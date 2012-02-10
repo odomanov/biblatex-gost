@@ -1,0 +1,51 @@
+% $Id: gost-inline.bbx 132 2012-02-09 18:29:52Z ODomanov $
+
+\ProvidesFile{gost-inline.bbx}
+[\abx@bbxid $Id: gost-inline.bbx 132 2012-02-09 18:29:52Z ODomanov $]
+
+\RequireBibliographyStyle{gost-standard}
+
+\ExecuteBibliographyOptions{labelyear,sorting=nyt,pagetracker}
+
+\DeclareFieldFormat{shorthandwidth}{#1}
+\setlength{\bibitemsep}{0pt}
+
+\DeclareNameAlias{author}{sortname}
+\DeclareNameAlias{editor}{sortname}
+\DeclareNameAlias{translator}{sortname}
+
+\defbibenvironment{bibliography}
+  {\list
+     {}
+     {\setlength{\leftmargin}{\bibhang}%
+      \setlength{\itemindent}{-\leftmargin}%
+      \setlength{\itemsep}{\bibitemsep}%
+      \setlength{\parsep}{\bibparsep}}}
+  {\endlist}
+  {\item}
+
+\defbibenvironment{shorthands}
+  {\list
+     {\printfield[shorthandwidth]{shorthand}}
+     {\setlength{\labelwidth}{\shorthandwidth}%
+      \setlength{\leftmargin}{\labelwidth}%
+      \setlength{\labelsep}{\biblabelsep}%
+      \addtolength{\leftmargin}{\labelsep}%
+      \setlength{\itemsep}{\bibitemsep}%
+      \setlength{\parsep}{\bibparsep}%
+      \renewcommand*{\makelabel}[1]{##1\hss}}}
+  {\endlist}
+  {\item}
+
+\InitializeBibliographyStyle{%
+  \global\undef\bbx@lasthash}
+
+\newbibmacro*{labeltitle}{%
+  \iffieldundef{label}
+    {\iffieldundef{shorttitle}
+       {\printfield{title}%
+        \clearfield{title}}
+       {\printfield[title]{shorttitle}}}
+    {\printfield{label}}}
+
+\endinput

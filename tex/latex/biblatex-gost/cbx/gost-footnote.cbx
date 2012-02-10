@@ -1,0 +1,22 @@
+% $Id: gost-footnote.cbx 132 2012-02-09 18:29:52Z ODomanov $
+
+\ProvidesFile{gost-footnote.cbx}
+[\abx@cbxid $Id: gost-footnote.cbx 132 2012-02-09 18:29:52Z ODomanov $]
+
+\RequireCitationStyle{gost-inline}
+
+\renewbibmacro*{cite:full}{%
+  \usebibmacro{cite:full:citepages}%
+  \printtext[bibhypertarget]{%
+    \usedriver
+      {}%\DeclareNameAlias{sortname}{default}}
+      {\thefield{entrytype}}}%
+  \usebibmacro{shorthandintro}}
+
+\ExecuteBibliographyOptions{autocite=footnote}
+
+%\renewrobustcmd{\cite}{\smartcite}
+%\renewrobustcmd{\parencite}{\smartcite}
+%\renewrobustcmd{\parencites}{\smartcites}
+
+\endinput

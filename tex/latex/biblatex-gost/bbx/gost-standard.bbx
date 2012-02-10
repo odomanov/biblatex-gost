@@ -1,0 +1,1011 @@
+% $Id: gost-standard.bbx 129 2012-02-05 14:19:34Z ODomanov $
+
+\ProvidesFile{gost-standard.bbx}
+[\abx@bbxid $Id: gost-standard.bbx 129 2012-02-05 14:19:34Z ODomanov $]
+
+\RequireBiber[1]
+\DeclareLanguageMapping{russian}{russian-gost}
+
+\newtoggle{bbx:isbn}
+\newtoggle{bbx:url}
+\newtoggle{bbx:doi}
+\newtoggle{bbx:eprint}
+
+\DeclareSortingScheme{ntvy}{
+  \sort{
+    \field{presort}
+  }
+  \sort[final]{
+    \field{sortkey}
+  }
+  \sort{
+    \name{sortname}
+    \name{author}
+    \name{editor}
+    \name{translator}
+    \field{sorttitle}
+    \field{title}
+  }
+  \sort{
+    \field{sorttitle}
+    \field{maintitle}   % ?????
+    \field{title}
+  }
+  \sort{
+    \field[padside=left,padwidth=4,padchar=0]{volume}
+    \literal{0000}
+  }
+  \sort{
+    \field{sortyear}
+    \field{year}
+  }
+}
+
+\DeclareBibliographyOption{isbn}[true]{%
+  \settoggle{bbx:isbn}{#1}}
+\DeclareBibliographyOption{url}[true]{%
+  \settoggle{bbx:url}{#1}}
+\DeclareBibliographyOption{doi}[true]{%
+  \settoggle{bbx:doi}{#1}}
+\DeclareBibliographyOption{eprint}[true]{%
+  \settoggle{bbx:eprint}{#1}}
+
+\ExecuteBibliographyOptions{isbn,url,doi,eprint,
+  useeditor=false,
+  usetranslator=false,
+  sorting=ntvy,
+  maxnames=3,
+  minnames=3}
+
+\DeclareDataInheritance{periodical}{article}{%
+  \noinherit{endyear}\noinherit{endmonth}\noinherit{endday}}
+\DeclareDataInheritance{mvbook,mvcollection}{book,collection}{%
+  \noinherit{endyear}\noinherit{endmonth}\noinherit{endday}}
+\DeclareDataInheritance{mvbook,mvcollection,mvproceedings,mvreference}{*}{%
+  \inherit{shorttitle}{shorttitle}}
+
+\DeclareFieldFormat*{title}{#1}
+\DeclareFieldFormat{booktitle}{#1}
+\DeclareFieldFormat{journaltitle}{#1}
+\DeclareFieldFormat{issuetitle}{#1}
+\DeclareFieldFormat{maintitle}{#1}
+\DeclareFieldFormat*{volume}{%
+  \ifbibstring{volume}
+    {\bibstring{volume}\addabbrvspace#1}
+    {}}
+\DeclareFieldFormat[article,periodical]{volume}{%
+  \ifbibstring{volume}
+    {\bibstring{jourvol}\addabbrvspace#1}
+    {}}
+\DeclareFieldFormat*{book}{%
+  \ifbibstring{book}
+    {\bibstring{book}\addabbrvspace#1}
+    {\unspace\adddot#1}}
+\DeclareFieldFormat*{part}{%
+  \ifbibstring{part}
+    {\bibstring{part}\addabbrvspace#1}
+    {\unspace\adddot#1}}
+\DeclareFieldFormat[article,periodical]{number}{%
+  \ifbibstring{number}
+    {\bibstring{number}\addabbrvspace#1}
+    {\unspace\adddot#1}}
+\DeclareFieldFormat{volumes}{#1}
+%\DeclareFieldFormat{volumes}{%
+%  \ifbibstring{involumes}%
+%    {\ifbibstring{volumes}%
+%      {\bibstring{involumes}\addabbrvspace#1~\bibstring{volumes}}
+%      {}}
+%    {}}
+\DeclareFieldFormat{issuenum}{%
+  \iffieldnum{issue}%
+    {\ifbibstring{issue}%
+     {\bibstring{issue}\addabbrvspace#1}%
+     {\unspace\adddot#1}}%
+    {}}
+\DeclareFieldFormat[article,periodical]{issue}{%
+  \ifinteger{#1}
+    {\ifbibstring{issue}%
+     {\bibstring{issue}\addabbrvspace#1}%
+     {\unspace\adddot#1}}%
+    {#1}}
+
+\DeclareNameAlias{sortname}{last-first}
+\DeclareNameFormat{byeditor}{%
+  \iffirstinits
+    {\usebibmacro{byeditor:first-last}{#1}{#4}{#5}{#7}}
+    {\usebibmacro{byeditor:first-last}{#1}{#3}{#5}{#7}}%
+  \usebibmacro{name:andothers}}
+\newbibmacro*{byeditor:first-last}[4]{%
+  \usebibmacro{name:delim}{#2#3#1}%
+  \usebibmacro{name:hook}{#2#3#1}%
+  \ifblank{#2}{}{#2\isdot\bibnamedelimd}%
+  \ifblank{#3}{}{%
+    #3\isdot
+    \ifpunctmark{'}
+      {}
+      {\ifuseprefix{\bibnamedelimc}{\bibnamedelimd}}}%
+  #1\isdot
+  \ifblank{#4}{}{\bibnamedelimd#4\isdot}}
+
+\newcommand*{\mkbibmainnamefirst}[1]{\mkbibemph{#1}}
+\newcommand*{\mkbibmainnamelast}[1]{\mkbibemph{#1}}
+\newcommand*{\mkbibmainnameprefix}[1]{\mkbibemph{#1}}
+\newcommand*{\mkbibmainnameaffix}[1]{\mkbibemph{#1}} 
+\renewbibmacro*{name:last-first}[4]{%
+  \ifuseprefix
+    {\usebibmacro{name:delim}{#3#1}%
+     \usebibmacro{name:hook}{#3#1}%
+     \ifblank{#3}{}{%
+       \ifcapital
+         {\mkbibmainnameprefix{\MakeCapital{#3}}\isdot}
+	 {\mkbibmainnameprefix{#3}\isdot}%
+       \ifpunctmark{'}{}{\bibnamedelimc}}%
+     \mkbibmainnamelast{#1}\isdot
+     \ifblank{#4}{}{\bibnamedelimd\mkbibmainnameaffix{#4}\isdot}%
+     \ifblank{#2}{}{\addcomma\bibnamedelimd\mkbibmainnamefirst{#2}\isdot}}
+    {\usebibmacro{name:delim}{#1}%
+     \usebibmacro{name:hook}{#1}%
+     \mkbibmainnamelast{#1}\isdot
+     \ifblank{#4}{}{\bibnamedelimd\mkbibmainnameaffix{#4}\isdot}%
+     \ifblank{#2#3}{}{\addspace}%
+     \ifblank{#2}{}{\bibnamedelimd\mkbibmainnamefirst{#2}\isdot}%
+     \ifblank{#3}{}{\bibnamedelimd\mkbibmainnameprefix{#3}\isdot}}}
+
+\newbibmacro*{//}{%
+  \nopunct\printtext{\addnbspace\mbox{//}\addspace}}
+\renewcommand*{\labelnamepunct}{\addspace} 
+\renewcommand*{\intitlepunct}{\addspace}
+\renewcommand*{\finalnamedelim}{\addcomma\space}
+\renewcommand*{\finallistdelim}{\addcomma\space}
+\renewcommand*{\bibpagespunct}{\addperiod\space}
+\renewcommand*{\subtitlepunct}{\addcolon\space}
+\renewcommand*{\newblockpunct}{%
+  \addnbspace\textemdash\space\bibsentence}% block punctuation
+\newcommand{\respdelim}{\addnbspace/\space}% delimiter before "credits"
+%\newcommand{\resppunct}{\addsemicolon\space}% punctuation between "credits" items
+\newcommand{\resppunct}{\addsemicolondelim\space}% punctuation between "credits" items
+\newcommand*{\bibstellipsis}{%
+%  \addnbspace\bibellipsis}
+  \unkern\addnbspace\textellipsis\ }% ellipsis in shorttitles
+
+\newcommand{\bbx@partmap@books}{userb}
+\newcommand{\bbx@partmap@parts}{userc}
+\newcommand{\bbx@partmap@issues}{userd}
+\newcommand{\bbx@partmap@credits}{lista}
+\newcommand{\bbx@partmap@volumes}{volumes}
+
+\newbibmacro*{begentry}{}
+\newbibmacro*{finentry}{\finentry}
+%
+%-----------  Drivers  ----------------
+%
+\DeclareBibliographyDriver{article}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author/translator+others}%
+  \setunit*{\labelnamepunct}%
+  \usebibmacro{title}%
+  \usebibmacro{//}%
+  \usebibmacro{journal}
+  \newunit
+  \printfield{series}
+  \setunit{\respdelim}%
+  \usebibmacro{byeditor+others}%
+  \newunit\newblock
+  \printfield{edition}%
+  \newunit\newblock
+  \printfield{location}%
+  \setunit*{\addcomma\space}%
+  %\usebibmacro{date}
+  \usebibmacro{year}%
+  \newunit\newblock
+  \mkbibdatelong{}{month}{day}%
+  \newunit\newblock
+  \usebibmacro{jour:volume+parts+issuetitle}%
+  \newunit\newblock
+  \printfield{note}%
+  \newunit\newblock
+  \printfield{pages}%
+  \newunit\newblock
+  \iftoggle{bbx:isbn}
+    {\printfield{issn}}
+    {}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \usebibmacro{finentry}}
+
+\DeclareBibliographyDriver{book}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author/editor+others/translator+others}%
+  \setunit*{\labelnamepunct}%
+  \usebibmacro{maintitle+volumes+parts+title}%
+  \setunit{\respdelim}%
+  \usebibmacro{byeditor+others}%
+  \newunit\newblock
+  \printfield{edition}%
+  \newunit\newblock
+  \printfield{note}%
+  \newunit\newblock
+  \usebibmacro{publisher+location+year}%
+  \newunit\newblock
+  \usebibmacro{chapter+pages}%
+  \newunit
+  \printfield{pagetotal}%
+  \newunit\newblock
+  \usebibmacro{series+number}%
+  \newunit\newblock
+  \iftoggle{bbx:isbn}
+    {\printfield{isbn}}
+    {}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \usebibmacro{finentry}}
+
+\DeclareBibliographyDriver{booklet}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author/editor+others/translator+others}%
+  \setunit*{\labelnamepunct}%
+  \usebibmacro{title}%
+  \setunit{\respdelim}%
+  \usebibmacro{byeditor+others}%
+  \newunit\newblock
+  \printfield{howpublished}%
+  \newunit\newblock
+  \printfield{type}%
+  \newunit\newblock
+  \printfield{note}%
+  \newunit\newblock
+  \usebibmacro{location+date}%
+  \newunit\newblock
+  \usebibmacro{chapter+pages}%
+  \newunit
+  \printfield{pagetotal}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \usebibmacro{finentry}}
+
+\DeclareBibliographyDriver{collection}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{editor+others}%
+  \setunit*{\labelnamepunct}%
+  \usebibmacro{maintitle+volumes+parts+title}%
+  \setunit{\respdelim}%
+  \usebibmacro{byeditor+others}%
+  \newunit\newblock
+  \printfield{edition}%
+  \newunit\newblock
+  \printfield{note}%
+  \newunit\newblock
+  \usebibmacro{publisher+location+year}%
+  \newunit\newblock
+  \usebibmacro{chapter+pages}%
+  \newunit
+  \printfield{pagetotal}%
+  \newunit\newblock
+  \usebibmacro{series+number}%
+  \newunit\newblock
+  \iftoggle{bbx:isbn}
+    {\printfield{isbn}}
+    {}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \usebibmacro{finentry}}
+
+\DeclareBibliographyDriver{inbook}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author/translator+others}%
+  \setunit*{\labelnamepunct}%
+  \usebibmacro{title}%
+  \usebibmacro{//}%
+  \usebibmacro{maintitle+volumes+parts+booktitle}%
+  \setunit{\respdelim}%
+  \printnames{bookauthor}%
+  \setunit*{\resppunct}%
+  \usebibmacro{byeditor+others}%
+  \newunit\newblock
+  \printfield{edition}%
+  \newunit\newblock
+  \printfield{note}%
+  \newunit\newblock
+  \usebibmacro{publisher+location+year}%
+  \newunit\newblock
+  \usebibmacro{chapter+pages}%
+  \newunit\newblock
+  \usebibmacro{series+number}%
+  \newunit\newblock
+  \iftoggle{bbx:isbn}
+    {\printfield{isbn}}
+    {}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \usebibmacro{finentry}}
+
+\DeclareBibliographyDriver{incollection}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author/translator+others}%
+  \setunit*{\labelnamepunct}%
+  \usebibmacro{title}%
+  \usebibmacro{//}%
+  \usebibmacro{maintitle+volumes+parts+booktitle}%
+  \setunit{\respdelim}%
+  \usebibmacro{byeditor+others}%
+  \newunit\newblock
+  \printfield{edition}%
+  \newunit\newblock
+  \printfield{note}%
+  \newunit\newblock
+  \usebibmacro{publisher+location+year}%
+  \newunit\newblock
+  \usebibmacro{chapter+pages}%
+  \newunit\newblock
+  \usebibmacro{series+number}%
+  \newunit\newblock
+  \iftoggle{bbx:isbn}
+    {\printfield{isbn}}
+    {}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \usebibmacro{finentry}}
+
+\DeclareBibliographyDriver{inproceedings}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author/translator+others}%
+  \setunit*{\labelnamepunct}%
+  \usebibmacro{title}%
+  \usebibmacro{//}%
+  \usebibmacro{maintitle+volumes+parts+booktitle}%
+  \newunit
+  \usebibmacro{event+venue+date}%
+  \setunit{\respdelim}%
+  \usebibmacro{byeditor+others}%
+  \newunit\newblock
+  \printfield{note}%
+  \newunit\newblock
+  \printlist{organization}%
+  \newunit
+  \usebibmacro{publisher+location+year}%
+  \newunit\newblock
+  \usebibmacro{chapter+pages}%
+  \newunit\newblock
+  \usebibmacro{series+number}%
+  \newunit\newblock
+  \iftoggle{bbx:isbn}
+    {\printfield{isbn}}
+    {}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \usebibmacro{finentry}}
+
+\DeclareBibliographyDriver{manual}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author/editor}%
+  \setunit*{\labelnamepunct}%
+  \usebibmacro{title}%
+  \setunit{\respdelim}%
+  \usebibmacro{byeditor+others}%
+  \newunit\newblock
+  \printfield{edition}%
+  \newunit\newblock
+  \printfield{type}%
+  \newunit
+  \printfield{version}%
+  \newunit
+  \printfield{note}%
+  \newunit\newblock
+  \printlist{organization}%
+  \newunit
+  \usebibmacro{publisher+location+year}%
+  \newunit\newblock
+  \usebibmacro{chapter+pages}%
+  \newunit
+  \printfield{pagetotal}%
+  \newunit\newblock
+  \usebibmacro{series+number}%
+  \newunit\newblock
+  \iftoggle{bbx:isbn}
+    {\printfield{isbn}}
+    {}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \usebibmacro{finentry}}
+
+\DeclareBibliographyDriver{misc}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author/editor+others/translator+others}%
+  \setunit*{\labelnamepunct}%
+  \usebibmacro{title}%
+  \setunit{\respdelim}%
+  \usebibmacro{byeditor+others}%
+  \newunit\newblock
+  \printfield{howpublished}%
+  \newunit\newblock
+  \printfield{type}%
+  \newunit
+  \printfield{version}%
+  \newunit
+  \printfield{note}%
+  \newunit\newblock
+  \usebibmacro{organization+location+date}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \usebibmacro{finentry}}
+
+\DeclareBibliographyDriver{online}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author/editor+others/translator+others}%
+  \setunit*{\labelnamepunct}%
+  \usebibmacro{title}%
+  \setunit{\respdelim}%
+  \usebibmacro{byeditor+others}%
+  \newunit\newblock
+  \printfield{version}%
+  \newunit
+  \printfield{note}%
+  \newunit\newblock
+  \printlist{organization}%
+  \newunit\newblock
+  \usebibmacro{date}%
+  \newunit\newblock
+  \usebibmacro{url+urldate}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \usebibmacro{finentry}}
+
+\DeclareBibliographyDriver{patent}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author}%
+  \setunit*{\labelnamepunct}%
+  \usebibmacro{title}%
+  \newunit
+  \printlist{language}%
+  \newunit\newblock
+  \usebibmacro{byauthor}%
+  \newunit\newblock
+  \printfield{type}%
+  \setunit*{\addspace}%
+  \printfield{number}%
+  \iflistundef{location}
+    {}
+    {\setunit*{\addspace}%
+     \printtext[parens]{%
+       \printlist[][-\value{listtotal}]{location}}}%
+  \newunit\newblock
+  \usebibmacro{byholder}%
+  \newunit\newblock
+  \printfield{note}%
+  \newunit\newblock
+  \usebibmacro{date}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \usebibmacro{finentry}}
+
+\DeclareBibliographyDriver{periodical}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{editor}%
+  \setunit*{\labelnamepunct}%
+  \usebibmacro{periodical}
+  \newunit
+  \printfield{series}
+  \newunit
+  \printdate
+  \setunit*{\addcomma\space}%
+  \usebibmacro{jour:volume+parts+issuetitle}%
+  \setunit{\respdelim}%
+  \usebibmacro{byeditor+others}%
+  \newunit\newblock
+  \printfield{note}%
+  \newunit\newblock
+  \iftoggle{bbx:isbn}
+    {\printfield{issn}}
+    {}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \usebibmacro{finentry}}
+
+\DeclareBibliographyDriver{proceedings}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{editor+others}%
+  \setunit*{\labelnamepunct}%
+  \usebibmacro{maintitle+volumes+parts+title}%
+  \newunit
+  \usebibmacro{event+venue+date}%
+  \setunit{\respdelim}%
+  \usebibmacro{byeditor+others}%
+  \newunit\newblock
+  \printfield{note}%
+  \newunit\newblock
+  \printlist{organization}%
+  \newunit
+  \usebibmacro{publisher+location+year}%
+  \newunit\newblock
+  \usebibmacro{chapter+pages}%
+  \newunit
+  \printfield{pagetotal}%
+  \newunit\newblock
+  \usebibmacro{series+number}%
+  \newunit\newblock
+  \iftoggle{bbx:isbn}
+    {\printfield{isbn}}
+    {}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \usebibmacro{finentry}}
+
+\DeclareBibliographyDriver{report}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author}%
+  \setunit*{\labelnamepunct}%
+  \usebibmacro{title}%
+  \newunit\newblock
+  \printfield{type}%
+  \setunit*{\addspace}%
+  \printfield{number}%
+  \newunit\newblock
+  \printfield{version}%
+  \newunit
+  \printfield{note}%
+  \newunit\newblock
+  \usebibmacro{institution+location+date}%
+  \newunit\newblock
+  \usebibmacro{chapter+pages}%
+  \newunit
+  \printfield{pagetotal}%
+  \newunit\newblock
+  \iftoggle{bbx:isbn}
+    {\printfield{isrn}}
+    {}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \usebibmacro{finentry}}
+
+\DeclareBibliographyDriver{thesis}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author}%
+  \setunit*{\labelnamepunct}%
+  \usebibmacro{title}%
+  \newunit\newblock
+  \printfield{note}%
+  \newunit\newblock
+  \printfield{type}%
+  \newunit
+  \usebibmacro{institution+location+date}%
+  \newunit\newblock
+  \usebibmacro{chapter+pages}%
+  \newunit
+  \printfield{pagetotal}%
+  \newunit\newblock
+  \iftoggle{bbx:isbn}
+    {\printfield{isbn}}
+    {}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \usebibmacro{finentry}}
+
+\DeclareBibliographyDriver{unpublished}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author}%
+  \setunit*{\labelnamepunct}%
+  \usebibmacro{title}%
+  \newunit\newblock
+  \printfield{howpublished}%
+  \newunit\newblock
+  \printfield{note}%
+  \newunit\newblock
+  \usebibmacro{location+date}%
+  \newunit\newblock
+  \iftoggle{bbx:url}
+    {\usebibmacro{url+urldate}}
+    {}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \usebibmacro{finentry}}
+
+\DeclareBibliographyDriver{shorthands}{%
+  \usedriver
+    {\DeclareNameAlias{sortname}{default}}
+    {\thefield{entrytype}}%
+  \finentry}
+
+\DeclareBibliographyDriver{set}{%
+  \entryset{}{}%
+  \newunit\newblock
+  \usebibmacro{setpageref}%
+  \finentry}
+
+\DeclareBibliographyAlias{mvbook}{book}
+\DeclareBibliographyAlias{bookinbook}{inbook}
+\DeclareBibliographyAlias{suppbook}{inbook}
+\DeclareBibliographyAlias{mvcollection}{collection}
+\DeclareBibliographyAlias{suppcollection}{incollection}
+\DeclareBibliographyAlias{mvproceedings}{proceedings}
+\DeclareBibliographyAlias{reference}{collection}
+\DeclareBibliographyAlias{mvreference}{reference}
+\DeclareBibliographyAlias{inreference}{incollection}
+\DeclareBibliographyAlias{suppperiodical}{article}
+\DeclareBibliographyAlias{review}{article}
+\DeclareBibliographyAlias{*}{misc}
+
+\newbibmacro*{maintitle+volumes+parts+title}{%
+  \iffieldsequal{maintitle}{title}
+    {\clearfield{maintitle}%
+     \clearfield{mainsubtitle}%
+     \clearfield{maintitleaddon}}
+    {\iffieldundef{maintitle}
+       {\usebibmacro{title}%
+        \ifbibstring{involumes}
+          {\setunit{\addcolondelim}%
+           \usebibmacro{involumes+inparts}{\addcolondelim}}
+          {}}
+       {\usebibmacro{maintitle}%
+        \newunit
+        \usebibmacro{involumes+inparts}{\addperiod}%
+        \newunit
+        \usebibmacro{volume+parts}%
+        \newunit
+        \usebibmacro{title}}}%
+  \newunit}
+
+\newbibmacro*{maintitle+volumes+parts+booktitle}{%
+  \iffieldundef{maintitle}
+    {\usebibmacro{booktitle}%
+     \ifbibstring{involumes}
+      {\setunit{\addcolondelim}%
+       \usebibmacro{involumes+inparts}{addcolondelim}}
+      {}}
+    {\usebibmacro{maintitle}%
+     \newunit
+     \usebibmacro{involumes+inparts}{\addperiod}%
+     \newunit
+	 \usebibmacro{volume+parts}%
+     \newunit
+     \usebibmacro{booktitle}}%
+  \newunit}
+
+\newbibmacro*{event+venue+date}{%
+    \ifboolexpr{
+      test {\iffieldundef{eventtitle}}
+      and
+      test {\iffieldundef{venue}}
+      and
+      test {\iffieldundef{eventyear}}
+    }
+      {}
+      {\setunit{\addspace}%
+       \printtext[parens]{%
+         \printfield{eventtitle}%
+         \setunit*{\addcomma\space}%
+         \printfield{venue}%
+         \setunit*{\addcomma\space}%
+         \printeventdate}}%
+  \newunit}
+
+\newbibmacro*{series+number}{%
+  \iffieldundef{series}
+    {}
+    {\printtext[parens]{%
+      \printfield{series}%
+      \setunit*{\addspace}%
+      \printfield{number}}}
+  }
+
+\newbibmacro*{publisher+location+year}{%
+  \usebibmacro{publisher+location}%
+  \setunit*{\addcomma\space}%
+  \usebibmacro{year}}
+
+\newbibmacro*{publisher+location}{%
+  \printlist{location}%
+  \iflistundef{publisher}
+    {\setunit*{\addcomma\space}}
+    {\setunit*{\addcolon\space}}%
+  \printlist{publisher}}
+
+\newbibmacro*{institution+location+date}{%
+  \printlist{location}%
+  \iflistundef{institution}
+    {\setunit*{\addcomma\space}}
+    {\setunit*{\addcolon\space}}%
+  \printlist{institution}%
+  \setunit*{\addcomma\space}%
+  \usebibmacro{date}%
+  \newunit}
+
+\newbibmacro*{organization+location+date}{%
+  \printlist{location}%
+  \iflistundef{organization}
+    {\setunit*{\addcomma\space}}
+    {\setunit*{\addcolon\space}}%
+  \printlist{organization}%
+  \setunit*{\addcomma\space}%
+  \usebibmacro{date}%
+  \newunit}
+
+\newbibmacro*{location+date}{%
+  \printlist{location}%
+  \setunit*{\addcomma\space}%
+  \usebibmacro{date}%
+  \newunit}
+
+\newbibmacro*{chapter+pages}{%
+  \printfield{chapter}%
+  \setunit{\bibpagespunct}%
+  \printfield{pages}%
+  \newunit}
+
+\newbibmacro*{note+pages}{%
+  \printfield{note}%
+  \setunit{\bibpagespunct}%
+  \printfield{pages}%
+  \newunit}
+
+\newbibmacro*{doi+eprint+url}{%
+  \iftoggle{bbx:doi}
+    {\printfield{doi}}
+    {}%
+  \newunit\newblock
+  \iftoggle{bbx:eprint}
+    {\usebibmacro{eprint}}
+    {}%
+  \newunit\newblock
+  \iftoggle{bbx:url}
+    {\usebibmacro{url+urldate}}
+    {}}
+
+\newbibmacro*{addendum+pubstate}{%
+  \printfield{addendum}%
+  \newunit\newblock
+  \printfield{pubstate}}
+
+\renewbibmacro*{byeditorx}{%
+  \ifnameundef{editora}
+    {}
+    {\usebibmacro{bytypestrg}{editora}{editor}%
+     \setunit{\addspace}%
+     \printnames[byeditora]{editora}%
+     \setunit*{\resppunct}}%
+  \ifnameundef{editorb}
+    {}
+    {\usebibmacro{bytypestrg}{editorb}{editor}%
+     \setunit{\addspace}%
+     \printnames[byeditorb]{editorb}%
+     \setunit*{\resppunct}}%
+  \ifnameundef{editorc}
+    {}
+    {\usebibmacro{bytypestrg}{editorc}{editor}%
+     \setunit{\addspace}%
+     \printnames[byeditorc]{editorc}%
+     \setunit*{\resppunct}}}
+
+\renewbibmacro*{byeditor+others}{%
+  \printfield{\bbx@partmap@credits}%
+  \setunit*{\resppunct}%
+  \ifnameundef{editor}
+    {}
+    {\usebibmacro{byeditor+othersstrg}%
+     \setunit{\addspace}%
+     \printnames[byeditor]{editor}%
+     \clearname{editor}%
+     \setunit*{\resppunct}}%
+  \usebibmacro{byeditorx}%
+  \usebibmacro{bytranslator+others}}
+
+\renewbibmacro*{bytranslator+others}{%
+  \ifnameundef{translator}
+    {}
+    {\usebibmacro{bytranslator+othersstrg}%
+     \setunit{\addspace}%
+     \printnames[bytranslator]{translator}%
+     \clearname{translator}%
+     \setunit*{\resppunct}}%
+  \usebibmacro{withothers}}
+
+\renewbibmacro*{withothers}{%
+  \usebibmacro{withcommentator}%
+  \clearname{commentator}%
+  \setunit*{\resppunct}%
+  \usebibmacro{withannotator}%
+  \clearname{annotator}%
+  \setunit*{\resppunct}%
+  \usebibmacro{withintroduction}%
+  \clearname{introduction}%
+  \setunit*{\resppunct}%
+  \usebibmacro{withforeword}%
+  \clearname{foreword}%
+  \setunit*{\resppunct}%
+  \usebibmacro{withafterword}%
+  \clearname{afterword}}
+
+\newbibmacro{jour:volume+parts+issuetitle}{%
+  \printfield{volume}%
+  \setunit*{\addcomma\space}%
+  \printfield{issue}%
+  \setunit*{\addcomma\space}%
+  \printfield{number}%
+  \iffieldundef{issuetitle}
+    {}
+    {\setunit{\addcolon\space}%
+     \printfield{issuetitle}}}%
+
+\newbibmacro{volume+parts}{%
+  \printfield{volume}%
+  \newunit
+  \printfield{book}%
+  \newunit
+  \printfield{part}%
+  \newunit
+  \printfield[issuenum]{issue}}%
+
+\newbibmacro{year}{%
+  \printfield{year}}
+
+\renewbibmacro*{title}{%
+  \ifboolexpr{
+    test {\iffieldundef{title}}
+    and
+    test {\iffieldundef{subtitle}}
+  }
+    {}
+    {\printtext[title]{%
+       \printfield[titlecase]{title}%
+       \setunit{\subtitlepunct}%
+       \printfield[titlecase]{subtitle}}%
+     \newunit}%
+  \setunit{\addcolondelim}%
+  \printfield{titleaddon}}
+
+\renewbibmacro*{booktitle}{%
+  \ifboolexpr{
+    test {\iffieldundef{booktitle}}
+    and
+    test {\iffieldundef{booksubtitle}}
+  }
+    {}
+    {\printtext[booktitle]{%
+       \printfield[titlecase]{booktitle}%
+       \setunit{\subtitlepunct}%
+       \printfield[titlecase]{booksubtitle}}%
+     \newunit}%
+  \setunit{\addcolondelim}%
+  \printfield{booktitleaddon}}
+
+\renewbibmacro*{maintitle}{%
+  \ifboolexpr{
+    test {\iffieldundef{maintitle}}
+    and
+    test {\iffieldundef{mainsubtitle}}
+  }
+    {}
+    {\printtext[maintitle]{%
+       \printfield[titlecase]{maintitle}%
+       \setunit{\subtitlepunct}%
+       \printfield[titlecase]{mainsubtitle}}%
+     \newunit}%
+  \setunit{\addcolondelim}%
+  \printfield{maintitleaddon}}
+
+\newcommand{\addcolondelim}{%
+  \begingroup%
+  \def\abx@colon{%
+    \ifdim\lastkern>\z@\unkern\fi%
+    \addnbspace\abx@puncthook{:}\space}%
+  \addcolon%
+  \endgroup}
+
+\newcommand{\addsemicolondelim}{%
+  \begingroup%
+  \def\abx@semicolon{%
+    \ifdim\lastkern>\z@\unkern\fi%
+    \addnbspace\abx@puncthook{;}\space}%
+  \addsemicolon%
+  \endgroup}
+
+\newbibmacro{involumes+inparts}[1]{%
+  \usebibmacro{inparts}{volumes}%
+  \setunit*{#1}%
+  \usebibmacro{inparts}{books}%
+  \setunit*{#1}%
+  \usebibmacro{inparts}{parts}%
+  \setunit*{#1}%
+  \usebibmacro{inparts}{issues}%
+  \setunit*{#1}%
+}
+
+% <parttype>, <number of parts>
+% Does not really work, since fields 'books', 'parts', 'issues' are not defined
+\newbibmacro{inparts}[1]{%
+  \iffieldundef{\csuse{bbx@partmap@#1}}%
+    {}
+    {\ifbibstring{involumes}%
+      {\iffieldint{\csuse{bbx@partmap@#1}}%
+        {\ifbibstring{#1}%
+          {\bibstring{involumes}\addabbrvspace\printfield{\csuse{bbx@partmap@#1}}~\bibstring{#1}}
+          {}}
+        {\printfield{\csuse{bbx@partmap@#1}}}}
+      {}
+      {}}}
+
+\gdef\ifmulticitation{%
+  %\ifnumequal{\themulticitetotal}{0}{\@secondoftwo}{\@firstoftwo}
+  \ifnum\c@multicitetotal>0
+    \expandafter\@firstoftwo
+  \else
+    \expandafter\@secondoftwo
+  \fi
+}
+
+\endinput

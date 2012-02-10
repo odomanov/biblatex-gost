@@ -1,0 +1,111 @@
+% $Id: russian-gost.lbx 42 2012-01-15 13:31:06Z OLEG $
+
+\ProvidesFile{russian-gost.lbx}
+[\abx@lbxid $Id: russian-gost.lbx 42 2012-01-15 13:31:06Z OLEG $]
+
+\InheritBibliographyExtras{russian}
+
+\NewBibliographyString{%
+  geneditor,
+  geneditors,
+  bygeneditor,
+  bygeneditortr,
+  bygeneditorco,
+  bygeneditoran,
+  bygeneditorin,
+  bygeneditorfo,
+  bygeneditoraf,
+  bygeneditortrco,
+  bygeneditortran,
+  bygeneditortrin,
+  bygeneditortrfo,
+  bygeneditortraf,
+  bygeneditorcoin,
+  bygeneditorcofo,
+  bygeneditorcoaf,
+  bygeneditoranin,
+  bygeneditoranfo,
+  bygeneditoranaf,
+  bygeneditortrcoin,
+  bygeneditortrcofo,
+  bygeneditortrcoaf,
+  bygeneditortranin,
+  bygeneditortranfo,
+  bygeneditortranaf,
+  books,
+  parts,
+  issues%
+}
+
+\DeclareBibliographyStrings{%
+  inherit          = {russian},
+  withcommentator  = {{комментарии}{комм\adddot}},
+  withannotator    = {{примечания}{прим\adddot}},
+  withintroduction = {{введение}{введ\adddot}},
+  withforeword     = {{предисловие}{предисл\adddot}},
+  withafterword    = {{послесловие}{послесл\adddot}},
+  volumes          = {{т\adddot}{т\adddot}},
+  jourvol          = {{том}{т\adddot}},
+  jourser          = {{серия}{сер\adddot}},
+  books            = {{кн\adddot}{кн\adddot}},
+  parts            = {{ч\adddot}{ч\adddot}},
+  issue            = {{выпуск}{вып\adddot}},
+  issues           = {{вып\adddot}{вып\adddot}},
+  loccit           = {{цит\adddotspace место}{цит\adddotspace место}},
+  langcroatian     = {{хорватский}{хорватский}},
+  langfinnish      = {{финский}{финский}},
+  fromcroatian     = {{с хорватского}{с\addabbrvspace хорв\adddot}},
+  geneditor        = {{общий редактор}{общ\adddotspace ред\adddot}},
+  geneditors       = {{общие реадкторы}{общ\adddotspace ред\adddot}},
+  bygeneditor      = {{под общей редакцией}{под общ\adddotspace ред\adddot}},
+  bygeneditortr    = {{перевод \lbx@lfromlang, под общей редакцией}%
+                      {пер. \lbx@sfromlang, под общ. ред\adddotspace}},
+  bygeneditorco    = {{под общей редакцией и с комментариями}%
+                      {под общ. ред. и с\addabbrvspace комм\adddot}},
+  bygeneditoran    = {{под общей редакцией и с примечаниями}%
+                      {под общ. ред. и с\addabbrvspace прим\adddot}},
+  bygeneditorin    = {{под общей редакцией, с введением}%
+                      {под общ. ред., с\addabbrvspace введ\adddot}},
+  bygeneditorfo    = {{под общей редакцией, с предисловием}%
+                      {под общ. ред., с\addabbrvspace предисл\adddot}},
+  bygeneditoraf    = {{под общей редакцией, с послесловием}%
+                      {под общ. ред., с\addabbrvspace послесл\adddot}},
+  bygeneditortrco  = {{под общей редакцией, перевод \lbx@lfromlang и комментарии}%
+                      {под общ. ред., пер. \lbx@sfromlang и комм\adddot}},
+  bygeneditortran  = {{под общей редакцией, перевод \lbx@lfromlang и примечания}%
+                      {под общ. ред., пер. \lbx@sfromlang и прим\adddot}},
+  bygeneditortrin  = {{под общей редакцией, перевод \lbx@lfromlang, введение}%
+                      {под общ. ред., пер. \lbx@sfromlang, введ\adddot}},
+  bygeneditortrfo  = {{под общей редакцией, перевод \lbx@lfromlang, предисловие}%
+                      {под общ. ред., пер. \lbx@sfromlang, предисл\adddot}},
+  bygeneditortraf  = {{под общей редакцией, перевод \lbx@lfromlang, послесловие}%
+                      {под общ. ред. и пер. \lbx@sfromlang, послесл\adddot}},
+  bygeneditorcoin  = {{под общей редакцией, комментарии и введение}%
+                      {под общ. ред., комм. и введ\adddot}},
+  bygeneditorcofo  = {{под общей редакцией, комментарии и предисловие}%
+                      {под общ. ред., комм. и предисл\adddot}},
+  bygeneditorcoaf  = {{под общей редакцией, комментарии и послесловие}%
+                      {под общ. ред., комм. и послесл\adddot}},
+  bygeneditoranin  = {{под общей редакцией, примечания и введение}%
+                      {под общ. ред., прим. и введ\adddot}},
+  bygeneditoranfo  = {{под общей редакцией, примечания и предисловие}%
+                      {под общ. ред., прим. и предисл\adddot}},
+  bygeneditoranaf  = {{под общей редакцией, примечания и послесловие}%
+                      {под общ. ред., прим. и послесл\adddot}},
+  bygeneditortrcoin= {{под общей редакцией, перевод \lbx@lfromlang, комментарии и введение}%
+                      {под общ. ред., пер. \lbx@sfromlang, комм. и введ\adddot}},
+  bygeneditortrcofo= {{под общей редакцией, перевод \lbx@lfromlang, комментарии и предисловие}%
+                      {под общ. ред., пер. \lbx@sfromlang, комм. и предисл\adddot}},
+  bygeneditortrcoaf= {{под общей редакцией, перевод \lbx@lfromlang, комментарии и послесловие}%
+                      {под общ. ред., пер. \lbx@sfromlang, комм. и послесл\adddot}},
+  bygeneditortranin= {{под общей редакцией, перевод \lbx@lfromlang, примечания и введение}%
+                      {под общ. ред., пер. \lbx@sfromlang, примеч. и введ\adddot}},
+  bygeneditortranfo= {{под общей редакцией, перевод \lbx@lfromlang, примечания и предисловие}%
+                      {под общ. ред., пер. \lbx@sfromlang, примеч. и предисл\adddot}},
+  bygeneditortranaf= {{под общей редакцией, перевод \lbx@lfromlang, примечания и послесловие}%
+                      {под общ. ред., пер. \lbx@sfromlang, примеч. и послесл\adddot}},
+  andothers        = {{\mkbibbrackets{и\addabbrvspace др\adddot}}{\mkbibbrackets{и\addabbrvspace др\adddot}}},
+  andmore          = {{\mkbibbrackets{и\addabbrvspace др\adddot}}{\mkbibbrackets{и\addabbrvspace др\adddot}}},
+}
+
+\endinput
