@@ -36,6 +36,32 @@
 \newcommand*{\biblatexgost}{Biblatex-GOST\xspace}
 \newcommand*{\biblatexgosthome}{http://sourceforge.net/projects/biblatex-gost/}
 
+\makeatletter
+\providecommand*{\printtitlepage}{}
+\renewrobustcmd*{\printtitlepage}{%
+  \begingroup
+  \centering\titlefont
+  \begingroup\LARGE
+    \ifundef\ltd@title@url
+      {\ltd@title@title}
+      {\href{\ltd@title@url}{\ltd@title@title}}%
+    \par
+  \endgroup
+  \vspace{0.25\baselineskip}
+  \begingroup\large
+    \ltd@title@subtitle\par
+  \endgroup
+  \vspace{0.25\baselineskip}
+  \begin{multicols}{2}
+  \raggedleft
+    \ltd@title@author\par
+    \expandafter\email\expandafter{\ltd@title@email}\par
+  \raggedright
+    Ревизия \ltd@title@revision\par\ltd@title@date
+  \end{multicols}
+  \endgroup}
+\makeatother
+
 \titlepage{%
   title={Пакет \biblatexgost},
   subtitle={Оформление библиографии согласно ГОСТ 7.0.5-2008},
@@ -114,7 +140,7 @@
 
 Пакет поставляется в виде архива, содержащего стандартую структуру дерева TDS. 
 Для его установки достаточно распаковать архив в дерево \TeX, желательно локальное, и 
-обновить базу файлов (в \texttt{TeX Live} это делается командой \cmd{mktexlsr}).
+обновить базу файлов (в \texttt{TeX Live} это делается командой \texttt{mktexlsr}).
 
 \subsection{Использование}
 \label{ssec:usage}
@@ -219,7 +245,10 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 \item Человек. \dots\ (Детская энциклопедия: в 5 т., т. 2)\dots\ 
 \end{bibexample}
 
-В \biblatexgost реализован только первый вариант. Соответственно, в стиле \bibsty{gost-autoryear} при отсутствии автора ссылка производится на общий заголовок многотомного издания, а не на заголовок отдельного тома (тем более, что последний может и отсутствовать):
+В \biblatexgost реализован только первый вариант. Соответственно, 
+в стиле \bibsty{gost-autoryear} при отсутствии автора ссылка производится на общий 
+заголовок многотомного издания, а не на заголовок отдельного тома (тем более, что 
+последний может и отсутствовать):
 
 \begin{bibexample}
 %\item{} [Детская энциклопедия, с.\,22]
@@ -697,9 +726,11 @@ FIX: Возможно, лучше сделать editortype = organization ?
 \end{itemize}
 
 \section{Детали реализации}
+\label{sec:impldet}
 
 \begin{itemize}
-\item Определен макрос \cmd{ifmulticite}, принимающий значение \texttt{True} внутри команд \cmd{...cites} (комплексных ссылок, в терминологии ГОСТ).
+\item Определен макрос \cmd{ifmulticitation}, принимающий значение \texttt{True} 
+внутри команд \cmd{...cites} (комплексных ссылок, в терминологии ГОСТ).
 
 \item Пакет загружает дополнительный файл локализации
 \linebreak\file{russian-gost.lbx}. В него добавлены строки \bibfield{books}, \bibfield{parts}, \bibfield{issues} для книг, частей, выпусков. ...
@@ -730,5 +761,24 @@ FIX: Возможно, лучше сделать editortype = organization ?
 \item Область специф.свед.?
 \end{itemize}
 
+\appendix
+\section*{Приложения}
+\addcontentsline{toc}{section}{Приложения}
+
+\section{ChangeLog}
+\label{apx:changelog}
+
+\begin{changelog}
+
+\begin{release}{0.2}{2012-}
+\item \texttt{gost-intext} is renamed into \texttt{gost-inline}
+\item \cmd{ifmulticitation} macro is introduced\see{sec:impldet}
+\end{release}
+
+\begin{release}{0.1}{2012-02-03}
+\item Initial
+\end{release}
+
+\end{changelog}
 
 \end{document}
