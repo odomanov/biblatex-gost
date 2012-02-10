@@ -386,7 +386,7 @@ ISSN серии или подсерии & \textendash \\
 
 См. также~\secref{sec:todo}.
 
-FIXME: разобраться с \ellipsis !!
+FIXME: разобраться с \textellipsis !!
 
 \section{Команды цитирования}
 \label{sec:citecommands}
@@ -477,7 +477,7 @@ FIXME: разобраться с \ellipsis !!
 
 \fielditem{credits}{literal}
 
-Новое поле, см.~\secref{sec:biber}. Содержит организацию, выводимую 
+Новое поле, см.~\secref{ssec:biber}. Содержит организацию, выводимую 
 в сведениях об ответственности.  Например:
 
 \begin{bibexample}
@@ -488,16 +488,16 @@ FIXME: Возможно, лучше сделать editortype = organization ?
 
 \fielditem{books}{literal}
 
-Новое поле, см.~\secref{sec:biber}. Содержит количество книг многочастного издания, 
+Новое поле, см.~\secref{ssec:biber}. Содержит количество книг многочастного издания, 
 если оно делится на книги.
 
 \fielditem{parts}{literal}
 
-Новое поле, см.~\secref{sec:biber}. Содержит количество частей многочастного издания, если оно делится на части.
+Новое поле, см.~\secref{ssec:biber}. Содержит количество частей многочастного издания, если оно делится на части.
 
 \fielditem{issues}{literal}
 
-Новое поле, см.~\secref{sec:biber}. Содержит количество выпусков многочастного издания, если оно делится на выпуски.
+Новое поле, см.~\secref{ssec:biber}. Содержит количество выпусков многочастного издания, если оно делится на выпуски.
 
 \fielditem{issue}{literal}
 
@@ -629,14 +629,7 @@ FIXME: Возможно, лучше сделать editortype = organization ?
 \subsection{Тома, книги, части, выпуски}
 \label{ssec:volsparts}
 
-Издание может делиться на физически отдельные части, которые могут называться по-разному. \biblatexgost поддерживает деление на тома, книги, части и выпуски (деление только одного уровня; например, тома, разделённые на части, не поддерживаются). Им соответствуют следующие поля базы данных:
-
-\begin{trivlist}
-\item[тома:] \bibfield{volume}, \bibfield{volumes}
-\item[книги:] \bibfield{book}, \bibfield{books}
-\item[части:] \bibfield{part}, \bibfield{parts}
-\item[выпуски:] \bibfield{issue}\footnote{Поле \bibfield{issue} имеет особое значение в случае журналов. См. п. ??? руководства по \biblatex.}, \bibfield{issues}
-\end{trivlist}
+Издание может делиться на физически отдельные части, которые могут называться по-разному. \biblatexgost поддерживает деление на тома, книги, части и выпуски (деление только одного уровня; например, тома, разделённые на части, не поддерживаются). Соответствующие им поля базы данных показаны в \tabref{tab:volsparts}.
 
 \begin{table}
 \tablesetup
@@ -730,8 +723,8 @@ FIXME: Возможно, лучше сделать editortype = organization ?
 \kvopt{useeditor}{false}, \kvopt{usetranslator}{false}, \kvopt{dashed}{false}, 
 \kvopt{sorting}{ntvy}, \kvopt{mergedate}{gostletter}, ...
 
-\subsection{Другие отличия}
-\label{ssec:otherdiff}
+\section{Другие отличия}
+\label{sec:otherdiff}
 
 \begin{itemize}
 
