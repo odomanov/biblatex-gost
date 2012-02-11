@@ -355,38 +355,12 @@ ISSN серии или подсерии & \textendash \\
 
 \begin{itemize}
 
-\item В \biblatexgost нет понятия параллельного заглавия.
-
-\item В качестве многоточия в сокращённых заголовках рекомендуется использовать
-%знак \enquote{…} (Unicode U+2026), окружённый двумя пробелами, как предписывает
-%ГОСТ. 
-команду \cmd{bibellipsis}, хотя это и не совпадает с предписаниями ГОСТ. К
-сожалению,
-как \cmd{textellipsis}, так и символ \enquote{…} (Unicode U+2026)
-конфликтуют с трекером пунктуации (который, например, добавляет лишнюю точку). 
-%\ldots в xelatex выводит единственный глиф Unicode U+2026 !!
-Например:
-
-\begin{lstlisting}[style=bibtex]
-@BOOK{book,
-  ...
-  shorttitle = {Introduction\addnbspace\bibellipsis}
-}
-\end{lstlisting}
-
-Результат: 
-
-\begin{bibexample}
-\item {[Introduction [\textellipsis], p. 12]}
-\end{bibexample}
-
-
+\item В \biblatex нет понятия параллельного заглавия. Соответственно, его нет в 
+\biblatexgost.
 
 \end{itemize}
 
 См. также~\secref{sec:todo}.
-
-FIXME: разобраться с \textellipsis !!
 
 \section{Команды цитирования}
 \label{sec:citecommands}
@@ -622,6 +596,32 @@ FIXME: Возможно, лучше сделать editortype = organization ?
 
 Будем надеяться, что это временное решение.
 
+\subsection{Многоточие при сокращении названий}
+\label{ssec:ellipsis}
+
+Команда \cmd{textellipsis}, так же как и символ \enquote{…} (Unicode U+2026), в поле \bibfield{shorttitle} воспринимается \biblatex'ом
+как конец предложения. Это может приводить к конфликтам с трекером пунктуации. 
+По этой причине рекомендуется добавлять в таких случаях
+команду \cmd{isdot}, превращающую
+последнюю точку в точку сокращения (\texttt{dot}), а не конца предложения 
+(\texttt{period}). Например: 
+%xelatex, похоже, использует символ \enquote{…} (Unicode U+2026)
+
+\begin{lstlisting}[style=bibtex]
+@BOOK{book,
+  ...
+  shorttitle = {Introduction~\textellipsis\isdot}
+}
+\end{lstlisting}
+
+Или:
+
+\begin{lstlisting}[style=bibtex]
+@BOOK{book,
+  ...
+  shorttitle = {Introduction~...\isdot}
+}
+\end{lstlisting}
 
 \section{Отличия от стандартных стилей \biblatex}
 \label{sec:stydiff}
