@@ -177,6 +177,7 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 
 
 \section{Стили, определяемые \biblatexgost}
+\label{sec:styles}
 
 ГОСТ определяет три типа ссылок: внутритекстовую, подстрочную, затекстовую.
 Первые два типа приблизительно соответствуют стилям \bibsty{verbose} в \biblatex 
@@ -202,7 +203,7 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 \bibfield{shorttitle}\footnote{Чтобы при использовании многоточий при сокращении
 заголовков не возникали лишние точки после этих многоточий, используйте пакет
 \sty{ellipsis} (он должен загружаться после пакета \sty{hyperref}). FIXME}.
-Стиль устанавливает опцию \kvopt{autocite}{inline}.
+Стиль устанавливает опции \kvopt{autocite}{inline}, ...
 
 Отсутствует опция \opt{dashed} (ПОЧЕМУ?).
 
@@ -211,6 +212,7 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 стиля \bibsty{verbose-trad3}. 
 Стиль предназначен для помещения ссылок в сносках внизу страницы (с помощью 
 команд \cmd{footcite}, \cmd{smartcite} или, ещё лучше, \cmd{autocite}). 
+Стиль устанавливает опции \kvopt{autocite}{footnote}, ...
 
 Фактически, стиль \bibsty{gost-footnote} имеет только два отличия от стиля 
 \bibsty{gost-inline}. 
@@ -223,6 +225,7 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 
 \item[gost-numeric]
 Затекстовые ссылки по ГОСТ. Является модификацией стандартного стиля \bibsty{numeric} и отличается от него лишь оформлением библиографии, но не цитат. Ссылки помещаются после текста, а для их связи с текстом используются числа в квадратных скобках.
+Стиль устанавливает опции \kvopt{autocite}{inline}, ...
 
 \item[gost-authoryear]
 Затекстовые ссылки по ГОСТ. Является модификацией стандартного 
@@ -230,12 +233,14 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 используется название или поле \bibfield{shorttitle}, если оно доступно. Нужно заметить, что ГОСТ допускает в этом случае неопределённые ссылки, например, в случаях, когда один автор имеет несколько работ одного года. Поэтому в \biblatexgost используется стандартный для других библиографических стилей метод добавления в случае необходимости маленькой латинской буквы к году. Буква добавляется как в ссылке, так и в библиографии. См. файл примеров. Это поведение можно отключить, для чего служит опция \opt{mergedate}.
 По сравнению с \biblatex, она имеет два дополнительных значения \opt{gostletter} и 
 \opt{goststrict}. Первое соответствует добавлению буквы к году, второе~"--- строгому 
-следованию ГОСТу (хотя при этом существует опасностью появления неопределённых ссылок). 
+следованию ГОСТу (хотя при этом существует опасностью появления неопределённых ссылок).
+Стиль устанавливает опции \kvopt{autocite}{inline}, ... 
 
 \end{marglist}
 
 В ГОСТ определён ещё один тип затекстовых ссылок, при котором они связываются с текстом сносками. Этого можно достичь двумя способами. В первом используется стиль
- \bibsty{gost-footnote} при наличии поддержки команды \cmd{endnote} (пакета \sty{endnotes}, стиля документа \sty{memoir} или других). При этом ссылки переносятся в конец текста (или главы, или в любое нужное место). Можно также воспользоваться 
+ \bibsty{gost-footnote} при наличии поддержки команды \cmd{endnote} (пакета \sty{endnotes}, стиля документа \sty{memoir} или других). При этом ссылки переносятся в конец текста (или главы, или в любое нужное место). Для этого должна быть установлена
+опция \kvopt{notetype}{endonly}. Можно также воспользоваться 
 пакетом \sty{fn2end}. Второй способ~--- использовать команду цитирования 
 \cmd{supercite}, которая доступна только для стилей типа \bibsty{numeric} и
 помещает номер в верхний индекс вместо квадратных скобок.
@@ -777,8 +782,10 @@ FIXME: Возможно, лучше сделать editortype = organization ?
 \begin{changelog}
 
 \begin{release}{0.2}{2012-}
-\item \texttt{gost-intext} is renamed into \texttt{gost-inline}
-\item \cmd{ifmulticitation} macro is introduced\see{sec:impldet}
+\item Rearranged citation commands\see{sec:citecommands}
+\item \texttt{gost-intext} renamed \texttt{gost-inline}\see{sec:styles}
+\item Introduced \cmd{ifmulticitation} macro\see{sec:impldet}
+\item Changed documentation
 \end{release}
 
 \begin{release}{0.1}{2012-02-03}
