@@ -2,4 +2,4 @@ These are Biblatex bibliography and citation styles to format bibliography accor
 
 The package (especially its documentation) is on an early stage but may be already of some use.
 
-To install just unzip the package into you texmf tree (preferably local) and update the TeX hash (for example, for TeX Live run mktexlsr). 
+To install just unzip the package into your texmf tree (preferably local) and update the TeX hash (for example, for TeX Live run mktexlsr). 
