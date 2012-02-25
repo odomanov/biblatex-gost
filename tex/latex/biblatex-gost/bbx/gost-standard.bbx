@@ -101,7 +101,7 @@
     {\ifbibstring{issue}%
      {\bibstring{issue}\addabbrvspace#1}%
      {\unspace\adddot#1}}%
-    {}}
+    {#1}}
 \DeclareFieldFormat[article,periodical]{issue}{%
   \ifinteger{#1}
     {\ifbibstring{issue}%
@@ -905,7 +905,7 @@
   \newunit
   \printfield{part}%
   \newunit
-  \printfield{issue}}%
+  \printfield[issuenum]{issue}}%
 
 \newbibmacro{year}{%
   \printfield{year}}
