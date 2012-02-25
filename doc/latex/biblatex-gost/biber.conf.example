@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
 <sourcemap>
-	<maps datatype="bibtex" map_overwrite="0">
-		<map>
-			<map_step map_field_source="BOOKS" map_field_target="USERB"/>
-			<map_step map_field_source="PARTS" map_field_target="USERC"/>
-			<map_step map_field_source="ISSUES" map_field_target="USERD"/>
-			<map_step map_field_source="CREDITS" map_field_target="LISTA"/>
-		</map>
-	</maps>
+  <maps datatype="bibtex" map_overwrite="0">
+    <map>
+      <map_step map_field_source="BOOKS" map_field_target="USERB"/>
+      <map_step map_field_source="PARTS" map_field_target="USERC"/>
+      <map_step map_field_source="ISSUES" map_field_target="USERD"/>
+      <map_step map_field_source="CREDITS" map_field_target="LISTA"/>
+    </map>
+  </maps>
 </sourcemap>
 </config>
-
