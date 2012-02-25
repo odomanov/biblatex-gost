@@ -70,21 +70,27 @@
 \DeclareFieldFormat{issuetitle}{#1}
 \DeclareFieldFormat{maintitle}{#1}
 \DeclareFieldFormat*{volume}{%
-  \ifbibstring{volume}
-    {\bibstring{volume}\addabbrvspace#1}
-    {}}
+  \iffieldnum{volume}
+    {\ifbibstring{volume}
+      {\bibstring{volume}\addabbrvspace#1}
+      {}}
+    {#1}}
 \DeclareFieldFormat[article,periodical]{volume}{%
   \ifbibstring{volume}
     {\bibstring{jourvol}\addabbrvspace#1}
     {}}
 \DeclareFieldFormat*{book}{%
-  \ifbibstring{book}
-    {\bibstring{book}\addabbrvspace#1}
-    {\unspace\adddot#1}}
+  \iffieldnum{book}
+    {\ifbibstring{book}
+      {\bibstring{book}\addabbrvspace#1}
+      {}}
+    {#1}}
 \DeclareFieldFormat*{part}{%
-  \ifbibstring{part}
-    {\bibstring{part}\addabbrvspace#1}
-    {\unspace\adddot#1}}
+  \iffieldnum{part}
+    {\ifbibstring{part}
+      {\bibstring{part}\addabbrvspace#1}
+      {}}
+    {#1}}
 \DeclareFieldFormat[article,periodical]{number}{%
   \ifbibstring{number}
     {\bibstring{number}\addabbrvspace#1}
@@ -96,11 +102,11 @@
 %      {\bibstring{involumes}\addabbrvspace#1~\bibstring{volumes}}
 %      {}}
 %    {}}
-\DeclareFieldFormat{issuenum}{%
-  \iffieldnum{issue}%
-    {\ifbibstring{issue}%
-     {\bibstring{issue}\addabbrvspace#1}%
-     {\unspace\adddot#1}}%
+\DeclareFieldFormat{issue}{%
+  \iffieldnum{issue}
+    {\ifbibstring{issue}
+      {\bibstring{issue}\addabbrvspace#1}
+      {}}
     {#1}}
 \DeclareFieldFormat[article,periodical]{issue}{%
   \ifinteger{#1}
@@ -905,7 +911,7 @@
   \newunit
   \printfield{part}%
   \newunit
-  \printfield[issuenum]{issue}}%
+  \printfield{issue}}%
 
 \newbibmacro{year}{%
   \printfield{year}}
