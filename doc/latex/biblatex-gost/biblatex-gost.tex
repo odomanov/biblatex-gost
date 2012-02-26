@@ -56,19 +56,22 @@
     \ltd@title@author\par
     \expandafter\email\expandafter{\ltd@title@email}\par
   \raggedright
-    Ревизия \ltd@title@revision\par\ltd@title@date
+    Ревизия \ltd@title@revision\par\ltd@title@date 
   \end{multicols}
   \endgroup}
 \makeatother
 
+%\svnRegisterRevision{22}{v.1.0}% to be used with \svnFullRevision*{\svnrev}
 \titlepage{%
   title={Пакет \biblatexgost},
   subtitle={Оформление библиографии согласно ГОСТ 7.0.5-2008},
   url={\biblatexgosthome},
   author={Олег Доманов},
   email={odomanov@yandex.ru},
-  revision={\svnrev},
-  date={\svndate}}
+  revision={\svnrev% 
+  %\svnFullRevision*{\svnrev}
+  },
+  date={\svnday.\svnmonth.\svnyear}}
 
 \hypersetup{%
   pdftitle={The \biblatexgost Package},
@@ -139,7 +142,7 @@
 
 Пакет поставляется в виде архива, содержащего стандартую структуру дерева TDS. 
 Для его установки достаточно распаковать архив в дерево \TeX, желательно локальное, и 
-обновить базу файлов (в \TeX\ Live это делается командой \texttt{mktexlsr}).
+обновить индексы (в \TeX\ Live это делается командой \texttt{mktexlsr}).
 
 \subsection{Использование}
 \label{ssec:usage}
