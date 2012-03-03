@@ -623,19 +623,19 @@ FIXME: Возможно, лучше сделать editortype = organization ?
 (\texttt{period}). Например: 
 %xelatex, похоже, использует символ \enquote{…} (Unicode U+2026)
 
-\begin{lstlisting}[style=bibtex]
+\begin{lstlisting}[style=bibtex,escapechar=\%]
 @BOOK{book,
   ...
-  shorttitle = {Introduction~\textellipsis\isdot}
+  shorttitle = {%Введение%~\textellipsis\isdot}
 }
 \end{lstlisting}
 
 Или:
 
-\begin{lstlisting}[style=bibtex]
+\begin{lstlisting}[style=bibtex,escapechar=\%]
 @BOOK{book,
   ...
-  shorttitle = {Introduction~...\isdot}
+  shorttitle = {%Введение%~...\isdot}
 }
 \end{lstlisting}
 
