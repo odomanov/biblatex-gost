@@ -61,7 +61,7 @@
   \endgroup}
 \makeatother
 
-%\svnRegisterRevision{22}{v.1.0}% to be used with \svnFullRevision*{\svnrev}
+%\svnRegisterRevision{22}{v1.0}% to be used with \svnFullRevision*{\svnrev}
 \titlepage{%
   title={Пакет \biblatexgost},
   subtitle={Оформление библиографии согласно ГОСТ 7.0.5-2008},
@@ -181,6 +181,7 @@
 Для работы с \biblatexgost рекомендуется использовать \biber.
 
 \subsection{Лицензия}
+\label{ssec:lic}
 
 Permission is granted to copy, distribute and\slash or modify this software under the terms of the \lppl, version 1.3.\fnurl{http://www.ctan.org/tex-archive/macros/latex/base/lppl.txt} This package is author"=maintained.
 
@@ -241,7 +242,7 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 используется название или поле \bibfield{shorttitle}, если оно доступно. Нужно заметить, что ГОСТ допускает в этом случае неопределённые ссылки, например, в случаях, когда один автор имеет несколько работ одного года. Поэтому в \biblatexgost используется стандартный для других библиографических стилей метод добавления в случае необходимости маленькой латинской буквы к году. Буква добавляется как в ссылке, так и в библиографии. См. файл примеров. Это поведение можно отключить, для чего служит опция \opt{mergedate}.
 По сравнению с \biblatex, она имеет два дополнительных значения \opt{gostletter} и 
 \opt{goststrict}. Первое соответствует добавлению буквы к году, второе~"--- строгому 
-следованию ГОСТу (хотя при этом существует опасностью появления неопределённых ссылок).
+следованию ГОСТу (хотя при этом существует опасность появления неопределённых ссылок).
 Стиль устанавливает опции \kvopt{autocite}{inline}, ... 
 
 \end{marglist}
@@ -259,6 +260,7 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 Соответствие терминов ГОСТ и \biblatexgost представлено в \tabref{tab:gost-biblatex}. 
 Как можно видеть, это соответствие неполное,
 причём с обеих сторон.
+Цветом выделены поля \biblatexgost, отсутствующие в \biblatex.
 
 %\begin{table}[ht]
 \begingroup
@@ -268,7 +270,7 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 \begin{longtable}[l]{@{}V{0.5\textwidth}@{}V{0.5\textwidth}@{}}
 \toprule
 \multicolumn{1}{@{}H}{ГОСТ} &
-\multicolumn{1}{@{}H}{\biblatex\hfill}  \\
+\multicolumn{1}{@{}H}{\biblatexgost\hfill}  \\
 \cmidrule(r){1-1}\cmidrule{2-2}
 \endhead
 \bottomrule
@@ -283,7 +285,9 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 \textit{Параллельное заглавие}            & \textendash \\
 \textit{Сведения, относящиеся к заглавию} & \bibfield{titleaddon}, \bibfield{maintitleaddon}, \bibfield{booktitleaddon} \\
 Сведения об ответственности      & \bibfield{editor}, \bibfield{editora},
-                                   \bibfield{editorb}, \bibfield{editorc}, \bibfield{translator}, \bibfield{commentator}, ??? \\
+                                   \bibfield{editorb}, \bibfield{editorc}, 
+                                   \bibfield{translator}, \bibfield{commentator}, 
+                                   {\spotcolor\bibfield{credits}}, ??? \\
 \cmidrule(r){1-1}\cmidrule{2-2}
 \multicolumn{1}{@{}H}{Область специфических сведений} & \bibfield{note} \\
 \cmidrule(r){1-1}
@@ -301,7 +305,7 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 \cmidrule(r){1-1}\cmidrule{2-2}
 \multicolumn{1}{@{}H}{Область физической характеристики} & \\
 \cmidrule(r){1-1}
-Специфическое обозначение материала и объём & \bibfield{volumes}, \bibfield{pagetotal}, \bibfield{pages}\\
+Специфическое обозначение материала и объём & \bibfield{volumes}, \bibfield{pagetotal}, \bibfield{pages}, {\spotcolor\bibfield{books}}, {\spotcolor\bibfield{parts}}, {\spotcolor\bibfield{issues}}\\
 \textit{Другие сведения о физической характеристике} & \textendash \\
 \textit{Размеры} & \textendash \\
 \textit{Сведения о сопроводительном материале} & \textendash \\
@@ -379,7 +383,7 @@ ISSN серии или подсерии & \textendash \\
 \label{sec:citecommands}
 
 Доступные команды цитирования перечислены в \tabref{tab:citecommands}. Их поведение
-лишь в редких случаях отличается от стандартного, как оно описано в документации
+лишь в редких случаях отличается от стандартного, описанного в документации
 \biblatex.
 %Цветом выделены команды, поведение которых отличается от стандартного в \biblatex.
 
@@ -549,11 +553,12 @@ FIXME: Возможно, лучше сделать editortype = organization ?
 При заполнении базы данных, эта серия помещается в поле \bibfield{journaltitle}
 вместе с названием журнала:
 
-%\begin{lstlisting}[style=bibtex,extendedchars=true]
-\medskip\noindent
-\texttt{\small journaltitle = \{Итоги науки и техники. Серия: Автомобилестроение\}}
-\medskip
-%\end{lstlisting}
+\begin{lstlisting}[style=bibtex,escapechar=|]
+@ARTICLE{article,
+  ...
+  journaltitle = {|Итоги науки и техники. Серия: Автомобилестроение|},
+}
+\end{lstlisting}
 
 \subsection{Преобразование программой \biber}
 \label{ssec:biber}
@@ -594,22 +599,6 @@ FIXME: Возможно, лучше сделать editortype = organization ?
 
 \lstinputlisting[language=XML,basicstyle=\footnotesize\verbatimfont]{biber.conf.example}
 
-%\begin{lstlisting}[language=XML,basicstyle=\footnotesize\verbatimfont]
-%<?xml version="1.0" encoding="UTF-8"?>
-%<config>
-%<sourcemap>
-%  <maps datatype="bibtex" map_overwrite="0">
-%    <map>
-%      <map_step map_field_source="BOOKS" map_field_target="USERB"/>
-%      <map_step map_field_source="PARTS" map_field_target="USERC"/>
-%      <map_step map_field_source="ISSUES" map_field_target="USERD"/>
-%      <map_step map_field_source="CREDITS" map_field_target="LISTA"/>
-%    </map>
-%  </maps>
-%</sourcemap>
-%</config>
-%\end{lstlisting}
-
 Будем надеяться, что это временное решение.
 
 \subsection{Многоточие при сокращении названий}
@@ -623,19 +612,19 @@ FIXME: Возможно, лучше сделать editortype = organization ?
 (\texttt{period}). Например: 
 %xelatex, похоже, использует символ \enquote{…} (Unicode U+2026)
 
-\begin{lstlisting}[style=bibtex,escapechar=\%]
+\begin{lstlisting}[style=bibtex,escapechar=|]
 @BOOK{book,
   ...
-  shorttitle = {%Введение%~\textellipsis\isdot}
+  shorttitle = {|Введение|~\textellipsis\isdot}
 }
 \end{lstlisting}
 
 Или:
 
-\begin{lstlisting}[style=bibtex,escapechar=\%]
+\begin{lstlisting}[style=bibtex,escapechar=|]
 @BOOK{book,
   ...
-  shorttitle = {%Введение%~...\isdot}
+  shorttitle = {|Введение|~...\isdot}
 }
 \end{lstlisting}
 
@@ -812,7 +801,7 @@ FIXME: Возможно, лучше сделать editortype = organization ?
 \item свед.о материале~"--- возможно, добавить в biber.conf
 \item При составлении описания на документ в целом, если он продолжает публиковаться, приводят год издания первого номера и тире, после которого оставляют \textit{интервал в четыре пробела}: 
 
-Долгопрудный : МФТИ, 1998~"--- \mbox{\ \ \ \ }.
+Долгопрудный : МФТИ, 1998~"--- \mbox{~~~~}.
 \item серий может быть несколько~"--- выводятся друг за другом~"--- д.б. list?
 \item Одно произведение в нескольких номерах журнала
 \end{itemize}
