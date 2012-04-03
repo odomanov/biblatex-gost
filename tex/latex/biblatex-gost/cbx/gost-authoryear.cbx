@@ -66,13 +66,15 @@
      \usebibmacro{cite:volume+parts}}
 
 \newbibmacro{cite:volume+parts}{%
-  \printfield{volume}%
-  \setunit*{\postnotedelim}%
-  \printfield{book}%
-  \setunit*{\postnotedelim}%
-  \printfield{part}%
-  \setunit*{\postnotedelim}%
-  \printfield[issuenum]{issue}}%
+  \ifentrytype{article}
+	{}
+	{\printfield{volume}%
+	  \setunit*{\postnotedelim}%
+	  \printfield{book}%
+	  \setunit*{\postnotedelim}%
+	  \printfield{part}%
+	  \setunit*{\postnotedelim}%
+	  \printfield[issuenum]{issue}}}%
 
 
 \endinput
