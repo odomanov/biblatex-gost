@@ -115,13 +115,14 @@
      {\unspace\adddot#1}}%
     {#1}}
 
+%\DeclareNameAlias{default}{first-last}
 \DeclareNameAlias{sortname}{last-first}
-\DeclareNameFormat{byeditor}{%
+\DeclareNameFormat{byeditor-------------}{%
   \iffirstinits
     {\usebibmacro{byeditor:first-last}{#1}{#4}{#5}{#7}}
     {\usebibmacro{byeditor:first-last}{#1}{#3}{#5}{#7}}%
   \usebibmacro{name:andothers}}
-\newbibmacro*{byeditor:first-last}[4]{%
+\newbibmacro*{byeditor:first-last-----------}[4]{%
   \usebibmacro{name:delim}{#2#3#1}%
   \usebibmacro{name:hook}{#2#3#1}%
   \ifblank{#2}{}{#2\isdot\bibnamedelimd}%
@@ -133,29 +134,40 @@
   #1\isdot
   \ifblank{#4}{}{\bibnamedelimd#4\isdot}}
 
-\newcommand*{\mkbibmainnamefirst}[1]{\mkbibemph{#1}}
-\newcommand*{\mkbibmainnamelast}[1]{\mkbibemph{#1}}
-\newcommand*{\mkbibmainnameprefix}[1]{\mkbibemph{#1}}
-\newcommand*{\mkbibmainnameaffix}[1]{\mkbibemph{#1}} 
-\renewbibmacro*{name:last-first}[4]{%
+\DefineBibliographyExtras{french}{\protected\def\mkbibnamelast#1{#1}}
+\DeclareNameFormat{author}{%
+  \iffirstinits
+    {\usebibmacro{authorname:last-first}{#1}{#4}{#5}{#7}}
+    {\usebibmacro{authorname:last-first}{#1}{#3}{#5}{#7}}%
+  \usebibmacro{name:andothers}}
+\newcommand*{\mkbibauthorlast}[1]{\mkbibemph{#1}}
+\newcommand*{\mkbibauthorfirst}[1]{\mkbibauthorlast{#1}}
+\newcommand*{\mkbibauthorprefix}[1]{\mkbibauthorlast{#1}}
+\newcommand*{\mkbibauthoraffix}[1]{\mkbibauthorlast{#1}} 
+\newbibmacro*{authorname:last-first}[4]{%
   \ifuseprefix
     {\usebibmacro{name:delim}{#3#1}%
      \usebibmacro{name:hook}{#3#1}%
      \ifblank{#3}{}{%
        \ifcapital
-         {\mkbibmainnameprefix{\MakeCapital{#3}}\isdot}
-	 {\mkbibmainnameprefix{#3}\isdot}%
+         {\mkbibauthorprefix{\MakeCapital{#3}}\isdot}
+	 {\mkbibauthorprefix{#3}\isdot}%
        \ifpunctmark{'}{}{\bibnamedelimc}}%
-     \mkbibmainnamelast{#1}\isdot
-     \ifblank{#4}{}{\bibnamedelimd\mkbibmainnameaffix{#4}\isdot}%
-     \ifblank{#2}{}{\addcomma\bibnamedelimd\mkbibmainnamefirst{#2}\isdot}}
+     \mkbibauthorlast{#1}\isdot
+     \ifblank{#4}{}{\bibnamedelimd\mkbibauthoraffix{#4}\isdot}%
+     \ifblank{#2}{}{\addcomma\bibnamedelimd\mkbibauthorfirst{#2}\isdot}}
     {\usebibmacro{name:delim}{#1}%
      \usebibmacro{name:hook}{#1}%
-     \mkbibmainnamelast{#1}\isdot
-     \ifblank{#4}{}{\bibnamedelimd\mkbibmainnameaffix{#4}\isdot}%
+     \mkbibauthorlast{#1}\isdot
+     \ifblank{#4}{}{\bibnamedelimd\mkbibauthoraffix{#4}\isdot}%
      \ifblank{#2#3}{}{\addspace}%
-     \ifblank{#2}{}{\bibnamedelimd\mkbibmainnamefirst{#2}\isdot}%
-     \ifblank{#3}{}{\bibnamedelimd\mkbibmainnameprefix{#3}\isdot}}}
+     \ifblank{#2}{}{\bibnamedelimd\mkbibauthorfirst{#2}\isdot}%
+     \ifblank{#3}{}{\bibnamedelimd\mkbibauthorprefix{#3}\isdot}}}
+\DeclareNameAlias{editor}{author}
+\DeclareNameAlias{editora}{editor}
+\DeclareNameAlias{editorb}{editor}
+\DeclareNameAlias{editorc}{editor}
+\DeclareNameAlias{translator}{author}
 
 \newbibmacro*{//}{%
   \nopunct\printtext{\addnbspace\mbox{//}\addspace}}

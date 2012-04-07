@@ -767,6 +767,19 @@ FIXME: Возможно, лучше сделать editortype = organization ?
 \item Пакет загружает дополнительный файл локализации
 \linebreak\file{russian-gost.lbx}. В него добавлены строки \bibfield{books}, \bibfield{parts}, \bibfield{issues} для книг, частей, выпусков. ...
 
+\item Имя авторов (а также редакторов и переводчиков при использовании опций \opt{useeditor} и/или 
+\opt{usetranslator}) по умолчанию выводится курсивом. Этот формат можно изменить, переопределив 
+команды
+\cmd{mkbibauthorlast}, \cmd{mkbibauthorfirst}, \cmd{mkbibauthorprefix} и 
+\cmd{mkbibauthoraffix}. По умолчанию, они определены как: 
+
+\begin{lstlisting}[style=latex]
+\newcommand*{\mkbibauthorlast}[1]{\mkbibemph{#1}}
+\newcommand*{\mkbibauthorfirst}[1]{\mkbibauthorlast{#1}}
+\newcommand*{\mkbibauthorprefix}[1]{\mkbibauthorlast{#1}}
+\newcommand*{\mkbibauthoraffix}[1]{\mkbibauthorlast{#1}} 
+\end{lstlisting}
+
 \end{itemize}
 
 \section{ChangeLog}
