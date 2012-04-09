@@ -352,7 +352,7 @@ ISSN серии или подсерии & \textendash \\
 последний может и отсутствовать):
 
 \begin{bibexample}
-\item{} [Детская энциклопедия, ч.\,2, с.\,33]
+\item{} [Детская энциклопедия, ч.\,2, 2001, с.\,33]
 \end{bibexample}
 
 \section{Отличия от ГОСТ}
@@ -375,6 +375,10 @@ ISSN серии или подсерии & \textendash \\
 
 \item В \biblatex нет понятия параллельного заглавия. Соответственно, его нет в 
 \biblatexgost.
+
+\item В \biblatex нет понятия общего обозначения материала. Соответственно, его нет в 
+\biblatexgost. При необходимости, обозначение материала включается в поле \bibfield{title} 
+(см.~\secref{ssec:db:misc}).
 
 \end{itemize}
 
@@ -476,7 +480,11 @@ ISSN серии или подсерии & \textendash \\
 \item \textellipsis\ \slash\ Академия наук СССР\ ;\ \textellipsis
 \end{bibexample}
 
-FIXME: Возможно, лучше сделать editortype = organization ?
+%#FIXME: Возможно, лучше сделать editortype = organization ?
+
+В этом же поле могут содержаться другие нестандартные сведения об ответственности,
+например: <<авт. курса А. Сигалов>>,
+<<коллектив авт. под рук. Исакова Ю.Ф>> и т.\,д. 
 
 \fielditem{books}{literal}
 
@@ -632,6 +640,31 @@ FIXME: Возможно, лучше сделать editortype = organization ?
 Рекомендуется также использовать пакет
 \sty{ellipsis} (его нужно загружать после пакета \sty{hyperref}).
 
+\subsection{Электронные ресурсы}
+\label{ssec:elres}
+
+Для электронных ресурсов в области специфических сведений содержатся вид и объём ресурса 
+(см. ГОСТ 7.82-2001, п.5.5) в виде: <<Вид (Объём)>>. Например:
+
+\begin{trivlist}
+\item \textellipsis~"--- Электрон, дан. (3 файла) и прогр. (2 файла).~"--- \textellipsis
+\item \textellipsis~"--- Электрон, дан. (2 файла : 70 тыс. записей).~"--- \textellipsis
+\item \textellipsis~"--- Электрон, прогр. (2 файла : 18650 байтов).~"--- \textellipsis
+\item \textellipsis~"--- Electrinic text data (2 files : 1.6 Mbytes).~"--- \textellipsis 
+\end{trivlist} 
+
+\subsection{Другие особенности}
+\label{ssec:db:misc}
+
+\begin{itemize}
+\item Общее обозначение материала ([Электронный ресурс] и пр.) включается в заголовок:
+
+\begin{lstlisting}[style=bibtex,escapechar=|]
+title = {Google |[Электронный ресурс]|}
+\end{lstlisting}
+
+\end{itemize}
+
 \section{Отличия от стандартных стилей \biblatex}
 \label{sec:stydiff}
 
@@ -732,7 +765,11 @@ FIXME: Возможно, лучше сделать editortype = organization ?
 
 \kvopt{maxnames}{3}, \kvopt{minnames}{3}, 
 \kvopt{useeditor}{false}, \kvopt{usetranslator}{false}, \kvopt{dashed}{false}, 
-\kvopt{sorting}{ntvy}, \kvopt{mergedate}{gostletter}, ...
+\kvopt{mergedate}{gostletter}, ...
+
+\kvopt{sorting}{ntvy} для \bibsty{gost-inline}, \bibsty{gost-footnote}
+
+\kvopt{sorting}{nyt} для \bibsty{gost-authoryear}
 
 \section{Другие отличия}
 \label{sec:otherdiff}
