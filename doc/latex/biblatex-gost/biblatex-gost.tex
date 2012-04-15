@@ -15,9 +15,12 @@
 %\usepackage{shortvrb}
 %\usepackage{pifont}%  ???
 \usepackage{indentfirst}
+%---  fonts  ---
 \usepackage{pscyr}
 \renewcommand{\rmdefault}{fha}% Балтика
 \renewcommand{\sfdefault}{far}% arial
+%\usepackage{droid}   % ??
+%\usepackage{dejavu}  % ??
 
 %\MakeAutoQuote{«}{»}
 %\MakeAutoQuote*{<}{>}
@@ -374,7 +377,8 @@ ISSN серии или подсерии & \textendash \\
 \begin{itemize}
 
 \item В \biblatex нет понятия параллельного заглавия. Соответственно, его нет в 
-\biblatexgost.
+\biblatexgost. В качестве обходного пути параллельное заглавие можно помещать в поля
+\bibfield{titleaddon}, \bibfield{maintitleaddon}, \bibfield{booktitleaddon}. 
 
 \item В \biblatex нет понятия общего обозначения материала. Соответственно, его нет в 
 \biblatexgost. При необходимости, обозначение материала включается в поле \bibfield{title} 
@@ -480,7 +484,7 @@ ISSN серии или подсерии & \textendash \\
 \item \textellipsis\ \slash\ Академия наук СССР\ ;\ \textellipsis
 \end{bibexample}
 
-%#FIXME: Возможно, лучше сделать editortype = organization ?
+% FIXME: Возможно, лучше сделать editortype = organization ?
 
 В этом же поле могут содержаться другие нестандартные сведения об ответственности,
 например: <<авт. курса А. Сигалов>>,
@@ -646,12 +650,43 @@ ISSN серии или подсерии & \textendash \\
 Для электронных ресурсов в области специфических сведений содержатся вид и объём ресурса 
 (см. ГОСТ 7.82-2001, п.5.5) в виде: <<Вид (Объём)>>. Например:
 
-\begin{trivlist}
+\begin{bibexample}
 \item \textellipsis~"--- Электрон, дан. (3 файла) и прогр. (2 файла).~"--- \textellipsis
 \item \textellipsis~"--- Электрон, дан. (2 файла : 70 тыс. записей).~"--- \textellipsis
 \item \textellipsis~"--- Электрон, прогр. (2 файла : 18650 байтов).~"--- \textellipsis
 \item \textellipsis~"--- Electrinic text data (2 files : 1.6 Mbytes).~"--- \textellipsis 
-\end{trivlist} 
+\end{bibexample} 
+
+\subsection{Четыре и более имён}
+\label{ssec:db:4names}
+
+При наличии 4-х и более имён авторов, редакторов, переводчиков и т.\,д. ГОСТ предоставляет 
+выбор выводить ли их полный список или сокращать его до
+одного имени с добавлением [et al.], [и др.] и пр. В \biblatexgost принят последний вариант.
+При этом, даже при использовании опций \opt{useauthor}, \opt{useeditor} и \opt{usetranslator}, 
+в качестве заголовка библиографической
+записи используются не имена, а заглавие книги, статьи и т.\,д., сами же имена выводятся в сведениях
+об ответственности:
+
+\begin{bibexample}
+\item Хорошая книга / И. Иванов [и др.]. --- \textellipsis
+\end{bibexample}
+
+ \biblatexgost отслеживает
+количество имён в списке автоматически, 
+однако механизм сортировки \biblatex не может обнаружить, что в заголовке используются
+не имена, а заглавие. Поэтому для правильной работы сортировки необходимо в базе данных для публикаций,
+имеющих 4 и более имён, указывать в поле \bibfield{options} значение 
+\kvopt{useauthor}{false} (при 4-х и более авторах), \kvopt{useeditor}{false} (при 4-х и более
+редакторах), \kvopt{usetranslator}{false} (при 4-х и более переводчиках). Например:
+
+\begin{lstlisting}[style=bibtex,escapechar=|]
+@BOOK{book,
+  author = {|И. Иванов| and |П. Петров| and |С. Сидоров| and |В. Пупкин|},
+  options = {useauthor=false},
+  ...
+}
+\end{lstlisting}
 
 \subsection{Другие особенности}
 \label{ssec:db:misc}
@@ -723,9 +758,12 @@ title = {Google |[Электронный ресурс]|}
 \subsection{Сортировка}
 \label{ssec:sorting}
 
-Определена новая схема сортировки \opt{ntvy} (имя, заголовок, том, год). Она по умолчанию включена для
+Стандартные схемы сортировки \biblatex не работают для многотомных изданий (неверно обрабатывают
+поле \bibfield{maintitle}). Поэтому в \biblatexgost определены новые схемы \opt{gostnyt}, 
+\opt{gostntvy}. Последняя схема (имя, заголовок, том, год) не имеет аналога в \biblatex
+Она по умолчанию включена для
 стилей \bibsty{gost-inline} и \bibsty{gost-footnote}. В \bibsty{gost-authoryear} по умолчанию включена 
-стандартная сортировка \opt{nyt} (имя, год, заголовок). В \bibsty{gost-numeric} сортировка всегда в 
+сортировка \opt{gostnyt} (имя, год, заголовок). В \bibsty{gost-numeric} сортировка всегда в 
 порядке цитирования.
 
 %\subsection{Типы публикаций}
