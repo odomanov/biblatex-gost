@@ -200,11 +200,11 @@
 %\newcommand{\resppunct}{\addsemicolon\space}% punctuation between "credits" items
 \newcommand{\resppunct}{\addsemicolondelim\space}% punctuation between "credits" items
 
-\newcommand{\bbx@bibermap@books}{userb}
-\newcommand{\bbx@bibermap@parts}{userc}
-\newcommand{\bbx@bibermap@issues}{userd}
-\newcommand{\bbx@bibermap@credits}{lista}
-\newcommand{\bbx@bibermap@volumes}{volumes}
+\newcommand{\bbx@gostbibermap@books}{userb}
+\newcommand{\bbx@gostbibermap@parts}{userc}
+\newcommand{\bbx@gostbibermap@issues}{userd}
+\newcommand{\bbx@gostbibermap@credits}{lista}
+\newcommand{\bbx@gostbibermap@volumes}{volumes}
 
 \newbibmacro*{begentry}{}
 \newbibmacro*{finentry}{\finentry}
@@ -902,7 +902,7 @@
      \setunit*{\resppunct}}}
 
 \renewbibmacro*{byeditor+others}{%
-  \printlist{\bbx@bibermap@credits}%
+  \printlist{\bbx@gostbibermap@credits}%
   \setunit*{\resppunct}%
   \ifnameundef{editor}
     {}
