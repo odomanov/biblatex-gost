@@ -141,14 +141,14 @@
 Игоря Котельникова и Максима Полякова\fnurl{http://ctan.org/pkg/gost}.
 
 \subsection{Установка}
-\label{ssec:install}
+\label{sec:install}
 
 Пакет поставляется в виде архива, содержащего стандартую структуру дерева TDS. 
 Для его установки достаточно распаковать архив в дерево \TeX, желательно локальное, и 
 обновить индексы (в \TeX\ Live это делается командой \texttt{mktexlsr}).
 
 \subsection{Использование}
-\label{ssec:usage}
+\label{sec:usage}
 
 Работа со стилями \biblatexgost не отличается от работы с любыми другими стилями 
 \biblatex. Например, в случае использования \sty{babel} ваш 
@@ -184,7 +184,7 @@
 Для работы с \biblatexgost требуется \biber.
 
 \subsection{Лицензия}
-\label{ssec:lic}
+\label{sec:lic}
 
 Permission is granted to copy, distribute and\slash or modify this software under the terms of the \lppl, version 1.3.\fnurl{http://www.ctan.org/tex-archive/macros/latex/base/lppl.txt} This package is author"=maintained.
 
@@ -214,7 +214,7 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 Стиль отслеживает
 повторные ссылки, используя при необходимости короткие названия из поля
 \bibfield{shorttitle}\footnote{О многоточиях при сокращении заголовков 
-см.~\secref{ssec:ellipsis}}.  
+см.~\secref{sec:ellipsis}}.  
 Стиль устанавливает опции \kvopt{autocite}{inline}, ...
 
 Отсутствует опция \opt{dashed} (ПОЧЕМУ?).
@@ -382,7 +382,7 @@ ISSN серии или подсерии & \textendash \\
 
 \item В \biblatex нет понятия общего обозначения материала. Соответственно, его нет в 
 \biblatexgost. При необходимости, обозначение материала включается в поле \bibfield{title} 
-(см.~\secref{ssec:db:misc}).
+(см.~\secref{sec:db:misc}).
 
 \end{itemize}
 
@@ -468,7 +468,7 @@ ISSN серии или подсерии & \textendash \\
 \label{sec:database}
 
 \subsection{Поля}
-\label{ssec:db:fields}
+\label{sec:db:fields}
 
 Имена в полях \bibfield{editor}, \bibfield{editora}, \bibfield{editorb}, \bibfield{editorc}, \bibfield{commentator}, \bibfield{translator}, \bibfield{afterword},... должны быть в родительном падеже: 
 \enquote{Под ред. \prm{кого} А.\,Петрова}, \enquote{Пер. с фр. \prm{кого} И.\,Иванова}.
@@ -477,7 +477,7 @@ ISSN серии или подсерии & \textendash \\
 
 \fielditem{credits}{literal}
 
-Новое поле, см.~\secref{ssec:biber}. Содержит организацию, выводимую 
+Новое поле, см.~\secref{sec:biber}. Содержит организацию, выводимую 
 в сведениях об ответственности.  Например:
 
 \begin{bibexample}
@@ -492,22 +492,22 @@ ISSN серии или подсерии & \textendash \\
 
 \fielditem{books}{literal}
 
-Новое поле, см.~\secref{ssec:biber}. Содержит количество книг многочастного издания, 
+Новое поле, см.~\secref{sec:biber}. Содержит количество книг многочастного издания, 
 если оно делится на книги.
 
 \fielditem{parts}{literal}
 
-Новое поле, см.~\secref{ssec:biber}. Содержит количество частей многочастного издания, если оно делится на части.
+Новое поле, см.~\secref{sec:biber}. Содержит количество частей многочастного издания, если оно делится на части.
 
 \fielditem{issues}{literal}
 
-Новое поле, см.~\secref{ssec:biber}. Содержит количество выпусков многочастного издания, если оно делится на выпуски.
+Новое поле, см.~\secref{sec:biber}. Содержит количество выпусков многочастного издания, если оно делится на выпуски.
 
 \fielditem{issue}{literal}
 
 Выпуск. Для книг должно быть целым числом и выводится в форме «Вып. 3». Для журналов и 
 другой периодики может быть литералом (например, Summer, Autumn и т.\,д.).
-Подробнее см.~\secref{ssec:serinjour}.
+Подробнее см.~\secref{sec:serinjour}.
 
 \fielditem{edition}{literal}
 
@@ -516,7 +516,7 @@ ISSN серии или подсерии & \textendash \\
 \fielditem{series}{literal}
 
 Для периодических изданий, таких как журналы, выводится в виде «3-я сер.», если
-является целым числом. В противном случае, выводится как есть. См. также \secref{ssec:serinjour}.
+является целым числом. В противном случае, выводится как есть. См. также \secref{sec:serinjour}.
 
 \listitem{afterword}{name}
 
@@ -536,12 +536,12 @@ ISSN серии или подсерии & \textendash \\
 
 \subsection[@periodical, @mvbook и сериальные
 издания]{\bibtype{periodical}, \bibtype{mvbook} и сериальные издания}
-\label{ssec:db:series}
+\label{sec:db:series}
 
 В ГОСТ различаются (6.3.4.2) сериальные документы с нумерацией по годам (как, например, в журналах) и со сквозной нумерацией. В первом случае не печатается дата на месте выходных данных. В \biblatexgost только такие документы соответствуют \bibtype{periodical}.  Сериальные документы со сквозной нумерацией рекомендуется оформлять как \bibtype{mvbook}. 
 
 \subsection{Серия в журналах}
-\label{ssec:serinjour}
+\label{sec:serinjour}
 
 Серия в журналах может пониматься в двух смыслах. 
 
@@ -574,7 +574,7 @@ ISSN серии или подсерии & \textendash \\
 \end{lstlisting}
 
 \subsection{Преобразование программой \biber}
-\label{ssec:biber}
+\label{sec:biber}
 
 \biblatex (до версии 2.x) не позволяет вводить новые поля библиографической базы данных.
 В то же время, пакет \biblatexgost определяет дополнительные поля для хранения количества 
@@ -615,7 +615,7 @@ ISSN серии или подсерии & \textendash \\
 Будем надеяться, что это временное решение.
 
 \subsection{Многоточие при сокращении названий}
-\label{ssec:ellipsis}
+\label{sec:ellipsis}
 
 Команда \cmd{textellipsis}, так же как и символ \enquote{…} (Unicode U+2026), в поле \bibfield{shorttitle} воспринимается \biblatex'ом
 как конец предложения. Это может приводить к конфликтам с трекером пунктуации. 
@@ -645,7 +645,7 @@ ISSN серии или подсерии & \textendash \\
 \sty{ellipsis} (его нужно загружать после пакета \sty{hyperref}).
 
 \subsection{Электронные ресурсы}
-\label{ssec:elres}
+\label{sec:elres}
 
 Для электронных ресурсов в области специфических сведений содержатся вид и объём ресурса 
 (см. ГОСТ 7.82-2001, п.5.5) в виде: <<Вид (Объём)>>. Например:
@@ -658,7 +658,7 @@ ISSN серии или подсерии & \textendash \\
 \end{bibexample} 
 
 \subsection{Четыре и более имён}
-\label{ssec:db:4names}
+\label{sec:db:4names}
 
 При наличии 4-х и более имён авторов, редакторов, переводчиков и т.\,д. ГОСТ предоставляет 
 выбор выводить ли их полный список или сокращать его до
@@ -689,7 +689,7 @@ ISSN серии или подсерии & \textendash \\
 \end{lstlisting}
 
 \subsection{Другие особенности}
-\label{ssec:db:misc}
+\label{sec:db:misc}
 
 \begin{itemize}
 \item Общее обозначение материала ([Электронный ресурс] и пр.) включается в заголовок:
@@ -704,7 +704,7 @@ title = {Google |[Электронный ресурс]|}
 \label{sec:stydiff}
 
 \subsection{Тома, книги, части, выпуски}
-\label{ssec:volsparts}
+\label{sec:volsparts}
 
 Издание может делиться на физически отдельные части, которые могут называться по-разному. \biblatexgost поддерживает деление на тома, книги, части и выпуски (деление только одного уровня; например, тома, разделённые на части, не поддерживаются). Соответствующие им поля базы данных показаны в \tabref{tab:volsparts}.
 
@@ -731,7 +731,7 @@ title = {Google |[Электронный ресурс]|}
 5-и томах (6-и кн.)} и т.\,д.
 
 \subsection{Даты в газетах и журналах}
-\label{ssec:jourdates}
+\label{sec:jourdates}
 
 Информация о дате в публикациях типа \bibtype{article} выводится в следующем порядке:
 
@@ -756,14 +756,15 @@ title = {Google |[Электронный ресурс]|}
 
 
 \subsection{Сортировка}
-\label{ssec:sorting}
+\label{sec:sorting}
 
-Стандартные схемы сортировки \biblatex плохо работают для многотомных изданий (неверно обрабатывается
-поле \bibfield{maintitle}). Поэтому в \biblatexgost определены новые схемы \opt{gostnyt}, 
-\opt{gostntvy}. Последняя схема (имя, заголовок, том, год) не имеет аналога в \biblatex
-Она по умолчанию включена для
-стилей \bibsty{gost-inline} и \bibsty{gost-footnote}. В \bibsty{gost-authoryear} по умолчанию включена 
-сортировка \opt{gostnyt} (имя, год, заголовок). В \bibsty{gost-numeric} сортировка всегда в 
+Определена новая схема сортировки \opt{ntvy} (имя, заглавие, том, год). 
+Она по умолчанию включена для стилей \bibsty{gost-inline} и \bibsty{gost-footnote}.
+Кроме того, поскольку стандартные схемы сортировки \biblatex плохо работают с многотомными
+изданиями (неверно обрабатывается
+поле \bibfield{maintitle}), то модифицированы схемы \opt{nty}, \opt{nyvt}, \opt{ynt}, 
+\opt{ydnt} и \opt{nyt}. Последняя (имя, год, заголовок) включена по умолчанию в стиле 
+\bibsty{gost-authoryear}. В \bibsty{gost-numeric} сортировка всегда в 
 порядке цитирования.
 
 %\subsection{Типы публикаций}
@@ -796,10 +797,14 @@ title = {Google |[Электронный ресурс]|}
 
 \end{valuelist}
 
+\optitem{sorting}{\opt{ntvy}}
+
+В \biblatexgost определена дополнительная схема сортировки. См.~\secref{sec:sorting}.
+
 \end{optionlist}
 
 \subsection{Опции, установленные по умолчанию}
-\label{ssec:defopt}
+\label{sec:defopt}
 
 \kvopt{maxnames}{3}, \kvopt{minnames}{3}, 
 \kvopt{useeditor}{false}, \kvopt{usetranslator}{false}, \kvopt{dashed}{false}, 
@@ -844,7 +849,8 @@ title = {Google |[Электронный ресурс]|}
 \item Пакет загружает дополнительный файл локализации
 \linebreak\file{russian-gost.lbx}. В него добавлены строки \bibfield{books}, \bibfield{parts}, \bibfield{issues} для книг, частей, выпусков. ...
 
-\item Имя авторов (а также редакторов и переводчиков при использовании опций \opt{useeditor} и/или 
+\item Имена авторов в заголовке библиографической записи 
+(а также редакторов и переводчиков при использовании опций \opt{useeditor} и/или 
 \opt{usetranslator}) по умолчанию выводится курсивом. Этот формат можно изменить, переопределив 
 команды
 \cmd{mkbibauthorlast}, \cmd{mkbibauthorfirst}, \cmd{mkbibauthorprefix} и 
@@ -865,15 +871,17 @@ title = {Google |[Электронный ресурс]|}
 \begin{changelog}
 
 \begin{release}{0.3}{16-04-2012}
-\item Добавлена обработка длинных списков имён\see{ssec:db:4names}
-\item Добавлены схемы сортировки\see{ssec:sorting}
-\item Поля volume, book, part, issue теперь могут быть нечисловыми\see{ssec:volsparts}
+\item Добавлена обработка длинных списков имён\see{sec:db:4names}
+\item Добавлена схема сортировки \opt{ntvy}\see{sec:sorting}
+\item Изменены некоторые стандартные схемы сортировки\see{sec:sorting}
+\item Поля \bibfield{volume}, \bibfield{book}, \bibfield{part}, \bibfield{issue} 
+теперь могут быть нечисловыми\see{sec:volsparts}
 \item Добавлены макросы настройки формата имён заголовков\see{sec:impldet}
 \item Исправлены ошибки в формате вывода авторов, редакторов, переводчиков
 (в частности, для французского языка)
 \item Исправлены ошибки сортировки
-\item Исправлен перевод терминов annotator, withannotator
-\item Несколько других исправлений
+\item Исправлен перевод терминов \bibfield{annotator}, \bibfield{withannotator}
+\item Исправлены другие ошибки
 \end{release}
 
 \begin{release}{0.2}{12-02-2012}

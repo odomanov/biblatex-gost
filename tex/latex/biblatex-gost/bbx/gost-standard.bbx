@@ -11,6 +11,124 @@
 \newtoggle{bbx:doi}
 \newtoggle{bbx:eprint}
 
+\DeclareSortingScheme{nty}{
+  \sort{
+    \field{presort}
+  }
+  \sort[final]{
+    \field{sortkey}
+  }
+  \sort{
+    \name{sortname}
+    \name{author}
+    \name{editor}
+    \name{translator}
+    \field{sorttitle}
+    \field{maintitle}
+    \field{title}
+  }
+  \sort{
+    \field{sorttitle}
+    \field{maintitle}
+    \field{title}
+  }
+  \sort{
+    \field{sortyear}
+    \field{year}
+  }
+  \sort{
+    \field[padside=left,padwidth=4,padchar=0]{volume}
+    \literal{0000}
+  }
+}
+
+\DeclareSortingScheme{nyvt}{
+  \sort{
+    \field{presort}
+  }
+  \sort[final]{
+    \field{sortkey}
+  }
+  \sort{
+    \name{sortname}
+    \name{author}
+    \name{editor}
+    \name{translator}
+    \field{sorttitle}
+    \field{maintitle}
+    \field{title}
+  }
+  \sort{
+    \field{sortyear}
+    \field{year}
+  }
+  \sort{
+    \field[padside=left,padwidth=4,padchar=0]{volume}
+    \literal{0000}
+  }
+  \sort{
+    \field{sorttitle}
+    \field{maintitle}
+    \field{title}
+  }
+}
+
+\DeclareSortingScheme{ynt}{
+  \sort{
+    \field{presort}
+  }
+  \sort[final]{
+    \field{sortkey}
+  }
+  \sort{
+    \field{sortyear}
+    \field{year}
+    \literal{9999}
+  }
+  \sort{
+    \name{sortname}
+    \name{author}
+    \name{editor}
+    \name{translator}
+    \field{sorttitle}
+    \field{maintitle}
+    \field{title}
+  }
+  \sort{
+    \field{sorttitle}
+    \field{maintitle}
+    \field{title}
+  }
+}
+
+\DeclareSortingScheme{ydnt}{
+  \sort{
+    \field{presort}
+  }
+  \sort[final]{
+    \field{sortkey}
+  }
+  \sort[direction=descending]{
+    \field[strside=left,strwidth=4]{sortyear}
+    \field[strside=left,strwidth=4]{year}
+    \literal{9999}
+  }
+  \sort{
+    \name{sortname}
+    \name{author}
+    \name{editor}
+    \name{translator}
+    \field{sorttitle}
+    \field{maintitle}
+    \field{title}
+  }
+  \sort{
+    \field{sorttitle}
+    \field{maintitle}
+    \field{title}
+  }
+}
+
 \DeclareSortingScheme{nyt}{
   \sort{
     \field{presort}
