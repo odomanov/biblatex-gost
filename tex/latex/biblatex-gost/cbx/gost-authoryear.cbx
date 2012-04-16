@@ -23,6 +23,8 @@
 		{}%
 }
 
+\DeclareFieldFormat*{citetitle}{\mkbibemph{#1}}
+
 \renewbibmacro*{cite}{%
   \iffieldundef{shorthand}
     {\ifthenelse{\ifciteibid\AND\NOT\iffirstonpage}
