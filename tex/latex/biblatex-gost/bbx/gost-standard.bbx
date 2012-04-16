@@ -207,7 +207,7 @@
   useeditor=false,
   usetranslator=false,
   maxnames=3,
-  minnames=3}
+  minnames=1}
 
 \DeclareDataInheritance{periodical}{article}{%
   \noinherit{endyear}\noinherit{endmonth}\noinherit{endday}}
@@ -1026,7 +1026,7 @@
     {}
     {\usebibmacro{byeditor+othersstrg}%
      \setunit{\addspace}%
-     \usebibmacro{list-etal}{editor}%
+     \printnames[byeditor]{editor}%
      \clearname{editor}%
      \setunit*{\resppunct}}%
   \usebibmacro{byeditorx}%
@@ -1037,7 +1037,7 @@
     {}
     {\usebibmacro{bytranslator+othersstrg}%
      \setunit{\addspace}%
-     \usebibmacro{list-etal}{translator}%
+     \printnames[bytranslator]{translator}%
      \clearname{translator}%
      \setunit*{\resppunct}}%
   \usebibmacro{withothers}}
@@ -1167,12 +1167,6 @@
       {}
       {}}}
 
-\newbibmacro{list-etal}[1]{%
- \ifnumgreater{\value{#1}}{3}
-  {\printnames[by#1][-1]{#1}}
-  {\printnames[by#1]{#1}}
-}
-
 \renewbibmacro*{byauthor}{%
   \ifboolexpr{
     test \ifuseauthor
@@ -1182,12 +1176,12 @@
     {}
     {%\usebibmacro{bytypestrg}{author}{author}%
      %\setunit{\addspace}%
-     \usebibmacro{list-etal}{author}}}
+     \printnames[byauthor]{author}}}
      
 \renewbibmacro*{bybookauthor}{%
   \ifnamesequal{author}{bookauthor}
     {}
-    {\usebibmacro{list-etal}{bookauthor}}}
+    {\printnames[bybookauthor]{bookauthor}}}
 
 \renewbibmacro*{name:andothers}{%
   \ifboolexpr{
