@@ -38,6 +38,8 @@
 \newcommand*{\biblatexgost}{Biblatex-GOST\xspace}
 \newcommand*{\biblatexgosthome}{http://sourceforge.net/projects/biblatexgost/}
 
+\svnRegisterRevision{22}{v1.0}% to be used with \svnFullRevision*{\svnrev}
+\svnRegisterRevision{53}{Версия 0.3}
 \makeatletter
 \providecommand*{\printtitlepage}{}
 \renewrobustcmd*{\printtitlepage}{%
@@ -59,21 +61,18 @@
     \ltd@title@author\par
     \expandafter\email\expandafter{\ltd@title@email}\par
   \raggedright
-    Ревизия \ltd@title@revision\par\ltd@title@date 
+    \ltd@title@revision\par\ltd@title@date 
   \end{multicols}
   \endgroup}
 \makeatother
 
-%\svnRegisterRevision{22}{v1.0}% to be used with \svnFullRevision*{\svnrev}
 \titlepage{%
   title={Пакет \biblatexgost},
   subtitle={Оформление библиографии согласно ГОСТ 7.0.5-2008},
   url={\biblatexgosthome},
   author={Олег Доманов},
   email={odomanov@yandex.ru},
-  revision={\svnrev% 
-  %\svnFullRevision*{\svnrev}
-  },
+  revision={\svnFullRevision*{\svnrev}},
   date={\svnday.\svnmonth.\svnyear}}
 
 \hypersetup{%
@@ -137,15 +136,15 @@
 оформления библиографии согласно ГОСТ 7.0.5-2008. 
 %Данная документация описывает отличия \biblatexgost как от \biblatex, так и 
 %от ГОСТ. 
-Пакет, по возможности, совместим с пакетом GOST для Bibtex 
-Игоря Котельникова и Максима Полякова\fnurl{http://ctan.org/pkg/gost}.
+%Пакет, по возможности, совместим с пакетом GOST для Bibtex 
+%Игоря Котельникова и Максима Полякова\fnurl{http://ctan.org/pkg/gost}.
 
 \subsection{Установка}
 \label{sec:install}
 
 Пакет поставляется в виде архива, содержащего стандартую структуру дерева TDS. 
 Для его установки достаточно распаковать архив в дерево \TeX, желательно локальное, и 
-обновить индексы (в \TeX\ Live это делается командой \texttt{mktexlsr}).
+обновить индексы (в \TeX\ Live, например, это делается командой \texttt{mktexlsr}).
 
 \subsection{Использование}
 \label{sec:usage}
@@ -217,8 +216,6 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 см.~\secref{sec:ellipsis}}.  
 Стиль устанавливает опции \kvopt{autocite}{inline}, ...
 
-Отсутствует опция \opt{dashed} (ПОЧЕМУ?).
-
 \item[gost-footnote]
 Подстрочные ссылки по ГОСТ. Также является модификацией стандартного 
 стиля \bibsty{verbose-trad3}. 
@@ -237,13 +234,27 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 \bibfield{eprint}, \bibfield{url}, \bibfield{addendum}, \bibfield{pubstate}. 
 
 \item[gost-numeric]
-Затекстовые ссылки по ГОСТ. Является модификацией стандартного стиля \bibsty{numeric} и отличается от него лишь оформлением библиографии, но не цитат. Ссылки помещаются после текста, а для их связи с текстом используются числа в квадратных скобках.
+Затекстовые ссылки по ГОСТ. Является модификацией стандартного стиля \bibsty{numeric-comp} и отличается от него лишь оформлением библиографии, но не цитат. Ссылки помещаются после текста, а для их связи с текстом используются числа в квадратных скобках. Стиль можно использовать в качестве только 
+библиографического, указывая как стили цитирования стандартные стили \bibsty{numeric}, 
+\bibsty{numeric-comp} и \bibsty{numeric-verb} и переопределив символ разделения ссылок на
+точку с запятой:
+
+\begin{lstlisting}[style=latex]
+\renewcommand*{\multicitedelim}{\addsemicolon\space}
+\end{lstlisting}
+
 Стиль устанавливает опции \kvopt{autocite}{inline}, ...
 
 \item[gost-authoryear]
 Затекстовые ссылки по ГОСТ. Является модификацией стандартного 
-стиля \bibsty{authoryear-icomp}. Ссылки помещаются после текста, и для их связи с текстом используются имя автора и год в квадратных скобках. При отсутствии автора
-используется название или поле \bibfield{shorttitle}, если оно доступно. Нужно заметить, что ГОСТ допускает в этом случае неопределённые ссылки, например, в случаях, когда один автор имеет несколько работ одного года. Поэтому в \biblatexgost используется стандартный для других библиографических стилей метод добавления в случае необходимости маленькой латинской буквы к году. Буква добавляется как в ссылке, так и в библиографии. См. файл примеров. Это поведение можно отключить, для чего служит опция \opt{mergedate}.
+стиля \bibsty{authoryear-icomp}. Ссылки помещаются после текста, и для их связи 
+с текстом используются имя автора и год в квадратных скобках. При отсутствии автора
+используется название или поле \bibfield{shorttitle}, если оно доступно. Нужно заметить, что ГОСТ 
+допускает в этом случае неопределённые ссылки, например, в случаях, когда один автор имеет несколько 
+работ одного года. Поэтому в \biblatexgost используется стандартный для других библиографических стилей 
+метод добавления в случае необходимости маленькой латинской буквы к году. Буква добавляется как в 
+ссылке, так и в библиографии. См. файл примеров. Это поведение можно отключить, для чего служит опция 
+\opt{mergedate}.
 По сравнению с \biblatex, она имеет два дополнительных значения \opt{gostletter} и 
 \opt{goststrict}. Первое соответствует добавлению буквы к году, второе~"--- строгому 
 следованию ГОСТу (хотя при этом существует опасность появления неопределённых ссылок).
@@ -251,8 +262,11 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 
 \end{marglist}
 
-В ГОСТ определён ещё один тип затекстовых ссылок, при котором они связываются с текстом сносками. Этого можно достичь двумя способами. В первом используется стиль
- \bibsty{gost-footnote} при наличии поддержки команды \cmd{endnote} (пакета \sty{endnotes}, стиля документа \sty{memoir} или других). При этом ссылки переносятся в конец текста (или главы, или в любое нужное место). Для этого должна быть установлена
+В ГОСТ определён ещё один тип затекстовых ссылок, при котором они связываются с текстом сносками. Этого 
+можно достичь двумя способами. В первом используется стиль
+\bibsty{gost-footnote} при наличии поддержки команды \cmd{endnote} (пакета \sty{endnotes}, стиля 
+документа \sty{memoir} или других). При этом ссылки переносятся в конец текста (или главы, или в любое 
+нужное место). Для этого должна быть установлена
 опция \kvopt{notetype}{endonly}. Можно также воспользоваться 
 пакетом \sty{fn2end}. Второй способ~--- использовать команду цитирования 
 \cmd{supercite}, которая доступна только для стилей типа \bibsty{numeric} и
@@ -849,18 +863,19 @@ title = {Google |[Электронный ресурс]|}
 \item Пакет загружает дополнительный файл локализации
 \linebreak\file{russian-gost.lbx}. В него добавлены строки \bibfield{books}, \bibfield{parts}, \bibfield{issues} для книг, частей, выпусков. ...
 
-\item Имена авторов в заголовке библиографической записи 
-(а также редакторов и переводчиков при использовании опций \opt{useeditor} и/или 
-\opt{usetranslator}) по умолчанию выводится курсивом. Этот формат можно изменить, переопределив 
-команды
-\cmd{mkbibauthorlast}, \cmd{mkbibauthorfirst}, \cmd{mkbibauthorprefix} и 
-\cmd{mkbibauthoraffix}. По умолчанию, они определены как: 
+\item Имена авторов~--- 
+а также редакторов или переводчиков при использовании опций \opt{useeditor} и/или 
+\opt{usetranslator}~--- в заголовке библиографической записи 
+по умолчанию выводятся курсивом. Этот формат можно изменить, 
+переопределив команды
+\cmd{mkbibhdnamelast}, \cmd{mkbibhdnamefirst}, \cmd{mkbibhdnameprefix} и 
+\cmd{mkbibhdnameaffix}. По умолчанию, они определены как: 
 
 \begin{lstlisting}[style=latex]
-\newcommand*{\mkbibauthorlast}[1]{\mkbibemph{#1}}
-\newcommand*{\mkbibauthorfirst}[1]{\mkbibauthorlast{#1}}
-\newcommand*{\mkbibauthorprefix}[1]{\mkbibauthorlast{#1}}
-\newcommand*{\mkbibauthoraffix}[1]{\mkbibauthorlast{#1}} 
+\newcommand*{\mkbibhdnamelast}[1]{\mkbibemph{#1}}
+\newcommand*{\mkbibhdnamefirst}[1]{\mkbibhdnamelast{#1}}
+\newcommand*{\mkbibhdnameprefix}[1]{\mkbibhdnamelast{#1}}
+\newcommand*{\mkbibhdnameaffix}[1]{\mkbibhdnamelast{#1}} 
 \end{lstlisting}
 
 \end{itemize}
