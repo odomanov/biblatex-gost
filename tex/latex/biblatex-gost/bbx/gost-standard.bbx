@@ -275,29 +275,29 @@
     {\usebibmacro{authorname:last-first}{#1}{#4}{#5}{#7}}
     {\usebibmacro{authorname:last-first}{#1}{#3}{#5}{#7}}%
   \usebibmacro{name:andothers}}
-\newcommand*{\mkbibauthorlast}[1]{\mkbibemph{#1}}
-\newcommand*{\mkbibauthorfirst}[1]{\mkbibauthorlast{#1}}
-\newcommand*{\mkbibauthorprefix}[1]{\mkbibauthorlast{#1}}
-\newcommand*{\mkbibauthoraffix}[1]{\mkbibauthorlast{#1}} 
+\newcommand*{\mkbibhdnamelast}[1]{\mkbibemph{#1}}
+\newcommand*{\mkbibhdnamefirst}[1]{\mkbibhdnamelast{#1}}
+\newcommand*{\mkbibhdnameprefix}[1]{\mkbibhdnamelast{#1}}
+\newcommand*{\mkbibhdnameaffix}[1]{\mkbibhdnamelast{#1}} 
 \newbibmacro*{authorname:last-first}[4]{%
   \ifuseprefix
     {\usebibmacro{name:delim}{#3#1}%
      \usebibmacro{name:hook}{#3#1}%
      \ifblank{#3}{}{%
        \ifcapital
-         {\mkbibauthorprefix{\MakeCapital{#3}}\isdot}
-	 {\mkbibauthorprefix{#3}\isdot}%
+         {\mkbibhdnameprefix{\MakeCapital{#3}}\isdot}
+	 {\mkbibhdnameprefix{#3}\isdot}%
        \ifpunctmark{'}{}{\bibnamedelimc}}%
-     \mkbibauthorlast{#1}\isdot
-     \ifblank{#4}{}{\bibnamedelimd\mkbibauthoraffix{#4}\isdot}%
-     \ifblank{#2}{}{\addcomma\bibnamedelimd\mkbibauthorfirst{#2}\isdot}}
+     \mkbibhdnamelast{#1}\isdot
+     \ifblank{#4}{}{\bibnamedelimd\mkbibhdnameaffix{#4}\isdot}%
+     \ifblank{#2}{}{\addcomma\bibnamedelimd\mkbibhdnamefirst{#2}\isdot}}
     {\usebibmacro{name:delim}{#1}%
      \usebibmacro{name:hook}{#1}%
-     \mkbibauthorlast{#1}\isdot
-     \ifblank{#4}{}{\bibnamedelimd\mkbibauthoraffix{#4}\isdot}%
+     \mkbibhdnamelast{#1}\isdot
+     \ifblank{#4}{}{\bibnamedelimd\mkbibhdnameaffix{#4}\isdot}%
      \ifblank{#2#3}{}{\addspace}%
-     \ifblank{#2}{}{\bibnamedelimd\mkbibauthorfirst{#2}\isdot}%
-     \ifblank{#3}{}{\bibnamedelimd\mkbibauthorprefix{#3}\isdot}}}
+     \ifblank{#2}{}{\bibnamedelimd\mkbibhdnamefirst{#2}\isdot}%
+     \ifblank{#3}{}{\bibnamedelimd\mkbibhdnameprefix{#3}\isdot}}}
 \DeclareNameAlias{editor}{author}
 \DeclareNameAlias{editora}{editor}
 \DeclareNameAlias{editorb}{editor}
