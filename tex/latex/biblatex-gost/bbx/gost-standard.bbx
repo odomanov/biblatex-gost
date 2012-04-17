@@ -194,6 +194,14 @@
 \DeclareSortExclusion{inbook,incollection,inproceeding}
   {editor,volume,maintitle}
 
+%  OPTIONS
+
+\DeclareBibliographyOption{dashed}[true]{%
+  \ifstrequal{#1}{true}
+    {\ExecuteBibliographyOptions{pagetracker}%
+     \renewbibmacro*{bbx:savehash}{\savefield{fullhash}{\bbx@lasthash}}}
+    {\renewbibmacro*{bbx:savehash}{}}}
+
 \DeclareBibliographyOption{isbn}[true]{%
   \settoggle{bbx:isbn}{#1}}
 \DeclareBibliographyOption{url}[true]{%
@@ -857,12 +865,6 @@
     {\thefield{entrytype}}%
   \finentry}
 
-\DeclareBibliographyDriver{set}{%
-  \entryset{}{}%
-  \newunit\newblock
-  \usebibmacro{setpageref}%
-  \finentry}
-
 \DeclareBibliographyAlias{mvbook}{book}
 \DeclareBibliographyAlias{bookinbook}{inbook}
 \DeclareBibliographyAlias{suppbook}{inbook}
@@ -1194,6 +1196,87 @@
        {}%
      \andothersdelim\mkbibbrackets{\bibstring{andothers}}}
     {}}
+
+\InitializeBibliographyStyle{%
+  \global\undef\bbx@lasthash}
+
+\newbibmacro*{bbx:savehash}{%
+  \savefield{fullhash}{\bbx@lasthash}}
+
+\newbool{bbx@inset}
+\DeclareBibliographyDriver{set}{%
+  \booltrue{bbx@inset}%
+  \entryset{}{}%
+  \newunit\newblock
+  \usebibmacro{setpageref}%
+  \finentry}
+
+\renewbibmacro*{author}{%
+  \ifboolexpr{
+    test \ifuseauthor
+    and
+    not test {\ifnameundef{author}}
+  }
+    {\usebibmacro{bbx:dashcheck}
+       {\bibnamedash}
+       {\printnames{author}%
+     \setunit{\addcomma\space}%
+     \usebibmacro{bbx:savehash}}%
+     \usebibmacro{authorstrg}}
+    {\global\undef\bbx@lasthash}}
+
+\renewbibmacro*{editor}{%
+  \usebibmacro{bbx:editor}{editorstrg}}
+\renewbibmacro*{editor+others}{%
+  \usebibmacro{bbx:editor}{editor+othersstrg}}
+\newbibmacro*{bbx:editor}[1]{%
+  \ifboolexpr{
+    test \ifuseeditor
+    and
+    not test {\ifnameundef{editor}}
+  }
+    {\usebibmacro{bbx:dashcheck}
+       {\bibnamedash}
+       {\printnames{editor}%
+     \setunit{\addcomma\space}%
+     \usebibmacro{bbx:savehash}}%
+     \usebibmacro{#1}%
+     \clearname{editor}}
+    {\global\undef\bbx@lasthash}}
+
+\renewbibmacro*{translator}{%
+  \usebibmacro{bbx:translator}{translatorstrg}}
+\renewbibmacro*{translator+others}{%
+  \usebibmacro{bbx:translator}{translator+othersstrg}}
+\newbibmacro*{bbx:translator}[1]{%
+  \ifboolexpr{
+    test \ifusetranslator
+    and
+    not test {\ifnameundef{translator}}
+  }
+    {\usebibmacro{bbx:dashcheck}
+       {\bibnamedash}
+       {\printnames{translator}%
+     \setunit{\addcomma\space}%
+     \usebibmacro{bbx:savehash}}%
+     \usebibmacro{#1}%
+     \clearname{translator}}
+    {\global\undef\bbx@lasthash}}
+
+\newbibmacro*{bbx:dashcheck}[2]{%
+  \ifboolexpr{
+    test {\iffieldequals{fullhash}{\bbx@lasthash}}
+    and
+    not test \iffirstonpage
+    and
+    (
+       not bool {bbx@inset}
+       or
+       test {\iffieldequalstr{entrysetcount}{1}}
+    )
+  }
+    {#1}
+    {#2}}
 
 \gdef\ifmulticitation{%
   %\ifnumequal{\themulticitetotal}{0}{\@secondoftwo}{\@firstoftwo}
