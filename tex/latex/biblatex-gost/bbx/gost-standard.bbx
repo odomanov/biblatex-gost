@@ -955,7 +955,7 @@
 \newbibmacro*{maintitle+volumes+parts+booktitle}{%
   \usebibmacro{maintitle+volumes+parts+}{booktitle}}
   
-\renewbibmacro*{event+venue+date}{%
+\newbibmacro*{event+venue+date}{%
     \ifboolexpr{
       test {\iffieldundef{eventtitle}}
       and
