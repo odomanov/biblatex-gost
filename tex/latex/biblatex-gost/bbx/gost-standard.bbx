@@ -1208,14 +1208,14 @@
 % <parttype>, <number of parts>
 % Does not really work, since fields 'books', 'parts', 'issues' are not defined
 \newbibmacro{inparts}[1]{%
-  \iffieldundef{\csuse{bbx@bibermap@#1}}%
+  \iffieldundef{\csuse{bbx@gostbibermap@#1}}%
     {}
     {\ifbibstring{involumes}%
-      {\iffieldint{\csuse{bbx@bibermap@#1}}%
+      {\iffieldint{\csuse{bbx@gostbibermap@#1}}%
         {\ifbibstring{#1}%
-          {\bibstring{involumes}\addabbrvspace\printfield{\csuse{bbx@bibermap@#1}}~\bibstring{#1}}
+          {\bibstring{involumes}\addabbrvspace\printfield{\csuse{bbx@gostbibermap@#1}}~\bibstring{#1}}
           {}}
-        {\printfield{\csuse{bbx@bibermap@#1}}}}
+        {\printfield{\csuse{bbx@gostbibermap@#1}}}}
       {}
       {}}}
 
