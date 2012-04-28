@@ -5,8 +5,15 @@
 
 %derived from verbose-trad3
 
+\DeclareFieldFormat{bibhyperlink}{%
+  \bibhyperlink{\thefield{entrykey}:\csuse{cbx@\iffootnote{f}{t}@\thefield{entrykey}}}{#1}}
+\DeclareFieldFormat{bibhypertarget}{%
+  \bibhypertarget{\thefield{entrykey}:\the\value{instcount}}{#1}}
 \providecommand*{\mkibid}[1]{#1}
 \newtoggle{cbx:loccit}
+\newbibmacro*{cite:citepages}{}
+\newbibmacro*{cite:full:citepages}{}
+\newbibmacro*{cite:postnote}{}
 
 \DeclareBibliographyOption{strict}[true]{%
   \ifstrequal{#1}{true}
@@ -94,7 +101,7 @@
 \renewcommand{\postnotedelim}{\addperiod\space}
 \renewcommand{\multicitedelim}{\addsemicolondelim\space}
 
-\ExecuteBibliographyOptions{citetracker=strict,autocite=inline,
+\ExecuteBibliographyOptions{citetracker=constrict,autocite=inline,
                             citepages=omit,strict,opcittracker=constrict}
 
 \newbibmacro*{cite}{%
@@ -117,9 +124,13 @@
              {\usebibmacro{cite:opcit}}
              {\usebibmacro{cite:shorthand}}}}}}
        {\iffieldundef{shorthand}
-          {\usebibmacro{cite:short}}
-          {\usebibmacro{cite:shorthand}}}}
-    {\usebibmacro{cite:full}}}
+	  {\usebibmacro{cite:short}}
+	  {\usebibmacro{cite:shorthand}}}}
+    {\usebibmacro{cite:full}%
+     \usebibmacro{cite:save}}}
+
+\newbibmacro*{cite:save}{%
+  \csxdef{cbx@t@\thefield{entrykey}}{\the\value{instcount}}}
 
 \newbibmacro*{cite:full}{%
   \usebibmacro{cite:full:citepages}%
@@ -140,21 +151,23 @@
   \usebibmacro{shorthandintro}}
 
 \newbibmacro*{cite:short}{%
-  \printnames{labelname}%
+  \ifnameundef{labelname}
+    {\printfield{label}}
+    {\printnames{labelname}}%
   \setunit*{\nametitledelim}%
   \printtext[bibhyperlink]{%
     \usebibmacro{cite:maintitle/labeltitle+parts}}}
 
 \newbibmacro*{cite:opcit}{%
-  \printnames{labelname}%
+  \ifnameundef{labelname}
+    {\printfield{label}}
+    {\printnames{labelname}}%
   \setunit*{\nametitledelim}%
   \bibsentence\printtext[bibhyperlink]{%
     \bibstring[\mkibid]{opcit}}}
 
 \newbibmacro*{cite:ibid}{%
-  \bibsentence\printtext[bibhyperlink]{\bibstring[\mkibid]{ibidem}}%
-  %\global\toggletrue{cbx:loccit}
-  }
+  \bibsentence\printtext[bibhyperlink]{\bibstring[\mkibid]{ibidem}}}
 
 \newbibmacro*{cite:shorthand}{%
   \printtext[bibhyperlink]{\printfield{shorthand}}}
@@ -182,38 +195,69 @@
   \setunit*{\addcomma\space}%
   \printfield[issuenum]{issue}}%
 
+\newbibmacro*{footcite}{%
+  \usebibmacro{cite:citepages}%
+  \global\togglefalse{cbx:loccit}%
+  \ifciteseen
+    {\ifciteibid
+       {\ifloccit
+        {\usebibmacro{cite:ibid}%
+          \global\toggletrue{cbx:loccit}}
+        {\ifopcit
+          {\usebibmacro{cite:ibid}}
+          {\iffieldundef{labelname}%if there is no labelname, \ifopcit always yields false
+            {\usebibmacro{cite:ibid}}
+            {\iffieldundef{shorthand}
+             {\usebibmacro{cite:opcit}}
+             {\usebibmacro{cite:shorthand}}}}}}
+       {\iffieldundef{shorthand}
+	  {\usebibmacro{cite:short}}
+	  {\usebibmacro{cite:shorthand}}}}
+    {\usebibmacro{cite:full}%
+     \usebibmacro{footcite:save}}}
+
+\newbibmacro*{footcite:save}{%
+  \csxdef{cbx@f@\thefield{entrykey}}{\the\value{instcount}}%
+  \label{cbx@\the\value{instcount}}}
+
 \DeclareCiteCommand{\cite}
   {\usebibmacro{prenote}}
   {\usebibmacro{citeindex}%
-   \usebibmacro{cite}}
+   \iffootnote
+     {\usebibmacro{footcite}}
+     {\usebibmacro{cite}}}
   {\multicitedelim}
   {\usebibmacro{cite:postnote}}
 
 \DeclareCiteCommand{\parencite}[\mkbibparens]
   {\usebibmacro{prenote}}
   {\usebibmacro{citeindex}%
-   \usebibmacro{cite}}
+   \iffootnote
+     {\usebibmacro{footcite}}
+     {\usebibmacro{cite}}}
   {\multicitedelim}
   {\usebibmacro{cite:postnote}}
 
 \DeclareCiteCommand{\footcite}[\mkbibfootnote]
   {\usebibmacro{prenote}}
   {\usebibmacro{citeindex}%
-   \usebibmacro{cite}}
+   \usebibmacro{footcite}}
   {\multicitedelim}
   {\usebibmacro{cite:postnote}}
 
 \DeclareCiteCommand{\footcitetext}[\mkbibfootnotetext]
   {\usebibmacro{prenote}}
   {\usebibmacro{citeindex}%
-   \usebibmacro{cite}}
+   \usebibmacro{footcite}}
   {\multicitedelim}
   {\usebibmacro{cite:postnote}}
 
 \DeclareCiteCommand{\smartcite}[\iffootnote\mkbibparens\mkbibfootnote]
   {\usebibmacro{prenote}}
   {\usebibmacro{citeindex}%
-   \usebibmacro{cite}}
+   \iffootnote
+     {\usebibmacro{footcite}}
+     {\usebibmacro{cite}}}
   {\multicitedelim}
   {\usebibmacro{cite:postnote}}
 
