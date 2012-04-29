@@ -341,12 +341,22 @@
     {\bibstring{number}\addabbrvspace#1}
     {\unspace\adddot#1}}
 \DeclareFieldFormat{volumes}{#1}
-%\DeclareFieldFormat{volumes}{%
-%  \ifbibstring{involumes}%
-%    {\ifbibstring{volumes}%
-%      {\bibstring{involumes}\addabbrvspace#1~\bibstring{volumes}}
-%      {}}
-%    {}}
+\DeclareFieldFormat{involumes}{%
+  \ifbibstring{involumes}%
+    {\bibstring{involumes}\addabbrvspace#1~\bibsstring{volumes}}
+    {}}
+\DeclareFieldFormat{inbooks}{%
+  \ifbibstring{involumes}%
+    {\bibstring{involumes}\addabbrvspace#1~\bibsstring{books}}
+    {}}
+\DeclareFieldFormat{inparts}{%
+  \ifbibstring{involumes}%
+    {\bibstring{involumes}\addabbrvspace#1~\bibsstring{parts}}
+    {}}
+\DeclareFieldFormat{inissues}{%
+  \ifbibstring{involumes}%
+    {\bibstring{involumes}\addabbrvspace#1~\bibsstring{issues}}
+    {}}
 \DeclareFieldFormat{issue}{%
   \iffieldnum{issue}
     {\ifbibstring{issue}
@@ -970,15 +980,13 @@
      \clearfield{maintitleaddon}}
     {\iffieldundef{maintitle}
        {\usebibmacro{#1}%
-        \ifbibstring{involumes}
-          {\setunit{\addcolondelim}%
-           \usebibmacro{involumes+inparts}{\addcolondelim}}
-          {}%
-          \newunit
-          \usebibmacro{volume+parts}}
+        \setunit{\addcolondelim}%
+        \usebibmacro{involumes+otherparts}{\addcolondelim}
+        \newunit
+        \usebibmacro{volume+parts}}
        {\usebibmacro{maintitle}%
         \newunit
-        \usebibmacro{involumes+inparts}{\addperiod\addspace}%
+        \usebibmacro{involumes+otherparts}{\addperiod\addspace}%
         \newunit
         \usebibmacro{volume+parts}%
         \newunit
@@ -1229,30 +1237,16 @@
   \addsemicolon%
   \endgroup}
 
-\newbibmacro{involumes+inparts}[1]{%
-  \usebibmacro{inparts}{volumes}%
+\newbibmacro{involumes+otherparts}[1]{%
+  \printfield[involumes]{volumes}%
   \setunit*{#1}%
-  \usebibmacro{inparts}{books}%
+  \printfield[inbooks]{\csuse{bbx@gostbibermap@books}}%
   \setunit*{#1}%
-  \usebibmacro{inparts}{parts}%
+  \printfield[inparts]{\csuse{bbx@gostbibermap@parts}}%
   \setunit*{#1}%
-  \usebibmacro{inparts}{issues}%
+  \printfield[inissues]{\csuse{bbx@gostbibermap@issues}}%
   \setunit*{#1}%
 }
-
-% <parttype>, <number of parts>
-% Does not really work, since fields 'books', 'parts', 'issues' are not defined
-\newbibmacro{inparts}[1]{%
-  \iffieldundef{\csuse{bbx@gostbibermap@#1}}%
-    {}
-    {\ifbibstring{involumes}%
-      {\iffieldint{\csuse{bbx@gostbibermap@#1}}%
-        {\ifbibstring{#1}%
-          {\bibstring{involumes}\addabbrvspace\printfield{\csuse{bbx@gostbibermap@#1}}~\bibstring{#1}}
-          {}}
-        {\printfield{\csuse{bbx@gostbibermap@#1}}}}
-      {}
-      {}}}
 
 \renewbibmacro*{byauthor}{%
   \ifboolexpr{
