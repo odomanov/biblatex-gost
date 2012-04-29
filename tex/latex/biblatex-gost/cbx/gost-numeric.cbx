@@ -7,4 +7,12 @@
 \ExecuteBibliographyOptions{dashed=false}
 \renewcommand*{\multicitedelim}{\addsemicolon\space} 
 
+\AtEveryCitekey{%
+  \ifcsdef{abx@field@hyphenation}{%
+    \edef\blx@languagename{\abx@field@hyphenation}%
+    \select@language{\abx@field@hyphenation}%
+    \blx@hyphenreset}%
+  {}%
+}
+
 \endinput
