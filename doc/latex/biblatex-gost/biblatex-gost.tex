@@ -41,6 +41,7 @@
 \svnRegisterRevision{16}{Версия 0.2}% to be used with \svnFullRevision*{\svnrev}
 \svnRegisterRevision{64}{Версия 0.3}
 \svnRegisterRevision{70}{Версия 0.3.1}
+\svnRegisterRevision{75}{Версия 0.3.2}
 \makeatletter
 \providecommand*{\printtitlepage}{}
 \renewrobustcmd*{\printtitlepage}{%
@@ -216,7 +217,7 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 \bibfield{shorttitle}\footnote{О многоточиях при сокращении заголовков 
 см.~\secref{sec:ellipsis}}.  
 По умолчанию стиль устанавливает опции \kvopt{autocite}{inline}, \kvopt{sorting}{ntvy}, 
-\kvopt{citetracker}{strict}, \kvopt{citepages}{omit}, \kvopt{strict}{true}, 
+\kvopt{citetracker}{constrict}, \kvopt{citepages}{omit}, \kvopt{strict}{true}, 
 \kvopt{opcittracker}{constrict}.
 
 \item[gost-footnote]
@@ -225,7 +226,7 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 Стиль предназначен для помещения ссылок в сносках внизу страницы (с помощью 
 команд \cmd{footcite}, \cmd{smartcite} или, ещё лучше, \cmd{autocite}, см.~\secref{sec:autocite}). 
 По умолчанию стиль устанавливает опции \kvopt{autocite}{footnote}, \kvopt{sorting}{ntvy},
-\kvopt{citetracker}{strict}, \kvopt{citepages}{omit}, \kvopt{strict}{true}, 
+\kvopt{citetracker}{constrict}, \kvopt{citepages}{omit}, \kvopt{strict}{true}, 
 \kvopt{opcittracker}{constrict}.
 
 Фактически, стиль \bibsty{gost-footnote} имеет только два отличия от стиля 
@@ -861,7 +862,9 @@ title = {Google |[Электронный ресурс]|}
 \label{sec:issues}
 
 \begin{itemize}
-\item \ldots
+\item Русский должен быть последним в списке языков при вызове \cmd{babel}, иначе возможны ошибки 
+при выводе многотомных книг. 
+\href{https://sourceforge.net/tracker/?func=detail&aid=3483207&group_id=244752&atid=1126005}{Причина выясняется.} 
 
 \end{itemize}
 
@@ -901,6 +904,13 @@ title = {Google |[Электронный ресурс]|}
 \label{apx:changelog}
 
 \begin{changelog}
+
+\begin{release}{0.3.2}{29-04-2012}
+\item Исправлена ошибка опции \kvopt{citetracker}{constrict} в \bibsty{gost-inline},
+\bibsty{gost-footnote}. Опция установлена по умолчанию.
+\item Исправлено: не выводилось полное число томов, частей и т.\,д.
+\item Исправлено: в цитатах \bibsty{gost-numeric} не переключался язык. 
+\end{release}
 
 \begin{release}{0.3.1}{21-04-2012}
 \item Исправлены ошибки обработки опции dashed
