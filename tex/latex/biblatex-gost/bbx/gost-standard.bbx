@@ -244,6 +244,8 @@
 
 %  OPTIONS
 
+\newbibmacro*{bbx:savehash}{%
+  \savefield{fullhash}{\bbx@lasthash}}
 \DeclareBibliographyOption{dashed}[true]{%
   \ifstrequal{#1}{true}
     {\ExecuteBibliographyOptions{pagetracker}%
@@ -1249,9 +1251,6 @@
 
 \InitializeBibliographyStyle{%
   \global\undef\bbx@lasthash}
-
-\newbibmacro*{bbx:savehash}{%
-  \savefield{fullhash}{\bbx@lasthash}}
 
 \newbool{bbx@inset}
 \DeclareBibliographyDriver{set}{%
