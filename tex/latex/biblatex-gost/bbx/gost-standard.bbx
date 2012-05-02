@@ -43,6 +43,16 @@
 \newtoggle{bbx:url}
 \newtoggle{bbx:doi}
 \newtoggle{bbx:eprint}
+\DeclareSourcemap{
+  \maps[datatype=bibtex]{
+    \map{
+      \step[fieldsource=books, fieldtarget=userb]
+      \step[fieldsource=parts, fieldtarget=userc]
+      \step[fieldsource=issues, fieldtarget=userd]
+      \step[fieldsource=credits, fieldtarget=lista]
+    }
+  }
+}
 \newcommand{\bbx@gostbibermap@books}{userb}
 \newcommand{\bbx@gostbibermap@parts}{userc}
 \newcommand{\bbx@gostbibermap@issues}{userd}
