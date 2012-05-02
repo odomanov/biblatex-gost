@@ -608,48 +608,6 @@ ISSN серии или подсерии & \textendash \\
 }
 \end{lstlisting}
 
-\subsection{Преобразование программой \biber}
-\label{sec:biber}
-
-\biblatex (до версии 2.x) не позволяет определять новые поля библиографической базы данных.
-В то же время, пакет \biblatexgost определяет дополнительные поля для хранения количества 
-книг, частей, выпусков многочастных изданий, а также название организации в сведениях об ответственности. В качестве этих полей можно использовать запасные поля \biblatex \bibfield{user[a-f]}, 
-\bibfield{list[a-f]}, \bibfield{custom[a-f]} (см. п. 2.2.4 руководства \biblatex). Для 
-четырёх перечисленных параметров \biblatexgost использует, соответственно, поля 
-\bibfield{userb}, \bibfield{userc}, \bibfield{userd} и \bibfield{lista}. Однако, вместо того, чтобы использовать эти поля в своей базе данных,  можно поступить иначе и использовать способность программы \biber подменять поля 
-\enquote{на лету}\footnote{В этом разделе описано временное решение. 
-В ближайшей версии \biblatex будет реализован интерфейс к этой функции
-\biber, и манипуляции с файлом конфигурации больше не понадобятся.}. Тогда база данных будет содержать 
-более осмысленные названия полей, 
-которые преобразуются программой \biber в запасные поля, понимаемые \biblatex.
-Соответствие между полями в файле базы данных \file{.bib} и полями \biblatex показано в 
-\tabref{tab:biber}.
-
-\begin{table}
-\tablesetup
-\centering
-\begin{tabularx}{.7\textwidth}{@{}p{.3\textwidth}@{}X@{}}
-\toprule
-\multicolumn{1}{@{}H}{Поле в базе \file{.bib}} &
-\multicolumn{1}{@{}H}{Поле \biblatex}  \\
-\cmidrule(r){1-1}\cmidrule{2-2}
-%\bibfield{parttitle} & \bibfield{usera} \\
-\bibfield{books} & \bibfield{userb} \\
-\bibfield{parts} & \bibfield{userc} \\
-\bibfield{issues} & \bibfield{userd} \\
-\bibfield{credits} & \bibfield{lista} \\
-\bottomrule
-\end{tabularx}
-\caption{Соответствие полей файла \file{.bib} и \biblatex}
-\label{tab:biber}
-\end{table}
-
-Чтобы воспользоваться этими заменами, нужно настроить \biber. Для этого нужно изменить 
-его файл конфигурации \file{biber.conf}. В простейшем случае, он
- может выглядеть следующим образом:
-
-\lstinputlisting[language=XML,basicstyle=\footnotesize\verbatimfont]{biber.conf.example}
-
 \subsection{Многоточие при сокращении названий}
 \label{sec:ellipsis}
 
@@ -902,6 +860,51 @@ volumes = {|в 5-и томах (6-и кн.)|}
 \newcommand*{\mkbibhdnameprefix}[1]{\mkbibhdnamelast{#1}}
 \newcommand*{\mkbibhdnameaffix}[1]{\mkbibhdnamelast{#1}} 
 \end{lstlisting}
+
+%\end{itemize}
+
+%\subsection{Преобразование программой \biber}
+%\label{sec:biber}
+
+\item \biblatex не позволяет определять новые поля библиографической базы данных.
+В то же время, пакет \biblatexgost определяет дополнительные поля для хранения количества 
+книг, частей, выпусков многочастных изданий, а также название организации в сведениях об ответственности. В качестве этих полей можно использовать 
+запасные поля \biblatex \bibfield{user[a-f]}, 
+\bibfield{list[a-f]}, \bibfield{custom[a-f]} (см. п. 2.2.4 руководства \biblatex). В частности, для 
+четырёх перечисленных параметров \biblatexgost использует, соответственно, поля 
+\bibfield{userb}, \bibfield{userc}, \bibfield{userd} и \bibfield{lista}. 
+При этом, однако, в базе данных 
+содержатся более осмысленные названия полей, которые \biblatexgost (фактически, программа \biber
+через механизм sourcemap)
+автоматически преобразует во
+внутренние поля \biblatex. 
+Соответствие между полями в файле базы данных \file{.bib} и полями \biblatex показано в 
+\tabref{tab:biber}.
+
+\begin{table}
+\tablesetup
+\centering
+\begin{tabularx}{.5\textwidth}{@{}p{.25\textwidth}@{}X@{}}
+\toprule
+\multicolumn{1}{@{}H}{Поле в базе \file{.bib}} &
+\multicolumn{1}{@{}H}{Поле \biblatex}  \\
+\cmidrule(r){1-1}\cmidrule{2-2}
+%\bibfield{parttitle} & \bibfield{usera} \\
+\bibfield{books} & \bibfield{userb} \\
+\bibfield{parts} & \bibfield{userc} \\
+\bibfield{issues} & \bibfield{userd} \\
+\bibfield{credits} & \bibfield{lista} \\
+\bottomrule
+\end{tabularx}
+\caption{Соответствие полей файла \file{.bib} и \biblatex}
+\label{tab:biber}
+\end{table}
+
+%Чтобы воспользоваться этими заменами, нужно настроить \biber. Для этого нужно изменить 
+%его файл конфигурации \file{biber.conf}. В простейшем случае, он
+% может выглядеть следующим образом:
+%
+%\lstinputlisting[language=XML,basicstyle=\footnotesize\verbatimfont]{biber.conf.example}
 
 \end{itemize}
 
