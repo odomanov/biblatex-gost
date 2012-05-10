@@ -19,7 +19,7 @@
 \usepackage{pscyr}
 \renewcommand{\rmdefault}{fha}% Балтика
 \renewcommand{\sfdefault}{far}% arial
-%\usepackage{droid}   % ??
+%\usepackage{droid}   % not bad
 %\usepackage{dejavu}  % ??
 
 %\MakeAutoQuote{«}{»}
@@ -76,6 +76,23 @@
   email={odomanov@yandex.ru},
   revision={\svnFullRevision{\svnrev}},
   date={\svnday.\svnmonth.\svnyear}}
+
+% TOC,LOT layout
+
+\usepackage{tocloft}
+\renewcommand*{\cftsecaftersnum}{.}
+\renewcommand*{\cftsubsecaftersnum}{.}
+\renewcommand*{\cfttabaftersnum}{.}
+\setlength{\cftbeforesecskip}{0.25\baselineskip}
+\setlength{\cftsecnumwidth}{2em}
+\cftsetindents{subsection}{\cftsecindent}{\cftsecnumwidth}
+\cftsetindents{table}{\cftsecindent}{\cftsecnumwidth}
+\renewcommand*{\cftsubsecfont}{\sffamily\small}
+\renewcommand*{\cftsecfont}{\bfseries\cftsubsecfont}
+\renewcommand*{\cfttabfont}{\cftsubsecfont}
+\renewcommand*{\cftsecpagefont}{\cftsecfont}
+\renewcommand*{\cftsubsecpagefont}{\cftsubsecfont}
+\renewcommand*{\cfttabpagefont}{\cfttabfont}
 
 \hypersetup{%
   pdftitle={The \biblatexgost Package},
@@ -182,7 +199,7 @@
 \sty{polyglossia}. Однако использование \sty{babel} совместно с \sty{xecyr}, 
 похоже, не приводит ни к каким проблемам.
 
-Для работы с \biblatexgost требуется \biblatex\unskip2.0 и \biber\unskip1.0beta.
+Для работы с \biblatexgost версии 0.4 и выше требуются \biblatex~2.0 и \biber~1.0beta.
 
 \subsection{Лицензия}
 \label{sec:lic}
@@ -190,7 +207,7 @@
 Permission is granted to copy, distribute and\slash or modify this software under the terms of the \lppl, version 1.3.\fnurl{http://www.ctan.org/tex-archive/macros/latex/base/lppl.txt} This package is author"=maintained.
 
 
-\section{Стили, определяемые \biblatexgost}
+\section{Стили \biblatexgost}
 \label{sec:styles}
 
 ГОСТ определяет три типа ссылок: внутритекстовую, подстрочную, затекстовую.
@@ -769,7 +786,8 @@ volumes = {|в 5-и томах (6-и кн.)|}
 
 В \biblatexgost определена новая схема сортировки \opt{ntvy} 
 (имя, заглавие, том\slash книга\slash часть\slash выпуск, год). 
-Она по умолчанию включена для стилей \bibsty{gost-inline} и \bibsty{gost-footnote}.
+Она по умолчанию включена для стилей \bibsty{gost-inline}, \bibsty{gost-footnote}
+и \bibsty{gost-numeric}.
 Схема сортирует сначала по тому, затем, внутри тома, по книге, затем~--- по части, и 
 затем~--- по выпуску.
 Кроме того, поскольку стандартные схемы сортировки \biblatex плохо работают с многотомными
@@ -778,8 +796,7 @@ volumes = {|в 5-и томах (6-и кн.)|}
 \opt{ydnt} и \opt{nyt}. Кроме того, в них добавлена сортировка по 
 тому\slash книге\slash части\slash выпуску. 
 Схема \opt{nyt} (имя, год, заголовок) включена по умолчанию в стиле 
-\bibsty{gost-authoryear}. В \bibsty{gost-numeric} сортировка всегда в 
-порядке цитирования.
+\bibsty{gost-authoryear}.
 
 %\subsection{Типы публикаций}
 
