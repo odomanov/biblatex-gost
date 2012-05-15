@@ -156,7 +156,13 @@
     {\printnames{labelname}}%
   \setunit*{\nametitledelim}%
   \printtext[bibhyperlink]{%
-    \usebibmacro{cite:maintitle/labeltitle+parts}}}
+    \ifthenelse{ \ifentrytype{inbook} \or \ifentrytype{incollection}
+      \or \ifentrytype{inproceedings} \or \ifentrytype{inreference}
+      \or \ifentrytype{suppbook} \or \ifentrytype{suppcollection} 
+      \or \ifentrytype{suppperiodical} \or \ifentrytype{bookinbook}
+      }
+    {\printfield[citetitle]{labeltitle}}
+    {\usebibmacro{cite:maintitle/labeltitle+parts}}}}
 
 \newbibmacro*{cite:opcit}{%
   \ifnameundef{labelname}

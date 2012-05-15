@@ -321,7 +321,8 @@
 \DeclareDataInheritance{mvbook,mvcollection,mvproceedings}
   {book,collection,inbook,incollection,inproceedings}{%
   \noinherit{endyear}\noinherit{endmonth}\noinherit{endday}}
-\DeclareDataInheritance{mvbook,mvcollection,mvproceedings,mvreference}{*}{%
+\DeclareDataInheritance{mvbook,mvcollection,mvproceedings,mvreference}
+  {book,collection,proceedings,reference}{%
   \inherit{shorttitle}{shorttitle}}
 
 \DeclareFieldFormat*{title}{#1}
