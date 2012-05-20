@@ -2,7 +2,7 @@
 \input glyphtounicode.tex           %these three lines are
 \input glyphtounicode-cmr.tex       %needed for russian search/copy
 \pdfgentounicode=1                  %(cmap)
-\documentclass[11pt,headings=small,numbers=enddot]{ltxdockit}[2011/03/25]
+\documentclass[11pt,a4paper,DIV=10,headings=small,numbers=enddot]{ltxdockit}[2011/03/25]
 %\usepackage[resetfonts]{cmap}
 \usepackage[T2A]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -98,7 +98,7 @@
   pdftitle={The \biblatexgost Package},
   pdfsubject={Bibliography according to Russian standards (GOST 7.0.5-2008)},
   pdfauthor={Oleg Domanov},
-  pdfkeywords={tex, latex, bibtex, bibliography, references, citation, gost, russian}}
+  pdfkeywords={tex, latex, biblatex, bibliography, references, citation, gost, russian}}
 
 % tables
 
@@ -318,9 +318,8 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 причём с обеих сторон.
 Цветом выделены поля \biblatexgost, отсутствующие в \biblatex.
 
-%\begin{table}[ht]
 \begingroup
-\sorttablesetup
+\tablesetup
 \setlength\LTleft{0pt}
 \setlength\LTright{0pt}
 \begin{longtable}[l]{@{}V{0.5\textwidth}@{}V{0.5\textwidth}@{}}
@@ -388,7 +387,6 @@ ISSN серии или подсерии & \textendash \\
 \caption{Соответствие терминов ГОСТ и \biblatex}\\
 \label{tab:gost-biblatex}
 \end{longtable}
-%\end{table}
 \endgroup
 
 \section{Описание многотомных изданий}
@@ -456,7 +454,7 @@ ISSN серии или подсерии & \textendash \\
 %Цветом выделены команды, поведение которых отличается от стандартного в \biblatex.
 
 \begingroup
-\sorttablesetup
+\tablesetup
 \setlength\LTleft{0pt}
 \setlength\LTright{0pt}
 \begin{longtable}[l]{%
@@ -511,7 +509,6 @@ ISSN серии или подсерии & \textendash \\
 \label{tab:citecommands}
 \end{longtable}
 \endgroup
-%\end{table}
 
 Кроме перечисленных поддерживаются производные команды, описанные в 
  руководстве \biblatex, такие как \cmd{Cite}, \cmd{Parencite}, \dots\ \cmd{Cites}, 
@@ -728,7 +725,7 @@ title = {Google |[Электронный ресурс]|}
 
 Издание может делиться на физически отдельные части, которые могут называться по-разному. \biblatexgost поддерживает деление на тома, книги, части и выпуски (деление только одного уровня; например, тома, разделённые на части, не поддерживаются). Соответствующие им поля базы данных показаны в \tabref{tab:volsparts}.
 
-\begin{table}
+\begin{table}[htbp]
 \tablesetup
 \centering
 \begin{tabularx}{.7\textwidth}{@{}p{.3\textwidth}@{}X@{}}
@@ -898,7 +895,7 @@ volumes = {|в 5-и томах (6-и кн.)|}
 Соответствие между полями в файле базы данных \file{.bib} и полями \biblatex показано в 
 \tabref{tab:biber}.
 
-\begin{table}
+\begin{table}[htbp]
 \tablesetup
 \centering
 \begin{tabularx}{.5\textwidth}{@{}p{.25\textwidth}@{}X@{}}
