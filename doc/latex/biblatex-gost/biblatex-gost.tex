@@ -17,11 +17,24 @@
 %\usepackage{pifont}%  ???
 \usepackage{indentfirst}
 %---  fonts  ---
-\usepackage{pscyr}
-\renewcommand{\rmdefault}{fha}% Балтика
-\renewcommand{\sfdefault}{far}% arial
+%\usepackage{pscyr}
+%\renewcommand{\rmdefault}{fha}% Балтика
+%\renewcommand{\sfdefault}{far}% arial
 %\usepackage{droid}   % not bad
 %\usepackage{dejavu}  % ??
+\usepackage{BalticaP}  % tl5
+%\usepackage{PetersburgP}  % tp7
+%\usepackage{CooperP}  % tl5
+%\usepackage{JournalP}  % tjr
+%\usepackage{ITCNewBaskervilleP}  % ibv
+%\usepackage{NewtonP}  % tnw
+%\usepackage[scaled=1.2]{FuturaP}  % tfu  ss
+%\usepackage{JournalSansP}  % tjs  ss -- too bold
+\usepackage[scaled=1.1]{TextbookP}  % ttx  ss
+%\usepackage{PragmaticaP}  % tpg  ss
+%\usepackage[scaled=.9]{ITCAvantGardeGothicP}  % iag ss
+%\usepackage{CourierP}  % tco  mono
+\usepackage{LetterGothicP}  % tlg mono
 
 %\MakeAutoQuote{«}{»}
 %\MakeAutoQuote*{<}{>}
@@ -85,10 +98,10 @@
 \renewcommand*{\cftsubsecaftersnum}{.}
 \renewcommand*{\cfttabaftersnum}{.}
 \setlength{\cftbeforesecskip}{0.25\baselineskip}
-\setlength{\cftsecnumwidth}{2em}
-\cftsetindents{subsection}{\cftsecindent}{\cftsecnumwidth}
+\setlength{\cftsecnumwidth}{1.5em}
+\cftsetindents{subsection}{\cftsecnumwidth}{1.2\cftsecnumwidth}
 \cftsetindents{table}{\cftsecindent}{\cftsecnumwidth}
-\renewcommand*{\cftsubsecfont}{\sffamily\small}
+\renewcommand*{\cftsubsecfont}{\small}
 \renewcommand*{\cftsecfont}{\bfseries\cftsubsecfont}
 \renewcommand*{\cfttabfont}{\cftsubsecfont}
 \renewcommand*{\cftsecpagefont}{\cftsecfont}
@@ -127,6 +140,8 @@
 \deffootnote[1.0em]{1.0em}{1.0em}{\makebox[0.7em][r]{\textsuperscript{\thefootnotemark}}~}
 \addtokomafont{section}{\reddishcolor}
 \addtokomafont{subsection}{\reddishcolor}
+\addtokomafont{subsubsection}{\reddishcolor}
+\addtokomafont{descriptionlabel}{\spotcolor\rmfamily}
 \renewcommand{\textfraction}{.5}
 %-----
 \usepackage{ellipsis}% must be loaded after hyperref !!
@@ -166,41 +181,7 @@
 Для его установки достаточно распаковать архив в дерево \TeX, желательно локальное, и 
 обновить индексы (в \TeX\ Live, например, это делается командой \texttt{mktexlsr}).
 
-\subsection{Использование}
-\label{sec:usage}
-
-Работа со стилями \biblatexgost не отличается от работы с любыми другими стилями 
-\biblatex. Например, в случае использования \sty{babel} ваш 
-файл \latex может выглядеть примерно так:
-
-\begin{lstlisting}[style=latex]
-\documentclass{...}
-\usepackage[french,latin,english,russian]{babel}
-...
-\usepackage[backend=biber,      % use biber instead of bibtex
-  style=gost-footnote,          % bibliography and citation style
-  language=auto,                % get main language from babel
-  babel=other,                  % multilanguage bibliography
-  ...
-]{biblatex}
-\addbibresource{biblatex-examples.bib}  % bibliographical database
-...
-\begin{document}
-
-...\cite[123]{knuth:ct:a} ...           % cite your source
-
-\printbibliography                      % print your bibliography
-
-\end{document}
-
-\end{lstlisting}
-
-Подробности можно найти в документации по \biblatex{}\fnurl{http://www.ctan.org/tex-archive/macros/latex/contrib/biblatex/doc/biblatex.pdf}. \xelatex
-официально не поддерживается, поскольку \biblatex{'ом} пока не поддерживается 
-\sty{polyglossia}. Однако использование \sty{babel} совместно с \sty{xecyr}, 
-похоже, не приводит ни к каким проблемам.
-
-Для работы с \biblatexgost версии 0.4 и выше требуются \biblatex~2.0 и \biber~1.0beta.
+Для работы с \biblatexgost версии 0.4 и выше требуются \biblatex~2.0 и \biber~1.0 (beta).
 
 \subsection{Лицензия}
 \label{sec:lic}
@@ -228,19 +209,17 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 \begin{marglist}
 
 \item[gost-inline]
-Внутритекстовые ссылки по ГОСТ. Является модификацией стандартного стиля 
-\bibsty{verbose-trad3}. Ссылки помещаются внутри текста в круглых скобках. 
+Внутритекстовые ссылки по ГОСТ. Ссылки помещаются внутри текста в круглых скобках. 
 Стиль отслеживает
 повторные ссылки, используя при необходимости короткие названия из поля
 \bibfield{shorttitle}\footnote{О многоточиях при сокращении заголовков 
-см.~\secref{sec:ellipsis}}.  
+см.~\secref{ellipsis}}.  
 По умолчанию стиль устанавливает опции \kvopt{autocite}{inline}, \kvopt{sorting}{ntvy}, 
 \kvopt{citetracker}{constrict}, \kvopt{citepages}{omit}, \kvopt{strict}{true}, 
 \kvopt{opcittracker}{constrict}.
 
 \item[gost-footnote]
-Подстрочные ссылки по ГОСТ. Также является модификацией стандартного 
-стиля \bibsty{verbose-trad3}. 
+Подстрочные ссылки по ГОСТ.  
 Стиль предназначен для помещения ссылок в сносках внизу страницы (с помощью 
 команд \cmd{footcite}, \cmd{smartcite} или, ещё лучше, \cmd{autocite}, см.~\secref{sec:autocite}). 
 По умолчанию стиль устанавливает опции \kvopt{autocite}{footnote}, \kvopt{sorting}{ntvy},
@@ -291,15 +270,23 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 
 \end{marglist}
 
-В ГОСТ определён ещё один тип затекстовых ссылок, при котором они связываются с текстом сносками. Этого 
-можно достичь двумя способами. В первом используется стиль
-\bibsty{gost-footnote} при наличии поддержки команды \cmd{endnote} (пакета \sty{endnotes}, стиля 
-документа \sty{memoir} или других). При этом ссылки переносятся в конец текста (или главы, или в любое 
-нужное место). Для этого должна быть установлена
+В ГОСТ определён ещё один тип затекстовых ссылок, при котором они 
+связываются с текстом номером в верхнем индексе. Этого можно достичь несколькими способами. 
+
+\begin{itemize}
+\item Использовать стиль \bibsty{gost-numeric} и команду цитирования  
+\cmd{supercite}, доступную только для стилей типа \bibsty{numeric}. Эта команда
+помещает номер в верхний индекс вместо квадратных скобок. Эти номера не зависят от 
+сносок \cmd{footnote} и существуют параллельно с ними.
+\item Использовать стиль \bibsty{gost-numeric} и команду цитирования
+\cmd{autocite}. При установке опции \kvopt{autocite}{superscript} эта команда ведёт себя 
+как \cmd{supercite}.
+\item Использовать стиль \bibsty{gost-footnote} и какой-либо пакет, поддерживающий команду \cmd{endnote} (например, \sty{endnotes}, \sty{memoir} и т.\,д.). 
+При этом, чтобы ссылки переносились в конец текста (или главы, или в любое 
+нужное место), должна быть установлена
 опция \kvopt{notetype}{endonly}. Можно также воспользоваться 
-пакетом \sty{fn2end}. Второй способ~--- использовать команду цитирования 
-\cmd{supercite}, которая доступна только для стилей типа \bibsty{numeric} и
-помещает номер в верхний индекс вместо квадратных скобок.
+пакетом \sty{fn2end}.
+\end{itemize}
 
 Дополнительно, все стили по умолчанию устанавливают опции 
 \kvopt{isbn}{true},
@@ -311,10 +298,59 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 \kvopt{maxnames}{3},
 \kvopt{minnames}{1}.
 
-\section{Соответствие терминов ГОСТ и \biblatexgost}
+\section{Заполнение базы данных}
+\label{sec:database}
+
+
+\subsection{Новые поля}
+\label{sec:fields}
+
+\biblatex позволяет, с некоторыми ограничениями, определять новые поля библиографической
+базы данных (см.~\apxref{bibermap}). В \biblatexgost определены следующие поля. 
+
+\begin{fieldlist}
+
+\fielditem{credits}{literal}
+
+Содержит сведения об ответственности, отличные от предусмотренных в \biblatex, 
+такие, например, как организация:
+
+\begin{bibexample}
+\item \textellipsis\ \slash\ Академия наук СССР\ ;\ \textellipsis
+\end{bibexample}
+
+В этом поле могут содержаться любые нестандартные сведения об ответственности,
+например: <<авт. курса А. Сигалов>>,
+<<коллектив авт. под рук. Исакова Ю.Ф>> и т.\,д. 
+Более того, в особенно нестандартных ситуациях
+оно может содержать вообще все сведения об ответственности. 
+Поле \bibfield{credits} выводится в сведениях об ответственности в самом начале или 
+сразу после авторов, если они там присутствуют. 
+
+\fielditem{book}{literal}
+
+Содержит номер книги для изданий, разделённых на книги. См. подробнее
+\secref{sec:volsparts} 
+
+\fielditem{books, parts, issues}{literal}
+
+Содержат количество книг, частей, выпусков изданий, 
+которые делятся на книги, части, выпуски (аналогично стандартному полю \bibfield{volumes}). См.
+подробнее \secref{sec:volsparts}.
+
+\fielditem{editortype}{key}
+
+Это поле существует в \biblatex, но в \biblatexgost для него определёно новое значение: 
+тип редактора \bibfield{editortype}=\{\bibfield{geneditor}\}, соответствующий общему 
+редактору. Соответствует выводу вида: \enquote{Под общ. ред. \ldots}.
+
+\end{fieldlist}
+
+\subsection{Соответствие терминов ГОСТ и \biblatexgost}
 \label{sec:gost-biblatex}
 
-Соответствие терминов ГОСТ и \biblatexgost представлено в \tabref{tab:gost-biblatex}. 
+Соответствие терминов ГОСТ и \biblatexgost представлено в следующей таблице.
+%\tabref{tab:gost-biblatex}. 
 Как можно видеть, это соответствие неполное,
 причём с обеих сторон.
 Цветом выделены поля \biblatexgost, отсутствующие в \biblatex.
@@ -390,66 +426,252 @@ ISSN серии или подсерии & \textendash \\
 \end{longtable}
 \endgroup
 
-\section{Описание многотомных изданий}
-\label{sec:multivol}
+Ниже приведены рекомендации по размещению сведений, для которых отсутствуют
+отдельные поля в базе данных.
 
-ГОСТ определяет два способа библиографического описания отдельного тома многотомного издания:
+\begin{description}
+\item[Общее обозначение материала] ([Электронный ресурс] и пр.) включается в заголовок:
+
+\begin{lstlisting}[style=bibtex,escapechar=|]
+title = {Google |[Электронный ресурс]|}
+\end{lstlisting}
+
+То же относится к {\usekomafont{descriptionlabel}параллельному заглавию}.
+
+\item[Cведения об ответственности серии] в случае необходимости можно помещать 
+в поле \bibfield{series}:  
+\begin{lstlisting}[style=bibtex,escapechar=|]
+series = {|Языковеды мира / Редкол.: Г.В. Степанов (пред.) и др.|}
+\end{lstlisting}
+
+\item[Серия.] В ГОСТ различаются (6.3.4.2) сериальные документы с нумерацией по годам (как, например, в журналах) и со сквозной нумерацией. В первом случае не печатается дата на месте выходных данных. В \biblatexgost только такие документы соответствуют \bibtype{periodical}.  Сериальные документы со сквозной нумерацией рекомендуется оформлять как \bibtype{mvbook} или \bibtype{mvcollection}. 
+
+Серия в журналах может пониматься в двух смыслах. Во-первых, она употребляется в
+том же смысле, что и для книг, и также выводится в области серии в виде:
 
 \begin{bibexample}
-\item Детская энциклопедия. В 5 т. Т. 2. Человек. \dots\ 
-\item Человек. \dots\ (Детская энциклопедия: в 5 т., т. 2)\dots\ 
+\item \textellipsis~"--- (Формальная семантика 78).~"--- \textellipsis
 \end{bibexample}
 
-В \biblatexgost реализован только первый вариант. Соответственно, 
-в стиле \bibsty{gost-autoryear} при отсутствии автора ссылка производится на общий 
-заголовок многотомного издания, а не на заголовок отдельного тома (тем более, что 
-последний может и отсутствовать):
+При заполнении базы данных, эта серия помещается в поле \bibfield{series}.
+
+Во-вторых, серия может входить в заглавие журнала: 
 
 \begin{bibexample}
-\item{} [Детская энциклопедия, т.\,2, 2001, с.\,33]
+\item Известия Российской академии наук. Серия геологическая
+\item Труды исторического факультета МГУ. Серия 4, Библиографии
+\item Вестник Ивановского государственного университета. Серия «Химия, биология»
+\item Итоги науки и техники. Серия: Автомобилестроение
 \end{bibexample}
 
-\section{Отличия от ГОСТ}
-\label{sec:diff}
+При заполнении базы данных, эта серия помещается в поле \bibfield{journaltitle}
+вместе с названием журнала:
 
-Отличия \biblatexgost от ГОСТ обусловлены двумя обстоятельствами.
-1)~ГОСТ несовершенен. В некоторых
-случаях, он допускает двусмысленность в ссылках. 2)~\biblatex несовершенен.
-Некоторые требования ГОСТ не могут быть реализованы без внесения изменений в
-ядро \biblatex'а. 
-%Тем не менее, самые существенные требования ГОСТ соблюдены, и
-%пакет, я надеюсь, уже в таком виде может быть полезен.
+\begin{lstlisting}[style=bibtex,escapechar=|]
+@ARTICLE{article,
+  ...
+  journaltitle = {|Итоги науки и техники. Серия: Автомобилестроение|},
+}
+\end{lstlisting}
 
-%По этим причинам \biblatexgost не во всём следует ГОСТ. Некоторые свойства более удачно
-%реализованы средствами \biblatex, и было бы странно затрачивать усилия на то,
-%чтобы эту реализацию ухудшить в угоду строгого соблюдения ГОСТ. 
-Ниже перечислены отличия \biblatexgost от ГОСТ.
+\end{description}
 
-\begin{itemize}
+\subsection{Особенности заполнения отдельных полей}
+\label{sec:filling}
 
-\item В \biblatex нет понятия параллельного заглавия. Соответственно, его нет в 
-\biblatexgost. В качестве обходного пути параллельное заглавие можно помещать в поля
-\bibfield{titleaddon}, \bibfield{maintitleaddon}, \bibfield{booktitleaddon}. 
+\begin{fieldlist}
 
-\item В \biblatex нет понятия общего обозначения материала. Соответственно, его нет в 
-\biblatexgost. При необходимости, обозначение материала включается в поле \bibfield{title}, 
-\bibfield{maintitle} и пр. 
-(см.~\secref{sec:db:misc}).
+\listitem{editor, translator, commentator, afterword, etc.}{name}
 
-\item В \biblatex нет понятия редактора серии и вообще того, что в ГОСТ относится к
-сведениям об ответственности серии. Соответственно, ничего из этого не реализовано в 
-\biblatexgost.
+Имена в этих полях 
+%\bibfield{editor}, \bibfield{editora}, \bibfield{editorb}, \bibfield{editorc}, 
+%\bibfield{commentator}, \bibfield{translator}, \bibfield{afterword} и т.\,д. 
+должны быть в 
+родительном падеже: 
+\enquote{Под ред. \prm{кого} А.\,Петрова}, \enquote{Пер. с фр. \prm{кого} И.\,Иванова}.
 
-\item \ldots 
+\fielditem{issue}{integer/literal}
 
-\end{itemize}
+Выпуск. Имеет разный смысл для книг и журналов. Для книг, если является 
+целым числом, то выводится в форме «Вып.~3», если литералом~--- выводится как есть.
+Для журналов и 
+прочей периодики должно быть литералом (например, Summer, Autumn и т.\,д.).
+Подробнее см.~\secref{sec:serinjour}.
 
-См. также~\apxref{sec:todo}.
+\fielditem{edition}{integer/literal}
 
-\section{Команды цитирования}
+Сведения об издании. Если целое число, то выводится в виде «5-е изд.». Если литерал, выводится как есть. Например: <<издание 13-е, существенно переработанное>>.
+
+\fielditem{series}{integer/literal}
+
+Для периодических изданий, таких как журналы, выводится в виде «3-я сер.», если
+является целым числом. В противном случае, выводится как есть. См. также \secref{sec:serinjour}.
+
+\fielditem{shorttitle}{literal}
+\label{ellipsis}
+
+Команда \cmd{textellipsis}, так же как и символ \enquote{…} (Unicode U+2026), в поле \bibfield{shorttitle} воспринимается \biblatex'ом
+как конец предложения. Это может приводить к конфликтам с трекером пунктуации. 
+По этой причине рекомендуется добавлять в таких случаях
+команду \cmd{isdot}, превращающую
+последнюю точку в точку сокращения (\texttt{dot}), а не конца предложения 
+(\texttt{period}). Например: 
+
+\begin{lstlisting}[style=bibtex,escapechar=|]
+@BOOK{book,
+  ...
+  shorttitle = {|Введение|~\textellipsis\isdot}
+}
+\end{lstlisting}
+
+Или:
+
+\begin{lstlisting}[style=bibtex,escapechar=|]
+@BOOK{book,
+  ...
+  shorttitle = {|Введение|~...\isdot}
+}
+\end{lstlisting}
+
+%Рекомендуется также использовать пакет
+%\sty{ellipsis} (его нужно загружать после пакета \sty{hyperref}).
+
+   
+\end{fieldlist}
+
+
+%\subsection{Электронные ресурсы}
+%\label{sec:elres}
+%
+%Для электронных ресурсов в области специфических сведений содержатся вид и объём ресурса 
+%в виде: <<Вид (Объём)>> (см. ГОСТ 7.82-2001, п.5.5). Например:
+%
+%\begin{bibexample}
+%\item \textellipsis~"--- Электрон, дан. (3 файла) и прогр. (2 файла).~"--- \textellipsis
+%\item \textellipsis~"--- Электрон, дан. (2 файла : 70 тыс. записей).~"--- \textellipsis
+%\item \textellipsis~"--- Электрон, прогр. (2 файла : 18650 байтов).~"--- \textellipsis
+%\item \textellipsis~"--- Electronic text data (2 files : 1.6 Mbytes).~"--- \textellipsis 
+%\end{bibexample} 
+
+\subsection{Тома, книги, части, выпуски}
+\label{sec:volsparts}
+
+Издание может делиться на физически отдельные части, которые могут называться по-разному. \biblatexgost поддерживает деление на тома, книги, части и выпуски (деление только одного уровня; например, тома, разделённые на части, не поддерживаются). Соответствующие им поля базы данных показаны в \tabref{tab:volsparts}.
+
+\begin{table}[htbp]
+\tablesetup
+\centering
+\begin{tabularx}{.7\textwidth}{@{}p{.3\textwidth}@{}X@{}}
+\toprule
+\multicolumn{1}{@{}H}{Часть издания} &
+\multicolumn{1}{@{}H}{Поле \biblatex}  \\
+\cmidrule(r){1-1}\cmidrule{2-2}
+тома & \bibfield{volume}, \bibfield{volumes} \\
+книги & \bibfield{book}, \bibfield{books} \\
+части & \bibfield{part}, \bibfield{parts} \\
+выпуски & \bibfield{issue}\footnote{Поле \bibfield{issue} имеет особое значение в случае журналов. См. п. ??? руководства по \biblatex.}, \bibfield{issues} \\
+\bottomrule
+\end{tabularx}
+\caption{Обозначение частей издания}
+\label{tab:volsparts}
+\end{table}
+
+Если эти поля являются целыми числами, то они выводятся в виде: \enquote{В 5 т.},
+\enquote{В 4 вып.} и т.\,д. В противном случае, они выводятся как есть: \enquote{В
+5-и томах (6-и кн.)} и т.\,д. Строковые значения при занесении в базу данных следует 
+писать со строчной буквы, \biblatexgost перейдёт на заглавные там, где требуется. Например:
+
+\begin{lstlisting}[style=bibtex,escapechar=|]
+volumes = {|в 5-и томах (6-и кн.)|}
+\end{lstlisting}
+ 
+
+\section{Работа с пакетом}
+\label{sec:usage}
+
+Работа со стилями \biblatexgost не отличается от работы с любыми другими стилями 
+\biblatex. Например, в случае использования \sty{babel} ваш 
+файл \latex может выглядеть примерно так:
+
+\begin{lstlisting}[style=latex]
+\documentclass{...}
+\usepackage[french,latin,english,russian]{babel}
+...
+\usepackage[style=gost-footnote,        % bibliography and citation style
+  language=auto,                        % get main language from babel
+  babel=other,                          % multilanguage bibliography
+  ...
+]{biblatex}
+\addbibresource{biblatex-examples.bib}  % bibliographical database
+...
+\begin{document}
+
+...\cite[123]{knuth:ct:a} ...           % cite your source
+
+\printbibliography                      % print your bibliography
+
+\end{document}
+
+\end{lstlisting}
+
+Подробности можно найти в документации по \biblatex{}\fnurl{http://www.ctan.org/tex-archive/macros/latex/contrib/biblatex/doc/biblatex.pdf}. \xelatex
+официально не поддерживается, поскольку \biblatex{'ом} пока не поддерживается 
+\sty{polyglossia}. Однако использование \sty{babel} совместно с \sty{xecyr}, 
+похоже, не приводит ни к каким проблемам.
+
+\subsection{Новые опции и значения опций}
+\label{sec:opt}
+
+Для всех стилей сохранены опции стандартных стилей \biblatex, от которых они происходят, даже если 
+соответствующая функциональность не предполагается ГОСТом. Кроме того, пакет \sty{biblatex-gost} имеет 
+следующие дополнительные опции.
+
+\begin{optionlist}
+
+\optitem[gostletter]{mergedate}{\opt{goststrict}, \opt{gostletter}}
+
+Стиль \bibsty{gost-authoryear}, по сравнению со стандартным \bibsty{authoryear}, имеет два дополнительных значения опции \opt{mergedate}:
+ 
+\begin{valuelist}
+
+\item[gostletter]
+
+Отключает в библиографии вывод года после автора (точнее, после \bibfield{label}). Для 
+предотвращения неопределённых ссылок (например, при совпадении автора и года) к году при 
+необходимости добавляется латинская буква. Эта функциональность не предусмотрена ГОСТом.
+
+\item[goststrict]
+
+Отключает в библиографии вывод года после автора (точнее, после \bibfield{label}). В 
+отличие от предыдущей опции, никаких знаков к году не добавляется, что может приводить к 
+неопределённым ссылкам, но зато точно соответствует требованиям ГОСТ.
+
+\end{valuelist}
+
+\optitem{sorting}{\opt{ntvy}}
+
+В \biblatexgost определена дополнительная схема сортировки \opt{ntvy} 
+(имя, заглавие, том\slash книга\slash часть\slash выпуск, год). 
+Она по умолчанию включена для стилей \bibsty{gost-inline}, \bibsty{gost-footnote}
+и \bibsty{gost-numeric}.
+Схема сортирует сначала по тому, затем, внутри тома, по книге, затем~--- по части, и 
+затем~--- по выпуску.
+Кроме того, поскольку стандартные схемы сортировки \biblatex плохо работают с многотомными
+изданиями (неверно обрабатывается
+поле \bibfield{maintitle}), то модифицированы схемы \opt{nty}, \opt{nyvt}, \opt{ynt}, 
+\opt{ydnt} и \opt{nyt}. Кроме того, в них добавлена сортировка по 
+тому\slash книге\slash части\slash выпуску. 
+Схема \opt{nyt} (имя, год, заголовок) включена по умолчанию в стиле 
+\bibsty{gost-authoryear}.
+
+\end{optionlist}
+
+\subsection{Команды цитирования}
 \label{sec:citecommands}
 
-Доступные команды цитирования перечислены в \tabref{tab:citecommands}. Их поведение
+Доступные команды цитирования перечислены в следующей таблице.
+%\tabref{tab:citecommands}. 
+Их поведение
 лишь в редких случаях отличается от стандартного, описанного в документации
 \biblatex.
 %Цветом выделены команды, поведение которых отличается от стандартного в \biblatex.
@@ -513,158 +735,15 @@ ISSN серии или подсерии & \textendash \\
 
 Кроме перечисленных поддерживаются производные команды, описанные в 
  руководстве \biblatex, такие как \cmd{Cite}, \cmd{Parencite}, \dots\ \cmd{Cites}, 
-\cmd{Footcites}, \dots\ \cmd{volcite}, \cmd{Volcites} и т.\,д. 
+\cmd{Footcites}, \dots\ и т.\,д.
+Исключение составляют команды типа \cmd{volcite}, которые корректно работают 
+только в \bibsty{gost-numeric}. 
 
 Хотя команды \cmd{textcite} и \cmd{textcites} в стилях \bibsty{gost-inline},
  \bibsty{gost-footnote} и \bibsty{gost-authoryear} вряд ли найдут применение
 в русском тексте, они оставлены для полноты.
 
-\subsection{Команда \cmd{autocite}}
-\label{sec:autocite}
-
 Команда \cmd{autocite} определена таким образом, чтобы\ldots
-
-\section{Особенности заполнения базы данных}
-\label{sec:database}
-
-\subsection{Поля}
-\label{sec:db:fields}
-
-Имена в полях \bibfield{editor}, \bibfield{editora}, \bibfield{editorb}, \bibfield{editorc}, 
-\bibfield{commentator}, \bibfield{translator}, \bibfield{afterword} и т.\,д. должны быть в 
-родительном падеже: 
-\enquote{Под ред. \prm{кого} А.\,Петрова}, \enquote{Пер. с фр. \prm{кого} И.\,Иванова}.
-
-\begin{fieldlist}
-
-\fielditem{credits}{literal}
-
-Новое поле, см.~\secref{sec:biber}. Содержит организацию, выводимую 
-в сведениях об ответственности.  Например:
-
-\begin{bibexample}
-\item \textellipsis\ \slash\ Академия наук СССР\ ;\ \textellipsis
-\end{bibexample}
-
-% FIXME: Возможно, лучше сделать editortype = organization ?
-
-В этом же поле могут содержаться другие нестандартные сведения об ответственности,
-например: <<авт. курса А. Сигалов>>,
-<<коллектив авт. под рук. Исакова Ю.Ф>> и т.\,д. 
-Более того, в особенно нестандартных ситуациях
-оно может содержать вообще все сведения об ответственности. 
-Поле \bibfield{credits} выводится в сведениях об ответственности в самом начале или 
-сразу после авторов, если они там присутствуют. 
-
-\fielditem{books, parts, issues}{literal}
-
-Новые поля, см.~\secref{sec:biber}. Содержат количество книг, частей, выпусков многочастных изданий, 
-которые делятся на книги, части, выпуски (аналогично стандартному полю \bibfield{volumes}). См.
-также \secref{sec:volsparts}.
-
-\fielditem{issue}{literal}
-
-Выпуск. Для книг должно быть целым числом и выводится в форме «Вып.~3». Для журналов и 
-другой периодики может быть литералом (например, Summer, Autumn и т.\,д.).
-Подробнее см.~\secref{sec:serinjour}.
-
-\fielditem{edition}{literal}
-
-Сведения об издании. Если целое число, то выводится в виде «5-е изд.». Если литерал, выводится как есть. Например: <<издание 13-е, существенно переработанное>>.
-
-\fielditem{series}{literal}
-
-Для периодических изданий, таких как журналы, выводится в виде «3-я сер.», если
-является целым числом. В противном случае, выводится как есть. См. также \secref{sec:serinjour}.
-
-\fielditem{editortype}{key}
-
-В \biblatexgost определён новый тип редактора \bibfield{editortype}=\{\bibfield{geneditor}\}, соответствующий общему редактору: \enquote{Под общ. ред. \ldots}.
-
-
-\end{fieldlist}
-
-\subsection[@periodical, @mvbook и сериальные
-издания]{\bibtype{periodical}, \bibtype{mvbook} и сериальные издания}
-\label{sec:db:series}
-
-В ГОСТ различаются (6.3.4.2) сериальные документы с нумерацией по годам (как, например, в журналах) и со сквозной нумерацией. В первом случае не печатается дата на месте выходных данных. В \biblatexgost только такие документы соответствуют \bibtype{periodical}.  Сериальные документы со сквозной нумерацией рекомендуется оформлять как \bibtype{mvbook} или \bibtype{mvcollection}. 
-
-\subsection{Серия в журналах}
-\label{sec:serinjour}
-
-Серия в журналах может пониматься в двух смыслах. 
-
-Во-первых, она употребляется в
-том же смысле, что и для книг, и также выводится в области серии в виде:
-
-\begin{bibexample}
-\item \textellipsis~"--- (Формальная семантика 78).~"--- \textellipsis
-\end{bibexample}
-
-При заполнении базы данных, эта серия помещается в поле \bibfield{series}.
-
-Во-вторых, серия может входить в заглавие журнала: 
-
-\begin{bibexample}
-\item Известия Российской академии наук. Серия геологическая
-\item Труды исторического факультета МГУ. Серия 4, Библиографии
-\item Вестник Ивановского государственного университета. Серия «Химия, биология»
-\item Итоги науки и техники. Серия: Автомобилестроение
-\end{bibexample}
-
-При заполнении базы данных, эта серия помещается в поле \bibfield{journaltitle}
-вместе с названием журнала:
-
-\begin{lstlisting}[style=bibtex,escapechar=|]
-@ARTICLE{article,
-  ...
-  journaltitle = {|Итоги науки и техники. Серия: Автомобилестроение|},
-}
-\end{lstlisting}
-
-\subsection{Многоточие при сокращении названий}
-\label{sec:ellipsis}
-
-Команда \cmd{textellipsis}, так же как и символ \enquote{…} (Unicode U+2026), в поле \bibfield{shorttitle} воспринимается \biblatex'ом
-как конец предложения. Это может приводить к конфликтам с трекером пунктуации. 
-По этой причине рекомендуется добавлять в таких случаях
-команду \cmd{isdot}, превращающую
-последнюю точку в точку сокращения (\texttt{dot}), а не конца предложения 
-(\texttt{period}). Например: 
-%xelatex, похоже, использует символ \enquote{…} (Unicode U+2026)
-
-\begin{lstlisting}[style=bibtex,escapechar=|]
-@BOOK{book,
-  ...
-  shorttitle = {|Введение|~\textellipsis\isdot}
-}
-\end{lstlisting}
-
-Или:
-
-\begin{lstlisting}[style=bibtex,escapechar=|]
-@BOOK{book,
-  ...
-  shorttitle = {|Введение|~...\isdot}
-}
-\end{lstlisting}
-
-Рекомендуется также использовать пакет
-\sty{ellipsis} (его нужно загружать после пакета \sty{hyperref}).
-
-\subsection{Электронные ресурсы}
-\label{sec:elres}
-
-Для электронных ресурсов в области специфических сведений содержатся вид и объём ресурса 
-в виде: <<Вид (Объём)>> (см. ГОСТ 7.82-2001, п.5.5). Например:
-
-\begin{bibexample}
-\item \textellipsis~"--- Электрон, дан. (3 файла) и прогр. (2 файла).~"--- \textellipsis
-\item \textellipsis~"--- Электрон, дан. (2 файла : 70 тыс. записей).~"--- \textellipsis
-\item \textellipsis~"--- Электрон, прогр. (2 файла : 18650 байтов).~"--- \textellipsis
-\item \textellipsis~"--- Electronic text data (2 files : 1.6 Mbytes).~"--- \textellipsis 
-\end{bibexample} 
 
 \subsection{Четыре и более имён}
 \label{sec:db:4names}
@@ -704,55 +783,24 @@ ISSN серии или подсерии & \textendash \\
 будет отступлением от ГОСТа), вам придётся изменить базу данных.
 Если вы знаете способ это автоматизировать, соообщите, пожалуйста, мне.
 
-\subsection{Другие особенности}
-\label{sec:db:misc}
+\subsection{Описание многотомных изданий}
+\label{sec:multivol}
 
-\begin{itemize}
-\item Общее обозначение материала ([Электронный ресурс] и пр.) включается в заголовок:
+ГОСТ определяет два способа библиографического описания отдельного тома многотомного издания:
 
-\begin{lstlisting}[style=bibtex,escapechar=|]
-title = {Google |[Электронный ресурс]|}
-\end{lstlisting}
+\begin{bibexample}
+\item Детская энциклопедия. В 5 т. Т. 2. Человек. \dots\ 
+\item Человек. \dots\ (Детская энциклопедия: в 5 т., т. 2)\dots\ 
+\end{bibexample}
 
-То же относится к параллельному заглавию.
+В \biblatexgost реализован только первый вариант. Соответственно, 
+в стиле \bibsty{gost-autoryear} при отсутствии автора ссылка производится на общий 
+заголовок многотомного издания, а не на заголовок отдельного тома (тем более, что 
+последний может и отсутствовать):
 
-\end{itemize}
-
-\section{Отличия от стандартных стилей \biblatex}
-\label{sec:stydiff}
-
-\subsection{Тома, книги, части, выпуски}
-\label{sec:volsparts}
-
-Издание может делиться на физически отдельные части, которые могут называться по-разному. \biblatexgost поддерживает деление на тома, книги, части и выпуски (деление только одного уровня; например, тома, разделённые на части, не поддерживаются). Соответствующие им поля базы данных показаны в \tabref{tab:volsparts}.
-
-\begin{table}[htbp]
-\tablesetup
-\centering
-\begin{tabularx}{.7\textwidth}{@{}p{.3\textwidth}@{}X@{}}
-\toprule
-\multicolumn{1}{@{}H}{Часть издания} &
-\multicolumn{1}{@{}H}{Поле \biblatex}  \\
-\cmidrule(r){1-1}\cmidrule{2-2}
-тома & \bibfield{volume}, \bibfield{volumes} \\
-книги & \bibfield{book}, \bibfield{books} \\
-части & \bibfield{part}, \bibfield{parts} \\
-выпуски & \bibfield{issue}\footnote{Поле \bibfield{issue} имеет особое значение в случае журналов. См. п. ??? руководства по \biblatex.}, \bibfield{issues} \\
-\bottomrule
-\end{tabularx}
-\caption{Обозначение частей издания}
-\label{tab:volsparts}
-\end{table}
-
-Если эти поля являются целыми числами, то они выводятся в виде: \enquote{В 5 т.},
-\enquote{В 4 вып.} и т.\,д. В противном случае, они выводятся как есть: \enquote{В
-5-и томах (6-и кн.)} и т.\,д. Строковые значения при занесении в базу данных следует 
-писать со строчной буквы, \biblatexgost перейдёт на заглавные там, где требуется. Например:
-
-\begin{lstlisting}[style=bibtex,escapechar=|]
-volumes = {|в 5-и томах (6-и кн.)|}
-\end{lstlisting}
- 
+\begin{bibexample}
+\item{} [Детская энциклопедия, т.\,2, 2001, с.\,33]
+\end{bibexample}
 
 \subsection{Даты в газетах и журналах}
 \label{sec:jourdates}
@@ -778,74 +826,12 @@ volumes = {|в 5-и томах (6-и кн.)|}
 \item\textellipsis\ 2001.~"--- July.~"--- Vol.~34.~"--- \textellipsis
 \end{bibexample}
 
-
-\subsection{Сортировка}
-\label{sec:sorting}
-
-В \biblatexgost определена новая схема сортировки \opt{ntvy} 
-(имя, заглавие, том\slash книга\slash часть\slash выпуск, год). 
-Она по умолчанию включена для стилей \bibsty{gost-inline}, \bibsty{gost-footnote}
-и \bibsty{gost-numeric}.
-Схема сортирует сначала по тому, затем, внутри тома, по книге, затем~--- по части, и 
-затем~--- по выпуску.
-Кроме того, поскольку стандартные схемы сортировки \biblatex плохо работают с многотомными
-изданиями (неверно обрабатывается
-поле \bibfield{maintitle}), то модифицированы схемы \opt{nty}, \opt{nyvt}, \opt{ynt}, 
-\opt{ydnt} и \opt{nyt}. Кроме того, в них добавлена сортировка по 
-тому\slash книге\slash части\slash выпуску. 
-Схема \opt{nyt} (имя, год, заголовок) включена по умолчанию в стиле 
-\bibsty{gost-authoryear}.
-
-%\subsection{Типы публикаций}
-
-
-\section{Опции}
-\label{sec:opt}
-
-Для всех стилей сохранены опции стандартных стилей \biblatex, от которых они происходят, даже если 
-соответствующая функциональность не предполагается ГОСТом. Кроме того, пакет \sty{biblatex-gost} имеет 
-следующие дополнительные опции.
-
-\begin{optionlist}
-
-\optitem[gostletter]{mergedate}{\opt{goststrict}, \opt{gostletter}}
-
-Стиль \bibsty{gost-authoryear}, по сравнению со стандартным \bibsty{authoryear}, имеет два дополнительных значения опции \opt{mergedate}:
- 
-\begin{valuelist}
-
-\item[gostletter]
-
-Отключает в библиографии вывод года после автора (точнее, после \bibfield{label}). Для 
-предотвращения неопределённых ссылок (например, при совпадении автора и года) к году при 
-необходимости добавляется латинская буква. Эта функциональность не предусмотрена ГОСТом.
-
-\item[goststrict]
-
-Отключает в библиографии вывод года после автора (точнее, после \bibfield{label}). В 
-отличие от предыдущей опции, никаких знаков к году не добавляется, что может приводить к 
-неопределённым ссылкам, но зато точно соответствует требованиям ГОСТ.
-
-\end{valuelist}
-
-\optitem{sorting}{\opt{ntvy}}
-
-В \biblatexgost определена дополнительная схема сортировки. См.~\secref{sec:sorting}.
-
-\end{optionlist}
-
-\section{Другие отличия}
-\label{sec:otherdiff}
-
-\ldots
-
-\section{Известные проблемы}
-\label{sec:issues}
-
-\begin{itemize}
-\item \ldots
-\end{itemize}
-
+%\section{Известные проблемы}
+%\label{sec:issues}
+%
+%\begin{itemize}
+%\item \ldots
+%\end{itemize}
 
 \appendix
 \section*{Приложения}
@@ -879,9 +865,7 @@ volumes = {|в 5-и томах (6-и кн.)|}
 %\end{itemize}
 
 %\subsection{Преобразование программой \biber}
-%\label{sec:biber}
-
-\item \biblatex не позволяет определять новые поля библиографической базы данных.
+\item \label{bibermap}\biblatex не позволяет определять новые поля библиографической базы данных.
 В то же время, пакет \biblatexgost определяет дополнительные поля для хранения количества 
 книг, частей, выпусков многочастных изданий, а также название организации в сведениях об ответственности. В качестве этих полей можно использовать 
 запасные поля \biblatex \bibfield{user[a-f]}, 
@@ -904,7 +888,7 @@ volumes = {|в 5-и томах (6-и кн.)|}
 \multicolumn{1}{@{}H}{Поле в базе \file{.bib}} &
 \multicolumn{1}{@{}H}{Поле \biblatex}  \\
 \cmidrule(r){1-1}\cmidrule{2-2}
-%\bibfield{parttitle} & \bibfield{usera} \\
+\bibfield{book} & \bibfield{usera} \\
 \bibfield{books} & \bibfield{userb} \\
 \bibfield{parts} & \bibfield{userc} \\
 \bibfield{issues} & \bibfield{userd} \\
@@ -927,6 +911,10 @@ volumes = {|в 5-и томах (6-и кн.)|}
 \label{apx:changelog}
 
 \begin{changelog}
+
+\begin{release}{0.4}{????-2012}
+\item Переход на \biblatex\,2.0 и \biber%\see{} 
+\end{release}
 
 \begin{release}{0.3.2}{29-04-2012}
 \item Исправлена ошибка опции \kvopt{citetracker}{constrict} в \bibsty{gost-inline},
@@ -966,22 +954,5 @@ volumes = {|в 5-и томах (6-и кн.)|}
 \end{release}
 
 \end{changelog}
-
-\section{TODO}
-\label{sec:todo}
-
-\begin{itemize}
-\item электронные документы ([Электронный ресурс], систем. требования,\textellipsis)
-\item комплексные ссылки: ... // Там же.~"--- требует проверки crossref
-\item комплексные ссылки: ... // Её же., Его же,...~--- требует указания пола в БД
-\item оформление стандартов
-\item оформление патентов (поля: заявлено, опубликовано, приоритет,...)
-%\item свед. о материале~"--- возможно, добавить в biber.conf
-\item При составлении описания на документ в целом, если он продолжает публиковаться, приводят год издания первого номера и тире, после которого оставляют \textit{интервал в четыре пробела}: 
-
-Долгопрудный : МФТИ, 1998~"--- \mbox{~~~~}.
-\item серий может быть несколько~"--- выводятся друг за другом~"--- д.б. list?
-\item Одно произведение в нескольких номерах журнала
-\end{itemize}
 
 \end{document}
