@@ -46,6 +46,7 @@
 \DeclareSourcemap{
   \maps[datatype=bibtex]{
     \map{
+      \step[fieldsource=book, fieldtarget=usera]
       \step[fieldsource=books, fieldtarget=userb]
       \step[fieldsource=parts, fieldtarget=userc]
       \step[fieldsource=issues, fieldtarget=userd]
@@ -100,6 +101,7 @@
   }
 }
 
+\newcommand{\bbx@gostbibermap@book}{usera}
 \newcommand{\bbx@gostbibermap@books}{userb}
 \newcommand{\bbx@gostbibermap@parts}{userc}
 \newcommand{\bbx@gostbibermap@issues}{userd}
@@ -388,7 +390,7 @@
     {\bibstring{jourvol}\addabbrvspace#1}
     {}}
 \DeclareFieldFormat*{book}{%
-  \iffieldnum{book}
+  \iffieldnum{\bbx@gostbibermap@book}
     {\ifbibstring{book}
       {\bibstring{book}\addabbrvspace#1}
       {}}
@@ -1219,7 +1221,7 @@
 \newbibmacro{volume+parts}{%
   \printfield{volume}%
   \newunit
-  \printfield{book}%
+  \printfield[book]{\bbx@gostbibermap@book}%
   \newunit
   \printfield{part}%
   \newunit
