@@ -438,6 +438,12 @@
      {\bibstring{issue}\addabbrvspace#1}%
      {\unspace\adddot#1}}%
     {#1}}
+\DeclareFieldFormat{date}{%
+ \iffieldundef{endyear}
+   {#1}
+   {\iffieldequalstr{endyear}{}
+      {#1\mbox{~~~~}}
+      {#1}}}
 
 \DeclareNameAlias{sortname}{last-first}
 
