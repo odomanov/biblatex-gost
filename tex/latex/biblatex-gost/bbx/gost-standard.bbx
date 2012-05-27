@@ -3,7 +3,16 @@
 \ProvidesFile{gost-standard.bbx}
 [\abx@bbxid $Id$]
 
-\RequireBiber[1]
+\@ifpackagelater{biblatex}{2012/05/22}
+  {}
+  {\PackageError{biblatex}
+    {Outdated 'biblatex' package}
+    {This version of 'biblatex-gost' requires biblatex v2.0 or later.\MessageBreak
+     You are using: '\csuse{ver@biblatex.sty}'.\MessageBreak
+     This is a fatal error. I'm aborting now.}%
+    \endinput}
+
+\RequireBiber[3]  % strictly required
 \NewBibliographyString{% should be here, not in lbx, to be initialized for all languages
   involumes,
   candthesis,
