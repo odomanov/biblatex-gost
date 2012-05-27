@@ -51,8 +51,55 @@
       \step[fieldsource=issues, fieldtarget=userd]
       \step[fieldsource=credits, fieldtarget=lista]
     }
+    \map{
+      \step[fieldsource=author, 
+        match=\regexp{(.+\s+and\s+){3,}}, 
+        final]
+      \step[fieldset=options, fieldvalue={useauthor=false}]
+    }
+    \map{
+      \step[fieldsource=editor, 
+        match=\regexp{(.+\s+and\s+){3,}}, 
+        final]
+      \step[fieldset=options, fieldvalue={useeditor=false}]
+    }
+    \map[overwrite]{
+      \step[fieldsource=author, 
+        match=\regexp{(.+\s+and\s+){3,}}, 
+        final]
+      \step[fieldsource=options, 
+        match=\regexp{^$}, 
+        final]
+      \step[fieldset=options, fieldvalue={useauthor=false}]
+    }
+    \map[overwrite]{
+      \step[fieldsource=editor, 
+        match=\regexp{(.+\s+and\s+){3,}}, 
+        final]
+      \step[fieldsource=options, 
+        match=\regexp{^$}, 
+        final]
+      \step[fieldset=options, fieldvalue={useeditor=false}]
+    }
+    \map[overwrite]{
+      \step[fieldsource=author, 
+        match=\regexp{(.+\s+and\s+){3,}}, 
+        final]
+      \step[fieldsource=options,
+        match=\regexp{(.+)},
+        replace=\regexp{useauthor=false,$1}]
+    }
+    \map[overwrite]{
+      \step[fieldsource=editor, 
+        match=\regexp{(.+\s+and\s+){3,}}, 
+        final]
+      \step[fieldsource=options,
+        match=\regexp{(.+)},
+        replace=\regexp{useeditor=false,$1}]
+    }
   }
 }
+
 \newcommand{\bbx@gostbibermap@books}{userb}
 \newcommand{\bbx@gostbibermap@parts}{userc}
 \newcommand{\bbx@gostbibermap@issues}{userd}
