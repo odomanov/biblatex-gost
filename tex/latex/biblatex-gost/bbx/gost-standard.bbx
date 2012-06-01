@@ -524,8 +524,6 @@
   \setunit{\space}
   \usebibmacro{//}%
   \usebibmacro{journal}
-  \newunit
-  \printfield{series}
   \setunit{\respdelim}%
   \usebibmacro{byeditor+others}%
   \newunit\newblock
@@ -540,6 +538,8 @@
   \usebibmacro{jour:volume+parts+issuetitle}%
   \newunit\newblock
   \printfield{pages}%
+  \newunit\newblock
+  \printfield[parens]{series}
   \newunit\newblock
   \iftoggle{bbx:isbn}
     {\printfield{issn}}
@@ -898,6 +898,8 @@
   \usebibmacro{byeditor+others}%
   \newunit\newblock
   \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
+  \newunit\newblock
+  \printfield[parens]{series}
   \newunit\newblock
   \iftoggle{bbx:isbn}
     {\printfield{issn}}
