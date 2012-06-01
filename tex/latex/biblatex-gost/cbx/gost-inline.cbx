@@ -134,8 +134,9 @@
   \csxdef{cbx@t@\thefield{entrykey}}{\the\value{instcount}}}
 
 \newbibmacro{cite:clearfields}{%
-   \clearfield{series}%
-   \clearfield{number}%
+   %\clearfield{series}%
+   %\clearfield{number}%
+   \renewbibmacro*{series+number}{}%
    \clearfield{doi}%
    \clearfield{eprint}%
    \clearfield{url}%
