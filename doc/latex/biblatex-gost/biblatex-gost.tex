@@ -56,7 +56,7 @@
 \svnRegisterRevision{64}{Версия 0.3}
 \svnRegisterRevision{70}{Версия 0.3.1}
 \svnRegisterRevision{79}{Версия 0.3.2}
-\svnRegisterRevision{100}{Версия 0.4}
+\svnRegisterRevision{115}{Версия 0.4}
 \makeatletter
 \providecommand*{\printtitlepage}{}
 \renewrobustcmd*{\printtitlepage}{%
@@ -215,7 +215,7 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 По умолчанию стиль устанавливает опции \kvopt{autocite}{inline}, \kvopt{sorting}{ntvy}, 
  \kvopt{pagetracker}{true}, \kvopt{strict}{true}, \kvopt{citetracker}{constrict},   
 \kvopt{opcittracker}{constrict}, \kvopt{citepages}{omit},
-\kvopt{labelyear}{true}, \kvopt{dashed}{false}.
+\kvopt{labelyear}{true}.
 
 \item[gost-footnote]
 Подстрочные ссылки.  
@@ -225,7 +225,7 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 По умолчанию стиль устанавливает опции \kvopt{autocite}{footnote}, \kvopt{sorting}{ntvy}, 
 \kvopt{pagetracker}{true}, \kvopt{strict}{true}, \kvopt{citetracker}{constrict},   
 \kvopt{opcittracker}{constrict}, \kvopt{citepages}{omit},
-\kvopt{labelyear}{true}, \kvopt{dashed}{false}.
+\kvopt{labelyear}{true}.
 
 Фактически, стиль \bibsty{gost-footnote} имеет только два отличия от стиля 
 \bibsty{gost-inline}. 
@@ -252,7 +252,7 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 \end{lstlisting}
 
 По умолчанию стиль устанавливает опции \kvopt{autocite}{inline}, \kvopt{sortcites}{true}.
-\kvopt{labelnumber}{true}, \kvopt{dashed}{false}.
+\kvopt{labelnumber}{true}.
 
 \item[gost-authoryear]
 Затекстовые ссылки. Основан на стандартном 
@@ -272,8 +272,7 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 По умолчанию стиль устанавливает опции \kvopt{autocite}{inline}, 
 \kvopt{sorting}{nyt},
 \kvopt{pagetracker}{true},
-\kvopt{mergedate}{gostletter},
-\kvopt{dashed}{false}. 
+\kvopt{mergedate}{gostletter}. 
 
 \end{marglist}
 
@@ -296,6 +295,7 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 \end{itemize}
 
 Дополнительно, все стили по умолчанию устанавливают опции 
+\kvopt{dashed}{false},
 \kvopt{isbn}{true},
 \kvopt{url}{true},
 \kvopt{doi}{true},
@@ -312,9 +312,9 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 \subsection{Новые поля}
 \label{sec:newfields}
 
-\biblatex позволяет, с некоторыми ограничениями, \hyperref[bibermap]{определять} 
-новые поля библиографической
-базы данных. В \biblatexgost определены следующие поля. 
+\biblatex позволяет, с некоторыми ограничениями, определять 
+новые поля библиографической базы данных. 
+В \biblatexgost определены следующие поля  (подробности реализации см. в~\apxref{bibermap}). 
 
 \begin{fieldlist}
 
@@ -354,22 +354,22 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 
 \listitem{specdata}{literal}
 
-Область специфических сведений. См.~\tabref{tab:gost-biblatex}. Представляет собой список,
+Область специфических сведений (см.~\tabref{tab:gost-biblatex}). Представляет собой список,
 элементы которого при выводе разделяются точкой с запятой.
 
 \end{fieldlist}
 
-\subsection{Соответствие терминов ГОСТа и \biblatexgost{а}}
+\subsection{Соответствие терминов ГОСТа и \biblatexgost}
 \label{sec:gost-biblatex}
 
-Соответствие терминов ГОСТа и \biblatexgost{а} представлено в следующей таблице.
+Соответствие терминов ГОСТа и \biblatexgost представлено в \tabref{tab:gost-biblatex}.
 Как видно, в ней отсутствуют, с одной стороны, некоторые элементы библиографического
 описания, предусмотренные ГОСТом, а с другой стороны, некоторые поля \biblatex. Эти элементы и поля 
 не учитываются в \biblatexgost и не обрабатываются (разумеется, специальные поля,
 такие как \bibfield{crossref}, \bibfield{options} и пр., учитываются, хотя и не 
 представлены в таблице).
 Курсивом выделены факультативные, согласно ГОСТу, элементы.
-Цветом выделены поля \biblatexgost, отсутствующие в \biblatex, см.~\secref{sec:newfields}.
+Цветом выделены поля \biblatexgost, отсутствующие в \biblatex (см.~\secref{sec:newfields}).
 
 \begingroup
 \tablesetup
@@ -388,26 +388,22 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 %\multicolumn{1}{@{}H}{сведений об ответственности} & \\
 %\cmidrule(r){1-1}
 Основное заглавие                & title, maintitle, booktitle \\
-\textit{Общее обозначение материала, 
-параллельное заглавие, 
-cведения, относящиеся к заглавию}& titleaddon, maintitleaddon,
+%\textit{Общее обозначение материала} &  \\
+%\textit{Параллельное заглавие} &  \\
+\textit{Сведения, относящиеся к заглавию} & subtitle, mainsubtitle,
+                                            booksubtitle, titleaddon, maintitleaddon,
                                             booktitleaddon \\
-%\textit{Параллельное заглавие} & titleaddon, maintitleaddon,
-%                                            booktitleaddon \\
-%\textit{Сведения, относящиеся к заглавию} & subtitle, mainsubtitle,
-%                                            booksubtitle, \\
 Сведения об ответственности      & {\spotcolor credits}, editor, editora, editorb, editorc, 
                                     afterword, 
                                     annotator, commentator, foreword, introduction, organization,  
                                     translator \\
 \cmidrule(r){1-1}\cmidrule{2-2}
-\multicolumn{1}{@{}H}{Область специфических сведений} & specdata \\
-%\cmidrule(r){1-1}
-\cmidrule(r){1-1}\cmidrule{2-2}
 \multicolumn{1}{@{}H}{Область издания} & \\
 %\cmidrule(r){1-1}
 Сведения об издании & edition \\
 \textit{Параллельные сведения об издании} & edition \\
+\cmidrule(r){1-1}\cmidrule{2-2}
+\multicolumn{1}{@{}H}{Область специфических сведений} & {\spotcolor specdata} \\
 \cmidrule(r){1-1}\cmidrule{2-2}
 \multicolumn{1}{@{}H}{Область выходных данных} & \\
 %\cmidrule(r){1-1}
@@ -437,7 +433,8 @@ ISSN серии или подсерии & issn (isbn) \\
 \multicolumn{1}{@{}H}{Область стандартного номера и} & \\
 \multicolumn{1}{@{}H}{условий доступности} & \\
 %\cmidrule(r){1-1}
-Стандартный номер (или его альтернатива) & isbn, isan, ismn, isrn, iswc, doi, eprint, 
+Стандартный номер (или его альтернатива) & isbn, issn, %isan, ismn, isrn, iswc, 
+                                           doi, eprint, 
                                            eprintclass, addendum \\
 Ключевое заглавие & addendum  \\
 Условия доступности и (или) цена & addendum \\
@@ -459,7 +456,7 @@ ISSN серии или подсерии & issn (isbn) \\
 Б\'{о}льшая часть полей и сведений, таких как автор, название, редактор и т.\,д., оформляются
 автоматически. 
 Ниже приведены рекомендации по размещению сведений, для которых отсутствуют
-специальные поля в базе данных или нет прямого соответствия между ГОСТом и \biblatexgost{ом}.
+специальные поля в базе данных или нет прямого соответствия между ГОСТом и \biblatexgost.
 
 \begin{description}
 %\item[Общее обозначение материала и параллельное заглавие]:
@@ -480,7 +477,7 @@ ISSN серии или подсерии & issn (isbn) \\
 
 В случае сериальных изданий эта область является областью нумерации, в которой приводятся 
 первый и последний номер, перерывы в нумерации и пр. \biblatexgost оформляет это поле 
-автоматически, если присутствует поле \bibfield{date} в записях типа \bibtype{periodical}.
+автоматически, если присутствует поле \bibfield{date} в записях типа \bibtype{periodical}\notimpl.
 
 \item[Cведения об ответственности серии] в случае необходимости можно помещать 
 в поле \bibfield{series}:  
@@ -488,7 +485,7 @@ ISSN серии или подсерии & issn (isbn) \\
 series = {|Языковеды мира / Редкол.: Г.В. Степанов (пред.) и др.|}
 \end{lstlisting}
 
-\item[Серия.] \label{series}ГОСТ различает (\gostref{6.3.4.2}) сериальные документы 
+\item[Серия.] \label{series}ГОСТ различает (см. \gostref{6.3.4.2}) сериальные документы 
 с нумерацией по годам 
 (как, например, в журналах) и со сквозной нумерацией (в первом случае, например, 
 не печатается год на месте выходных данных). В \biblatexgost только такие документы соответствуют \bibtype{periodical}.  Сериальные документы со сквозной нумерацией рекомендуется оформлять как \bibtype{mvbook}, \bibtype{mvcollection}, \bibtype{mvproceedings} или \bibtype{mvreference}. 
@@ -497,7 +494,7 @@ series = {|Языковеды мира / Редкол.: Г.В. Степанов 
 том же смысле, что и для книг, и также выводится в области серии в виде:
 
 \begin{bibexample}
-\item \textellipsis~"--- (Формальная семантика 78).~"--- \textellipsis
+\item \textellipsis~"--- (Формальная семантика ; 78).~"--- \textellipsis
 \end{bibexample}
 
 При заполнении базы данных, эта серия помещается в поле \bibfield{series}.
@@ -590,7 +587,7 @@ introduction & введение \prm{кого} & введ. \prm{кого} \\
 Например, по умолчанию  \kvopt{useeditor}{false} и редактор выводится в виде:
 
 \begin{bibexample}
-\item \ldots\ \slash\ под ред. А.\,Петрова\ldots
+\item \ldots\ \slash\ под ред. А.\,Петровой\ldots
 \end{bibexample} 
 
 Поэтому имена в полях \bibfield{editor}, \bibfield{editora}, \bibfield{editorb}, 
@@ -598,7 +595,7 @@ introduction & введение \prm{кого} & введ. \prm{кого} \\
 то редактор выводится как 
 
 \begin{bibexample}
-\item \textit{Петров А.}, ред. \ldots 
+\item \textit{Петрова А.}, ред. \ldots 
 \end{bibexample} 
 
 и имя должно быть в именительном падеже. То же касается переводчика и опции \opt{usetranslator}
@@ -761,6 +758,7 @@ volumes = {|в 5-и томах (6-и кн.)|}
 \end{valuelist}
 
 \optitem{sorting}{\opt{ntvy}}
+\label{sorting}
 
 В \biblatexgost определена дополнительная схема сортировки \opt{ntvy} 
 (имя, заглавие, том\slash книга\slash часть\slash выпуск, год). 
@@ -945,9 +943,11 @@ gost-authoryear & cite & Автор (заголовок) и год в текст
 При этом в базе данных 
 содержатся осмысленные названия полей, которые \biblatexgost (фактически, программа \biber
 через механизм sourcemap) автоматически преобразует во внутренние поля \biblatex. 
-В частности, \biblatexgost переопределяет следующие поля\footnote{В предыдущих версиях \biblatexgost
+В частности, \biblatexgost переопределяет следующие поля\footnote{В ранних версиях \biblatexgost
 для настройки этой функции требовались манипуляции с файлом \file{biber.conf}. Начиная с
-\biblatex~2.0~--- соответственно, с \biblatexgost~0.4~--- переопределение происходит автоматически.}:
+\biblatexgost~0.4
+%~--- соответственно, с \biblatex~2.0~--- 
+переопределение происходит автоматически.}:
 
 \begin{table}[htbp]
 \tablesetup
@@ -972,12 +972,12 @@ specdata & listb \\
 \item \label{impl:4names} \biblatexgost автоматически отслеживает количество авторов,
 редакторов и переводчиков, изменяя формат вывода, когда это количество превышает 3
 (см.~\secref{sec:db:4names}).
-Однако при этом механизм сортировки \biblatex не позволяет обнаружить, что в заголовке
+При этом, однако, механизм сортировки \biblatex не позволяет обнаружить, что в заголовке
 теперь используются не имена, а заглавие. 
-Поэтому в \biblatexgost для правильной работы сортировки для публикаций,
+Поэтому в \biblatexgost для правильной работы сортировки в записи публикаций,
 имеющих более 3-х имён, в поле \bibfield{options} добавляется значение 
 \kvopt{useauthor}{false} (при 4-х и более авторах), \kvopt{useeditor}{false} (при 4-х и более
-редакторах), \kvopt{usetranslator}{false} (при 4-х и более переводчиках). Например:
+редакторах) и \kvopt{usetranslator}{false} (при 4-х и более переводчиках). Например:
 
 \begin{lstlisting}[style=bibtex,escapechar=|]
 @BOOK{book,
@@ -987,8 +987,11 @@ specdata & listb \\
 }
 \end{lstlisting}
 
-В \biblatexgost это делается автоматически при помощи функции \cmd{DeclareSourcemap}%
+Это делается автоматически при помощи функции \cmd{DeclareSourcemap}%
 \footnote{В предыдущих версиях \biblatexgost это нужно было делать вручную.}.
+При этом, однако, используется фиксированное значение предельного количества авторов 
+(3), которое не зависит от опции пакета \opt{maxnames}. Соответственно, простое изменение
+этой опции может привести к ошибкам сортировки.
 
 \item Определен макрос \cmd{ifmulticitation}, принимающий значение \texttt{True} 
 внутри команд \cmd{...cites} (комплексных ссылок, в терминологии ГОСТа).
@@ -1003,9 +1006,22 @@ specdata & listb \\
 
 \begin{changelog}
 
-\begin{release}{0.4}{????-2012}
-\item Переход на \biblatex\,2.0 и \biber%\see{} 
+\begin{release}{0.4}{??-06-2012}
+\item Переход на \biblatex\,2.0
+\item Изменено отношение терминов ГОСТ и полей \biblatex\see{sec:gost-biblatex}
+\item Добавлено автоматическое переопределение полей (теперь не нужна настройка \file{biber.conf})\see{bibermap}
+\item Добавлена автоматическая обработка длинных списков имён\see{sec:db:4names} 
+\item Добавлено новое поле \bibfield{specdata}\see{sec:newfields}
+\item В \bibsty{gost-authoryear} значение по умолчанию опции \opt{loccittracker} изменено на
+    \opt{constrict}\see{sec:styles}
 \item Существенно переработана документация
+\item Исправлены ошибки обработки опции \opt{loccittracker}
+\item Исправлена ошибка вывода редактора в \bibtype{inbook}, \bibtype{incollection}, \ldots
+\item Исправлена ошибка вывода поля \bibfield{shorttitle}
+\item Исправлена ошибка вывода поля \bibfield{book}
+\item Исправлена ошибка вывода серии в \bibsty{gost-inline}
+\item Исправлена ошибка вывода серии в \bibtype{article} и \bibtype{periodical}
+\item Исправлены другие ошибки
 \end{release}
 
 \begin{release}{0.3.2}{29-04-2012}
@@ -1021,8 +1037,8 @@ specdata & listb \\
 
 \begin{release}{0.3}{18-04-2012}
 \item Добавлена обработка длинных списков имён\see{sec:db:4names}
-\item Добавлена схема сортировки \opt{ntvy}\see{sec:sorting}
-\item Изменены некоторые стандартные схемы сортировки\see{sec:sorting}
+\item Добавлена схема сортировки \opt{ntvy}\see{sorting}
+\item Изменены некоторые стандартные схемы сортировки\see{sorting}
 \item Поля \bibfield{volume}, \bibfield{book}, \bibfield{part}, \bibfield{issue} 
 теперь могут быть нечисловыми\see{sec:volsparts}
 \item Добавлены макросы настройки формата имён заголовков\see{sec:impldet}
