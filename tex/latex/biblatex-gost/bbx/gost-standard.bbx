@@ -413,9 +413,11 @@
       {}}
     {#1}}
 \DeclareFieldFormat[article,periodical]{number}{%
-  \ifbibstring{number}
-    {\bibstring{number}\addabbrvspace#1}
-    {\unspace\adddot#1}}
+  \iffieldnum{number}
+    {\ifbibstring{number}
+      {\bibstring{number}\addabbrvspace#1}
+      {\unspace\adddot#1}}
+    {#1}}
 \DeclareFieldFormat{volumes}{#1}
 \newbibmacro{in+}[2]{%
   \iffieldnum{\csuse{bbx@gostbibermap@#1}}
