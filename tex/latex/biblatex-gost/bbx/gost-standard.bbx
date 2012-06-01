@@ -116,6 +116,7 @@
 \newcommand{\bbx@gostbibermap@parts}{userc}
 \newcommand{\bbx@gostbibermap@issues}{userd}
 \newcommand{\bbx@gostbibermap@credits}{lista}
+\newcommand{\bbx@gostbibermap@specdata}{listb}
 \newcommand{\bbx@gostbibermap@volumes}{volumes}
 
 \DeclareSortingScheme{nty}{
@@ -445,6 +446,16 @@
    {\iffieldequalstr{endyear}{}
       {#1\mbox{~~~~}}
       {#1}}}
+\DeclareListFormat{semicolondelim}{%
+  \ifnumgreater{\value{listcount}}{\value{liststart}}
+    {\ifnumless{\value{listcount}}{\value{liststop}}
+      {\addsemicolondelim}
+      {\ifnumequal{\value{listcount}}{\value{liststop}}
+        {\addsemicolondelim}
+        {}}}
+    {}%
+    #1\isdot
+}
 
 \DeclareNameAlias{sortname}{last-first}
 
@@ -522,14 +533,11 @@
   \newunit\newblock
   \printfield{location}%
   \setunit*{\addcomma\space}%
-  %\usebibmacro{date}
   \usebibmacro{year}%
   \newunit\newblock
   \mkbibdatelong{}{month}{day}%
   \newunit\newblock
   \usebibmacro{jour:volume+parts+issuetitle}%
-  \newunit\newblock
-  \printfield{note}%
   \newunit\newblock
   \printfield{pages}%
   \newunit\newblock
@@ -537,7 +545,7 @@
     {\printfield{issn}}
     {}%
   \newunit\newblock
-  \usebibmacro{doi+eprint+url}%
+  \usebibmacro{doi+eprint+url+note}%
   \newunit\newblock
   \usebibmacro{addendum+pubstate}%
   \setunit{\bibpagerefpunct}\newblock
@@ -557,7 +565,7 @@
   \newunit\newblock
   \printfield{edition}%
   \newunit\newblock
-  \printfield{note}%
+  \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
   \newunit\newblock
   \usebibmacro{publisher+location+date}%
   \newunit\newblock
@@ -571,7 +579,7 @@
     {\printfield{isbn}}
     {}%
   \newunit\newblock
-  \usebibmacro{doi+eprint+url}%
+  \usebibmacro{doi+eprint+url+note}%
   \newunit\newblock
   \usebibmacro{addendum+pubstate}%
   \setunit{\bibpagerefpunct}\newblock
@@ -593,7 +601,7 @@
   \newunit\newblock
   \printfield{type}%
   \newunit\newblock
-  \printfield{note}%
+  \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
   \newunit\newblock
   \usebibmacro{location+date}%
   \newunit\newblock
@@ -601,7 +609,7 @@
   \newunit
   \printfield{pagetotal}%
   \newunit\newblock
-  \usebibmacro{doi+eprint+url}%
+  \usebibmacro{doi+eprint+url+note}%
   \newunit\newblock
   \usebibmacro{addendum+pubstate}%
   \setunit{\bibpagerefpunct}\newblock
@@ -619,7 +627,7 @@
   \newunit\newblock
   \printfield{edition}%
   \newunit\newblock
-  \printfield{note}%
+  \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
   \newunit\newblock
   \usebibmacro{publisher+location+date}%
   \newunit\newblock
@@ -633,7 +641,7 @@
     {\printfield{isbn}}
     {}%
   \newunit\newblock
-  \usebibmacro{doi+eprint+url}%
+  \usebibmacro{doi+eprint+url+note}%
   \newunit\newblock
   \usebibmacro{addendum+pubstate}%
   \setunit{\bibpagerefpunct}\newblock
@@ -658,7 +666,7 @@
   \newunit\newblock
   \printfield{edition}%
   \newunit\newblock
-  \printfield{note}%
+  \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
   \newunit\newblock
   \usebibmacro{publisher+location+date}%
   \newunit\newblock
@@ -670,7 +678,7 @@
     {\printfield{isbn}}
     {}%
   \newunit\newblock
-  \usebibmacro{doi+eprint+url}%
+  \usebibmacro{doi+eprint+url+note}%
   \newunit\newblock
   \usebibmacro{addendum+pubstate}%
   \setunit{\bibpagerefpunct}\newblock
@@ -689,13 +697,11 @@
   \usebibmacro{//}%
   \usebibmacro{maintitle+volumes+parts+booktitle}%
   \setunit{\respdelim}%
-  %\usebibmacro{bybookauthor}%
-  %\setunit*{\resppunct}%
   \usebibmacro{byeditor+others}%
   \newunit\newblock
   \printfield{edition}%
   \newunit\newblock
-  \printfield{note}%
+  \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
   \newunit\newblock
   \usebibmacro{publisher+location+date}%
   \newunit\newblock
@@ -707,7 +713,7 @@
     {\printfield{isbn}}
     {}%
   \newunit\newblock
-  \usebibmacro{doi+eprint+url}%
+  \usebibmacro{doi+eprint+url+note}%
   \newunit\newblock
   \usebibmacro{addendum+pubstate}%
   \setunit{\bibpagerefpunct}\newblock
@@ -728,11 +734,9 @@
   \newunit
   \usebibmacro{event+venue+date}%
   \setunit{\respdelim}%
-  %\usebibmacro{bybookauthor}%
-  %\setunit*{\resppunct}%
   \usebibmacro{byeditor+others}%
   \newunit\newblock
-  \printfield{note}%
+  \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
   \newunit\newblock
   \printlist{organization}%
   \newunit
@@ -746,7 +750,7 @@
     {\printfield{isbn}}
     {}%
   \newunit\newblock
-  \usebibmacro{doi+eprint+url}%
+  \usebibmacro{doi+eprint+url+note}%
   \newunit\newblock
   \usebibmacro{addendum+pubstate}%
   \setunit{\bibpagerefpunct}\newblock
@@ -766,11 +770,11 @@
   \newunit\newblock
   \printfield{edition}%
   \newunit\newblock
+  \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
+  \newunit\newblock
   \printfield{type}%
   \newunit
   \printfield{version}%
-  \newunit
-  \printfield{note}%
   \newunit\newblock
   \printlist{organization}%
   \newunit
@@ -786,7 +790,7 @@
     {\printfield{isbn}}
     {}%
   \newunit\newblock
-  \usebibmacro{doi+eprint+url}%
+  \usebibmacro{doi+eprint+url+note}%
   \newunit\newblock
   \usebibmacro{addendum+pubstate}%
   \setunit{\bibpagerefpunct}\newblock
@@ -809,12 +813,12 @@
   \printfield{type}%
   \newunit
   \printfield{version}%
-  \newunit
-  \printfield{note}%
+  \newunit\newblock
+  \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
   \newunit\newblock
   \usebibmacro{organization+location+date}%
   \newunit\newblock
-  \usebibmacro{doi+eprint+url}%
+  \usebibmacro{doi+eprint+url+note}%
   \newunit\newblock
   \usebibmacro{addendum+pubstate}%
   \setunit{\bibpagerefpunct}\newblock
@@ -833,14 +837,14 @@
   \usebibmacro{byeditor+others}%
   \newunit\newblock
   \printfield{version}%
-  \newunit
-  \printfield{note}%
+  \newunit\newblock
+  \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
   \newunit\newblock
   \printlist{organization}%
   \newunit\newblock
   \usebibmacro{date}%
   \newunit\newblock
-  \usebibmacro{url+urldate}%
+  \usebibmacro{url+urldate+note}%
   \newunit\newblock
   \usebibmacro{addendum+pubstate}%
   \setunit{\bibpagerefpunct}\newblock
@@ -869,11 +873,9 @@
   \newunit\newblock
   \usebibmacro{byholder}%
   \newunit\newblock
-  \printfield{note}%
-  \newunit\newblock
   \usebibmacro{date}%
   \newunit\newblock
-  \usebibmacro{doi+eprint+url}%
+  \usebibmacro{doi+eprint+url+note}%
   \newunit\newblock
   \usebibmacro{addendum+pubstate}%
   \setunit{\bibpagerefpunct}\newblock
@@ -895,13 +897,13 @@
   \setunit{\respdelim}%
   \usebibmacro{byeditor+others}%
   \newunit\newblock
-  \printfield{note}%
+  \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
   \newunit\newblock
   \iftoggle{bbx:isbn}
     {\printfield{issn}}
     {}%
   \newunit\newblock
-  \usebibmacro{doi+eprint+url}%
+  \usebibmacro{doi+eprint+url+note}%
   \newunit\newblock
   \usebibmacro{addendum+pubstate}%
   \setunit{\bibpagerefpunct}\newblock
@@ -919,7 +921,7 @@
   \setunit{\respdelim}%
   \usebibmacro{byeditor+others}%
   \newunit\newblock
-  \printfield{note}%
+  \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
   \newunit\newblock
   \printlist{organization}%
   \newunit
@@ -935,7 +937,7 @@
     {\printfield{isbn}}
     {}%
   \newunit\newblock
-  \usebibmacro{doi+eprint+url}%
+  \usebibmacro{doi+eprint+url+note}%
   \newunit\newblock
   \usebibmacro{addendum+pubstate}%
   \setunit{\bibpagerefpunct}\newblock
@@ -954,8 +956,8 @@
   \printfield{number}%
   \newunit\newblock
   \printfield{version}%
-  \newunit
-  \printfield{note}%
+  \newunit\newblock
+  \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
   \newunit\newblock
   \usebibmacro{institution+location+date}%
   \newunit\newblock
@@ -967,7 +969,7 @@
     {\printfield{isrn}}
     {}%
   \newunit\newblock
-  \usebibmacro{doi+eprint+url}%
+  \usebibmacro{doi+eprint+url+note}%
   \newunit\newblock
   \usebibmacro{addendum+pubstate}%
   \setunit{\bibpagerefpunct}\newblock
@@ -981,7 +983,7 @@
   \setunit*{\labelnamepunct}%
   \usebibmacro{title}%
   \newunit\newblock
-  \printfield{note}%
+  \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
   \newunit\newblock
   \printfield{type}%
   \newunit
@@ -995,7 +997,7 @@
     {\printfield{isbn}}
     {}%
   \newunit\newblock
-  \usebibmacro{doi+eprint+url}%
+  \usebibmacro{doi+eprint+url+note}%
   \newunit\newblock
   \usebibmacro{addendum+pubstate}%
   \setunit{\bibpagerefpunct}\newblock
@@ -1011,13 +1013,11 @@
   \newunit\newblock
   \printfield{howpublished}%
   \newunit\newblock
-  \printfield{note}%
+  \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
   \newunit\newblock
   \usebibmacro{location+date}%
   \newunit\newblock
-  \iftoggle{bbx:url}
-    {\usebibmacro{url+urldate}}
-    {}%
+  \usebibmacro{url+urldate+note}
   \newunit\newblock
   \usebibmacro{addendum+pubstate}%
   \setunit{\bibpagerefpunct}\newblock
@@ -1146,7 +1146,7 @@
   \printfield{pages}%
   \newunit}
 
-\newbibmacro*{doi+eprint+url}{%
+\newbibmacro*{doi+eprint+url+note}{%
   \iftoggle{bbx:doi}
     {\printfield{doi}}
     {}%
@@ -1155,9 +1155,7 @@
     {\usebibmacro{eprint}}
     {}%
   \newunit\newblock
-  \iftoggle{bbx:url}
-    {\usebibmacro{url+urldate}}
-    {}}
+  \usebibmacro{url+urldate+note}}
 
 \newbibmacro*{addendum+pubstate}{%
   \printfield{addendum}%
@@ -1423,6 +1421,14 @@
   }
     {#1}
     {#2}}
+
+\newbibmacro{url+urldate+note}{%
+  \iftoggle{bbx:url}
+    {\usebibmacro{url+urldate}}
+    {}%
+  \setunit*{\addsemicolondelim\space}
+  \printfield{note}
+}
 
 \gdef\ifmulticitation{%
   %\ifnumequal{\themulticitetotal}{0}{\@secondoftwo}{\@firstoftwo}
