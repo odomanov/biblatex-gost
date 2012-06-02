@@ -52,64 +52,6 @@
 \newtoggle{bbx:url}
 \newtoggle{bbx:doi}
 \newtoggle{bbx:eprint}
-\DeclareSourcemap{
-  \maps[datatype=bibtex]{
-    \map{
-      \step[fieldsource=book, fieldtarget=usera]
-      \step[fieldsource=books, fieldtarget=userb]
-      \step[fieldsource=parts, fieldtarget=userc]
-      \step[fieldsource=issues, fieldtarget=userd]
-      \step[fieldsource=credits, fieldtarget=lista]
-      \step[fieldsource=specdata, fieldtarget=listb]
-    }
-    \map{
-      \step[fieldsource=author, 
-        match=\regexp{(.+\s+and\s+){3,}}, 
-        final]
-      \step[fieldset=options, fieldvalue={useauthor=false}]
-    }
-    \map{
-      \step[fieldsource=editor, 
-        match=\regexp{(.+\s+and\s+){3,}}, 
-        final]
-      \step[fieldset=options, fieldvalue={useeditor=false}]
-    }
-    \map[overwrite]{
-      \step[fieldsource=author, 
-        match=\regexp{(.+\s+and\s+){3,}}, 
-        final]
-      \step[fieldsource=options, 
-        match=\regexp{^$}, 
-        final]
-      \step[fieldset=options, fieldvalue={useauthor=false}]
-    }
-    \map[overwrite]{
-      \step[fieldsource=editor, 
-        match=\regexp{(.+\s+and\s+){3,}}, 
-        final]
-      \step[fieldsource=options, 
-        match=\regexp{^$}, 
-        final]
-      \step[fieldset=options, fieldvalue={useeditor=false}]
-    }
-    \map[overwrite]{
-      \step[fieldsource=author, 
-        match=\regexp{(.+\s+and\s+){3,}}, 
-        final]
-      \step[fieldsource=options,
-        match=\regexp{(.+)},
-        replace=\regexp{useauthor=false,$1}]
-    }
-    \map[overwrite]{
-      \step[fieldsource=editor, 
-        match=\regexp{(.+\s+and\s+){3,}}, 
-        final]
-      \step[fieldsource=options,
-        match=\regexp{(.+)},
-        replace=\regexp{useeditor=false,$1}]
-    }
-  }
-}
 
 \newcommand{\bbx@gostbibermap@book}{usera}
 \newcommand{\bbx@gostbibermap@books}{userb}
@@ -359,6 +301,81 @@
     {\ExecuteBibliographyOptions{pagetracker}%
      \renewbibmacro*{bbx:savehash}{\savefield{fullhash}{\bbx@lasthash}}}
     {\renewbibmacro*{bbx:savehash}{}}}
+\DeclareBibliographyOption{movenames}[true]{%
+  \ifstrequal{#1}{true}
+    {\DeclareSourcemap{
+      \maps[datatype=bibtex]{
+        \map{
+          \step[fieldsource=book, fieldtarget=usera]
+          \step[fieldsource=books, fieldtarget=userb]
+          \step[fieldsource=parts, fieldtarget=userc]
+          \step[fieldsource=issues, fieldtarget=userd]
+          \step[fieldsource=credits, fieldtarget=lista]
+          \step[fieldsource=specdata, fieldtarget=listb]
+        }
+        \map{
+          \step[fieldsource=author, 
+            match=\regexp{(.+\s+and\s+){3,}}, 
+            final]
+          \step[fieldset=options, fieldvalue={useauthor=false}]
+        }
+        \map{
+          \step[fieldsource=editor, 
+            match=\regexp{(.+\s+and\s+){3,}}, 
+            final]
+          \step[fieldset=options, fieldvalue={useeditor=false}]
+        }
+        \map[overwrite]{
+          \step[fieldsource=author, 
+            match=\regexp{(.+\s+and\s+){3,}}, 
+            final]
+          \step[fieldsource=options, 
+            match=\regexp{^$}, 
+            final]
+          \step[fieldset=options, fieldvalue={useauthor=false}]
+        }
+        \map[overwrite]{
+          \step[fieldsource=editor, 
+            match=\regexp{(.+\s+and\s+){3,}}, 
+            final]
+          \step[fieldsource=options, 
+            match=\regexp{^$}, 
+            final]
+          \step[fieldset=options, fieldvalue={useeditor=false}]
+        }
+        \map[overwrite]{
+          \step[fieldsource=author, 
+            match=\regexp{(.+\s+and\s+){3,}}, 
+            final]
+          \step[fieldsource=options,
+            match=\regexp{(.+)},
+            replace=\regexp{useauthor=false,$1}]
+        }
+        \map[overwrite]{
+          \step[fieldsource=editor, 
+            match=\regexp{(.+\s+and\s+){3,}}, 
+            final]
+          \step[fieldsource=options,
+            match=\regexp{(.+)},
+            replace=\regexp{useeditor=false,$1}]
+        }
+      }
+     }
+    }
+    {\DeclareSourcemap{
+      \maps[datatype=bibtex]{
+        \map{
+          \step[fieldsource=book, fieldtarget=usera]
+          \step[fieldsource=books, fieldtarget=userb]
+          \step[fieldsource=parts, fieldtarget=userc]
+          \step[fieldsource=issues, fieldtarget=userd]
+          \step[fieldsource=credits, fieldtarget=lista]
+          \step[fieldsource=specdata, fieldtarget=listb]
+        }
+      }
+     }
+    }
+}
 
 \DeclareBibliographyOption{isbn}[true]{%
   \settoggle{bbx:isbn}{#1}}
@@ -374,7 +391,8 @@
   usetranslator=false,
   maxnames=3,
   minnames=1,
-  dashed=false}
+  dashed=false,
+  movenames=true}
 
 \DeclareDataInheritance{periodical}{article}{%
   \noinherit{endyear}\noinherit{endmonth}\noinherit{endday}}
