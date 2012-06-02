@@ -2,7 +2,7 @@
 \input glyphtounicode.tex           %these three lines are
 \input glyphtounicode-cmr.tex       %needed for russian search/copy
 \pdfgentounicode=1                  %(cmap)
-\documentclass[11pt,a4paper,headings=small,numbers=enddot]{ltxdockit}[2011/03/25]
+\documentclass[10pt,a4paper,headings=small,numbers=enddot]{ltxdockit}[2011/03/25]
 \usepackage[vscale=0.8,hscale=0.7,hdivide={0.2\paperwidth,*,0.1\paperwidth}]{geometry}
 %\usepackage[resetfonts]{cmap}
 \usepackage[T2A]{fontenc}
@@ -138,6 +138,7 @@
 \addtokomafont{section}{\reddishcolor}
 \addtokomafont{subsection}{\reddishcolor}
 \addtokomafont{subsubsection}{\reddishcolor}
+\addtokomafont{disposition}{\reddishcolor}
 \addtokomafont{descriptionlabel}{\spotcolor\rmfamily}
 \renewcommand{\textfraction}{.5}
 %-----
@@ -177,7 +178,8 @@
 Для его установки достаточно распаковать архив в дерево \tex, желательно локальное, и 
 обновить индексы (в \tex~Live, например, это делается командой \texttt{mktexlsr}).
 
-Для работы с \biblatexgost версии 0.4 и выше требуются \biblatex~2.0 и \biber~1.0 (beta) или выше.
+Для работы с \biblatexgost версии 0.4 и выше требуются \biblatex~2.0 (который,
+в свою очередь, требует \biber~1.0) или выше.
 
 \subsection{Лицензия}
 \label{sec:lic}
@@ -469,7 +471,7 @@ ISSN серии или подсерии & issn (isbn) \\
 \item[Область специфических сведений] применяется для
 особых типов публикации и специфических носителей (см.~\gostref{5.4}). 
 \biblatexgost заполняет эту 
-область самостоятельно только для патентов\notimpl и сериальных изданий\notimpl. 
+область самостоятельно только для патентов\notimpl\ и сериальных изданий\notimpl. 
 Для всех остальных типов публикаций
 следует помещать информацию в поле \bibfield{specdata}. 
 
