@@ -5,18 +5,8 @@
 
 \RequireCitationStyle{gost-inline}
 
-\renewbibmacro*{cite:full}{%
-  \usebibmacro{cite:full:citepages}%
-  \printtext[bibhypertarget]{%
-    \usedriver
-      {}%\DeclareNameAlias{sortname}{default}}
-      {\thefield{entrytype}}}%
-  \usebibmacro{shorthandintro}}
+\renewbibmacro{cite:clearfields}{}
 
 \ExecuteBibliographyOptions{autocite=footnote}
-
-%\renewrobustcmd{\cite}{\smartcite}
-%\renewrobustcmd{\parencite}{\smartcite}
-%\renewrobustcmd{\parencites}{\smartcites}
 
 \endinput

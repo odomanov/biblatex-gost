@@ -3,7 +3,9 @@
 \ProvidesFile{gost-inline.cbx}
 [\abx@cbxid $Id$]
 
-%derived from verbose-trad3
+\DeclareLabelname
+  [inbook,incollection,inproceedings,inreference,suppbook,suppcollection,suppperiodical,bookinbook]
+  {shortauthor,author,translator}
 
 \DeclareFieldFormat{bibhyperlink}{%
   \bibhyperlink{\thefield{entrykey}:\csuse{cbx@\iffootnote{f}{t}@\thefield{entrykey}}}{#1}}
@@ -104,6 +106,18 @@
 \ExecuteBibliographyOptions{citetracker=constrict,autocite=inline,
                             citepages=omit,strict,opcittracker=constrict}
 
+\newbibmacro*{cite:seen}{%  the same for cite and footcite
+  \ifciteibid
+     {\ifloccit{\global\toggletrue{cbx:loccit}}{}%
+      \usebibmacro{cite:ibid}}
+     {\ifopcit
+        {\ifloccit{\global\toggletrue{cbx:loccit}}{}%
+         \usebibmacro{cite:opcit}}
+        {\iffieldundef{shorthand}
+          {\usebibmacro{cite:short}}
+          {\usebibmacro{cite:shorthand}}}}%
+}
+
 \newbibmacro*{cite}{%
   %\ifbool{multicite}{TRUE}{FALSE}
   %\ifmulticite{TRUE}{FALSE}
@@ -112,41 +126,32 @@
   \usebibmacro{cite:citepages}%
   \global\togglefalse{cbx:loccit}%
   \ifciteseen
-    {\ifciteibid
-       {\ifloccit
-        {\usebibmacro{cite:ibid}%
-          \global\toggletrue{cbx:loccit}}
-        {\ifopcit
-          {\usebibmacro{cite:ibid}}
-          {\iffieldundef{labelname}%if there is no labelname, \ifopcit always yields false
-            {\usebibmacro{cite:ibid}}
-            {\iffieldundef{shorthand}
-             {\usebibmacro{cite:opcit}}
-             {\usebibmacro{cite:shorthand}}}}}}
-       {\iffieldundef{shorthand}
-	  {\usebibmacro{cite:short}}
-	  {\usebibmacro{cite:shorthand}}}}
+    {\usebibmacro{cite:seen}}
     {\usebibmacro{cite:full}%
      \usebibmacro{cite:save}}}
 
 \newbibmacro*{cite:save}{%
   \csxdef{cbx@t@\thefield{entrykey}}{\the\value{instcount}}}
 
+\newbibmacro{cite:clearfields}{%
+   %\clearfield{series}%
+   %\clearfield{number}%
+   \renewbibmacro*{series+number}{}%
+   \clearfield{doi}%
+   \clearfield{eprint}%
+   \clearfield{url}%
+   \clearfield{urlday}%
+   \clearfield{urlmonth}%
+   \clearfield{urlyear}%
+   \clearfield{addendum}%
+   \clearfield{pubstate}%
+   \clearfield{titleaddon}}
+
 \newbibmacro*{cite:full}{%
   \usebibmacro{cite:full:citepages}%
   \printtext[bibhypertarget]{%
     \usedriver
-      {\clearfield{series}%
-       \clearfield{number}%
-       \clearfield{doi}%
-       \clearfield{eprint}%
-       \clearfield{url}%
-       \clearfield{urlday}%
-       \clearfield{urlmonth}%
-       \clearfield{urlyear}%
-       \clearfield{addendum}%
-       \clearfield{pubstate}%
-       \clearfield{titleaddon}}%\DeclareNameAlias{sortname}{default}}
+      {\usebibmacro{cite:clearfields}}%\DeclareNameAlias{sortname}{default}}
       {\thefield{entrytype}}}%
   \usebibmacro{shorthandintro}}
 
@@ -156,14 +161,20 @@
     {\printnames{labelname}}%
   \setunit*{\nametitledelim}%
   \printtext[bibhyperlink]{%
-    \usebibmacro{cite:maintitle/labeltitle+parts}}}
+    \ifthenelse{ \ifentrytype{inbook} \or \ifentrytype{incollection}
+      \or \ifentrytype{inproceedings} \or \ifentrytype{inreference}
+      \or \ifentrytype{suppbook} \or \ifentrytype{suppcollection} 
+      \or \ifentrytype{suppperiodical} \or \ifentrytype{bookinbook}
+      }
+    {\printfield[citetitle]{labeltitle}}
+    {\usebibmacro{cite:maintitle/labeltitle+parts}}}}
 
 \newbibmacro*{cite:opcit}{%
   \ifnameundef{labelname}
     {\printfield{label}}
     {\printnames{labelname}}%
-  \setunit*{\nametitledelim}%
-  \bibsentence\printtext[bibhyperlink]{%
+  \newunit
+  \printtext[bibhyperlink]{%
     \bibstring[\mkibid]{opcit}}}
 
 \newbibmacro*{cite:ibid}{%
@@ -184,35 +195,22 @@
       {\printfield[citetitle]{maintitle}}
       {\printfield[citetitle]{labeltitle}}
      \setunit*{\addcomma\space}%
-     \usebibmacro{cite:volume+parts}}}
+     \usebibmacro{cite:volume+parts}{\addcomma\space}}}
 
-\newbibmacro{cite:volume+parts}{%
+\newbibmacro{cite:volume+parts}[1]{%
   \printfield{volume}%
-  \setunit*{\addcomma\space}%
+  \setunit*{#1}%
   \printfield{book}%
-  \setunit*{\addcomma\space}%
+  \setunit*{#1}%
   \printfield{part}%
-  \setunit*{\addcomma\space}%
+  \setunit*{#1}%
   \printfield[issuenum]{issue}}%
 
 \newbibmacro*{footcite}{%
   \usebibmacro{cite:citepages}%
   \global\togglefalse{cbx:loccit}%
   \ifciteseen
-    {\ifciteibid
-       {\ifloccit
-        {\usebibmacro{cite:ibid}%
-          \global\toggletrue{cbx:loccit}}
-        {\ifopcit
-          {\usebibmacro{cite:ibid}}
-          {\iffieldundef{labelname}%if there is no labelname, \ifopcit always yields false
-            {\usebibmacro{cite:ibid}}
-            {\iffieldundef{shorthand}
-             {\usebibmacro{cite:opcit}}
-             {\usebibmacro{cite:shorthand}}}}}}
-       {\iffieldundef{shorthand}
-	  {\usebibmacro{cite:short}}
-	  {\usebibmacro{cite:shorthand}}}}
+    {\usebibmacro{cite:seen}}
     {\usebibmacro{cite:full}%
      \usebibmacro{footcite:save}}}
 
