@@ -2,7 +2,7 @@
 \input glyphtounicode.tex           %these three lines are
 \input glyphtounicode-cmr.tex       %needed for russian search/copy
 \pdfgentounicode=1                  %(cmap)
-\documentclass[10pt,a4paper,headings=small,numbers=enddot]{ltxdockit}[2011/03/25]
+\documentclass[11pt,a4paper,headings=small,numbers=enddot]{ltxdockit}[2011/03/25]
 \usepackage[vscale=0.8,hscale=0.7,hdivide={0.2\paperwidth,*,0.1\paperwidth}]{geometry}
 %\usepackage[resetfonts]{cmap}
 \usepackage[T2A]{fontenc}
@@ -16,25 +16,7 @@
 %\usepackage{shortvrb}
 %\usepackage{pifont}%  ???
 \usepackage{indentfirst}
-%---  fonts  ---
-%\usepackage{pscyr}
-%\renewcommand{\rmdefault}{fha}% Балтика
-%\renewcommand{\sfdefault}{far}% arial
-\usepackage{droid}   % not bad
-%\usepackage{dejavu}  % ??
-%%\usepackage{BalticaP}  % tl5
-%\usepackage{PetersburgP}  % tp7
-%\usepackage{CooperP}  % tl5
-%\usepackage{JournalP}  % tjr
-%\usepackage{ITCNewBaskervilleP}  % ibv
-%\usepackage{NewtonP}  % tnw
-%\usepackage[scaled=1.2]{FuturaP}  % tfu  ss
-%\usepackage{JournalSansP}  % tjs  ss -- too bold
-%%\usepackage[scaled=1.1]{TextbookP}  % ttx  ss
-%\usepackage{PragmaticaP}  % tpg  ss
-%\usepackage[scaled=.9]{ITCAvantGardeGothicP}  % iag ss
-%\usepackage{CourierP}  % tco  mono
-%%\usepackage{LetterGothicP}  % tlg mono
+%\usepackage{droid}   % not bad
 
 %\MakeAutoQuote{«}{»}
 %\MakeAutoQuote*{<}{>}
@@ -121,10 +103,6 @@
 \newcolumntype{R}{>{\raggedleft\let\\=\tabularnewline}p}
 \newcolumntype{C}{>{\centering\let\\=\tabularnewline}p}
 \newcolumntype{V}{>{\raggedright\let\\=\tabularnewline\ttfamily}p}
-
-\renewcommand*{\tablesetup}{%
-  \let\verbatim@font\displayverbfont
-  \footnotesize}
 
 \setcounter{secnumdepth}{4}
 
