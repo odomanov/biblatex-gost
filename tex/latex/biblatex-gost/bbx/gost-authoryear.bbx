@@ -11,9 +11,10 @@
     {\PackageError{biblatex}
        {Invalid option 'mergedate=#1'}
        {Valid values are 'maximum', 'compact', 'basic', 'minimum',\MessageBreak
-        'goststrict', 'gostletter', 'true' (=compact), and 'false'.}}}
+        'goststrict', 'gostletter', 'gostlabel', 'true' (=compact), and 'false'.}}}
 
 \providebibmacro*{date+extrayear}{}
+\providebibmacro*{authoryearlabel}{}
 
 \def\bbx@opt@mergedate@true{\bbx@opt@mergedate@compact}
 
@@ -27,6 +28,8 @@
 	 \printdateextra}}}%
   \renewbibmacro*{date}{}%
   \renewbibmacro*{issue+date}{}%
+  \renewbibmacro*{year}{\printfield{year}}%
+  \renewbibmacro*{authoryearlabel}{}%
 }
 
 \def\bbx@opt@mergedate@compact{%
@@ -40,6 +43,8 @@
       {}
       {\printtext[parens]{\printfield{issue}}}%
     \newunit}%
+  \renewbibmacro*{year}{\printfield{year}}%
+  \renewbibmacro*{authoryearlabel}{}%
 }
 
 \def\bbx@opt@mergedate@basic{%
@@ -65,6 +70,8 @@
 	 \setunit*{\addspace}%
 	 \printdate}}%
     \newunit}%
+  \renewbibmacro*{year}{\printfield{year}}%
+  \renewbibmacro*{authoryearlabel}{}%
 }
 
 \def\bbx@opt@mergedate@minimum{%
@@ -96,6 +103,8 @@
 	 \setunit*{\addspace}%
 	 \printdate}}%
     \newunit}%
+  \renewbibmacro*{year}{\printfield{year}}%
+  \renewbibmacro*{authoryearlabel}{}%
 }
 
 \def\bbx@opt@mergedate@false{%
@@ -112,18 +121,39 @@
       \setunit*{\addspace}%
       \printdate}%
     \newunit}%
+  \renewbibmacro*{year}{\printfield{year}}%
+  \renewbibmacro*{authoryearlabel}{}%
 }
 
 \def\bbx@opt@mergedate@goststrict{%
   \renewbibmacro*{date+extrayear}{}%
   \renewbibmacro*{date}{\printdate}%
-  \renewbibmacro*{year}{\printfield{year}}
+  \renewbibmacro*{year}{\printfield{year}}%
+  \renewbibmacro*{authoryearlabel}{}%
 }
 
 \def\bbx@opt@mergedate@gostletter{%
   \renewbibmacro*{date+extrayear}{}%
   \renewbibmacro*{date}{\printdateextra}%
-  \renewbibmacro*{year}{\printfield{year}\printfield{extrayear}}
+  \renewbibmacro*{year}{\printfield{year}\printfield{extrayear}}%
+  \renewbibmacro*{authoryearlabel}{}%
+}
+
+\def\bbx@opt@mergedate@gostlabel{%
+  \renewbibmacro*{date+extrayear}{}%
+  \renewbibmacro*{date}{\printdate}%
+  \renewbibmacro*{year}{\printfield{year}}%
+  \renewbibmacro*{authoryearlabel}{%
+  \mkbibbrackets{%
+    \iffieldundef{shorthand}
+      {\ifthenelse{\ifnameundef{labelname}\OR\iffieldundef{labelyear}}
+          {\iffieldundef{label}
+              {\usebibmacro{cite:maintitle/labeltitle+parts}}
+              {\printfield{label}}}
+          {\printnames{labelname}}%
+       \setunit{\nameyeardelim}%
+       \printfield{year}\printfield{extrayear}}
+      {\printfield{shorthand}}}}%
 }
 
 \ExecuteBibliographyOptions{labelyear,sorting=nyt,pagetracker,mergedate=gostletter}
@@ -133,7 +163,7 @@
 
 \defbibenvironment{bibliography}
   {\list
-     {}
+     {\usebibmacro{authoryearlabel}}
      {\setlength{\leftmargin}{\bibhang}%
       \setlength{\itemindent}{-\leftmargin}%
       \setlength{\itemsep}{\bibitemsep}%
