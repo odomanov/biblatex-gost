@@ -115,8 +115,9 @@
 }
 
 \def\bbx@opt@mergedate@goststrict{%
-  \DeclareFieldFormat{extrayear}{}%
   \renewbibmacro*{date+extrayear}{}%
+  \renewbibmacro*{date}{\printdate}%
+  \renewbibmacro*{year}{\printfield{year}}
 }
 
 \def\bbx@opt@mergedate@gostletter{%
