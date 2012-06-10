@@ -27,6 +27,7 @@
 	 \printdateextra}}}%
   \renewbibmacro*{date}{}%
   \renewbibmacro*{issue+date}{}%
+  \renewbibmacro*{biblabel}{}%
 }
 
 \def\bbx@opt@mergedate@compact{%
@@ -40,6 +41,7 @@
       {}
       {\printtext[parens]{\printfield{issue}}}%
     \newunit}%
+  \renewbibmacro*{biblabel}{}%
 }
 
 \def\bbx@opt@mergedate@basic{%
@@ -65,6 +67,7 @@
 	 \setunit*{\addspace}%
 	 \printdate}}%
     \newunit}%
+  \renewbibmacro*{biblabel}{}%
 }
 
 \def\bbx@opt@mergedate@minimum{%
@@ -96,6 +99,7 @@
 	 \setunit*{\addspace}%
 	 \printdate}}%
     \newunit}%
+  \renewbibmacro*{biblabel}{}%
 }
 
 \def\bbx@opt@mergedate@false{%
@@ -112,18 +116,33 @@
       \setunit*{\addspace}%
       \printdate}%
     \newunit}%
+  \renewbibmacro*{biblabel}{}%
 }
 
 \def\bbx@opt@mergedate@goststrict{%
   \renewbibmacro*{date+extrayear}{}%
   \renewbibmacro*{date}{\printdate}%
-  \renewbibmacro*{year}{\printfield{year}}
+  \renewbibmacro*{year}{\printfield{year}}%
+  \renewbibmacro*{biblabel}{}%
 }
 
 \def\bbx@opt@mergedate@gostletter{%
   \renewbibmacro*{date+extrayear}{}%
   \renewbibmacro*{date}{\printdateextra}%
-  \renewbibmacro*{year}{\printfield{year}\printfield{extrayear}}
+  \renewbibmacro*{year}{\printfield{year}\printfield{extrayear}}%
+  \renewbibmacro*{biblabel}{}%
+}
+
+\def\bbx@opt@mergedate@gostlabel{%
+  \renewbibmacro*{date+extrayear}{}%
+  \renewbibmacro*{date}{\printdate}%
+  \renewbibmacro*{year}{\printfield{year}%
+  \renewbibmacro*{biblabel}{AAA%
+    \mkbibbrackets{CCC%
+      \iffieldundef{shorthand}%
+        {\printnames{labelname}\setunit{\nameyeardelim}\printfield{year}\printfield{extrayear}}%
+        {\printfield{shorthand}\setunit{\nameyeardelim}\printfield{year}\printfield{extrayear}}%
+    }\addnbspace}}
 }
 
 \ExecuteBibliographyOptions{labelyear,sorting=nyt,pagetracker,mergedate=gostletter}
@@ -133,11 +152,15 @@
 
 \defbibenvironment{bibliography}
   {\list
-     {}
-     {\setlength{\leftmargin}{\bibhang}%
-      \setlength{\itemindent}{-\leftmargin}%
+     {BBB\usebibmacro{biblabel}}
+     {\setlength{\labelwidth}{\shorthandwidth}%
+      \setlength{\leftmargin}{\labelwidth}%
+      \setlength{\labelsep}{\biblabelsep}%
+      \addtolength{\leftmargin}{\labelsep}%
       \setlength{\itemsep}{\bibitemsep}%
-      \setlength{\parsep}{\bibparsep}}}
+      \setlength{\parsep}{\bibparsep}%
+      \renewcommand*{\makelabel}[1]{##1\hss}%
+      }}
   {\endlist}
   {\item}
 
