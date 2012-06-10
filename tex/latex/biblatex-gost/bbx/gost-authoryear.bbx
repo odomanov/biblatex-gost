@@ -165,7 +165,9 @@
   {\list
      {\usebibmacro{authoryearlabel}}
      {\setlength{\leftmargin}{\bibhang}%
-      \setlength{\itemindent}{-\leftmargin}%
+      \setlength{\labelwidth}{\leftmargin}
+      \addtolength{\labelwidth}{-\labelsep}
+      \setlength{\itemindent}{0pt}
       \setlength{\itemsep}{\bibitemsep}%
       \setlength{\parsep}{\bibparsep}}}
   {\endlist}
