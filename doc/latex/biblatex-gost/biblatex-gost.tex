@@ -13,10 +13,11 @@
 \usepackage{tabularx}
 \usepackage{longtable}
 \usepackage{booktabs}
+\usepackage{comment}
 %\usepackage{shortvrb}
 %\usepackage{pifont}%  ???
 \usepackage{indentfirst}
-%\usepackage{droid}   % not bad
+%\usepackage{droid}   % not bad, sc
 
 %\MakeAutoQuote{«}{»}
 %\MakeAutoQuote*{<}{>}
@@ -125,6 +126,7 @@
 \newcommand*{\gostname}{ГОСТ 7.0.5-2008}
 \newcommand*{\gostref}[1]{\gostname, п.\,#1}
 \newcommand*{\notimpl}{\footnote{Не реализовано в данной версии \biblatexgost.}}
+\excludecomment{notimplc} % not implemented
 \renewcommand*{\apxref}{\refs{прил.}{прил.}}
 \renewcommand*{\Apxref}{\refs{Прил.}{Прил.}}
 \renewcommand*{\tabref}{\refs{табл.}{табл.}}
@@ -340,7 +342,7 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 
 \end{fieldlist}
 
-\subsection{Соответствие терминов ГОСТа и \biblatexgost}
+\subsection{Соответствие между терминами ГОСТа и \biblatexgost}
 \label{sec:gost-biblatex}
 
 Соответствие терминов ГОСТа и \biblatexgost представлено в \tabref{tab:gost-biblatex}.
@@ -717,9 +719,32 @@ volumes = {|в 5-и томах (6-и кн.)|}
 
 \begin{optionlist}
 
-\optitem[gostletter]{mergedate}{\opt{goststrict}, \opt{gostletter}}
+\optitem[gostletter]{mergedate}{\opt{goststrict}, \opt{gostletter}, \opt{gostlabel}}
 
-Стиль \bibsty{gost-authoryear}, по сравнению со стандартным \bibsty{authoryear}, имеет два дополнительных значения опции \opt{mergedate}:
+В \biblatex эта опция регулирует способ вывода даты в библиографии для стилей 
+типа \bibsty{authoryear}. Её цель~--- облегчить поиск публикации в библиографическом списке. 
+
+\begin{notimplc}
+Стандартные стили \biblatex выводят дату в скобках сразу после автора:
+
+\begin{bibexample}
+\item Doe, John (2000). \textit{Book 1}. \ldots 
+\item Doe, John (2003a). \textit{Book 2}. \ldots
+\end{bibexample}
+
+Данная опция определяет, каким образом выводится дата в самой записи на её обычном месте:  
+как обычно (\kvopt{mergedate}{false}),  
+выводит дату только для меток с добавленной буквой (\kvopt{mergedate}{minimum}),  
+выводит дату только для меток с добавленной буквой и если 
+она является просто годом (\kvopt{mergedate}{basic}),  
+дата вообще не выводится на своём обычном месте (\kvopt{mergedate}{maximum}),
+то же, но поле \bibfield{issue} всё же выводится (\kvopt{mergedate}{compact/true}),  
+(подробнее см. примеры в документации \biblatex).  
+\biblatexgost сохраняет все эти опции и добавляет ещё три.
+
+\end{notimplc}
+
+Стиль \bibsty{gost-authoryear}, по сравнению со стандартным \bibsty{authoryear}, имеет три дополнительных значения опции \opt{mergedate}:
  
 \begin{valuelist}
 
@@ -735,6 +760,15 @@ volumes = {|в 5-и томах (6-и кн.)|}
 %Отключает в библиографии вывод года после автора (точнее, после \bibfield{label}). 
 В отличие от предыдущей опции, никаких знаков к году не добавляется, что может приводить к 
 неопределённым ссылкам, но зато соответствует требованиям ГОСТа.
+
+\item[gostlabel]
+
+В библиографии записи начинаются с метки, аналогичной той, что применяется при цитировании, 
+то есть автор (заглавие, если его нет) и год в квадратных скобках\notimpl:
+
+\begin{bibexample}
+\item {[Пушкин, 1990]} \textit{Пушкин А. С.} Руслан и Людмила. \ldots 1990.~--- \ldots
+\end{bibexample} 
 
 \end{valuelist}
 
