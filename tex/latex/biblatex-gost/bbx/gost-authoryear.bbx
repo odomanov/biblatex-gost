@@ -15,6 +15,7 @@
 
 \providebibmacro*{date+extrayear}{}
 \providebibmacro*{authoryearlabel}{}
+\newlength{\labelauthoryearsep}
 
 \def\bbx@opt@mergedate@true{\bbx@opt@mergedate@compact}
 
@@ -30,6 +31,7 @@
   \renewbibmacro*{issue+date}{}%
   \renewbibmacro*{year}{\printfield{year}}%
   \renewbibmacro*{authoryearlabel}{}%
+  \setlength{\labelauthoryearsep}{0pt}%
 }
 
 \def\bbx@opt@mergedate@compact{%
@@ -45,6 +47,7 @@
     \newunit}%
   \renewbibmacro*{year}{\printfield{year}}%
   \renewbibmacro*{authoryearlabel}{}%
+  \setlength{\labelauthoryearsep}{0pt}%
 }
 
 \def\bbx@opt@mergedate@basic{%
@@ -72,6 +75,7 @@
     \newunit}%
   \renewbibmacro*{year}{\printfield{year}}%
   \renewbibmacro*{authoryearlabel}{}%
+  \setlength{\labelauthoryearsep}{0pt}%
 }
 
 \def\bbx@opt@mergedate@minimum{%
@@ -105,6 +109,7 @@
     \newunit}%
   \renewbibmacro*{year}{\printfield{year}}%
   \renewbibmacro*{authoryearlabel}{}%
+  \setlength{\labelauthoryearsep}{0pt}%
 }
 
 \def\bbx@opt@mergedate@false{%
@@ -123,6 +128,7 @@
     \newunit}%
   \renewbibmacro*{year}{\printfield{year}}%
   \renewbibmacro*{authoryearlabel}{}%
+  \setlength{\labelauthoryearsep}{0pt}%
 }
 
 \def\bbx@opt@mergedate@goststrict{%
@@ -130,6 +136,7 @@
   \renewbibmacro*{date}{\printdate}%
   \renewbibmacro*{year}{\printfield{year}}%
   \renewbibmacro*{authoryearlabel}{}%
+  \setlength{\labelauthoryearsep}{0pt}%
 }
 
 \def\bbx@opt@mergedate@gostletter{%
@@ -137,6 +144,7 @@
   \renewbibmacro*{date}{\printdateextra}%
   \renewbibmacro*{year}{\printfield{year}\printfield{extrayear}}%
   \renewbibmacro*{authoryearlabel}{}%
+  \setlength{\labelauthoryearsep}{0pt}%
 }
 
 \def\bbx@opt@mergedate@gostlabel{%
@@ -154,6 +162,7 @@
        \setunit{\nameyeardelim}%
        \printfield{year}\printfield{extrayear}}
       {\printfield{shorthand}}}}%
+  \setlength{\labelauthoryearsep}{\biblabelsep}%
 }
 
 \ExecuteBibliographyOptions{labelyear,sorting=nyt,pagetracker,mergedate=gostletter}
@@ -165,9 +174,10 @@
   {\list
      {\usebibmacro{authoryearlabel}}
      {\setlength{\leftmargin}{\bibhang}%
-      \setlength{\labelwidth}{\leftmargin}
-      \addtolength{\labelwidth}{-\labelsep}
-      \setlength{\itemindent}{0pt}
+      \setlength{\labelwidth}{0pt}
+      \setlength{\labelsep}{\labelauthoryearsep}%
+      \setlength{\itemindent}{-\leftmargin}
+      \addtolength{\itemindent}{\labelsep}
       \setlength{\itemsep}{\bibitemsep}%
       \setlength{\parsep}{\bibparsep}}}
   {\endlist}
