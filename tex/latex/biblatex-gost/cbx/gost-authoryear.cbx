@@ -5,7 +5,8 @@
 
 \RequireCitationStyle{authoryear-icomp}
 
-\ExecuteBibliographyOptions{dashed=false,citetracker=constrict,loccittracker=constrict}
+\ExecuteBibliographyOptions{dashed=false,citetracker=constrict,loccittracker=constrict,
+                            singletitle}
 
 \renewcommand*{\postnotedelim}{\addcomma\addspace}
 \renewcommand*{\nameyeardelim}{\addcomma\addspace}
@@ -57,6 +58,15 @@
     {\printtext[bibhyperref]{\usebibmacro{cite:maintitle/labeltitle+parts}}}
     {\printtext[bibhyperref]{\printfield{label}}}}
 
+\renewbibmacro*{cite:labelyear+extrayear}{%
+  \ifsingletitle
+    {}
+    {\iffieldundef{labelyear}
+      {}
+      {\printtext[bibhyperref]{%
+         \printfield{labelyear}%
+         \printfield{extrayear}}}}}
+
 \newbibmacro{cite:maintitle/labeltitle+parts}{%
   \iffieldundef{maintitle}
     {\printfield[citetitle]{labeltitle}}
@@ -76,6 +86,5 @@
 	  \printfield{part}%
 	  \setunit*{\postnotedelim}%
 	  \printfield[issuenum]{issue}}}%
-
 
 \endinput
