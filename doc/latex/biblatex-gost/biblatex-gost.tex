@@ -171,7 +171,7 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 \section{Стили \biblatexgost}
 \label{sec:styles}
 
-ГОСТ определяет три типа ссылок: внутритекстовую, подстрочную, затекстовую.
+ГОСТ определяет три типа ссылок: внутритекстовую, подстрочную и затекстовую.
 Первые два типа приблизительно соответствуют стилям \bibsty{verbose} в \biblatex 
 с опцией \opt{autocite}, установленной, соответственно, в \opt{inline} и 
 \opt{footnote}. Затекстовые ссылки могут быть трёх типов, в зависимости 
@@ -246,12 +246,12 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 работ одного года. Поэтому в \biblatexgost используется стандартный для других библиографических 
 стилей 
 метод добавления в случае необходимости маленькой латинской буквы к году. Буква добавляется как в 
-ссылке, так и в библиографии. См.~ файл примеров. Это поведение можно отключить, для чего служит опция 
-\opt{mergedate}.
-По сравнению с \biblatex, она имеет два дополнительных значения \opt{gostletter} и 
-\opt{goststrict} (см.~\secref{sec:opt}). Первое соответствует добавлению буквы к году, 
-второе~"--- строгому 
-следованию ГОСТу (хотя при этом существует опасность появления неопределённых ссылок).
+ссылке, так и в библиографии. См.~файл примеров. Это поведение можно отключить, для чего служит 
+опция \opt{mergedate}.
+По сравнению с \biblatex, она имеет три дополнительных значения \opt{gostletter},
+\opt{gostlabel} и 
+\opt{goststrict} (см.~\secref{sec:opt}). Последнее соответствует строгому 
+следованию ГОСТу, хотя при этом существует опасность появления неопределённых ссылок.
 По умолчанию стиль устанавливает опции \kvopt{autocite}{inline}, 
 \kvopt{sorting}{nyt},
 \kvopt{pagetracker}{true},
@@ -274,7 +274,7 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 При этом, чтобы ссылки переносились в конец текста (или главы, или в любое 
 нужное место), должна быть установлена
 опция \kvopt{notetype}{endonly}. Можно также воспользоваться 
-пакетом \sty{fn2end}.
+пакетом \sty{fn2end} или ему подобными.
 \end{itemize}
 
 Дополнительно, все стили по умолчанию устанавливают опции 
@@ -303,7 +303,7 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 
 \fielditem{book}{number/literal}
 
-Содержит номер книги для изданий, разделённых на книги. См. подробнее
+Содержит номер (или другой идентификатор) книги для изданий, разделённых на книги. См. подробнее
 \secref{sec:volsparts} 
 
 \fielditem{books, parts, issues}{number/literal}
@@ -342,10 +342,10 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 
 \end{fieldlist}
 
-\subsection{Соответствие между терминами ГОСТа и \biblatexgost}
+\subsection{Соответствие между терминами ГОСТ и \biblatexgost}
 \label{sec:gost-biblatex}
 
-Соответствие терминов ГОСТа и \biblatexgost представлено в \tabref{tab:gost-biblatex}.
+Соответствие терминов ГОСТ и \biblatexgost представлено в \tabref{tab:gost-biblatex}.
 Как видно, в ней отсутствуют, с одной стороны, некоторые элементы библиографического
 описания, предусмотренные ГОСТом, а с другой стороны, некоторые поля \biblatex. Эти элементы и поля 
 не учитываются в \biblatexgost и не обрабатываются (разумеется, специальные поля,
@@ -368,8 +368,6 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 \endfoot
 \endlastfoot
 \multicolumn{1}{@{}H}{Область заглавия и сведений об ответственности} & \\
-%\multicolumn{1}{@{}H}{сведений об ответственности} & \\
-%\cmidrule(r){1-1}
 Основное заглавие                & title, maintitle, booktitle \\
 %\textit{Общее обозначение материала} &  \\
 %\textit{Параллельное заглавие} &  \\
@@ -382,27 +380,23 @@ Permission is granted to copy, distribute and\slash or modify this software unde
                                     translator \\
 \cmidrule(r){1-1}\cmidrule{2-2}
 \multicolumn{1}{@{}H}{Область издания} & \\
-%\cmidrule(r){1-1}
 Сведения об издании & edition \\
 \textit{Параллельные сведения об издании} & edition \\
 \cmidrule(r){1-1}\cmidrule{2-2}
 \multicolumn{1}{@{}H}{Область специфических сведений} & {\spotcolor specdata} \\
 \cmidrule(r){1-1}\cmidrule{2-2}
 \multicolumn{1}{@{}H}{Область выходных данных} & \\
-%\cmidrule(r){1-1}
 Место издания, распространения & location \\
 Имя издателя, распространителя и т.\,п. & publisher \\
 Дата издания, распространения и т.\,п. & date \\
 \cmidrule(r){1-1}\cmidrule{2-2}
 \multicolumn{1}{@{}H}{Область физической характеристики} & \\
-%\cmidrule(r){1-1}
 Специфическое обозначение материала и объём & volumes, pagetotal, pages, {\spotcolor books}, {\spotcolor parts}, {\spotcolor issues}\\
 %\textit{Другие сведения о физической характеристике} & \textendash \\
 %\textit{Размеры} & \textendash \\
 %\textit{Сведения о сопроводительном материале} & \textendash \\
 \cmidrule(r){1-1}\cmidrule{2-2}
 \multicolumn{1}{@{}H}{Область серии} & \\
-%\cmidrule(r){1-1}
 Основное заглавие серии или подсерии & series \\
 \textit{Параллельное заглавие серии или подсерии} & series \\
 \textit{Сведения, относящиеся к заглавию серии или подсерии} & series \\
@@ -411,11 +405,9 @@ ISSN серии или подсерии & issn (isbn) \\
 Номер выпуска серии или подсерии & number \\
 \cmidrule(r){1-1}\cmidrule{2-2}
 \multicolumn{1}{@{}H}{Область примечания} & url, urldate, note \\
-%\cmidrule(r){1-1}
 \cmidrule(r){1-1}\cmidrule{2-2}
 \multicolumn{1}{@{}H}{Область стандартного номера и} & \\
 \multicolumn{1}{@{}H}{условий доступности} & \\
-%\cmidrule(r){1-1}
 Стандартный номер (или его альтернатива) & isbn, issn, %isan, ismn, isrn, iswc, 
                                            doi, eprint, 
                                            eprintclass, addendum \\
@@ -432,6 +424,10 @@ ISSN серии или подсерии & issn (isbn) \\
 \bibfield{bookpagination}, \bibfield{chapter}, \bibfield{library}, 
 \bibfield{origdate}, \bibfield{origlocation}, \bibfield{origpublisher}, \bibfield{origtitle}, 
 \bibfield{file}, \bibfield{reprinttitle}.
+
+С другой стороны, не учитываются следующие элементы ГОСТа: общее обозначение материала,
+параллельное заглавие, другие сведения о физической характеристике, размеры,
+сведения о сопроводительном материале.
 
 \subsection{Особенности размещения отдельных сведений}
 \label{sec:db:inf}
@@ -501,7 +497,7 @@ series = {|Языковеды мира / Редкол.: Г.В. Степанов 
 }
 \end{lstlisting}
 
-\item[Области примечания, стандартного номера и условий доступности] В случае 
+\item[Области примечания, стандартного номера и условий доступности.] В случае 
 необходимости, вся эта информация включается в \bibfield{addendum}. Нужно лишь учесть, что
 в стиле \bibsty{gost-inline} она не выводится в цитатах (но выводится в библиографии).
 
