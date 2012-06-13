@@ -42,7 +42,9 @@
           {\setunit{\compcitedelim}%
            \usebibmacro{cite:labelyear+extrayear}%
            \savefield{labelyear}{\cbx@lastyear}}}
-         {\printnames{labelname}%
+         {\ifsingletitle
+            {\printtext[bibhyperref]{\printnames{labelname}}}
+            {\printnames{labelname}}%
           \setunit*{\postnotedelim}%
           \usebibmacro{cite:volume+parts}%
           \setunit{\nameyeardelim}%
