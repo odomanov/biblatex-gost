@@ -2,9 +2,8 @@
 \input glyphtounicode.tex           %these three lines are
 \input glyphtounicode-cmr.tex       %needed for russian search/copy
 \pdfgentounicode=1                  %(cmap)
-\documentclass[10pt,a4paper,headings=small,numbers=enddot]{ltxdockit}[2011/03/25]
+\documentclass[11pt,a4paper,headings=small,numbers=enddot]{ltxdockit}[2011/03/25]
 \usepackage[vscale=0.8,hscale=0.7,hdivide={0.2\paperwidth,*,0.1\paperwidth}]{geometry}
-%\usepackage[resetfonts]{cmap}
 \usepackage[T2A]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{btxdockit}
@@ -18,7 +17,13 @@
 %\usepackage{shortvrb}
 %\usepackage{pifont}%  ???
 \usepackage{indentfirst}
-\usepackage{droid}   % not bad, sc
+%\usepackage{droid}   % not bad, sc
+\usepackage{pscyr}
+%\renewcommand{\rmdefault}{fha}% Балтика sc
+%\renewcommand{\sfdefault}{far}% arial sc
+\renewcommand{\rmdefault}{fjn}% 
+\renewcommand{\sfdefault}{fma}% 
+\renewcommand{\ttdefault}{fer}% 
 
 %\MakeAutoQuote{«}{»}
 %\MakeAutoQuote*{<}{>}
