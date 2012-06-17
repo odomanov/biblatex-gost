@@ -292,6 +292,8 @@
 \DeclareSortExclusion{inbook,incollection,inproceeding,bookinbook,suppbook,suppcollection,inreference}
   {editor,volume,maintitle}
 
+\DeclareLabeltitle[book,collection,reference,proceedings]{shorttitle,maintitle,title}
+
 %  OPTIONS
 
 \newbibmacro*{bbx:savehash}{%
@@ -392,6 +394,7 @@
   maxnames=3,
   minnames=1,
   dashed=false,
+  singletitle=false,
   movenames=true}
 
 \DeclareDataInheritance{periodical}{article}{%
@@ -466,6 +469,10 @@
    {\iffieldequalstr{endyear}{}
       {#1\mbox{~~~~}}
       {#1}}}
+\DeclareFieldFormat{extratitle}{%
+  \ifnameundef{labelname}%    if there is labelname, extrayear disambiguation is enough
+    {\mknumalph{#1}}
+    {}}
 \DeclareListFormat{semicolondelim}{%
   \ifnumgreater{\value{listcount}}{\value{liststart}}
     {\ifnumless{\value{listcount}}{\value{liststop}}

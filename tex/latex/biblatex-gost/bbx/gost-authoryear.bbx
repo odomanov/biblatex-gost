@@ -135,14 +135,16 @@
   \renewbibmacro*{date+extrayear}{}%
   \renewbibmacro*{date}{\printdate}%
   \renewbibmacro*{year}{\printfield{year}}%
+  \DeclareFieldFormat{extrayear}{}
+  \DeclareFieldFormat{extratitle}{}
   \renewbibmacro*{authoryearlabel}{}%
   \setlength{\labelauthoryearsep}{0pt}%
 }
 
 \def\bbx@opt@mergedate@gostletter{%
   \renewbibmacro*{date+extrayear}{}%
-  \renewbibmacro*{date}{\printdateextra}%
-  \renewbibmacro*{year}{\printfield{year}\printfield{extrayear}}%
+  \renewbibmacro*{date}{\printdateextra\printfield{extratitle}}%
+  \renewbibmacro*{year}{\printfield{year}\printfield{extrayear}\printfield{extratitle}}%
   \renewbibmacro*{authoryearlabel}{}%
   \setlength{\labelauthoryearsep}{0pt}%
 }
@@ -153,23 +155,23 @@
   \renewbibmacro*{year}{\printfield{year}}%
   \renewbibmacro*{authoryearlabel}{%
   \mkbibbrackets{%
-    \iffieldundef{shorthand}
-      {\ifthenelse{\ifnameundef{labelname}\OR\iffieldundef{labelyear}}
+  \iffieldundef{shorthand}
+    {\ifthenelse{\ifnameundef{labelname}\OR\iffieldundef{labelyear}}
+        {\ifnameundef{labelname}
           {\iffieldundef{label}
-              {\usebibmacro{cite:maintitle/labeltitle+parts}}
-              {\printfield{label}}}
-          {\printnames{labelname}}%
-       \ifsingletitle
-          {}
-          {\iffieldundef{labelyear}
-            {}
-            {\setunit{\nameyeardelim}%
-             \printfield{labelyear}\printfield{extrayear}}}}
-      {\printfield{shorthand}}}}%
+            {\printfield[citetitle]{labeltitle}}
+            {\printfield{label}}%
+           \setunit{\nameyeardelim}%
+           \usebibmacro{cite:labelyear+extrayear}}
+          {\printnames{labelname}}}
+        {\printnames{labelname}%
+          \setunit{\nameyeardelim}%
+          \usebibmacro{cite:labelyear+extrayear}}}
+    {\printfield{shorthand}}}}
   \setlength{\labelauthoryearsep}{\biblabelsep}%
 }
 
-\ExecuteBibliographyOptions{labelyear,sorting=nyt,pagetracker,mergedate=gostletter}
+\ExecuteBibliographyOptions{labelyear,labeltitle,sorting=nyt,pagetracker,mergedate=gostletter}
 
 \DeclareFieldFormat{shorthandwidth}{#1}
 \setlength{\bibitemsep}{0pt}
