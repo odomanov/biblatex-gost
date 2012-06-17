@@ -566,7 +566,7 @@
   \newunit\newblock
   \printfield{pages}%
   \newunit\newblock
-  \printfield[parens]{series}
+  \printtext{(\printfield{series})}
   \newunit\newblock
   \iftoggle{bbx:isbn}
     {\printfield{issn}}
@@ -915,8 +915,8 @@
   \usebibmacro{editor}%
   \setunit*{\labelnamepunct}%
   \usebibmacro{periodical}
-  \newunit
-  \printfield{series}
+  %\newunit
+  %\printfield{series}
   \newunit
   \printdate
   \setunit*{\addcomma\space}%
@@ -926,7 +926,7 @@
   \newunit\newblock
   \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
   \newunit\newblock
-  \printfield[parens]{series}
+  \printtext{(\printfield{series})}
   \newunit\newblock
   \iftoggle{bbx:isbn}
     {\printfield{issn}}
@@ -1119,10 +1119,10 @@
 \newbibmacro*{series+number}{%
   \iffieldundef{series}
     {}
-    {\printtext[parens]{%
+    {\printtext{(%
       \printfield{series}%
       \setunit*{\addsemicolondelim}%
-      \printfield{number}}}
+      \printfield{number})}}
   }
 
 \newbibmacro*{publisher+location+date}{%

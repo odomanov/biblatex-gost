@@ -158,15 +158,13 @@
   \iffieldundef{shorthand}
     {\ifthenelse{\ifnameundef{labelname}\OR\iffieldundef{labelyear}}
         {\ifnameundef{labelname}
-          {\iffieldundef{label}
-            {\printfield[citetitle]{labeltitle}}
-            {\printfield{label}}%
+          {\usebibmacro{cite:label+volume+parts}{}%
            \setunit{\nameyeardelim}%
-           \usebibmacro{cite:labelyear+extrayear}}
-          {\printnames{labelname}}}
-        {\printnames{labelname}%
+           \usebibmacro{cite:labelyear+extrayear}{}}
+          {\usebibmacro{cite:labelname+volume+parts}{}}}
+        {\usebibmacro{cite:labelname+volume+parts}{}%
           \setunit{\nameyeardelim}%
-          \usebibmacro{cite:labelyear+extrayear}}}
+          \usebibmacro{cite:labelyear+extrayear}{}}}
     {\printfield{shorthand}}}}
   \setlength{\labelauthoryearsep}{\biblabelsep}%
 }
