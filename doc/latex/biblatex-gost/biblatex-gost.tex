@@ -2,7 +2,7 @@
 \input glyphtounicode.tex           %these three lines are
 \input glyphtounicode-cmr.tex       %needed for russian search/copy
 \pdfgentounicode=1                  %(cmap)
-\documentclass[11pt,a4paper,headings=small,numbers=enddot]{ltxdockit}[2011/03/25]
+\documentclass[10pt,a4paper,headings=small,numbers=enddot]{ltxdockit}[2011/03/25]
 \usepackage[vscale=0.8,hscale=0.7,hdivide={0.2\paperwidth,*,0.1\paperwidth}]{geometry}
 %\usepackage[resetfonts]{cmap}
 \usepackage[T2A]{fontenc}
@@ -18,7 +18,7 @@
 %\usepackage{shortvrb}
 %\usepackage{pifont}%  ???
 \usepackage{indentfirst}
-%\usepackage{droid}   % not bad, sc
+\usepackage{droid}   % not bad, sc
 
 %\MakeAutoQuote{«}{»}
 %\MakeAutoQuote*{<}{>}
@@ -251,6 +251,8 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 ссылок, которые выбираются опцией \opt{mergedate} (см.~\secref{sec:opt}).
 В частности, значение опции \kvopt{mergedate}{goststrict} соответствует строгому 
 следованию ГОСТу, хотя при этом существует опасность появления неопределённых ссылок.
+Стиль чувствителен к опции \opt{singletitle} и может не выводить год в ссылке, если имеется
+лишь одна публикация данного автора. 
 
 По умолчанию стиль устанавливает опции 
 \kvopt{autocite}{inline}, 
@@ -773,12 +775,12 @@ volumes = {|в 5-и томах (6-и кн.)|}
 неопределённым ссылкам, но зато соответствует требованиям ГОСТа. Вам нужно самим следить за
 уникальностью ссылок, выбирая соответствующие значения параметра \prm{postnote}. 
 Например, если вы делаете ссылку на \bibtype{mvbook}, то в \prm{postnote}, возможно, 
-понадобится указать том, часть и т.\,д.
-При установленной опции \kvopt{singletitle}{true} год в ссылке не выводится при наличии 
-единственного произведения данного автора.
-При отсутствии автора
+понадобится указать том, часть и т.\,д. или воспользоваться командами типа \cmd{volcite}.
+%При установленной опции \kvopt{singletitle}{true} год в ссылке не выводится при наличии 
+%единственного произведения данного автора.
+%При отсутствии автора
 %(когда он в ссылке заменяется названием)
-год выводится в любом случае.
+%год выводится в любом случае.
 
 \end{valuelist}
 
@@ -903,8 +905,8 @@ gost-authoryear & cite & Автор (заголовок) и год в текст
 Кроме перечисленных поддерживаются производные команды, описанные в 
  руководстве \biblatex, такие как \cmd{Cite}, \cmd{Parencite}, \dots\ \cmd{Cites}, 
 \cmd{Footcites}, \dots\ и т.\,д.
-Исключение составляют команды типа \cmd{volcite}, которые корректно работают 
-только в \bibsty{gost-numeric}. 
+%Исключение составляют команды типа \cmd{volcite}, которые корректно работают 
+%только в \bibsty{gost-numeric}. 
 
 Хотя команды \cmd{textcite} и \cmd{textcites} в стилях \bibsty{gost-inline},
  \bibsty{gost-footnote} и \bibsty{gost-authoryear} вряд ли найдут применение
