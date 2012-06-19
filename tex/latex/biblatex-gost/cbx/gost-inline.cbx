@@ -104,7 +104,7 @@
 \renewcommand{\multicitedelim}{\addsemicolondelim\space}
 
 \ExecuteBibliographyOptions{citetracker=constrict,autocite=inline,
-                            citepages=omit,strict,opcittracker=constrict}
+                            citepages=omit,strict,opcittracker=constrict,labeltitle}
 
 \newbibmacro*{cite:seen}{%  the same for cite and footcite
   \ifciteibid
@@ -161,13 +161,13 @@
     {\printnames{labelname}}%
   \setunit*{\nametitledelim}%
   \printtext[bibhyperlink]{%
-    \ifthenelse{ \ifentrytype{inbook} \or \ifentrytype{incollection}
-      \or \ifentrytype{inproceedings} \or \ifentrytype{inreference}
-      \or \ifentrytype{suppbook} \or \ifentrytype{suppcollection} 
-      \or \ifentrytype{suppperiodical} \or \ifentrytype{bookinbook}
-      }
-    {\printfield[citetitle]{labeltitle}}
-    {\usebibmacro{cite:maintitle/labeltitle+parts}}}}
+     \printfield[citetitle]{labeltitle}}%
+  \ifthenelse{ \ifentrytype{book} \or \ifentrytype{collection}
+    \or \ifentrytype{proceedings} \or \ifentrytype{reference}
+    }
+    {\setunit*{\addcomma\space}%
+     \printtext[bibhyperlink]{\usebibmacro{cite:volume+parts}{\addcomma\space}}}%
+    {}}
 
 \newbibmacro*{cite:opcit}{%
   \ifnameundef{labelname}
@@ -187,15 +187,6 @@
   \iftoggle{cbx:loccit}
     {}
     {\usebibmacro{postnote}}}
-
-\newbibmacro{cite:maintitle/labeltitle+parts}{%
-  \iffieldundef{maintitle}
-    {\printfield[citetitle]{labeltitle}}
-    {\iffieldundef{shorttitle}
-      {\printfield[citetitle]{maintitle}}
-      {\printfield[citetitle]{labeltitle}}
-     \setunit*{\addcomma\space}%
-     \usebibmacro{cite:volume+parts}{\addcomma\space}}}
 
 \newbibmacro{cite:volume+parts}[1]{%
   \printfield{volume}%

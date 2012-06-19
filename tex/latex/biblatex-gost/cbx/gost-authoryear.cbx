@@ -5,7 +5,8 @@
 
 \RequireCitationStyle{authoryear-icomp}
 
-\ExecuteBibliographyOptions{dashed=false,citetracker=constrict,loccittracker=constrict}
+\ExecuteBibliographyOptions{dashed=false,citetracker=constrict,loccittracker=constrict,
+                            singletitle=false,labelyear,labeltitleyear}
 
 \renewcommand*{\postnotedelim}{\addcomma\addspace}
 \renewcommand*{\nameyeardelim}{\addcomma\addspace}
@@ -23,59 +24,77 @@
 }
 
 \DeclareFieldFormat*{citetitle}{\mkbibemph{#1}}
+\DeclareFieldFormat{extratitleyear}{\mknumalph{#1}}
 
 \renewbibmacro*{cite}{%
   \iffieldundef{shorthand}
     {\ifthenelse{\ifciteibid\AND\NOT\iffirstonpage}
        {\usebibmacro{cite:ibid}}
        {\ifthenelse{\ifnameundef{labelname}\OR\iffieldundef{labelyear}}
-        {\usebibmacro{cite:label}%
-         \setunit{\nameyeardelim}%
-         \usebibmacro{cite:labelyear+extrayear}%
-         \usebibmacro{cite:reinit}}
-        {\iffieldequals{namehash}{\cbx@lasthash}
-         {\ifthenelse{\iffieldequals{labelyear}{\cbx@lastyear}\AND
-                  \(\value{multicitecount}=0\OR\iffieldundef{postnote}\)}
-          {\setunit{\addcomma}%
-           \usebibmacro{cite:extrayear}}
-          {\setunit{\compcitedelim}%
-           \usebibmacro{cite:labelyear+extrayear}%
-           \savefield{labelyear}{\cbx@lastyear}}}
-         {\printnames{labelname}%
-          \setunit*{\postnotedelim}%
-          \usebibmacro{cite:volume+parts}%
-          \setunit{\nameyeardelim}%
-          \usebibmacro{cite:labelyear+extrayear}%
-          \savefield{namehash}{\cbx@lasthash}%
-          \savefield{labelyear}{\cbx@lastyear}}}}}
+          {\ifnameundef{labelname}
+              {\usebibmacro{cite:label+volume+parts}{bibhyperref}%
+               \setunit{\nameyeardelim}%
+               \usebibmacro{cite:labelyear+extras}{bibhyperref}}
+              {\usebibmacro{cite:labelname+volume+parts}{bibhyperref}}%
+           \usebibmacro{cite:reinit}}
+          {\iffieldequals{namehash}{\cbx@lasthash}
+             {\ifthenelse{\iffieldequals{labelyear}{\cbx@lastyear}\AND
+                      \(\value{multicitecount}=0\OR\iffieldundef{postnote}\)}
+                {\setunit{\addcomma}%
+                 \usebibmacro{cite:extrayear}}
+                {\setunit{\compcitedelim}%
+                 \usebibmacro{cite:labelyear+extras}{bibhyperref}%
+                 \savefield{labelyear}{\cbx@lastyear}}}
+             {\ifsingletitle
+                {\usebibmacro{cite:labelname+volume+parts}{bibhyperref}}
+                {\usebibmacro{cite:labelname+volume+parts}{}%
+                 \setunit{\nameyeardelim}%
+                 \usebibmacro{cite:labelyear+extras}{bibhyperref}%
+                 \savefield{labelyear}{\cbx@lastyear}}%
+              \savefield{namehash}{\cbx@lasthash}}}}}
     {\usebibmacro{cite:shorthand}%
      \usebibmacro{cite:reinit}}%
   \setunit{\multicitedelim}}
 
-\renewbibmacro*{cite:label}{%
+\newbibmacro*{cite:labelname+volume+parts}[1]{%
+  \printtext[#1]{\printnames{labelname}}%
+     \setunit*{\addcomma\space}%
+     \usebibmacro{cite:volume+parts}{\addcomma\space}}
+
+\newbibmacro*{cite:label+volume+parts}[1]{%
   \iffieldundef{label}
-    {\printtext[bibhyperref]{\usebibmacro{cite:maintitle/labeltitle+parts}}}
-    {\printtext[bibhyperref]{\printfield{label}}}}
+    {\ifsingletitle
+      {\printtext[#1]{\printfield[citetitle]{labeltitle}}}
+      {\printfield[citetitle]{labeltitle}}}
+    {\printtext[#1]{\printfield{label}}}%
+     \setunit*{\addcomma\space}%
+     \usebibmacro{cite:volume+parts}{\addcomma\space}}
 
-\newbibmacro{cite:maintitle/labeltitle+parts}{%
-  \iffieldundef{maintitle}
-    {\printfield[citetitle]{labeltitle}}
-    {\iffieldundef{shorttitle}
-      {\printfield[citetitle]{maintitle}}
-      {\printfield[citetitle]{labeltitle}}}%
-     \setunit*{\postnotedelim}%
-     \usebibmacro{cite:volume+parts}}
+\newbibmacro*{cite:labelyear+extras}[1]{%
+  \ifsingletitle
+    {}
+    {\iffieldundef{labelyear}
+      {}
+      {\printtext[#1]{%
+          \printfield{labelyear}%
+          \usebibmacro{cite:extras}}}}}
 
-\newbibmacro{cite:volume+parts}{%
-  \ifentrytype{article}
-	{}
-	{\printfield{volume}%
-	  \setunit*{\postnotedelim}%
-	  \printfield{book}%
-	  \setunit*{\postnotedelim}%
-	  \printfield{part}%
-	  \setunit*{\postnotedelim}%
-	  \printfield[issuenum]{issue}}}%
+\newbibmacro*{cite:extras}{%
+  \ifnameundef{labelname}%    if there is labelname, extrayear disambiguation is enough
+    {\printfield{extratitleyear}}
+    {\printfield{extrayear}}}
 
+\newbibmacro*{cite:volume+parts}[1]{}
+%\newbibmacro*{cite:volume+parts}[1]{%
+%  \ifthenelse{\ifentrytype{book} \OR \ifentrytype{collection}
+%              \OR \ifentrytype{proceedings} \OR \ifentrytype{reference}}
+%     {\printfield{volume}%
+%      \setunit*{#1}%
+%      \printfield{book}%
+%      \setunit*{#1}%
+%      \printfield{part}%
+%      \setunit*{#1}%
+%      \printfield[issuenum]{issue}}
+%     {}}%
 
 \endinput
