@@ -135,16 +135,17 @@
   \renewbibmacro*{date+extrayear}{}%
   \renewbibmacro*{date}{\printdate}%
   \renewbibmacro*{year}{\printfield{year}}%
-  \DeclareFieldFormat{extrayear}{}
-  \DeclareFieldFormat{extratitle}{}
+  \DeclareFieldFormat{extrayear}{}%
+  \DeclareFieldFormat{extratitleyear}{}%
+  \ExecuteBibliographyOptions{singletitle}%
   \renewbibmacro*{authoryearlabel}{}%
   \setlength{\labelauthoryearsep}{0pt}%
 }
 
 \def\bbx@opt@mergedate@gostletter{%
   \renewbibmacro*{date+extrayear}{}%
-  \renewbibmacro*{date}{\printdateextra\printfield{extratitle}}%
-  \renewbibmacro*{year}{\printfield{year}\printfield{extrayear}\printfield{extratitle}}%
+  \renewbibmacro*{date}{\printdate\usebibmacro{cite:extras}}%
+  \renewbibmacro*{year}{\printfield{year}\usebibmacro{cite:extras}}%
   \renewbibmacro*{authoryearlabel}{}%
   \setlength{\labelauthoryearsep}{0pt}%
 }
@@ -160,16 +161,16 @@
         {\ifnameundef{labelname}
           {\usebibmacro{cite:label+volume+parts}{}%
            \setunit{\nameyeardelim}%
-           \usebibmacro{cite:labelyear+extrayear}{}}
+           \usebibmacro{cite:labelyear+extras}{}}
           {\usebibmacro{cite:labelname+volume+parts}{}}}
         {\usebibmacro{cite:labelname+volume+parts}{}%
           \setunit{\nameyeardelim}%
-          \usebibmacro{cite:labelyear+extrayear}{}}}
+          \usebibmacro{cite:labelyear+extras}{}}}
     {\printfield{shorthand}}}}
   \setlength{\labelauthoryearsep}{\biblabelsep}%
 }
 
-\ExecuteBibliographyOptions{labelyear,labeltitle,sorting=nyt,pagetracker,mergedate=gostletter}
+\ExecuteBibliographyOptions{labelyear,labeltitleyear,sorting=nyt,pagetracker,mergedate=gostletter}
 
 \DeclareFieldFormat{shorthandwidth}{#1}
 \setlength{\bibitemsep}{0pt}

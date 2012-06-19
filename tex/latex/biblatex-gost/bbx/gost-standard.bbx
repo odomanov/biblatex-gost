@@ -3,7 +3,7 @@
 \ProvidesFile{gost-standard.bbx}
 [\abx@bbxid $Id$]
 
-\@ifpackagelater{biblatex}{2012/05/22}
+\@ifpackagelater{biblatex}{2012/06/19}
   {}
   {\PackageError{biblatex}
     {Outdated 'biblatex' package}
@@ -53,13 +53,13 @@
 \newtoggle{bbx:doi}
 \newtoggle{bbx:eprint}
 
-\newcommand{\bbx@gostbibermap@book}{usera}
-\newcommand{\bbx@gostbibermap@books}{userb}
-\newcommand{\bbx@gostbibermap@parts}{userc}
-\newcommand{\bbx@gostbibermap@issues}{userd}
-\newcommand{\bbx@gostbibermap@credits}{lista}
-\newcommand{\bbx@gostbibermap@specdata}{listb}
-\newcommand{\bbx@gostbibermap@volumes}{volumes}
+\newcommand*{\bbx@gostbibermap@book}{usera}
+\newcommand*{\bbx@gostbibermap@books}{userb}
+\newcommand*{\bbx@gostbibermap@parts}{userc}
+\newcommand*{\bbx@gostbibermap@issues}{userd}
+\newcommand*{\bbx@gostbibermap@credits}{lista}
+\newcommand*{\bbx@gostbibermap@specdata}{listb}
+\newcommand*{\bbx@gostbibermap@volumes}{volumes}
 
 \DeclareSortingScheme{nty}{
   \sort{
@@ -469,10 +469,6 @@
    {\iffieldequalstr{endyear}{}
       {#1\mbox{~~~~}}
       {#1}}}
-\DeclareFieldFormat{extratitle}{%
-  \ifnameundef{labelname}%    if there is labelname, extrayear disambiguation is enough
-    {\mknumalph{#1}}
-    {}}
 \DeclareListFormat{semicolondelim}{%
   \ifnumgreater{\value{listcount}}{\value{liststart}}
     {\ifnumless{\value{listcount}}{\value{liststop}}
@@ -566,7 +562,9 @@
   \newunit\newblock
   \printfield{pages}%
   \newunit\newblock
-  \printtext{(\printfield{series})}
+  \iffieldundef{series}
+    {}
+    {\printtext{(\printfield{series})}}
   \newunit\newblock
   \iftoggle{bbx:isbn}
     {\printfield{issn}}
@@ -926,7 +924,9 @@
   \newunit\newblock
   \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
   \newunit\newblock
-  \printtext{(\printfield{series})}
+  \iffieldundef{series}
+    {}
+    {\printtext{(\printfield{series})}}
   \newunit\newblock
   \iftoggle{bbx:isbn}
     {\printfield{issn}}
