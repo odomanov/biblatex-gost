@@ -3,7 +3,8 @@
 \ProvidesFile{biblatex-gost.def}
 [\abx@bbxid $Id:$]
 
-\NewBibliographyString{% should be here, not in lbx, to be initialized for all languages
+% these declarations should be here, not in lbx, to be initialized for all languages
+\NewBibliographyString{
   involumes,
   candthesis,
   geneditor,
@@ -37,7 +38,9 @@
   issues%
 }
 \DeclareLanguageMapping{russian}{russian-gost}
-
+%
+%   Sorting Schemes
+%
 \DeclareSortingScheme{nty}{
   \sort{
     \field{presort}
