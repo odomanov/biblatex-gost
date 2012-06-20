@@ -1,0 +1,284 @@
+% $Id$
+
+\ProvidesFile{biblatex-gost.def}
+[\abx@bbxid $Id$]
+
+% these declarations should be here, not in lbx, to be initialized for all languages
+\NewBibliographyString{
+  involumes,
+  candthesis,
+  geneditor,
+  geneditors,
+  bygeneditor,
+  bygeneditortr,
+  bygeneditorco,
+  bygeneditoran,
+  bygeneditorin,
+  bygeneditorfo,
+  bygeneditoraf,
+  bygeneditortrco,
+  bygeneditortran,
+  bygeneditortrin,
+  bygeneditortrfo,
+  bygeneditortraf,
+  bygeneditorcoin,
+  bygeneditorcofo,
+  bygeneditorcoaf,
+  bygeneditoranin,
+  bygeneditoranfo,
+  bygeneditoranaf,
+  bygeneditortrcoin,
+  bygeneditortrcofo,
+  bygeneditortrcoaf,
+  bygeneditortranin,
+  bygeneditortranfo,
+  bygeneditortranaf,
+  books,
+  parts,
+  issues%
+}
+\DeclareLanguageMapping{russian}{russian-gost}
+%
+%   Sorting Schemes
+%
+\DeclareSortingScheme{nty}{
+  \sort{
+    \field{presort}
+  }
+  \sort[final]{
+    \field{sortkey}
+  }
+  \sort{
+    \name{sortname}
+    \name{author}
+    \name{editor}
+    \name{translator}
+    \field{sorttitle}
+    \field{maintitle}
+    \field{title}
+  }
+  \sort{
+    \field{sorttitle}
+    \field{maintitle}
+    \field{title}
+  }
+  \sort{
+    \field{sortyear}
+    \field{year}
+  }
+  \sort{
+    \field[padside=left,padwidth=4,padchar=0]{volume}
+    \literal{0000}
+  }
+  \sort{
+    \field[padside=left,padwidth=4,padchar=0]{book}
+    \literal{0000}
+  }
+  \sort{
+    \field[padside=left,padwidth=4,padchar=0]{part}
+    \literal{0000}
+  }
+  \sort{
+    \field[padside=left,padwidth=4,padchar=0]{issue}
+    \literal{0000}
+  }
+}
+
+\DeclareSortingScheme{nyvt}{
+  \sort{
+    \field{presort}
+  }
+  \sort[final]{
+    \field{sortkey}
+  }
+  \sort{
+    \name{sortname}
+    \name{author}
+    \name{editor}
+    \name{translator}
+    \field{sorttitle}
+    \field{maintitle}
+    \field{title}
+  }
+  \sort{
+    \field{sortyear}
+    \field{year}
+  }
+  \sort{
+    \field[padside=left,padwidth=4,padchar=0]{volume}
+    \literal{0000}
+  }
+  \sort{
+    \field[padside=left,padwidth=4,padchar=0]{book}
+    \literal{0000}
+  }
+  \sort{
+    \field[padside=left,padwidth=4,padchar=0]{part}
+    \literal{0000}
+  }
+  \sort{
+    \field[padside=left,padwidth=4,padchar=0]{issue}
+    \literal{0000}
+  }
+  \sort{
+    \field{sorttitle}
+    \field{maintitle}
+    \field{title}
+  }
+}
+
+\DeclareSortingScheme{ynt}{
+  \sort{
+    \field{presort}
+  }
+  \sort[final]{
+    \field{sortkey}
+  }
+  \sort{
+    \field{sortyear}
+    \field{year}
+    \literal{9999}
+  }
+  \sort{
+    \name{sortname}
+    \name{author}
+    \name{editor}
+    \name{translator}
+    \field{sorttitle}
+    \field{maintitle}
+    \field{title}
+  }
+  \sort{
+    \field{sorttitle}
+    \field{maintitle}
+    \field{title}
+  }
+}
+
+\DeclareSortingScheme{ydnt}{
+  \sort{
+    \field{presort}
+  }
+  \sort[final]{
+    \field{sortkey}
+  }
+  \sort[direction=descending]{
+    \field[strside=left,strwidth=4]{sortyear}
+    \field[strside=left,strwidth=4]{year}
+    \literal{9999}
+  }
+  \sort{
+    \name{sortname}
+    \name{author}
+    \name{editor}
+    \name{translator}
+    \field{sorttitle}
+    \field{maintitle}
+    \field{title}
+  }
+  \sort{
+    \field{sorttitle}
+    \field{maintitle}
+    \field{title}
+  }
+}
+
+\DeclareSortingScheme{nyt}{
+  \sort{
+    \field{presort}
+  }
+  \sort[final]{
+    \field{sortkey}
+  }
+  \sort{
+    \name{sortname}
+    \name{author}
+    \name{editor}
+    \name{translator}
+    \field{sorttitle}
+    \field{maintitle}
+    \field{title}
+  }
+  \sort{
+    \field{sortyear}
+    \field{year}
+  }
+  \sort{
+    \field{sorttitle}
+    \field{maintitle}
+    \field{title}
+  }
+  \sort{
+    \field[padside=left,padwidth=4,padchar=0]{volume}
+    \literal{0000}
+  }
+  \sort{
+    \field[padside=left,padwidth=4,padchar=0]{book}
+    \literal{0000}
+  }
+  \sort{
+    \field[padside=left,padwidth=4,padchar=0]{part}
+    \literal{0000}
+  }
+  \sort{
+    \field[padside=left,padwidth=4,padchar=0]{issue}
+    \literal{0000}
+  }
+}
+
+\DeclareSortingScheme{ntvy}{
+  \sort{
+    \field{presort}
+  }
+  \sort[final]{
+    \field{sortkey}
+  }
+  \sort{
+    \name{sortname}
+    \name{author}
+    \name{editor}
+    \name{translator}
+    \field{sorttitle}
+    \field{maintitle}
+    \field{title}
+  }
+  \sort{
+    \field{sorttitle}
+    \field{maintitle}
+    \field{title}
+  }
+  \sort{
+    \field[padside=left,padwidth=4,padchar=0]{volume}
+    \literal{0000}
+  }
+  \sort{
+    \field[padside=left,padwidth=4,padchar=0]{book}
+    \literal{0000}
+  }
+  \sort{
+    \field[padside=left,padwidth=4,padchar=0]{part}
+    \literal{0000}
+  }
+  \sort{
+    \field[padside=left,padwidth=4,padchar=0]{issue}
+    \literal{0000}
+  }
+  \sort{
+    \field{sortyear}
+    \field{year}
+  }
+}
+
+\DeclareSortExclusion{inbook,incollection,inproceeding,bookinbook,suppbook,suppcollection,inreference}
+  {editor,volume,maintitle}
+
+\DeclareLabeltitle[book,collection,reference,proceedings]{shorttitle,maintitle,title}
+
+\DeclareDataInheritance{periodical}{article}{%
+  \noinherit{endyear}\noinherit{endmonth}\noinherit{endday}}
+\DeclareDataInheritance{mvbook,mvcollection,mvproceedings}
+  {book,collection,inbook,incollection,inproceedings}{%
+  \noinherit{endyear}\noinherit{endmonth}\noinherit{endday}}
+\DeclareDataInheritance{mvbook,mvcollection,mvproceedings,mvreference}
+  {book,collection,proceedings,reference}{%
+  \inherit{shorttitle}{shorttitle}}

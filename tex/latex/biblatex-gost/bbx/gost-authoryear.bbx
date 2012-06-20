@@ -15,6 +15,7 @@
 
 \providebibmacro*{date+extrayear}{}
 \providebibmacro*{authoryearlabel}{}
+\providebibmacro*{cite:date+extras}{}
 \newlength{\labelauthoryearsep}
 
 \def\bbx@opt@mergedate@true{\bbx@opt@mergedate@compact}
@@ -26,7 +27,7 @@
       {\printtext[parens]{%
          \printfield{issue}%
 	 \setunit*{\addspace}%
-	 \printdateextra}}}%
+	 \usebibmacro{cite:date+extras}{}}}}%
   \renewbibmacro*{date}{}%
   \renewbibmacro*{issue+date}{}%
   \renewbibmacro*{year}{\printfield{year}}%
@@ -38,7 +39,7 @@
   \renewbibmacro*{date+extrayear}{%
     \iffieldundef{year}
       {}
-      {\printtext[parens]{\printdateextra}}}%
+      {\printtext[parens]{\usebibmacro{cite:date+extras}{}}}}%
   \renewbibmacro*{date}{}%
   \renewbibmacro*{issue+date}{%
     \iffieldundef{issue}
@@ -54,9 +55,7 @@
   \renewbibmacro*{date+extrayear}{%
     \iffieldundef{labelyear}
       {}
-      {\printtext[parens]{%
-	 \printfield{labelyear}%
-	 \printfield{extrayear}}}}%
+      {\printtext[parens]{\usebibmacro{cite:labelyear+extras}{}}}}%
   \renewbibmacro*{date}{%
     \iffieldundef{month}
       {}
@@ -82,9 +81,7 @@
   \renewbibmacro*{date+extrayear}{%
     \iffieldundef{labelyear}
       {}
-      {\printtext[parens]{%
-	 \printfield{labelyear}%
-	 \printfield{extrayear}}}}%
+      {\printtext[parens]{\usebibmacro{cite:labelyear+extras}{}}}}%
   \renewbibmacro*{date}{%
     \ifboolexpr{
       test {\iffieldundef{month}}
@@ -117,8 +114,7 @@
     \iffieldundef{labelyear}
       {}
       {\printtext[parens]{%
-	 \printfield{labelyear}%
-	 \printfield{extrayear}}}}%
+	 \usebibmacro{cite:labelyear+extras}{}}}}%
   \renewbibmacro*{date}{\printdate}%
   \renewbibmacro*{issue+date}{%
     \printtext[parens]{%
@@ -203,8 +199,80 @@
 
 \newbibmacro*{labeltitle}{%
   \iffieldundef{label}
-    {}
+    {\iffieldundef{shorttitle}
+       {\iffieldundef{maintitle}
+          {\printfield{title}%
+           \clearfield{title}}
+          {\printfield{maintitle}%
+           \clearfield{maintitle}}}
+       {\printfield[title]{shorttitle}}}
     {\printfield{label}}}
+
+\renewbibmacro*{author}{%
+  \ifboolexpr{
+    test \ifuseauthor
+    and
+    not test {\ifnameundef{author}}
+  }
+    {\usebibmacro{bbx:dashcheck}
+       {\bibnamedash}
+       {\printnames{author}%
+     \setunit{\addcomma\space}%
+     \usebibmacro{bbx:savehash}}%
+     \usebibmacro{authorstrg}%
+     \setunit*{\addspace}%
+     \clearname{author}}
+    {\global\undef\bbx@lasthash%
+     \printfield{labeltitle}%
+     \setunit*{\addspace}}
+  \usebibmacro{date+extrayear}}
+
+
+\renewbibmacro*{editor}{%
+  \usebibmacro{bbx:editor}{editorstrg}}
+\renewbibmacro*{editor+others}{%
+  \usebibmacro{bbx:editor}{editor+othersstrg}}
+\renewbibmacro*{bbx:editor}[1]{%
+  \ifboolexpr{
+    test \ifuseeditor
+    and
+    not test {\ifnameundef{editor}}
+  }
+    {\usebibmacro{bbx:dashcheck}
+       {\bibnamedash}
+       {\printnames{editor}%
+     \setunit{\addcomma\space}%
+     \usebibmacro{bbx:savehash}}%
+     \usebibmacro{#1}%
+     \clearname{editor}%
+     \setunit*{\addspace}}
+    {\global\undef\bbx@lasthash%
+     \printfield{labeltitle}%
+     \setunit*{\addspace}}
+  \usebibmacro{date+extrayear}}
+
+\renewbibmacro*{translator}{%
+  \usebibmacro{bbx:translator}{translatorstrg}}
+\renewbibmacro*{translator+others}{%
+  \usebibmacro{bbx:translator}{translator+othersstrg}}
+\renewbibmacro*{bbx:translator}[1]{%
+  \ifboolexpr{
+    test \ifusetranslator
+    and
+    not test {\ifnameundef{translator}}
+  }
+    {\usebibmacro{bbx:dashcheck}
+       {\bibnamedash}
+       {\printnames{translator}%
+     \setunit{\addcomma\space}%
+     \usebibmacro{bbx:savehash}}%
+     \usebibmacro{#1}%
+     \clearname{translator}%
+     \setunit*{\addspace}}
+    {\global\undef\bbx@lasthash%
+     \printfield{labeltitle}%
+     \setunit*{\addspace}}
+  \usebibmacro{date+extrayear}}
 
 %\def\blx@numalph\blx@asbuk%
 %\def\blx@asbuk#1{%
