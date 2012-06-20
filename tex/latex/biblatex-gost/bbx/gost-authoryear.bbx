@@ -27,10 +27,12 @@
       {\printtext[parens]{%
          \printfield{issue}%
 	 \setunit*{\addspace}%
-	 \usebibmacro{cite:date+extras}{}}}}%
+	 \usebibmacro{cite:date+extras}{}%
+	 \clearfield{month}%
+	 \clearfield{day}}}}%
   \renewbibmacro*{date}{}%
   \renewbibmacro*{issue+date}{}%
-  \renewbibmacro*{year}{\printfield{year}}%
+  \renewbibmacro*{year}{}%\printfield{year}}%
   \renewbibmacro*{authoryearlabel}{}%
   \setlength{\labelauthoryearsep}{0pt}%
 }
