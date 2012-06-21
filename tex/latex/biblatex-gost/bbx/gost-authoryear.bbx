@@ -26,14 +26,13 @@
       {}
       {\printtext[parens]{%
         \ifentrytype{article}
-          {\printfield{issue}}
+          {\printfield{issue}%
+           \setunit*{\addspace}}
           {}%
-	 \setunit*{\addspace}%
 	 \usebibmacro{cite:date+extras}{}%
 	 \clearfield{month}%
 	 \clearfield{day}}}}%
   \renewbibmacro*{date}{}%
-  \renewbibmacro*{issue+date}{}%
   \renewbibmacro*{jour:volume+parts+issuetitle}{%
     \printfield{volume}%
     \setunit*{\addcomma\space}%
@@ -54,12 +53,8 @@
       {}
       {\printtext[parens]{\usebibmacro{cite:date+extras}{}}}}%
   \renewbibmacro*{date}{}%
-  \renewbibmacro*{issue+date}{%
-    \iffieldundef{issue}
-      {}
-      {\printtext[parens]{\printfield{issue}}}%
-    \newunit}%
-  \renewbibmacro*{year}{\printfield{year}}%
+  \renewbibmacro*{year}{}%\printfield{year}}%
+  \renewbibmacro*{jour:date}{}%
   \renewbibmacro*{authoryearlabel}{}%
   \setlength{\labelauthoryearsep}{0pt}%
 }
@@ -70,21 +65,11 @@
       {}
       {\printtext[parens]{\usebibmacro{cite:labelyear+extras}{}}}}%
   \renewbibmacro*{date}{%
-    \iffieldundef{month}
-      {}
-      {\printdate}}%
-  \renewbibmacro*{issue+date}{%
-    \ifboolexpr{
-      test {\iffieldundef{issue}}
-      and
-      test {\iffieldundef{month}}
-    }
-      {}
-      {\printtext[parens]{%
-	 \printfield{issue}%
-	 \setunit*{\addspace}%
-	 \printdate}}%
-    \newunit}%
+    \ifsingletitle
+      {\printdate}
+      {\iffieldundef{month}
+        {}
+        {\printdate}}}%
   \renewbibmacro*{year}{\printfield{year}}%
   \renewbibmacro*{authoryearlabel}{}%
   \setlength{\labelauthoryearsep}{0pt}%
@@ -96,27 +81,15 @@
       {}
       {\printtext[parens]{\usebibmacro{cite:labelyear+extras}{}}}}%
   \renewbibmacro*{date}{%
-    \ifboolexpr{
-      test {\iffieldundef{month}}
-      and
-      test {\iffieldundef{extrayear}}
-    }
-      {}
-      {\printdate}}%
-  \renewbibmacro*{issue+date}{%
-    \ifboolexpr{
-      test {\iffieldundef{issue}}
-      and
-      test {\iffieldundef{month}}
-      and
-      test {\iffieldundef{extrayear}}
-    }
-      {}
-      {\printtext[parens]{%
-	 \printfield{issue}%
-	 \setunit*{\addspace}%
-	 \printdate}}%
-    \newunit}%
+    \ifsingletitle
+      {\printdate}
+      {\ifboolexpr{
+          test {\iffieldundef{month}}
+          and
+          test {\iffieldundef{extrayear}}
+        }
+          {}
+          {\printdate}}}%
   \renewbibmacro*{year}{\printfield{year}}%
   \renewbibmacro*{authoryearlabel}{}%
   \setlength{\labelauthoryearsep}{0pt}%
@@ -126,15 +99,8 @@
   \renewbibmacro*{date+extrayear}{%
     \iffieldundef{labelyear}
       {}
-      {\printtext[parens]{%
-	 \usebibmacro{cite:labelyear+extras}{}}}}%
+      {\printtext[parens]{\usebibmacro{cite:labelyear+extras}{}}}}%
   \renewbibmacro*{date}{\printdate}%
-  \renewbibmacro*{issue+date}{%
-    \printtext[parens]{%
-      \printfield{issue}%
-      \setunit*{\addspace}%
-      \printdate}%
-    \newunit}%
   \renewbibmacro*{year}{\printfield{year}}%
   \renewbibmacro*{authoryearlabel}{}%
   \setlength{\labelauthoryearsep}{0pt}%
