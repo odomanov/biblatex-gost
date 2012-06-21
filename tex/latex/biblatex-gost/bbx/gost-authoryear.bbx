@@ -32,7 +32,16 @@
 	 \clearfield{day}}}}%
   \renewbibmacro*{date}{}%
   \renewbibmacro*{issue+date}{}%
+  \renewbibmacro*{jour:volume+parts+issuetitle}{%
+    \printfield{volume}%
+    \setunit*{\addcomma\space}%
+    \printfield{number}%
+    \iffieldundef{issuetitle}
+      {}
+      {\setunit{\addcolon\space}%
+       \printfield{issuetitle}}}%
   \renewbibmacro*{year}{}%\printfield{year}}%
+  \renewbibmacro*{jour:date}{}%
   \renewbibmacro*{authoryearlabel}{}%
   \setlength{\labelauthoryearsep}{0pt}%
 }
