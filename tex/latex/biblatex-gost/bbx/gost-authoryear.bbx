@@ -16,23 +16,35 @@
 \providebibmacro*{date+extrayear}{}
 \providebibmacro*{authoryearlabel}{}
 \providebibmacro*{cite:date+extras}{}
+\newbibmacro*{labeltitle}{%
+  \iffieldundef{label}
+     {\ifsingletitle
+        {}
+        {\iffieldundef{shorttitle}
+          {\iffieldundef{maintitle}
+            {\printfield{title}}
+            {\printfield[title]{maintitle}}}%
+           {\printfield[title]{shorttitle}}}}
+     {\printfield{label}}}
 \newlength{\labelauthoryearsep}
 
 \def\bbx@opt@mergedate@true{\bbx@opt@mergedate@compact}
 
 \def\bbx@opt@mergedate@maximum{%
   \renewbibmacro*{date+extrayear}{%
-    \iffieldundef{year}
+    \ifsingletitle
       {}
-      {\printtext[parens]{%
-        \ifentrytype{article}
-          {\printfield{issue}%
-           \setunit*{\addspace}}
-          {}%
-	 \usebibmacro{cite:date+extras}{}%
-	 \clearfield{month}%
-	 \clearfield{day}}}}%
-  \renewbibmacro*{date}{}%
+      {\iffieldundef{year}
+        {}
+        {\printtext[parens]{%
+          \ifentrytype{article}
+            {\printfield{issue}%
+             \setunit*{\addspace}}
+            {}%
+      	 \usebibmacro{cite:date+extras}{}%
+      	 \clearfield{month}%
+      	 \clearfield{day}}}}}%
+  \renewcommand*{\labelnamepunct}{\newunitpunct}
   \renewbibmacro*{jour:volume+parts+issuetitle}{%
     \printfield{volume}%
     \setunit*{\addcomma\space}%
@@ -41,29 +53,38 @@
       {}
       {\setunit{\addcolon\space}%
        \printfield{issuetitle}}}%
-  \renewbibmacro*{year}{}%\printfield{year}}%
-  \renewbibmacro*{jour:date}{}%
+  \renewbibmacro*{date}{\ifsingletitle{\printdate}{}}%
+  \renewbibmacro*{year}{\ifsingletitle{\printfield{year}}{}}%
+  \renewbibmacro*{jour:date}{%
+    \ifsingletitle
+      {\usebibmacro{year}%
+       \newunit\newblock
+       \mkbibdatelong{}{month}{day}}
+      {}}%
   \renewbibmacro*{authoryearlabel}{}%
   \setlength{\labelauthoryearsep}{0pt}%
 }
 
 \def\bbx@opt@mergedate@compact{%
   \renewbibmacro*{date+extrayear}{%
-    \iffieldundef{year}
-      {}
-      {\printtext[parens]{\usebibmacro{cite:date+extras}{}}}}%
-  \renewbibmacro*{date}{}%
-  \renewbibmacro*{year}{}%\printfield{year}}%
-  \renewbibmacro*{jour:date}{}%
+    \usebibmacro{cite:date+extras}{parens}}%
+  \renewcommand*{\labelnamepunct}{\newunitpunct}
+  \renewbibmacro*{date}{\ifsingletitle{\printdate}{}}%
+  \renewbibmacro*{year}{\ifsingletitle{\printfield{year}}{}}%
+  \renewbibmacro*{jour:date}{%
+    \ifsingletitle
+      {\usebibmacro{year}%
+       \newunit\newblock
+       \mkbibdatelong{}{month}{day}}
+      {}}%
   \renewbibmacro*{authoryearlabel}{}%
   \setlength{\labelauthoryearsep}{0pt}%
 }
 
 \def\bbx@opt@mergedate@basic{%
   \renewbibmacro*{date+extrayear}{%
-    \iffieldundef{labelyear}
-      {}
-      {\printtext[parens]{\usebibmacro{cite:labelyear+extras}{}}}}%
+    \usebibmacro{cite:labelyear+extras}{parens}}%
+  \renewcommand*{\labelnamepunct}{\newunitpunct}
   \renewbibmacro*{date}{%
     \ifsingletitle
       {\printdate}
@@ -77,9 +98,8 @@
 
 \def\bbx@opt@mergedate@minimum{%
   \renewbibmacro*{date+extrayear}{%
-    \iffieldundef{labelyear}
-      {}
-      {\printtext[parens]{\usebibmacro{cite:labelyear+extras}{}}}}%
+    \usebibmacro{cite:labelyear+extras}{parens}}%
+  \renewcommand*{\labelnamepunct}{\newunitpunct}
   \renewbibmacro*{date}{%
     \ifsingletitle
       {\printdate}
@@ -97,11 +117,11 @@
 
 \def\bbx@opt@mergedate@false{%
   \renewbibmacro*{date+extrayear}{%
-    \iffieldundef{labelyear}
-      {}
-      {\printtext[parens]{\usebibmacro{cite:labelyear+extras}{}}}}%
+    \usebibmacro{cite:labelyear+extras}{parens}}%
+  \renewcommand*{\labelnamepunct}{\newunitpunct}
   \renewbibmacro*{date}{\printdate}%
   \renewbibmacro*{year}{\printfield{year}}%
+  \renewbibmacro*{labeltitle}{}%
   \renewbibmacro*{authoryearlabel}{}%
   \setlength{\labelauthoryearsep}{0pt}%
 }
@@ -110,6 +130,7 @@
   \renewbibmacro*{date+extrayear}{}%
   \renewbibmacro*{date}{\printdate}%
   \renewbibmacro*{year}{\printfield{year}}%
+  \renewbibmacro*{labeltitle}{}%
   \DeclareFieldFormat{extrayear}{}%
   \DeclareFieldFormat{extratitleyear}{}%
   \ExecuteBibliographyOptions{singletitle}%
@@ -121,6 +142,7 @@
   \renewbibmacro*{date+extrayear}{}%
   \renewbibmacro*{date}{\printdate\usebibmacro{cite:extras}}%
   \renewbibmacro*{year}{\printfield{year}\usebibmacro{cite:extras}}%
+  \renewbibmacro*{labeltitle}{}%
   \renewbibmacro*{authoryearlabel}{}%
   \setlength{\labelauthoryearsep}{0pt}%
 }
@@ -129,6 +151,7 @@
   \renewbibmacro*{date+extrayear}{}%
   \renewbibmacro*{date}{\printdate}%
   \renewbibmacro*{year}{\printfield{year}}%
+  \renewbibmacro*{labeltitle}{}%
   \renewbibmacro*{authoryearlabel}{%
   \mkbibbrackets{%
   \iffieldundef{shorthand}
@@ -176,17 +199,6 @@
   {\endlist}
   {\item}
 
-\newbibmacro*{labeltitle}{%
-  \iffieldundef{label}
-    {\iffieldundef{shorttitle}
-       {\iffieldundef{maintitle}
-          {\printfield{title}%
-           \clearfield{title}}
-          {\printfield{maintitle}%
-           \clearfield{maintitle}}}
-       {\printfield[title]{shorttitle}}}
-    {\printfield{label}}}
-
 \renewbibmacro*{author}{%
   \ifboolexpr{
     test \ifuseauthor
@@ -202,8 +214,8 @@
      \setunit*{\addspace}%
      \clearname{author}}
     {\global\undef\bbx@lasthash%
-     \printfield{labeltitle}%
-     \setunit*{\addspace}}
+     \usebibmacro{labeltitle}%
+     \setunit*{\addspace}}%
   \usebibmacro{date+extrayear}}
 
 
@@ -226,8 +238,8 @@
      \clearname{editor}%
      \setunit*{\addspace}}
     {\global\undef\bbx@lasthash%
-     \printfield{labeltitle}%
-     \setunit*{\addspace}}
+     \usebibmacro{labeltitle}%
+     \setunit*{\addspace}}%
   \usebibmacro{date+extrayear}}
 
 \renewbibmacro*{translator}{%
@@ -249,8 +261,8 @@
      \clearname{translator}%
      \setunit*{\addspace}}
     {\global\undef\bbx@lasthash%
-     \printfield{labeltitle}%
-     \setunit*{\addspace}}
+     \usebibmacro{labeltitle}%
+     \setunit*{\addspace}}%
   \usebibmacro{date+extrayear}}
 
 %\def\blx@numalph\blx@asbuk%
