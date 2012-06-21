@@ -25,7 +25,9 @@
     \iffieldundef{year}
       {}
       {\printtext[parens]{%
-         \printfield{issue}%
+        \ifentrytype{article}
+          {\printfield{issue}}
+          {}%
 	 \setunit*{\addspace}%
 	 \usebibmacro{cite:date+extras}{}%
 	 \clearfield{month}%
