@@ -1,7 +1,6 @@
 % $Id$
 
 \ProvidesFile{biblatex-gost.def}
-[\abx@bbxid $Id$]
 
 % these declarations should be here, not in lbx, to be initialized for all languages
 \NewBibliographyString{
