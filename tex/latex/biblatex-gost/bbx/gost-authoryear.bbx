@@ -16,16 +16,7 @@
 \providebibmacro*{date+extrayear}{}
 \providebibmacro*{authoryearlabel}{}
 \providebibmacro*{cite:date+extras}{}
-\newbibmacro*{labeltitle}{%
-  \iffieldundef{label}
-     {\ifsingletitle
-        {}
-        {\iffieldundef{shorttitle}
-          {\iffieldundef{maintitle}
-            {\printfield{title}}
-            {\printfield[title]{maintitle}}}%
-           {\printfield[title]{shorttitle}}}}
-     {\printfield{label}}}
+\providebibmacro*{labeltitle}{}
 \newlength{\labelauthoryearsep}
 
 \def\bbx@opt@mergedate@true{\bbx@opt@mergedate@compact}
@@ -61,6 +52,16 @@
        \newunit\newblock
        \mkbibdatelong{}{month}{day}}
       {}}%
+  \renewbibmacro*{labeltitle}{%
+    \iffieldundef{label}
+       {\ifsingletitle
+          {}
+          {\iffieldundef{shorttitle}
+            {\iffieldundef{maintitle}
+              {\printfield{title}}
+              {\printfield[title]{maintitle}}}%
+             {\printfield[title]{shorttitle}}}}
+       {\printfield{label}}}
   \renewbibmacro*{authoryearlabel}{}%
   \setlength{\labelauthoryearsep}{0pt}%
 }
@@ -77,6 +78,16 @@
        \newunit\newblock
        \mkbibdatelong{}{month}{day}}
       {}}%
+  \renewbibmacro*{labeltitle}{%
+    \iffieldundef{label}
+       {\ifsingletitle
+          {}
+          {\iffieldundef{shorttitle}
+            {\iffieldundef{maintitle}
+              {\printfield{title}}
+              {\printfield[title]{maintitle}}}%
+             {\printfield[title]{shorttitle}}}}
+       {\printfield{label}}}
   \renewbibmacro*{authoryearlabel}{}%
   \setlength{\labelauthoryearsep}{0pt}%
 }
@@ -92,6 +103,16 @@
         {}
         {\printdate}}}%
   \renewbibmacro*{year}{\printfield{year}}%
+  \renewbibmacro*{labeltitle}{%
+    \iffieldundef{label}
+       {\ifsingletitle
+          {}
+          {\iffieldundef{shorttitle}
+            {\iffieldundef{maintitle}
+              {\printfield{title}}
+              {\printfield[title]{maintitle}}}%
+             {\printfield[title]{shorttitle}}}}
+       {\printfield{label}}}
   \renewbibmacro*{authoryearlabel}{}%
   \setlength{\labelauthoryearsep}{0pt}%
 }
@@ -111,6 +132,16 @@
           {}
           {\printdate}}}%
   \renewbibmacro*{year}{\printfield{year}}%
+  \renewbibmacro*{labeltitle}{%
+    \iffieldundef{label}
+       {\ifsingletitle
+          {}
+          {\iffieldundef{shorttitle}
+            {\iffieldundef{maintitle}
+              {\printfield{title}}
+              {\printfield[title]{maintitle}}}%
+             {\printfield[title]{shorttitle}}}}
+       {\printfield{label}}}
   \renewbibmacro*{authoryearlabel}{}%
   \setlength{\labelauthoryearsep}{0pt}%
 }
