@@ -44,7 +44,7 @@
       	 \usebibmacro{cite:date+extras}{}%
       	 \clearfield{month}%
       	 \clearfield{day}}}}}%
-  \renewcommand*{\labelnamepunct}{\newunitpunct}
+  %\renewcommand*{\labelnamepunct}{\newunitpunct}
   \renewbibmacro*{jour:volume+parts+issuetitle}{%
     \printfield{volume}%
     \setunit*{\addcomma\space}%
@@ -68,7 +68,7 @@
 \def\bbx@opt@mergedate@compact{%
   \renewbibmacro*{date+extrayear}{%
     \usebibmacro{cite:date+extras}{parens}}%
-  \renewcommand*{\labelnamepunct}{\newunitpunct}
+  %\renewcommand*{\labelnamepunct}{\newunitpunct}
   \renewbibmacro*{date}{\ifsingletitle{\printdate}{}}%
   \renewbibmacro*{year}{\ifsingletitle{\printfield{year}}{}}%
   \renewbibmacro*{jour:date}{%
@@ -84,7 +84,7 @@
 \def\bbx@opt@mergedate@basic{%
   \renewbibmacro*{date+extrayear}{%
     \usebibmacro{cite:labelyear+extras}{parens}}%
-  \renewcommand*{\labelnamepunct}{\newunitpunct}
+  %\renewcommand*{\labelnamepunct}{\newunitpunct}
   \renewbibmacro*{date}{%
     \ifsingletitle
       {\printdate}
@@ -99,7 +99,7 @@
 \def\bbx@opt@mergedate@minimum{%
   \renewbibmacro*{date+extrayear}{%
     \usebibmacro{cite:labelyear+extras}{parens}}%
-  \renewcommand*{\labelnamepunct}{\newunitpunct}
+  %\renewcommand*{\labelnamepunct}{\newunitpunct}
   \renewbibmacro*{date}{%
     \ifsingletitle
       {\printdate}
@@ -118,7 +118,7 @@
 \def\bbx@opt@mergedate@false{%
   \renewbibmacro*{date+extrayear}{%
     \usebibmacro{cite:labelyear+extras}{parens}}%
-  \renewcommand*{\labelnamepunct}{\newunitpunct}
+  %\renewcommand*{\labelnamepunct}{\newunitpunct}
   \renewbibmacro*{date}{\printdate}%
   \renewbibmacro*{year}{\printfield{year}}%
   \renewbibmacro*{labeltitle}{}%
