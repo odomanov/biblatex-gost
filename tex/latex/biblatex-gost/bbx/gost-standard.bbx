@@ -1025,9 +1025,11 @@
     test \ifuseauthor
     or
     test {\ifnameundef{author}}
-  }%
-    {}%
-    {\printnames[byauthor]{author}}}
+  }
+    {}
+    {%\usebibmacro{bytypestrg}{author}{author}%
+     %\setunit{\addspace}%
+     \printnames[byauthor]{author}}}
      
 \renewbibmacro*{bybookauthor}{%
   \ifnamesequal{author}{bookauthor}
