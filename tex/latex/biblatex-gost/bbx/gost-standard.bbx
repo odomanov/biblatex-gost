@@ -236,8 +236,10 @@
   \setunit*{\labelnamepunct}%
   \usebibmacro{maintitle+volumes+parts+title}%
   \setunit{\respdelim}%
-  \usebibmacro{byauthor}%
-  \setunit*{\resppunct}%
+  \ifuseauthor
+    {}
+    {\usebibmacro{byauthor}%
+     \setunit*{\resppunct}}%
   \usebibmacro{byeditor+others}%
   \newunit\newblock
   \printfield{edition}%
@@ -270,8 +272,10 @@
   \setunit*{\labelnamepunct}%
   \usebibmacro{title}%
   \setunit{\respdelim}%
-  \usebibmacro{byauthor}%
-  \setunit*{\resppunct}%
+  \ifuseauthor
+    {}
+    {\usebibmacro{byauthor}%
+     \setunit*{\resppunct}}%
   \usebibmacro{byeditor+others}%
   \newunit\newblock
   \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
@@ -337,8 +341,10 @@
   \usebibmacro{//}%
   \usebibmacro{maintitle+volumes+parts+booktitle}%
   \setunit{\respdelim}%
-  \usebibmacro{bybookauthor}%
-  \setunit*{\resppunct}%
+  \ifnamesequal{author}{bookauthor}
+    {}
+    {\usebibmacro{bybookauthor}%
+     \setunit*{\resppunct}}%
   \usebibmacro{byeditor+others}%
   \newunit\newblock
   \printfield{edition}%
@@ -441,10 +447,14 @@
   \setunit*{\labelnamepunct}%
   \usebibmacro{title}%
   \setunit{\respdelim}%
-  \usebibmacro{byauthor}%
-  \setunit*{\resppunct}%
-  \printlist{organization}%
-  \setunit*{\resppunct}%
+  \ifuseauthor
+    {}
+    {\usebibmacro{byauthor}%
+     \setunit*{\resppunct}}%
+  \iffieldundef{organization}
+    {}
+    {\printlist{organization}%
+     \setunit*{\resppunct}}
   \usebibmacro{byeditor+others}%
   \newunit\newblock
   \printfield{edition}%
@@ -481,8 +491,10 @@
   \setunit*{\labelnamepunct}%
   \usebibmacro{title}%
   \setunit{\respdelim}%
-  \usebibmacro{byauthor}%
-  \setunit*{\resppunct}%
+  \ifuseauthor
+    {}
+    {\usebibmacro{byauthor}%
+     \setunit*{\resppunct}}%
   \usebibmacro{byeditor+others}%
   \newunit\newblock
   \printfield{version}%
@@ -509,10 +521,14 @@
   \setunit*{\labelnamepunct}%
   \usebibmacro{title}%
   \setunit{\respdelim}%
-  \usebibmacro{byauthor}%
-  \setunit*{\resppunct}%
-  \printlist{organization}%
-  \setunit*{\resppunct}%
+  \ifuseauthor
+    {}
+    {\usebibmacro{byauthor}%
+     \setunit*{\resppunct}}%
+  \iffieldundef{organization}
+    {}
+    {\printlist{organization}%
+     \setunit*{\resppunct}}
   \usebibmacro{byeditor+others}%
   \newunit\newblock
   \printfield{version}%
@@ -565,8 +581,6 @@
   \usebibmacro{editor}%
   \setunit*{\labelnamepunct}%
   \usebibmacro{periodical}
-  %\newunit
-  %\printfield{series}
   \newunit
   \usebibmacro{date}%
   \setunit*{\addcomma\space}%
@@ -631,6 +645,8 @@
   \usebibmacro{author}%
   \setunit*{\labelnamepunct}%
   \usebibmacro{title}%
+  \setunit{\respdelim}%
+  \usebibmacro{byauthor}%
   \newunit\newblock
   \printfield{version}%
   \newunit\newblock
@@ -691,6 +707,8 @@
   \usebibmacro{author}%
   \setunit*{\labelnamepunct}%
   \usebibmacro{title}%
+  \setunit{\respdelim}%
+  \usebibmacro{byauthor}%
   \newunit\newblock
   \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
   \newunit\newblock
