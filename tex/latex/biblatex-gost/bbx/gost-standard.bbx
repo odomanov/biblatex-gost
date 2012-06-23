@@ -236,8 +236,10 @@
   \setunit*{\labelnamepunct}%
   \usebibmacro{maintitle+volumes+parts+title}%
   \setunit{\respdelim}%
-  \usebibmacro{byauthor}%
-  \setunit*{\resppunct}%
+  \ifuseauthor
+    {}
+    {\usebibmacro{byauthor}%
+     \setunit*{\resppunct}}%
   \usebibmacro{byeditor+others}%
   \newunit\newblock
   \printfield{edition}%
@@ -270,21 +272,23 @@
   \setunit*{\labelnamepunct}%
   \usebibmacro{title}%
   \setunit{\respdelim}%
-  \usebibmacro{byauthor}%
-  \setunit*{\resppunct}%
+  \ifuseauthor
+    {}
+    {\usebibmacro{byauthor}%
+     \setunit*{\resppunct}}%
   \usebibmacro{byeditor+others}%
-  \newunit\newblock
-  \printfield{howpublished}%
-  \newunit\newblock
-  \printfield{type}%
   \newunit\newblock
   \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
   \newunit\newblock
   \usebibmacro{location+date}%
   \newunit\newblock
+  \printfield{howpublished}%
+  \newunit\newblock
   \usebibmacro{chapter+pages}%
   \newunit
   \printfield{pagetotal}%
+  \newunit\newblock
+  \printfield{type}%
   \newunit\newblock
   \usebibmacro{doi+eprint+url+note}%
   \newunit\newblock
@@ -335,31 +339,39 @@
   \usebibmacro{byauthor}%
   \setunit{\space}
   \usebibmacro{//}%
-  \usebibmacro{maintitle+volumes+parts+booktitle}%
-  \setunit{\respdelim}%
-  \usebibmacro{bybookauthor}%
-  \setunit*{\resppunct}%
-  \usebibmacro{byeditor+others}%
-  \newunit\newblock
-  \printfield{edition}%
-  \newunit\newblock
-  \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
-  \newunit\newblock
-  \usebibmacro{publisher+location+date}%
-  \newunit\newblock
-  \usebibmacro{chapter+pages}%
-  \newunit\newblock
-  \usebibmacro{series+number}%
-  \newunit\newblock
-  \iftoggle{bbx:isbn}
-    {\printfield{isbn}}
-    {}%
-  \newunit\newblock
-  \usebibmacro{doi+eprint+url+note}%
-  \newunit\newblock
-  \usebibmacro{addendum+pubstate}%
-  \setunit{\bibpagerefpunct}\newblock
-  \usebibmacro{pageref}%
+  \ifboolexpr{%
+    test {\ifcitation}
+    and
+    test {\iftoggle{cbx:bookibid}} 
+  }
+     {\usebibmacro{cite:ibid}}
+     {\usebibmacro{maintitle+volumes+parts+booktitle}%
+      \setunit{\respdelim}%
+      \ifnamesequal{author}{bookauthor}
+        {}
+        {\usebibmacro{bybookauthor}%
+         \setunit*{\resppunct}}%
+      \usebibmacro{byeditor+others}%
+      \newunit\newblock
+      \printfield{edition}%
+      \newunit\newblock
+      \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
+      \newunit\newblock
+      \usebibmacro{publisher+location+date}%
+      \newunit\newblock
+      \usebibmacro{chapter+pages}%
+      \newunit\newblock
+      \usebibmacro{series+number}%
+      \newunit\newblock
+      \iftoggle{bbx:isbn}
+        {\printfield{isbn}}
+        {}%
+      \newunit\newblock
+      \usebibmacro{doi+eprint+url+note}%
+      \newunit\newblock
+      \usebibmacro{addendum+pubstate}%
+      \setunit{\bibpagerefpunct}\newblock
+      \usebibmacro{pageref}}%
   \usebibmacro{finentry}}
 
 \DeclareBibliographyDriver{incollection}{%
@@ -441,20 +453,22 @@
   \setunit*{\labelnamepunct}%
   \usebibmacro{title}%
   \setunit{\respdelim}%
-  \usebibmacro{byauthor}%
-  \setunit*{\resppunct}%
+  \ifuseauthor
+    {}
+    {\usebibmacro{byauthor}%
+     \setunit*{\resppunct}}%
+  \iffieldundef{organization}
+    {}
+    {\printlist{organization}%
+     \setunit*{\resppunct}}
   \usebibmacro{byeditor+others}%
   \newunit\newblock
   \printfield{edition}%
-  \newunit\newblock
-  \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
-  \newunit\newblock
-  \printfield{type}%
   \newunit
   \printfield{version}%
   \newunit\newblock
-  \printlist{organization}%
-  \newunit
+  \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
+  \newunit\newblock
   \usebibmacro{publisher+location+date}%
   \newunit\newblock
   \usebibmacro{chapter+pages}%
@@ -466,6 +480,8 @@
   \iftoggle{bbx:isbn}
     {\printfield{isbn}}
     {}%
+  \newunit\newblock
+  \printfield{type}%
   \newunit\newblock
   \usebibmacro{doi+eprint+url+note}%
   \newunit\newblock
@@ -481,19 +497,21 @@
   \setunit*{\labelnamepunct}%
   \usebibmacro{title}%
   \setunit{\respdelim}%
-  \usebibmacro{byauthor}%
-  \setunit*{\resppunct}%
+  \ifuseauthor
+    {}
+    {\usebibmacro{byauthor}%
+     \setunit*{\resppunct}}%
   \usebibmacro{byeditor+others}%
   \newunit\newblock
-  \printfield{howpublished}%
-  \newunit\newblock
-  \printfield{type}%
-  \newunit
   \printfield{version}%
   \newunit\newblock
   \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
   \newunit\newblock
   \usebibmacro{organization+location+date}%
+  \newunit\newblock
+  \printfield{howpublished}%
+  \newunit\newblock
+  \printfield{type}%
   \newunit\newblock
   \usebibmacro{doi+eprint+url+note}%
   \newunit\newblock
@@ -509,15 +527,19 @@
   \setunit*{\labelnamepunct}%
   \usebibmacro{title}%
   \setunit{\respdelim}%
-  \usebibmacro{byauthor}%
-  \setunit*{\resppunct}%
+  \ifuseauthor
+    {}
+    {\usebibmacro{byauthor}%
+     \setunit*{\resppunct}}%
+  \iffieldundef{organization}
+    {}
+    {\printlist{organization}%
+     \setunit*{\resppunct}}
   \usebibmacro{byeditor+others}%
   \newunit\newblock
   \printfield{version}%
   \newunit\newblock
   \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
-  \newunit\newblock
-  \printlist{organization}%
   \newunit\newblock
   \usebibmacro{date}%
   \newunit\newblock
@@ -565,8 +587,6 @@
   \usebibmacro{editor}%
   \setunit*{\labelnamepunct}%
   \usebibmacro{periodical}
-  %\newunit
-  %\printfield{series}
   \newunit
   \usebibmacro{date}%
   \setunit*{\addcomma\space}%
@@ -631,10 +651,8 @@
   \usebibmacro{author}%
   \setunit*{\labelnamepunct}%
   \usebibmacro{title}%
-  \newunit\newblock
-  \printfield{type}%
-  \setunit*{\addspace}%
-  \printfield{number}%
+  \setunit{\respdelim}%
+  \usebibmacro{byauthor}%
   \newunit\newblock
   \printfield{version}%
   \newunit\newblock
@@ -649,6 +667,10 @@
   \iftoggle{bbx:isbn}
     {\printfield{isrn}}
     {}%
+  \newunit\newblock
+  \printfield{type}%
+  \setunit*{\addspace}%
+  \printfield{number}%
   \newunit\newblock
   \usebibmacro{doi+eprint+url+note}%
   \newunit\newblock
@@ -691,12 +713,14 @@
   \usebibmacro{author}%
   \setunit*{\labelnamepunct}%
   \usebibmacro{title}%
-  \newunit\newblock
-  \printfield{howpublished}%
+  \setunit{\respdelim}%
+  \usebibmacro{byauthor}%
   \newunit\newblock
   \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
   \newunit\newblock
   \usebibmacro{location+date}%
+  \newunit\newblock
+  \printfield{howpublished}%
   \newunit\newblock
   \usebibmacro{url+urldate+note}
   \newunit\newblock
@@ -1117,7 +1141,6 @@
 }
 
 \gdef\ifmulticitation{%
-  %\ifnumequal{\themulticitetotal}{0}{\@secondoftwo}{\@firstoftwo}
   \ifnum\c@multicitetotal>0
     \expandafter\@firstoftwo
   \else

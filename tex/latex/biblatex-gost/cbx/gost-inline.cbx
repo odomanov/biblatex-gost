@@ -12,6 +12,9 @@
   \bibhypertarget{\thefield{entrykey}:\the\value{instcount}}{#1}}
 \providecommand*{\mkibid}[1]{#1}
 \newtoggle{cbx:loccit}
+\newtoggle{cbx:bookibid} % for Ibid. in inbook, incollection,..
+%\global\toggletrue{cbx:bookibid}
+\def\cbx@t@lastcrossref{}
 \newbibmacro*{cite:citepages}{}
 \newbibmacro*{cite:full:citepages}{}
 \newbibmacro*{cite:postnote}{}
@@ -126,11 +129,18 @@
   \global\togglefalse{cbx:loccit}%
   \ifciteseen
     {\usebibmacro{cite:seen}}
-    {\usebibmacro{cite:full}%
+    {\iffieldequals{crossref}{\cbx@t@lastcrossref}
+      {\global\toggletrue{cbx:bookibid}}
+      {\global\togglefalse{cbx:bookibid}}%
+     \usebibmacro{cite:full}%
      \usebibmacro{cite:save}}}
 
 \newbibmacro*{cite:save}{%
-  \csxdef{cbx@t@\thefield{entrykey}}{\the\value{instcount}}}
+  \csxdef{cbx@t@\thefield{entrykey}}{\the\value{instcount}}%
+  \iffieldundef{crossref}
+    {\global\togglefalse{cbx:bookibid}}
+    {\savefield{crossref}{\cbx@t@lastcrossref}}%
+}
 
 \newbibmacro{cite:clearfields}{%
    %\clearfield{series}%

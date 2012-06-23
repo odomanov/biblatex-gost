@@ -2,18 +2,20 @@
 \input glyphtounicode.tex           %these three lines are
 \input glyphtounicode-cmr.tex       %needed for russian search/copy
 \pdfgentounicode=1                  %(cmap)
-\documentclass[11pt,a4paper,headings=small,numbers=enddot]{ltxdockit}[2011/03/25]
+\documentclass[11pt,a4paper,headings=small,numbers=enddot,english,russian]{ltxdockit}[2011/03/25]
 \usepackage[vscale=0.8,hscale=0.7,hdivide={0.2\paperwidth,*,0.1\paperwidth}]{geometry}
 \usepackage[T2A]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{btxdockit}
-\usepackage[english,russian]{babel}
+\usepackage{babel}
 \usepackage[strict]{csquotes}
 \usepackage{tabularx}
 \usepackage{longtable}
 \usepackage{booktabs}
 \usepackage{comment}
 \usepackage[inline]{enumitem}
+\usepackage{isodate}
+\usepackage[bibstyle=gost-standard]{biblatex} % to receive \bbx@gost@version, etc.
 %\usepackage{shortvrb}
 %\usepackage{pifont}%  ???
 \usepackage{indentfirst}
@@ -29,9 +31,6 @@
 %\MakeAutoQuote*{<}{>}
 %\MakeShortVerb{\|}
 
-\usepackage{svn-multi}
-\svnid{$Id$}
-
 \hypersetup{unicode=true}
 
 \newcommand*{\biber}{Biber\xspace}
@@ -41,44 +40,15 @@
 \newcommand*{\biblatexgost}{\biblatex-GOST\xspace}
 \newcommand*{\biblatexgosthome}{http://sourceforge.net/projects/biblatexgost/}
 
-\svnRegisterRevision{16}{Версия 0.2}% to be used with \svnFullRevision*{\svnrev}
-\svnRegisterRevision{64}{Версия 0.3}
-\svnRegisterRevision{70}{Версия 0.3.1}
-\svnRegisterRevision{79}{Версия 0.3.2}
-\svnRegisterRevision{128}{Версия 0.4}
 \makeatletter
-\providecommand*{\printtitlepage}{}
-\renewrobustcmd*{\printtitlepage}{%
-  \begingroup
-  \centering\titlefont
-  \begingroup\LARGE
-    \ifundef\ltd@title@url
-      {\ltd@title@title}
-      {\href{\ltd@title@url}{\ltd@title@title}}%
-    \par
-  \endgroup
-  \vspace{0.25\baselineskip}
-  \begingroup\large
-    \ltd@title@subtitle\par
-  \endgroup
-  \vspace{0.25\baselineskip}
-  \begin{multicols}{2}
-  \raggedleft
-    \ltd@title@author\par
-    \expandafter\email\expandafter{\ltd@title@email}\par
-  \raggedright
-    \ltd@title@revision\par\ltd@title@date 
-  \end{multicols}
-  \endgroup}
-
 \titlepage{%
   title={Пакет \biblatexgost},
   subtitle={Оформление библиографии согласно ГОСТ 7.0.5-2008},
   url={\biblatexgosthome},
   author={Олег Доманов},
   email={odomanov@yandex.ru},
-  revision={\svnFullRevision{\svnrev}},
-  date={\svnday.\svnmonth.\svnyear}}
+  revision={\bbx@gost@version},
+  date={\bbx@gost@date}}
 
 % TOC,LOT layout
 
@@ -129,8 +99,10 @@
 %-----
 \usepackage{ellipsis}% must be loaded after hyperref !!
 \newcommand*{\bibsty}{\texttt}
-\newcommand*{\gostname}{ГОСТ 7.0.5-2008}
-\newcommand*{\gostref}[1]{\gostname, п.\,#1}
+\newcommand*{\gostbibname}{ГОСТ 7.1-2003}
+\newcommand*{\gostcitename}{ГОСТ 7.0.5-2008}
+\newcommand*{\gostbibref}[1]{\gostbibname, п.\,#1}
+\newcommand*{\gostciteref}[1]{\gostcitename, п.\,#1}
 \newcommand*{\notimpl}{\footnote{Не реализовано в данной версии \biblatexgost.}}
 \excludecomment{notimplc} % not implemented
 \renewcommand*{\apxref}{\refs{прил.}{прил.}}
@@ -155,7 +127,7 @@
 
 Пакет \biblatexgost{}\fnurl{http://sourceforge.net/projects/biblatex-gost/} представляет 
 собой набор стилей для \biblatex{}\fnurl{http://www.ctan.org/tex-archive/macros/latex/contrib/biblatex/} 
-и предназначен для оформления библиографии согласно \gostname. 
+и предназначен для оформления библиографии согласно \gostcitename. 
 
 \subsection{Установка}
 \label{sec:install}
@@ -391,18 +363,19 @@ Permission is granted to copy, distribute and\slash or modify this software unde
                                     translator \\
 \cmidrule(r){1-1}\cmidrule{2-2}
 \multicolumn{1}{@{}H}{Область издания} & \\
-Сведения об издании & edition \\
+Сведения об издании & edition, version \\
 \textit{Параллельные сведения об издании} & edition \\
 \cmidrule(r){1-1}\cmidrule{2-2}
 \multicolumn{1}{@{}H}{Область специфических сведений} & {\spotcolor specdata} \\
 \cmidrule(r){1-1}\cmidrule{2-2}
 \multicolumn{1}{@{}H}{Область выходных данных} & \\
 Место издания, распространения & location \\
-Имя издателя, распространителя и т.\,п. & publisher \\
+Имя издателя, распространителя и т.\,п. & publisher, institution \\
 Дата издания, распространения и т.\,п. & date \\
 \cmidrule(r){1-1}\cmidrule{2-2}
 \multicolumn{1}{@{}H}{Область физической характеристики} & \\
-Специфическое обозначение материала и объём & volumes, pagetotal, pages, {\spotcolor books}, {\spotcolor parts}, {\spotcolor issues}\\
+Специфическое обозначение материала и объём & volumes, pagetotal, pages, howpublished, 
+    {\spotcolor books}, {\spotcolor parts}, {\spotcolor issues}\\
 %\textit{Другие сведения о физической характеристике} & \textendash \\
 %\textit{Размеры} & \textendash \\
 %\textit{Сведения о сопроводительном материале} & \textendash \\
@@ -415,7 +388,7 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 ISSN серии или подсерии & issn (isbn) \\
 Номер выпуска серии или подсерии & number \\
 \cmidrule(r){1-1}\cmidrule{2-2}
-\multicolumn{1}{@{}H}{Область примечания} & url, urldate, note \\
+\multicolumn{1}{@{}H}{Область примечания} & url, urldate, note, type \\
 \cmidrule(r){1-1}\cmidrule{2-2}
 \multicolumn{1}{@{}H}{Область стандартного номера и} & \\
 \multicolumn{1}{@{}H}{условий доступности} & \\
@@ -436,7 +409,8 @@ ISSN серии или подсерии & issn (isbn) \\
 \bibfield{origdate}, \bibfield{origlocation}, \bibfield{origpublisher}, \bibfield{origtitle}, 
 \bibfield{file}, \bibfield{reprinttitle}.
 
-С другой стороны, не учитываются следующие элементы ГОСТа: общее обозначение материала,
+С другой стороны, не учитываются следующие элементы описания, предусмотренные ГОСТом: 
+общее обозначение материала,
 параллельное заглавие, другие сведения о физической характеристике, размеры,
 сведения о сопроводительном материале.
 
@@ -457,7 +431,7 @@ ISSN серии или подсерии & issn (isbn) \\
 %\end{lstlisting}
 %
 \item[Область специфических сведений] применяется для
-особых типов публикации и специфических носителей (см.~\gostref{5.4}). 
+особых типов публикации и специфических носителей (см.~\gostbibref{5.4}). 
 \biblatexgost заполняет эту 
 область самостоятельно только для патентов\notimpl\ и сериальных изданий\notimpl. 
 Для всех остальных типов публикаций
@@ -475,10 +449,13 @@ ISSN серии или подсерии & issn (isbn) \\
 series = {|Языковеды мира / редкол.: Г.В. Степанов (пред.) и др.|}
 \end{lstlisting}
 
-\item[Серия.] \label{series}ГОСТ различает (см. \gostref{6.3.4.2}) сериальные документы 
+\item[Серия.] \label{series}ГОСТ различает (см. \gostbibref{6.3.4.2}) сериальные документы 
 с нумерацией по годам 
-(как, например, в журналах) и со сквозной нумерацией (в первом случае, например, 
-не печатается год на месте выходных данных). В \biblatexgost только такие документы соответствуют \bibtype{periodical}.  Сериальные документы со сквозной нумерацией рекомендуется оформлять как \bibtype{mvbook}, \bibtype{mvcollection}, \bibtype{mvproceedings} или \bibtype{mvreference}. 
+(как, например, в журналах) и со сквозной нумерацией. В первом случае, например, 
+не печатается год на месте выходных данных. В \biblatexgost только документы
+с нумерацией по годам соответствуют \bibtype{periodical}.  Сериальные документы со 
+сквозной нумерацией следует оформлять как \bibtype{mvbook}, \bibtype{mvcollection},
+\bibtype{mvproceedings} или \bibtype{mvreference}. 
 
 Серия в журналах может пониматься в двух смыслах. Во-первых, она употребляется в
 том же смысле, что и для книг, и также выводится в области серии в виде:
@@ -546,13 +523,17 @@ introduction & введение \prm{кого} & введ. \prm{кого} \\
 
 \fielditem{date}{date}
 
-Информация о дате в публикациях типа \bibtype{article} выводится в следующем порядке:
+Информация о дате в публикациях типа \bibtype{article} выводится в следующем порядке
+(см.~\gostbibref{7.5.2}):
 
 \begin{bibexample}
-\item\textellipsis\ \prm{year}.~"--- \prm{day} \prm{month}.~"--- \prm{volume}, \prm{issue}, \prm{number}.~"--- \textellipsis
+\item \prm{year}.~"--- 
+%\prm{day} \prm{month}
+\cmd{mkbibdatelong\{\}\{month\}\{day\}}%
+.~"--- \prm{volume}, \prm{issue}, \prm{number}
 \end{bibexample}
 
-Таким образом, для газет получается: 
+Таким образом, для газет получается (на русском языке): 
 
 \begin{bibexample}
 \item\textellipsis\ 2001.~"--- 25 мая.~"--- \textellipsis
@@ -832,7 +813,7 @@ volumes = {|в 5-и томах (6-и кн.)|}
 Схема сортирует сначала по тому, затем, внутри тома, по книге, затем~--- по части, и 
 затем~--- по выпуску.
 Кроме того, поскольку стандартные схемы сортировки \biblatex недостаточно учитывают многотомные
-изданиями (неверно обрабатывают
+издания (неверно обрабатывают
 поле \bibfield{maintitle}), то модифицированы схемы \opt{nty}, \opt{nyvt}, \opt{ynt}, 
 \opt{ydnt} и \opt{nyt}. Кроме того, в них добавлена сортировка по 
 тому\slash книге\slash части\slash выпуску. 
