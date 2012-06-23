@@ -127,20 +127,23 @@
   %\ifmulticitation{MULTI}{NOTMULTI}
   \usebibmacro{cite:citepages}%
   \global\togglefalse{cbx:loccit}%
-  \ifciteseen
-    {\usebibmacro{cite:seen}}
-    {\iffieldequals{crossref}{\cbx@t@lastcrossref}
+  \ifboolexpr{%
+            not test {\ifdefvoid{\cbx@t@lastcrossref}}
+            and
+            test {\iffieldequals{crossref}{\cbx@t@lastcrossref}}
+       }
       {\global\toggletrue{cbx:bookibid}}
-      {\global\togglefalse{cbx:bookibid}}%
-     \usebibmacro{cite:full}%
+      {\global\togglefalse{cbx:bookibid}%
+       \global\undef\cbx@t@lastcrossref}%
+  \ifciteseen
+    {\global\undef\cbx@t@lastcrossref%
+     \usebibmacro{cite:seen}}
+    {\usebibmacro{cite:full}%
      \usebibmacro{cite:save}}}
 
 \newbibmacro*{cite:save}{%
   \csxdef{cbx@t@\thefield{entrykey}}{\the\value{instcount}}%
-  \iffieldundef{crossref}
-    {\global\togglefalse{cbx:bookibid}}
-    {\savefield{crossref}{\cbx@t@lastcrossref}}%
-}
+  \savefield{crossref}{\cbx@t@lastcrossref}}%
 
 \newbibmacro{cite:clearfields}{%
    %\clearfield{series}%
