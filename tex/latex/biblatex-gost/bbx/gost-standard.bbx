@@ -1,7 +1,10 @@
 % $Id$
 
+\def\bbx@gost@date{2012/06/21}
+\def\bbx@gost@version{0.5}
+
 \ProvidesFile{gost-standard.bbx}
-[\abx@bbxid $Id$]
+[\bbx@gost@date\space v\bbx@gost@version\space biblatex-GOST styles]
 
 \@ifpackagelater{biblatex}{2012/06/19}
   {}
@@ -38,81 +41,6 @@
     {\ExecuteBibliographyOptions{pagetracker}%
      \renewbibmacro*{bbx:savehash}{\savefield{fullhash}{\bbx@lasthash}}}
     {\renewbibmacro*{bbx:savehash}{}}}
-\DeclareBibliographyOption{movenames}[true]{%
-  \ifstrequal{#1}{true}
-    {\DeclareSourcemap{
-      \maps[datatype=bibtex]{
-        \map{
-          \step[fieldsource=book, fieldtarget=usera]
-          \step[fieldsource=books, fieldtarget=userb]
-          \step[fieldsource=parts, fieldtarget=userc]
-          \step[fieldsource=issues, fieldtarget=userd]
-          \step[fieldsource=credits, fieldtarget=lista]
-          \step[fieldsource=specdata, fieldtarget=listb]
-        }
-        \map{
-          \step[fieldsource=author, 
-            match=\regexp{(.+\s+and\s+){3,}}, 
-            final]
-          \step[fieldset=options, fieldvalue={useauthor=false}]
-        }
-        \map{
-          \step[fieldsource=editor, 
-            match=\regexp{(.+\s+and\s+){3,}}, 
-            final]
-          \step[fieldset=options, fieldvalue={useeditor=false}]
-        }
-        \map[overwrite]{
-          \step[fieldsource=author, 
-            match=\regexp{(.+\s+and\s+){3,}}, 
-            final]
-          \step[fieldsource=options, 
-            match=\regexp{^$}, 
-            final]
-          \step[fieldset=options, fieldvalue={useauthor=false}]
-        }
-        \map[overwrite]{
-          \step[fieldsource=editor, 
-            match=\regexp{(.+\s+and\s+){3,}}, 
-            final]
-          \step[fieldsource=options, 
-            match=\regexp{^$}, 
-            final]
-          \step[fieldset=options, fieldvalue={useeditor=false}]
-        }
-        \map[overwrite]{
-          \step[fieldsource=author, 
-            match=\regexp{(.+\s+and\s+){3,}}, 
-            final]
-          \step[fieldsource=options,
-            match=\regexp{(.+)},
-            replace=\regexp{useauthor=false,$1}]
-        }
-        \map[overwrite]{
-          \step[fieldsource=editor, 
-            match=\regexp{(.+\s+and\s+){3,}}, 
-            final]
-          \step[fieldsource=options,
-            match=\regexp{(.+)},
-            replace=\regexp{useeditor=false,$1}]
-        }
-      }
-     }
-    }
-    {\DeclareSourcemap{
-      \maps[datatype=bibtex]{
-        \map{
-          \step[fieldsource=book, fieldtarget=usera]
-          \step[fieldsource=books, fieldtarget=userb]
-          \step[fieldsource=parts, fieldtarget=userc]
-          \step[fieldsource=issues, fieldtarget=userd]
-          \step[fieldsource=credits, fieldtarget=lista]
-          \step[fieldsource=specdata, fieldtarget=listb]
-        }
-      }
-     }
-    }
-}
 
 \DeclareBibliographyOption{isbn}[true]{%
   \settoggle{bbx:isbn}{#1}}
@@ -340,23 +268,23 @@
   \usebibmacro{begentry}%
   \usebibmacro{author/editor+others/translator+others}%
   \setunit*{\labelnamepunct}%
-  \usebibmacro{title}%
+  \printfield{title}%\usebibmacro{title}%
   \setunit{\respdelim}%
   \usebibmacro{byauthor}%
   \setunit*{\resppunct}%
   \usebibmacro{byeditor+others}%
   \newunit\newblock
-  \printfield{howpublished}%
-  \newunit\newblock
-  \printfield{type}%
-  \newunit\newblock
   \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
   \newunit\newblock
   \usebibmacro{location+date}%
   \newunit\newblock
+  \printfield{howpublished}%
+  \newunit\newblock
   \usebibmacro{chapter+pages}%
   \newunit
   \printfield{pagetotal}%
+  \newunit\newblock
+  \printfield{type}%
   \newunit\newblock
   \usebibmacro{doi+eprint+url+note}%
   \newunit\newblock
@@ -515,18 +443,16 @@
   \setunit{\respdelim}%
   \usebibmacro{byauthor}%
   \setunit*{\resppunct}%
+  \printlist{organization}%
+  \setunit*{\resppunct}%
   \usebibmacro{byeditor+others}%
   \newunit\newblock
   \printfield{edition}%
-  \newunit\newblock
-  \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
-  \newunit\newblock
-  \printfield{type}%
   \newunit
   \printfield{version}%
   \newunit\newblock
-  \printlist{organization}%
-  \newunit
+  \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
+  \newunit\newblock
   \usebibmacro{publisher+location+date}%
   \newunit\newblock
   \usebibmacro{chapter+pages}%
@@ -538,6 +464,8 @@
   \iftoggle{bbx:isbn}
     {\printfield{isbn}}
     {}%
+  \newunit\newblock
+  \printfield{type}%
   \newunit\newblock
   \usebibmacro{doi+eprint+url+note}%
   \newunit\newblock
@@ -557,15 +485,15 @@
   \setunit*{\resppunct}%
   \usebibmacro{byeditor+others}%
   \newunit\newblock
-  \printfield{howpublished}%
-  \newunit\newblock
-  \printfield{type}%
-  \newunit
   \printfield{version}%
   \newunit\newblock
   \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
   \newunit\newblock
   \usebibmacro{organization+location+date}%
+  \newunit\newblock
+  \printfield{howpublished}%
+  \newunit\newblock
+  \printfield{type}%
   \newunit\newblock
   \usebibmacro{doi+eprint+url+note}%
   \newunit\newblock
@@ -583,13 +511,13 @@
   \setunit{\respdelim}%
   \usebibmacro{byauthor}%
   \setunit*{\resppunct}%
+  \printlist{organization}%
+  \setunit*{\resppunct}%
   \usebibmacro{byeditor+others}%
   \newunit\newblock
   \printfield{version}%
   \newunit\newblock
   \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
-  \newunit\newblock
-  \printlist{organization}%
   \newunit\newblock
   \usebibmacro{date}%
   \newunit\newblock
@@ -704,10 +632,6 @@
   \setunit*{\labelnamepunct}%
   \usebibmacro{title}%
   \newunit\newblock
-  \printfield{type}%
-  \setunit*{\addspace}%
-  \printfield{number}%
-  \newunit\newblock
   \printfield{version}%
   \newunit\newblock
   \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
@@ -721,6 +645,10 @@
   \iftoggle{bbx:isbn}
     {\printfield{isrn}}
     {}%
+  \newunit\newblock
+  \printfield{type}%
+  \setunit*{\addspace}%
+  \printfield{number}%
   \newunit\newblock
   \usebibmacro{doi+eprint+url+note}%
   \newunit\newblock
@@ -764,11 +692,11 @@
   \setunit*{\labelnamepunct}%
   \usebibmacro{title}%
   \newunit\newblock
-  \printfield{howpublished}%
-  \newunit\newblock
   \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
   \newunit\newblock
   \usebibmacro{location+date}%
+  \newunit\newblock
+  \printfield{howpublished}%
   \newunit\newblock
   \usebibmacro{url+urldate+note}
   \newunit\newblock
@@ -1079,11 +1007,9 @@
     test \ifuseauthor
     or
     test {\ifnameundef{author}}
-  }
-    {}
-    {%\usebibmacro{bytypestrg}{author}{author}%
-     %\setunit{\addspace}%
-     \printnames[byauthor]{author}}}
+  }%
+    {}%
+    {\printnames[byauthor]{author}}}
      
 \renewbibmacro*{bybookauthor}{%
   \ifnamesequal{author}{bookauthor}

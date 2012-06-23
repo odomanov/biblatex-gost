@@ -1,7 +1,6 @@
 % $Id$
 
 \ProvidesFile{biblatex-gost.def}
-[\abx@bbxid $Id$]
 
 % these declarations should be here, not in lbx, to be initialized for all languages
 \NewBibliographyString{
@@ -267,6 +266,82 @@
     \field{sortyear}
     \field{year}
   }
+}
+
+\DeclareBibliographyOption{movenames}[true]{%
+  \ifstrequal{#1}{true}
+    {\DeclareSourcemap{
+      \maps[datatype=bibtex]{
+        \map{
+          \step[fieldsource=book, fieldtarget=usera]
+          \step[fieldsource=books, fieldtarget=userb]
+          \step[fieldsource=parts, fieldtarget=userc]
+          \step[fieldsource=issues, fieldtarget=userd]
+          \step[fieldsource=credits, fieldtarget=lista]
+          \step[fieldsource=specdata, fieldtarget=listb]
+        }
+        \map{
+          \step[fieldsource=author, 
+            match=\regexp{(.+\s+and\s+){3,}}, 
+            final]
+          \step[fieldset=options, fieldvalue={useauthor=false}]
+        }
+        \map{
+          \step[fieldsource=editor, 
+            match=\regexp{(.+\s+and\s+){3,}}, 
+            final]
+          \step[fieldset=options, fieldvalue={useeditor=false}]
+        }
+        \map[overwrite]{
+          \step[fieldsource=author, 
+            match=\regexp{(.+\s+and\s+){3,}}, 
+            final]
+          \step[fieldsource=options, 
+            match=\regexp{^$}, 
+            final]
+          \step[fieldset=options, fieldvalue={useauthor=false}]
+        }
+        \map[overwrite]{
+          \step[fieldsource=editor, 
+            match=\regexp{(.+\s+and\s+){3,}}, 
+            final]
+          \step[fieldsource=options, 
+            match=\regexp{^$}, 
+            final]
+          \step[fieldset=options, fieldvalue={useeditor=false}]
+        }
+        \map[overwrite]{
+          \step[fieldsource=author, 
+            match=\regexp{(.+\s+and\s+){3,}}, 
+            final]
+          \step[fieldsource=options,
+            match=\regexp{(.+)},
+            replace=\regexp{useauthor=false,$1}]
+        }
+        \map[overwrite]{
+          \step[fieldsource=editor, 
+            match=\regexp{(.+\s+and\s+){3,}}, 
+            final]
+          \step[fieldsource=options,
+            match=\regexp{(.+)},
+            replace=\regexp{useeditor=false,$1}]
+        }
+      }
+     }
+    }
+    {\DeclareSourcemap{
+      \maps[datatype=bibtex]{
+        \map{
+          \step[fieldsource=book, fieldtarget=usera]
+          \step[fieldsource=books, fieldtarget=userb]
+          \step[fieldsource=parts, fieldtarget=userc]
+          \step[fieldsource=issues, fieldtarget=userd]
+          \step[fieldsource=credits, fieldtarget=lista]
+          \step[fieldsource=specdata, fieldtarget=listb]
+        }
+      }
+     }
+    }
 }
 
 \DeclareSortExclusion{inbook,incollection,inproceeding,bookinbook,suppbook,suppcollection,inreference}
