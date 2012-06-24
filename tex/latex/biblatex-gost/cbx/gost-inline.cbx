@@ -14,6 +14,7 @@
 \newtoggle{cbx:loccit}
 \newtoggle{cbx:t:bookibid} % for .. // Ibid. in inbook, incollection,..
 \newtoggle{cbx:f:bookibid} 
+\newtoggle{cbx:opt:inbookibid}
 \newbibmacro*{cite:citepages}{}
 \newbibmacro*{cite:full:citepages}{}
 \newbibmacro*{cite:postnote}{}
@@ -90,6 +91,9 @@
     \setunit{\addspace}%
     \printfield{postnote}}}
 
+\DeclareBibliographyOption{inbookibid}[true]{%
+  \settoggle{cbx:opt:inbookibid}{#1}}
+
 \AtEveryCitekey{%
   \ifcsdef{abx@field@hyphenation}{%
     \edef\blx@languagename{\abx@field@hyphenation}%
@@ -104,7 +108,7 @@
 \renewcommand{\postnotedelim}{\addperiod\space}
 \renewcommand{\multicitedelim}{\addsemicolondelim\space}
 
-\ExecuteBibliographyOptions{citetracker=constrict,autocite=inline,
+\ExecuteBibliographyOptions{citetracker=constrict,autocite=inline,inbookibid=false,
                             citepages=omit,strict,opcittracker=constrict,labeltitle}
 
 \newbibmacro*{cite:seen}{%  the same for cite and footcite
@@ -285,6 +289,8 @@
 \newbibmacro*{cbx:bookibid:check}[2]{%
   \ifboolexpr{%
     test {\ifcitation}
+    and
+    test {\iftoggle{cbx:opt:inbookibid}}
     and
     ( ( test {\iffootnote}
       and
