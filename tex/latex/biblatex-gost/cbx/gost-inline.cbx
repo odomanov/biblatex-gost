@@ -12,9 +12,8 @@
   \bibhypertarget{\thefield{entrykey}:\the\value{instcount}}{#1}}
 \providecommand*{\mkibid}[1]{#1}
 \newtoggle{cbx:loccit}
-\newtoggle{cbx:t:bookibid} % for Ibid. in inbook, incollection,..
-%\global\togglefalse{cbx:t:bookibid}
-%\global\undef\cbx@t@lastcrossref
+\newtoggle{cbx:t:bookibid} % for .. // Ibid. in inbook, incollection,..
+\newtoggle{cbx:f:bookibid} 
 \newbibmacro*{cite:citepages}{}
 \newbibmacro*{cite:full:citepages}{}
 \newbibmacro*{cite:postnote}{}
@@ -121,21 +120,17 @@
 }
 
 \newbibmacro*{cite}{%
-  %\ifbool{multicite}{TRUE}{FALSE}
-  %\ifmulticite{TRUE}{FALSE}
-  %\ifnumequal{\themulticitetotal}{0}{NOTMULTI}{MULTI}
-  %\ifmulticitation{MULTI}{NOTMULTI}
   \usebibmacro{cite:citepages}%
   \global\togglefalse{cbx:loccit}%
   \ifboolexpr{%
           not test {\ifdefvoid{\cbx@t@lastcrossref}}
           and 
           test {\iffieldequals{crossref}{\cbx@t@lastcrossref}}
-          }
+          }%
     {\global\toggletrue{cbx:t:bookibid}}
     {\global\togglefalse{cbx:t:bookibid}%
      \savefield{crossref}{\cbx@t@lastcrossref}%
-     \global\xdef\cbx@t@bookref{\thefield{entrykey}:\the\value{instcount}}}
+     \global\xdef\cbx@t@bookref{\thefield{entrykey}:\the\value{instcount}}}%
   \ifciteseen
     {\global\togglefalse{cbx:t:bookibid}%
      \global\undef\cbx@t@lastcrossref%
@@ -148,8 +143,6 @@
   \csxdef{cbx@t@\thefield{entrykey}}{\the\value{instcount}}}%
 
 \newbibmacro{cite:clearfields}{%
-   %\clearfield{series}%
-   %\clearfield{number}%
    \renewbibmacro*{series+number}{}%
    \clearfield{doi}%
    \clearfield{eprint}%
@@ -214,8 +207,20 @@
 \newbibmacro*{footcite}{%
   \usebibmacro{cite:citepages}%
   \global\togglefalse{cbx:loccit}%
+  \ifboolexpr{%
+          not test {\ifdefvoid{\cbx@f@lastcrossref}} % undef, \relax, or empty
+          and 
+          test {\iffieldequals{crossref}{\cbx@f@lastcrossref}}
+          }%
+    {\global\toggletrue{cbx:f:bookibid}}
+    {\global\togglefalse{cbx:f:bookibid}%
+     \savefield{crossref}{\cbx@f@lastcrossref}%
+     \global\xdef\cbx@f@bookref{\thefield{entrykey}:\the\value{instcount}}}%
   \ifciteseen
-    {\usebibmacro{cite:seen}}
+    {\global\togglefalse{cbx:f:bookibid}%
+     \global\undef\cbx@f@lastcrossref%
+     \global\undef\cbx@f@bookref%
+     \usebibmacro{cite:seen}}
     {\usebibmacro{cite:full}%
      \usebibmacro{footcite:save}}}
 
@@ -277,10 +282,20 @@
 
 \DeclareMultiCiteCommand{\textcites}[\cbx@textcite\footcites]{\textcite}{\multicitedelim}
 
-\gdef\ifbookibid{%
-  \iffootnote
-    {\iftoggle{cbx:f:bookibid}{\expandafter\@firstoftwo}{\expandafter\@secondoftwo}}
-    {\iftoggle{cbx:t:bookibid}{\expandafter\@firstoftwo}{\expandafter\@secondoftwo}}}
-
+\newbibmacro*{cbx:bookibid:check}[2]{%
+  \ifboolexpr{%
+    test {\ifcitation}
+    and
+    ( ( test {\iffootnote}
+      and
+      test {\iftoggle{cbx:f:bookibid}} )
+      or
+      ( not test {\iffootnote}
+        and 
+        test {\iftoggle{cbx:t:bookibid}} )
+    ) 
+  }
+  {#1}
+  {#2}}
 
 \endinput

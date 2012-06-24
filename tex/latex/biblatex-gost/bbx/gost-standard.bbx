@@ -339,18 +339,7 @@
   \usebibmacro{byauthor}%
   \setunit{\space}
   \usebibmacro{//}%
-  \ifboolexpr{%
-    test {\ifcitation}
-    and
-    ( ( test {\iffootnote}
-      and
-      test {\iftoggle{cbx:f:bookibid}} )
-      or
-      ( not test {\iffootnote}
-        and 
-        test {\iftoggle{cbx:t:bookibid}})
-    ) 
-  }
+  \usebibmacro{cbx:bookibid:check}
      {\bibsentence\printtext{%
         \bibhyperlink{\csuse{cbx@\iffootnote{f}{t}@bookref}}{\bibstring[\mkibid]{ibidem}}}}
      {\usebibmacro{maintitle+volumes+parts+booktitle}%
@@ -392,29 +381,32 @@
   \usebibmacro{byauthor}%
   \setunit{\space}
   \usebibmacro{//}%
-  \usebibmacro{maintitle+volumes+parts+booktitle}%
-  \setunit{\respdelim}%
-  \usebibmacro{byeditor+others}%
-  \newunit\newblock
-  \printfield{edition}%
-  \newunit\newblock
-  \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
-  \newunit\newblock
-  \usebibmacro{publisher+location+date}%
-  \newunit\newblock
-  \usebibmacro{chapter+pages}%
-  \newunit\newblock
-  \usebibmacro{series+number}%
-  \newunit\newblock
-  \iftoggle{bbx:isbn}
-    {\printfield{isbn}}
-    {}%
-  \newunit\newblock
-  \usebibmacro{doi+eprint+url+note}%
-  \newunit\newblock
-  \usebibmacro{addendum+pubstate}%
-  \setunit{\bibpagerefpunct}\newblock
-  \usebibmacro{pageref}%
+  \usebibmacro{cbx:bookibid:check}
+     {\bibsentence\printtext{%
+        \bibhyperlink{\csuse{cbx@\iffootnote{f}{t}@bookref}}{\bibstring[\mkibid]{ibidem}}}}
+     {\usebibmacro{maintitle+volumes+parts+booktitle}%
+      \setunit{\respdelim}%
+      \usebibmacro{byeditor+others}%
+      \newunit\newblock
+      \printfield{edition}%
+      \newunit\newblock
+      \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
+      \newunit\newblock
+      \usebibmacro{publisher+location+date}%
+      \newunit\newblock
+      \usebibmacro{chapter+pages}%
+      \newunit\newblock
+      \usebibmacro{series+number}%
+      \newunit\newblock
+      \iftoggle{bbx:isbn}
+        {\printfield{isbn}}
+        {}%
+      \newunit\newblock
+      \usebibmacro{doi+eprint+url+note}%
+      \newunit\newblock
+      \usebibmacro{addendum+pubstate}%
+      \setunit{\bibpagerefpunct}\newblock
+      \usebibmacro{pageref}}%
   \usebibmacro{finentry}}
 
 \DeclareBibliographyDriver{inproceedings}{%
@@ -427,31 +419,34 @@
   \usebibmacro{byauthor}%
   \setunit{\space}
   \usebibmacro{//}%
-  \usebibmacro{maintitle+volumes+parts+booktitle}%
-  \newunit
-  \usebibmacro{event+venue+date}%
-  \setunit{\respdelim}%
-  \usebibmacro{byeditor+others}%
-  \newunit\newblock
-  \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
-  \newunit\newblock
-  \printlist{organization}%
-  \newunit
-  \usebibmacro{publisher+location+date}%
-  \newunit\newblock
-  \usebibmacro{chapter+pages}%
-  \newunit\newblock
-  \usebibmacro{series+number}%
-  \newunit\newblock
-  \iftoggle{bbx:isbn}
-    {\printfield{isbn}}
-    {}%
-  \newunit\newblock
-  \usebibmacro{doi+eprint+url+note}%
-  \newunit\newblock
-  \usebibmacro{addendum+pubstate}%
-  \setunit{\bibpagerefpunct}\newblock
-  \usebibmacro{pageref}%
+  \usebibmacro{cbx:bookibid:check}
+     {\bibsentence\printtext{%
+        \bibhyperlink{\csuse{cbx@\iffootnote{f}{t}@bookref}}{\bibstring[\mkibid]{ibidem}}}}
+     {\usebibmacro{maintitle+volumes+parts+booktitle}%
+      \newunit
+      \usebibmacro{event+venue+date}%
+      \setunit{\respdelim}%
+      \usebibmacro{byeditor+others}%
+      \newunit\newblock
+      \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
+      \newunit\newblock
+      \printlist{organization}%
+      \newunit
+      \usebibmacro{publisher+location+date}%
+      \newunit\newblock
+      \usebibmacro{chapter+pages}%
+      \newunit\newblock
+      \usebibmacro{series+number}%
+      \newunit\newblock
+      \iftoggle{bbx:isbn}
+        {\printfield{isbn}}
+        {}%
+      \newunit\newblock
+      \usebibmacro{doi+eprint+url+note}%
+      \newunit\newblock
+      \usebibmacro{addendum+pubstate}%
+      \setunit{\bibpagerefpunct}\newblock
+      \usebibmacro{pageref}}%
   \usebibmacro{finentry}}
 
 \DeclareBibliographyDriver{manual}{%
