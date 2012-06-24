@@ -342,9 +342,17 @@
   \ifboolexpr{%
     test {\ifcitation}
     and
-    test {\iftoggle{cbx:bookibid}} 
+    ( ( test {\iffootnote}
+      and
+      test {\iftoggle{cbx:f:bookibid}} )
+      or
+      ( not test {\iffootnote}
+        and 
+        test {\iftoggle{cbx:t:bookibid}})
+    ) 
   }
-     {\usebibmacro{cite:ibid}}
+     {\bibsentence\printtext{%
+        \bibhyperlink{\csuse{cbx@\iffootnote{f}{t}@bookref}}{\bibstring[\mkibid]{ibidem}}}}
      {\usebibmacro{maintitle+volumes+parts+booktitle}%
       \setunit{\respdelim}%
       \ifnamesequal{author}{bookauthor}

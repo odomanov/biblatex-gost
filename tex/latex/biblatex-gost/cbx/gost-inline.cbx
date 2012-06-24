@@ -12,9 +12,9 @@
   \bibhypertarget{\thefield{entrykey}:\the\value{instcount}}{#1}}
 \providecommand*{\mkibid}[1]{#1}
 \newtoggle{cbx:loccit}
-\newtoggle{cbx:bookibid} % for Ibid. in inbook, incollection,..
-%\global\toggletrue{cbx:bookibid}
-\def\cbx@t@lastcrossref{}
+\newtoggle{cbx:t:bookibid} % for Ibid. in inbook, incollection,..
+%\global\togglefalse{cbx:t:bookibid}
+%\global\undef\cbx@t@lastcrossref
 \newbibmacro*{cite:citepages}{}
 \newbibmacro*{cite:full:citepages}{}
 \newbibmacro*{cite:postnote}{}
@@ -128,22 +128,24 @@
   \usebibmacro{cite:citepages}%
   \global\togglefalse{cbx:loccit}%
   \ifboolexpr{%
-            not test {\ifdefvoid{\cbx@t@lastcrossref}}
-            and
-            test {\iffieldequals{crossref}{\cbx@t@lastcrossref}}
-       }
-      {\global\toggletrue{cbx:bookibid}}
-      {\global\togglefalse{cbx:bookibid}%
-       \global\undef\cbx@t@lastcrossref}%
+          not test {\ifdefvoid{\cbx@t@lastcrossref}}
+          and 
+          test {\iffieldequals{crossref}{\cbx@t@lastcrossref}}
+          }
+    {\global\toggletrue{cbx:t:bookibid}}
+    {\global\togglefalse{cbx:t:bookibid}%
+     \savefield{crossref}{\cbx@t@lastcrossref}%
+     \global\xdef\cbx@t@bookref{\thefield{entrykey}:\the\value{instcount}}}
   \ifciteseen
-    {\global\undef\cbx@t@lastcrossref%
+    {\global\togglefalse{cbx:t:bookibid}%
+     \global\undef\cbx@t@lastcrossref%
+     \global\undef\cbx@t@bookref%
      \usebibmacro{cite:seen}}
     {\usebibmacro{cite:full}%
      \usebibmacro{cite:save}}}
 
 \newbibmacro*{cite:save}{%
-  \csxdef{cbx@t@\thefield{entrykey}}{\the\value{instcount}}%
-  \savefield{crossref}{\cbx@t@lastcrossref}}%
+  \csxdef{cbx@t@\thefield{entrykey}}{\the\value{instcount}}}%
 
 \newbibmacro{cite:clearfields}{%
    %\clearfield{series}%
@@ -274,5 +276,11 @@
   \def\cbx@savedcites{#1}#2\cbx@savedcites}
 
 \DeclareMultiCiteCommand{\textcites}[\cbx@textcite\footcites]{\textcite}{\multicitedelim}
+
+\gdef\ifbookibid{%
+  \iffootnote
+    {\iftoggle{cbx:f:bookibid}{\expandafter\@firstoftwo}{\expandafter\@secondoftwo}}
+    {\iftoggle{cbx:t:bookibid}{\expandafter\@firstoftwo}{\expandafter\@secondoftwo}}}
+
 
 \endinput
