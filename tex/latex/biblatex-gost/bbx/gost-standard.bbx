@@ -72,7 +72,7 @@
     {\ifbibstring{volume}
       {\bibstring{volume}\addabbrvspace#1}
       {}}
-    {#1}}
+    {\ifcapital{\MakeCapital{#1}}{#1}\isdot}}
 \DeclareFieldFormat[article,periodical]{volume}{%
   \ifbibstring{volume}
     {\bibstring{jourvol}\addabbrvspace#1}
@@ -82,19 +82,19 @@
     {\ifbibstring{book}
       {\bibstring{book}\addabbrvspace#1}
       {}}
-    {#1}}
+    {\ifcapital{\MakeCapital{#1}}{#1}\isdot}}
 \DeclareFieldFormat*{part}{%
   \iffieldnum{part}
     {\ifbibstring{part}
       {\bibstring{part}\addabbrvspace#1}
       {}}
-    {#1}}
+    {\ifcapital{\MakeCapital{#1}}{#1}\isdot}}
 \DeclareFieldFormat[article,periodical]{number}{%
   \iffieldnum{number}
     {\ifbibstring{number}
       {\bibstring{number}\addabbrvspace#1}
       {\unspace\adddot#1}}
-    {#1}}
+    {\ifcapital{\MakeCapital{#1}}{#1}\isdot}}
 \DeclareFieldFormat{volumes}{#1}
 \newbibmacro{in+}[2]{%
   \iffieldnum{\csuse{bbx@gostbibermap@#1}}
@@ -112,13 +112,13 @@
     {\ifbibstring{issue}
       {\bibstring{issue}\addabbrvspace#1}
       {}}
-    {#1}}
+    {\ifcapital{\MakeCapital{#1}}{#1}\isdot}}
 \DeclareFieldFormat[article,periodical]{issue}{%
   \ifinteger{#1}
     {\ifbibstring{issue}%
      {\bibstring{issue}\addabbrvspace#1}%
      {\unspace\adddot#1}}%
-    {#1}}
+    {\ifcapital{\MakeCapital{#1}}{#1}\isdot}}
 \DeclareFieldFormat{date}{%
  \iffieldundef{endyear}
    {#1}
@@ -135,6 +135,10 @@
     {}%
     #1\isdot
 }
+\DeclareFieldFormat{edition}{%
+  \ifinteger{#1}
+    {\mkbibordedition{#1}~\bibstring{edition}}
+    {\ifcapital{\MakeCapital{#1}}{#1}\isdot}}
 
 \DeclareNameAlias{sortname}{last-first}
 
