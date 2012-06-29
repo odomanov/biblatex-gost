@@ -562,26 +562,25 @@
 \DeclareBibliographyDriver{patent}{%
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
-  \usebibmacro{author}%
-  \setunit*{\labelnamepunct}%
+  %\usebibmacro{author}%
+  %\setunit*{\labelnamepunct}%
   \usebibmacro{title}%
-  \newunit
-  \printlist{language}%
-  \newunit\newblock
-  \usebibmacro{byauthor}%
-  \newunit\newblock
+  \setunit*{\addcolondelim}
   \printfield{type}%
   \setunit*{\addspace}%
   \printfield{number}%
   \iflistundef{location}
     {}
     {\setunit*{\addspace}%
-     \printtext[parens]{%
-       \printlist[][-\value{listtotal}]{location}}}%
-  \newunit\newblock
+     \printlist[][-\value{listtotal}]{location}}%
+  \setunit{\respdelim}%
+  \printnames[byauthor]{author}%
+  \setunit*{\addsemicolondelim}
   \usebibmacro{byholder}%
   \newunit\newblock
   \usebibmacro{date}%
+  \newunit\newblock
+  \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
   \newunit\newblock
   \usebibmacro{doi+eprint+url+note}%
   \newunit\newblock
