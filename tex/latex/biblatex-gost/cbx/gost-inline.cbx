@@ -148,6 +148,7 @@
 
 \newbibmacro{cite:clearfields}{%
    \renewbibmacro*{series+number}{}%
+   %\clearfield{\bbx@gostbibermap@material}%
    \clearfield{doi}%
    \clearfield{eprint}%
    \clearfield{url}%
@@ -286,7 +287,7 @@
 
 \DeclareMultiCiteCommand{\textcites}[\cbx@textcite\footcites]{\textcite}{\multicitedelim}
 
-\newbibmacro*{cbx:bookibid:check}[2]{%
+\renewbibmacro*{cbx:bookibid:check}[2]{%
   \ifboolexpr{%
     test {\ifcitation}
     and

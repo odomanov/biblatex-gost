@@ -28,6 +28,7 @@
 \newcommand*{\bbx@gostbibermap@books}{userb}
 \newcommand*{\bbx@gostbibermap@parts}{userc}
 \newcommand*{\bbx@gostbibermap@issues}{userd}
+\newcommand*{\bbx@gostbibermap@material}{usere}
 \newcommand*{\bbx@gostbibermap@credits}{lista}
 \newcommand*{\bbx@gostbibermap@specdata}{listb}
 \newcommand*{\bbx@gostbibermap@volumes}{volumes}
@@ -60,6 +61,8 @@
   singletitle=false,
   movenames=true}
 
+\newbibmacro*{cbx:bookibid:check}[2]{#2}
+
 \DeclareFieldFormat*{title}{#1}
 \DeclareFieldFormat{booktitle}{#1}
 \DeclareFieldFormat{journaltitle}{#1}
@@ -70,7 +73,7 @@
     {\ifbibstring{volume}
       {\bibstring{volume}\addabbrvspace#1}
       {}}
-    {#1}}
+    {\ifcapital{\MakeCapital{#1}}{#1}\isdot}}
 \DeclareFieldFormat[article,periodical]{volume}{%
   \ifbibstring{volume}
     {\bibstring{jourvol}\addabbrvspace#1}
@@ -80,19 +83,19 @@
     {\ifbibstring{book}
       {\bibstring{book}\addabbrvspace#1}
       {}}
-    {#1}}
+    {\ifcapital{\MakeCapital{#1}}{#1}\isdot}}
 \DeclareFieldFormat*{part}{%
   \iffieldnum{part}
     {\ifbibstring{part}
       {\bibstring{part}\addabbrvspace#1}
       {}}
-    {#1}}
+    {\ifcapital{\MakeCapital{#1}}{#1}\isdot}}
 \DeclareFieldFormat[article,periodical]{number}{%
   \iffieldnum{number}
     {\ifbibstring{number}
       {\bibstring{number}\addabbrvspace#1}
       {\unspace\adddot#1}}
-    {#1}}
+    {\ifcapital{\MakeCapital{#1}}{#1}\isdot}}
 \DeclareFieldFormat{volumes}{#1}
 \newbibmacro{in+}[2]{%
   \iffieldnum{\csuse{bbx@gostbibermap@#1}}
@@ -110,13 +113,13 @@
     {\ifbibstring{issue}
       {\bibstring{issue}\addabbrvspace#1}
       {}}
-    {#1}}
+    {\ifcapital{\MakeCapital{#1}}{#1}\isdot}}
 \DeclareFieldFormat[article,periodical]{issue}{%
   \ifinteger{#1}
     {\ifbibstring{issue}%
      {\bibstring{issue}\addabbrvspace#1}%
      {\unspace\adddot#1}}%
-    {#1}}
+    {\ifcapital{\MakeCapital{#1}}{#1}\isdot}}
 \DeclareFieldFormat{date}{%
  \iffieldundef{endyear}
    {#1}
@@ -133,6 +136,10 @@
     {}%
     #1\isdot
 }
+\DeclareFieldFormat{edition}{%
+  \ifinteger{#1}
+    {\mkbibordedition{#1}~\bibstring{edition}}
+    {\ifcapital{\MakeCapital{#1}}{#1}\isdot}}
 
 \DeclareNameAlias{sortname}{last-first}
 
@@ -181,9 +188,12 @@
 \renewcommand*{\subtitlepunct}{\addcolon\space}
 \renewcommand*{\newblockpunct}{%
   \addnbspace\textemdash\space\bibsentence}% block punctuation
-\newcommand{\respdelim}{\addnbspace/\space}% delimiter before "credits"
-%\newcommand{\resppunct}{\addsemicolon\space}% punctuation between "credits" items
-\newcommand{\resppunct}{\addsemicolondelim\space}% punctuation between "credits" items
+\newcommand*{\respdelim}{\addnbspace/\space}% delimiter before "credits"
+\newcommand*{\resppunct}{\addsemicolondelim\space}% punctuation between "credits" items
+
+\@ifpackageloaded{babel}
+  {\edef\gostmateriallanguage{\bbl@main@language}}
+  {\edef\gostmateriallanguage{russian}}
 
 \newbibmacro*{begentry}{}
 \newbibmacro*{finentry}{\finentry}
@@ -556,26 +566,25 @@
 \DeclareBibliographyDriver{patent}{%
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
-  \usebibmacro{author}%
-  \setunit*{\labelnamepunct}%
+  %\usebibmacro{author}%
+  %\setunit*{\labelnamepunct}%
   \usebibmacro{title}%
-  \newunit
-  \printlist{language}%
-  \newunit\newblock
-  \usebibmacro{byauthor}%
-  \newunit\newblock
+  \setunit*{\addcolondelim}
   \printfield{type}%
   \setunit*{\addspace}%
   \printfield{number}%
   \iflistundef{location}
     {}
     {\setunit*{\addspace}%
-     \printtext[parens]{%
-       \printlist[][-\value{listtotal}]{location}}}%
-  \newunit\newblock
+     \printlist[][-\value{listtotal}]{location}}%
+  \setunit{\respdelim}%
+  \printnames[byauthor]{author}%
+  \setunit*{\addsemicolondelim}
   \usebibmacro{byholder}%
   \newunit\newblock
   \usebibmacro{date}%
+  \newunit\newblock
+  \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
   \newunit\newblock
   \usebibmacro{doi+eprint+url+note}%
   \newunit\newblock
@@ -966,7 +975,11 @@
     {}
     {\printtext[title]{%
        \printfield[titlecase]{title}%
-       \setunit*{\subtitlepunct}%
+       \iffieldundef{\bbx@gostbibermap@material}
+          {\setunit*{\subtitlepunct}}
+          {\setunit*{\addspace}%
+           \usebibmacro{material}%
+           \setunit*{\addcolondelim}}
        \printfield[titlecase]{subtitle}}%
      \newunit}%
   \setunit*{\addcolondelim}%
@@ -996,13 +1009,17 @@
     {}
     {\printtext[maintitle]{%
        \printfield[titlecase]{maintitle}%
-       \setunit{\subtitlepunct}%
+       \iffieldundef{\bbx@gostbibermap@material}
+          {\setunit*{\subtitlepunct}}
+          {\setunit*{\addspace}%
+           \usebibmacro{material}%
+           \setunit*{\addcolondelim}}
        \printfield[titlecase]{mainsubtitle}}%
      \newunit}%
   \setunit{\addcolondelim}%
   \printfield{maintitleaddon}}
 
-\newcommand{\addcolondelim}{%
+\newcommand*{\addcolondelim}{%
   \begingroup%
   \def\abx@colon{%
     \ifdim\lastkern>\z@\unkern\fi%
@@ -1010,7 +1027,7 @@
   \addcolon%
   \endgroup}
 
-\newcommand{\addsemicolondelim}{%
+\newcommand*{\addsemicolondelim}{%
   \begingroup%
   \def\abx@semicolon{%
     \ifdim\lastkern>\z@\unkern\fi%
@@ -1018,7 +1035,7 @@
   \addsemicolon%
   \endgroup}
 
-\newbibmacro{involumes+otherparts}[1]{%
+\newbibmacro*{involumes+otherparts}[1]{%
   \printfield[involumes]{volumes}%
   \setunit*{#1}%
   \printfield[inbooks]{\bbx@gostbibermap@books}%
@@ -1135,7 +1152,7 @@
     {#1}
     {#2}}
 
-\newbibmacro{url+urldate+note}{%
+\newbibmacro*{url+urldate+note}{%
   \iftoggle{bbx:url}
     {\usebibmacro{url+urldate}}
     {}%
@@ -1150,6 +1167,16 @@
     \expandafter\@secondoftwo
   \fi
 }
+
+\newbibmacro*{material}{%
+  \iffieldundef{\bbx@gostbibermap@material}
+    {}
+    {{\ifdefvoid{\gostmateriallanguage}
+        {}
+        {\select@language{\gostmateriallanguage}}%
+          \ifbibxstring{material\thefield{\bbx@gostbibermap@material}}
+            {\printtext[brackets]{\bibcpstring{material\thefield{\bbx@gostbibermap@material}}}}
+            {}}}}
 
 \DeclareAutoCiteCommand{footnote}{\smartcite}{\smartcites}
 \DeclareAutoCiteCommand{superscript}{\supercite}{\supercites}
