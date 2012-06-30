@@ -1017,7 +1017,8 @@
        \printfield[titlecase]{mainsubtitle}}%
      \newunit}%
   \setunit{\addcolondelim}%
-  \printfield{maintitleaddon}}
+  \printfield{maintitleaddon}%
+  \clearfield{\bbx@gostbibermap@material}}
 
 \newcommand*{\addcolondelim}{%
   \begingroup%
@@ -1157,16 +1158,14 @@
     {\usebibmacro{url+urldate}}
     {}%
   \setunit*{\addsemicolondelim\space}
-  \printfield{note}
-}
+  \printfield{note}}
 
 \gdef\ifmulticitation{%
   \ifnum\c@multicitetotal>0
     \expandafter\@firstoftwo
   \else
     \expandafter\@secondoftwo
-  \fi
-}
+  \fi}
 
 \newbibmacro*{material}{%
   \iffieldundef{\bbx@gostbibermap@material}
@@ -1174,9 +1173,9 @@
     {{\ifdefvoid{\gostmateriallanguage}
         {}
         {\select@language{\gostmateriallanguage}}%
-          \ifbibxstring{material\thefield{\bbx@gostbibermap@material}}
-            {\printtext[brackets]{\bibcpstring{material\thefield{\bbx@gostbibermap@material}}}}
-            {}}}}
+      \ifbibxstring{material\thefield{\bbx@gostbibermap@material}}
+        {\printtext[brackets]{\bibcpstring{material\thefield{\bbx@gostbibermap@material}}}}
+        {}}}}
 
 \DeclareAutoCiteCommand{footnote}{\smartcite}{\smartcites}
 \DeclareAutoCiteCommand{superscript}{\supercite}{\supercites}

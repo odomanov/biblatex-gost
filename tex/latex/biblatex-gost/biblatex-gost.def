@@ -35,8 +35,20 @@
   books,
   parts,
   issues,
+  materialvideorecording,
+  materialsoundrecording,
+  materialgraphic,
+  materialcartographic,
+  materialkit,
+  materialmotionpicture,
+  materialmicroform,
+  materialmultimedia,
+  materialmusic,
+  materialobject,
+  materialmanuscript,
   materialtext,
-  materialvideorecording%
+  materialbraille,
+  materialeresource,
 }
 \DeclareLanguageMapping{russian}{russian-gost}
 %
