@@ -34,7 +34,21 @@
   bygeneditortranaf,
   books,
   parts,
-  issues%
+  issues,
+  materialvideorecording,
+  materialsoundrecording,
+  materialgraphic,
+  materialcartographic,
+  materialkit,
+  materialmotionpicture,
+  materialmicroform,
+  materialmultimedia,
+  materialmusic,
+  materialobject,
+  materialmanuscript,
+  materialtext,
+  materialbraille,
+  materialeresource,
 }
 \DeclareLanguageMapping{russian}{russian-gost}
 %
@@ -277,6 +291,7 @@
           \step[fieldsource=books, fieldtarget=userb]
           \step[fieldsource=parts, fieldtarget=userc]
           \step[fieldsource=issues, fieldtarget=userd]
+          \step[fieldsource=material, fieldtarget=usere]
           \step[fieldsource=credits, fieldtarget=lista]
           \step[fieldsource=specdata, fieldtarget=listb]
         }
@@ -336,6 +351,7 @@
           \step[fieldsource=books, fieldtarget=userb]
           \step[fieldsource=parts, fieldtarget=userc]
           \step[fieldsource=issues, fieldtarget=userd]
+          \step[fieldsource=material, fieldtarget=usere]
           \step[fieldsource=credits, fieldtarget=lista]
           \step[fieldsource=specdata, fieldtarget=listb]
         }

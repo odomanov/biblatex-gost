@@ -28,6 +28,7 @@
 \newcommand*{\bbx@gostbibermap@books}{userb}
 \newcommand*{\bbx@gostbibermap@parts}{userc}
 \newcommand*{\bbx@gostbibermap@issues}{userd}
+\newcommand*{\bbx@gostbibermap@material}{usere}
 \newcommand*{\bbx@gostbibermap@credits}{lista}
 \newcommand*{\bbx@gostbibermap@specdata}{listb}
 \newcommand*{\bbx@gostbibermap@volumes}{volumes}
@@ -96,7 +97,7 @@
       {\unspace\adddot#1}}
     {\ifcapital{\MakeCapital{#1}}{#1}\isdot}}
 \DeclareFieldFormat{volumes}{#1}
-\newbibmacro{in+}[2]{%
+\newbibmacro*{in+}[2]{%
   \iffieldnum{\csuse{bbx@gostbibermap@#1}}
     {\ifbibstring{involumes}
       {\bibstring{involumes}\addabbrvspace}
@@ -187,9 +188,12 @@
 \renewcommand*{\subtitlepunct}{\addcolon\space}
 \renewcommand*{\newblockpunct}{%
   \addnbspace\textemdash\space\bibsentence}% block punctuation
-\newcommand{\respdelim}{\addnbspace/\space}% delimiter before "credits"
-%\newcommand{\resppunct}{\addsemicolon\space}% punctuation between "credits" items
-\newcommand{\resppunct}{\addsemicolondelim\space}% punctuation between "credits" items
+\newcommand*{\respdelim}{\addnbspace/\space}% delimiter before "credits"
+\newcommand*{\resppunct}{\addsemicolondelim\space}% punctuation between "credits" items
+
+\@ifpackageloaded{babel}
+  {\edef\gostmateriallanguage{\bbl@main@language}}
+  {\edef\gostmateriallanguage{russian}}
 
 \newbibmacro*{begentry}{}
 \newbibmacro*{finentry}{\finentry}
@@ -594,7 +598,7 @@
   \usebibmacro{begentry}%
   \usebibmacro{editor}%
   \setunit*{\labelnamepunct}%
-  \usebibmacro{periodical}
+  \usebibmacro{title}
   \newunit
   \usebibmacro{date}%
   \setunit*{\addcomma\space}%
@@ -934,7 +938,7 @@
   \usebibmacro{withafterword}%
   \clearname{afterword}}
 
-\newbibmacro{jour:volume+parts+issuetitle}{%
+\newbibmacro*{jour:volume+parts+issuetitle}{%
   \printfield{volume}%
   \setunit*{\addcomma\space}%
   \printfield{issue}%
@@ -950,7 +954,7 @@
   \newunit\newblock
   \mkbibdatelong{}{month}{day}}
 
-\newbibmacro{volume+parts}{%
+\newbibmacro*{volume+parts}{%
   \printfield{volume}%
   \newunit
   \printfield[book]{\bbx@gostbibermap@book}%
@@ -959,7 +963,7 @@
   \newunit
   \printfield{issue}}%
 
-\newbibmacro{year}{%
+\newbibmacro*{year}{%
   \printfield{year}}
 
 \renewbibmacro*{title}{%
@@ -971,11 +975,16 @@
     {}
     {\printtext[title]{%
        \printfield[titlecase]{title}%
-       \setunit*{\subtitlepunct}%
+       \iffieldundef{\bbx@gostbibermap@material}
+          {\setunit*{\subtitlepunct}}
+          {\setunit*{\addspace}%
+           \usebibmacro{material}%
+           \setunit*{\addcolondelim}}
        \printfield[titlecase]{subtitle}}%
      \newunit}%
   \setunit*{\addcolondelim}%
-  \printfield{titleaddon}}
+  \printfield{titleaddon}%
+  \clearfield{\bbx@gostbibermap@material}}
 
 \renewbibmacro*{booktitle}{%
   \ifboolexpr{
@@ -1001,13 +1010,18 @@
     {}
     {\printtext[maintitle]{%
        \printfield[titlecase]{maintitle}%
-       \setunit{\subtitlepunct}%
+       \iffieldundef{\bbx@gostbibermap@material}
+          {\setunit*{\subtitlepunct}}
+          {\setunit*{\addspace}%
+           \usebibmacro{material}%
+           \setunit*{\addcolondelim}}
        \printfield[titlecase]{mainsubtitle}}%
      \newunit}%
   \setunit{\addcolondelim}%
-  \printfield{maintitleaddon}}
+  \printfield{maintitleaddon}%
+  \clearfield{\bbx@gostbibermap@material}}
 
-\newcommand{\addcolondelim}{%
+\newcommand*{\addcolondelim}{%
   \begingroup%
   \def\abx@colon{%
     \ifdim\lastkern>\z@\unkern\fi%
@@ -1015,7 +1029,7 @@
   \addcolon%
   \endgroup}
 
-\newcommand{\addsemicolondelim}{%
+\newcommand*{\addsemicolondelim}{%
   \begingroup%
   \def\abx@semicolon{%
     \ifdim\lastkern>\z@\unkern\fi%
@@ -1023,7 +1037,7 @@
   \addsemicolon%
   \endgroup}
 
-\newbibmacro{involumes+otherparts}[1]{%
+\newbibmacro*{involumes+otherparts}[1]{%
   \printfield[involumes]{volumes}%
   \setunit*{#1}%
   \printfield[inbooks]{\bbx@gostbibermap@books}%
@@ -1140,21 +1154,29 @@
     {#1}
     {#2}}
 
-\newbibmacro{url+urldate+note}{%
+\newbibmacro*{url+urldate+note}{%
   \iftoggle{bbx:url}
     {\usebibmacro{url+urldate}}
     {}%
   \setunit*{\addsemicolondelim\space}
-  \printfield{note}
-}
+  \printfield{note}}
 
 \gdef\ifmulticitation{%
   \ifnum\c@multicitetotal>0
     \expandafter\@firstoftwo
   \else
     \expandafter\@secondoftwo
-  \fi
-}
+  \fi}
+
+\newbibmacro*{material}{%
+  \iffieldundef{\bbx@gostbibermap@material}
+    {}
+    {{\ifdefvoid{\gostmateriallanguage}
+        {}
+        {\select@language{\gostmateriallanguage}}% first switch language, then \ifbibxstring
+      \ifbibxstring{material\thefield{\bbx@gostbibermap@material}}
+        {\printtext[brackets]{\bibcpstring{material\thefield{\bbx@gostbibermap@material}}}}
+        {}}}}
 
 \DeclareAutoCiteCommand{footnote}{\smartcite}{\smartcites}
 \DeclareAutoCiteCommand{superscript}{\supercite}{\supercites}

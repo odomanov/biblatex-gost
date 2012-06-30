@@ -60,10 +60,10 @@
 \setlength{\cftsecnumwidth}{1.5em}
 \cftsetindents{subsection}{\cftsecnumwidth}{1.2\cftsecnumwidth}
 \cftsetindents{table}{\cftsecindent}{\cftsecnumwidth}
-\renewcommand*{\cftsubsecfont}{\small}
-\renewcommand*{\cftsecfont}{\bfseries\cftsubsecfont}
+\renewcommand*{\cftsubsecfont}{}%\small}
+\renewcommand*{\cftsecfont}{\bfseries\sffamily\cftsubsecfont}
 \renewcommand*{\cfttabfont}{\cftsubsecfont}
-\renewcommand*{\cftsecpagefont}{\cftsecfont}
+\renewcommand*{\cftsecpagefont}{\cftsubsecfont}
 \renewcommand*{\cftsubsecpagefont}{\cftsubsecfont}
 \renewcommand*{\cfttabpagefont}{\cfttabfont}
 
@@ -95,6 +95,7 @@
 \addtokomafont{subsubsection}{\reddishcolor}
 \addtokomafont{disposition}{\reddishcolor}
 \addtokomafont{descriptionlabel}{\spotcolor\rmfamily}
+\addtokomafont{caption}{\small}
 \renewcommand{\textfraction}{.5}
 %-----
 \usepackage{ellipsis}% must be loaded after hyperref !!
@@ -275,56 +276,6 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 \label{sec:database}
 
 
-\subsection{Новые поля}
-\label{sec:newfields}
-
-\biblatex позволяет, с некоторыми ограничениями, определять 
-новые поля библиографической базы данных. 
-В \biblatexgost определены следующие поля  (подробности реализации см. в~\apxref{bibermap}). 
-
-\begin{fieldlist}
-
-\fielditem{book}{number/literal}
-
-Содержит номер (или другой идентификатор) книги для изданий, разделённых на книги. См. подробнее
-\secref{sec:volsparts} 
-
-\fielditem{books, parts, issues}{number/literal}
-
-Содержат количество книг, частей, выпусков изданий, 
-которые делятся на книги, части, выпуски (аналогично стандартному полю \bibfield{volumes}). См.
-подробнее \secref{sec:volsparts}.
-
-\listitem{credits}{literal}
-
-Содержит сведения об ответственности, отличные от предусмотренных в \biblatex, 
-такие, например, как организация:
-
-\begin{bibexample}
-\item \textellipsis\ \slash\ Академия наук СССР\ ;\ \textellipsis
-\end{bibexample}
-
-В этом поле могут содержаться любые нестандартные сведения об ответственности,
-например: <<авт. курса А. Сигалов>>,
-<<коллектив авт. под рук. Исакова Ю.Ф>> и т.\,д. 
-Более того, в особенно нестандартных ситуациях
-оно может содержать вообще все сведения об ответственности. 
-Поле \bibfield{credits} выводится в сведениях об ответственности в самом начале или 
-сразу после авторов, если они там присутствуют. 
-
-\fielditem{editortype}{key}
-
-Это поле существует в \biblatex, но в \biblatexgost для него определёно новое значение: 
-тип редактора \bibfield{geneditor}, соответствующий общему 
-редактору. Он выводится в виде: \enquote{Под общ. ред.~\ldots}.
-
-\listitem{specdata}{literal}
-
-Область специфических сведений (см.~\tabref{tab:gost-biblatex}). Представляет собой список,
-элементы которого при выводе разделяются точкой с запятой.
-
-\end{fieldlist}
-
 \subsection{Соответствие между терминами ГОСТ и \biblatexgost}
 \label{sec:gost-biblatex}
 
@@ -352,8 +303,8 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 \endlastfoot
 \multicolumn{1}{@{}H}{Область заглавия и сведений об ответственности} & \\
 Основное заглавие                & title, maintitle, booktitle \\
-%\textit{Общее обозначение материала} &  \\
-%\textit{Параллельное заглавие} &  \\
+\textit{Общее обозначение материала} &  {\spotcolor material} \\
+%\textit{Параллельное заглавие} &  {\spotcolor paratitle} \\
 \textit{Сведения, относящиеся к заглавию} & subtitle, mainsubtitle,
                                             booksubtitle, titleaddon, maintitleaddon,
                                             booktitleaddon \\
@@ -414,6 +365,102 @@ ISSN серии или подсерии & issn (isbn) \\
 параллельное заглавие, другие сведения о физической характеристике, размеры,
 сведения о сопроводительном материале.
 
+\subsection{Новые поля}
+\label{sec:newfields}
+
+\biblatex позволяет, с некоторыми ограничениями, определять 
+новые поля библиографической базы данных. 
+В \biblatexgost определены следующие поля  (подробности реализации см. в~\apxref{bibermap}). 
+
+\begin{fieldlist}
+
+\fielditem{book}{number/literal}
+
+Содержит номер (или другой идентификатор) книги для изданий, разделённых на книги. См. подробнее
+\secref{sec:volsparts} 
+
+\fielditem{books, parts, issues}{number/literal}
+
+Содержат количество книг, частей, выпусков изданий, 
+которые делятся на книги, части, выпуски (аналогично стандартному полю \bibfield{volumes}). См.
+подробнее \secref{sec:volsparts}.
+
+\listitem{credits}{literal}
+
+Содержит сведения об ответственности, отличные от предусмотренных в \biblatex, 
+такие, например, как организация:
+
+\begin{bibexample}
+\item \textellipsis\ \slash\ Академия наук СССР\ ;\ \textellipsis
+\end{bibexample}
+
+В этом поле могут содержаться любые нестандартные сведения об ответственности,
+например: <<авт. курса А. Сигалов>>,
+<<коллектив авт. под рук. Исакова Ю.Ф>> и т.\,д. 
+Более того, в особенно нестандартных ситуациях
+оно может содержать вообще все сведения об ответственности. 
+Поле \bibfield{credits} выводится в сведениях об ответственности в самом начале или 
+сразу после авторов, если они там присутствуют. 
+
+\fielditem{editortype}{key}
+
+Это поле существует в \biblatex, но в \biblatexgost для него определёно новое значение: 
+тип редактора \bibfield{geneditor}, соответствующий общему 
+редактору. Он выводится в виде: \enquote{Под общ. ред.~\ldots}.
+
+\fielditem{material}{literal}
+
+Общее обозначение материала (см.~\gostbibref{5.2.3}). В \tabref{tab:material} приведены
+допустимые значения этого поля вместе с соответствующими терминами ГОСТа. 
+\begin{table}[htbp]
+\tablesetup
+\centering
+\begin{tabularx}{.6\textwidth}{@{}V{.3\textwidth}@{}L{.3\textwidth}@{}}
+\toprule
+\multicolumn{1}{@{}H}{Значение поля \bibfield{material}} &
+\multicolumn{1}{@{}H}{Термины ГОСТа}  \\
+\cmidrule(r){1-1}\cmidrule{2-2}
+videorecording & видеозапись \\
+soundrecording & звукозапись \\
+graphic & изоматериал \\
+cartographic & карты \\
+kit & комплект\\
+motionpicture & кинофильм\\
+microform & микроформа\\
+multimedia & мультимедиа\\
+music & ноты\\
+object & предмет\\
+manuscript & рукопись\\
+text & текст\\
+braille & шрифт Брайля\\
+eresource & электронный ресурс\\
+\bottomrule
+\end{tabularx}
+\caption{Общее обозначение материала}
+\label{tab:material}
+\end{table}
+%
+Для этих значений определены строки в файле локализации, то есть они могут быть локализованы. 
+Язык вывода поля  
+определяется командой \cmd{gostmateriallanguage}. По умолчанию он совпадает с 
+основным языком \texttt{babel}, если последний загружен. Если \texttt{babel} не загружен, 
+то язык установлен в \texttt{russian}. При переопределении
+
+\begin{ltxcode}
+\renewcommand*{\gostmateriallanguage}{}
+\end{ltxcode}
+
+поле выводится на текущем языке библиографической записи или ссылки. 
+Это важно для многоязычных библиографий, если установлена опция 
+\kvopt{babel}{other} или \kvopt{babel}{other*} и записи выводятся на разных языках. 
+
+\listitem{specdata}{literal}
+
+Область специфических сведений (см.~\tabref{tab:gost-biblatex}). Представляет собой список,
+элементы которого при выводе разделяются точкой с запятой.
+
+\end{fieldlist}
+
 \subsection{Особенности размещения отдельных сведений}
 \label{sec:db:inf}
 
@@ -432,8 +479,9 @@ ISSN серии или подсерии & issn (isbn) \\
 %
 \item[Область специфических сведений] применяется для
 особых типов публикации и специфических носителей (см.~\gostbibref{5.4}). 
-\biblatexgost заполняет эту 
-область самостоятельно только для патентов\notimpl\ и сериальных изданий\notimpl. 
+\biblatexgost заполняет эту область самостоятельно только для
+%патентов\notimpl\ и 
+сериальных изданий\notimpl. 
 Для всех остальных типов публикаций
 следует помещать информацию в поле \bibfield{specdata}. 
 
@@ -595,21 +643,21 @@ introduction & введение \prm{кого} & введ. \prm{кого} \\
 последнюю точку в точку сокращения (\texttt{dot}), а не конца предложения 
 (\texttt{period}). Например: 
 
-\begin{lstlisting}[style=bibtex,escapechar=|]
+\begin{ltxexample}[linewidth=.7\textwidth,escapechar=|]
 @BOOK{book,
   ...
   shorttitle = {|Введение|~\textellipsis\isdot}
 }
-\end{lstlisting}
+\end{ltxexample}
 
 Или:
 
-\begin{lstlisting}[style=bibtex,escapechar=|]
+\begin{ltxexample}[linewidth=.7\textwidth,escapechar=|]
 @BOOK{book,
   ...
   shorttitle = {|Введение|~...\isdot}
 }
-\end{lstlisting}
+\end{ltxexample}
    
 \end{fieldlist}
 
@@ -671,7 +719,7 @@ volumes = {|в 5-и томах (6-и кн.)|}
 \biblatex. Например, в случае использования \sty{babel} ваш 
 файл \latex может выглядеть примерно так:
 
-\begin{lstlisting}[style=latex,escapechar=|]
+\begin{ltxexample}[escapechar=|]
 \documentclass{...}
 \usepackage[french,latin,english,russian]{babel}
 ...
@@ -684,13 +732,12 @@ volumes = {|в 5-и томах (6-и кн.)|}
 ...
 \begin{document}
 
-...~\cite[123]{knuth:ct:a} ...          % |цитата|
+...~\cite[123]{knuth:ct:a} ...          % |цитирование|
 
 \printbibliography                      % |печать библиографии|
 
 \end{document}
-
-\end{lstlisting}
+\end{ltxexample}
 
 Подробности можно найти в документации по \biblatex{}\fnurl{http://www.ctan.org/tex-archive/macros/latex/contrib/biblatex/doc/biblatex.pdf}. \xelatex
 официально не поддерживается, поскольку \biblatex{'ом} пока не поддерживается 
