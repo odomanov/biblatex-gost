@@ -97,7 +97,7 @@
       {\unspace\adddot#1}}
     {\ifcapital{\MakeCapital{#1}}{#1}\isdot}}
 \DeclareFieldFormat{volumes}{#1}
-\newbibmacro{in+}[2]{%
+\newbibmacro*{in+}[2]{%
   \iffieldnum{\csuse{bbx@gostbibermap@#1}}
     {\ifbibstring{involumes}
       {\bibstring{involumes}\addabbrvspace}
@@ -598,7 +598,7 @@
   \usebibmacro{begentry}%
   \usebibmacro{editor}%
   \setunit*{\labelnamepunct}%
-  \usebibmacro{periodical}
+  \usebibmacro{title}
   \newunit
   \usebibmacro{date}%
   \setunit*{\addcomma\space}%
@@ -938,7 +938,7 @@
   \usebibmacro{withafterword}%
   \clearname{afterword}}
 
-\newbibmacro{jour:volume+parts+issuetitle}{%
+\newbibmacro*{jour:volume+parts+issuetitle}{%
   \printfield{volume}%
   \setunit*{\addcomma\space}%
   \printfield{issue}%
@@ -954,7 +954,7 @@
   \newunit\newblock
   \mkbibdatelong{}{month}{day}}
 
-\newbibmacro{volume+parts}{%
+\newbibmacro*{volume+parts}{%
   \printfield{volume}%
   \newunit
   \printfield[book]{\bbx@gostbibermap@book}%
@@ -963,7 +963,7 @@
   \newunit
   \printfield{issue}}%
 
-\newbibmacro{year}{%
+\newbibmacro*{year}{%
   \printfield{year}}
 
 \renewbibmacro*{title}{%
@@ -983,7 +983,8 @@
        \printfield[titlecase]{subtitle}}%
      \newunit}%
   \setunit*{\addcolondelim}%
-  \printfield{titleaddon}}
+  \printfield{titleaddon}%
+  \clearfield{\bbx@gostbibermap@material}}
 
 \renewbibmacro*{booktitle}{%
   \ifboolexpr{
@@ -1172,7 +1173,7 @@
     {}
     {{\ifdefvoid{\gostmateriallanguage}
         {}
-        {\select@language{\gostmateriallanguage}}%
+        {\select@language{\gostmateriallanguage}}% first switch language, then \ifbibxstring
       \ifbibxstring{material\thefield{\bbx@gostbibermap@material}}
         {\printtext[brackets]{\bibcpstring{material\thefield{\bbx@gostbibermap@material}}}}
         {}}}}
