@@ -17,7 +17,7 @@
 \usepackage{isodate}
 \usepackage[bibstyle=gost-standard]{biblatex} % to receive \bbx@gost@version, etc.
 %\usepackage{shortvrb}
-%\usepackage{pifont}%  ???
+%\usepackage{pifont}
 \usepackage{indentfirst}
 %\usepackage{droid}   % not bad, sc
 \usepackage{pscyr}
@@ -276,7 +276,7 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 \label{sec:database}
 
 
-\subsection{Соответствие между терминами ГОСТ и \biblatexgost}
+\subsection{Соответствие терминов ГОСТ и \biblatexgost}
 \label{sec:gost-biblatex}
 
 Соответствие терминов ГОСТ и \biblatexgost представлено в \tabref{tab:gost-biblatex}.
@@ -350,7 +350,7 @@ ISSN серии или подсерии & issn (isbn) \\
 Условия доступности и (или) цена & addendum \\
 Дополнительные сведения к элементам области & addendum \\
 \bottomrule
-\caption{Соответствие терминов ГОСТ и \biblatex}\\
+\caption{Соответствие терминов ГОСТ и \biblatexgost}\\
 \label{tab:gost-biblatex}
 \end{longtable}
 \endgroup
@@ -802,8 +802,6 @@ volumes = {|в 5-и томах (6-и кн.)|}
 автора, то добавляет ещё три. Все они чувствительны к опции \opt{singletitle} и могут опускать
 дату, если она не требуется для устранения неопределённости. 
 
-%\end{notimplc}
-
 \begin{valuelist}
 
 \item[gostletter]
@@ -1101,23 +1099,23 @@ specdata & listb \\
 
 \begin{changelog}
 
-\begin{release}{0.5}{??-??-2012}
-\item Добавлено поле \bibfield{material} для общего обозначения 
-  материала\see{sec:newfields} 
-\item Исправлена ошибка заглавных букв для нечисловых значений 
-  \bibfield{edition}, \bibfield{volume}, \bibfield{book} и т.\,д. 
-\item Добавлено сокращение Там же/Ibid. для  последовательных ссылок на публикации,
-включённые в один и тот же документ. Регулируется опцией \opt{inbookibid}\see{sec:opt}
-\item Исправлены отклонения от ГОСТ в драйверах \bibtype{booklet}, \bibtype{manual}, 
+\begin{release}{0.5}{1-07-2012}
+\item Добавлено поле \bibfield{material} (общее обозначение материала)\see{sec:newfields} 
+\item Восстановлены стандартные значения опции \opt{mergedate}\see{sec:opt}
+\item Добавлена опция \kvopt{mergedate}{gostlabel}\see{sec:opt}
+\item Добавлена обработка опции \opt{singletitle}\see{sec:opt}
+\item Добавлено сокращение <<Там же>>/<<Ibid.>> для  последовательных ссылок на публикации,
+  включённые в один и тот же документ. Регулируется опцией \opt{inbookibid}\see{sec:opt}
+\item Исправлены отклонения от ГОСТа в драйверах \bibtype{booklet}, \bibtype{manual}, 
   \bibtype{misc}, \bibtype{online}, \bibtype{patent}, \bibtype{report},  
   \bibtype{thesis}, \bibtype{unpublished}
-\item Добавлена обработка опции \opt{singletitle}\see{sec:opt}
-\item Исправлена ошибка, приводящая к неопределённости для публикаций без авторов в
-  \bibsty{gost-autoryear}%\see{sec:}
-\item Добавлена опция \kvopt{mergedate}{gostlabel}\see{sec:opt}
-\item Восстановлены стандартные значения опции \opt{mergedate}\see{sec:opt}
-\item Удалён вывод тома и пр. из цитат в \bibsty{gost-autoryear}%\see{sec:} 
-\item Исправлены другие ошибки
+%\item Исправлена ошибка, приводившая к неопределённости для публикаций без авторов в
+%  \bibsty{gost-autoryear}%\see{sec:}
+%\item Исправлена ошибка: нечисловые значения
+%  \bibfield{edition}, \bibfield{volume}, \bibfield{book} и т.\,д. выводились со
+%  строчной буквы  
+%\item Удалён вывод тома и пр. из цитат в \bibsty{gost-autoryear}%\see{sec:} 
+\item Исправлены ошибки
 \end{release}
 
 \begin{release}{0.4}{03-06-2012}
