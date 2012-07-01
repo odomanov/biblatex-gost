@@ -1,7 +1,7 @@
 % $Id$
 
-\def\bbx@gost@date{2012/06/21}
-\def\bbx@gost@version{0.5}
+\def\bbx@gost@date{2012/07/01}
+\def\bbx@gost@version{0.5beta}
 
 \ProvidesFile{gost-standard.bbx}
 [\bbx@gost@date\space v\bbx@gost@version\space biblatex-GOST styles]
@@ -786,7 +786,7 @@
 \newbibmacro*{maintitle+volumes+parts+booktitle}{%
   \usebibmacro{maintitle+volumes+parts+}{booktitle}}
   
-\newbibmacro*{event+venue+date}{%
+\renewbibmacro*{event+venue+date}{%
     \ifboolexpr{
       test {\iffieldundef{eventtitle}}
       and
@@ -796,12 +796,12 @@
     }
       {}
       {\setunit{\addspace}%
-       \printtext[parens]{%
+       \printtext{(%
          \printfield{eventtitle}%
          \setunit*{\addcomma\space}%
          \printfield{venue}%
          \setunit*{\addcomma\space}%
-         \printeventdate}}%
+         \printeventdate)}}%
   \newunit}
 
 \newbibmacro*{series+number}{%
