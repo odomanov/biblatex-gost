@@ -20,12 +20,13 @@
 %\usepackage{pifont}
 \usepackage{indentfirst}
 %\usepackage{droid}   % not bad, sc
-\usepackage{pscyr}
-\renewcommand{\rmdefault}{fha}% Балтика sc
+\usepackage{paratype}
+%%\usepackage{pscyr}
+%%\renewcommand{\rmdefault}{fha}% Балтика sc
 %\renewcommand{\sfdefault}{far}% arial sc
 %\renewcommand{\rmdefault}{fjn}% 
 %\renewcommand{\sfdefault}{fma}% 
-\renewcommand{\ttdefault}{fer}% 
+%%\renewcommand{\ttdefault}{fer}% 
 %\renewcommand{\rmdefault}{ccr}% Concrete
 
 %\MakeAutoQuote{«}{»}
@@ -278,10 +279,11 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 \label{sec:database}
 
 
-\subsection{Термины ГОСТа и \biblatexgost}
+\subsection{Термины ГОСТа и поля \biblatexgost}
 \label{sec:gost-biblatex}
 
-Соответствие терминов ГОСТа и \biblatexgost представлено в \tabref{tab:gost-biblatex}.
+Соответствие между терминами ГОСТа и полями \biblatexgost представлено в 
+\tabref{tab:gost-biblatex}.
 Как видно, в ней отсутствуют, с одной стороны, некоторые элементы библиографического
 описания, предусмотренные ГОСТом, а с другой стороны, некоторые поля \biblatex. Эти элементы и поля 
 не учитываются в \biblatexgost и не обрабатываются (разумеется, специальные поля,
@@ -353,7 +355,7 @@ ISSN серии или подсерии & issn (isbn) \\
 Условия доступности и (или) цена & addendum \\
 Дополнительные сведения к элементам области & addendum \\
 \bottomrule
-\caption{Соответствие терминов ГОСТа и \biblatexgost}\\
+\caption{Соответствие между терминами ГОСТа и полями \biblatexgost}\\
 \label{tab:gost-biblatex}
 \end{longtable}
 \endgroup
@@ -751,7 +753,7 @@ volumes = {|в 5-и томах (6-и кн.)|}
 
 Для всех стилей сохранены опции стандартных стилей \biblatex, от которых они происходят или
 с которыми сходны, даже если соответствующая функциональность не предполагается ГОСТом. 
-Кроме этого, пакет \sty{biblatex-gost} имеет 
+Кроме этого, пакет \biblatexgost имеет 
 следующие дополнительные опции.
 
 \begin{optionlist}
@@ -773,7 +775,7 @@ volumes = {|в 5-и томах (6-и кн.)|}
 считая сведения повторяющимися, если повторяется это поле. По этой причине,
 для корректной работы этой опции требуется аккуратное заполнение поля \bibfield{crossref}. 
 Поскольку не для всякой библиографической базы данных это верно, 
-такое поведение может оказаться нежелательно. Данная опция позволяет его отключить.
+такое поведение может оказаться нежелательным. Данная опция позволяет его отключить.
 Опция относится ко всем записям типа \bibtype{inbook}, \bibtype{bookinbook},
 \bibtype{suppbook}, \bibtype{incollection}, \bibtype{inproceedings} и т.\,д.,
 но не работает для \bibtype{article}.
@@ -1029,7 +1031,7 @@ gost-authoryear & cite & Автор (заголовок) и год в текст
 \begin{itemize}
 
 \item \label{bibermap}\biblatex не позволяет определять новые поля библиографической базы данных.
-В то же время, пакет \biblatexgost определяет дополнительные поля для хранения количества 
+В то же время, пакету \biblatexgost требуются дополнительные поля для хранения количества 
 книг, частей, выпусков многочастных изданий и т.\,д. В качестве этих полей можно использовать 
 запасные поля \biblatex \bibfield{user[a-f]}, 
 \bibfield{list[a-f]}, \bibfield{custom[a-f]} (см. п. 2.2.4 руководства \biblatex),
@@ -1123,7 +1125,7 @@ specdata & listb \\
 
 \begin{release}{0.4}{03-06-2012}
 \item Переход на \biblatex\,2.0
-\item Изменено соответствие терминов ГОСТ и полей \biblatex\see{sec:gost-biblatex}
+\item Изменено соответствие терминов ГОСТа и полей \biblatex\see{sec:gost-biblatex}
 \item Добавлено автоматическое переопределение полей (теперь не нужна настройка \file{biber.conf})\see{bibermap}
 \item Добавлена автоматическая обработка длинных списков имён\see{4names}
 \item Добавлено новая опция \bibfield{movenames}\see{4names} 
