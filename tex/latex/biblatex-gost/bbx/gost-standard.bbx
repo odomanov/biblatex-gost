@@ -351,7 +351,9 @@
   \usebibmacro{//}%
   \usebibmacro{cbx:bookibid:check}
      {\bibsentence\printtext{%
-        \bibhyperlink{\csuse{cbx@\iffootnote{f}{t}@bookref}}{\bibstring[\mkibid]{ibidem}}}}
+        \bibhyperlink{\csuse{cbx@\iffootnote{f}{t}@bookref}}{\bibstring[\mkibid]{ibidem}}}%
+        \newunit\newblock
+        \usebibmacro{chapter+pages}}
      {\usebibmacro{maintitle+volumes+parts+booktitle}%
       \setunit{\respdelim}%
       \ifnamesequal{author}{bookauthor}
@@ -393,7 +395,9 @@
   \usebibmacro{//}%
   \usebibmacro{cbx:bookibid:check}
      {\bibsentence\printtext{%
-        \bibhyperlink{\csuse{cbx@\iffootnote{f}{t}@bookref}}{\bibstring[\mkibid]{ibidem}}}}
+        \bibhyperlink{\csuse{cbx@\iffootnote{f}{t}@bookref}}{\bibstring[\mkibid]{ibidem}}}%
+        \newunit\newblock
+        \usebibmacro{chapter+pages}}
      {\usebibmacro{maintitle+volumes+parts+booktitle}%
       \setunit{\respdelim}%
       \usebibmacro{byeditor+others}%
@@ -431,7 +435,9 @@
   \usebibmacro{//}%
   \usebibmacro{cbx:bookibid:check}
      {\bibsentence\printtext{%
-        \bibhyperlink{\csuse{cbx@\iffootnote{f}{t}@bookref}}{\bibstring[\mkibid]{ibidem}}}}
+        \bibhyperlink{\csuse{cbx@\iffootnote{f}{t}@bookref}}{\bibstring[\mkibid]{ibidem}}}%
+        \newunit\newblock
+        \usebibmacro{chapter+pages}}
      {\usebibmacro{maintitle+volumes+parts+booktitle}%
       \newunit
       \usebibmacro{event+venue+date}%
