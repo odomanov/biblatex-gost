@@ -2,7 +2,7 @@
 \input glyphtounicode.tex           %these three lines are
 \input glyphtounicode-cmr.tex       %needed for russian search/copy
 \pdfgentounicode=1                  %(cmap)
-\documentclass[11pt,a4paper,headings=small,numbers=enddot,english,russian]{ltxdockit}[2011/03/25]
+\documentclass[10pt,a4paper,headings=small,numbers=enddot,english,russian]{ltxdockit}[2011/03/25]
 \usepackage[vscale=0.8,hscale=0.7,hdivide={0.2\paperwidth,*,0.1\paperwidth}]{geometry}
 \usepackage[T2A]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -20,12 +20,13 @@
 %\usepackage{pifont}
 \usepackage{indentfirst}
 %\usepackage{droid}   % not bad, sc
-\usepackage{pscyr}
-\renewcommand{\rmdefault}{fha}% Балтика sc
+\usepackage{paratype}
+%%\usepackage{pscyr}
+%%\renewcommand{\rmdefault}{fha}% Балтика sc
 %\renewcommand{\sfdefault}{far}% arial sc
 %\renewcommand{\rmdefault}{fjn}% 
 %\renewcommand{\sfdefault}{fma}% 
-\renewcommand{\ttdefault}{fer}% 
+%%\renewcommand{\ttdefault}{fer}% 
 %\renewcommand{\rmdefault}{ccr}% Concrete
 
 %\MakeAutoQuote{«}{»}
@@ -44,7 +45,7 @@
 \makeatletter
 \titlepage{%
   title={Пакет \biblatexgost},
-  subtitle={Оформление библиографии согласно ГОСТам\\ 7.0.5--2008 и 7.1--2003},
+  subtitle={Оформление библиографии согласно ГОСТам\protect\\ 7.0.5--2008 и 7.1--2003},
   url={\biblatexgosthome},
   author={Олег Доманов},
   email={odomanov@yandex.ru},
@@ -127,10 +128,15 @@
 \section{Введение}
 \label{sec:int}
 
-Пакет \biblatexgost{}\fnurl{http://sourceforge.net/projects/biblatex-gost/} представляет 
+Пакет \biblatexgost{}\fnurl{http://sourceforge.net/projects/biblatexgost/} представляет 
 собой набор стилей для \biblatex{}\fnurl{http://www.ctan.org/tex-archive/macros/latex/contrib/biblatex/} 
 и предназначен для оформления библиографии в соответствии с требованиями \gostcitename[ов] и 
 7.1--2003 (а также 7.80--2000, 7.82--2001 и др.). 
+
+\subsection{Лицензия}
+\label{sec:lic}
+
+Permission is granted to copy, distribute and\slash or modify this software under the terms of the \lppl, version 1.3.\fnurl{http://www.ctan.org/tex-archive/macros/latex/base/lppl.txt} This package is author"=maintained.
 
 \subsection{Установка}
 \label{sec:install}
@@ -139,15 +145,11 @@
 Для его установки достаточно распаковать архив в дерево \tex, желательно локальное, и 
 обновить индексы (в \tex~Live, например, это делается командой \texttt{mktexlsr}).
 
-Для работы с \biblatexgost версии 0.4 и выше требуются 
-\biblatex~2.0\fnurl{https://sourceforge.net/projects/biblatex/files/development/} (который,
-в свою очередь, требует \biber~1.0\fnurl{https://sourceforge.net/projects/biblatex-biber/files/biblatex-biber/development/}) или выше.
-
-\subsection{Лицензия}
-\label{sec:lic}
-
-Permission is granted to copy, distribute and\slash or modify this software under the terms of the \lppl, version 1.3.\fnurl{http://www.ctan.org/tex-archive/macros/latex/base/lppl.txt} This package is author"=maintained.
-
+Для работы \biblatexgost версии 0.4 и выше требуются 
+\biblatex~2.0\fnurl{http://sourceforge.net/projects/biblatex/files/biblatex-2.0/} 
+(который, в свою очередь, требует
+\biber~1.0\fnurl{http://sourceforge.net/projects/biblatex-biber/files/biblatex-biber/1.0/}) 
+или выше.
 
 \section{Стили \biblatexgost}
 \label{sec:styles}
@@ -155,7 +157,7 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 ГОСТ определяет три типа ссылок: внутритекстовую, подстрочную и затекстовую.
 Первые два типа приблизительно соответствуют стилям \bibsty{verbose} в \biblatex 
 с опцией \opt{autocite}, установленной, соответственно, в \opt{inline} и 
-\opt{footnote}. Затекстовые ссылки могут быть трёх типов, в зависимости 
+\opt{footnote}. Затекстовые ссылки делятся, в свою очередь, на три типа, в зависимости 
 от способа отсылки к библиографии (которая в этом случае располагается 
 \enquote{за текстом}~--- в конце статьи, главы, книги и пр.). 
 В первом случае используются номера в квадратных скобках, во 
@@ -173,8 +175,8 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 Внутритекстовые ссылки. Ссылки помещаются внутри текста в круглых скобках. 
 Стиль отслеживает
 повторные ссылки, используя при необходимости короткие названия из поля
-\bibfield{shorttitle}\footnote{О многоточиях при сокращении заголовков 
-см.~\secref{ellipsis}}.  
+\bibfield{shorttitle} (о многоточиях при сокращении заголовков 
+см.~\secref{ellipsis}).  
 
 По умолчанию стиль устанавливает опции \kvopt{autocite}{inline}, \kvopt{sorting}{ntvy}, 
  \kvopt{pagetracker}{true}, \kvopt{strict}{true}, \kvopt{citetracker}{constrict},   
@@ -278,10 +280,11 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 \label{sec:database}
 
 
-\subsection{Термины ГОСТа и \biblatexgost}
+\subsection{Термины ГОСТа и поля \biblatexgost}
 \label{sec:gost-biblatex}
 
-Соответствие терминов ГОСТа и \biblatexgost представлено в \tabref{tab:gost-biblatex}.
+Соответствие между терминами ГОСТа и полями \biblatexgost представлено в 
+\tabref{tab:gost-biblatex}.
 Как видно, в ней отсутствуют, с одной стороны, некоторые элементы библиографического
 описания, предусмотренные ГОСТом, а с другой стороны, некоторые поля \biblatex. Эти элементы и поля 
 не учитываются в \biblatexgost и не обрабатываются (разумеется, специальные поля,
@@ -353,7 +356,7 @@ ISSN серии или подсерии & issn (isbn) \\
 Условия доступности и (или) цена & addendum \\
 Дополнительные сведения к элементам области & addendum \\
 \bottomrule
-\caption{Соответствие терминов ГОСТа и \biblatexgost}\\
+\caption{Соответствие между терминами ГОСТа и полями \biblatexgost}\\
 \label{tab:gost-biblatex}
 \end{longtable}
 \endgroup
@@ -751,15 +754,15 @@ volumes = {|в 5-и томах (6-и кн.)|}
 
 Для всех стилей сохранены опции стандартных стилей \biblatex, от которых они происходят или
 с которыми сходны, даже если соответствующая функциональность не предполагается ГОСТом. 
-Кроме этого, пакет \sty{biblatex-gost} имеет 
+Кроме этого, пакет \biblatexgost имеет 
 следующие дополнительные опции.
 
 \begin{optionlist}
 
 \optitem[false]{inbookibid}{\opt{true}, \opt{false}}
 
-Опция определена только для стилей \bibsty{gost-inline} и \bibsty{gost-footnote}. 
-Она переключает экпериментальное поведение, отключенное по умолчанию. Согласно  
+Опция определена только для стилей \bibsty{gost-inline} и \bibsty{gost-footnote} 
+и отключена по умолчанию. Согласно  
 \gostciteref[у]{8.11}, в случае последовательных ссылок на публикации, включённые в один и 
 тот же документ, во второй ссылке вместо повторяющихся сведений о документе ставят слова
 \enquote{Там же} или \enquote{Ibid.}: 
@@ -773,7 +776,22 @@ volumes = {|в 5-и томах (6-и кн.)|}
 считая сведения повторяющимися, если повторяется это поле. По этой причине,
 для корректной работы этой опции требуется аккуратное заполнение поля \bibfield{crossref}. 
 Поскольку не для всякой библиографической базы данных это верно, 
-такое поведение может оказаться нежелательно. Данная опция позволяет его отключить.
+такое поведение может оказаться нежелательным. Данная опция позволяет его отключить.
+
+Обратите внимание, что поле \bibfield{crossref} доступно только в том случае, если 
+доступна запись, на которую оно указывает, то есть если эта запись также цитируется
+в тексте или стоит в аргументе команды \cmd{nocite} (см.~документацию \biblatex). 
+Она также становится доступной автоматически (и включается в список литературы), 
+когда количество цитируемых записей с одним и тем же полем \bibfield{crossref}
+превысит порог, задаваемый опцией \opt{mincrossrefs}. 
+По умолчанию этот параметр равен 2, но
+при установке \kvopt{inbookibid}{true} \biblatexgost выставляет его равным 1,
+так, чтобы запись, на которую указывает \bibfield{crossref}, всегда включалась в 
+библиографию и поле \bibfield{crossref} было всегда доступно. 
+Но если вы изменяете опцию \opt{mincrossrefs}, убедитесь, что записи, 
+нужные для работы опции \opt{inbookibid}, присутствуют в вашем тексте, хотя бы в
+аргументе команды \cmd{nocite}.   
+
 Опция относится ко всем записям типа \bibtype{inbook}, \bibtype{bookinbook},
 \bibtype{suppbook}, \bibtype{incollection}, \bibtype{inproceedings} и т.\,д.,
 но не работает для \bibtype{article}.
@@ -1029,7 +1047,7 @@ gost-authoryear & cite & Автор (заголовок) и год в текст
 \begin{itemize}
 
 \item \label{bibermap}\biblatex не позволяет определять новые поля библиографической базы данных.
-В то же время, пакет \biblatexgost определяет дополнительные поля для хранения количества 
+В то же время, пакету \biblatexgost требуются дополнительные поля для хранения количества 
 книг, частей, выпусков многочастных изданий и т.\,д. В качестве этих полей можно использовать 
 запасные поля \biblatex \bibfield{user[a-f]}, 
 \bibfield{list[a-f]}, \bibfield{custom[a-f]} (см. п. 2.2.4 руководства \biblatex),
@@ -1123,7 +1141,7 @@ specdata & listb \\
 
 \begin{release}{0.4}{03-06-2012}
 \item Переход на \biblatex\,2.0
-\item Изменено соответствие терминов ГОСТ и полей \biblatex\see{sec:gost-biblatex}
+\item Изменено соответствие терминов ГОСТа и полей \biblatex\see{sec:gost-biblatex}
 \item Добавлено автоматическое переопределение полей (теперь не нужна настройка \file{biber.conf})\see{bibermap}
 \item Добавлена автоматическая обработка длинных списков имён\see{4names}
 \item Добавлено новая опция \bibfield{movenames}\see{4names} 
