@@ -1,0 +1,34 @@
+% $Id: gost-footnote.bbx 165 2012-06-22 14:46:50Z odomanov $
+
+\ProvidesFile{gost-inline-min.bbx}
+
+\RequireBibliographyStyle{gost-inline}
+
+ \renewbibmacro*{series+number}{}%
+ \renewbibmacro*{byeditor+others}{}
+ \renewbibmacro*{material}{}
+ \renewbibmacro*{editor}{}
+ \renewbibmacro*{translator}{}
+ 
+\AtEveryBibitem{%
+ %\clearfield{\bbx@gostbibermap@material}%
+ \clearfield{series}%
+ \clearfield{edition}%
+ \clearlist{\bbx@gostbibermap@credits}%
+ \clearlist{\bbx@gostbibermap@specdata}%
+ \clearfield{pagetotal}%
+ \clearfield{\bbx@gostbibermap@material}%
+ \clearfield{titleaddon}%
+ \clearfield{booktitleaddon}%
+ \clearfield{maintitleaddon}%
+ \clearfield{doi}%
+ \clearfield{eprint}%
+ \clearfield{url}%
+ \clearfield{urlday}%
+ \clearfield{urlmonth}%
+ \clearfield{urlyear}%
+ \clearfield{addendum}%
+ \clearfield{pubstate}%
+ \clearfield{titleaddon}}
+
+\endinput
