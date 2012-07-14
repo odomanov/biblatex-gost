@@ -1184,6 +1184,24 @@
         {\printtext[brackets]{\bibcpstring{material\thefield{\bbx@gostbibermap@material}}}}
         {}}}}
 
+\newbibmacro*{setup:min}{%
+  \renewbibmacro*{series+number}{}%
+  \renewbibmacro*{byeditor+others}{}%
+  \renewbibmacro*{material}{}%
+  \renewbibmacro*{editor}{}%
+  \renewbibmacro*{translator}{}%
+  \clearfield{series}%
+  \clearfield{edition}%
+  \clearlist{\bbx@gostbibermap@credits}%
+  \clearlist{\bbx@gostbibermap@specdata}%
+  \clearfield{\bbx@gostbibermap@material}%
+  \clearfield{pagetotal}%
+  \clearfield{titleaddon}%
+  \clearfield{booktitleaddon}%
+  \clearfield{maintitleaddon}%
+  \clearfield{addendum}%
+  \clearfield{pubstate}}
+
 \DeclareAutoCiteCommand{footnote}{\smartcite}{\smartcites}
 \DeclareAutoCiteCommand{superscript}{\supercite}{\supercites}
 

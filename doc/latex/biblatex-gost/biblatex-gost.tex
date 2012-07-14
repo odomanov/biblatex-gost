@@ -188,11 +188,6 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 Стиль предназначен для помещения ссылок в сносках внизу страницы (например, с помощью 
 команд \cmd{footcite}, \cmd{smartcite} или \cmd{autocite}).
  
-По умолчанию стиль устанавливает опции \kvopt{autocite}{footnote}, \kvopt{sorting}{ntvy}, 
-\kvopt{pagetracker}{true}, \kvopt{strict}{true}, \kvopt{citetracker}{constrict},   
-\kvopt{opcittracker}{constrict}, \kvopt{citepages}{omit},
-\kvopt{labelyear}{true}.
-
 Фактически, стиль \bibsty{gost-footnote} имеет только два отличия от стиля 
 \bibsty{gost-inline}. 
 Во-первых, он устанавливает опцию \kvopt{autocite}{footnote}, что заставляет команду
@@ -203,6 +198,11 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 к заглавию (поле \bibfield{titleaddon}, см.~\tabref{tab:gost-biblatex}). Кроме того,
 там не выводятся поля \bibfield{doi}, 
 \bibfield{eprint}, \bibfield{url}, \bibfield{addendum}, \bibfield{pubstate}. 
+
+По умолчанию стиль устанавливает опции \kvopt{autocite}{footnote}, \kvopt{sorting}{ntvy}, 
+\kvopt{pagetracker}{true}, \kvopt{strict}{true}, \kvopt{citetracker}{constrict},   
+\kvopt{opcittracker}{constrict}, \kvopt{citepages}{omit},
+\kvopt{labelyear}{true}.
 
 \item[gost-numeric]
 Затекстовые ссылки. Основан на стандартном стиле \bibsty{numeric-comp} и отличается 
@@ -245,7 +245,54 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 \kvopt{singletitle}{false} (или \opt{true} при \kvopt{mergedate}{goststrict}, 
 см.~\secref{sec:opt}). 
 
+\item[gost-inline-min]\vspace{-\itemsep}\vspace{-\parsep}
+\item[gost-footnote-min]\vspace{-\itemsep}\vspace{-\parsep}
+\item[gost-numeric-min]\vspace{-\itemsep}\vspace{-\parsep}
+\item[gost-authoryear-min]\vspace{-\itemsep}\vspace{-\parsep}
+
+Все стили имеют <<минимальный>> вариант, в котором выводится минимальное количество
+сведений~--- автор, название, том\slash часть\slash книга\slash выпуск, 
+выходные данные, страницы (для статей в журналах и книгах).
+Сведения об ответственности, издании, серии и т.\,д. не выводятся, вне зависимости от их присутствия
+в базе данных. При этом вывод сведений, для которых в \biblatex имеются специальные опции 
+(\opt{url}, \opt{doi}, \opt{isbn/issn/isrn}, \opt{eprint}), регулируется 
+этими опциями. По умолчанию в минимальных стилях этот вывод отключён. 
+
+Минимальные стили можно использовать совместно с полными. Например,
+при установке
+
+\begin{ltxcode}
+\usepackage[%
+    citestyle=gost-footnote-min, 
+    bibstyle=gost-footnote,
+    ...
+]{biblatex}
+\end{ltxcode}
+
+цитаты будут выводится в минимальном стиле, а записи в библиографии~--- в полном.
+Разумеется, это не имеет значения для стилей \bibsty{gost-numeric-min} и 
+\bibsty{gost-authoryear-min}, 
+в которых меняется только стиль библиографии, а не цитат.
+
 \end{marglist}
+
+\centerline{*~~~*~~~*}
+
+Дополнительно, все стили по умолчанию устанавливают опции 
+\kvopt{dashed}{false},
+\kvopt{isbn}{true},
+\kvopt{url}{true},
+\kvopt{doi}{true},
+\kvopt{eprint}{true},
+\kvopt{useeditor}{false},
+\kvopt{usetranslator}{false},
+\kvopt{maxnames}{3},
+\kvopt{minnames}{1}.
+
+\centerline{\rule{0pt}{1.5\baselineskip}*~~~*~~~*}
+
+%\subsection{Ссылки в верхнем индексе}
+%\label{sec:superscript}
 
 ГОСТ определяет ещё один тип затекстовых ссылок, при котором они 
 связываются с текстом номером в верхнем индексе. Этого можно достичь несколькими способами. 
@@ -264,17 +311,6 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 опция \kvopt{notetype}{endonly}. Можно также воспользоваться 
 пакетом \sty{fn2end} или ему подобными.
 \end{itemize}
-
-Дополнительно, все стили по умолчанию устанавливают опции 
-\kvopt{dashed}{false},
-\kvopt{isbn}{true},
-\kvopt{url}{true},
-\kvopt{doi}{true},
-\kvopt{eprint}{true},
-\kvopt{useeditor}{false},
-\kvopt{usetranslator}{false},
-\kvopt{maxnames}{3},
-\kvopt{minnames}{1}.
 
 \section{Заполнение базы данных}
 \label{sec:database}
@@ -1119,6 +1155,10 @@ specdata & listb \\
 \label{apx:changelog}
 
 \begin{changelog}
+
+\begin{release}{0.6}{1-07-2012}
+\item Добавлены <<минимальные>> стили\see{sec:styles}
+\end{release}
 
 \begin{release}{0.5}{1-07-2012}
 \item Добавлено поле \bibfield{material} (общее обозначение материала)\see{sec:newfields} 
