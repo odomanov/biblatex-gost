@@ -272,12 +272,27 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 цитаты будут выводится в минимальном стиле, а записи в библиографии~--- в полном.
 Разумеется, это не имеет значения для стилей \bibsty{gost-numeric-min} и 
 \bibsty{gost-authoryear-min}, 
-в которых всё равно меняется только стиль библиографии, а не цитат.
+в которых меняется только стиль библиографии, а не цитат.
 
 \end{marglist}
 
-\subsection{Ссылки в верхнем индексе}
-\label{sec:superscript}
+\centerline{*~~~*~~~*}
+
+Дополнительно, все стили по умолчанию устанавливают опции 
+\kvopt{dashed}{false},
+\kvopt{isbn}{true},
+\kvopt{url}{true},
+\kvopt{doi}{true},
+\kvopt{eprint}{true},
+\kvopt{useeditor}{false},
+\kvopt{usetranslator}{false},
+\kvopt{maxnames}{3},
+\kvopt{minnames}{1}.
+
+\centerline{\rule{0pt}{1.5\baselineskip}*~~~*~~~*}
+
+%\subsection{Ссылки в верхнем индексе}
+%\label{sec:superscript}
 
 ГОСТ определяет ещё один тип затекстовых ссылок, при котором они 
 связываются с текстом номером в верхнем индексе. Этого можно достичь несколькими способами. 
@@ -296,17 +311,6 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 опция \kvopt{notetype}{endonly}. Можно также воспользоваться 
 пакетом \sty{fn2end} или ему подобными.
 \end{itemize}
-
-Дополнительно, все стили по умолчанию устанавливают опции 
-\kvopt{dashed}{false},
-\kvopt{isbn}{true},
-\kvopt{url}{true},
-\kvopt{doi}{true},
-\kvopt{eprint}{true},
-\kvopt{useeditor}{false},
-\kvopt{usetranslator}{false},
-\kvopt{maxnames}{3},
-\kvopt{minnames}{1}.
 
 \section{Заполнение базы данных}
 \label{sec:database}
