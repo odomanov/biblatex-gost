@@ -1,32 +1,9 @@
-% $Id: gost-footnote.cbx 165 2012-06-22 14:46:50Z odomanov $
+% $Id:  $
 
 \ProvidesFile{gost-inline-min.cbx}
 
 \RequireCitationStyle{gost-inline}
-
-\renewbibmacro*{series+number}{}%
-\renewbibmacro*{byeditor+others}{}%
-\renewbibmacro*{material}{}%
-\renewbibmacro*{editor}{}%
-\renewbibmacro*{translator}{}%
-\renewbibmacro{cite:clearfields}{%
-   %\clearfield{\bbx@gostbibermap@material}%
-   \clearfield{series}%
-   \clearfield{edition}%
-   \clearlist{\bbx@gostbibermap@specdata}%
-   \clearfield{pagetotal}%
-   \clearfield{\bbx@gostbibermap@material}%
-   \clearfield{titleaddon}%
-   \clearfield{booktitleaddon}%
-   \clearfield{maintitleaddon}%
-   \clearfield{doi}%
-   \clearfield{eprint}%
-   \clearfield{url}%
-   \clearfield{urlday}%
-   \clearfield{urlmonth}%
-   \clearfield{urlyear}%
-   \clearfield{addendum}%
-   \clearfield{pubstate}%
-   \clearfield{titleaddon}}
+\renewbibmacro*{cite:clearfields}{%
+	\usebibmacro{setup:min}}
 
 \endinput
