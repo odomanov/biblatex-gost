@@ -78,20 +78,6 @@
           \printfield{labelyear}%
           \usebibmacro{cite:extras}}}}}
 
-\newbibmacro*{cite:date+extras}[1]{%
-  \ifsingletitle
-    {}
-    {\iffieldundef{year}
-      {}
-      {\printtext[#1]{%
-          \printdate%
-          \usebibmacro{cite:extras}}}}}
-
-\newbibmacro*{cite:extras}{%
-  \ifnameundef{labelname}%    if there is labelname, extrayear disambiguation is enough
-    {\printfield{extratitleyear}}
-    {\printfield{extrayear}}}
-
 \newbibmacro*{cite:volume+parts}[1]{}
 %\newbibmacro*{cite:volume+parts}[1]{%
 %  \ifthenelse{\ifentrytype{book} \OR \ifentrytype{collection}

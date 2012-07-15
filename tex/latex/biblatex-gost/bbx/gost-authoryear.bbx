@@ -14,8 +14,19 @@
 
 \providebibmacro*{date+extrayear}{}
 \providebibmacro*{authoryearlabel}{}
-\providebibmacro*{cite:date+extras}{}
-\providebibmacro*{cite:extras}{}
+\newbibmacro*{cite:date+extras}[1]{%
+  \ifsingletitle
+    {}
+    {\iffieldundef{year}
+      {}
+      {\printtext[#1]{%
+          \printdate%
+          \usebibmacro{cite:extras}}}}}
+\newbibmacro*{cite:extras}{%
+  \ifnameundef{labelname}%    if there is labelname, extrayear disambiguation is enough
+    {\printfield{extratitleyear}}
+    {\printfield{extrayear}}}
+
 \providebibmacro*{labeltitle}{}
 \newlength{\labelauthoryearsep}
 
