@@ -24,6 +24,7 @@
 \newtoggle{bbx:doi}
 \newtoggle{bbx:eprint}
 
+\newcommand*{\bbx@gostbibermap@booktranslator}{namea}
 \newcommand*{\bbx@gostbibermap@book}{usera}
 \newcommand*{\bbx@gostbibermap@books}{userb}
 \newcommand*{\bbx@gostbibermap@parts}{userc}
@@ -31,6 +32,7 @@
 \newcommand*{\bbx@gostbibermap@material}{usere}
 \newcommand*{\bbx@gostbibermap@credits}{lista}
 \newcommand*{\bbx@gostbibermap@specdata}{listb}
+\newcommand*{\bbx@gostbibermap@bookoriglanguage}{listc}
 \newcommand*{\bbx@gostbibermap@volumes}{volumes}
 
 %  OPTIONS
@@ -347,6 +349,8 @@
   \usebibmacro{title}%
   \setunit{\respdelim}%
   \usebibmacro{byauthor}%
+  \setunit*{semicolondelim}%
+  \usebibmacro{bytranslator+others}%
   \setunit{\space}
   \usebibmacro{//}%
   \usebibmacro{cbx:bookibid:check}
@@ -360,7 +364,7 @@
         {}
         {\usebibmacro{bybookauthor}%
          \setunit*{\resppunct}}%
-      \usebibmacro{byeditor+others}%
+      \usebibmacro{bybookeditor+others}%
       \newunit\newblock
       \printfield{edition}%
       \newunit\newblock
@@ -391,6 +395,8 @@
   \usebibmacro{title}%
   \setunit{\respdelim}%
   \usebibmacro{byauthor}%
+  \setunit*{semicolondelim}%
+  \usebibmacro{bytranslator+others}%
   \setunit{\space}
   \usebibmacro{//}%
   \usebibmacro{cbx:bookibid:check}
@@ -400,7 +406,7 @@
         \usebibmacro{chapter+pages}}
      {\usebibmacro{maintitle+volumes+parts+booktitle}%
       \setunit{\respdelim}%
-      \usebibmacro{byeditor+others}%
+      \usebibmacro{bybookeditor+others}%
       \newunit\newblock
       \printfield{edition}%
       \newunit\newblock
@@ -431,6 +437,8 @@
   \usebibmacro{title}%
   \setunit{\respdelim}%
   \usebibmacro{byauthor}%
+  \setunit*{semicolondelim}%
+  \usebibmacro{bytranslator+others}%
   \setunit{\space}
   \usebibmacro{//}%
   \usebibmacro{cbx:bookibid:check}
@@ -442,7 +450,7 @@
       \newunit
       \usebibmacro{event+venue+date}%
       \setunit{\respdelim}%
-      \usebibmacro{byeditor+others}%
+      \usebibmacro{bybookeditor+others}%
       \newunit\newblock
       \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
       \newunit\newblock
@@ -1184,9 +1192,34 @@
         {\printtext[brackets]{\bibcpstring{material\thefield{\bbx@gostbibermap@material}}}}
         {}}}}
 
+\newbibmacro*{bybookeditor+others}{%
+  \printlist{\bbx@gostbibermap@credits}%
+  \setunit*{\resppunct}%
+  \ifnameundef{editor}
+    {}
+    {\usebibmacro{byeditor+othersstrg}%
+     \setunit{\addspace}%
+     \printnames[byeditor]{editor}%
+     \clearname{editor}%
+     \setunit*{\resppunct}}%
+  \usebibmacro{byeditorx}%
+  \usebibmacro{bybooktranslator+others}}
+
+\newbibmacro*{bybooktranslator+others}{%
+  \ifnameundef{\bbx@gostbibermap@booktranslator}
+    {}
+    {%\usebibmacro{bytranslator+othersstrg}%
+     %\setunit{\addspace}%
+     \printnames[bytranslator]{\bbx@gostbibermap@booktranslator}%
+     \clearname{\bbx@gostbibermap@booktranslator}%
+     \setunit*{\resppunct}}%
+  \usebibmacro{withothers}}
+
 \newbibmacro*{setup:min}{%
   \renewbibmacro*{series+number}{}%
   \renewbibmacro*{byeditor+others}{}%
+  \renewbibmacro*{bybookeditor+others}{}%
+  \renewbibmacro*{bytranslator+others}{}%
   \renewbibmacro*{material}{}%
   \renewbibmacro*{editor}{}%
   \renewbibmacro*{translator}{}%

@@ -287,6 +287,7 @@
     {\DeclareSourcemap{
       \maps[datatype=bibtex]{
         \map{
+          \step[fieldsource=booktranslator, fieldtarget=namea]
           \step[fieldsource=book, fieldtarget=usera]
           \step[fieldsource=books, fieldtarget=userb]
           \step[fieldsource=parts, fieldtarget=userc]
@@ -347,6 +348,7 @@
     {\DeclareSourcemap{
       \maps[datatype=bibtex]{
         \map{
+          \step[fieldsource=booktranslator, fieldtarget=namea]
           \step[fieldsource=book, fieldtarget=usera]
           \step[fieldsource=books, fieldtarget=userb]
           \step[fieldsource=parts, fieldtarget=userc]
@@ -373,3 +375,14 @@
 \DeclareDataInheritance{mvbook,mvcollection,mvproceedings,mvreference}
   {book,collection,proceedings,reference}{%
   \inherit{shorttitle}{shorttitle}}
+
+\DeclareDataInheritance{book}{inbook,bookinbook,suppbook}{%
+  \inherit{translator}{\bbx@gostbibermap@booktranslator}
+  \inherit{origlanguage}{bookoriglanguage}}
+\DeclareDataInheritance{collection,reference}{incollection,inreference,suppcollection}{%
+  \inherit{translator}{\bbx@gostbibermap@booktranslator}
+  \inherit{origlanguage}{bookoriglanguage}}
+\DeclareDataInheritance{proceedings}{inproceedings}{%
+  \inherit{translator}{\bbx@gostbibermap@booktranslator}
+  \inherit{origlanguage}{bookoriglanguage}}
+
