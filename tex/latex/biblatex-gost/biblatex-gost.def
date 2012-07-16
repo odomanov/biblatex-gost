@@ -295,6 +295,7 @@
           \step[fieldsource=material, fieldtarget=usere]
           \step[fieldsource=credits, fieldtarget=lista]
           \step[fieldsource=specdata, fieldtarget=listb]
+          \step[fieldsource=bookoriglanguage, fieldtarget=listc]
         }
         \map{
           \step[fieldsource=author, 
@@ -356,6 +357,7 @@
           \step[fieldsource=material, fieldtarget=usere]
           \step[fieldsource=credits, fieldtarget=lista]
           \step[fieldsource=specdata, fieldtarget=listb]
+          \step[fieldsource=bookoriglanguage, fieldtarget=listc]
         }
       }
      }
@@ -377,12 +379,12 @@
   \inherit{shorttitle}{shorttitle}}
 
 \DeclareDataInheritance{book}{inbook,bookinbook,suppbook}{%
-  \inherit{translator}{\bbx@gostbibermap@booktranslator}
-  \inherit{origlanguage}{bookoriglanguage}}
+  \inherit{translator}{namea}
+  \inherit{origlanguage}{listc}}
 \DeclareDataInheritance{collection,reference}{incollection,inreference,suppcollection}{%
-  \inherit{translator}{\bbx@gostbibermap@booktranslator}
-  \inherit{origlanguage}{bookoriglanguage}}
+  \inherit{translator}{namea}
+  \inherit{origlanguage}{listc}}
 \DeclareDataInheritance{proceedings}{inproceedings}{%
-  \inherit{translator}{\bbx@gostbibermap@booktranslator}
-  \inherit{origlanguage}{bookoriglanguage}}
+  \inherit{translator}{namea}
+  \inherit{origlanguage}{listc}}
 
