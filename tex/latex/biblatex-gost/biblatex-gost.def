@@ -287,15 +287,6 @@
     {\DeclareSourcemap{
       \maps[datatype=bibtex]{
         \map{
-          \step[fieldsource=book, fieldtarget=usera]
-          \step[fieldsource=books, fieldtarget=userb]
-          \step[fieldsource=parts, fieldtarget=userc]
-          \step[fieldsource=issues, fieldtarget=userd]
-          \step[fieldsource=material, fieldtarget=usere]
-          \step[fieldsource=credits, fieldtarget=lista]
-          \step[fieldsource=specdata, fieldtarget=listb]
-        }
-        \map{
           \step[fieldsource=author, 
             match=\regexp{(.+\s+and\s+){3,}}, 
             final]
@@ -344,20 +335,7 @@
       }
      }
     }
-    {\DeclareSourcemap{
-      \maps[datatype=bibtex]{
-        \map{
-          \step[fieldsource=book, fieldtarget=usera]
-          \step[fieldsource=books, fieldtarget=userb]
-          \step[fieldsource=parts, fieldtarget=userc]
-          \step[fieldsource=issues, fieldtarget=userd]
-          \step[fieldsource=material, fieldtarget=usere]
-          \step[fieldsource=credits, fieldtarget=lista]
-          \step[fieldsource=specdata, fieldtarget=listb]
-        }
-      }
-     }
-    }
+    {}
 }
 
 \DeclareSortExclusion{inbook,incollection,inproceeding,bookinbook,suppbook,suppcollection,inreference}
