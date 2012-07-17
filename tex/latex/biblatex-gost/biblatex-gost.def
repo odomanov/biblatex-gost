@@ -353,24 +353,36 @@
   \inherit{shorttitle}{shorttitle}}
 
 \DeclareDataInheritance{book}{inbook,bookinbook,suppbook}{%
-  \inherit{editor}{namea}
-  \inherit{translator}{nameb}
-  \inherit{commentator}{namec}
-  \inherit{editortype}{userf}
-  \inherit{origlanguage}{verba}
-  \inherit{credits}{listd}}
+  \inherit{editor}{bookeditor}
+  \inherit{translator}{booktranslator}
+  \inherit{introduction}{bookintroduction}
+  \inherit{commentator}{bookcommentator}
+  \inherit{annotator}{bookannotator}
+  \inherit{foreword}{bookforeword}
+  \inherit{afterword}{bookafterword}
+  \inherit{editortype}{bookeditortype}
+  \inherit{origlanguage}{bookoriglanguage}
+  \inherit{credits}{bookcredits}}
 \DeclareDataInheritance{collection,reference}{incollection,inreference,suppcollection}{%
-  \inherit{editor}{namea}
-  \inherit{translator}{nameb}
-  \inherit{commentator}{namec}
-  \inherit{editortype}{userf}
-  \inherit{origlanguage}{verba}
-  \inherit{credits}{listd}}
+  \inherit{editor}{bookeditor}
+  \inherit{translator}{booktranslator}
+  \inherit{introduction}{bookintroduction}
+  \inherit{commentator}{bookcommentator}
+  \inherit{annotator}{bookannotator}
+  \inherit{foreword}{bookforeword}
+  \inherit{afterword}{bookafterword}
+  \inherit{editortype}{bookeditortype}
+  \inherit{origlanguage}{bookoriglanguage}
+  \inherit{credits}{bookcredits}}
 \DeclareDataInheritance{proceedings}{inproceedings}{%
-  \inherit{editor}{namea}
-  \inherit{translator}{nameb}
-  \inherit{commentator}{namec}
-  \inherit{editortype}{userf}
-  \inherit{origlanguage}{verba}
-  \inherit{credits}{listd}}
+  \inherit{editor}{bookeditor}
+  \inherit{translator}{booktranslator}
+  \inherit{introduction}{bookintroduction}
+  \inherit{commentator}{bookcommentator}
+  \inherit{annotator}{bookannotator}
+  \inherit{foreword}{bookforeword}
+  \inherit{afterword}{bookafterword}
+  \inherit{editortype}{bookeditortype}
+  \inherit{origlanguage}{bookoriglanguage}
+  \inherit{credits}{bookcredits}}
 
