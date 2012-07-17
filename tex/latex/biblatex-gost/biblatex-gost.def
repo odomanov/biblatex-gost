@@ -298,7 +298,7 @@
           \step[fieldsource=bookeditortype, fieldtarget=userf]
           \step[fieldsource=credits, fieldtarget=lista]
           \step[fieldsource=specdata, fieldtarget=listb]
-          \step[fieldsource=bookoriglanguage, fieldtarget=listc]
+          \step[fieldsource=bookoriglanguage, fieldtarget=verba]
           \step[fieldsource=bookcredits, fieldtarget=listd]
         }
         \map{
@@ -364,7 +364,7 @@
           \step[fieldsource=bookeditortype, fieldtarget=userf]
           \step[fieldsource=credits, fieldtarget=lista]
           \step[fieldsource=specdata, fieldtarget=listb]
-          \step[fieldsource=bookoriglanguage, fieldtarget=listc]
+          \step[fieldsource=bookoriglanguage, fieldtarget=verba]
           \step[fieldsource=bookcredits, fieldtarget=listd]
         }
       }
@@ -391,20 +391,20 @@
   \inherit{translator}{nameb}
   \inherit{commentator}{namec}
   \inherit{editortype}{userf}
-  \inherit{origlanguage}{listc}
+  \inherit{origlanguage}{verba}
   \inherit{credits}{listd}}
 \DeclareDataInheritance{collection,reference}{incollection,inreference,suppcollection}{%
   \inherit{editor}{namea}
   \inherit{translator}{nameb}
   \inherit{commentator}{namec}
   \inherit{editortype}{userf}
-  \inherit{origlanguage}{listc}
+  \inherit{origlanguage}{verba}
   \inherit{credits}{listd}}
 \DeclareDataInheritance{proceedings}{inproceedings}{%
   \inherit{editor}{namea}
   \inherit{translator}{nameb}
   \inherit{commentator}{namec}
   \inherit{editortype}{userf}
-  \inherit{origlanguage}{listc}
+  \inherit{origlanguage}{verba}
   \inherit{credits}{listd}}
 

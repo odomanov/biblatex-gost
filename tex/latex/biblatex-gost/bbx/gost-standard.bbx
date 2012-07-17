@@ -945,9 +945,6 @@
 
 % <name><true><false>
 \newbibmacro*{checkbookname}[3]{% 
-%#1:%
-%\ifnameundef{\csuse{bbx@gostbibermap@book#1}}{YYY}{NNN}%
-%\ifnamesequal{#1}{\csuse{bbx@gostbibermap@book#1}}{yyy}{nnn}
   \ifboolexpr{
     test {\ifnameundef{\csuse{bbx@gostbibermap@book#1}}}
     or
@@ -958,8 +955,17 @@
 }
 
 \newbibmacro*{credits}{%
-  \usebibmacro{checkbookfield}{credits}
+\par\bbx@gostbibermap@bookcredits==\printlist{\bbx@gostbibermap@bookcredits}
+\par DEF=\iflistundef{\bbx@gostbibermap@bookcredits}{NNN}{YYY}
+\par\bbx@gostbibermap@credits==\printlist{\bbx@gostbibermap@credits}
+\par EQ=\iflistsequal{\bbx@gostbibermap@credits}{\bbx@gostbibermap@bookcredits}{yyy}{nnn}
+  \ifboolexpr{
+    test {\iflistundef{\csuse{bbx@gostbibermap@bookcredits}}}
+    or
+    not test {\iflistsequal{\csuse{bbx@gostbibermap@credits}}{\csuse{bbx@gostbibermap@bookcredits}}}
+  }
     {\printlist{\bbx@gostbibermap@credits}%
+     \clearlist{\bbx@gostbibermap@credits}%
      \setunit*{\resppunct}}
     {}
   \ifnameundef{editor}
@@ -1045,6 +1051,7 @@
 
 \newbibmacro*{book:credits}{%
   \printlist{\bbx@gostbibermap@bookcredits}%
+  \clearlist{\bbx@gostbibermap@bookcredits}%
   \setunit*{\resppunct}%
   \ifnameundef{\bbx@gostbibermap@bookeditor}
     {}
@@ -1057,7 +1064,6 @@
   \usebibmacro{book:bytranslator+others}}
 
 \newbibmacro*{book:byeditor+othersstrg}{%
-==\bbx@gostbibermap@bookeditortype==by\thefield{\bbx@gostbibermap@bookeditortype}
   \iffieldundef{\bbx@gostbibermap@bookeditortype}
     {\def\abx@tempa{byeditor}}
     {\edef\abx@tempa{by\thefield{\bbx@gostbibermap@bookeditortype}}}%
