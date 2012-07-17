@@ -287,21 +287,6 @@
     {\DeclareSourcemap{
       \maps[datatype=bibtex]{
         \map{
-          \step[fieldsource=bookeditor, fieldtarget=namea]
-          \step[fieldsource=booktranslator, fieldtarget=nameb]
-          \step[fieldsource=bookcommentator, fieldtarget=namec]
-          \step[fieldsource=book, fieldtarget=usera]
-          \step[fieldsource=books, fieldtarget=userb]
-          \step[fieldsource=parts, fieldtarget=userc]
-          \step[fieldsource=issues, fieldtarget=userd]
-          \step[fieldsource=material, fieldtarget=usere]
-          \step[fieldsource=bookeditortype, fieldtarget=userf]
-          \step[fieldsource=credits, fieldtarget=lista]
-          \step[fieldsource=specdata, fieldtarget=listb]
-          \step[fieldsource=bookoriglanguage, fieldtarget=verba]
-          \step[fieldsource=bookcredits, fieldtarget=listd]
-        }
-        \map{
           \step[fieldsource=author, 
             match=\regexp{(.+\s+and\s+){3,}}, 
             final]
@@ -350,26 +335,7 @@
       }
      }
     }
-    {\DeclareSourcemap{
-      \maps[datatype=bibtex]{
-        \map{
-          \step[fieldsource=bookeditor, fieldtarget=namea]
-          \step[fieldsource=booktranslator, fieldtarget=nameb]
-          \step[fieldsource=bookcommentator, fieldtarget=namec]
-          \step[fieldsource=book, fieldtarget=usera]
-          \step[fieldsource=books, fieldtarget=userb]
-          \step[fieldsource=parts, fieldtarget=userc]
-          \step[fieldsource=issues, fieldtarget=userd]
-          \step[fieldsource=material, fieldtarget=usere]
-          \step[fieldsource=bookeditortype, fieldtarget=userf]
-          \step[fieldsource=credits, fieldtarget=lista]
-          \step[fieldsource=specdata, fieldtarget=listb]
-          \step[fieldsource=bookoriglanguage, fieldtarget=verba]
-          \step[fieldsource=bookcredits, fieldtarget=listd]
-        }
-      }
-     }
-    }
+   {}
 }
 
 \DeclareSortExclusion{inbook,incollection,inproceeding,bookinbook,suppbook,suppcollection,inreference}

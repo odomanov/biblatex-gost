@@ -31,17 +31,9 @@
 %\newcommand*{\bbx@gostbibermap@bookintroduction}{}
 %\newcommand*{\bbx@gostbibermap@bookforeword}{}
 %\newcommand*{\bbx@gostbibermap@bookafterword}{}
-\newcommand*{\bbx@gostbibermap@book}{usera}
-\newcommand*{\bbx@gostbibermap@books}{userb}
-\newcommand*{\bbx@gostbibermap@parts}{userc}
-\newcommand*{\bbx@gostbibermap@issues}{userd}
-\newcommand*{\bbx@gostbibermap@material}{usere}
 \newcommand*{\bbx@gostbibermap@bookeditortype}{userf}
-\newcommand*{\bbx@gostbibermap@credits}{lista}
-\newcommand*{\bbx@gostbibermap@specdata}{listb}
 \newcommand*{\bbx@gostbibermap@bookoriglanguage}{listc}
 \newcommand*{\bbx@gostbibermap@bookcredits}{listd}
-\newcommand*{\bbx@gostbibermap@volumes}{volumes}
 
 %  OPTIONS
 
@@ -63,13 +55,15 @@
   \settoggle{bbx:eprint}{#1}}
 
 \ExecuteBibliographyOptions{isbn,url,doi,eprint,
+  %datamodel=biblatex-gost,
   useeditor=false,
   usetranslator=false,
   maxnames=3,
   minnames=1,
   dashed=false,
   singletitle=false,
-  movenames=true}
+  movenames=true,
+  firstinits}
 
 \newbibmacro*{cbx:bookibid:check}[2]{#2}
 
@@ -89,7 +83,7 @@
     {\bibstring{jourvol}\addabbrvspace#1}
     {}}
 \DeclareFieldFormat*{book}{%
-  \iffieldnum{\bbx@gostbibermap@book}
+  \iffieldnum{book}
     {\ifbibstring{book}
       {\bibstring{book}\addabbrvspace#1}
       {}}
@@ -108,7 +102,7 @@
     {\ifcapital{\MakeCapital{#1}}{#1}\isdot}}
 \DeclareFieldFormat{volumes}{#1}
 \newbibmacro*{in+}[2]{%
-  \iffieldnum{\csuse{bbx@gostbibermap@#1}}
+  \iffieldnum{#1}
     {\ifbibstring{involumes}
       {\bibstring{involumes}\addabbrvspace}
       {}%
@@ -265,7 +259,7 @@
   \newunit\newblock
   \printfield{edition}%
   \newunit\newblock
-  \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
+  \printlist[semicolondelim]{specdata}%
   \newunit\newblock
   \usebibmacro{publisher+location+date}%
   \newunit\newblock
@@ -299,7 +293,7 @@
      \setunit*{\resppunct}}%
   \usebibmacro{credits}%
   \newunit\newblock
-  \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
+  \printlist[semicolondelim]{specdata}%
   \newunit\newblock
   \usebibmacro{location+date}%
   \newunit\newblock
@@ -329,7 +323,7 @@
   \newunit\newblock
   \printfield{edition}%
   \newunit\newblock
-  \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
+  \printlist[semicolondelim]{specdata}%
   \newunit\newblock
   \usebibmacro{publisher+location+date}%
   \newunit\newblock
@@ -381,7 +375,7 @@
       \newunit\newblock
       \printfield{edition}%
       \newunit\newblock
-      \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
+      \printlist[semicolondelim]{specdata}%
       \newunit\newblock
       \usebibmacro{publisher+location+date}%
       \newunit\newblock
@@ -427,7 +421,7 @@
       \newunit\newblock
       \printfield{edition}%
       \newunit\newblock
-      \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
+      \printlist[semicolondelim]{specdata}%
       \newunit\newblock
       \usebibmacro{publisher+location+date}%
       \newunit\newblock
@@ -469,7 +463,7 @@
       \setunit{\respdelim}%
       \usebibmacro{book:credits}%
       \newunit\newblock
-      \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
+      \printlist[semicolondelim]{specdata}%
       \newunit\newblock
       \printlist{organization}%
       \newunit
@@ -511,7 +505,7 @@
   \newunit
   \printfield{version}%
   \newunit\newblock
-  \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
+  \printlist[semicolondelim]{specdata}%
   \newunit\newblock
   \usebibmacro{publisher+location+date}%
   \newunit\newblock
@@ -549,7 +543,7 @@
   \newunit\newblock
   \printfield{version}%
   \newunit\newblock
-  \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
+  \printlist[semicolondelim]{specdata}%
   \newunit\newblock
   \usebibmacro{organization+location+date}%
   \newunit\newblock
@@ -583,7 +577,7 @@
   \newunit\newblock
   \printfield{version}%
   \newunit\newblock
-  \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
+  \printlist[semicolondelim]{specdata}%
   \newunit\newblock
   \usebibmacro{date}%
   \newunit\newblock
@@ -615,7 +609,7 @@
   \newunit\newblock
   \usebibmacro{date}%
   \newunit\newblock
-  \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
+  \printlist[semicolondelim]{specdata}%
   \newunit\newblock
   \usebibmacro{doi+eprint+url+note}%
   \newunit\newblock
@@ -637,7 +631,7 @@
   \setunit{\respdelim}%
   \usebibmacro{credits}%
   \newunit\newblock
-  \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
+  \printlist[semicolondelim]{specdata}%
   \newunit\newblock
   \iffieldundef{series}
     {}
@@ -665,7 +659,7 @@
   \setunit{\respdelim}%
   \usebibmacro{credits}%
   \newunit\newblock
-  \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
+  \printlist[semicolondelim]{specdata}%
   \newunit\newblock
   \printlist{organization}%
   \newunit
@@ -699,7 +693,7 @@
   \newunit\newblock
   \printfield{version}%
   \newunit\newblock
-  \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
+  \printlist[semicolondelim]{specdata}%
   \newunit\newblock
   \usebibmacro{institution+location+date}%
   \newunit\newblock
@@ -729,7 +723,7 @@
   \setunit*{\labelnamepunct}%
   \usebibmacro{title}%
   \newunit\newblock
-  \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
+  \printlist[semicolondelim]{specdata}%
   \newunit\newblock
   \printfield{type}%
   \newunit
@@ -759,7 +753,7 @@
   \setunit{\respdelim}%
   \usebibmacro{byauthor}%
   \newunit\newblock
-  \printlist[semicolondelim]{\bbx@gostbibermap@specdata}%
+  \printlist[semicolondelim]{specdata}%
   \newunit\newblock
   \usebibmacro{location+date}%
   \newunit\newblock
@@ -1208,7 +1202,7 @@
 \newbibmacro*{volume+parts}{%
   \printfield{volume}%
   \newunit
-  \printfield[book]{\bbx@gostbibermap@book}%
+  \printfield[book]{book}%
   \newunit
   \printfield{part}%
   \newunit
@@ -1226,7 +1220,7 @@
     {}
     {\printtext[title]{%
        \printfield[titlecase]{title}%
-       \iffieldundef{\bbx@gostbibermap@material}
+       \iffieldundef{material}
           {\setunit*{\subtitlepunct}}
           {\setunit*{\addspace}%
            \usebibmacro{material}%
@@ -1235,7 +1229,7 @@
      \newunit}%
   \setunit*{\addcolondelim}%
   \printfield{titleaddon}%
-  \clearfield{\bbx@gostbibermap@material}}
+  \clearfield{material}}
 
 \renewbibmacro*{booktitle}{%
   \ifboolexpr{
@@ -1261,7 +1255,7 @@
     {}
     {\printtext[maintitle]{%
        \printfield[titlecase]{maintitle}%
-       \iffieldundef{\bbx@gostbibermap@material}
+       \iffieldundef{material}
           {\setunit*{\subtitlepunct}}
           {\setunit*{\addspace}%
            \usebibmacro{material}%
@@ -1270,7 +1264,7 @@
      \newunit}%
   \setunit{\addcolondelim}%
   \printfield{maintitleaddon}%
-  \clearfield{\bbx@gostbibermap@material}}
+  \clearfield{material}}
 
 \newcommand*{\addcolondelim}{%
   \begingroup%
@@ -1291,11 +1285,11 @@
 \newbibmacro*{involumes+otherparts}[1]{%
   \printfield[involumes]{volumes}%
   \setunit*{#1}%
-  \printfield[inbooks]{\bbx@gostbibermap@books}%
+  \printfield[inbooks]{books}%
   \setunit*{#1}%
-  \printfield[inparts]{\bbx@gostbibermap@parts}%
+  \printfield[inparts]{parts}%
   \setunit*{#1}%
-  \printfield[inissues]{\bbx@gostbibermap@issues}%
+  \printfield[inissues]{issues}%
   \setunit*{#1}%
 }
 
@@ -1420,13 +1414,13 @@
   \fi}
 
 \newbibmacro*{material}{%
-  \iffieldundef{\bbx@gostbibermap@material}
+  \iffieldundef{material}
     {}
     {{\ifdefvoid{\gostmateriallanguage}
         {}
         {\select@language{\gostmateriallanguage}}% first switch language, then \ifbibxstring
-      \ifbibxstring{material\thefield{\bbx@gostbibermap@material}}
-        {\printtext[brackets]{\bibcpstring{material\thefield{\bbx@gostbibermap@material}}}}
+      \ifbibxstring{material\thefield{material}}
+        {\printtext[brackets]{\bibcpstring{material\thefield{material}}}}
         {}}}}
 
 \newbibmacro*{setup:min}{%
@@ -1439,9 +1433,9 @@
   \renewbibmacro*{translator}{}%
   \clearfield{series}%
   \clearfield{edition}%
-  \clearlist{\bbx@gostbibermap@credits}%
-  \clearlist{\bbx@gostbibermap@specdata}%
-  \clearfield{\bbx@gostbibermap@material}%
+  \clearlist{credits}%
+  \clearlist{specdata}%
+  \clearfield{material}%
   \clearfield{pagetotal}%
   \clearfield{titleaddon}%
   \clearfield{booktitleaddon}%
