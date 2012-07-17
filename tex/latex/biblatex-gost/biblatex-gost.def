@@ -287,7 +287,7 @@
     {\DeclareSourcemap{
       \maps[datatype=bibtex]{
         \map{
-          \step[fieldsource=bookteditator, fieldtarget=namea]
+          \step[fieldsource=bookeditor, fieldtarget=namea]
           \step[fieldsource=booktranslator, fieldtarget=nameb]
           \step[fieldsource=bookcommentator, fieldtarget=namec]
           \step[fieldsource=book, fieldtarget=usera]
@@ -295,6 +295,7 @@
           \step[fieldsource=parts, fieldtarget=userc]
           \step[fieldsource=issues, fieldtarget=userd]
           \step[fieldsource=material, fieldtarget=usere]
+          \step[fieldsource=bookeditortype, fieldtarget=userf]
           \step[fieldsource=credits, fieldtarget=lista]
           \step[fieldsource=specdata, fieldtarget=listb]
           \step[fieldsource=bookoriglanguage, fieldtarget=listc]
@@ -352,7 +353,7 @@
     {\DeclareSourcemap{
       \maps[datatype=bibtex]{
         \map{
-          \step[fieldsource=bookteditator, fieldtarget=namea]
+          \step[fieldsource=bookeditor, fieldtarget=namea]
           \step[fieldsource=booktranslator, fieldtarget=nameb]
           \step[fieldsource=bookcommentator, fieldtarget=namec]
           \step[fieldsource=book, fieldtarget=usera]
@@ -360,6 +361,7 @@
           \step[fieldsource=parts, fieldtarget=userc]
           \step[fieldsource=issues, fieldtarget=userd]
           \step[fieldsource=material, fieldtarget=usere]
+          \step[fieldsource=bookeditortype, fieldtarget=userf]
           \step[fieldsource=credits, fieldtarget=lista]
           \step[fieldsource=specdata, fieldtarget=listb]
           \step[fieldsource=bookoriglanguage, fieldtarget=listc]
@@ -388,18 +390,21 @@
   \inherit{editor}{namea}
   \inherit{translator}{nameb}
   \inherit{commentator}{namec}
+  \inherit{editortype}{userf}
   \inherit{origlanguage}{listc}
   \inherit{credits}{listd}}
 \DeclareDataInheritance{collection,reference}{incollection,inreference,suppcollection}{%
   \inherit{editor}{namea}
   \inherit{translator}{nameb}
   \inherit{commentator}{namec}
+  \inherit{editortype}{userf}
   \inherit{origlanguage}{listc}
   \inherit{credits}{listd}}
 \DeclareDataInheritance{proceedings}{inproceedings}{%
   \inherit{editor}{namea}
   \inherit{translator}{nameb}
   \inherit{commentator}{namec}
+  \inherit{editortype}{userf}
   \inherit{origlanguage}{listc}
   \inherit{credits}{listd}}
 

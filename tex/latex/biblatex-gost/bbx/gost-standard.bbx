@@ -27,15 +27,16 @@
 \newcommand*{\bbx@gostbibermap@bookeditor}{namea}
 \newcommand*{\bbx@gostbibermap@booktranslator}{nameb}
 \newcommand*{\bbx@gostbibermap@bookcommentator}{namec}
-%\newcommand*{\bbx@gostbibermap@bookannotator}{namec}
-%\newcommand*{\bbx@gostbibermap@bookintroduction}{named}
-%\newcommand*{\bbx@gostbibermap@bookforeword}{namee}
-%\newcommand*{\bbx@gostbibermap@bookafterword}{namef}
+%\newcommand*{\bbx@gostbibermap@bookannotator}{}
+%\newcommand*{\bbx@gostbibermap@bookintroduction}{}
+%\newcommand*{\bbx@gostbibermap@bookforeword}{}
+%\newcommand*{\bbx@gostbibermap@bookafterword}{}
 \newcommand*{\bbx@gostbibermap@book}{usera}
 \newcommand*{\bbx@gostbibermap@books}{userb}
 \newcommand*{\bbx@gostbibermap@parts}{userc}
 \newcommand*{\bbx@gostbibermap@issues}{userd}
 \newcommand*{\bbx@gostbibermap@material}{usere}
+\newcommand*{\bbx@gostbibermap@bookeditortype}{userf}
 \newcommand*{\bbx@gostbibermap@credits}{lista}
 \newcommand*{\bbx@gostbibermap@specdata}{listb}
 \newcommand*{\bbx@gostbibermap@bookoriglanguage}{listc}
@@ -186,7 +187,7 @@
 \DeclareNameAlias{editorb}{editor}
 \DeclareNameAlias{editorc}{editor}
 \DeclareNameAlias{translator}{author}
-\DeclareNameAlias{book:byauthor}{byauthor}
+%\DeclareNameAlias{book:byauthor}{byauthor}
 
 \newbibmacro*{//}{%
   \nopunct\printtext{\addnbspace\mbox{//}\addspace}}
@@ -350,10 +351,10 @@
   \usebibmacro{finentry}}
 
 \DeclareBibliographyDriver{inbook}{%
-==\printfield{credits}==\printfield{\bbx@gostbibermap@credits}==\par
-==\printnames{editor}==\printnames{\bbx@gostbibermap@bookeditor}==\par
-==\printnames{translator}==\printnames{\bbx@gostbibermap@booktranslator}==\par
-==\printnames{commentator}==\printnames{\bbx@gostbibermap@bookcommentator}==\par
+%==\printfield{credits}==\printfield{\bbx@gostbibermap@credits}==\par
+%==\printnames{editor}==\printnames{\bbx@gostbibermap@bookeditor}==\par
+%==\printnames{translator}==\printnames{\bbx@gostbibermap@booktranslator}==\par
+%==\printnames{commentator}==\printnames{\bbx@gostbibermap@bookcommentator}==\par
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author/translator+others}%
@@ -400,10 +401,10 @@
   \usebibmacro{finentry}}
 
 \DeclareBibliographyDriver{incollection}{%
-==\printfield{credits}==\printfield{\bbx@gostbibermap@credits}==\par
-==\printnames{editor}==\printnames{\bbx@gostbibermap@bookeditor}==\par
-==\printnames{translator}==\printnames{\bbx@gostbibermap@booktranslator}==\par
-==\printnames{commentator}==\printnames{\bbx@gostbibermap@bookcommentator}==\par
+%==\printfield{credits}==\printfield{\bbx@gostbibermap@credits}==\par
+%==\printnames{editor}==\printnames{\bbx@gostbibermap@bookeditor}==\par
+%==\printnames{translator}==\printnames{\bbx@gostbibermap@booktranslator}==\par
+%==\printnames{commentator}==\printnames{\bbx@gostbibermap@bookcommentator}==\par
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author/translator+others}%
@@ -1042,151 +1043,144 @@
      \clearname{afterword}}
     {}}
 
-\newbibmacro*{inbook:credits}{%
-  \printlist{\bbx@gostbibermap@credits}%
+\newbibmacro*{book:credits}{%
+  \printlist{\bbx@gostbibermap@bookcredits}%
   \setunit*{\resppunct}%
-  \ifnameundef{editor}
+  \ifnameundef{\bbx@gostbibermap@bookeditor}
     {}
-    {\usebibmacro{byeditor+othersstrg}%
+    {\usebibmacro{book:byeditor+othersstrg}%
      \setunit{\addspace}%
-     \printnames[byeditor]{editor}%
-     \clearname{editor}%
+     \printnames[byeditor]{\bbx@gostbibermap@bookeditor}%
+     \clearname{\bbx@gostbibermap@bookeditor}%
      \setunit*{\resppunct}}%
-  \usebibmacro{byeditorx}%
-  \usebibmacro{inbook:bytranslator+others}}
+  \usebibmacro{book:byeditorx}%
+  \usebibmacro{book:bytranslator+others}}
 
-\newbibmacro*{inbook:bytranslator+others}{%
-  \ifboolexpr{
-      not test {\ifnameundef{translator}}
-      and 
-      test {\ifmanesequal{translator}{\bbx@gostbibermap@booktranslator}}  
-  }
-    {\usebibmacro{bytranslator+othersstrg}%
-     \setunit{\addspace}%
-     \printnames[bytranslator]{translator}%
-     \clearname{translator}%
-     \setunit*{\resppunct}}
-     {}%
-  \usebibmacro{inbook:withothers}}
-
-\newbibmacro*{bybooktranslator+othersstrg}{%
-  \def\abx@tempa{bytranslator}%
-  \ifnamesequal{\bbx@gostbibermap@booktranslator}{commentator}
+\newbibmacro*{book:byeditor+othersstrg}{%
+==\bbx@gostbibermap@bookeditortype==by\thefield{\bbx@gostbibermap@bookeditortype}
+  \iffieldundef{\bbx@gostbibermap@bookeditortype}
+    {\def\abx@tempa{byeditor}}
+    {\edef\abx@tempa{by\thefield{\bbx@gostbibermap@bookeditortype}}}%
+  \let\abx@tempb=\empty
+  \ifnamesequal{\bbx@gostbibermap@bookeditor}{\bbx@gostbibermap@booktranslator}
+    {\appto\abx@tempa{tr}%
+     \appto\abx@tempb{\clearname{\bbx@gostbibermap@booktranslator}}}
+    {}%
+  \ifnamesequal{\bbx@gostbibermap@bookeditor}{\bbx@gostbibermap@bookcommentator}
     {\appto\abx@tempa{co}%
-     \clearname{commentator}}
-    {\ifnamesequal{\bbx@gostbibermap@booktranslator}{annotator}
-       {\appto\abx@tempa{an}%
-        \clearname{annotator}}
-       {}}%
-  \ifnamesequal{\bbx@gostbibermap@booktranslator}{introduction}
-    {\appto\abx@tempa{in}%
-     \clearname{introduction}}
-    {\ifnamesequal{\bbx@gostbibermap@booktranslator}{foreword}
-       {\appto\abx@tempa{fo}%
-        \clearname{foreword}}
-       {\ifnamesequal{\bbx@gostbibermap@booktranslator}{afterword}
-          {\appto\abx@tempa{af}%
-           \clearname{afterword}}
-          {}}}%
-  \bibstring{\abx@tempa}}
+     \appto\abx@tempb{\clearname{\bbx@gostbibermap@bookcommentator}}}
+    {}%\ifnamesequal{\bbx@gostbibermap@bookeditor}{\bbx@gostbibermap@bookannotator}
+      % {\appto\abx@tempa{an}%
+      %  \appto\abx@tempb{\clearname{\bbx@gostbibermap@bookannotator}}}
+      % {}}%
+%  \ifnamesequal{\bbx@gostbibermap@bookeditor}{\bbx@gostbibermap@bookintroduction}
+%    {\appto\abx@tempa{in}%
+%     \appto\abx@tempb{\clearname{\bbx@gostbibermap@bookintroduction}}}
+%    {\ifnamesequal{\bbx@gostbibermap@bookeditor}{\bbx@gostbibermap@bookforeword}
+%       {\appto\abx@tempa{fo}%
+%        \appto\abx@tempb{\clearname{\bbx@gostbibermap@bookforeword}}}
+%       {\ifnamesequal{\bbx@gostbibermap@bookeditor}{\bbx@gostbibermap@bookafterword}
+%          {\appto\abx@tempa{af}%
+%           \appto\abx@tempb{\clearname{\bbx@gostbibermap@bookafterword}}}
+%          {}}}%
+  \ifbibxstring{\abx@tempa}
+    {\printtext{\bibstring{\abx@tempa}}\abx@tempb}
+    {}}%\usebibmacro{bytypestrg}{\bbx@gostbibermap@bookeditor}{\bbx@gostbibermap@bookeditor}}}
 
-\renewbibmacro*{inbook:withothers}{%
-  \usebibmacro{withcommentator}%
-  \clearname{commentator}%
-  \setunit*{\resppunct}%
-  \usebibmacro{withannotator}%
-  \clearname{annotator}%
-  \setunit*{\resppunct}%
-  \usebibmacro{withintroduction}%
-  \clearname{introduction}%
-  \setunit*{\resppunct}%
-  \usebibmacro{withforeword}%
-  \clearname{foreword}%
-  \setunit*{\resppunct}%
-  \usebibmacro{withafterword}%
-  \clearname{afterword}}
-
-\renewbibmacro*{book:credits}{%
-  \printlist{\bbx@gostbibermap@credits}%
-  \setunit*{\resppunct}%
-  \ifnameundef{editor}
+\newbibmacro*{book:byeditorx}{%
+  \ifnameundef{editora}
     {}
-    {\usebibmacro{byeditor+othersstrg}%
+    {%\usebibmacro{bytypestrg}{editora}{\bbx@gostbibermap@bookeditor}%
      \setunit{\addspace}%
-     \printnames[byeditor]{editor}%
-     \clearname{editor}%
+     \printnames[byeditora]{editora}%
      \setunit*{\resppunct}}%
-  \usebibmacro{byeditorx}%
-  \usebibmacro{bytranslator+others}}
-
-\renewbibmacro*{book:bytranslator+others}{%
-  \ifnameundef{translator}
+  \ifnameundef{editorb}
     {}
-    {\usebibmacro{bytranslator+othersstrg}%
+    {%\usebibmacro{bytypestrg}{editorb}{\bbx@gostbibermap@bookeditor}%
      \setunit{\addspace}%
-     \printnames[bytranslator]{translator}%
-     \clearname{translator}%
+     \printnames[byeditorb]{editorb}%
      \setunit*{\resppunct}}%
-  \usebibmacro{withothers}}
+  \ifnameundef{editorc}
+    {}
+    {%\usebibmacro{bytypestrg}{editorc}{\bbx@gostbibermap@bookeditor}%
+     \setunit{\addspace}%
+     \printnames[byeditorc]{editorc}%
+     \setunit*{\resppunct}}}
 
-\newbibmacro*{bybooktranslator+othersstrg}{%
+\newbibmacro*{book:bytranslator+others}{%
+  \ifnameundef{\bbx@gostbibermap@booktranslator}
+    {}
+    {\usebibmacro{book:bytranslator+othersstrg}%
+     \setunit{\addspace}%
+     \printnames[bytranslator]{\bbx@gostbibermap@booktranslator}%
+     \clearname{\bbx@gostbibermap@booktranslator}%
+     \setunit*{\resppunct}}%
+  \usebibmacro{book:withothers}}
+
+\newbibmacro*{book:bytranslator+othersstrg}{%
   \def\abx@tempa{bytranslator}%
-  \ifnamesequal{\bbx@gostbibermap@booktranslator}{commentator}
+  \ifnamesequal{\bbx@gostbibermap@booktranslator}{\bbx@gostbibermap@bookcommentator}
     {\appto\abx@tempa{co}%
-     \clearname{commentator}}
-    {\ifnamesequal{\bbx@gostbibermap@booktranslator}{annotator}
-       {\appto\abx@tempa{an}%
-        \clearname{annotator}}
-       {}}%
-  \ifnamesequal{\bbx@gostbibermap@booktranslator}{introduction}
-    {\appto\abx@tempa{in}%
-     \clearname{introduction}}
-    {\ifnamesequal{\bbx@gostbibermap@booktranslator}{foreword}
-       {\appto\abx@tempa{fo}%
-        \clearname{foreword}}
-       {\ifnamesequal{\bbx@gostbibermap@booktranslator}{afterword}
-          {\appto\abx@tempa{af}%
-           \clearname{afterword}}
-          {}}}%
+     \clearname{\bbx@gostbibermap@bookcommentator}}
+    {}%\ifnamesequal{\bbx@gostbibermap@booktranslator}{\bbx@gostbibermap@bookannotator}
+      % {\appto\abx@tempa{an}%
+      %  \clearname{\bbx@gostbibermap@bookannotator}}
+      % {}}%
+%  \ifnamesequal{\bbx@gostbibermap@booktranslator}{\bbx@gostbibermap@bookintroduction}
+%    {\appto\abx@tempa{in}%
+%     \clearname{\bbx@gostbibermap@bookintroduction}}
+%    {\ifnamesequal{\bbx@gostbibermap@booktranslator}{\bbx@gostbibermap@bookforeword}
+%       {\appto\abx@tempa{fo}%
+%        \clearname{\bbx@gostbibermap@bookforeword}}
+%       {\ifnamesequal{\bbx@gostbibermap@booktranslator}{\bbx@gostbibermap@bookafterword}
+%          {\appto\abx@tempa{af}%
+%           \clearname{\bbx@gostbibermap@bookafterword}}
+%          {}}}%
   \bibstring{\abx@tempa}}
 
 \newbibmacro*{book:withothers}{%
   \usebibmacro{book:withcommentator}%
   \clearname{\bbx@gostbibermap@bookcommentator}%
   \setunit*{\resppunct}%
-  \usebibmacro{book:withannotator}%
-  \clearname{\bbx@gostbibermap@bookannotator}%
-  \setunit*{\resppunct}%
-  \usebibmacro{book:withintroduction}%
-  \clearname{\bbx@gostbibermap@bookintroduction}%
-  \setunit*{\resppunct}%
-  \usebibmacro{book:withforeword}%
-  \clearname{\bbx@gostbibermap@bookforeword}%
-  \setunit*{\resppunct}%
-  \usebibmacro{book:withafterword}%
-  \clearname{\bbx@gostbibermap@bookafterword}}
+%  \usebibmacro{book:withannotator}%
+%  \clearname{\bbx@gostbibermap@bookannotator}%
+%  \setunit*{\resppunct}%
+%  \usebibmacro{book:withintroduction}%
+%  \clearname{\bbx@gostbibermap@bookintroduction}%
+%  \setunit*{\resppunct}%
+%  \usebibmacro{book:withforeword}%
+%  \clearname{\bbx@gostbibermap@bookforeword}%
+%  \setunit*{\resppunct}%
+%  \usebibmacro{book:withafterword}%
+%  \clearname{\bbx@gostbibermap@bookafterword}%
+}
 
-\newbibmacro*{book:with+}[1]{%
-  \ifnameundef{\bbx@gostbibermap@book#1}
-    {}
-    {\bibstring{with#1}%
-     \setunit{\addspace}%
-     \printnames[with#1]{\bbx@gostbibermap@book#1}}}
+%\newbibmacro*{book:with+}[1]{%
+%  \ifnameundef{\csuse{bbx@gostbibermap@book#1}}
+%    {}
+%    {\bibstring{with#1}%
+%     \setunit{\addspace}%
+%     \printnames[with#1]{\csuse{bbx@gostbibermap@book#1}}}}
 
 \newbibmacro*{book:withcommentator}{%
-  \usebibmacro{book:with+}{commentator}}
+  %\usebibmacro{book:with+}{commentator}}
+  \ifnameundef{\bbx@gostbibermap@bookcommentator}
+    {}
+    {\bibstring{withcommentator}%
+     \setunit{\addspace}%
+     \printnames[withcommentator]{\bbx@gostbibermap@bookcommentator}}}
 
-\newbibmacro*{book:withannotator}{%
-  \usebibmacro{book:with+}{annotator}}
+%\newbibmacro*{book:withannotator}{%
+%  \usebibmacro{book:with+}{annotator}}
   
-\newbibmacro*{book:withintroduction}{%
-  \usebibmacro{book:with+}{introduction}}
+%\newbibmacro*{book:withintroduction}{%
+%  \usebibmacro{book:with+}{introduction}}
 
-\newbibmacro*{book:withforeword}{%
-  \usebibmacro{book:with+}{foreword}}
+%\newbibmacro*{book:withforeword}{%
+%  \usebibmacro{book:with+}{foreword}}
 
-\newbibmacro*{book:withafterword}{%
-  \usebibmacro{book:with+}{afterword}}
+%\newbibmacro*{book:withafterword}{%
+%  \usebibmacro{book:with+}{afterword}}
 
 %----------------------------------------------------------------
 \newbibmacro*{jour:volume+parts+issuetitle}{%
@@ -1310,10 +1304,10 @@
      %\setunit{\addspace}%
      \printnames[byauthor]{author}}}
      
-\renewbibmacro*{book:byauthor}{%
+\newbibmacro*{book:byauthor}{%
   \ifnamesequal{author}{bookauthor}
     {}
-    {\printnames[book:byauthor]{bookauthor}}}
+    {\printnames[byauthor]{bookauthor}}}
 
 \renewbibmacro*{name:andothers}{%
   \ifboolexpr{
