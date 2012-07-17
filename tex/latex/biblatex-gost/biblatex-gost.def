@@ -287,7 +287,9 @@
     {\DeclareSourcemap{
       \maps[datatype=bibtex]{
         \map{
-          \step[fieldsource=booktranslator, fieldtarget=namea]
+          \step[fieldsource=bookteditator, fieldtarget=namea]
+          \step[fieldsource=booktranslator, fieldtarget=nameb]
+          \step[fieldsource=bookcommentator, fieldtarget=namec]
           \step[fieldsource=book, fieldtarget=usera]
           \step[fieldsource=books, fieldtarget=userb]
           \step[fieldsource=parts, fieldtarget=userc]
@@ -296,6 +298,7 @@
           \step[fieldsource=credits, fieldtarget=lista]
           \step[fieldsource=specdata, fieldtarget=listb]
           \step[fieldsource=bookoriglanguage, fieldtarget=listc]
+          \step[fieldsource=bookcredits, fieldtarget=listd]
         }
         \map{
           \step[fieldsource=author, 
@@ -349,7 +352,9 @@
     {\DeclareSourcemap{
       \maps[datatype=bibtex]{
         \map{
-          \step[fieldsource=booktranslator, fieldtarget=namea]
+          \step[fieldsource=bookteditator, fieldtarget=namea]
+          \step[fieldsource=booktranslator, fieldtarget=nameb]
+          \step[fieldsource=bookcommentator, fieldtarget=namec]
           \step[fieldsource=book, fieldtarget=usera]
           \step[fieldsource=books, fieldtarget=userb]
           \step[fieldsource=parts, fieldtarget=userc]
@@ -358,6 +363,7 @@
           \step[fieldsource=credits, fieldtarget=lista]
           \step[fieldsource=specdata, fieldtarget=listb]
           \step[fieldsource=bookoriglanguage, fieldtarget=listc]
+          \step[fieldsource=bookcredits, fieldtarget=listd]
         }
       }
      }
@@ -379,12 +385,21 @@
   \inherit{shorttitle}{shorttitle}}
 
 \DeclareDataInheritance{book}{inbook,bookinbook,suppbook}{%
-  \inherit{translator}{namea}
-  \inherit{origlanguage}{listc}}
+  \inherit{editor}{namea}
+  \inherit{translator}{nameb}
+  \inherit{commentator}{namec}
+  \inherit{origlanguage}{listc}
+  \inherit{credits}{listd}}
 \DeclareDataInheritance{collection,reference}{incollection,inreference,suppcollection}{%
-  \inherit{translator}{namea}
-  \inherit{origlanguage}{listc}}
+  \inherit{editor}{namea}
+  \inherit{translator}{nameb}
+  \inherit{commentator}{namec}
+  \inherit{origlanguage}{listc}
+  \inherit{credits}{listd}}
 \DeclareDataInheritance{proceedings}{inproceedings}{%
-  \inherit{translator}{namea}
-  \inherit{origlanguage}{listc}}
+  \inherit{editor}{namea}
+  \inherit{translator}{nameb}
+  \inherit{commentator}{namec}
+  \inherit{origlanguage}{listc}
+  \inherit{credits}{listd}}
 
