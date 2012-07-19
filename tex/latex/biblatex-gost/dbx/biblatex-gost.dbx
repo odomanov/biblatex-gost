@@ -52,7 +52,7 @@
   bookintroduction,
   bookforeword,
   bookafterword,
-  bookeditortype,
+  %bookeditortype,
   bookoriglanguage,
   bookcredits,
 }
