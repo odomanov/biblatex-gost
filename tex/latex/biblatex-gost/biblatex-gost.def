@@ -353,36 +353,36 @@
   \inherit{shorttitle}{shorttitle}}
 
 \DeclareDataInheritance{book}{inbook,bookinbook,suppbook}{%
-  \inherit{editor}{bookeditor}
+  %\inherit{editor}{bookeditor}
   \inherit{translator}{booktranslator}
   \inherit{introduction}{bookintroduction}
   \inherit{commentator}{bookcommentator}
   \inherit{annotator}{bookannotator}
   \inherit{foreword}{bookforeword}
   \inherit{afterword}{bookafterword}
-  \inherit{editortype}{bookeditortype}
+  %\inherit{editortype}{bookeditortype}
   \inherit{origlanguage}{bookoriglanguage}
   \inherit{credits}{bookcredits}}
 \DeclareDataInheritance{collection,reference}{incollection,inreference,suppcollection}{%
-  \inherit{editor}{bookeditor}
+  %\inherit{editor}{bookeditor}
   \inherit{translator}{booktranslator}
   \inherit{introduction}{bookintroduction}
   \inherit{commentator}{bookcommentator}
   \inherit{annotator}{bookannotator}
   \inherit{foreword}{bookforeword}
   \inherit{afterword}{bookafterword}
-  \inherit{editortype}{bookeditortype}
+  %\inherit{editortype}{bookeditortype}
   \inherit{origlanguage}{bookoriglanguage}
   \inherit{credits}{bookcredits}}
 \DeclareDataInheritance{proceedings}{inproceedings}{%
-  \inherit{editor}{bookeditor}
+  %\inherit{editor}{bookeditor}
   \inherit{translator}{booktranslator}
   \inherit{introduction}{bookintroduction}
   \inherit{commentator}{bookcommentator}
   \inherit{annotator}{bookannotator}
   \inherit{foreword}{bookforeword}
   \inherit{afterword}{bookafterword}
-  \inherit{editortype}{bookeditortype}
+  %\inherit{editortype}{bookeditortype}
   \inherit{origlanguage}{bookoriglanguage}
   \inherit{credits}{bookcredits}}
 

@@ -207,6 +207,10 @@
   \usebibmacro{journal}
   \setunit{\respdelim}%
   \usebibmacro{credits}%
+  \setunit*{\resppunct}%
+  \usebibmacro{byeditor}%
+  \setunit*{\resppunct}%
+  \usebibmacro{bytranslator+others}%
   \newunit\newblock
   \printfield{edition}%
   \newunit\newblock
@@ -245,6 +249,10 @@
     {\usebibmacro{byauthor}%
      \setunit*{\resppunct}}%
   \usebibmacro{credits}%
+  \setunit*{\resppunct}%
+  \usebibmacro{byeditor}%
+  \setunit*{\resppunct}%
+  \usebibmacro{bytranslator+others}%
   \newunit\newblock
   \printfield{edition}%
   \newunit\newblock
@@ -281,6 +289,10 @@
     {\usebibmacro{byauthor}%
      \setunit*{\resppunct}}%
   \usebibmacro{credits}%
+  \setunit*{\resppunct}%
+  \usebibmacro{byeditor}%
+  \setunit*{\resppunct}%
+  \usebibmacro{bytranslator+others}%
   \newunit\newblock
   \printlist[semicolondelim]{specdata}%
   \newunit\newblock
@@ -309,6 +321,10 @@
   \usebibmacro{maintitle+volumes+parts+title}%
   \setunit{\respdelim}%
   \usebibmacro{credits}%
+  \setunit*{\resppunct}%
+  \usebibmacro{byeditor}%
+  \setunit*{\resppunct}%
+  \usebibmacro{bytranslator+others}%
   \newunit\newblock
   \printfield{edition}%
   \newunit\newblock
@@ -347,6 +363,8 @@
   \usebibmacro{byauthor}%
   \setunit*{\resppunct}%
   \usebibmacro{credits}%
+  \setunit*{\resppunct}%
+  \usebibmacro{bytranslator+others}%
   \setunit{\space}
   \usebibmacro{//}%
   \usebibmacro{cbx:bookibid:check}
@@ -361,6 +379,10 @@
         {\usebibmacro{book:byauthor}%
          \setunit*{\resppunct}}%
       \usebibmacro{book:credits}%
+      \setunit*{\resppunct}%
+      \usebibmacro{byeditor}%
+      \setunit*{\resppunct}%
+      \usebibmacro{book:bytranslator+others}%
       \newunit\newblock
       \printfield{edition}%
       \newunit\newblock
@@ -397,6 +419,8 @@
   \usebibmacro{byauthor}%
   \setunit*{\resppunct}%
   \usebibmacro{credits}%
+  \setunit*{\resppunct}%
+  \usebibmacro{bytranslator+others}%
   \setunit{\space}
   \usebibmacro{//}%
   \usebibmacro{cbx:bookibid:check}
@@ -407,6 +431,10 @@
      {\usebibmacro{maintitle+volumes+parts+booktitle}%
       \setunit{\respdelim}%
       \usebibmacro{book:credits}%
+      \setunit*{\resppunct}%
+      \usebibmacro{byeditor}%
+      \setunit*{\resppunct}%
+      \usebibmacro{book:bytranslator+others}%
       \newunit\newblock
       \printfield{edition}%
       \newunit\newblock
@@ -439,6 +467,8 @@
   \usebibmacro{byauthor}%
   \setunit*{\resppunct}%
   \usebibmacro{credits}%
+  \setunit*{\resppunct}%
+  \usebibmacro{bytranslator+others}%
   \setunit{\space}
   \usebibmacro{//}%
   \usebibmacro{cbx:bookibid:check}
@@ -451,6 +481,10 @@
       \usebibmacro{event+venue+date}%
       \setunit{\respdelim}%
       \usebibmacro{book:credits}%
+      \setunit*{\resppunct}%
+      \usebibmacro{byeditor}%
+      \setunit*{\resppunct}%
+      \usebibmacro{book:bytranslator+others}%
       \newunit\newblock
       \printlist[semicolondelim]{specdata}%
       \newunit\newblock
@@ -647,6 +681,10 @@
   \usebibmacro{event+venue+date}%
   \setunit{\respdelim}%
   \usebibmacro{credits}%
+  \setunit*{\resppunct}%
+  \usebibmacro{byeditor}%
+  \setunit*{\resppunct}%
+  \usebibmacro{bytranslator+others}%
   \newunit\newblock
   \printlist[semicolondelim]{specdata}%
   \newunit\newblock
@@ -928,6 +966,8 @@
 
 % <name><true><false>
 \newbibmacro*{checkbookname}[3]{% 
+%\par book#1=\printnames{book#1} DEF=\ifnameundef{book#1}{NNN}{YYY}
+%#1=\printnames{#1} EQ=\ifnamesequal{#1}{book#1}{yyy}{nnn}
   \ifboolexpr{
     test {\ifnameundef{book#1}}
     or
@@ -939,8 +979,8 @@
 
 % <list><true><false>
 \newbibmacro*{checkbooklist}[3]{% 
-%\par==\printlist{bookcredits} DEF=\iflistundef{bookcredits}{NNN}{YYY}
-%\par==\printlist{credits} EQ=\iflistsequal{credits}{bookcredits}{yyy}{nnn}
+%\par book#1=\printlist{book#1} DEF=\iflistundef{book#1}{NNN}{YYY}
+%#1=\printlist{#1} EQ=\iflistsequal{#1}{book#1}{yyy}{nnn}
   \ifboolexpr{
     test {\iflistundef{book#1}}
     or
@@ -954,19 +994,22 @@
   \usebibmacro{checkbooklist}{credits}
     {\printlist{credits}%
      \clearlist{credits}%
-     \setunit*{\resppunct}}
-    {}
+     %\setunit*{\resppunct}
+     }
+    {}}
+
+\renewbibmacro*{byeditor}{%    
   \ifnameundef{editor}
     {}
-    {\usebibmacro{checkbookname}{editor}
+    %{\usebibmacro{checkbookname}{editor}
       {\usebibmacro{byeditor+othersstrg}%
        \setunit{\addspace}%
        \printnames[byeditor]{editor}%
        \clearname{editor}%
        \setunit*{\resppunct}%
        \usebibmacro{byeditorx}}
-      {}}
-  \usebibmacro{bytranslator+others}}
+      %{}}%
+}
 
 \renewbibmacro*{bytranslator+others}{%
   \ifnameundef{translator}
@@ -1017,22 +1060,22 @@
      \clearname{commentator}%
      \setunit*{\resppunct}}
     {}%
-  \usebibmacro{checkbookname}{commentator}
+  \usebibmacro{checkbookname}{annotator}
     {\usebibmacro{withannotator}%
      \clearname{annotator}%
      \setunit*{\resppunct}}
     {}%
-  \usebibmacro{checkbookname}{commentator}
+  \usebibmacro{checkbookname}{introduction}
     {\usebibmacro{withintroduction}%
      \clearname{introduction}%
      \setunit*{\resppunct}}
     {}%
-  \usebibmacro{checkbookname}{commentator}
+  \usebibmacro{checkbookname}{foreword}
     {\usebibmacro{withforeword}%
      \clearname{foreword}%
      \setunit*{\resppunct}}
     {}%
-  \usebibmacro{checkbookname}{commentator}
+  \usebibmacro{checkbookname}{afterword}
     {\usebibmacro{withafterword}%
      \clearname{afterword}}
     {}}
@@ -1040,66 +1083,8 @@
 \newbibmacro*{book:credits}{%
   \printlist{bookcredits}%
   \clearlist{bookcredits}%
-  \setunit*{\resppunct}%
-  \ifnameundef{bookeditor}
-    {}
-    {\usebibmacro{book:byeditor+othersstrg}%
-     \setunit{\addspace}%
-     \printnames[byeditor]{bookeditor}%
-     \clearname{bookeditor}%
-     \setunit*{\resppunct}}%
-  \usebibmacro{book:byeditorx}%
-  \usebibmacro{book:bytranslator+others}}
-
-\newbibmacro*{book:byeditor+othersstrg}{%
-  \iffieldundef{bookeditortype}
-    {\def\abx@tempa{byeditor}}
-    {\edef\abx@tempa{by\thefield{bookeditortype}}}%
-  \let\abx@tempb=\empty
-  \ifnamesequal{bookeditor}{booktranslator}
-    {\appto\abx@tempa{tr}%
-     \appto\abx@tempb{\clearname{booktranslator}}}
-    {}%
-  \ifnamesequal{bookeditor}{bookcommentator}
-    {\appto\abx@tempa{co}%
-     \appto\abx@tempb{\clearname{bookcommentator}}}
-    {\ifnamesequal{bookeditor}{bookannotator}
-       {\appto\abx@tempa{an}%
-        \appto\abx@tempb{\clearname{bookannotator}}}
-       {}}%
-  \ifnamesequal{bookeditor}{bookintroduction}
-    {\appto\abx@tempa{in}%
-     \appto\abx@tempb{\clearname{bookintroduction}}}
-    {\ifnamesequal{bookeditor}{bookforeword}
-       {\appto\abx@tempa{fo}%
-        \appto\abx@tempb{\clearname{bookforeword}}}
-       {\ifnamesequal{bookeditor}{bookafterword}
-          {\appto\abx@tempa{af}%
-           \appto\abx@tempb{\clearname{bookafterword}}}
-          {}}}%
-  \ifbibxstring{\abx@tempa}
-    {\printtext{\bibstring{\abx@tempa}}\abx@tempb}
-    {\usebibmacro{bytypestrg}{bookeditor}{editor}}}
-
-\newbibmacro*{book:byeditorx}{%
-  \ifnameundef{editora}
-    {}
-    {\usebibmacro{bytypestrg}{bookeditora}{editor}%
-     \setunit{\addspace}%
-     \printnames[byeditora]{editora}%
-     \setunit*{\resppunct}}%
-  \ifnameundef{editorb}
-    {}
-    {\usebibmacro{bytypestrg}{bookeditorb}{editor}%
-     \setunit{\addspace}%
-     \printnames[byeditorb]{editorb}%
-     \setunit*{\resppunct}}%
-  \ifnameundef{editorc}
-    {}
-    {\usebibmacro{bytypestrg}{bookeditorc}{editor}%
-     \setunit{\addspace}%
-     \printnames[byeditorc]{editorc}%
-     \setunit*{\resppunct}}}
+  %\setunit*{\resppunct}%
+}
 
 \newbibmacro*{book:bytranslator+others}{%
   \ifnameundef{booktranslator}
@@ -1416,7 +1401,9 @@
   \renewbibmacro*{series+number}{}%
   \renewbibmacro*{credits}{}%
   \renewbibmacro*{book:credits}{}%
+  \renewbibmacro*{byeditor}{}%
   \renewbibmacro*{bytranslator+others}{}%
+  \renewbibmacro*{book:bytranslator+others}{}%
   \renewbibmacro*{material}{}%
   \renewbibmacro*{editor}{}%
   \renewbibmacro*{translator}{}%
