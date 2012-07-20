@@ -1138,41 +1138,6 @@ gost-authoryear & cite & Автор (заголовок) и год в текст
 
 \begin{itemize}
 
-\item \label{bibermap}\biblatex не позволяет определять новые поля библиографической базы данных.
-В то же время, пакету \biblatexgost требуются дополнительные поля для хранения количества 
-книг, частей, выпусков многочастных изданий и т.\,д. В качестве этих полей можно использовать 
-запасные поля \biblatex \bibfield{user[a-f]}, 
-\bibfield{list[a-f]}, \bibfield{custom[a-f]} (см. п. 2.2.4 руководства \biblatex),
-переопределяя их динамически при помощи команды \cmd{DeclareSourcemap}. 
-При этом в базе данных 
-содержатся осмысленные названия полей, которые \biblatexgost (фактически, программа \biber
-через механизм sourcemap) автоматически преобразует во внутренние поля \biblatex. 
-В частности, \biblatexgost переопределяет следующие поля\footnote{В ранних версиях \biblatexgost
-для настройки этой функции требовались манипуляции с файлом \file{biber.conf}. Начиная с
-\biblatexgost~0.4
-%~--- соответственно, с \biblatex~2.0~--- 
-переопределение происходит автоматически (благодаря новым функциям \biblatex~2.0/\biber~1.0).}:
-
-\begin{table}[htbp]
-\tablesetup
-\centering
-\begin{tabularx}{.4\textwidth}{@{}V{.2\textwidth}@{}V{.2\textwidth}@{}}
-\toprule
-\multicolumn{1}{@{}H}{Файл \file{.bib}} &
-\multicolumn{1}{@{}H}{\biblatex}  \\
-\cmidrule(r){1-1}\cmidrule{2-2}
-book & usera \\
-books & userb \\
-parts & userc \\
-issues & userd \\
-credits & lista \\
-specdata & listb \\
-\bottomrule
-\end{tabularx}
-\caption{Соответствие полей файла \file{.bib} и \biblatex}
-\label{tab:bibermap}
-\end{table}
-
 \item \label{impl:4names} \biblatexgost автоматически отслеживает количество авторов,
 редакторов и переводчиков, изменяя формат вывода, когда это количество превышает 3
 (см.~\secref{4names}).
