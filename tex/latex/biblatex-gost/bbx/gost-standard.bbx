@@ -1115,7 +1115,21 @@
           {\appto\abx@tempa{af}%
            \clearname{bookafterword}}
           {}}}%
-  \bibstring{\abx@tempa}}
+  % temporarily redefining commands used in bibstring 
+  \savecommand\lbx@lfromlang%
+  \savecommand\lbx@sfromlang%
+  \renewcommand*{\lbx@lfromlang}{%
+    \iffielddundef{bookoriglanguage}
+      {\unspace}
+      {\biblstring{from\thefield{bookoriglanguage}}}}
+  \renewcommand*{\lbx@sfromlang}{%
+    \iffieldundef{bookoriglanguage}
+      {\unspace}
+      {\bibsstring{from\thefield{bookoriglanguage}}}}
+  \bibstring{\abx@tempa}%
+  \restorecommand\lbx@lfromlang%
+  \restorecommand\lbx@sfromlang%
+}
 
 \newbibmacro*{book:withothers}{%
   \usebibmacro{book:withcommentator}%
