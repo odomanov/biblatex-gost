@@ -966,8 +966,6 @@
 
 % <name><true><false>
 \newbibmacro*{checkbookname}[3]{% 
-%\par book#1=\printnames{book#1} DEF=\ifnameundef{book#1}{NNN}{YYY}
-%#1=\printnames{#1} EQ=\ifnamesequal{#1}{book#1}{yyy}{nnn}
   \ifboolexpr{
     test {\ifnameundef{book#1}}
     or
@@ -979,8 +977,6 @@
 
 % <list><true><false>
 \newbibmacro*{checkbooklist}[3]{% 
-%\par book#1=\printlist{book#1} DEF=\iflistundef{book#1}{NNN}{YYY}
-%#1=\printlist{#1} EQ=\iflistsequal{#1}{book#1}{yyy}{nnn}
   \ifboolexpr{
     test {\iflistundef{book#1}}
     or
@@ -1014,13 +1010,34 @@
 \renewbibmacro*{bytranslator+others}{%
   \ifnameundef{translator}
     {}
-    {\usebibmacro{checkbookname}{translator}
-      {\usebibmacro{bytranslator+othersstrg}%
-       \setunit{\addspace}%
-       \printnames[bytranslator]{translator}%
-       \clearname{translator}%
-       \setunit*{\resppunct}}
-      {}}%
+    {\ifboolexpr{
+      test {\ifnameundef{booktranslator}}
+      or
+      not test {\ifnamesequal{translator}{booktranslator}}
+      or 
+      ( not test {\iffieldundef{origlanguage}}
+        and
+        test {\iffieldundef{bookoriglanguage}}
+      )
+      or
+      ( test {\iffieldundef{origlanguage}}
+        and
+        not test {\iffieldundef{bookoriglanguage}}
+      )
+      or
+      ( not test {\iffieldundef{origlanguage}}
+        and
+        not test {\iffieldundef{bookoriglanguage}}
+        and 
+        not test {\iffieldsequal{origlanguage}{bookoriglanguage}}
+      )
+      }
+        {\usebibmacro{bytranslator+othersstrg}%
+         \setunit{\addspace}%
+         \printnames[bytranslator]{translator}%
+         \clearname{translator}%
+         \setunit*{\resppunct}}
+        {}}%
   \usebibmacro{withothers}}
 
 \renewbibmacro*{bytranslator+othersstrg}{%
