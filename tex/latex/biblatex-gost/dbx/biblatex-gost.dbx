@@ -20,9 +20,6 @@
 
 \DeclareDatamodelFields[type=field, datatype=key]{
   %bookeditortype,
-}
-
-\DeclareDatamodelFields[type=list, datatype=key]{
   bookoriglanguage,
 }
 
