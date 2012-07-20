@@ -202,6 +202,8 @@
   \usebibmacro{title}%
   \setunit{\respdelim}%
   \usebibmacro{byauthor}%
+  \setunit*{\resppunct}%
+  \usebibmacro{bytranslator+others}%
   \setunit{\space}
   \usebibmacro{//}%
   \usebibmacro{journal}
@@ -209,8 +211,6 @@
   \usebibmacro{credits}%
   \setunit*{\resppunct}%
   \usebibmacro{byeditor}%
-  \setunit*{\resppunct}%
-  \usebibmacro{bytranslator+others}%
   \newunit\newblock
   \printfield{edition}%
   \newunit\newblock
@@ -350,10 +350,6 @@
   \usebibmacro{finentry}}
 
 \DeclareBibliographyDriver{inbook}{%
-%==\printfield{credits}==\printfield{bookcredits}==\par
-%==\printnames{editor}==\printnames{bookeditor}==\par
-%==\printnames{translator}==\printnames{booktranslator}==\par
-%==\printnames{commentator}==\printnames{bookcommentator}==\par
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author/translator+others}%
@@ -406,10 +402,6 @@
   \usebibmacro{finentry}}
 
 \DeclareBibliographyDriver{incollection}{%
-%==\printfield{credits}==\printfield{bookcredits}==\par
-%==\printnames{editor}==\printnames{bookeditor}==\par
-%==\printnames{translator}==\printnames{booktranslator}==\par
-%==\printnames{commentator}==\printnames{bookcommentator}==\par
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author/translator+others}%
@@ -514,15 +506,12 @@
   \setunit*{\labelnamepunct}%
   \usebibmacro{title}%
   \setunit{\respdelim}%
-  \ifuseauthor
-    {}
-    {\usebibmacro{byauthor}%
-     \setunit*{\resppunct}}%
-  \iffieldundef{organization}
-    {}
-    {\printlist{organization}%
-     \setunit*{\resppunct}}
+  \usebibmacro{byauthor}%
+  \setunit*{\resppunct}%
   \usebibmacro{credits}%
+  \setunit*{\resppunct}%
+  \printlist{organization}%
+  \setunit*{\resppunct}
   \newunit\newblock
   \printfield{edition}%
   \newunit
@@ -592,11 +581,13 @@
     {}
     {\usebibmacro{byauthor}%
      \setunit*{\resppunct}}%
-  \iffieldundef{organization}
-    {}
-    {\printlist{organization}%
-     \setunit*{\resppunct}}
   \usebibmacro{credits}%
+  \setunit*{\resppunct}%
+  \usebibmacro{byeditor}%
+  \setunit*{\resppunct}%
+  \printlist{organization}%
+  \setunit*{\resppunct}%
+  \usebibmacro{bytranslator+others}%
   \newunit\newblock
   \printfield{version}%
   \newunit\newblock
@@ -779,6 +770,10 @@
   \usebibmacro{title}%
   \setunit{\respdelim}%
   \usebibmacro{byauthor}%
+  \setunit*{resppunct}%
+  \usebibmacro{credits}%
+  \setunit*{resppunct}%
+  \usebibmacro{byeditor}%
   \newunit\newblock
   \printlist[semicolondelim]{specdata}%
   \newunit\newblock
@@ -990,7 +985,6 @@
   \usebibmacro{checkbooklist}{credits}
     {\printlist{credits}%
      \clearlist{credits}%
-     %\setunit*{\resppunct}
      }
     {}}
 
@@ -1100,7 +1094,6 @@
 \newbibmacro*{book:credits}{%
   \printlist{bookcredits}%
   \clearlist{bookcredits}%
-  %\setunit*{\resppunct}%
 }
 
 \newbibmacro*{book:bytranslator+others}{%
@@ -1132,7 +1125,7 @@
           {\appto\abx@tempa{af}%
            \clearname{bookafterword}}
           {}}}%
-  % temporarily redefining commands used in bibstring 
+  % temporarily redefining commands used in the bibstring 
   \savecommand\lbx@lfromlang%
   \savecommand\lbx@sfromlang%
   \renewcommand*{\lbx@lfromlang}{%
@@ -1310,9 +1303,15 @@
      \printnames[byauthor]{author}}}
      
 \newbibmacro*{book:byauthor}{%
-  \ifnamesequal{author}{bookauthor}
+  \ifboolexpr{
+    test \ifuseauthor
+    or
+    test {\ifnameundef{bookauthor}}
+  }
     {}
-    {\printnames[byauthor]{bookauthor}}}
+    {\ifnamesequal{author}{bookauthor}
+      {}
+      {\printnames[byauthor]{bookauthor}}}}
 
 \renewbibmacro*{name:andothers}{%
   \ifboolexpr{
