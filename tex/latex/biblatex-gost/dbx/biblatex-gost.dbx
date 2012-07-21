@@ -8,8 +8,25 @@
   material,
 }
 
+\DeclareDatamodelFields[type=list, datatype=name]{
+  %bookeditor,
+  booktranslator,
+  bookcommentator,
+  bookannotator,
+  bookintroduction,
+  bookforeword,
+  bookafterword,
+}
+
+\DeclareDatamodelFields[type=field, datatype=key]{
+  %bookeditortype,
+  bookoriglanguage,
+}
+
 \DeclareDatamodelFields[type=list, datatype=literal]{
-  credits, specdata,
+  specdata,
+  credits, 
+  bookcredits,
 }
 
 \DeclareDatamodelEntryfields{
@@ -25,6 +42,19 @@
 
 \DeclareDatamodelEntryfields[mvbook,mvcollection,mvproceedings,mvreference]{
   books,parts,issues,
+}
+
+\DeclareDatamodelEntryfields[inbook,incollection,inproceedings,inreference,bookinbook,suppbook,suppcollection]{
+  %bookeditor,
+  booktranslator,
+  bookcommentator,
+  bookannotator,
+  bookintroduction,
+  bookforeword,
+  bookafterword,
+  %bookeditortype,
+  bookoriglanguage,
+  bookcredits,
 }
 
 %\DeclareDatamodelConstraints{
