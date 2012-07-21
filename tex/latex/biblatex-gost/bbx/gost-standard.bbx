@@ -170,7 +170,6 @@
 \DeclareNameAlias{editorb}{editor}
 \DeclareNameAlias{editorc}{editor}
 \DeclareNameAlias{translator}{author}
-%\DeclareNameAlias{book:byauthor}{byauthor}
 
 \newbibmacro*{//}{%
   \nopunct\printtext{\addnbspace\mbox{//}\addspace}}
@@ -1304,14 +1303,12 @@
      
 \newbibmacro*{book:byauthor}{%
   \ifboolexpr{
-    test \ifuseauthor
-    or
     test {\ifnameundef{bookauthor}}
+    or
+    test {\ifnamesequal{author}{bookauthor}}
   }
     {}
-    {\ifnamesequal{author}{bookauthor}
-      {}
-      {\printnames[byauthor]{bookauthor}}}}
+    {\printnames[byauthor]{bookauthor}}}
 
 \renewbibmacro*{name:andothers}{%
   \ifboolexpr{
@@ -1435,8 +1432,6 @@
   \renewbibmacro*{bytranslator+others}{}%
   \renewbibmacro*{book:bytranslator+others}{}%
   \renewbibmacro*{material}{}%
-  \renewbibmacro*{editor}{}%
-  \renewbibmacro*{translator}{}%
   \clearfield{series}%
   \clearfield{edition}%
   \clearlist{credits}%

@@ -127,7 +127,7 @@
 7.1--2003 (а также 7.80--2000, 7.82--2001 и др.). Пакет будет полезен прежде всего в
 гуманитарных дисциплинах с повышенными требованиями к оформлению библиографии, многие из 
 которых Bibtex не в состоянии удовлетворить (это касается в первую очередь многоязычных
-библиографий). 
+библиографий, а также библиографических ссылок в сносках, использования Ibid., Op. cit. и т.\,д.). 
 
 \subsection{Лицензия}
 \label{sec:lic}
@@ -321,7 +321,7 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 Соответствие между терминами ГОСТа и полями \biblatexgost представлено в 
 \tabref{tab:gost-biblatex}.
 Как видно, в ней отсутствуют, с одной стороны, некоторые элементы библиографического
-описания, предусмотренные ГОСТом, а с другой стороны, некоторые поля \biblatex. Эти элементы и поля 
+описания, предусмотренные ГОСТом, а с другой~--- некоторые поля \biblatex. Эти элементы и поля 
 не учитываются в \biblatexgost и не обрабатываются (разумеется, специальные поля,
 такие как \bibfield{crossref}, \bibfield{options} и пр., учитываются, хотя и не 
 представлены в таблице).
@@ -348,10 +348,13 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 \textit{Сведения, относящиеся к заглавию} & subtitle, mainsubtitle,
                                             booksubtitle, titleaddon, maintitleaddon,
                                             booktitleaddon \\
-Сведения об ответственности      & {\spotcolor credits}, editor, editora, editorb, editorc, 
-                                    afterword, 
+Сведения об ответственности      & {\spotcolor credits}, {\spotcolor bookcredits}, 
+                                    editor, editora, editorb, editorc, afterword, 
                                     annotator, commentator, foreword, introduction, organization,  
-                                    translator \\
+                                    translator,
+                                    {\spotcolor bookafterword}, {\spotcolor bookannotator}, 
+                                    {\spotcolor bookcommentator}, {\spotcolor bookforeword},
+                                    {\spotcolor bookintroduction}, {\spotcolor booktranslator} \\
 \cmidrule(r){1-1}\cmidrule{2-2}
 \multicolumn{1}{@{}H}{Область издания} & \\
 Сведения об издании & edition, version \\
@@ -408,9 +411,10 @@ ISSN серии или подсерии & issn (isbn) \\
 \subsection{Новые поля}
 \label{sec:newfields}
  
-\biblatexgost использует механизм модели данных (опция \opt{datamodel}
-при этом не требуется, модель подключается автоматически) и определяет следующие 
-поля библиографической базы данных, отсутствующие в стандартном \biblatex).   
+В \biblatexgost опредены следующие 
+поля библиографической базы данных, отсутствующие в стандартном \biblatex 
+\footnote{Используется дополнительный файл модели данных \file{biblatex-gost.dbx}. 
+При этом устанавливать опцию \opt{datamodel}  не требуется, модель подключается автоматически}.   
 
 \begin{fieldlist}
 
@@ -418,12 +422,6 @@ ISSN серии или подсерии & issn (isbn) \\
 
 Содержит номер (или другой идентификатор) книги для изданий, разделённых на книги. См. подробнее
 \secref{sec:volsparts} 
-
-\fielditem{books, parts, issues}{number/literal}
-
-Содержат количество книг, частей, выпусков изданий, 
-которые делятся на книги, части, выпуски (аналогично стандартному полю \bibfield{volumes}). См.
-подробнее \secref{sec:volsparts}.
 
 \fielditem{booktranslator}{name}\vspace{-\itemsep}\vspace{-\parsep}%
 \fielditem{bookcommentator}{name}\vspace{-\itemsep}\vspace{-\parsep}%
@@ -437,7 +435,8 @@ ISSN серии или подсерии & issn (isbn) \\
 Аналогично \bibfield{bookauthor} и \bibfield{booktitle} эти поля 
 содержать переводчика, автора комментариев и т.\,д. книги, в состав которой входит 
 данная публикация. Поля определены для записей типа 
-\bibtype{inbook}, \bibtype{incollection}, \bibtype{inproceedings} 
+\bibtype{inbook}, \bibtype{bookinbook}, \bibtype{suppbook}, \bibtype{incollection},
+\bibtype{suppcollection}, \bibtype{inproceedings} 
 и \bibtype{inreference}.  При использовании ссылок \texttt{crossref} или \texttt{xref}
 эти поля копируются из записи, на которую указывает ссылка.
 
@@ -445,7 +444,7 @@ ISSN серии или подсерии & issn (isbn) \\
 каждый из которых имеет собственного переводчика, комментатора, автора вступительной статьи 
 и т.\,д. В библиографии, если поле \bibfield{commentator}, \bibfield{annotator} и т.\,д. 
 совпадает с соответствующим полем \bibfield{bookcommentator}, \bibfield{bookannotator} и т.\,д.,
-то поле выводится только в описании объемлющего документа. В случае переводчика проверяется 
+поле выводится только в описании объемлющего документа. В случае переводчика проверяется 
 ещё и равенство \bibfield{origlanguage} и \bibfield{bookoriglanguage}. Например, 
 следующие данные
 
@@ -481,6 +480,12 @@ ISSN серии или подсерии & issn (isbn) \\
 Поле \bibfield{bookoriglanguage}, так же как и поле \biblatex \bibfield{origlanguage},
 может содержать только один язык. Поэтому, если вам требуется указать список языков,
 используйте поле \bibfield{credits} (см. ниже). 
+
+\fielditem{books, parts, issues}{number/literal}
+
+Содержат количество книг, частей, выпусков изданий, 
+которые делятся на книги, части, выпуски (аналогично стандартному полю \bibfield{volumes}). См.
+подробнее \secref{sec:volsparts}.
 
 \listitem{credits}{literal}
 

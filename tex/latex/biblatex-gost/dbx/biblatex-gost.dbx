@@ -44,7 +44,7 @@
   books,parts,issues,
 }
 
-\DeclareDatamodelEntryfields[inbook,incollection,inproceedings,inreference]{
+\DeclareDatamodelEntryfields[inbook,incollection,inproceedings,inreference,bookinbook,suppbook,suppcollection]{
   %bookeditor,
   booktranslator,
   bookcommentator,
