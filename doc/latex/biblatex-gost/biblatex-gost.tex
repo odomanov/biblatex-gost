@@ -141,8 +141,8 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 Для его установки достаточно распаковать архив в дерево \tex, желательно локальное, и 
 обновить индексы (в \tex~Live, например, это делается командой \texttt{mktexlsr}).
 
-Для работы \biblatexgost версии 0.4 и выше требуются 
-\biblatex~2.0\fnurl{http://sourceforge.net/projects/biblatex/files/biblatex-2.0/} 
+Для работы \biblatexgost версии 0.6 и выше требуются 
+\biblatex~2.1\fnurl{http://sourceforge.net/projects/biblatex/files/development/} 
 (который, в свою очередь, требует
 \biber~1.0\fnurl{http://sourceforge.net/projects/biblatex-biber/files/biblatex-biber/1.0/}) 
 или выше.
@@ -655,16 +655,16 @@ series = {|Языковеды мира / редкол.: Г.В. Степанов 
 \begin{table}[htbp]
 \tablesetup
 \centering
-\begin{tabularx}{.65\textwidth}{@{}V{.2\textwidth}@{}L{.25\textwidth}@{}L{.2\textwidth}@{}}
+\begin{tabularx}{.7\textwidth}{@{}V{.2\textwidth}@{}L{.3\textwidth}@{}L{.2\textwidth}@{}}
 \toprule
 \multicolumn{1}{@{}H}{Поле} &
 \multicolumn{2}{@{}H}{Печатается как}  \\
 \cmidrule(r){1-1}\cmidrule{2-3}
 afterword & послесловие \prm{кого} & послесл. \prm{кого} \\
-annotator & примечание \prm{кого} & прим. \prm{кого} \\
-commentator & комментарий \prm{кого} & комм. \prm{кого} \\
+annotator & примечание \prm{кого} & примеч. \prm{кого} \\
+commentator & комментарий \prm{кого} & коммент. \prm{кого} \\
 foreword & предисловие \prm{кого} & предисл. \prm{кого} \\
-introduction & введение \prm{кого} & введ. \prm{кого} \\
+introduction & вступительная статья \prm{кого} & вступит. статья \prm{кого} \\
 \bottomrule
 \end{tabularx}
 \caption{Вывод полей \bibfield{afterword} и пр.}
@@ -745,21 +745,21 @@ introduction & введение \prm{кого} & введ. \prm{кого} \\
 последнюю точку в точку сокращения (\texttt{dot}), а не конца предложения 
 (\texttt{period}). Например: 
 
-\begin{ltxexample}[linewidth=.7\textwidth,escapechar=|]
+\begin{ltxcode}[escapechar=|]
 @BOOK{book,
   ...
   shorttitle = {|Введение|~\textellipsis\isdot}
 }
-\end{ltxexample}
+\end{ltxcode}
 
 Или:
 
-\begin{ltxexample}[linewidth=.7\textwidth,escapechar=|]
+\begin{ltxcode}[escapechar=|]
 @BOOK{book,
   ...
   shorttitle = {|Введение|~...\isdot}
 }
-\end{ltxexample}
+\end{ltxcode}
    
 \end{fieldlist}
 
