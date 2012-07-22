@@ -188,8 +188,8 @@
 \newcommand*{\resppunct}{\addsemicolondelim\space}% punctuation between "credits" items
 
 \@ifpackageloaded{babel}
-  {\edef\gostmateriallanguage{\bbl@main@language}}
-  {\edef\gostmateriallanguage{russian}}
+  {\edef\gostmedialanguage{\bbl@main@language}}
+  {\edef\gostmedialanguage{russian}}
 
 \newbibmacro*{begentry}{}
 \newbibmacro*{finentry}{\finentry}
@@ -1220,16 +1220,16 @@
     {}
     {\printtext[title]{%
        \printfield[titlecase]{title}%
-       \iffieldundef{material}
+       \iffieldundef{media}
           {\setunit*{\subtitlepunct}}
           {\setunit*{\addspace}%
-           \usebibmacro{material}%
+           \usebibmacro{media}%
            \setunit*{\addcolondelim}}
        \printfield[titlecase]{subtitle}}%
      \newunit}%
   \setunit*{\addcolondelim}%
   \printfield{titleaddon}%
-  \clearfield{material}}
+  \clearfield{media}}
 
 \renewbibmacro*{booktitle}{%
   \ifboolexpr{
@@ -1255,16 +1255,16 @@
     {}
     {\printtext[maintitle]{%
        \printfield[titlecase]{maintitle}%
-       \iffieldundef{material}
+       \iffieldundef{media}
           {\setunit*{\subtitlepunct}}
           {\setunit*{\addspace}%
-           \usebibmacro{material}%
+           \usebibmacro{media}%
            \setunit*{\addcolondelim}}
        \printfield[titlecase]{mainsubtitle}}%
      \newunit}%
   \setunit{\addcolondelim}%
   \printfield{maintitleaddon}%
-  \clearfield{material}}
+  \clearfield{media}}
 
 \newcommand*{\addcolondelim}{%
   \begingroup%
@@ -1417,14 +1417,14 @@
     \expandafter\@secondoftwo
   \fi}
 
-\newbibmacro*{material}{%
-  \iffieldundef{material}
+\newbibmacro*{media}{%
+  \iffieldundef{media}
     {}
-    {{\ifdefvoid{\gostmateriallanguage}
+    {{\ifdefvoid{\gostmedialanguage}
         {}
-        {\select@language{\gostmateriallanguage}}% first switch language, then \ifbibxstring
-      \ifbibxstring{material\thefield{material}}
-        {\printtext[brackets]{\bibcpstring{material\thefield{material}}}}
+        {\select@language{\gostmedialanguage}}% first switch language, then \ifbibxstring
+      \ifbibxstring{media\thefield{media}}
+        {\printtext[brackets]{\bibcpstring{media\thefield{media}}}}
         {}}}}
 
 \newbibmacro*{setup:min}{%
@@ -1434,12 +1434,12 @@
   \renewbibmacro*{byeditor}{}%
   \renewbibmacro*{bytranslator+others}{}%
   \renewbibmacro*{book:bytranslator+others}{}%
-  \renewbibmacro*{material}{}%
+  \renewbibmacro*{media}{}%
   \clearfield{series}%
   \clearfield{edition}%
   \clearlist{credits}%
   \clearlist{specdata}%
-  \clearfield{material}%
+  \clearfield{media}%
   \clearfield{pagetotal}%
   \clearfield{titleaddon}%
   \clearfield{booktitleaddon}%

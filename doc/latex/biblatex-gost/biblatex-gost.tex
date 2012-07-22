@@ -11,7 +11,6 @@
 \usepackage[strict]{csquotes}
 \usepackage{tabularx}
 \usepackage{longtable}
-\usepackage{xtab}
 \usepackage{booktabs}
 \usepackage{comment}
 \usepackage[inline]{enumitem}
@@ -141,7 +140,7 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 Для его установки достаточно распаковать архив в дерево \tex, желательно локальное, и 
 обновить индексы (в \tex~Live, например, это делается командой \texttt{mktexlsr}).
 
-Для работы \biblatexgost версии 0.6 и выше требуются 
+Для работы \biblatexgost версии 0.6 и выше требуется 
 \biblatex~2.1\fnurl{http://sourceforge.net/projects/biblatex/files/development/} 
 (который, в свою очередь, требует
 \biber~1.0\fnurl{http://sourceforge.net/projects/biblatex-biber/files/biblatex-biber/1.0/}) 
@@ -343,7 +342,7 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 \endlastfoot
 \multicolumn{1}{@{}H}{Область заглавия и сведений об ответственности} & \\
 Основное заглавие                & title, maintitle, booktitle \\
-\textit{Общее обозначение материала} &  {\spotcolor material} \\
+\textit{Общее обозначение материала} &  {\spotcolor media} \\
 \textit{Параллельное заглавие} &  \textendash \\%{\spotcolor paratitle} \\
 \textit{Сведения, относящиеся к заглавию} & subtitle, mainsubtitle,
                                             booksubtitle, titleaddon, maintitleaddon,
@@ -510,16 +509,16 @@ ISSN серии или подсерии & issn (isbn) \\
 тип редактора \bibfield{geneditor}, соответствующий общему 
 редактору. Он выводится в виде: \enquote{Под общ. ред.~\ldots}.
 
-\fielditem{material}{literal}
+\fielditem{media}{literal}
 
-Общее обозначение материала (см.~\gostbibref{5.2.3}). В \tabref{tab:material} приведены
+Общее обозначение материала (см.~\gostbibref{5.2.3}). В \tabref{tab:media} приведены
 допустимые значения этого поля вместе с соответствующими терминами ГОСТа. 
 \begin{table}[htbp]
 \tablesetup
 \centering
 \begin{tabularx}{.7\textwidth}{@{}V{.4\textwidth}@{}L{.3\textwidth}@{}}
 \toprule
-\multicolumn{1}{@{}H}{Значение поля \bibfield{material}} &
+\multicolumn{1}{@{}H}{Значение поля \bibfield{media}} &
 \multicolumn{1}{@{}H}{Термины ГОСТа}  \\
 \cmidrule(r){1-1}\cmidrule{2-2}
 videorecording & видеозапись \\
@@ -539,17 +538,17 @@ eresource & электронный ресурс\\
 \bottomrule
 \end{tabularx}
 \caption{Общее обозначение материала}
-\label{tab:material}
+\label{tab:media}
 \end{table}
 %
 Для этих значений определены строки в файле локализации, то есть они могут быть локализованы. 
 Язык вывода поля  
-определяется командой \cmd{gostmateriallanguage}. По умолчанию он совпадает с 
+определяется командой \cmd{gostmedialanguage}. По умолчанию он совпадает с 
 основным языком \texttt{babel}, если последний загружен. Если \texttt{babel} не загружен, 
 то язык установлен в \texttt{russian}. При переопределении
 
 \begin{ltxcode}
-\renewcommand*{\gostmateriallanguage}{}
+\renewcommand*{\gostmedialanguage}{}
 \end{ltxcode}
 
 используется текущий язык библиографической записи или цитаты. 
@@ -1187,7 +1186,7 @@ gost-authoryear & cite & Автор (заголовок) и год в текст
 \end{release}
 
 \begin{release}{0.5}{1-07-2012}
-\item Добавлено поле \bibfield{material} (общее обозначение материала)\see{sec:newfields} 
+\item Добавлено поле \bibfield{media} (общее обозначение материала)\see{sec:newfields} 
 \item Восстановлены стандартные значения опции \opt{mergedate}\see{sec:opt}
 \item Добавлена опция \kvopt{mergedate}{gostlabel}\see{sec:opt}
 \item Добавлена обработка опции \opt{singletitle}\see{sec:opt}
