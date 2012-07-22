@@ -23,6 +23,10 @@
 \newtoggle{bbx:url}
 \newtoggle{bbx:doi}
 \newtoggle{bbx:eprint}
+\newtoggle{cbx:isbn}
+\newtoggle{cbx:url}
+\newtoggle{cbx:doi}
+\newtoggle{cbx:eprint}
 
 %  OPTIONS
 
@@ -35,15 +39,36 @@
     {\renewbibmacro*{bbx:savehash}{}}}
 
 \DeclareBibliographyOption{isbn}[true]{%
-  \settoggle{bbx:isbn}{#1}}
+  \global\settoggle{bbx:isbn}{#1}%
+  \global\settoggle{cbx:isbn}{#1}}
 \DeclareBibliographyOption{url}[true]{%
-  \settoggle{bbx:url}{#1}}
+  \global\settoggle{bbx:url}{#1}%
+  \global\settoggle{cbx:url}{#1}}
 \DeclareBibliographyOption{doi}[true]{%
-  \settoggle{bbx:doi}{#1}}
+  \global\settoggle{bbx:doi}{#1}%
+  \global\settoggle{cbx:doi}{#1}}
 \DeclareBibliographyOption{eprint}[true]{%
-  \settoggle{bbx:eprint}{#1}}
+  \global\settoggle{bbx:eprint}{#1}%
+  \global\settoggle{cbx:eprint}{#1}}
+\DeclareBibliographyOption{bibisbn}[true]{%
+  \global\settoggle{bbx:isbn}{#1}}
+\DeclareBibliographyOption{biburl}[true]{%
+  \global\settoggle{bbx:url}{#1}}
+\DeclareBibliographyOption{bibdoi}[true]{%
+  \global\settoggle{bbx:doi}{#1}}
+\DeclareBibliographyOption{bibeprint}[true]{%
+  \global\settoggle{bbx:eprint}{#1}}
+\DeclareBibliographyOption{citeisbn}[true]{%
+  \global\settoggle{cbx:isbn}{#1}}
+\DeclareBibliographyOption{citeurl}[true]{%
+  \global\settoggle{cbx:url}{#1}}
+\DeclareBibliographyOption{citedoi}[true]{%
+  \global\settoggle{cbx:doi}{#1}}
+\DeclareBibliographyOption{citeeprint}[true]{%
+  \global\settoggle{cbx:eprint}{#1}}
 
-\ExecuteBibliographyOptions{isbn,url,doi,eprint,
+
+\ExecuteBibliographyOptions{
   %datamodel=biblatex-gost,
   useeditor=false,
   usetranslator=false,
@@ -229,9 +254,7 @@
     {}
     {\printtext{(\printfield{series})}}
   \newunit\newblock
-  \iftoggle{bbx:isbn}
-    {\printfield{issn}}
-    {}%
+  \usebibmacro{issn}
   \newunit\newblock
   \usebibmacro{doi+eprint+url+note}%
   \newunit\newblock
@@ -269,9 +292,7 @@
   \newunit\newblock
   \usebibmacro{series+number}%
   \newunit\newblock
-  \iftoggle{bbx:isbn}
-    {\printfield{isbn}}
-    {}%
+  \usebibmacro{isbn}
   \newunit\newblock
   \usebibmacro{doi+eprint+url+note}%
   \newunit\newblock
@@ -341,9 +362,7 @@
   \newunit\newblock
   \usebibmacro{series+number}%
   \newunit\newblock
-  \iftoggle{bbx:isbn}
-    {\printfield{isbn}}
-    {}%
+  \usebibmacro{isbn}
   \newunit\newblock
   \usebibmacro{doi+eprint+url+note}%
   \newunit\newblock
@@ -393,9 +412,7 @@
       \newunit\newblock
       \usebibmacro{series+number}%
       \newunit\newblock
-      \iftoggle{bbx:isbn}
-        {\printfield{isbn}}
-        {}%
+      \usebibmacro{isbn}
       \newunit\newblock
       \usebibmacro{doi+eprint+url+note}%
       \newunit\newblock
@@ -441,9 +458,7 @@
       \newunit\newblock
       \usebibmacro{series+number}%
       \newunit\newblock
-      \iftoggle{bbx:isbn}
-        {\printfield{isbn}}
-        {}%
+      \usebibmacro{isbn}
       \newunit\newblock
       \usebibmacro{doi+eprint+url+note}%
       \newunit\newblock
@@ -491,9 +506,7 @@
       \newunit\newblock
       \usebibmacro{series+number}%
       \newunit\newblock
-      \iftoggle{bbx:isbn}
-        {\printfield{isbn}}
-        {}%
+      \usebibmacro{isbn}
       \newunit\newblock
       \usebibmacro{doi+eprint+url+note}%
       \newunit\newblock
@@ -530,9 +543,7 @@
   \newunit\newblock
   \usebibmacro{series+number}%
   \newunit\newblock
-  \iftoggle{bbx:isbn}
-    {\printfield{isbn}}
-    {}%
+  \usebibmacro{isbn}
   \newunit\newblock
   \printfield{type}%
   \newunit\newblock
@@ -654,9 +665,7 @@
     {}
     {\printtext{(\printfield{series})}}
   \newunit\newblock
-  \iftoggle{bbx:isbn}
-    {\printfield{issn}}
-    {}%
+  \usebibmacro{issn}
   \newunit\newblock
   \usebibmacro{doi+eprint+url+note}%
   \newunit\newblock
@@ -692,9 +701,7 @@
   \newunit\newblock
   \usebibmacro{series+number}%
   \newunit\newblock
-  \iftoggle{bbx:isbn}
-    {\printfield{isbn}}
-    {}%
+  \usebibmacro{isbn}
   \newunit\newblock
   \usebibmacro{doi+eprint+url+note}%
   \newunit\newblock
@@ -722,9 +729,7 @@
   \newunit
   \printfield{pagetotal}%
   \newunit\newblock
-  \iftoggle{bbx:isbn}
-    {\printfield{isrn}}
-    {}%
+  \usebibmacro{isrn}
   \newunit\newblock
   \printfield{type}%
   \setunit*{\addspace}%
@@ -754,9 +759,7 @@
   \newunit
   \printfield{pagetotal}%
   \newunit\newblock
-  \iftoggle{bbx:isbn}
-    {\printfield{isbn}}
-    {}%
+  \usebibmacro{isbn}
   \newunit\newblock
   \usebibmacro{doi+eprint+url+note}%
   \newunit\newblock
@@ -913,14 +916,40 @@
   \printfield{pages}%
   \newunit}
 
+\newbibmacro*{isbn}{%
+  \ifcitation
+    {\iftoggle{cbx:isbn}
+      {\printfield{isbn}}
+      {}}
+    {\iftoggle{bbx:isbn}
+      {\printfield{isbn}}
+      {}}}
+
+\newbibmacro*{issn}{%
+  \ifcitation
+    {\iftoggle{cbx:isbn}
+      {\printfield{issn}}
+      {}}
+    {\iftoggle{bbx:isbn}
+      {\printfield{issn}}
+      {}}}
+
 \newbibmacro*{doi+eprint+url+note}{%
-  \iftoggle{bbx:doi}
-    {\printfield{doi}}
-    {}%
+  \ifcitation
+    {\iftoggle{cbx:doi}
+      {\printfield{doi}}
+      {}}
+    {\iftoggle{bbx:doi}
+      {\printfield{doi}}
+      {}}%
   \newunit\newblock
-  \iftoggle{bbx:eprint}
-    {\usebibmacro{eprint}}
-    {}%
+  \ifcitation
+    {\iftoggle{cbx:eprint}
+      {\printfield{eprint}}
+      {}}
+    {\iftoggle{bbx:eprint}
+      {\printfield{eprint}}
+      {}}%
   \newunit\newblock
   \usebibmacro{url+urldate+note}}
 
@@ -1405,9 +1434,13 @@
     {#2}}
 
 \newbibmacro*{url+urldate+note}{%
-  \iftoggle{bbx:url}
-    {\usebibmacro{url+urldate}}
-    {}%
+  \ifcitation
+    {\iftoggle{cbx:url}
+      {\usebibmacro{url+urldate}}
+      {}}
+    {\iftoggle{bbx:url}
+      {\usebibmacro{url+urldate}}
+      {}}%
   \setunit*{\addsemicolondelim\space}
   \printfield{note}}
 
