@@ -112,7 +112,8 @@
 \renewcommand{\multicitedelim}{\addsemicolondelim\space}
 
 \ExecuteBibliographyOptions{citetracker=constrict,autocite=inline,inbookibid=false,
-                            citepages=omit,strict,opcittracker=constrict,labeltitle}
+                            citepages=omit,strict,opcittracker=constrict,labeltitle,
+                            citeisbn=false,citeurl=false,citedoi=false,citeeprint=false}
 
 \newbibmacro*{cite:seen}{%  the same for cite and footcite
   \ifciteibid
@@ -152,12 +153,12 @@
 \newbibmacro{cite:clearfields}{%
    \renewbibmacro*{series+number}{}%
    %\clearfield{media}%
-   \clearfield{doi}%
-   \clearfield{eprint}%
-   \clearfield{url}%
-   \clearfield{urlday}%
-   \clearfield{urlmonth}%
-   \clearfield{urlyear}%
+   %\clearfield{doi}%
+   %\clearfield{eprint}%
+   %\clearfield{url}%
+   %\clearfield{urlday}%
+   %\clearfield{urlmonth}%
+   %\clearfield{urlyear}%
    \clearfield{addendum}%
    \clearfield{pubstate}%
    \clearfield{titleaddon}}
