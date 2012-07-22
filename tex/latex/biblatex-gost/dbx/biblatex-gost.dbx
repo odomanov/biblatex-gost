@@ -5,7 +5,6 @@
 \DeclareDatamodelFields[type=field, datatype=literal]{
   book,
   books,parts,issues,
-  material,
 }
 
 \DeclareDatamodelFields[type=list, datatype=name]{
@@ -19,6 +18,7 @@
 }
 
 \DeclareDatamodelFields[type=field, datatype=key]{
+  media,
   %bookeditortype,
   bookoriglanguage,
 }
@@ -30,7 +30,7 @@
 }
 
 \DeclareDatamodelEntryfields{
-  material,
+  media,
   credits,
   specdata,
 }
