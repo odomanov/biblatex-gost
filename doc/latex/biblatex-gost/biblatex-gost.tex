@@ -255,7 +255,8 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 Сведения об ответственности, издании, серии и т.\,д. не выводятся, вне зависимости от их присутствия
 в базе данных. При этом вывод сведений, для которых в \biblatex имеются специальные опции 
 (\opt{url}, \opt{doi}, \opt{isbn/issn/isrn}, \opt{eprint}), регулируется 
-этими опциями. По умолчанию в минимальных стилях этот вывод отключён. 
+этими опциями (а также опциями \opt{cite\ldots} и \opt{bib\ldots}, 
+описанными в \secref{sec:opt}). По умолчанию в минимальных стилях этот вывод отключён.
 
 Минимальные стили можно использовать совместно с полными. Например,
 при установке
@@ -278,14 +279,15 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 
 Дополнительно, все стили по умолчанию устанавливают опции 
 \kvopt{dashed}{false},
-\kvopt{isbn}{true},
-\kvopt{url}{true},
-\kvopt{doi}{true},
-\kvopt{eprint}{true},
+%\kvopt{isbn}{true},
+%\kvopt{url}{true},
+%\kvopt{doi}{true},
+%\kvopt{eprint}{true},
 \kvopt{useeditor}{false},
 \kvopt{usetranslator}{false},
 \kvopt{maxnames}{3},
 \kvopt{minnames}{1}.
+Значения по умолчанию  для опций \opt{cite\ldots} и \opt{bib\ldots} см. в \tabref{tab:bibcite}.
 
 \centerline{\rule{0pt}{1.5\baselineskip}*~~~*~~~*}
 
@@ -854,6 +856,50 @@ volumes = {|в 5-и томах (6-и кн.)|}
 следующие дополнительные опции.
 
 \begin{optionlist}
+
+\optitem[true]{citeurl,biburl}{\opt{true}, \opt{false}}\vspace{-\itemsep}\vspace{-\parsep}%
+\optitem[true]{citeisbn,bibisbn}{\opt{true}, \opt{false}}\vspace{-\itemsep}\vspace{-\parsep}%
+\optitem[true]{citedoi,bibdoi}{\opt{true}, \opt{false}}\vspace{-\itemsep}\vspace{-\parsep}%
+\optitem[true]{citeeprint,bibeprint}{\opt{true}, \opt{false}}%\vspace{-\itemsep}\vspace{-\parsep}%
+
+В дополнение к опциям \opt{url}, \opt{isbn}, \opt{doi} и \opt{eprint} в \biblatexgost 
+определены опции
+для раздельного регулирования этих параметров для цитат и библиографии. При этом опции
+\opt{url}, \opt{isbn}, \opt{doi} и \opt{eprint} устанавливают одновременно соответствующие
+\opt{cite\ldots} и \opt{bib\ldots} опции. Не все из этих опций имеют смысл для всех 
+стилей (см. ниже). По умолчанию все стили, для которых опции 
+\opt{cite\ldots} имеют смысл, устанавливают их в \opt{false}. 
+Исключением является стиль \bibsty{gost-footnote}, который 
+устанавливает \kvopt{citeisbn}{true}. Опции \opt{bib\ldots} устанавливаются
+по умолчанию в \opt{true}
+полными стилями и в \opt{false}~--- минимальными. Все эти значения суммированы 
+в \tabref{tab:bibcite}. Прочерк в таблице означает, что опция для данного стиля
+не имеет смысла.
+
+\begin{table}[htbp]
+\tablesetup
+\centering
+\begin{tabularx}{.8\textwidth}{@{}V{.3\textwidth}@{}V{.3\textwidth}@{}V{.2\textwidth}@{}}
+\toprule
+\multicolumn{1}{@{}H}{Стиль} &
+\multicolumn{1}{@{}H}{Опции \opt{cite\ldots}} &
+\multicolumn{1}{@{}H}{Опции \opt{bib\ldots}}  \\
+\cmidrule(r){1-1}\cmidrule{2-3}%\cmidrule{3-3}
+gost-inline & false & true \\
+gost-footnote & false (\rmfamily{кроме} \opt{citeisbn}) & true \\
+gost-numeric & --- & true \\
+gost-authoryear & --- & true \\
+gost-inline-min & false & false \\
+gost-footnote-min & false & false \\
+gost-numeric-min & --- & false \\
+gost-authoryear-min & --- & false \\
+\bottomrule
+\end{tabularx}
+\caption{Значения по умолчанию опций \opt{cite\ldots} и \opt{bib\ldots}}
+\label{tab:bibcite}
+\end{table}
+
+
 
 \optitem[false]{inbookibid}{\opt{true}, \opt{false}}
 
