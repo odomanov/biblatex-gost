@@ -49,6 +49,8 @@
   mediatext,
   mediabraille,
   mediaeresource,
+  langpoland,
+  frompoland,
 }
 \DeclareLanguageMapping{russian}{russian-gost}
 %
