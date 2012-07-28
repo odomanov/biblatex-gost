@@ -104,6 +104,8 @@
 \renewcommand*{\Apxref}{\refs{Прил.}{Прил.}}
 \renewcommand*{\tabref}{\refs{табл.}{табл.}}
 \renewcommand*{\Tabref}{\refs{Табл.}{Табл.}}
+\newcommand*{\noitemspace}{\vspace{-\itemsep}\vspace{-\parsep}}
+\newcommand*{\starsdelim}{\centerline{*~~~*~~~*}}
 
 \tolerance=9999
 
@@ -141,9 +143,8 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 обновить индексы (в \tex~Live, например, это делается командой \texttt{mktexlsr}).
 
 Для работы \biblatexgost версии 0.6 и выше требуется 
-\biblatex~2.1\fnurl{http://sourceforge.net/projects/biblatex/files/development/} 
-(который, в свою очередь, требует
-\biber~1.0\fnurl{http://sourceforge.net/projects/biblatex-biber/files/biblatex-biber/1.0/}) 
+\biblatex~2.1\fnurl{http://sourceforge.net/projects/biblatex/files/biblatex-2.1/} 
+и \biber~1.1\fnurl{http://sourceforge.net/projects/biblatex-biber/files/biblatex-biber/1.1/} 
 или выше.
 
 \section{Стили \biblatexgost}
@@ -240,14 +241,10 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 \kvopt{singletitle}{false} (или \opt{true} при \kvopt{mergedate}{goststrict}, 
 см.~\secref{sec:newoptions}). 
 
-%\item[gost-inline-min, gost-footnote-min, gost-numeric-min, gost-authoryear-min]
-\item[gost-inline-min]
-\item[gost-footnote-min]\vspace{-\itemsep}\vspace{-\parsep}%
-\item[gost-numeric-min]\vspace{-\itemsep}\vspace{-\parsep}%
-\item[gost-authoryear-min]\vspace{-\itemsep}\vspace{-\parsep}%
-%\item 
-%\vspace{-\itemsep}\vspace{-\parsep}%
-
+\item[gost-inline-min]\noitemspace%
+\item[gost-footnote-min]\noitemspace%
+\item[gost-numeric-min]\noitemspace%
+\item[gost-authoryear-min]\noitemspace%
 %\vspace{-4\baselineskip}%
 Все стили имеют <<минимальный>> вариант, в котором выводится минимальное количество
 сведений~--- автор, название, том\slash часть\slash книга\slash выпуск, 
@@ -275,7 +272,8 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 
 \end{marglist}
 
-\centerline{*~~~*~~~*}
+%\centerline{*~~~*~~~*}
+\starsdelim
 
 Дополнительно, все стили по умолчанию устанавливают опции 
 \kvopt{dashed}{false},
@@ -289,7 +287,8 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 \kvopt{minnames}{1}.
 Значения по умолчанию  для опций \opt{cite\ldots} и \opt{bib\ldots} см. в \tabref{tab:bibcite}.
 
-\centerline{\rule{0pt}{1.5\baselineskip}*~~~*~~~*}
+\vspace{.5\baselineskip}
+\starsdelim
 
 %\subsection{Ссылки в верхнем индексе}
 %\label{sec:superscript}
@@ -424,13 +423,13 @@ ISSN серии или подсерии & issn (isbn) \\
 Содержит номер (или другой идентификатор) книги для изданий, разделённых на книги. См. подробнее
 \secref{sec:volsparts} 
 
-\fielditem{booktranslator}{name}\vspace{-\itemsep}\vspace{-\parsep}%
-\fielditem{bookcommentator}{name}\vspace{-\itemsep}\vspace{-\parsep}%
-\fielditem{bookannotator}{name}\vspace{-\itemsep}\vspace{-\parsep}%
-\fielditem{bookintroduction}{name}\vspace{-\itemsep}\vspace{-\parsep}%
-\fielditem{bookforeword}{name}\vspace{-\itemsep}\vspace{-\parsep}%
-\fielditem{bookafterword}{name}\vspace{-\itemsep}\vspace{-\parsep}%
-\fielditem{bookoriglanguage}{key}\vspace{-\itemsep}\vspace{-\parsep}%
+\fielditem{booktranslator}{name}\noitemspace%
+\fielditem{bookcommentator}{name}\noitemspace%
+\fielditem{bookannotator}{name}\noitemspace%
+\fielditem{bookintroduction}{name}\noitemspace%
+\fielditem{bookforeword}{name}\noitemspace%
+\fielditem{bookafterword}{name}\noitemspace%
+\fielditem{bookoriglanguage}{key}\noitemspace%
 \listitem{bookcredits}{literal}
 
 Аналогично \bibfield{bookauthor} и \bibfield{booktitle} эти поля 
@@ -857,10 +856,10 @@ volumes = {|в 5-и томах (6-и кн.)|}
 
 \begin{optionlist}
 
-\optitem[true]{citeurl,biburl}{\opt{true}, \opt{false}}\vspace{-\itemsep}\vspace{-\parsep}%
-\optitem[true]{citeisbn,bibisbn}{\opt{true}, \opt{false}}\vspace{-\itemsep}\vspace{-\parsep}%
-\optitem[true]{citedoi,bibdoi}{\opt{true}, \opt{false}}\vspace{-\itemsep}\vspace{-\parsep}%
-\optitem[true]{citeeprint,bibeprint}{\opt{true}, \opt{false}}%\vspace{-\itemsep}\vspace{-\parsep}%
+\optitem[true]{citeurl,biburl}{\opt{true}, \opt{false}}\noitemspace%
+\optitem[true]{citeisbn,bibisbn}{\opt{true}, \opt{false}}\noitemspace%
+\optitem[true]{citedoi,bibdoi}{\opt{true}, \opt{false}}\noitemspace%
+\optitem[true]{citeeprint,bibeprint}{\opt{true}, \opt{false}}%\noitemspace%
 
 В дополнение к опциям \opt{url}, \opt{isbn}, \opt{doi} и \opt{eprint} в \biblatexgost 
 определены опции
