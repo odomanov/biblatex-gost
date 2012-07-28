@@ -5,7 +5,6 @@
 \DeclareDatamodelFields[type=field, datatype=literal]{
   book,
   books,parts,issues,
-  partsorder,
 }
 
 \DeclareDatamodelFields[type=list, datatype=name]{
@@ -34,7 +33,6 @@
   media,
   credits,
   specdata,
-  partsorder,
 }
   
 \DeclareDatamodelEntryfields[book,collection,proceedings,reference]{
