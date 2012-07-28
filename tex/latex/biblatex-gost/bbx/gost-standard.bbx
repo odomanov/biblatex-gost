@@ -1035,7 +1035,19 @@
 
 \renewbibmacro*{bytranslator+others}{%
   \ifnameundef{translator}
-    {}
+    {\ifboolexpr{
+      test {\iffieldundef{origlanguage}}
+      or
+      ( test {\ifnameundef{booktranslator}}
+        and 
+        not test {\iffieldundef{bookoriglanguage}}
+        and 
+        test {\iffieldsequal{origlanguage}{bookoriglanguage}}
+      )
+      }
+        {}
+        {\bibstring{bytranslator}%
+         \setunit*{\resppunct}}}
     {\ifboolexpr{
       test {\ifnameundef{booktranslator}}
       or
@@ -1128,9 +1140,29 @@
   \clearlist{bookcredits}%
 }
 
+%  <bibstring>, <origlanguage field>
+\newbibmacro*{bibstring+origlanguage}[2]{%
+% temporarily redefining commands used in the bibstring 
+    \savecommand\lbx@lfromlang%
+    \savecommand\lbx@sfromlang%
+    \renewcommand*{\lbx@lfromlang}{%
+      \iffielddundef{#2}
+        {\unspace}
+        {\biblstring{from\thefield{#2}}}}
+    \renewcommand*{\lbx@sfromlang}{%
+      \iffieldundef{#2}
+        {\unspace}
+        {\bibsstring{from\thefield{#2}}}}
+    \bibstring{#1}%
+    \restorecommand\lbx@lfromlang%
+    \restorecommand\lbx@sfromlang%
+}
 \newbibmacro*{book:bytranslator+others}{%
   \ifnameundef{booktranslator}
-    {}
+    {\iffieldundef{bookoriglanguage}
+      {}
+      {\usebibmacro{bibstring+origlanguage}{bytranslator}{bookoriglanguage}%
+       \setunit*{\resppunct}}}
     {\usebibmacro{book:bytranslator+othersstrg}%
      \setunit{\addspace}%
      \printnames[bytranslator]{booktranslator}%
@@ -1157,20 +1189,7 @@
           {\appto\abx@tempa{af}%
            \clearname{bookafterword}}
           {}}}%
-  % temporarily redefining commands used in the bibstring 
-  \savecommand\lbx@lfromlang%
-  \savecommand\lbx@sfromlang%
-  \renewcommand*{\lbx@lfromlang}{%
-    \iffielddundef{bookoriglanguage}
-      {\unspace}
-      {\biblstring{from\thefield{bookoriglanguage}}}}
-  \renewcommand*{\lbx@sfromlang}{%
-    \iffieldundef{bookoriglanguage}
-      {\unspace}
-      {\bibsstring{from\thefield{bookoriglanguage}}}}
-  \bibstring{\abx@tempa}%
-  \restorecommand\lbx@lfromlang%
-  \restorecommand\lbx@sfromlang%
+  \usebibmacro{bibstring+origlanguage}{\abx@tempa}{bookoriglanguage}%
 }
 
 \newbibmacro*{book:withothers}{%
