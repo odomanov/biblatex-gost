@@ -1238,30 +1238,25 @@
 %\setcounter{blx@gost@strpointer}{1}%
 \def\blx@gost@strgobble#1#2{%
 %\par :#1:#2:
-\ifthenelse{\equal{#2}{\blx@gost@strEnd}}%
-        {}%
-        {\ifstrequal{#1}{}
-          {}
-          {\ifstrequal{#1}{v}
-            {\printfield{volume}%
+  \ifstrequal{#1}{}
+    {}
+    {\ifstrequal{#1}{v}
+      {\printfield{volume}%
+       \newunit}
+      {\ifstrequal{#1}{b}
+        {\printfield{book}%
+         \newunit}
+        {\ifstrequal{#1}{p}
+          {\printfield{part}%
+           \newunit}
+          {\ifstrequal{#1}{i}
+            {\printfield{issue}%
              \newunit}
-            {\ifstrequal{#1}{b}
-              {\printfield{book}%
-               \newunit}
-              {\ifstrequal{#1}{p}
-                {\printfield{part}%
-                 \newunit}
-                {\ifstrequal{#1}{i}
-                  {\printfield{issue}}
-                  {}}}}}
-        \stepcounter{blx@gost@strpointer}%
-        \blx@gost@strgobble#2%
-        }}
-\newcommand{\printparts}[1]{%
-%\par PRINT=#1
-\setcounter{blx@gost@strpointer}{1}%
-\expandafter\blx@gost@strgobble#1\blx@gost@strEnd%
-}
+            {}}}}}
+  \ifthenelse{\equal{#2}{\blx@gost@strEnd}}%
+    {}%
+    {\stepcounter{blx@gost@strpointer}%
+     \blx@gost@strgobble#2}}
 \newbibmacro*{volume+parts}{%
 %\par ORDER=\printfield{partsorder}=\thefield{partsorder}
   \iffieldundef{partsorder}
@@ -1273,7 +1268,8 @@
       \newunit
       \printfield{issue}}
      {\edef\gost@tempa{\thefield{partsorder}}
-      \printparts{\gost@tempa}}}
+      \setcounter{blx@gost@strpointer}{1}%
+      \expandafter\blx@gost@strgobble\gost@tempa\blx@gost@strEnd}}
 
 \newbibmacro*{year}{%
   \printfield{year}}
