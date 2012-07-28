@@ -1,8 +1,0 @@
-% $Id$
-
-\ProvidesFile{gost-authoryear.dbx}
-
-\blx@inputonce{biblatex-gost.dbx}{biblatex-gost data model}{}{}{}{}
-%\input{biblatex-gost.dbx}
-
-\endinput

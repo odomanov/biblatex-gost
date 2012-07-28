@@ -1,7 +1,0 @@
-% $Id$
-
-\ProvidesFile{gost-numeric.dbx}
-
-\blx@inputonce{biblatex-gost.dbx}{biblatex-gost data model}{}{}{}{}
-
-\endinput
