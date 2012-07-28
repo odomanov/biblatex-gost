@@ -1,0 +1,341 @@
+% $Id$
+
+\ProvidesFile{gost-inline.cbx}
+
+\DeclareLabelname
+  [inbook,incollection,inproceedings,inreference,suppbook,suppcollection,suppperiodical,bookinbook]
+  {shortauthor,author,translator}
+
+\DeclareFieldFormat{bibhyperlink}{%
+  \bibhyperlink{\thefield{entrykey}:\csuse{cbx@\iffootnote{f}{t}@\thefield{entrykey}}}{#1}}
+\DeclareFieldFormat{bibhypertarget}{%
+  \bibhypertarget{\thefield{entrykey}:\the\value{instcount}}{#1}}
+\providecommand*{\mkibid}[1]{#1}
+\newtoggle{cbx:loccit}
+\newtoggle{cbx:t:bookibid} % for .. // Ibid. in inbook, incollection,..
+\newtoggle{cbx:f:bookibid} 
+\newtoggle{cbx:opt:inbookibid}
+\newbibmacro*{cite:citepages}{}
+\newbibmacro*{cite:full:citepages}{}
+\newbibmacro*{cite:postnote}{}
+
+\DeclareBibliographyOption{strict}[true]{%
+  \ifstrequal{#1}{true}
+    {\ExecuteBibliographyOptions{ibidtracker=constrict,loccittracker=constrict}}
+    {\ExecuteBibliographyOptions{ibidtracker=context,loccittracker=context}}}
+
+\DeclareBibliographyOption{citepages}[permit]{%
+  \ifcsdef{cbx@opt@citepages@#1}
+    {\csuse{cbx@opt@citepages@#1}}
+    {\PackageError{biblatex}
+       {Invalid option 'citepages=#1'}
+       {Valid values are 'permit', 'suppress', 'omit', 'separate'.}}}
+
+\providebibmacro*{cite:citepages}{}
+\providebibmacro*{cite:full:citepages}{}
+\providebibmacro*{cite:postnote}{}
+
+\def\cbx@opt@citepages@permit{%
+  \renewbibmacro*{cite:citepages}{}%
+  \renewbibmacro*{cite:full:citepages}{}%
+  \renewbibmacro*{cite:postnote}{%
+    \usebibmacro{cite:postnote:ibidpage}}}
+
+\def\cbx@opt@citepages@suppress{%
+  \renewbibmacro*{cite:citepages}{}%
+  \renewbibmacro*{cite:full:citepages}{%
+    \clearfield{pages}%
+    \clearfield{pagetotal}}%
+  \renewbibmacro*{cite:postnote}{%
+    \usebibmacro{cite:postnote:ibidpage}}}
+
+\def\cbx@opt@citepages@omit{%
+  \renewbibmacro*{cite:citepages}{}%
+  \renewbibmacro*{cite:full:citepages}{%
+    \ifboolexpr{
+      test {\ifnumequal{\value{citecount}}{\value{citetotal}}}
+      and
+      test {\iffieldpages{postnote}}
+    }
+      {\clearfield{pages}%
+       \clearfield{pagetotal}}
+      {}}%
+  \renewbibmacro*{cite:postnote}{%
+    \usebibmacro{cite:postnote:ibidpage}}}
+
+\def\cbx@opt@citepages@separate{%
+  \providetoggle{cbx:fullcite}%
+  \renewbibmacro*{cite:citepages}{%
+    \global\togglefalse{cbx:fullcite}}%
+  \renewbibmacro*{cite:full:citepages}{%
+    \global\toggletrue{cbx:fullcite}}%
+  \renewbibmacro*{cite:postnote}{%
+    \ifboolexpr{
+      togl {cbx:fullcite}
+      and
+      test {\iffieldpages{postnote}}
+      and
+      test {\ifnumequal{\value{citecount}}{\value{citetotal}}}
+      and
+      (
+	not test {\iffieldundef{pages}}
+	or
+	not test {\iffieldundef{pagetotal}}
+      )
+    }
+      {\usebibmacro{cite:postnote:pages}}
+      {\usebibmacro{cite:postnote:ibidpage}}}
+  \providebibmacro*{cite:postnote:pages}{%
+    \setunit{\postnotedelim}%
+    \bibstring{thiscite}%
+    \setunit{\addspace}%
+    \printfield{postnote}}}
+
+\DeclareBibliographyOption{inbookibid}[true]{%
+  \settoggle{cbx:opt:inbookibid}{#1}%
+  \iftoggle{cbx:opt:inbookibid}
+    {\def\blx@mincrossrefs{1}}
+    {}}
+
+\AtEveryCitekey{%
+  \ifcsdef{abx@field@hyphenation}{%
+    \edef\blx@languagename{\abx@field@hyphenation}%
+    \select@language{\abx@field@hyphenation}%
+    \blx@hyphenreset}%
+  {}%
+}
+
+\DeclareNameAlias{labelname}{author}
+\DeclareFieldFormat*{citetitle}{#1}
+
+\renewcommand{\postnotedelim}{\addperiod\space}
+\renewcommand{\multicitedelim}{\addsemicolondelim\space}
+
+\ExecuteBibliographyOptions{citetracker=constrict,autocite=inline,inbookibid=false,
+                            citepages=omit,strict,opcittracker=constrict,labeltitle,
+                            citeisbn=false,citeurl=false,citedoi=false,citeeprint=false}
+
+\newbibmacro*{cite:seen}{%  the same for cite and footcite
+  \ifciteibid
+     {\ifloccit{\global\toggletrue{cbx:loccit}}{}%
+      \usebibmacro{cite:ibid}}
+     {\ifopcit
+        {\ifloccit{\global\toggletrue{cbx:loccit}}{}%
+         \usebibmacro{cite:opcit}}
+        {\iffieldundef{shorthand}
+          {\usebibmacro{cite:short}}
+          {\usebibmacro{cite:shorthand}}}}%
+}
+
+\newbibmacro*{cite}{%
+  \usebibmacro{cite:citepages}%
+  \global\togglefalse{cbx:loccit}%
+  \ifboolexpr{%
+          not test {\ifdefvoid{\cbx@t@lastcrossref}}
+          and 
+          test {\iffieldequals{crossref}{\cbx@t@lastcrossref}}
+          }%
+    {\global\toggletrue{cbx:t:bookibid}}
+    {\global\togglefalse{cbx:t:bookibid}%
+     \savefield{crossref}{\cbx@t@lastcrossref}%
+     \global\xdef\cbx@t@bookref{\thefield{entrykey}:\the\value{instcount}}}%
+  \ifciteseen
+    {\global\togglefalse{cbx:t:bookibid}%
+     \global\undef\cbx@t@lastcrossref%
+     \global\undef\cbx@t@bookref%
+     \usebibmacro{cite:seen}}
+    {\usebibmacro{cite:full}%
+     \usebibmacro{cite:save}}}
+
+\newbibmacro*{cite:save}{%
+  \csxdef{cbx@t@\thefield{entrykey}}{\the\value{instcount}}}%
+
+\newbibmacro{cite:clearfields}{%
+   \renewbibmacro*{series+number}{}%
+   %\clearfield{media}%
+   %\clearfield{doi}%
+   %\clearfield{eprint}%
+   %\clearfield{url}%
+   %\clearfield{urlday}%
+   %\clearfield{urlmonth}%
+   %\clearfield{urlyear}%
+   \clearfield{addendum}%
+   \clearfield{pubstate}%
+   \clearfield{titleaddon}}
+
+\newbibmacro*{cite:full}{%
+  \usebibmacro{cite:full:citepages}%
+  \printtext[bibhypertarget]{%
+    \usedriver
+      {\usebibmacro{cite:clearfields}}%\DeclareNameAlias{sortname}{default}}
+      {\thefield{entrytype}}}%
+  \usebibmacro{shorthandintro}}
+
+\newbibmacro*{cite:short}{%
+  \ifnameundef{labelname}
+    {\printfield{label}}
+    {\printnames{labelname}}%
+  \setunit*{\nametitledelim}%
+  \printtext[bibhyperlink]{%
+     \printfield[citetitle]{labeltitle}}%
+  \ifthenelse{ \ifentrytype{book} \or \ifentrytype{collection}
+    \or \ifentrytype{proceedings} \or \ifentrytype{reference}
+    }
+    {\setunit*{\addcomma\space}%
+     \printtext[bibhyperlink]{\usebibmacro{cite:volume+parts}{\addcomma\space}}}%
+    {}}
+
+\newbibmacro*{cite:opcit}{%
+  \ifnameundef{labelname}
+    {\printfield{label}}
+    {\printnames{labelname}}%
+  \newunit
+  \printtext[bibhyperlink]{%
+    \bibstring[\mkibid]{opcit}}}
+
+\newbibmacro*{cite:ibid}{%
+  \bibsentence\printtext[bibhyperlink]{\bibstring[\mkibid]{ibidem}}}
+
+\newbibmacro*{cite:shorthand}{%
+  \printtext[bibhyperlink]{\printfield{shorthand}}}
+
+\newbibmacro*{cite:postnote:ibidpage}{%
+  \iftoggle{cbx:loccit}
+    {}
+    {\usebibmacro{postnote}}}
+
+\def\blx@gost@printinordercomma#1#2{%
+  \ifstrequal{#1}{v}
+    {\printfield{volume}%
+     \setunit*{\addcomma\space}}
+    {\ifstrequal{#1}{b}
+      {\printfield{book}%
+       \setunit*{\addcomma\space}}
+      {\ifstrequal{#1}{p}
+        {\printfield{part}%
+         \setunit*{\addcomma\space}}
+        {\ifstrequal{#1}{i}
+          {\printfield{issue}%
+           \setunit*{\addcomma\space}}
+          {\ifstrequal{#1}{n}
+          {\printfield{number}%
+           \setunit*{\addcomma\space}}
+          {}}}}}
+  \ifthenelse{\equal{#2}{\blx@gost@endofstring}}% end of string ? 
+    {}%
+    {\stepcounter{blx@gost@pointer}%
+     \blx@gost@printinorder#2}}
+\newbibmacro{cite:volume+parts}[1]{%
+  \iffieldundef{partsorder}
+     {\printfield{volume}%
+      \setunit*{\addcomma\space}
+      \printfield{book}%
+      \setunit*{\addcomma\space}
+      \printfield{part}%
+      \setunit*{\addcomma\space}
+      \printfield[issuenum]{issue}%
+      \setunit*{\addcomma\space}
+      \printfield{number}%
+      \setunit*{\addcomma\space}
+      }
+     {\edef\gost@tempa{\thefield{partsorder}}
+      \setcounter{blx@gost@pointer}{1}%
+      \expandafter\blx@gost@printinordercomma\gost@tempa\blx@gost@endofstring}}
+
+\newbibmacro*{footcite}{%
+  \usebibmacro{cite:citepages}%
+  \global\togglefalse{cbx:loccit}%
+  \ifboolexpr{%
+          not test {\ifdefvoid{\cbx@f@lastcrossref}} % undef, \relax, or empty
+          and 
+          test {\iffieldequals{crossref}{\cbx@f@lastcrossref}}
+          }%
+    {\global\toggletrue{cbx:f:bookibid}}
+    {\global\togglefalse{cbx:f:bookibid}%
+     \savefield{crossref}{\cbx@f@lastcrossref}%
+     \global\xdef\cbx@f@bookref{\thefield{entrykey}:\the\value{instcount}}}%
+  \ifciteseen
+    {\global\togglefalse{cbx:f:bookibid}%
+     \global\undef\cbx@f@lastcrossref%
+     \global\undef\cbx@f@bookref%
+     \usebibmacro{cite:seen}}
+    {\usebibmacro{cite:full}%
+     \usebibmacro{footcite:save}}}
+
+\newbibmacro*{footcite:save}{%
+  \csxdef{cbx@f@\thefield{entrykey}}{\the\value{instcount}}%
+  \label{cbx@\the\value{instcount}}}
+
+\DeclareCiteCommand{\cite}
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \iffootnote
+     {\usebibmacro{footcite}}
+     {\usebibmacro{cite}}}
+  {\multicitedelim}
+  {\usebibmacro{cite:postnote}}
+
+\DeclareCiteCommand{\parencite}[\mkbibparens]
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \iffootnote
+     {\usebibmacro{footcite}}
+     {\usebibmacro{cite}}}
+  {\multicitedelim}
+  {\usebibmacro{cite:postnote}}
+
+\DeclareCiteCommand{\footcite}[\mkbibfootnote]
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \usebibmacro{footcite}}
+  {\multicitedelim}
+  {\usebibmacro{cite:postnote}}
+
+\DeclareCiteCommand{\footcitetext}[\mkbibfootnotetext]
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \usebibmacro{footcite}}
+  {\multicitedelim}
+  {\usebibmacro{cite:postnote}}
+
+\DeclareCiteCommand{\smartcite}[\iffootnote\mkbibparens\mkbibfootnote]
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \iffootnote
+     {\usebibmacro{footcite}}
+     {\usebibmacro{cite}}}
+  {\multicitedelim}
+  {\usebibmacro{cite:postnote}}
+
+\DeclareCiteCommand{\textcite}[\cbx@textcite\footcite]
+  {\gdef\cbx@savedkeys{}}
+  {\printnames{labelname}%
+   \xappto\cbx@savedkeys{\thefield{entrykey},}}
+  {\multinamedelim}
+  {\protected@xappto\cbx@savedcites{%
+     [\thefield{prenote}][\thefield{postnote}]{\cbx@savedkeys}}}
+
+\newrobustcmd{\cbx@textcite}[2]{%
+  \def\cbx@savedcites{#1}#2\cbx@savedcites}
+
+\DeclareMultiCiteCommand{\textcites}[\cbx@textcite\footcites]{\textcite}{\multicitedelim}
+
+\renewbibmacro*{cbx:bookibid:check}[2]{%
+  \ifboolexpr{%
+    test {\ifcitation}
+    and
+    test {\iftoggle{cbx:opt:inbookibid}}
+    and
+    ( ( test {\iffootnote}
+      and
+      test {\iftoggle{cbx:f:bookibid}} )
+      or
+      ( not test {\iffootnote}
+        and 
+        test {\iftoggle{cbx:t:bookibid}} )
+    ) 
+  }
+  {#1}
+  {#2}}
+
+\endinput
