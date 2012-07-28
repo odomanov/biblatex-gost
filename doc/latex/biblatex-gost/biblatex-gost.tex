@@ -104,6 +104,8 @@
 \renewcommand*{\Apxref}{\refs{Прил.}{Прил.}}
 \renewcommand*{\tabref}{\refs{табл.}{табл.}}
 \renewcommand*{\Tabref}{\refs{Табл.}{Табл.}}
+\newcommand*{\noitemspace}{\vspace{-\itemsep}\vspace{-\parsep}}
+\newcommand*{\starsdelim}{\centerline{*~~~*~~~*}}
 
 \tolerance=9999
 
@@ -141,9 +143,8 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 обновить индексы (в \tex~Live, например, это делается командой \texttt{mktexlsr}).
 
 Для работы \biblatexgost версии 0.6 и выше требуется 
-\biblatex~2.1\fnurl{http://sourceforge.net/projects/biblatex/files/development/} 
-(который, в свою очередь, требует
-\biber~1.0\fnurl{http://sourceforge.net/projects/biblatex-biber/files/biblatex-biber/1.0/}) 
+\biblatex~2.1\fnurl{http://sourceforge.net/projects/biblatex/files/biblatex-2.1/} 
+и \biber~1.1\fnurl{http://sourceforge.net/projects/biblatex-biber/files/biblatex-biber/1.1/} 
 или выше.
 
 \section{Стили \biblatexgost}
@@ -225,7 +226,7 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 не слишком строго определяет соответствующий стиль и, в частности, допускает неопределённые 
 ссылки в случаях, когда один автор имеет несколько 
 работ одного года. Поэтому в \biblatexgost используется несколько способов оформления
-ссылок, которые выбираются опцией \opt{mergedate} (см.~\secref{sec:opt}).
+ссылок, которые выбираются опцией \opt{mergedate} (см.~\secref{sec:newoptions}).
 В частности, значение опции \kvopt{mergedate}{goststrict} соответствует строгому 
 следованию ГОСТу, хотя при этом существует опасность появления неопределённых ссылок.
 Стиль чувствителен к опции \opt{singletitle} и может не выводить год в ссылке, если он 
@@ -238,16 +239,12 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 \kvopt{pagetracker}{true},
 \kvopt{mergedate}{gostletter},
 \kvopt{singletitle}{false} (или \opt{true} при \kvopt{mergedate}{goststrict}, 
-см.~\secref{sec:opt}). 
+см.~\secref{sec:newoptions}). 
 
-%\item[gost-inline-min, gost-footnote-min, gost-numeric-min, gost-authoryear-min]
-\item[gost-inline-min]
-\item[gost-footnote-min]\vspace{-\itemsep}\vspace{-\parsep}%
-\item[gost-numeric-min]\vspace{-\itemsep}\vspace{-\parsep}%
-\item[gost-authoryear-min]\vspace{-\itemsep}\vspace{-\parsep}%
-%\item 
-%\vspace{-\itemsep}\vspace{-\parsep}%
-
+\item[gost-inline-min]\noitemspace%
+\item[gost-footnote-min]\noitemspace%
+\item[gost-numeric-min]\noitemspace%
+\item[gost-authoryear-min]\noitemspace%
 %\vspace{-4\baselineskip}%
 Все стили имеют <<минимальный>> вариант, в котором выводится минимальное количество
 сведений~--- автор, название, том\slash часть\slash книга\slash выпуск, 
@@ -256,7 +253,7 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 в базе данных. При этом вывод сведений, для которых в \biblatex имеются специальные опции 
 (\opt{url}, \opt{doi}, \opt{isbn/issn/isrn}, \opt{eprint}), регулируется 
 этими опциями (а также опциями \opt{cite\ldots} и \opt{bib\ldots}, 
-описанными в \secref{sec:opt}). По умолчанию в минимальных стилях этот вывод отключён.
+описанными в \secref{sec:newoptions}). По умолчанию в минимальных стилях этот вывод отключён.
 
 Минимальные стили можно использовать совместно с полными. Например,
 при установке
@@ -275,7 +272,8 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 
 \end{marglist}
 
-\centerline{*~~~*~~~*}
+%\centerline{*~~~*~~~*}
+\starsdelim
 
 Дополнительно, все стили по умолчанию устанавливают опции 
 \kvopt{dashed}{false},
@@ -289,7 +287,8 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 \kvopt{minnames}{1}.
 Значения по умолчанию  для опций \opt{cite\ldots} и \opt{bib\ldots} см. в \tabref{tab:bibcite}.
 
-\centerline{\rule{0pt}{1.5\baselineskip}*~~~*~~~*}
+\vspace{.5\baselineskip}
+\starsdelim
 
 %\subsection{Ссылки в верхнем индексе}
 %\label{sec:superscript}
@@ -424,13 +423,13 @@ ISSN серии или подсерии & issn (isbn) \\
 Содержит номер (или другой идентификатор) книги для изданий, разделённых на книги. См. подробнее
 \secref{sec:volsparts} 
 
-\fielditem{booktranslator}{name}\vspace{-\itemsep}\vspace{-\parsep}%
-\fielditem{bookcommentator}{name}\vspace{-\itemsep}\vspace{-\parsep}%
-\fielditem{bookannotator}{name}\vspace{-\itemsep}\vspace{-\parsep}%
-\fielditem{bookintroduction}{name}\vspace{-\itemsep}\vspace{-\parsep}%
-\fielditem{bookforeword}{name}\vspace{-\itemsep}\vspace{-\parsep}%
-\fielditem{bookafterword}{name}\vspace{-\itemsep}\vspace{-\parsep}%
-\fielditem{bookoriglanguage}{key}\vspace{-\itemsep}\vspace{-\parsep}%
+\fielditem{booktranslator}{name}\noitemspace%
+\fielditem{bookcommentator}{name}\noitemspace%
+\fielditem{bookannotator}{name}\noitemspace%
+\fielditem{bookintroduction}{name}\noitemspace%
+\fielditem{bookforeword}{name}\noitemspace%
+\fielditem{bookafterword}{name}\noitemspace%
+\fielditem{bookoriglanguage}{key}\noitemspace%
 \listitem{bookcredits}{literal}
 
 Аналогично \bibfield{bookauthor} и \bibfield{booktitle} эти поля 
@@ -848,7 +847,7 @@ volumes = {|в 5-и томах (6-и кн.)|}
 похоже, не приводит ни к каким проблемам.
 
 \subsection{Новые опции и значения опций}
-\label{sec:opt}
+\label{sec:newoptions}
 
 Для всех стилей сохранены опции стандартных стилей \biblatex, от которых они происходят или
 с которыми сходны, даже если соответствующая функциональность не предполагается ГОСТом. 
@@ -857,10 +856,10 @@ volumes = {|в 5-и томах (6-и кн.)|}
 
 \begin{optionlist}
 
-\optitem[true]{citeurl,biburl}{\opt{true}, \opt{false}}\vspace{-\itemsep}\vspace{-\parsep}%
-\optitem[true]{citeisbn,bibisbn}{\opt{true}, \opt{false}}\vspace{-\itemsep}\vspace{-\parsep}%
-\optitem[true]{citedoi,bibdoi}{\opt{true}, \opt{false}}\vspace{-\itemsep}\vspace{-\parsep}%
-\optitem[true]{citeeprint,bibeprint}{\opt{true}, \opt{false}}%\vspace{-\itemsep}\vspace{-\parsep}%
+\optitem[true]{citeurl,biburl}{\opt{true}, \opt{false}}\noitemspace%
+\optitem[true]{citeisbn,bibisbn}{\opt{true}, \opt{false}}\noitemspace%
+\optitem[true]{citedoi,bibdoi}{\opt{true}, \opt{false}}\noitemspace%
+\optitem[true]{citeeprint,bibeprint}{\opt{true}, \opt{false}}%\noitemspace%
 
 В дополнение к опциям \opt{url}, \opt{isbn}, \opt{doi} и \opt{eprint} в \biblatexgost 
 определены опции
@@ -945,8 +944,8 @@ gost-authoryear-min & --- & false \\
 Во-первых, в скобках сразу после автора:
 
 \begin{bibexample}
-\item \emph{Хайдеггер, М.} (1997). Бытие и время. \ldots 
-\item \emph{Хайдеггер, М.} (1993a). Время и бытие. \ldots
+\item \emph{Хайдеггер М.} (1997). Бытие и время. \ldots 
+\item \emph{Хайдеггер М.} (1993a). Время и бытие. \ldots
 \end{bibexample}
 
 Во-вторых, на своём обычном месте в самой записи. 
@@ -990,6 +989,10 @@ gost-authoryear-min & --- & false \\
 
 По существу, эта опция отличается от \kvopt{mergedate}{false} только деталями 
 оформления.%, но не способом вывода дат.
+
+Обратите внимание, если вы используете поле \bibfield{shorthand}, то при 
+использовании этой опции вам может
+потребоваться вручную настроить сортировку, например, при помощи поля \bibfield{sortkey}.
 
 \item[goststrict]
 
@@ -1227,19 +1230,31 @@ gost-authoryear & cite & Автор (заголовок) и год в текст
 
 \begin{changelog}
 
-\begin{release}{0.6}{1-07-2012}
+\begin{release}{0.6}{1-07-2012}% up to rev.257
+\item Переход на \biblatex~2.1\see{sec:install}
 \item Добавлены <<минимальные>> стили\see{sec:styles}
+\item Добавлены опции \opt{cite\ldots}, \opt{bib\ldots} для раздельного управления
+  выводом\\ \opt{url}, \opt{isbn}, \opt{doi} и \opt{eprint}
+  в цитатах и библиографии\see{sec:newoptions}
+\item Добавлены поля \bibfield{book\ldots} для раздельного описания
+  публикаций в книгах\see{sec:newfields}
+\item Поле \bibfield{material} (общее обозначение материала) переименовано в \bibfield{media}\see{sec:newfields}
+\item Установлено по умолчанию \kvopt{inbookidid}{false}
+\item Установлено по умолчанию \kvopt{firsinits}{true}
+\item Изменён перевод некоторых строк
+\item Исправлена ошибка вывода опции \kvopt{mergedate}{false}%\see{sec:newoptions}
+\item Исправлены ошибки
 \end{release}
 
-\begin{release}{0.5}{1-07-2012}
-\item Добавлено поле \bibfield{media} (общее обозначение материала)\see{sec:newfields} 
-\item Восстановлены стандартные значения опции \opt{mergedate}\see{sec:opt}
-\item Добавлена опция \kvopt{mergedate}{gostlabel}\see{sec:opt}
-\item Добавлена обработка опции \opt{singletitle}\see{sec:opt}
-\item Добавлено сокращение <<Там же>>/<<Ibid.>> для  последовательных ссылок на публикации,
-  включённые в один и тот же документ. Регулируется опцией \opt{inbookibid}\see{sec:opt}
+\begin{release}{0.5}{1-07-2012}% up to rev. 197
+\item Добавлено поле \bibfield{material} (общее обозначение материала)\see{sec:newfields} 
+\item Восстановлены стандартные значения опции \opt{mergedate}\see{sec:newoptions}
+\item Добавлена опция \kvopt{mergedate}{gostlabel}\see{sec:newoptions}
+\item Добавлена обработка опции \opt{singletitle}\see{sec:newoptions}
+\item Добавлено сокращение <<Там же>>/<<Ibid.>> для  последовательных ссылок\\ на публикации,
+  включённые в один и тот же документ. Регулируется опцией \opt{inbookibid}\see{sec:newoptions}
 \item Исправлены отклонения от ГОСТа в драйверах \bibtype{booklet}, \bibtype{manual}, 
-  \bibtype{misc}, \bibtype{online}, \bibtype{patent}, \bibtype{report},  
+  \bibtype{misc},\\ \bibtype{online}, \bibtype{patent}, \bibtype{report},  
   \bibtype{thesis}, \bibtype{unpublished}
 %\item Исправлена ошибка, приводившая к неопределённости для публикаций без авторов в
 %  \bibsty{gost-autoryear}%\see{sec:}
@@ -1253,7 +1268,7 @@ gost-authoryear & cite & Автор (заголовок) и год в текст
 \begin{release}{0.4}{03-06-2012}
 \item Переход на \biblatex\,2.0
 \item Изменено соответствие терминов ГОСТа и полей \biblatex\see{sec:gost-biblatex}
-\item Добавлено автоматическое переопределение полей (теперь не нужна настройка \file{biber.conf})\see{bibermap}
+\item Добавлено автоматическое переопределение полей (теперь не нужна настройка \file{biber.conf})%\see{bibermap}
 \item Добавлена автоматическая обработка длинных списков имён\see{4names}
 \item Добавлено новая опция \bibfield{movenames}\see{4names} 
 \item Добавлено новое поле \bibfield{specdata}\see{sec:newfields}

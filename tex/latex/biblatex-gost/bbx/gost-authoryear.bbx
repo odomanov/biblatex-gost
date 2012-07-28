@@ -163,7 +163,16 @@
   %\renewcommand*{\labelnamepunct}{\newunitpunct}
   \renewbibmacro*{date}{\printdate}%
   \renewbibmacro*{year}{\printfield{year}}%
-  \renewbibmacro*{labeltitle}{}%
+  \renewbibmacro*{labeltitle}{%
+    \iffieldundef{label}
+       {\ifsingletitle
+          {}
+          {\iffieldundef{shorttitle}
+            {\iffieldundef{maintitle}
+              {\printfield{title}}
+              {\printfield[title]{maintitle}}}%
+             {\printfield[title]{shorttitle}}}}
+       {\printfield{label}}}
   \renewbibmacro*{authoryearlabel}{}%
   \setlength{\labelauthoryearsep}{0pt}%
 }
