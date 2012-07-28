@@ -1229,36 +1229,30 @@
   \newunit\newblock
   \mkbibdatelong{}{month}{day}}
 
-%\newcounter{blx@gost@strlen}%
-\newcommand{\blx@gost@strEnd}{\%\%\%}
-%\newcommand{\blx@gost@intEnd}{\%@\%@\%@}
-%\let\blx@gost@strStop=\relax
-%\newcommand{\setstrEnd}[1]{\renewcommand{\blx@gost@strEnd}{#1}}
-\newcounter{blx@gost@strpointer}%
-%\setcounter{blx@gost@strpointer}{1}%
-\def\blx@gost@strgobble#1#2{%
-%\par :#1:#2:
-  \ifstrequal{#1}{}
-    {}
-    {\ifstrequal{#1}{v}
-      {\printfield{volume}%
+\newcounter{blx@gost@pointer}%
+\newcommand*{\blx@gost@endofstring}{\\\\\\}  % end of string = \\\
+\def\blx@gost@printinorder#1#2{%
+  \ifstrequal{#1}{v}
+    {\printfield{volume}%
+     \newunit}
+    {\ifstrequal{#1}{b}
+      {\printfield{book}%
        \newunit}
-      {\ifstrequal{#1}{b}
-        {\printfield{book}%
+      {\ifstrequal{#1}{p}
+        {\printfield{part}%
          \newunit}
-        {\ifstrequal{#1}{p}
-          {\printfield{part}%
+        {\ifstrequal{#1}{i}
+          {\printfield{issue}%
            \newunit}
-          {\ifstrequal{#1}{i}
-            {\printfield{issue}%
+          {\ifstrequal{#1}{n}
+            {\printfield{number}%
              \newunit}
             {}}}}}
-  \ifthenelse{\equal{#2}{\blx@gost@strEnd}}%
+  \ifthenelse{\equal{#2}{\blx@gost@endofstring}}% end of string ? 
     {}%
-    {\stepcounter{blx@gost@strpointer}%
-     \blx@gost@strgobble#2}}
+    {\stepcounter{blx@gost@pointer}%
+     \blx@gost@printinorder#2}}
 \newbibmacro*{volume+parts}{%
-%\par ORDER=\printfield{partsorder}=\thefield{partsorder}
   \iffieldundef{partsorder}
      {\printfield{volume}%
       \newunit
@@ -1266,10 +1260,13 @@
       \newunit
       \printfield{part}%
       \newunit
-      \printfield{issue}}
+      \printfield{issue}%
+      \newunit
+      \printfield{number}%
+      \newunit}
      {\edef\gost@tempa{\thefield{partsorder}}
-      \setcounter{blx@gost@strpointer}{1}%
-      \expandafter\blx@gost@strgobble\gost@tempa\blx@gost@strEnd}}
+      \setcounter{blx@gost@pointer}{1}%
+      \expandafter\blx@gost@printinorder\gost@tempa\blx@gost@endofstring}}
 
 \newbibmacro*{year}{%
   \printfield{year}}
