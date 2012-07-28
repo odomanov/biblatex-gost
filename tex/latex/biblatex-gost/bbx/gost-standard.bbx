@@ -1229,14 +1229,44 @@
   \newunit\newblock
   \mkbibdatelong{}{month}{day}}
 
+\newcounter{blx@gost@pointer}%
+\newcommand*{\blx@gost@endofstring}{\\\\\\}  % end of string = \\\
+\def\blx@gost@printinorder#1#2{%
+  \ifstrequal{#1}{v}
+    {\printfield{volume}%
+     \newunit}
+    {\ifstrequal{#1}{b}
+      {\printfield{book}%
+       \newunit}
+      {\ifstrequal{#1}{p}
+        {\printfield{part}%
+         \newunit}
+        {\ifstrequal{#1}{i}
+          {\printfield{issue}%
+           \newunit}
+          {\ifstrequal{#1}{n}
+            {\printfield{number}%
+             \newunit}
+            {}}}}}
+  \ifthenelse{\equal{#2}{\blx@gost@endofstring}}% end of string ? 
+    {}%
+    {\stepcounter{blx@gost@pointer}%
+     \blx@gost@printinorder#2}}
 \newbibmacro*{volume+parts}{%
-  \printfield{volume}%
-  \newunit
-  \printfield[book]{book}%
-  \newunit
-  \printfield{part}%
-  \newunit
-  \printfield{issue}}%
+  \iffieldundef{partsorder}
+     {\printfield{volume}%
+      \newunit
+      \printfield{book}%
+      \newunit
+      \printfield{part}%
+      \newunit
+      \printfield{issue}%
+      \newunit
+      \printfield{number}%
+      \newunit}
+     {\edef\gost@tempa{\thefield{partsorder}}
+      \setcounter{blx@gost@pointer}{1}%
+      \expandafter\blx@gost@printinorder\gost@tempa\blx@gost@endofstring}}
 
 \newbibmacro*{year}{%
   \printfield{year}}
