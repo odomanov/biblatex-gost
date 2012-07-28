@@ -1229,14 +1229,51 @@
   \newunit\newblock
   \mkbibdatelong{}{month}{day}}
 
+%\newcounter{blx@gost@strlen}%
+\newcommand{\blx@gost@strEnd}{\%\%\%}
+%\newcommand{\blx@gost@intEnd}{\%@\%@\%@}
+%\let\blx@gost@strStop=\relax
+%\newcommand{\setstrEnd}[1]{\renewcommand{\blx@gost@strEnd}{#1}}
+\newcounter{blx@gost@strpointer}%
+%\setcounter{blx@gost@strpointer}{1}%
+\def\blx@gost@strgobble#1#2{%
+%\par :#1:#2:
+\ifthenelse{\equal{#2}{\blx@gost@strEnd}}%
+        {}%
+        {\ifstrequal{#1}{}
+          {}
+          {\ifstrequal{#1}{v}
+            {\printfield{volume}%
+             \newunit}
+            {\ifstrequal{#1}{b}
+              {\printfield{book}%
+               \newunit}
+              {\ifstrequal{#1}{p}
+                {\printfield{part}%
+                 \newunit}
+                {\ifstrequal{#1}{i}
+                  {\printfield{issue}}
+                  {}}}}}
+        \stepcounter{blx@gost@strpointer}%
+        \blx@gost@strgobble#2%
+        }}
+\newcommand{\printparts}[1]{%
+%\par PRINT=#1
+\setcounter{blx@gost@strpointer}{1}%
+\expandafter\blx@gost@strgobble#1\blx@gost@strEnd%
+}
 \newbibmacro*{volume+parts}{%
-  \printfield{volume}%
-  \newunit
-  \printfield[book]{book}%
-  \newunit
-  \printfield{part}%
-  \newunit
-  \printfield{issue}}%
+%\par ORDER=\printfield{partsorder}=\thefield{partsorder}
+  \iffieldundef{partsorder}
+     {\printfield{volume}%
+      \newunit
+      \printfield{book}%
+      \newunit
+      \printfield{part}%
+      \newunit
+      \printfield{issue}}
+     {\edef\gost@tempa{\thefield{partsorder}}
+      \printparts{\gost@tempa}}}
 
 \newbibmacro*{year}{%
   \printfield{year}}
