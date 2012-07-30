@@ -67,6 +67,11 @@
 \DeclareBibliographyOption{citeeprint}[true]{%
   \global\settoggle{cbx:eprint}{#1}}
 
+\newcommand*{\blx@gost@defaultorder}{vpbin}
+\DeclareBibliographyOption{volsorder}[vpbin]{%
+  \renewcommand*{\blx@gost@defaultorder}{#1}}
+
+
 
 \ExecuteBibliographyOptions{
   %datamodel=biblatex-gost,
@@ -77,7 +82,8 @@
   dashed=false,
   singletitle=false,
   movenames=true,
-  firstinits}
+  firstinits,
+  volsorder=vpbin}
 
 \newbibmacro*{cbx:bookibid:check}[2]{#2}
 
@@ -112,7 +118,8 @@
       {\bibstring{part}\addabbrvspace#1}
       {}}
     {\ifcapital{\MakeCapital{#1}}{#1}\isdot}}
-\DeclareFieldFormat[article,periodical]{number}{%
+\DeclareFieldFormat{seriesnumber}{}%
+\DeclareFieldFormat{number}{%
   \iffieldnum{number}
     {\ifbibstring{number}
       {\bibstring{number}\addabbrvspace#1}
@@ -823,12 +830,12 @@
         \setunit{\addcolondelim}%
         \usebibmacro{involumes+otherparts}{\addcolondelim}
         \newunit
-        \usebibmacro{volume+parts}}
+        \usebibmacro{volume+parts}{\newunit}}
        {\usebibmacro{maintitle}%
         \newunit
         \usebibmacro{involumes+otherparts}{\addperiod\addspace}%
         \newunit
-        \usebibmacro{volume+parts}%
+        \usebibmacro{volume+parts}{\newunit}%
         \newunit
         \usebibmacro{#1}}}%
   \newunit}
@@ -863,7 +870,7 @@
     {\printtext{(%
       \printfield{series}%
       \setunit*{\addsemicolondelim}%
-      \printfield{number})}}
+      \printfield[seriesnumber]{number})}}
   }
 
 \newbibmacro*{publisher+location+date}{%
@@ -1230,43 +1237,39 @@
   \mkbibdatelong{}{month}{day}}
 
 \newcounter{blx@gost@pointer}%
-\newcommand*{\blx@gost@endofstring}{\\\\\\}  % end of string = \\\
-\def\blx@gost@printinorder#1#2{%
+\newcommand*{\blx@gost@endofstring}{\@\@\@\@\@}  % end of string = \\\
+\newcommand*{\blx@gost@setunit}{\newunit}
+\def\blx@gost@volsinorder#1#2{%
   \ifstrequal{#1}{v}
     {\printfield{volume}%
-     \newunit}
+     \blx@gost@setunit}
     {\ifstrequal{#1}{b}
       {\printfield{book}%
-       \newunit}
+       \blx@gost@setunit}
       {\ifstrequal{#1}{p}
         {\printfield{part}%
-         \newunit}
+         \blx@gost@setunit}
         {\ifstrequal{#1}{i}
           {\printfield{issue}%
-           \newunit}
+           \blx@gost@setunit}
           {\ifstrequal{#1}{n}
             {\printfield{number}%
-             \newunit}
-            {}}}}}
+             \blx@gost@setunit}
+            {}}}}}%
   \ifthenelse{\equal{#2}{\blx@gost@endofstring}}% end of string ? 
     {}%
     {\stepcounter{blx@gost@pointer}%
-     \blx@gost@printinorder#2}}
-\newbibmacro*{volume+parts}{%
-  \iffieldundef{partsorder}
-     {\printfield{volume}%
-      \newunit
-      \printfield{book}%
-      \newunit
-      \printfield{part}%
-      \newunit
-      \printfield{issue}%
-      \newunit
-      \printfield{number}%
-      \newunit}
-     {\edef\gost@tempa{\thefield{partsorder}}
+     \blx@gost@volsinorder#2}}
+
+\newbibmacro*{volume+parts}[1]{%
+  \iffieldundef{volsorder}
+     {\edef\gost@tempa{\blx@gost@defaultorder}}
+     {\edef\gost@tempa{\thefield{volsorder}}}%
+  \ifdefvoid{\gost@tempa}
+     {}
+     {\renewcommand*{\blx@gost@setunit}{#1}%
       \setcounter{blx@gost@pointer}{1}%
-      \expandafter\blx@gost@printinorder\gost@tempa\blx@gost@endofstring}}
+      \expandafter\blx@gost@volsinorder\gost@tempa\blx@gost@endofstring}}
 
 \newbibmacro*{year}{%
   \printfield{year}}

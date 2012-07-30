@@ -182,7 +182,7 @@
     \or \ifentrytype{proceedings} \or \ifentrytype{reference}
     }
     {\setunit*{\addcomma\space}%
-     \printtext[bibhyperlink]{\usebibmacro{cite:volume+parts}{\addcomma\space}}}%
+     \printtext[bibhyperlink]{\usebibmacro{volume+parts}{\setunit*{\addcomma\space}}}}%
     {}}
 
 \newbibmacro*{cite:opcit}{%
@@ -203,44 +203,6 @@
   \iftoggle{cbx:loccit}
     {}
     {\usebibmacro{postnote}}}
-
-\def\blx@gost@printinordercomma#1#2{%
-  \ifstrequal{#1}{v}
-    {\printfield{volume}%
-     \setunit*{\addcomma\space}}
-    {\ifstrequal{#1}{b}
-      {\printfield{book}%
-       \setunit*{\addcomma\space}}
-      {\ifstrequal{#1}{p}
-        {\printfield{part}%
-         \setunit*{\addcomma\space}}
-        {\ifstrequal{#1}{i}
-          {\printfield{issue}%
-           \setunit*{\addcomma\space}}
-          {\ifstrequal{#1}{n}
-          {\printfield{number}%
-           \setunit*{\addcomma\space}}
-          {}}}}}
-  \ifthenelse{\equal{#2}{\blx@gost@endofstring}}% end of string ? 
-    {}%
-    {\stepcounter{blx@gost@pointer}%
-     \blx@gost@printinorder#2}}
-\newbibmacro{cite:volume+parts}[1]{%
-  \iffieldundef{partsorder}
-     {\printfield{volume}%
-      \setunit*{\addcomma\space}
-      \printfield{book}%
-      \setunit*{\addcomma\space}
-      \printfield{part}%
-      \setunit*{\addcomma\space}
-      \printfield[issuenum]{issue}%
-      \setunit*{\addcomma\space}
-      \printfield{number}%
-      \setunit*{\addcomma\space}
-      }
-     {\edef\gost@tempa{\thefield{partsorder}}
-      \setcounter{blx@gost@pointer}{1}%
-      \expandafter\blx@gost@printinordercomma\gost@tempa\blx@gost@endofstring}}
 
 \newbibmacro*{footcite}{%
   \usebibmacro{cite:citepages}%
