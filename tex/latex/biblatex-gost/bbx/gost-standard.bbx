@@ -118,14 +118,23 @@
       {\bibstring{part}\addabbrvspace#1}
       {}}
     {\ifcapital{\MakeCapital{#1}}{#1}\isdot}}
-\DeclareFieldFormat{seriesnumber}{}%
-\DeclareFieldFormat{number}{%
+\DeclareFieldFormat{seriesnumber}{#1}%
+\DeclareFieldFormat*{number}{%
   \iffieldnum{number}
     {\ifbibstring{number}
-      {\bibstring{number}\addabbrvspace#1}
+      {\bibsstring{number}\addabbrvspace#1}
       {\unspace\adddot#1}}
     {\ifcapital{\MakeCapital{#1}}{#1}\isdot}}
-\DeclareFieldFormat{volumes}{#1}
+\newbibmacro*{volumes/parts/books/issues}[2]{%
+  \iffieldnum{#1}
+    {\ifbibstring{#1}
+      {#2~\bibsstring{#1}}
+      {}}
+    {\ifcapital{\MakeCapital{#2}}{#2}}}
+\DeclareFieldFormat{volumes}{\usebibmacro{volumes/parts/books/issues}{volumes}{#1}}
+\DeclareFieldFormat{parts}{\usebibmacro{volumes/parts/books/issues}{parts}{#1}}
+\DeclareFieldFormat{books}{\usebibmacro{volumes/parts/books/issues}{books}{#1}}
+\DeclareFieldFormat{issues}{\usebibmacro{volumes/parts/books/issues}{issues}{#1}}
 \newbibmacro*{in+}[2]{%
   \iffieldnum{#1}
     {\ifbibstring{involumes}
@@ -219,6 +228,10 @@
   \addnbspace\textemdash\space\bibsentence}% block punctuation
 \newcommand*{\respdelim}{\addnbspace/\space}% delimiter before "credits"
 \newcommand*{\resppunct}{\addsemicolondelim\space}% punctuation between "credits" items
+
+\newcounter{blx@gost@pointer}%
+\newcommand*{\blx@gost@endofstring}{\@\@\@\@\@}  % end of string = \\\
+\newcommand*{\blx@gost@setunit}{\newunit}
 
 \@ifpackageloaded{babel}
   {\edef\gostmedialanguage{\bbl@main@language}}
@@ -828,12 +841,12 @@
     {\iffieldundef{maintitle}
        {\usebibmacro{#1}%
         \setunit{\addcolondelim}%
-        \usebibmacro{involumes+otherparts}{\addcolondelim}
+        \usebibmacro{involumes+otherparts}{\setunit*{\addcomma\space}}
         \newunit
         \usebibmacro{volume+parts}{\newunit}}
        {\usebibmacro{maintitle}%
         \newunit
-        \usebibmacro{involumes+otherparts}{\addperiod\addspace}%
+        \usebibmacro{involumes+otherparts}{\setunit*{\addcomma\space}}%
         \newunit
         \usebibmacro{volume+parts}{\newunit}%
         \newunit
@@ -1236,9 +1249,6 @@
   \newunit\newblock
   \mkbibdatelong{}{month}{day}}
 
-\newcounter{blx@gost@pointer}%
-\newcommand*{\blx@gost@endofstring}{\@\@\@\@\@}  % end of string = \\\
-\newcommand*{\blx@gost@setunit}{\newunit}
 \def\blx@gost@volsinorder#1#2{%
   \ifstrequal{#1}{v}
     {\printfield{volume}%
@@ -1252,10 +1262,7 @@
         {\ifstrequal{#1}{i}
           {\printfield{issue}%
            \blx@gost@setunit}
-          {\ifstrequal{#1}{n}
-            {\printfield{number}%
-             \blx@gost@setunit}
-            {}}}}}%
+          {}}}}%
   \ifthenelse{\equal{#2}{\blx@gost@endofstring}}% end of string ? 
     {}%
     {\stepcounter{blx@gost@pointer}%
@@ -1345,16 +1352,46 @@
   \addsemicolon%
   \endgroup}
 
+\def\blx@gost@involsinorder#1#2{%
+  \ifstrequal{#1}{v}
+    {\printfield{volumes}%
+     \blx@gost@setunit}
+    {\ifstrequal{#1}{b}
+      {\printfield{books}%
+       \blx@gost@setunit}
+      {\ifstrequal{#1}{p}
+        {\printfield{parts}%
+         \blx@gost@setunit}
+        {\ifstrequal{#1}{i}
+          {\printfield{issues}%
+           \blx@gost@setunit}
+          {}}}}%
+  \ifthenelse{\equal{#2}{\blx@gost@endofstring}}% end of string ? 
+    {}%
+    {\stepcounter{blx@gost@pointer}%
+     \blx@gost@involsinorder#2}}
+
 \newbibmacro*{involumes+otherparts}[1]{%
-  \printfield[involumes]{volumes}%
-  \setunit*{#1}%
-  \printfield[inbooks]{books}%
-  \setunit*{#1}%
-  \printfield[inparts]{parts}%
-  \setunit*{#1}%
-  \printfield[inissues]{issues}%
-  \setunit*{#1}%
-}
+  \ifboolexpr{
+              test {\iffieldundef{volumes}}
+              and
+              test {\iffieldundef{parts}}
+              and
+              test {\iffieldundef{books}}
+              and
+              test {\iffieldundef{issues}}
+  }
+    {}
+    {\iffieldundef{volsorder}
+         {\edef\gost@tempa{\blx@gost@defaultorder}}
+         {\edef\gost@tempa{\thefield{volsorder}}}%
+     \ifdefvoid{\gost@tempa}
+         {}
+         {\renewcommand*{\blx@gost@setunit}{#1}%
+          \setcounter{blx@gost@pointer}{1}%
+          \bibstring{involumes}%
+          \addabbrvspace%
+          \expandafter\blx@gost@involsinorder\gost@tempa\blx@gost@endofstring}}}
 
 \renewbibmacro*{byauthor}{%
   \ifboolexpr{
