@@ -67,11 +67,9 @@
 \DeclareBibliographyOption{citeeprint}[true]{%
   \global\settoggle{cbx:eprint}{#1}}
 
-\newcommand*{\blx@gost@defaultorder}{vpbin}
-\DeclareBibliographyOption{volsorder}[vpbin]{%
+\newcommand*{\blx@gost@defaultorder}{vbpi}
+\DeclareBibliographyOption{volsorder}[vbpi]{%
   \renewcommand*{\blx@gost@defaultorder}{#1}}
-
-
 
 \ExecuteBibliographyOptions{
   %datamodel=biblatex-gost,
@@ -83,7 +81,7 @@
   singletitle=false,
   movenames=true,
   firstinits,
-  volsorder=vpbin}
+  volsorder=vbpi}
 
 \newbibmacro*{cbx:bookibid:check}[2]{#2}
 
