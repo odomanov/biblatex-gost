@@ -67,7 +67,8 @@
 \newbibmacro*{cite:labelname+volume+parts}[1]{%
   \printtext[#1]{\printnames{labelname}}%
      \setunit*{\addcomma\space}%
-     \usebibmacro{cite:volume+parts}{\addcomma\space}}
+     %\usebibmacro{volume+parts}{\setunit*{\addcomma\space}}%
+}
 
 \newbibmacro*{cite:label+volume+parts}[1]{%
   \iffieldundef{label}
@@ -76,7 +77,8 @@
       {\printfield[citetitle]{labeltitle}}}
     {\printtext[#1]{\printfield{label}}}%
      \setunit*{\addcomma\space}%
-     \usebibmacro{cite:volume+parts}{\addcomma\space}}
+     %\usebibmacro{volume+parts}{\setunit*{\addcomma\space}}%
+}
 
 \newbibmacro*{cite:labelyear+extras}[1]{%
   \ifsingletitle
@@ -86,19 +88,6 @@
       {\printtext[#1]{%
           \printfield{labelyear}%
           \usebibmacro{cite:extras}}}}}
-
-\newbibmacro*{cite:volume+parts}[1]{}
-%\newbibmacro*{cite:volume+parts}[1]{%
-%  \ifthenelse{\ifentrytype{book} \OR \ifentrytype{collection}
-%              \OR \ifentrytype{proceedings} \OR \ifentrytype{reference}}
-%     {\printfield{volume}%
-%      \setunit*{#1}%
-%      \printfield{book}%
-%      \setunit*{#1}%
-%      \printfield{part}%
-%      \setunit*{#1}%
-%      \printfield[issuenum]{issue}}
-%     {}}%
 
 \newbibmacro*{cite:init}{%
   \global\boolfalse{cbx:loccit}%

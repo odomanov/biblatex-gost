@@ -67,6 +67,9 @@
 \DeclareBibliographyOption{citeeprint}[true]{%
   \global\settoggle{cbx:eprint}{#1}}
 
+\newcommand*{\blx@gost@defaultorder}{vbpi}
+\DeclareBibliographyOption{volsorder}[vbpi]{%
+  \renewcommand*{\blx@gost@defaultorder}{#1}}
 
 \ExecuteBibliographyOptions{
   %datamodel=biblatex-gost,
@@ -77,7 +80,8 @@
   dashed=false,
   singletitle=false,
   movenames=true,
-  firstinits}
+  firstinits,
+  volsorder=vbpi}
 
 \newbibmacro*{cbx:bookibid:check}[2]{#2}
 
@@ -112,13 +116,23 @@
       {\bibstring{part}\addabbrvspace#1}
       {}}
     {\ifcapital{\MakeCapital{#1}}{#1}\isdot}}
-\DeclareFieldFormat[article,periodical]{number}{%
+\DeclareFieldFormat{seriesnumber}{#1}%
+\DeclareFieldFormat*{number}{%
   \iffieldnum{number}
     {\ifbibstring{number}
-      {\bibstring{number}\addabbrvspace#1}
+      {\bibsstring{number}\addabbrvspace#1}
       {\unspace\adddot#1}}
     {\ifcapital{\MakeCapital{#1}}{#1}\isdot}}
-\DeclareFieldFormat{volumes}{#1}
+\newbibmacro*{volumes/parts/books/issues}[2]{%
+  \iffieldnum{#1}
+    {\ifbibstring{#1}
+      {#2~\bibsstring{#1}}
+      {}}
+    {\ifcapital{\MakeCapital{#2}}{#2}}}
+\DeclareFieldFormat{volumes}{\usebibmacro{volumes/parts/books/issues}{volumes}{#1}}
+\DeclareFieldFormat{parts}{\usebibmacro{volumes/parts/books/issues}{parts}{#1}}
+\DeclareFieldFormat{books}{\usebibmacro{volumes/parts/books/issues}{books}{#1}}
+\DeclareFieldFormat{issues}{\usebibmacro{volumes/parts/books/issues}{issues}{#1}}
 \newbibmacro*{in+}[2]{%
   \iffieldnum{#1}
     {\ifbibstring{involumes}
@@ -212,6 +226,10 @@
   \addnbspace\textemdash\space\bibsentence}% block punctuation
 \newcommand*{\respdelim}{\addnbspace/\space}% delimiter before "credits"
 \newcommand*{\resppunct}{\addsemicolondelim\space}% punctuation between "credits" items
+
+\newcounter{blx@gost@pointer}%
+\newcommand*{\blx@gost@endofstring}{\@\@\@\@\@}  % end of string = \\\
+\newcommand*{\blx@gost@setunit}{\newunit}
 
 \@ifpackageloaded{babel}
   {\edef\gostmedialanguage{\bbl@main@language}}
@@ -821,14 +839,14 @@
     {\iffieldundef{maintitle}
        {\usebibmacro{#1}%
         \setunit{\addcolondelim}%
-        \usebibmacro{involumes+otherparts}{\addcolondelim}
+        \usebibmacro{involumes+otherparts}{\setunit*{\addcomma\space}}
         \newunit
-        \usebibmacro{volume+parts}}
+        \usebibmacro{volume+parts}{\newunit}}
        {\usebibmacro{maintitle}%
         \newunit
-        \usebibmacro{involumes+otherparts}{\addperiod\addspace}%
+        \usebibmacro{involumes+otherparts}{\setunit*{\addcomma\space}}%
         \newunit
-        \usebibmacro{volume+parts}%
+        \usebibmacro{volume+parts}{\newunit}%
         \newunit
         \usebibmacro{#1}}}%
   \newunit}
@@ -863,7 +881,7 @@
     {\printtext{(%
       \printfield{series}%
       \setunit*{\addsemicolondelim}%
-      \printfield{number})}}
+      \printfield[seriesnumber]{number})}}
   }
 
 \newbibmacro*{publisher+location+date}{%
@@ -1035,19 +1053,7 @@
 
 \renewbibmacro*{bytranslator+others}{%
   \ifnameundef{translator}
-    {\ifboolexpr{
-      test {\iffieldundef{origlanguage}}
-      or
-      ( test {\ifnameundef{booktranslator}}
-        and 
-        not test {\iffieldundef{bookoriglanguage}}
-        and 
-        test {\iffieldsequal{origlanguage}{bookoriglanguage}}
-      )
-      }
-        {}
-        {\bibstring{bytranslator}%
-         \setunit*{\resppunct}}}
+    {}
     {\ifboolexpr{
       test {\ifnameundef{booktranslator}}
       or
@@ -1140,29 +1146,9 @@
   \clearlist{bookcredits}%
 }
 
-%  <bibstring>, <origlanguage field>
-\newbibmacro*{bibstring+origlanguage}[2]{%
-% temporarily redefining commands used in the bibstring 
-    \savecommand\lbx@lfromlang%
-    \savecommand\lbx@sfromlang%
-    \renewcommand*{\lbx@lfromlang}{%
-      \iffielddundef{#2}
-        {\unspace}
-        {\biblstring{from\thefield{#2}}}}
-    \renewcommand*{\lbx@sfromlang}{%
-      \iffieldundef{#2}
-        {\unspace}
-        {\bibsstring{from\thefield{#2}}}}
-    \bibstring{#1}%
-    \restorecommand\lbx@lfromlang%
-    \restorecommand\lbx@sfromlang%
-}
 \newbibmacro*{book:bytranslator+others}{%
   \ifnameundef{booktranslator}
-    {\iffieldundef{bookoriglanguage}
-      {}
-      {\usebibmacro{bibstring+origlanguage}{bytranslator}{bookoriglanguage}%
-       \setunit*{\resppunct}}}
+    {}
     {\usebibmacro{book:bytranslator+othersstrg}%
      \setunit{\addspace}%
      \printnames[bytranslator]{booktranslator}%
@@ -1189,7 +1175,20 @@
           {\appto\abx@tempa{af}%
            \clearname{bookafterword}}
           {}}}%
-  \usebibmacro{bibstring+origlanguage}{\abx@tempa}{bookoriglanguage}%
+  % temporarily redefining commands used in the bibstring 
+  \savecommand\lbx@lfromlang%
+  \savecommand\lbx@sfromlang%
+  \renewcommand*{\lbx@lfromlang}{%
+    \iffielddundef{bookoriglanguage}
+      {\unspace}
+      {\biblstring{from\thefield{bookoriglanguage}}}}
+  \renewcommand*{\lbx@sfromlang}{%
+    \iffieldundef{bookoriglanguage}
+      {\unspace}
+      {\bibsstring{from\thefield{bookoriglanguage}}}}
+  \bibstring{\abx@tempa}%
+  \restorecommand\lbx@lfromlang%
+  \restorecommand\lbx@sfromlang%
 }
 
 \newbibmacro*{book:withothers}{%
@@ -1248,14 +1247,34 @@
   \newunit\newblock
   \mkbibdatelong{}{month}{day}}
 
-\newbibmacro*{volume+parts}{%
-  \printfield{volume}%
-  \newunit
-  \printfield[book]{book}%
-  \newunit
-  \printfield{part}%
-  \newunit
-  \printfield{issue}}%
+\def\blx@gost@volsinorder#1#2{%
+  \ifstrequal{#1}{v}
+    {\printfield{volume}%
+     \blx@gost@setunit}
+    {\ifstrequal{#1}{b}
+      {\printfield{book}%
+       \blx@gost@setunit}
+      {\ifstrequal{#1}{p}
+        {\printfield{part}%
+         \blx@gost@setunit}
+        {\ifstrequal{#1}{i}
+          {\printfield{issue}%
+           \blx@gost@setunit}
+          {}}}}%
+  \ifthenelse{\equal{#2}{\blx@gost@endofstring}}% end of string ? 
+    {}%
+    {\stepcounter{blx@gost@pointer}%
+     \blx@gost@volsinorder#2}}
+
+\newbibmacro*{volume+parts}[1]{%
+  \iffieldundef{volsorder}
+     {\edef\gost@tempa{\blx@gost@defaultorder}}
+     {\edef\gost@tempa{\thefield{volsorder}}}%
+  \ifdefvoid{\gost@tempa}
+     {}
+     {\renewcommand*{\blx@gost@setunit}{#1}%
+      \setcounter{blx@gost@pointer}{1}%
+      \expandafter\blx@gost@volsinorder\gost@tempa\blx@gost@endofstring}}
 
 \newbibmacro*{year}{%
   \printfield{year}}
@@ -1331,16 +1350,46 @@
   \addsemicolon%
   \endgroup}
 
+\def\blx@gost@involsinorder#1#2{%
+  \ifstrequal{#1}{v}
+    {\printfield{volumes}%
+     \blx@gost@setunit}
+    {\ifstrequal{#1}{b}
+      {\printfield{books}%
+       \blx@gost@setunit}
+      {\ifstrequal{#1}{p}
+        {\printfield{parts}%
+         \blx@gost@setunit}
+        {\ifstrequal{#1}{i}
+          {\printfield{issues}%
+           \blx@gost@setunit}
+          {}}}}%
+  \ifthenelse{\equal{#2}{\blx@gost@endofstring}}% end of string ? 
+    {}%
+    {\stepcounter{blx@gost@pointer}%
+     \blx@gost@involsinorder#2}}
+
 \newbibmacro*{involumes+otherparts}[1]{%
-  \printfield[involumes]{volumes}%
-  \setunit*{#1}%
-  \printfield[inbooks]{books}%
-  \setunit*{#1}%
-  \printfield[inparts]{parts}%
-  \setunit*{#1}%
-  \printfield[inissues]{issues}%
-  \setunit*{#1}%
-}
+  \ifboolexpr{
+              test {\iffieldundef{volumes}}
+              and
+              test {\iffieldundef{parts}}
+              and
+              test {\iffieldundef{books}}
+              and
+              test {\iffieldundef{issues}}
+  }
+    {}
+    {\iffieldundef{volsorder}
+         {\edef\gost@tempa{\blx@gost@defaultorder}}
+         {\edef\gost@tempa{\thefield{volsorder}}}%
+     \ifdefvoid{\gost@tempa}
+         {}
+         {\renewcommand*{\blx@gost@setunit}{#1}%
+          \setcounter{blx@gost@pointer}{1}%
+          \bibstring{involumes}%
+          \addabbrvspace%
+          \expandafter\blx@gost@involsinorder\gost@tempa\blx@gost@endofstring}}}
 
 \renewbibmacro*{byauthor}{%
   \ifboolexpr{

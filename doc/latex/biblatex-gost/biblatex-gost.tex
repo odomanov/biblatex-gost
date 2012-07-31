@@ -109,7 +109,15 @@
 
 \tolerance=9999
 
-\newenvironment{bibexample}{\begin{list}{}{}}{\end{list}}
+\newenvironment{bibexample}{\begin{list}
+     {}
+     {\setlength{\leftmargin}{\parindent}%
+      \setlength{\itemindent}{-\leftmargin}%
+      %\setlength{\itemsep}{\bibitemsep}%
+      \setlength{\parsep}{0pt}}}
+  {\end{list}}
+%  {\item}
+
 
 \makeatother
 
@@ -561,6 +569,10 @@ eresource & электронный ресурс\\
 Область специфических сведений (см.~\tabref{tab:gost-biblatex}). Представляет собой список,
 элементы которого при выводе разделяются точкой с запятой.
 
+\fielditem{volsorder}{literal}
+
+Порядок вывода томов в многотомных изданиях. См.~\secref{sec:volsparts}.
+
 \end{fieldlist}
 
 \subsection{Особенности размещения отдельных сведений}
@@ -812,7 +824,80 @@ introduction & вступительная статья \prm{кого} & всту
 \begin{lstlisting}[style=bibtex,escapechar=|]
 volumes = {|в 5-и томах (6-и кн.)|}
 \end{lstlisting}
- 
+
+По умолчанию части выводятся в порядке: том, книга, часть, выпуск. Эту последовательность
+можно изменить опцией пакета \opt{volsorder}. Она представляет собой строку, состоящую из
+символов \opt{v}, \opt{b}, \opt{p}, \opt{i} в любом порядке и количестве. 
+Порядок символов определяет порядок вывода частей.  По умолчанию \kvopt{volsorder}{vbpi}. 
+Аналогичным образом можно задавать порядок для отдельной записи
+с помощью поля \bibfield{volsorder}. Его значение наследуется по ссылкам \bibfield{crossref}
+и \bibfield{xref}.
+
+Несколько примеров:
+
+\columnseprule=.5pt
+\raggedcolumns
+\begin{multicols}{2}
+\begin{lstlisting}[style=bibtex,escapechar=|]
+volume = {2},
+book = {1}, 
+volsorder = {vb},
+\end{lstlisting}
+\columnbreak
+Выводится как:
+\begin{bibexample}
+\item \ldots\ Т. 2. Кн. 1. \ldots
+\end{bibexample}
+\columnbreak
+\end{multicols}
+
+\bigskip  
+
+\begin{multicols}{2}
+\begin{lstlisting}[style=bibtex,escapechar=|]
+book = {1},
+issue = {4}, 
+part = {2},
+volsorder = {pbi},
+\end{lstlisting}
+\columnbreak
+Выводится как:
+\begin{bibexample}
+\item \ldots\ Ч. 2. Кн. 1. Вып. 4. \ldots
+\end{bibexample}
+\columnbreak
+\end{multicols}
+  
+\bigskip  
+И несколько экзотический пример:
+\bigskip  
+
+\begin{multicols}{2}
+\begin{lstlisting}[style=bibtex,escapechar=|]
+@MVCOLLECTION{mvcoll,
+  title = {|Сказки|},
+  volumes = {5},
+  books = {6},
+  volsorder = {vb},
+  ...
+}
+
+@COLLECTION{coll,
+  title = {|Сказки Центральной Африки|},
+  crossref = {mvcoll},
+  volume = {3},
+  book = {|книга первая|},
+  ...
+}
+\end{lstlisting}
+\columnbreak
+Выводится как:
+\begin{bibexample}
+\item Сказки : в 5 т., 6 кн. \ldots
+\item Сказки. В 5 т., 6 кн. Т. 3. Книга первая. Сказки Центральной Африки \ldots
+\end{bibexample}
+\end{multicols}
+  
 
 \section{Работа с пакетом}
 \label{sec:usage}
@@ -871,7 +956,8 @@ volumes = {|в 5-и томах (6-и кн.)|}
 Исключением является стиль \bibsty{gost-footnote}, который 
 устанавливает \kvopt{citeisbn}{true}. Опции \opt{bib\ldots} устанавливаются
 по умолчанию в \opt{true}
-полными стилями и в \opt{false}~--- минимальными. Все эти значения суммированы 
+полными стилями и в \opt{false}~--- минимальными. Значения по умолчанию для всех опций
+представлены   
 в \tabref{tab:bibcite}. Прочерк в таблице означает, что опция для данного стиля
 не имеет смысла.
 
@@ -894,7 +980,7 @@ gost-numeric-min & --- & false \\
 gost-authoryear-min & --- & false \\
 \bottomrule
 \end{tabularx}
-\caption{Значения по умолчанию опций \opt{cite\ldots} и \opt{bib\ldots}}
+\caption{Значения по умолчанию опций \opt{citeurl}, \ldots, \opt{biburl}, \ldots}
 \label{tab:bibcite}
 \end{table}
 
@@ -1048,10 +1134,15 @@ gost-authoryear-min & --- & false \\
 Кроме того, поскольку стандартные схемы сортировки \biblatex недостаточно учитывают многотомные
 издания (неверно обрабатывают
 поле \bibfield{maintitle}), то модифицированы схемы \opt{nty}, \opt{nyvt}, \opt{ynt}, 
-\opt{ydnt} и \opt{nyt}. Кроме того, в них добавлена сортировка по 
+\opt{ydnt} и \opt{nyt}. В них также добавлена сортировка по 
 тому\slash книге\slash части\slash выпуску. 
-Схема \opt{nyt} (имя, год, заголовок) включена по умолчанию в стиле 
+Схема \opt{nyt} (имя, год, заглавие) включена по умолчанию в стиле 
 \bibsty{gost-authoryear}.
+
+\optitem[vbpi]{volsorder}{последовательность символов \opt{v}, \opt{b}, \opt{p}, \opt{i}}
+\label{sorting}
+
+Порядок вывода томов для многотомных изданий по умолчания. Подробнее см.~\secref{sec:volsparts}.
 
 \end{optionlist}
 
@@ -1238,6 +1329,7 @@ gost-authoryear & cite & Автор (заголовок) и год в текст
   в цитатах и библиографии\see{sec:newoptions}
 \item Добавлены поля \bibfield{book\ldots} для раздельного описания
   публикаций в книгах\see{sec:newfields}
+\item Добавлено поле \bibfield{volsorder}\see{sec:newfields}
 \item Поле \bibfield{material} (общее обозначение материала) переименовано в \bibfield{media}\see{sec:newfields}
 \item Установлено по умолчанию \kvopt{inbookidid}{false}
 \item Установлено по умолчанию \kvopt{firsinits}{true}
