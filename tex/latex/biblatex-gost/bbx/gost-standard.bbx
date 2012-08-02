@@ -952,6 +952,15 @@
       {\printfield{issn}}
       {}}}
 
+\newbibmacro*{isrn}{%
+  \ifcitation
+    {\iftoggle{cbx:isbn}
+      {\printfield{isrn}}
+      {}}
+    {\iftoggle{bbx:isbn}
+      {\printfield{isrn}}
+      {}}}
+
 \newbibmacro*{doi+eprint+url+note}{%
   \ifcitation
     {\iftoggle{cbx:doi}
