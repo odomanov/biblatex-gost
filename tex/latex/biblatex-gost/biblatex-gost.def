@@ -82,6 +82,7 @@
     \field{year}
   }
   \sort{
+    \field{sortvolume}
     \field[padside=left,padwidth=4,padchar=0]{volume}
     \literal{0000}
   }
@@ -120,6 +121,7 @@
     \field{year}
   }
   \sort{
+    \field{sortvolume}
     \field[padside=left,padwidth=4,padchar=0]{volume}
     \literal{0000}
   }
@@ -224,6 +226,7 @@
     \field{title}
   }
   \sort{
+    \field{sortvolume}
     \field[padside=left,padwidth=4,padchar=0]{volume}
     \literal{0000}
   }
@@ -263,6 +266,7 @@
     \field{title}
   }
   \sort{
+    \field{sortvolume}
     \field[padside=left,padwidth=4,padchar=0]{volume}
     \literal{0000}
   }
@@ -355,36 +359,30 @@
   \inherit{shorttitle}{shorttitle}}
 
 \DeclareDataInheritance{book}{inbook,bookinbook,suppbook}{%
-  %\inherit{editor}{bookeditor}
   \inherit{translator}{booktranslator}
   \inherit{introduction}{bookintroduction}
   \inherit{commentator}{bookcommentator}
   \inherit{annotator}{bookannotator}
   \inherit{foreword}{bookforeword}
   \inherit{afterword}{bookafterword}
-  %\inherit{editortype}{bookeditortype}
   \inherit{origlanguage}{bookoriglanguage}
   \inherit{credits}{bookcredits}}
 \DeclareDataInheritance{collection,reference}{incollection,inreference,suppcollection}{%
-  %\inherit{editor}{bookeditor}
   \inherit{translator}{booktranslator}
   \inherit{introduction}{bookintroduction}
   \inherit{commentator}{bookcommentator}
   \inherit{annotator}{bookannotator}
   \inherit{foreword}{bookforeword}
   \inherit{afterword}{bookafterword}
-  %\inherit{editortype}{bookeditortype}
   \inherit{origlanguage}{bookoriglanguage}
   \inherit{credits}{bookcredits}}
 \DeclareDataInheritance{proceedings}{inproceedings}{%
-  %\inherit{editor}{bookeditor}
   \inherit{translator}{booktranslator}
   \inherit{introduction}{bookintroduction}
   \inherit{commentator}{bookcommentator}
   \inherit{annotator}{bookannotator}
   \inherit{foreword}{bookforeword}
   \inherit{afterword}{bookafterword}
-  %\inherit{editortype}{bookeditortype}
   \inherit{origlanguage}{bookoriglanguage}
   \inherit{credits}{bookcredits}}
 

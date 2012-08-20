@@ -6,10 +6,10 @@
   book,
   books,parts,issues,
   volsorder,
+  sortvolume,
 }
 
 \DeclareDatamodelFields[type=list, datatype=name]{
-  %bookeditor,
   booktranslator,
   bookcommentator,
   bookannotator,
@@ -20,7 +20,6 @@
 
 \DeclareDatamodelFields[type=field, datatype=key]{
   media,
-  %bookeditortype,
   bookoriglanguage,
 }
 
@@ -40,6 +39,7 @@
 \DeclareDatamodelEntryfields[book,collection,proceedings,reference]{
   book,
   books,parts,issues,
+  sortvolume,
 }
 
 \DeclareDatamodelEntryfields[mvbook,mvcollection,mvproceedings,mvreference]{
@@ -47,14 +47,12 @@
 }
 
 \DeclareDatamodelEntryfields[inbook,incollection,inproceedings,inreference,bookinbook,suppbook,suppcollection]{
-  %bookeditor,
   booktranslator,
   bookcommentator,
   bookannotator,
   bookintroduction,
   bookforeword,
   bookafterword,
-  %bookeditortype,
   bookoriglanguage,
   bookcredits,
 }
