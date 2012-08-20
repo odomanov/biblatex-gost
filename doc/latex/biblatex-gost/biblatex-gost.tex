@@ -31,7 +31,7 @@
 \makeatletter
 \titlepage{%
   title={Пакет \biblatexgost},
-  subtitle={Оформление библиографии согласно ГОСТам\protect\\ 7.0.5--2008 и 7.1--2003},
+  subtitle={Оформление библиографии по ГОСТам 7.0.5--2008 и 7.1--2003},
   url={\biblatexgosthome},
   author={Олег Доманов},
   email={odomanov@yandex.ru},
@@ -359,7 +359,7 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 \bottomrule
 \endfoot
 \endlastfoot
-\multicolumn{1}{@{}H}{Область заглавия и сведений об ответственности} & \\
+\multicolumn{1}{@{}H}{Область заглавия и сведений об ответственности} & \\*
 Основное заглавие                & title, maintitle, booktitle \\
 \textit{Общее обозначение материала} &  {\spotcolor media} \\
 \textit{Параллельное заглавие} &  \textendash \\%{\spotcolor paratitle} \\
@@ -374,25 +374,25 @@ Permission is granted to copy, distribute and\slash or modify this software unde
                                     {\spotcolor bookcommentator}, {\spotcolor bookforeword},
                                     {\spotcolor bookintroduction}, {\spotcolor booktranslator} \\
 \cmidrule(r){1-1}\cmidrule{2-2}
-\multicolumn{1}{@{}H}{Область издания} & \\
+\multicolumn{1}{@{}H}{Область издания} & \\*
 Сведения об издании & edition, version \\
 \textit{Параллельные сведения об издании} & edition \\
 \cmidrule(r){1-1}\cmidrule{2-2}
 \multicolumn{1}{@{}H}{Область специфических сведений} & {\spotcolor specdata} \\
 \cmidrule(r){1-1}\cmidrule{2-2}
-\multicolumn{1}{@{}H}{Область выходных данных} & \\
+\multicolumn{1}{@{}H}{Область выходных данных} & \\*
 Место издания, распространения & location \\
 Имя издателя, распространителя и т.\,п. & publisher, institution \\
 Дата издания, распространения и т.\,п. & date \\
 \cmidrule(r){1-1}\cmidrule{2-2}
-\multicolumn{1}{@{}H}{Область физической характеристики} & \\
+\multicolumn{1}{@{}H}{Область физической характеристики} & \\*
 Специфическое обозначение материала и объём & volumes, pagetotal, pages, howpublished, 
     {\spotcolor books}, {\spotcolor parts}, {\spotcolor issues}\\
 \textit{Другие сведения о физической характеристике} & \textendash \\
 \textit{Размеры} & \textendash \\
 \textit{Сведения о сопроводительном материале} & \textendash \\
 \cmidrule(r){1-1}\cmidrule{2-2}
-\multicolumn{1}{@{}H}{Область серии} & \\
+\multicolumn{1}{@{}H}{Область серии} & \\*
 Основное заглавие серии или подсерии & series \\
 \textit{Параллельное заглавие серии или подсерии} & series \\
 \textit{Сведения, относящиеся к заглавию серии или подсерии} & series \\
@@ -403,7 +403,7 @@ ISSN серии или подсерии & issn (isbn) \\
 \multicolumn{1}{@{}H}{Область примечания} & url, urldate, note, type \\
 \cmidrule(r){1-1}\cmidrule{2-2}
 \multicolumn{1}{@{}H}{Область стандартного номера и} & \\
-\multicolumn{1}{@{}H}{условий доступности} & \\
+\multicolumn{1}{@{}H}{условий доступности} & \\*
 Стандартный номер (или его альтернатива) & isbn, issn, %isan, ismn, isrn, iswc, 
                                            doi, eprint, 
                                            eprintclass, addendum \\
@@ -678,7 +678,11 @@ series = {|Языковеды мира / редкол.: Г.В. Степанов 
 
 \begin{fieldlist}
 
-\listitem{afterword, etc}{name}
+\listitem{afterword}{name}\noitemspace%
+\listitem{annotator}{name}\noitemspace%
+\listitem{commentator}{name}\noitemspace%
+\listitem{foreword}{name}\noitemspace%
+\listitem{introduction}{name}
 
 Поля \bibfield{afterword} и пр.   
 должны быть в родительном падеже. Форма их вывода (в полной и краткой форме) 
@@ -1182,7 +1186,7 @@ gost-authoryear-min & --- & false \\
 лишь в редких случаях отличается от стандартного, описанного в документации
 \biblatex.
 %Цветом выделены команды, поведение которых отличается от стандартного в \biblatex.
-
+\nopagebreak
 \begingroup
 \tablesetup
 %\setlength\LTleft{0pt}
@@ -1349,7 +1353,7 @@ gost-authoryear & cite & Автор (заголовок) и год в текст
 
 \begin{changelog}
 
-\begin{release}{0.6}{20-08-2012}% up to rev.257
+\begin{release}{0.6}{20-08-2012}% up to rev.283
 \item Переход на \biblatex~2.1 и \biber~1.1\see{sec:install}
 \item Добавлены <<минимальные>> стили\see{sec:styles}
 \item Добавлены опции \opt{cite\ldots}, \opt{bib\ldots} для раздельного управления
