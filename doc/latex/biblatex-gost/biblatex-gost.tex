@@ -16,14 +16,8 @@
 \usepackage[inline]{enumitem}
 \usepackage{isodate}
 \usepackage[bibstyle=gost-standard]{biblatex} % to receive \bbx@gost@version, etc.
-%\usepackage{shortvrb}
-%\usepackage{pifont}
 \usepackage{indentfirst}
 \usepackage{paratype}
-
-%\MakeAutoQuote{«}{»}
-%\MakeAutoQuote*{<}{>}
-%\MakeShortVerb{\|}
 
 \hypersetup{unicode=true}
 
@@ -77,8 +71,7 @@
 
 \setcounter{secnumdepth}{4}
 
-\hyphenation{%
-}
+%\hyphenation{}
 
 \definecolor{reddish}{rgb}{0.6,0.2,0.2}
 \newcommand*{\reddishcolor}{\color{reddish}}
@@ -105,7 +98,7 @@
 \renewcommand*{\tabref}{\refs{табл.}{табл.}}
 \renewcommand*{\Tabref}{\refs{Табл.}{Табл.}}
 \newcommand*{\noitemspace}{\vspace{-\itemsep}\vspace{-\parsep}}
-\newcommand*{\starsdelim}{\centerline{*~~~*~~~*}}
+\newcommand*{\starsdelim}{\centerline{*~~~*~~~*}\nopagebreak}
 
 \tolerance=9999
 
@@ -116,8 +109,6 @@
       %\setlength{\itemsep}{\bibitemsep}%
       \setlength{\parsep}{0pt}}}
   {\end{list}}
-%  {\item}
-
 
 \makeatother
 
@@ -135,8 +126,27 @@
 и предназначен для оформления библиографии в соответствии с требованиями ГОСТов 7.0.5--2008 и 
 7.1--2003 (а также 7.80--2000, 7.82--2001 и др.). Пакет будет полезен прежде всего в
 гуманитарных дисциплинах с повышенными требованиями к оформлению библиографии, многие из 
-которых Bibtex не в состоянии удовлетворить (это касается в первую очередь многоязычных
+которых \bibtex не в состоянии удовлетворить (это касается в первую очередь многоязычных
 библиографий, а также библиографических ссылок в сносках, использования Ibid., Op. cit. и т.\,д.). 
+
+\subsection{Важные изменения в этой версии}
+\label{sec:critchanges}
+
+Ниже перечислены изменения, на которые стоит обратить внимание с
+точки зрения совместимости с предыдущими версиями. Пока проект находится на бета-стадии,
+модификации могут оказаться существенными. Более полный список изменений см.
+в \Apxref{apx:changelog}.
+
+\subsubsection*{Версия 0.6}
+
+\begin{trivlist}
+\item Переход на \biblatex~2.1 и \biber~1.1. В основном, это связано с переходом 
+  на \texttt{datamodel}.
+\item Поле \bibfield{material} (общее обозначение материала) переименовано в \bibfield{media}.
+\item По умолчанию установлено \kvopt{inbookibid}{false}.
+\item По умолчанию установлено \kvopt{firstinits}{true}.
+\item Изменён перевод на русский язык некоторых строк файла локализации.
+\end{trivlist}
 
 \subsection{Лицензия}
 \label{sec:lic}
@@ -148,7 +158,8 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 
 Пакет поставляется в виде архива, содержащего стандартую структуру дерева TDS. 
 Для его установки достаточно распаковать архив в дерево \tex, желательно локальное, и 
-обновить индексы (в \tex~Live, например, это делается командой \texttt{mktexlsr}).
+обновить индексы (в \tex~Live, например, это делается командой \texttt{mktexlsr},
+в MiKTeX~--- \texttt{initexmf -{}-update-fndb}).
 
 Для работы \biblatexgost версии 0.6 и выше требуется 
 \biblatex~2.1\fnurl{http://sourceforge.net/projects/biblatex/files/biblatex-2.1/} 
@@ -275,12 +286,11 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 \end{ltxcode}
 
 цитаты будут выводится в минимальном стиле, а записи в библиографии~--- в полном.
-Разумеется, это не важно для стилей \bibsty{gost-numeric-min} и 
-\bibsty{gost-authoryear-min}, которые изменяют оформление библиографии, но не цитат.
+Разумеется, это не имеет значения для стилей \bibsty{gost-numeric-min} и 
+\bibsty{gost-authoryear-min}, которые <<минимизируют>> оформление библиографии, но не цитат.
 
 \end{marglist}
 
-%\centerline{*~~~*~~~*}
 \starsdelim
 
 Дополнительно, все стили по умолчанию устанавливают опции 
@@ -398,7 +408,6 @@ ISSN серии или подсерии & issn (isbn) \\
                                            doi, eprint, 
                                            eprintclass, addendum \\
 Ключевое заглавие & addendum  \\
-%\newpage%--------------------------------------------------------------------------------
 Условия доступности и (или) цена & addendum \\
 Дополнительные сведения к элементам области & addendum \\
 \bottomrule
@@ -419,10 +428,12 @@ ISSN серии или подсерии & issn (isbn) \\
 \subsection{Новые поля}
 \label{sec:newfields}
  
-В \biblatexgost опредены следующие 
-поля библиографической базы данных, отсутствующие в стандартном \biblatex 
-\footnote{Используется дополнительный файл модели данных \file{biblatex-gost.dbx}. 
-При этом устанавливать опцию \opt{datamodel}  не требуется, модель подключается автоматически}.   
+В \biblatexgost определены следующие 
+поля библиографической базы данных, отсутствующие в стандартном \biblatex%
+%\footnote{Используется дополнительный файл модели данных \file{biblatex-gost.dbx}. 
+%При этом устанавливать опцию \opt{datamodel}  не требуется, модель подключается автоматически
+%}%
+.   
 
 \begin{fieldlist}
 
@@ -440,19 +451,20 @@ ISSN серии или подсерии & issn (isbn) \\
 \fielditem{bookoriglanguage}{key}\noitemspace%
 \listitem{bookcredits}{literal}
 
-Аналогично \bibfield{bookauthor} и \bibfield{booktitle} эти поля 
-содержать переводчика, автора комментариев и т.\,д. книги, в состав которой входит 
-данная публикация. Поля определены для записей типа 
+Аналогично \bibfield{bookauthor} и \bibfield{booktitle}, эти поля 
+содержать переводчика, автора комментариев и т.\,д. документа, в состав которого входит 
+данная публикация (ГОСТ называет его идентифицирующим документом). 
+Эти поля определены для записей типа 
 \bibtype{inbook}, \bibtype{bookinbook}, \bibtype{suppbook}, \bibtype{incollection},
 \bibtype{suppcollection}, \bibtype{inproceedings} 
 и \bibtype{inreference}.  При использовании ссылок \texttt{crossref} или \texttt{xref}
 эти поля копируются из записи, на которую указывает ссылка.
 
-Эти поля могут использоваться, например, при описании сборников переводов классических текстов,
+Данные поля могут использоваться, например, при описании сборников переводов классических текстов,
 каждый из которых имеет собственного переводчика, комментатора, автора вступительной статьи 
 и т.\,д. В библиографии, если поле \bibfield{commentator}, \bibfield{annotator} и т.\,д. 
 совпадает с соответствующим полем \bibfield{bookcommentator}, \bibfield{bookannotator} и т.\,д.,
-поле выводится только в описании объемлющего документа. В случае переводчика проверяется 
+поле выводится только в описании идентифицирующего документа. В случае переводчика проверяется 
 ещё и равенство \bibfield{origlanguage} и \bibfield{bookoriglanguage}. Например, 
 следующие данные
 
@@ -487,7 +499,7 @@ ISSN серии или подсерии & issn (isbn) \\
 
 Поле \bibfield{bookoriglanguage}, так же как и поле \biblatex \bibfield{origlanguage},
 может содержать только один язык. Поэтому, если вам требуется указать список языков,
-используйте поле \bibfield{credits} (см. ниже). 
+используйте поля \bibfield{bookcredits} и \bibfield{credits} (см. ниже). 
 
 \fielditem{books, parts, issues}{number/literal}
 
@@ -562,7 +574,15 @@ eresource & электронный ресурс\\
 
 используется текущий язык библиографической записи или цитаты. 
 Это важно для многоязычных библиографий, если установлена опция 
-\kvopt{babel}{other} или \kvopt{babel}{other*} и записи выводятся на разных языках. 
+\kvopt{babel}{other} или \kvopt{babel}{other*}, и записи выводятся на разных языках. 
+
+\fielditem{sortvolume}{literal}
+
+Значение, используемое вместо тома для сортировки. 
+Аналогично стандартным
+полям \bibfield{sortname}, \bibfield{sorttitle}, \bibfield{sortyear}.
+Может потребоваться для настройки порядка вывода томов многотомных изданий 
+(см.~\secref{sec:volsparts}).
 
 \listitem{specdata}{literal}
 
@@ -770,9 +790,9 @@ introduction & вступительная статья \prm{кого} & всту
 @BOOK{book,
   ...
   shorttitle = {|Введение|~...\isdot}
-}
+}.
 \end{ltxcode}
-   
+ 
 \end{fieldlist}
 
 
@@ -792,7 +812,7 @@ introduction & вступительная статья \prm{кого} & всту
 \subsection{Тома, книги, части, выпуски}
 \label{sec:volsparts}
 
-Издание может делиться на физически отдельные части, которые могут называться по-разному. \biblatexgost поддерживает деление на тома, книги, части и выпуски. 
+Издание может разделяться на физически отдельные части, которые могут называться по-разному. \biblatexgost поддерживает деление на тома, книги, части и выпуски. 
 Соответствующие им поля базы данных показаны в \tabref{tab:volsparts}.
 
 \begin{table}[htbp]
@@ -827,8 +847,8 @@ volumes = {|в 5-и томах (6-и кн.)|}
 
 По умолчанию части выводятся в порядке: том, книга, часть, выпуск. Эту последовательность
 можно изменить опцией пакета \opt{volsorder}. Она представляет собой строку, состоящую из
-символов \opt{v}, \opt{b}, \opt{p}, \opt{i} в любом порядке и количестве. 
-Порядок символов определяет порядок вывода частей.  По умолчанию \kvopt{volsorder}{vbpi}. 
+символов \opt{v}, \opt{b}, \opt{p}, \opt{i} в любом порядке.% и количестве. 
+Порядок символов определяет порядок вывода частей. Например, по умолчанию \kvopt{volsorder}{vbpi}. 
 Аналогичным образом можно задавать порядок для отдельной записи
 с помощью поля \bibfield{volsorder}. Его значение наследуется по ссылкам \bibfield{crossref}
 и \bibfield{xref}.
@@ -883,8 +903,8 @@ volsorder = {pbi},
 }
 
 @COLLECTION{coll,
-  title = {|Сказки Центральной Африки|},
   crossref = {mvcoll},
+  title = {|Сказки Центральной Африки|},
   volume = {3},
   book = {|книга первая|},
   ...
@@ -898,6 +918,12 @@ volsorder = {pbi},
 \end{bibexample}
 \end{multicols}
   
+\bigskip  
+Обратите внимание, что механизм сортировки \biblatex\slash\biber 
+нечувствителен к значениям опции %\opt{volsorder}
+и поля \bibfield{volsorder}, поэтому при их изменении может потребоваться ручная настройка
+сортировки, например, при помощи поля \bibfield{sortvolume} (см.~\secref{sec:newfields}).  
+
 
 \section{Работа с пакетом}
 \label{sec:usage}
@@ -941,10 +967,10 @@ volsorder = {pbi},
 
 \begin{optionlist}
 
-\optitem[true]{citeurl,biburl}{\opt{true}, \opt{false}}\noitemspace%
-\optitem[true]{citeisbn,bibisbn}{\opt{true}, \opt{false}}\noitemspace%
-\optitem[true]{citedoi,bibdoi}{\opt{true}, \opt{false}}\noitemspace%
-\optitem[true]{citeeprint,bibeprint}{\opt{true}, \opt{false}}%\noitemspace%
+\optitem{citeurl,biburl}{\opt{true}, \opt{false}}\noitemspace%
+\optitem{citeisbn,bibisbn}{\opt{true}, \opt{false}}\noitemspace%
+\optitem{citedoi,bibdoi}{\opt{true}, \opt{false}}\noitemspace%
+\optitem[\textrm{см.\,\tabref{tab:bibcite}}]{citeeprint,bibeprint}{\opt{true}, \opt{false}}%\noitemspace%
 
 В дополнение к опциям \opt{url}, \opt{isbn}, \opt{doi} и \opt{eprint} в \biblatexgost 
 определены опции
@@ -980,7 +1006,7 @@ gost-numeric-min & --- & false \\
 gost-authoryear-min & --- & false \\
 \bottomrule
 \end{tabularx}
-\caption{Значения по умолчанию опций \opt{citeurl}, \ldots, \opt{biburl}, \ldots}
+\caption{Значения по умолчанию для опций \opt{citeurl}, \ldots, \opt{biburl}, \ldots}
 \label{tab:bibcite}
 \end{table}
 
@@ -991,17 +1017,18 @@ gost-authoryear-min & --- & false \\
 Опция определена только для стилей \bibsty{gost-inline} и \bibsty{gost-footnote} 
 и отключена по умолчанию. Согласно  
 \gostciteref[у]{8.11}, в случае последовательных ссылок на публикации, включённые в один и 
-тот же документ, во второй ссылке вместо повторяющихся сведений о документе ставят слова
+тот же документ, во второй и последующих ссылках вместо повторяющихся сведений о документе 
+ставят слова
 \enquote{Там же} или \enquote{Ibid.}: 
 
 \begin{bibexample}
 \item \emph{Декарт Р.} Первоначала философии // Сочинения в двух томах. Т. 1. М.: Мысль, 1989. 
-С. 12 ; \emph{Декарт Р.} Рассуждение о методе // Там же. С. 112
+С. 12~; \emph{Декарт Р.} Рассуждение о методе // Там же. С. 112
 \end{bibexample}
 
 Чтобы это обеспечить, \biblatexgost ориентируется на поле \bibfield{crossref},
 считая сведения повторяющимися, если повторяется это поле. По этой причине,
-для корректной работы этой опции требуется аккуратное заполнение поля \bibfield{crossref}. 
+для корректной работы этого механизма требуется аккуратное заполнение поля \bibfield{crossref}. 
 Поскольку не для всякой библиографической базы данных это верно, 
 такое поведение может оказаться нежелательным. Данная опция позволяет его отключить.
 
@@ -1015,8 +1042,8 @@ gost-authoryear-min & --- & false \\
 при установке \kvopt{inbookibid}{true} \biblatexgost выставляет его равным 1,
 так, чтобы запись, на которую указывает \bibfield{crossref}, всегда включалась в 
 библиографию и поле \bibfield{crossref}  всегда было доступно. 
-Но если вы изменяете опцию \opt{mincrossrefs}, убедитесь, что записи, 
-нужные для работы опции \opt{inbookibid}, присутствуют в вашем тексте, хотя бы в
+Если вы изменяете опцию \opt{mincrossrefs} в настройках, убедитесь, что записи, 
+нужные для работы опции \opt{inbookibid}, присутствуют в вашем тексте хотя бы в
 аргументе команды \cmd{nocite}.   
 
 Опция относится ко всем записям типа \bibtype{inbook}, \bibtype{bookinbook},
@@ -1114,8 +1141,8 @@ gost-authoryear-min & --- & false \\
 ответственности. При этом опция не влияет на сокращение списка имён. Последнее регулируется
 независимо опциями \opt{maxnames} и \opt{minnames}, которые в \biblatexgost 
 по умолчанию установлены в 3 и 1, 
-соответственно, что означает, что при наличии более трёх имён в списке, он сокращается до 
-одного.
+соответственно (что означает, что при наличии более трёх имён в списке, он сокращается до 
+одного).
 %\opt{useauthor}, \opt{useeditor} и \opt{usetranslator},
 В частности, количество имён, при котором происходит перемещение, (4 и более) не зависит 
 от значения \opt{maxnames} и вообще не
@@ -1223,8 +1250,9 @@ gost-authoryear & cite & Автор (заголовок) и год в текст
 %Исключение составляют команды типа \cmd{volcite}, которые корректно работают 
 %только в \bibsty{gost-numeric}. 
 
-Хотя команды \cmd{textcite} и \cmd{textcites} в стилях \bibsty{gost-inline},
- \bibsty{gost-footnote} и \bibsty{gost-authoryear} вряд ли найдут применение
+Хотя команды \cmd{textcite} и \cmd{textcites}
+% в стилях \bibsty{gost-inline}, \bibsty{gost-footnote} и \bibsty{gost-authoryear} 
+вряд ли найдут применение
 в русском тексте, они оставлены для полноты.
 
 %Команда \cmd{autocite} определена таким образом, чтобы\ldots
@@ -1321,19 +1349,20 @@ gost-authoryear & cite & Автор (заголовок) и год в текст
 
 \begin{changelog}
 
-\begin{release}{0.6}{1-07-2012}% up to rev.257
-\item Переход на \biblatex~2.1\see{sec:install}
+\begin{release}{0.6}{20-08-2012}% up to rev.257
+\item Переход на \biblatex~2.1 и \biber~1.1\see{sec:install}
 \item Добавлены <<минимальные>> стили\see{sec:styles}
 \item Добавлены опции \opt{cite\ldots}, \opt{bib\ldots} для раздельного управления
   выводом\\ \opt{url}, \opt{isbn}, \opt{doi} и \opt{eprint}
   в цитатах и библиографии\see{sec:newoptions}
 \item Добавлены поля \bibfield{book\ldots} для раздельного описания
   публикаций в книгах\see{sec:newfields}
-\item Добавлено поле \bibfield{volsorder}\see{sec:newfields}
+\item Добавлены поле и опция \bibfield{volsorder}\see{sec:newfields}
+\item Добавлено поле \bibfield{sortvolume}\see{sec:newfields}
 \item Поле \bibfield{material} (общее обозначение материала) переименовано в \bibfield{media}\see{sec:newfields}
-\item Установлено по умолчанию \kvopt{inbookidid}{false}
+\item Установлено по умолчанию \kvopt{inbookibid}{false}
 \item Установлено по умолчанию \kvopt{firstinits}{true}
-\item Изменён перевод некоторых строк локализаци
+\item Изменён перевод некоторых строк файла локализаци
 \item Исправлена ошибка вывода опции \kvopt{mergedate}{false}%\see{sec:newoptions}
 \item Исправлены другие ошибки
 \end{release}
