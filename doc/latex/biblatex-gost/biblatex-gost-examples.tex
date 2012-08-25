@@ -1,0 +1,66 @@
+\RequirePackage{fixltx2e}
+\documentclass[a4paper,10pt]{article}
+\usepackage[margin=2cm]{geometry}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenx}
+\usepackage[english,british,american,spanish,greek,french,german,polish,russian]{babel}
+\usepackage{csquotes}
+\usepackage{multicol}
+\usepackage{fancyvrb}
+\usepackage{color}
+\definecolor{spot}{rgb}{0,0.2,0.6}
+\usepackage[colorlinks,allcolors=spot,bookmarksopen=true,pdfstartview=FitH]{hyperref}
+\usepackage[parentracker=true,
+  backend=biber,
+  hyperref=auto,
+  language=auto,
+  babel=other,
+  citestyle=gost-numeric,
+  defernumbers=true,
+  bibstyle=gost-footnote,
+]{biblatex}
+\addbibresource{biblatex-gost-examples.bib}
+
+\tolerance=1500
+
+\newcommand*{\bback}{}
+\renewbibmacro*{begentry}
+  {\hspace{-4em}\makebox[4em]{\hyperlink{\thefield{entrykey}}{$\Downarrow$}}%
+   \raisebox{\baselineskip}{\hypertarget{back:\thefield{entrykey}}{}}}%
+\newcommand*{\targetlink}[1]{\renewcommand\bback{back:#1}\hypertarget{#1}{}}
+\renewcommand{\FancyVerbFormatLine}[1]{%
+ \ifnum\value{FancyVerbLine}=1%
+  \hspace{-4em}\makebox[4em]{\hyperlink{\bback}{$\Uparrow$}}#1\else#1\fi}
+
+\title{Biblatex-GOST examples}
+\date{}
+
+\begin{document}
+\maketitle
+Examples are grouped according to their entrytypes. The types themselves are the following 
+(click to go to the respective bibliography section):
+\renewcommand*{\do}[1]{\hyperref[#1]{@#1}\\}
+\begin{multicols}{5}
+\noindent%
+\docsvlist{mvbook,book,inbook,suppbook,bookinbook,mvcollection,collection,incollection,suppcollection,mvreference,reference,inreference,proceedings,inproceedings,periodical,article,patent,online}
+\end{multicols}
+
+In the end of the text you may find the listing of the 
+\hyperref[bibfile]{bibliography database file} used. 
+You may take advantage of 
+the arrows on the left to switch between the database entry and its presentation.
+The database itself is preliminary. This is actually a file that I use in my everyday work, 
+so it contains some redundant and provisional material. I hope this does not distruct
+the reader too much.  
+
+\nocite{*}
+
+\defbibheading{bibliography}{}
+\renewcommand*{\do}[1]{\section{@#1\label{#1}}\printbibliography[type=#1]}
+\docsvlist{mvbook,book,inbook,suppbook,bookinbook,mvcollection,collection,incollection,suppcollection,mvreference,reference,inreference,proceedings,inproceedings,periodical,article,patent,online}
+
+\section{Bibliography database\label{bibfile}}
+{\small 
+\input biblatex-gost-examples.bib
+}
+\end{document} 
