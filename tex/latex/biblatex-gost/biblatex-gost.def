@@ -49,8 +49,8 @@
   mediatext,
   mediabraille,
   mediaeresource,
-  langpoland,
-  frompoland,
+  langpolish,
+  frompolish,
 }
 \DeclareLanguageMapping{russian}{russian-gost}
 %
@@ -293,46 +293,46 @@
     {\DeclareSourcemap{
       \maps[datatype=bibtex]{
         \map{
-          \step[fieldsource=author, 
-            match=\regexp{(.+\s+and\s+){3,}}, 
+          \step[fieldsource=author,
+            match=\regexp{(.+\s+and\s+){3,}},
             final]
           \step[fieldset=options, fieldvalue={useauthor=false}]
         }
         \map{
-          \step[fieldsource=editor, 
-            match=\regexp{(.+\s+and\s+){3,}}, 
+          \step[fieldsource=editor,
+            match=\regexp{(.+\s+and\s+){3,}},
             final]
           \step[fieldset=options, fieldvalue={useeditor=false}]
         }
         \map[overwrite]{
-          \step[fieldsource=author, 
-            match=\regexp{(.+\s+and\s+){3,}}, 
+          \step[fieldsource=author,
+            match=\regexp{(.+\s+and\s+){3,}},
             final]
-          \step[fieldsource=options, 
-            match=\regexp{^$}, 
+          \step[fieldsource=options,
+            match=\regexp{^$},
             final]
           \step[fieldset=options, fieldvalue={useauthor=false}]
         }
         \map[overwrite]{
-          \step[fieldsource=editor, 
-            match=\regexp{(.+\s+and\s+){3,}}, 
+          \step[fieldsource=editor,
+            match=\regexp{(.+\s+and\s+){3,}},
             final]
-          \step[fieldsource=options, 
-            match=\regexp{^$}, 
+          \step[fieldsource=options,
+            match=\regexp{^$},
             final]
           \step[fieldset=options, fieldvalue={useeditor=false}]
         }
         \map[overwrite]{
-          \step[fieldsource=author, 
-            match=\regexp{(.+\s+and\s+){3,}}, 
+          \step[fieldsource=author,
+            match=\regexp{(.+\s+and\s+){3,}},
             final]
           \step[fieldsource=options,
             match=\regexp{(.+)},
             replace=\regexp{useauthor=false,$1}]
         }
         \map[overwrite]{
-          \step[fieldsource=editor, 
-            match=\regexp{(.+\s+and\s+){3,}}, 
+          \step[fieldsource=editor,
+            match=\regexp{(.+\s+and\s+){3,}},
             final]
           \step[fieldsource=options,
             match=\regexp{(.+)},
