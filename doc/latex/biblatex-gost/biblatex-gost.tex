@@ -123,13 +123,13 @@ bibstyle=gost-standard,
 \section{Введение}
 \label{sec:int}
 
-Пакет \biblatexgost{}\fnurl{http://sourceforge.net/projects/biblatexgost/} представляет 
-собой набор стилей для \biblatex{}\fnurl{http://www.ctan.org/tex-archive/macros/latex/contrib/biblatex/} 
-и предназначен для оформления библиографии в соответствии с требованиями ГОСТов 7.0.5--2008 и 
+Пакет \biblatexgost{}\fnurl{http://sourceforge.net/projects/biblatexgost/} представляет
+собой набор стилей для \biblatex{}\fnurl{http://www.ctan.org/tex-archive/macros/latex/contrib/biblatex/}
+и предназначен для оформления библиографии в соответствии с требованиями ГОСТов 7.0.5--2008 и
 7.1--2003 (а также 7.80--2000, 7.82--2001 и др.). Пакет будет полезен прежде всего в
-гуманитарных дисциплинах с повышенными требованиями к оформлению библиографии, многие из 
+гуманитарных дисциплинах с повышенными требованиями к оформлению библиографии, многие из
 которых \bibtex не в состоянии удовлетворить (это касается в первую очередь многоязычных
-библиографий, а также библиографических ссылок в сносках, использования Ibid., Op. cit. и т.\,д.). 
+библиографий, а также библиографических ссылок в сносках, использования Ibid., Op. cit. и т.\,д.).
 
 \subsection{Важные изменения в этой версии}
 \label{sec:critchanges}
@@ -142,7 +142,7 @@ bibstyle=gost-standard,
 \subsubsection*{Версия 0.6}
 
 \begin{trivlist}
-\item Переход на \biblatex~2.1 и \biber~1.1. В основном, это связано с переходом 
+\item Переход на \biblatex~2.1 и \biber~1.1. В основном, это связано с переходом
   на \texttt{datamodel}.
 \item Поле \bibfield{material} (общее обозначение материала) переименовано в \bibfield{media}.
 \item По умолчанию установлено \kvopt{inbookibid}{false}.
@@ -158,75 +158,75 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 \subsection{Установка}
 \label{sec:install}
 
-Пакет поставляется в виде архива, содержащего стандартую структуру дерева TDS. 
-Для его установки достаточно распаковать архив в дерево \tex, желательно локальное, и 
+Пакет поставляется в виде архива, содержащего стандартую структуру дерева TDS.
+Для его установки достаточно распаковать архив в дерево \tex, желательно локальное, и
 обновить индексы (в \tex~Live, например, это делается командой \texttt{mktexlsr},
 в MiKTeX~--- \texttt{initexmf -{}-update-fndb}).
 
-Для работы \biblatexgost версии 0.6 и выше требуется 
-\biblatex~2.1\fnurl{http://sourceforge.net/projects/biblatex/files/biblatex-2.1/} 
-и \biber~1.1\fnurl{http://sourceforge.net/projects/biblatex-biber/files/biblatex-biber/1.1/} 
+Для работы \biblatexgost версии 0.6 и выше требуется
+\biblatex~2.1\fnurl{http://sourceforge.net/projects/biblatex/files/biblatex-2.1/}
+и \biber~1.1\fnurl{http://sourceforge.net/projects/biblatex-biber/files/biblatex-biber/1.1/}
 или выше.
 
 \section{Стили \biblatexgost}
 \label{sec:styles}
 
 ГОСТ определяет три типа ссылок: внутритекстовую, подстрочную и затекстовую.
-Первые два типа приблизительно соответствуют стилям \bibsty{verbose} в \biblatex 
-с опцией \opt{autocite}, установленной, соответственно, в \opt{inline} и 
-\opt{footnote}. Затекстовые ссылки делятся, в свою очередь, на три типа, в зависимости 
-от способа отсылки к библиографии (которая в этом случае располагается 
-\enquote{за текстом}~--- в конце статьи, главы, книги и пр.). 
-В первом случае используются номера в квадратных скобках, во 
-втором~--- автор и год в квадратных скобках, в третьем~--- номера в верхнем индексе. 
-В \biblatex им приблизительно 
-соответствуют стили \bibsty{numeric} и \bibsty{authoryear}. Таким образом, 
-стили \biblatexgost являются модификациями соответствующих базовых стилей 
-\biblatex или даже основываются на них. 
+Первые два типа приблизительно соответствуют стилям \bibsty{verbose} в \biblatex
+с опцией \opt{autocite}, установленной, соответственно, в \opt{inline} и
+\opt{footnote}. Затекстовые ссылки делятся, в свою очередь, на три типа, в зависимости
+от способа отсылки к библиографии (которая в этом случае располагается
+\enquote{за текстом}~--- в конце статьи, главы, книги и пр.).
+В первом случае используются номера в квадратных скобках, во
+втором~--- автор и год в квадратных скобках, в третьем~--- номера в верхнем индексе.
+В \biblatex им приблизительно
+соответствуют стили \bibsty{numeric} и \bibsty{authoryear}. Таким образом,
+стили \biblatexgost являются модификациями соответствующих базовых стилей
+\biblatex или даже основываются на них.
 
 Более конкретно, \biblatexgost содержит следующие стили.
 
 \begin{marglist}
 
 \item[gost-inline]
-Внутритекстовые ссылки. Ссылки помещаются внутри текста в круглых скобках. 
+Внутритекстовые ссылки. Ссылки помещаются внутри текста в круглых скобках.
 Стиль отслеживает
 повторные ссылки, используя при необходимости короткие названия из поля
-\bibfield{shorttitle} (о многоточиях при сокращении заголовков 
-см.~\secref{ellipsis}).  
+\bibfield{shorttitle} (о многоточиях при сокращении заголовков
+см.~\secref{ellipsis}).
 
-По умолчанию стиль устанавливает опции \kvopt{autocite}{inline}, \kvopt{sorting}{ntvy}, 
- \kvopt{pagetracker}{true}, \kvopt{strict}{true}, \kvopt{citetracker}{constrict},   
+По умолчанию стиль устанавливает опции \kvopt{autocite}{inline}, \kvopt{sorting}{ntvy},
+ \kvopt{pagetracker}{true}, \kvopt{strict}{true}, \kvopt{citetracker}{constrict},
 \kvopt{opcittracker}{constrict}, \kvopt{citepages}{omit},
 \kvopt{labelyear}{true}.
 
 \item[gost-footnote]
-Подстрочные ссылки.  
-Стиль предназначен для помещения ссылок в сносках внизу страницы (например, с помощью 
+Подстрочные ссылки.
+Стиль предназначен для помещения ссылок в сносках внизу страницы (например, с помощью
 команд \cmd{footcite}, \cmd{smartcite} или \cmd{autocite}).
- 
-Фактически, стиль \bibsty{gost-footnote} имеет только два отличия от стиля 
-\bibsty{gost-inline}. 
-Во-первых, он устанавливает опцию \kvopt{autocite}{footnote}, что заставляет команду
-\cmd{autocite} всегда выводить цитату в сноске 
-(См.~\secref{sec:citecommands}). Во-вторых, в согласии с требованиями ГОСТа, 
-во внутритекстовой ссылке (но не 
-в библиографии!) не выводятся серия и сведения, относящиеся 
-к заглавию (поле \bibfield{titleaddon}, см.~\tabref{tab:gost-biblatex}). Кроме того,
-там не выводятся поля \bibfield{doi}, 
-\bibfield{eprint}, \bibfield{url}, \bibfield{addendum}, \bibfield{pubstate}. 
 
-По умолчанию стиль устанавливает опции \kvopt{autocite}{footnote}, \kvopt{sorting}{ntvy}, 
-\kvopt{pagetracker}{true}, \kvopt{strict}{true}, \kvopt{citetracker}{constrict},   
+Фактически, стиль \bibsty{gost-footnote} имеет только два отличия от стиля
+\bibsty{gost-inline}.
+Во-первых, он устанавливает опцию \kvopt{autocite}{footnote}, что заставляет команду
+\cmd{autocite} всегда выводить цитату в сноске
+(См.~\secref{sec:citecommands}). Во-вторых, в согласии с требованиями ГОСТа,
+во внутритекстовой ссылке (но не
+в библиографии!) не выводятся серия и сведения, относящиеся
+к заглавию (поле \bibfield{titleaddon}, см.~\tabref{tab:gost-biblatex}). Кроме того,
+там не выводятся поля \bibfield{doi},
+\bibfield{eprint}, \bibfield{url}, \bibfield{addendum}, \bibfield{pubstate}.
+
+По умолчанию стиль устанавливает опции \kvopt{autocite}{footnote}, \kvopt{sorting}{ntvy},
+\kvopt{pagetracker}{true}, \kvopt{strict}{true}, \kvopt{citetracker}{constrict},
 \kvopt{opcittracker}{constrict}, \kvopt{citepages}{omit},
 \kvopt{labelyear}{true}.
 
 \item[gost-numeric]
-Затекстовые ссылки. Основан на стандартном стиле \bibsty{numeric-comp} и отличается 
-от него лишь оформлением библиографии, но не цитат. Ссылки помещаются после текста, 
-а для их связи с текстом используются числа в квадратных скобках. Стиль можно использовать 
-в качестве только 
-библиографического, указывая как стили цитирования стандартные стили \bibsty{numeric}, 
+Затекстовые ссылки. Основан на стандартном стиле \bibsty{numeric-comp} и отличается
+от него лишь оформлением библиографии, но не цитат. Ссылки помещаются после текста,
+а для их связи с текстом используются числа в квадратных скобках. Стиль можно использовать
+в качестве только
+библиографического, указывая как стили цитирования стандартные стили \bibsty{numeric},
 \bibsty{numeric-comp} и \bibsty{numeric-verb} и переопределив символ разделения ссылок на
 точку с запятой:
 
@@ -238,29 +238,29 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 \kvopt{labelnumber}{true}.
 
 \item[gost-authoryear]
-Затекстовые ссылки. Основан на стандартном 
-стиле \bibsty{authoryear-icomp}. Ссылки помещаются после текста, и для их связи 
+Затекстовые ссылки. Основан на стандартном
+стиле \bibsty{authoryear-icomp}. Ссылки помещаются после текста, и для их связи
 с текстом используются имя автора и год в квадратных скобках. Если имеется лишь одно
-произведение данного автора, то год в ссылке не выводится. Это поведение можно 
+произведение данного автора, то год в ссылке не выводится. Это поведение можно
 отключить опцией \kvopt{singletitle}{false}. При отсутствии автора
-используется название или поле \bibfield{shorttitle}, если оно доступно. Нужно заметить, что ГОСТ 
-не слишком строго определяет соответствующий стиль и, в частности, допускает неопределённые 
-ссылки в случаях, когда один автор имеет несколько 
+используется название или поле \bibfield{shorttitle}, если оно доступно. Нужно заметить, что ГОСТ
+не слишком строго определяет соответствующий стиль и, в частности, допускает неопределённые
+ссылки в случаях, когда один автор имеет несколько
 работ одного года. Поэтому в \biblatexgost используется несколько способов оформления
 ссылок, которые выбираются опцией \opt{mergedate} (см.~\secref{sec:newoptions}).
-В частности, значение опции \kvopt{mergedate}{goststrict} соответствует строгому 
+В частности, значение опции \kvopt{mergedate}{goststrict} соответствует строгому
 следованию ГОСТу, хотя при этом существует опасность появления неопределённых ссылок.
-Стиль чувствителен к опции \opt{singletitle} и может не выводить год в ссылке, если он 
-не требуется для устранения неопределённости (например, если имеется лишь одна публикация 
+Стиль чувствителен к опции \opt{singletitle} и может не выводить год в ссылке, если он
+не требуется для устранения неопределённости (например, если имеется лишь одна публикация
 данного автора или лишь одна публикация без автора с данным названием).
 
-По умолчанию стиль устанавливает опции 
-\kvopt{autocite}{inline}, 
+По умолчанию стиль устанавливает опции
+\kvopt{autocite}{inline},
 \kvopt{sorting}{nyt},
 \kvopt{pagetracker}{true},
 \kvopt{mergedate}{gostletter},
-\kvopt{singletitle}{false} (или \opt{true} при \kvopt{mergedate}{goststrict}, 
-см.~\secref{sec:newoptions}). 
+\kvopt{singletitle}{false} (или \opt{true} при \kvopt{mergedate}{goststrict},
+см.~\secref{sec:newoptions}).
 
 \item[gost-inline-min]\noitemspace%
 \item[gost-footnote-min]\noitemspace%
@@ -268,12 +268,12 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 \item[gost-authoryear-min]\noitemspace%
 %\vspace{-4\baselineskip}%
 Все стили имеют <<минимальный>> вариант, в котором выводится минимальное количество
-сведений~--- автор, название, том\slash часть\slash книга\slash выпуск, 
+сведений~--- автор, название, том\slash часть\slash книга\slash выпуск,
 выходные данные, страницы (для статей в журналах и книгах).
 Сведения об ответственности, издании, серии и т.\,д. не выводятся, вне зависимости от их присутствия
-в базе данных. При этом вывод сведений, для которых в \biblatex имеются специальные опции 
-(\opt{url}, \opt{doi}, \opt{isbn/issn/isrn}, \opt{eprint}), регулируется 
-этими опциями (а также опциями \opt{cite\ldots} и \opt{bib\ldots}, 
+в базе данных. При этом вывод сведений, для которых в \biblatex имеются специальные опции
+(\opt{url}, \opt{doi}, \opt{isbn/issn/isrn}, \opt{eprint}), регулируется
+этими опциями (а также опциями \opt{cite\ldots} и \opt{bib\ldots},
 описанными в \secref{sec:newoptions}). По умолчанию в минимальных стилях этот вывод отключён.
 
 Минимальные стили можно использовать совместно с полными. Например,
@@ -281,21 +281,21 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 
 \begin{ltxcode}
 \usepackage[%
-    citestyle=gost-footnote-min, 
+    citestyle=gost-footnote-min,
     bibstyle=gost-footnote,
     ...
 ]{biblatex}
 \end{ltxcode}
 
 цитаты будут выводится в минимальном стиле, а записи в библиографии~--- в полном.
-Разумеется, это не имеет значения для стилей \bibsty{gost-numeric-min} и 
+Разумеется, это не имеет значения для стилей \bibsty{gost-numeric-min} и
 \bibsty{gost-authoryear-min}, которые <<минимизируют>> оформление библиографии, но не цитат.
 
 \end{marglist}
 
 \starsdelim
 
-Дополнительно, все стили по умолчанию устанавливают опции 
+Дополнительно, все стили по умолчанию устанавливают опции
 \kvopt{dashed}{false},
 %\kvopt{isbn}{true},
 %\kvopt{url}{true},
@@ -313,21 +313,21 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 %\subsection{Ссылки в верхнем индексе}
 %\label{sec:superscript}
 
-ГОСТ определяет ещё один тип затекстовых ссылок, при котором они 
-связываются с текстом номером в верхнем индексе. Этого можно достичь несколькими способами. 
+ГОСТ определяет ещё один тип затекстовых ссылок, при котором они
+связываются с текстом номером в верхнем индексе. Этого можно достичь несколькими способами.
 
 \begin{itemize}
-\item Использовать стиль \bibsty{gost-numeric} и команду цитирования  
+\item Использовать стиль \bibsty{gost-numeric} и команду цитирования
 \cmd{supercite}, доступную только для стилей типа \bibsty{numeric}. Эта команда
-помещает номер в верхний индекс вместо квадратных скобок. Эти номера не зависят от 
+помещает номер в верхний индекс вместо квадратных скобок. Эти номера не зависят от
 сносок \cmd{footnote} и существуют параллельно с ними.
 \item Использовать стиль \bibsty{gost-numeric} и команду цитирования
-\cmd{autocite}. При установке опции \kvopt{autocite}{superscript} эта команда ведёт себя 
+\cmd{autocite}. При установке опции \kvopt{autocite}{superscript} эта команда ведёт себя
 как \cmd{supercite}.
-\item Использовать стиль \bibsty{gost-footnote} и какой-либо пакет, поддерживающий команду \cmd{endnote} (например, \sty{endnotes}, \sty{memoir} и т.\,д.). 
-При этом, чтобы ссылки переносились в конец текста (или главы, или в любое 
+\item Использовать стиль \bibsty{gost-footnote} и какой-либо пакет, поддерживающий команду \cmd{endnote} (например, \sty{endnotes}, \sty{memoir} и т.\,д.).
+При этом, чтобы ссылки переносились в конец текста (или главы, или в любое
 нужное место), должна быть установлена
-опция \kvopt{notetype}{endonly}. Можно также воспользоваться 
+опция \kvopt{notetype}{endonly}. Можно также воспользоваться
 пакетом \sty{fn2end} или ему подобными.
 \end{itemize}
 
@@ -338,12 +338,12 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 \subsection{Термины ГОСТа и поля \biblatexgost}
 \label{sec:gost-biblatex}
 
-Соответствие между терминами ГОСТа и полями \biblatexgost представлено в 
+Соответствие между терминами ГОСТа и полями \biblatexgost представлено в
 \tabref{tab:gost-biblatex}.
 Как видно, в ней отсутствуют, с одной стороны, некоторые элементы библиографического
-описания, предусмотренные ГОСТом, а с другой~--- некоторые поля \biblatex. Эти элементы и поля 
+описания, предусмотренные ГОСТом, а с другой~--- некоторые поля \biblatex. Эти элементы и поля
 не учитываются в \biblatexgost и не обрабатываются (разумеется, специальные поля,
-такие как \bibfield{crossref}, \bibfield{options} и пр., учитываются, хотя и не 
+такие как \bibfield{crossref}, \bibfield{options} и пр., учитываются, хотя и не
 представлены в таблице).
 Курсивом выделены факультативные, согласно ГОСТу, элементы.
 Цветом выделены поля \biblatexgost, отсутствующие в \biblatex (см.~\secref{sec:newfields}).
@@ -368,11 +368,11 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 \textit{Сведения, относящиеся к заглавию} & subtitle, mainsubtitle,
                                             booksubtitle, titleaddon, maintitleaddon,
                                             booktitleaddon \\
-Сведения об ответственности      & {\spotcolor credits}, {\spotcolor bookcredits}, 
-                                    editor, editora, editorb, editorc, afterword, 
-                                    annotator, commentator, foreword, introduction, organization,  
+Сведения об ответственности      & {\spotcolor credits}, {\spotcolor bookcredits},
+                                    editor, editora, editorb, editorc, afterword,
+                                    annotator, commentator, foreword, introduction, organization,
                                     translator,
-                                    {\spotcolor bookafterword}, {\spotcolor bookannotator}, 
+                                    {\spotcolor bookafterword}, {\spotcolor bookannotator},
                                     {\spotcolor bookcommentator}, {\spotcolor bookforeword},
                                     {\spotcolor bookintroduction}, {\spotcolor booktranslator} \\
 \cmidrule(r){1-1}\cmidrule{2-2}
@@ -388,7 +388,7 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 Дата издания, распространения и т.\,п. & date \\
 \cmidrule(r){1-1}\cmidrule{2-2}
 \multicolumn{1}{@{}H}{Область физической характеристики} & \\*
-Специфическое обозначение материала и объём & volumes, pagetotal, pages, howpublished, 
+Специфическое обозначение материала и объём & volumes, pagetotal, pages, howpublished,
     {\spotcolor books}, {\spotcolor parts}, {\spotcolor issues}\\
 \textit{Другие сведения о физической характеристике} & \textendash \\
 \textit{Размеры} & \textendash \\
@@ -406,8 +406,8 @@ ISSN серии или подсерии & issn (isbn) \\
 \cmidrule(r){1-1}\cmidrule{2-2}
 \multicolumn{1}{@{}H}{Область стандартного номера и} & \\
 \multicolumn{1}{@{}H}{условий доступности} & \\*
-Стандартный номер (или его альтернатива) & isbn, issn, %isan, ismn, isrn, iswc, 
-                                           doi, eprint, 
+Стандартный номер (или его альтернатива) & isbn, issn, %isan, ismn, isrn, iswc,
+                                           doi, eprint,
                                            eprintclass, addendum \\
 Ключевое заглавие & addendum  \\
 Условия доступности и (или) цена & addendum \\
@@ -419,30 +419,30 @@ ISSN серии или подсерии & issn (isbn) \\
 \endgroup
 
 Таким образом, не учитываются следующие поля \biblatex: \bibfield{pagination},
-\bibfield{bookpagination}, \bibfield{chapter}, \bibfield{library}, 
-\bibfield{origdate}, \bibfield{origlocation}, \bibfield{origpublisher}, \bibfield{origtitle}, 
+\bibfield{bookpagination}, \bibfield{chapter}, \bibfield{library},
+\bibfield{origdate}, \bibfield{origlocation}, \bibfield{origpublisher}, \bibfield{origtitle},
 \bibfield{file}, \bibfield{reprinttitle}.
 
-С другой стороны, не учитываются следующие элементы описания, предусмотренные ГОСТом: 
+С другой стороны, не учитываются следующие элементы описания, предусмотренные ГОСТом:
 параллельное заглавие, другие сведения о физической характеристике, размеры,
 сведения о сопроводительном материале.
 
 \subsection{Новые поля}
 \label{sec:newfields}
- 
-В \biblatexgost определены следующие 
+
+В \biblatexgost определены следующие
 поля библиографической базы данных, отсутствующие в стандартном \biblatex%
-%\footnote{Используется дополнительный файл модели данных \file{biblatex-gost.dbx}. 
+%\footnote{Используется дополнительный файл модели данных \file{biblatex-gost.dbx}.
 %При этом устанавливать опцию \opt{datamodel}  не требуется, модель подключается автоматически
 %}%
-.   
+.
 
 \begin{fieldlist}
 
 \fielditem{book}{number/literal}
 
 Содержит номер (или другой идентификатор) книги для изданий, разделённых на книги. См. подробнее
-\secref{sec:volsparts} 
+\secref{sec:volsparts}
 
 \fielditem{booktranslator}{name}\noitemspace%
 \fielditem{bookcommentator}{name}\noitemspace%
@@ -453,21 +453,21 @@ ISSN серии или подсерии & issn (isbn) \\
 \fielditem{bookoriglanguage}{key}\noitemspace%
 \listitem{bookcredits}{literal}
 
-Аналогично \bibfield{bookauthor} и \bibfield{booktitle}, эти поля 
-содержать переводчика, автора комментариев и т.\,д. документа, в состав которого входит 
-данная публикация (ГОСТ называет его идентифицирующим документом). 
-Эти поля определены для записей типа 
+Аналогично \bibfield{bookauthor} и \bibfield{booktitle}, эти поля
+содержать переводчика, автора комментариев и т.\,д. документа, в состав которого входит
+данная публикация (ГОСТ называет его идентифицирующим документом).
+Эти поля определены для записей типа
 \bibtype{inbook}, \bibtype{bookinbook}, \bibtype{suppbook}, \bibtype{incollection},
-\bibtype{suppcollection}, \bibtype{inproceedings} 
+\bibtype{suppcollection}, \bibtype{inproceedings}
 и \bibtype{inreference}.  При использовании ссылок \texttt{crossref} или \texttt{xref}
 эти поля копируются из записи, на которую указывает ссылка.
 
 Данные поля могут использоваться, например, при описании сборников переводов классических текстов,
-каждый из которых имеет собственного переводчика, комментатора, автора вступительной статьи 
-и т.\,д. В библиографии, если поле \bibfield{commentator}, \bibfield{annotator} и т.\,д. 
+каждый из которых имеет собственного переводчика, комментатора, автора вступительной статьи
+и т.\,д. В библиографии, если поле \bibfield{commentator}, \bibfield{annotator} и т.\,д.
 совпадает с соответствующим полем \bibfield{bookcommentator}, \bibfield{bookannotator} и т.\,д.,
-поле выводится только в описании идентифицирующего документа. В случае переводчика проверяется 
-ещё и равенство \bibfield{origlanguage} и \bibfield{bookoriglanguage}. Например, 
+поле выводится только в описании идентифицирующего документа. В случае переводчика проверяется
+ещё и равенство \bibfield{origlanguage} и \bibfield{bookoriglanguage}. Например,
 следующие данные
 
 \begin{lstlisting}[style=bibtex,escapechar=|]
@@ -491,27 +491,27 @@ ISSN серии или подсерии & issn (isbn) \\
 
 \begin{bibexample}
 \item Статья // Сборник / пер. с фин. А. Б. Ивановой ; \ldots
-\end{bibexample}  
+\end{bibexample}
 
 но не как:
 
 \begin{bibexample}
 \item Статья / пер. с фин. А. Б. Ивановой // Сборник / пер. с фин. А. Б. Ивановой ; \ldots
-\end{bibexample}  
+\end{bibexample}
 
 Поле \bibfield{bookoriglanguage}, так же как и поле \biblatex \bibfield{origlanguage},
 может содержать только один язык. Поэтому, если вам требуется указать список языков,
-используйте поля \bibfield{bookcredits} и \bibfield{credits} (см. ниже). 
+используйте поля \bibfield{bookcredits} и \bibfield{credits} (см. ниже).
 
 \fielditem{books, parts, issues}{number/literal}
 
-Содержат количество книг, частей, выпусков изданий, 
+Содержат количество книг, частей, выпусков изданий,
 которые делятся на книги, части, выпуски (аналогично стандартному полю \bibfield{volumes}). См.
 подробнее \secref{sec:volsparts}.
 
 \listitem{credits}{literal}
 
-Содержит сведения об ответственности, отличные от предусмотренных в \biblatex, 
+Содержит сведения об ответственности, отличные от предусмотренных в \biblatex,
 такие, например, как организация:
 
 \begin{bibexample}
@@ -520,22 +520,22 @@ ISSN серии или подсерии & issn (isbn) \\
 
 В этом поле могут содержаться любые нестандартные сведения об ответственности,
 например: <<авт. курса А. Сигалов>>,
-<<коллектив авт. под рук. Исакова Ю.Ф>> и т.\,д. 
+<<коллектив авт. под рук. Исакова Ю.Ф>> и т.\,д.
 Более того, в особенно нестандартных ситуациях
-оно может содержать вообще все сведения об ответственности. 
-Поле \bibfield{credits} выводится в сведениях об ответственности в самом начале или 
-сразу после авторов, если они там присутствуют. 
+оно может содержать вообще все сведения об ответственности.
+Поле \bibfield{credits} выводится в сведениях об ответственности в самом начале или
+сразу после авторов, если они там присутствуют.
 
 \fielditem{editortype}{key}
 
-Это поле существует в \biblatex, но в \biblatexgost для него определёно новое значение: 
-тип редактора \bibfield{geneditor}, соответствующий общему 
+Это поле существует в \biblatex, но в \biblatexgost для него определёно новое значение:
+тип редактора \bibfield{geneditor}, соответствующий общему
 редактору. Он выводится в виде: \enquote{Под общ. ред.~\ldots}.
 
 \fielditem{media}{literal}
 
 Общее обозначение материала (см.~\gostbibref{5.2.3}). В \tabref{tab:media} приведены
-допустимые значения этого поля вместе с соответствующими терминами ГОСТа. 
+допустимые значения этого поля вместе с соответствующими терминами ГОСТа.
 \begin{table}[htbp]
 \tablesetup
 \centering
@@ -564,26 +564,26 @@ eresource & электронный ресурс\\
 \label{tab:media}
 \end{table}
 %
-Для этих значений определены строки в файле локализации, то есть они могут быть локализованы. 
-Язык вывода поля  
-определяется командой \cmd{gostmedialanguage}. По умолчанию он совпадает с 
-основным языком \texttt{babel}, если последний загружен. Если \texttt{babel} не загружен, 
+Для этих значений определены строки в файле локализации, то есть они могут быть локализованы.
+Язык вывода поля
+определяется командой \cmd{gostmedialanguage}. По умолчанию он совпадает с
+основным языком \texttt{babel}, если последний загружен. Если \texttt{babel} не загружен,
 то язык установлен в \texttt{russian}. При переопределении
 
 \begin{ltxcode}
 \renewcommand*{\gostmedialanguage}{}
 \end{ltxcode}
 
-используется текущий язык библиографической записи или цитаты. 
-Это важно для многоязычных библиографий, если установлена опция 
-\kvopt{babel}{other} или \kvopt{babel}{other*}, и записи выводятся на разных языках. 
+используется текущий язык библиографической записи или цитаты.
+Это важно для многоязычных библиографий, если установлена опция
+\kvopt{babel}{other} или \kvopt{babel}{other*}, и записи выводятся на разных языках.
 
 \fielditem{sortvolume}{literal}
 
-Значение, используемое вместо тома для сортировки. 
+Значение, используемое вместо тома для сортировки.
 Аналогично стандартным
 полям \bibfield{sortname}, \bibfield{sorttitle}, \bibfield{sortyear}.
-Может потребоваться для настройки порядка вывода томов многотомных изданий 
+Может потребоваться для настройки порядка вывода томов многотомных изданий
 (см.~\secref{sec:volsparts}).
 
 \listitem{specdata}{literal}
@@ -601,7 +601,7 @@ eresource & электронный ресурс\\
 \label{sec:db:inf}
 
 Б\'{о}льшая часть полей и сведений, таких как автор, название, редактор и т.\,д., оформляются
-автоматически. 
+автоматически.
 Ниже приведены рекомендации по размещению сведений, для которых отсутствуют
 специальные поля в базе данных или нет прямого соответствия между ГОСТом и \biblatexgost.
 
@@ -614,32 +614,32 @@ eresource & электронный ресурс\\
 %\end{lstlisting}
 %
 \item[Область специфических сведений] применяется для
-особых типов публикации и специфических носителей (см.~\gostbibref{5.4}). 
+особых типов публикации и специфических носителей (см.~\gostbibref{5.4}).
 \biblatexgost заполняет эту область самостоятельно только для
-%патентов\notimpl\ и 
-сериальных изданий\notimpl. 
+%патентов\notimpl\ и
+сериальных изданий\notimpl.
 Для всех остальных типов публикаций
-следует помещать информацию в поле \bibfield{specdata}. 
+следует помещать информацию в поле \bibfield{specdata}.
 
 %В случае патентов здесь размещаются: \ldots
 
-В случае сериальных изданий эта область является областью нумерации, в которой приводятся 
-первый и последний номер, перерывы в нумерации и пр. \biblatexgost оформляет это поле 
+В случае сериальных изданий эта область является областью нумерации, в которой приводятся
+первый и последний номер, перерывы в нумерации и пр. \biblatexgost оформляет это поле
 автоматически, если присутствует поле \bibfield{date} в записях типа \bibtype{periodical}\notimpl.
 
-\item[Cведения об ответственности серии] в случае необходимости можно помещать 
-в поле \bibfield{series}:  
+\item[Cведения об ответственности серии] в случае необходимости можно помещать
+в поле \bibfield{series}:
 \begin{lstlisting}[style=bibtex,escapechar=|]
 series = {|Языковеды мира / редкол.: Г.В. Степанов (пред.) и др.|}
 \end{lstlisting}
 
-\item[Серия.] \label{series}ГОСТ различает (см. \gostbibref{6.3.4.2}) сериальные документы 
-с нумерацией по годам 
-(как, например, в журналах) и со сквозной нумерацией. В первом случае, кроме прочего, 
+\item[Серия.] \label{series}ГОСТ различает (см. \gostbibref{6.3.4.2}) сериальные документы
+с нумерацией по годам
+(как, например, в журналах) и со сквозной нумерацией. В первом случае, кроме прочего,
 не печатается год на месте выходных данных. В \biblatexgost только документы
-с нумерацией по годам соответствуют \bibtype{periodical}.  Сериальные документы со 
+с нумерацией по годам соответствуют \bibtype{periodical}.  Сериальные документы со
 сквозной нумерацией следует оформлять как \bibtype{mvbook}, \bibtype{mvcollection},
-\bibtype{mvproceedings} или \bibtype{mvreference}. 
+\bibtype{mvproceedings} или \bibtype{mvreference}.
 
 Серия в журналах может пониматься в двух смыслах. Во-первых, она употребляется в
 том же смысле, что и для книг, и также выводится в области серии в виде:
@@ -650,7 +650,7 @@ series = {|Языковеды мира / редкол.: Г.В. Степанов 
 
 При заполнении базы данных, эта серия помещается в поле \bibfield{series}.
 
-Во-вторых, серия может входить в заглавие журнала: 
+Во-вторых, серия может входить в заглавие журнала:
 
 \begin{bibexample}
 \item Известия Российской академии наук. Серия геологическая
@@ -669,7 +669,7 @@ series = {|Языковеды мира / редкол.: Г.В. Степанов 
 }
 \end{lstlisting}
 
-\item[Области примечания, стандартного номера и условий доступности.] В случае 
+\item[Области примечания, стандартного номера и условий доступности.] В случае
 необходимости, вся эта информация включается в \bibfield{addendum}. Нужно лишь учесть, что
 в стиле \bibsty{gost-inline} она не выводится в цитатах (но выводится в библиографии).
 
@@ -686,8 +686,8 @@ series = {|Языковеды мира / редкол.: Г.В. Степанов 
 \listitem{foreword}{name}\noitemspace%
 \listitem{introduction}{name}
 
-Поля \bibfield{afterword} и пр.   
-должны быть в родительном падеже. Форма их вывода (в полной и краткой форме) 
+Поля \bibfield{afterword} и пр.
+должны быть в родительном падеже. Форма их вывода (в полной и краткой форме)
 представлена в~\tabref{tab:afterword}.
 
 \begin{table}[htbp]
@@ -715,19 +715,19 @@ introduction & вступительная статья \prm{кого} & всту
 (см.~\gostbibref{7.5.2}):
 
 \begin{bibexample}
-\item \prm{year}.~"--- 
+\item \prm{year}.~"---
 %\prm{day} \prm{month}
 \cmd{mkbibdatelong\{\}\{month\}\{day\}}%
 .~"--- \prm{volume}, \prm{issue}, \prm{number}
 \end{bibexample}
 
-Таким образом, для газет получается (на русском языке): 
+Таким образом, для газет получается (на русском языке):
 
 \begin{bibexample}
 \item\textellipsis\ 2001.~"--- 25 мая.~"--- \textellipsis
 \end{bibexample}
 
-И для журналов: 
+И для журналов:
 
 \begin{bibexample}
 \item\textellipsis\ 2001.~"--- №~1.~"--- \textellipsis
@@ -738,37 +738,37 @@ introduction & вступительная статья \prm{кого} & всту
 
 \fielditem{edition}{integer/literal}
 
-Сведения об издании. Если целое число, то выводится в виде «5-е изд.». Если литерал, выводится как есть. Например: <<издание 13-е, существенно переработанное>>.  
+Сведения об издании. Если целое число, то выводится в виде «5-е изд.». Если литерал, выводится как есть. Например: <<издание 13-е, существенно переработанное>>.
 
 \listitem{editor, translator}{name}
 
-Форма имён в этих полях зависит от того, как вы будете их использовать. 
+Форма имён в этих полях зависит от того, как вы будете их использовать.
 Например, по умолчанию  \kvopt{useeditor}{false} и редактор выводится в виде:
 
 \begin{bibexample}
 \item \ldots\ \slash\ под ред. А.\,Петровой\ldots
-\end{bibexample} 
+\end{bibexample}
 
-Поэтому имена в полях \bibfield{editor}, \bibfield{editora}, \bibfield{editorb}, 
-\bibfield{editorc} должны быть в родительном падеже. Если же \kvopt{useeditor}{true}, 
-то редактор выводится как 
+Поэтому имена в полях \bibfield{editor}, \bibfield{editora}, \bibfield{editorb},
+\bibfield{editorc} должны быть в родительном падеже. Если же \kvopt{useeditor}{true},
+то редактор выводится как
 
 \begin{bibexample}
-\item \textit{Петрова А.}, ред. \ldots 
-\end{bibexample} 
+\item \textit{Петрова А.}, ред. \ldots
+\end{bibexample}
 
 и имя должно быть в именительном падеже. То же касается переводчика и опции \opt{usetranslator}
-(\ldots~/~пер. с фр. \prm{кого} И.\,Иванова). 
+(\ldots~/~пер. с фр. \prm{кого} И.\,Иванова).
 
 \fielditem{series}{integer/literal}
 
 Для периодических изданий, таких как журналы, выводится в виде «3-я сер.», если
-является целым числом. В противном случае, выводится как есть. 
+является целым числом. В противном случае, выводится как есть.
 О серии см. также \secref{series}.
 
 \fielditem{issue}{integer/literal}
 
-Поле \enquote{Выпуск} имеет разный смысл для книг и журналов. Для книг, если является 
+Поле \enquote{Выпуск} имеет разный смысл для книг и журналов. Для книг, если является
 целым числом, то выводится в форме «Вып.~\prm{номер}», если литералом~--- выводится как есть.
 Для журналов и прочей периодики должно быть литералом (например, Summer, Autumn и т.\,д.).
 %Подробнее см. стр.~\pageref{serinjour}.
@@ -777,11 +777,11 @@ introduction & вступительная статья \prm{кого} & всту
 \label{ellipsis}
 
 Команда \cmd{textellipsis}, так же как и символ \enquote{…} (Unicode U+2026), в поле \bibfield{shorttitle} воспринимается \biblatex'ом
-как конец предложения. Это может приводить к конфликтам с трекером пунктуации. 
+как конец предложения. Это может приводить к конфликтам с трекером пунктуации.
 По этой причине рекомендуется добавлять в таких случаях
 команду \cmd{isdot}, превращающую
-последнюю точку в точку сокращения (\texttt{dot}), а не конца предложения 
-(\texttt{period}). Например: 
+последнюю точку в точку сокращения (\texttt{dot}), а не конца предложения
+(\texttt{period}). Например:
 
 \begin{ltxcode}[escapechar=|]
 @BOOK{book,
@@ -798,27 +798,27 @@ introduction & вступительная статья \prm{кого} & всту
   shorttitle = {|Введение|~...\isdot}
 }.
 \end{ltxcode}
- 
+
 \end{fieldlist}
 
 
 %\subsection{Электронные ресурсы}
 %\label{sec:elres}
 %
-%Для электронных ресурсов в области специфических сведений содержатся вид и объём ресурса 
+%Для электронных ресурсов в области специфических сведений содержатся вид и объём ресурса
 %в виде: <<Вид (Объём)>> (см. ГОСТ 7.82-2001, п.5.5). Например:
 %
 %\begin{bibexample}
 %\item \textellipsis~"--- Электрон, дан. (3 файла) и прогр. (2 файла).~"--- \textellipsis
 %\item \textellipsis~"--- Электрон, дан. (2 файла : 70 тыс. записей).~"--- \textellipsis
 %\item \textellipsis~"--- Электрон, прогр. (2 файла : 18650 байтов).~"--- \textellipsis
-%\item \textellipsis~"--- Electronic text data (2 files : 1.6 Mbytes).~"--- \textellipsis 
-%\end{bibexample} 
+%\item \textellipsis~"--- Electronic text data (2 files : 1.6 Mbytes).~"--- \textellipsis
+%\end{bibexample}
 
 \subsection{Тома, книги, части, выпуски}
 \label{sec:volsparts}
 
-Издание может разделяться на физически отдельные части, которые могут называться по-разному. \biblatexgost поддерживает деление на тома, книги, части и выпуски. 
+Издание может разделяться на физически отдельные части, которые могут называться по-разному. \biblatexgost поддерживает деление на тома, книги, части и выпуски.
 Соответствующие им поля базы данных показаны в \tabref{tab:volsparts}.
 
 \begin{table}[htbp]
@@ -833,7 +833,7 @@ introduction & вступительная статья \prm{кого} & всту
 книги & book, books \\
 части & part, parts \\
 выпуски & issue%
-%\footnote{Поле \bibfield{issue} имеет особое значение в случае журналов. 
+%\footnote{Поле \bibfield{issue} имеет особое значение в случае журналов.
 %См. п. ??? руководства по \biblatex.}
 , issues \\
 \bottomrule
@@ -844,7 +844,7 @@ introduction & вступительная статья \prm{кого} & всту
 
 Если эти поля являются целыми числами, то они выводятся в виде: \enquote{В 5 т.},
 \enquote{В 4 вып.} и т.\,д. В противном случае, они выводятся как есть: \enquote{В
-5-и томах (6-и кн.)} и т.\,д. Строковые значения при занесении в базу данных следует 
+5-и томах (6-и кн.)} и т.\,д. Строковые значения при занесении в базу данных следует
 писать со строчной буквы, \biblatexgost перейдёт на заглавные там, где требуется. Например:
 
 \begin{lstlisting}[style=bibtex,escapechar=|]
@@ -853,8 +853,8 @@ volumes = {|в 5-и томах (6-и кн.)|}
 
 По умолчанию части выводятся в порядке: том, книга, часть, выпуск. Эту последовательность
 можно изменить опцией пакета \opt{volsorder}. Она представляет собой строку, состоящую из
-символов \opt{v}, \opt{b}, \opt{p}, \opt{i} в любом порядке.% и количестве. 
-Порядок символов определяет порядок вывода частей. Например, по умолчанию \kvopt{volsorder}{vbpi}. 
+символов \opt{v}, \opt{b}, \opt{p}, \opt{i} в любом порядке.% и количестве.
+Порядок символов определяет порядок вывода частей. Например, по умолчанию \kvopt{volsorder}{vbpi}.
 Аналогичным образом можно задавать порядок для отдельной записи
 с помощью поля \bibfield{volsorder}. Его значение наследуется по ссылкам \bibfield{crossref}
 и \bibfield{xref}.
@@ -866,7 +866,7 @@ volumes = {|в 5-и томах (6-и кн.)|}
 \begin{multicols}{2}
 \begin{lstlisting}[style=bibtex,escapechar=|]
 volume = {2},
-book = {1}, 
+book = {1},
 volsorder = {vb},
 \end{lstlisting}
 \columnbreak
@@ -877,12 +877,12 @@ volsorder = {vb},
 \columnbreak
 \end{multicols}
 
-\bigskip  
+\bigskip
 
 \begin{multicols}{2}
 \begin{lstlisting}[style=bibtex,escapechar=|]
 book = {1},
-issue = {4}, 
+issue = {4},
 part = {2},
 volsorder = {pbi},
 \end{lstlisting}
@@ -893,10 +893,10 @@ volsorder = {pbi},
 \end{bibexample}
 \columnbreak
 \end{multicols}
-  
-\bigskip  
+
+\bigskip
 И несколько экзотический пример:
-\bigskip  
+\bigskip
 
 \begin{multicols}{2}
 \begin{lstlisting}[style=bibtex,escapechar=|]
@@ -923,19 +923,19 @@ volsorder = {pbi},
 \item Сказки. В 5 т., 6 кн. Т. 3. Книга первая. Сказки Центральной Африки \ldots
 \end{bibexample}
 \end{multicols}
-  
-\bigskip  
-Обратите внимание, что механизм сортировки \biblatex\slash\biber 
+
+\bigskip
+Обратите внимание, что механизм сортировки \biblatex\slash\biber
 нечувствителен к значениям опции %\opt{volsorder}
 и поля \bibfield{volsorder}, поэтому при их изменении может потребоваться ручная настройка
-сортировки, например, при помощи поля \bibfield{sortvolume} (см.~\secref{sec:newfields}).  
+сортировки, например, при помощи поля \bibfield{sortvolume} (см.~\secref{sec:newfields}).
 
 
 \section{Работа с пакетом}
 \label{sec:usage}
 
-Работа со стилями \biblatexgost не отличается от работы с любыми другими стилями 
-\biblatex. Например, в случае использования \sty{babel} ваш 
+Работа со стилями \biblatexgost не отличается от работы с любыми другими стилями
+\biblatex. Например, в случае использования \sty{babel} ваш
 файл \latex может выглядеть примерно так:
 
 \begin{ltxexample}[escapechar=|]
@@ -959,16 +959,16 @@ volsorder = {pbi},
 \end{ltxexample}
 
 Подробности можно найти в документации по \biblatex{}\fnurl{http://www.ctan.org/tex-archive/macros/latex/contrib/biblatex/doc/biblatex.pdf}. \xelatex
-официально не поддерживается, поскольку \biblatex{'ом} пока не поддерживается 
-\sty{polyglossia}. Однако использование \sty{babel} совместно с \sty{xecyr}, 
+официально не поддерживается, поскольку \biblatex{'ом} пока не поддерживается
+\sty{polyglossia}. Однако использование \sty{babel} совместно с \sty{xecyr},
 похоже, не приводит ни к каким проблемам.
 
 \subsection{Новые опции и значения опций}
 \label{sec:newoptions}
 
 Для всех стилей сохранены опции стандартных стилей \biblatex, от которых они происходят или
-с которыми сходны, даже если соответствующая функциональность не предполагается ГОСТом. 
-Кроме этого, пакет \biblatexgost имеет 
+с которыми сходны, даже если соответствующая функциональность не предполагается ГОСТом.
+Кроме этого, пакет \biblatexgost имеет
 следующие дополнительные опции.
 
 \begin{optionlist}
@@ -978,18 +978,18 @@ volsorder = {pbi},
 \optitem{citedoi,bibdoi}{\opt{true}, \opt{false}}\noitemspace%
 \optitem[\textrm{см.\,\tabref{tab:bibcite}}]{citeeprint,bibeprint}{\opt{true}, \opt{false}}%\noitemspace%
 
-В дополнение к опциям \opt{url}, \opt{isbn}, \opt{doi} и \opt{eprint} в \biblatexgost 
+В дополнение к опциям \opt{url}, \opt{isbn}, \opt{doi} и \opt{eprint} в \biblatexgost
 определены опции
 для раздельного регулирования этих параметров для цитат и библиографии. При этом опции
 \opt{url}, \opt{isbn}, \opt{doi} и \opt{eprint} устанавливают одновременно соответствующие
-\opt{cite\ldots} и \opt{bib\ldots} опции. Не все из этих опций имеют смысл для всех 
-стилей (см. ниже). По умолчанию все стили, для которых опции 
-\opt{cite\ldots} имеют смысл, устанавливают их в \opt{false}. 
-Исключением является стиль \bibsty{gost-footnote}, который 
+\opt{cite\ldots} и \opt{bib\ldots} опции. Не все из этих опций имеют смысл для всех
+стилей (см. ниже). По умолчанию все стили, для которых опции
+\opt{cite\ldots} имеют смысл, устанавливают их в \opt{false}.
+Исключением является стиль \bibsty{gost-footnote}, который
 устанавливает \kvopt{citeisbn}{true}. Опции \opt{bib\ldots} устанавливаются
 по умолчанию в \opt{true}
 полными стилями и в \opt{false}~--- минимальными. Значения по умолчанию для всех опций
-представлены   
+представлены
 в \tabref{tab:bibcite}. Прочерк в таблице означает, что опция для данного стиля
 не имеет смысла.
 
@@ -1020,37 +1020,37 @@ gost-authoryear-min & --- & false \\
 
 \optitem[false]{inbookibid}{\opt{true}, \opt{false}}
 
-Опция определена только для стилей \bibsty{gost-inline} и \bibsty{gost-footnote} 
-и отключена по умолчанию. Согласно  
-\gostciteref[у]{8.11}, в случае последовательных ссылок на публикации, включённые в один и 
-тот же документ, во второй и последующих ссылках вместо повторяющихся сведений о документе 
+Опция определена только для стилей \bibsty{gost-inline} и \bibsty{gost-footnote}
+и отключена по умолчанию. Согласно
+\gostciteref[у]{8.11}, в случае последовательных ссылок на публикации, включённые в один и
+тот же документ, во второй и последующих ссылках вместо повторяющихся сведений о документе
 ставят слова
-\enquote{Там же} или \enquote{Ibid.}: 
+\enquote{Там же} или \enquote{Ibid.}:
 
 \begin{bibexample}
-\item \emph{Декарт Р.} Первоначала философии // Сочинения в двух томах. Т. 1. М.: Мысль, 1989. 
+\item \emph{Декарт Р.} Первоначала философии // Сочинения в двух томах. Т. 1. М.: Мысль, 1989.
 С. 12~; \emph{Декарт Р.} Рассуждение о методе // Там же. С. 112
 \end{bibexample}
 
 Чтобы это обеспечить, \biblatexgost ориентируется на поле \bibfield{crossref},
 считая сведения повторяющимися, если повторяется это поле. По этой причине,
-для корректной работы этого механизма требуется аккуратное заполнение поля \bibfield{crossref}. 
-Поскольку не для всякой библиографической базы данных это верно, 
+для корректной работы этого механизма требуется аккуратное заполнение поля \bibfield{crossref}.
+Поскольку не для всякой библиографической базы данных это верно,
 такое поведение может оказаться нежелательным. Данная опция позволяет его отключить.
 
-Обратите внимание, что поле \bibfield{crossref} доступно только в том случае, если 
+Обратите внимание, что поле \bibfield{crossref} доступно только в том случае, если
 доступна запись, на которую оно указывает, то есть если эта запись также цитируется
-в тексте или стоит в аргументе команды \cmd{nocite} (см.~документацию \biblatex). 
-Она также становится доступной автоматически (и включается в список литературы), 
+в тексте или стоит в аргументе команды \cmd{nocite} (см.~документацию \biblatex).
+Она также становится доступной автоматически (и включается в список литературы),
 когда количество цитируемых записей с одним и тем же полем \bibfield{crossref}
-превысит порог, задаваемый опцией \opt{mincrossrefs}. 
+превысит порог, задаваемый опцией \opt{mincrossrefs}.
 По умолчанию этот параметр равен 2, но
 при установке \kvopt{inbookibid}{true} \biblatexgost выставляет его равным 1,
-так, чтобы запись, на которую указывает \bibfield{crossref}, всегда включалась в 
-библиографию и поле \bibfield{crossref}  всегда было доступно. 
-Если вы изменяете опцию \opt{mincrossrefs} в настройках, убедитесь, что записи, 
+так, чтобы запись, на которую указывает \bibfield{crossref}, всегда включалась в
+библиографию и поле \bibfield{crossref}  всегда было доступно.
+Если вы изменяете опцию \opt{mincrossrefs} в настройках, убедитесь, что записи,
 нужные для работы опции \opt{inbookibid}, присутствуют в вашем тексте хотя бы в
-аргументе команды \cmd{nocite}.   
+аргументе команды \cmd{nocite}.
 
 Опция относится ко всем записям типа \bibtype{inbook}, \bibtype{bookinbook},
 \bibtype{suppbook}, \bibtype{incollection}, \bibtype{inproceedings} и т.\,д.,
@@ -1058,38 +1058,38 @@ gost-authoryear-min & --- & false \\
 
 \optitem[gostletter]{mergedate}{\opt{goststrict}, \opt{gostletter}, \opt{gostlabel}}
 
-В \biblatex эта опция регулирует способ вывода даты в библиографии для стилей 
-типа \bibsty{authoryear}. Стандартные стили \biblatex могут выводить дату в двух местах. 
+В \biblatex эта опция регулирует способ вывода даты в библиографии для стилей
+типа \bibsty{authoryear}. Стандартные стили \biblatex могут выводить дату в двух местах.
 Во-первых, в скобках сразу после автора:
 
 \begin{bibexample}
-\item \emph{Хайдеггер М.} (1997). Бытие и время. \ldots 
+\item \emph{Хайдеггер М.} (1997). Бытие и время. \ldots
 \item \emph{Хайдеггер М.} (1993a). Время и бытие. \ldots
 \end{bibexample}
 
-Во-вторых, на своём обычном месте в самой записи. 
+Во-вторых, на своём обычном месте в самой записи.
 Данная опция определяет, каким образом выводится вторая дата:
 \begin{enumerate*}[label=\arabic*)]
-\item как обычно (\kvopt{mergedate}{false}),  
-\item выводит дату только для меток с добавленной буквой (\kvopt{mergedate}{minimum}),  
-\item выводит дату только для меток с добавленной буквой, и если 
-она является просто годом (\kvopt{mergedate}{basic}),  
+\item как обычно (\kvopt{mergedate}{false}),
+\item выводит дату только для меток с добавленной буквой (\kvopt{mergedate}{minimum}),
+\item выводит дату только для меток с добавленной буквой, и если
+она является просто годом (\kvopt{mergedate}{basic}),
 \item дата вообще не выводится на своём обычном месте (\kvopt{mergedate}{maximum}),
-\item то же, но поле \bibfield{issue} всё же выводится 
-(\kvopt{mergedate}{compact {\rmfamily или} true}) 
+\item то же, но поле \bibfield{issue} всё же выводится
+(\kvopt{mergedate}{compact {\rmfamily или} true})
 \end{enumerate*}
-(подробнее см. примеры в документации \biblatex). 
+(подробнее см. примеры в документации \biblatex).
 \biblatexgost сохраняет все эти опции, но, поскольку ГОСТ не предусматривает вывод даты после
 автора, то добавляет ещё три. Все они чувствительны к опции \opt{singletitle} и могут опускать
-дату, если она не требуется для устранения неопределённости. 
+дату, если она не требуется для устранения неопределённости.
 
 \begin{valuelist}
 
 \item[gostletter]
 
-Для предотвращения неопределённых ссылок (например, при совпадении автора и года) к году при 
+Для предотвращения неопределённых ссылок (например, при совпадении автора и года) к году при
 необходимости добавляется латинская буква. Эта функциональность не предусмотрена ГОСТом, но
-является стандартной для стилей типа \bibsty{authoryear}. Год с буквой выводится на его обычном 
+является стандартной для стилей типа \bibsty{authoryear}. Год с буквой выводится на его обычном
 месте:
 
 \begin{bibexample}
@@ -1104,26 +1104,26 @@ gost-authoryear-min & --- & false \\
 
 \begin{bibexample}
 \item {[Пушкин, 1990c]} \emph{Пушкин А.\,С.} Сказки. \ldots{} 1990.~--- \ldots
-\end{bibexample} 
+\end{bibexample}
 
-По существу, эта опция отличается от \kvopt{mergedate}{false} только деталями 
+По существу, эта опция отличается от \kvopt{mergedate}{false} только деталями
 оформления.%, но не способом вывода дат.
 
-Обратите внимание, если вы используете поле \bibfield{shorthand}, то при 
+Обратите внимание, если вы используете поле \bibfield{shorthand}, то при
 использовании этой опции вам может
 потребоваться вручную настроить сортировку, например, при помощи поля \bibfield{sortkey}.
 
 \item[goststrict]
 
-Эта опция призвана обеспечить максимальное соответствие требованиям ГОСТа, 
-хотя при этом могут возникать неопределённые ссылки. 
+Эта опция призвана обеспечить максимальное соответствие требованиям ГОСТа,
+хотя при этом могут возникать неопределённые ссылки.
 Никаких знаков к году не добавляется, и вам нужно самим следить за
-уникальностью ссылок. 
-Например, если вы делаете ссылки на тома многотомного издания, то, возможно,  
+уникальностью ссылок.
+Например, если вы делаете ссылки на тома многотомного издания, то, возможно,
 понадобится указать том в \prm{postnote} или воспользоваться командами типа \cmd{volcite}.
 
-Эта опция также устанавливает \kvopt{singletitle}{true}, то есть при ней по умолчанию 
-год в ссылке не выводится, если он не требуется для устранения неопределённости. 
+Эта опция также устанавливает \kvopt{singletitle}{true}, то есть при ней по умолчанию
+год в ссылке не выводится, если он не требуется для устранения неопределённости.
 
 \end{valuelist}
 
@@ -1133,10 +1133,10 @@ gost-authoryear-min & --- & false \\
 Опция разрешает или запрещает перемещение имён в область сведений об ответственности,
 если количество имён больше трёх.
 
-При наличии 4-х и более имён авторов, редакторов, переводчиков и т.\,д. ГОСТ позволяет на 
+При наличии 4-х и более имён авторов, редакторов, переводчиков и т.\,д. ГОСТ позволяет на
 выбор либо выводить их полный список, либо сокращать его до
 одного имени с добавлением [et al.], [и др.] и пр.
-При этом сами имена выводятся не в заголовке библиографической записи, 
+При этом сами имена выводятся не в заголовке библиографической записи,
 а в сведениях об ответственности:
 
 \begin{bibexample}
@@ -1145,12 +1145,12 @@ gost-authoryear-min & --- & false \\
 
 Данная опция позволяет запретить это перемещение имён в область сведений об
 ответственности. При этом опция не влияет на сокращение списка имён. Последнее регулируется
-независимо опциями \opt{maxnames} и \opt{minnames}, которые в \biblatexgost 
-по умолчанию установлены в 3 и 1, 
-соответственно (что означает, что при наличии более трёх имён в списке, он сокращается до 
+независимо опциями \opt{maxnames} и \opt{minnames}, которые в \biblatexgost
+по умолчанию установлены в 3 и 1,
+соответственно (что означает, что при наличии более трёх имён в списке, он сокращается до
 одного).
 %\opt{useauthor}, \opt{useeditor} и \opt{usetranslator},
-В частности, количество имён, при котором происходит перемещение, (4 и более) не зависит 
+В частности, количество имён, при котором происходит перемещение, (4 и более) не зависит
 от значения \opt{maxnames} и вообще не
 регулируется в \biblatexgost (особенности реализации см. в~\apxref{impl:4names}).
 Впрочем, изменение этого количества означало бы отступление от ГОСТа.
@@ -1158,18 +1158,18 @@ gost-authoryear-min & --- & false \\
 \optitem{sorting}{\opt{ntvy}}
 \label{sorting}
 
-В \biblatexgost определена дополнительная схема сортировки \opt{ntvy} 
-(имя, заглавие, том\slash книга\slash часть\slash выпуск, год). 
+В \biblatexgost определена дополнительная схема сортировки \opt{ntvy}
+(имя, заглавие, том\slash книга\slash часть\slash выпуск, год).
 Она по умолчанию включена для стилей \bibsty{gost-inline}, \bibsty{gost-footnote}
 и \bibsty{gost-numeric}.
-Схема сортирует сначала по тому, затем, внутри тома, по книге, затем~--- по части, и 
+Схема сортирует сначала по тому, затем, внутри тома, по книге, затем~--- по части, и
 затем~--- по выпуску.
 Кроме того, поскольку стандартные схемы сортировки \biblatex недостаточно учитывают многотомные
 издания (неверно обрабатывают
-поле \bibfield{maintitle}), то модифицированы схемы \opt{nty}, \opt{nyvt}, \opt{ynt}, 
-\opt{ydnt} и \opt{nyt}. В них также добавлена сортировка по 
-тому\slash книге\slash части\slash выпуску. 
-Схема \opt{nyt} (имя, год, заглавие) включена по умолчанию в стиле 
+поле \bibfield{maintitle}), то модифицированы схемы \opt{nty}, \opt{nyvt}, \opt{ynt},
+\opt{ydnt} и \opt{nyt}. В них также добавлена сортировка по
+тому\slash книге\slash части\slash выпуску.
+Схема \opt{nyt} (имя, год, заглавие) включена по умолчанию в стиле
 \bibsty{gost-authoryear}.
 
 \optitem[vbpi]{volsorder}{последовательность символов \opt{v}, \opt{b}, \opt{p}, \opt{i}}
@@ -1183,7 +1183,7 @@ gost-authoryear-min & --- & false \\
 \label{sec:citecommands}
 
 Доступные команды цитирования перечислены в следующей таблице.
-%\tabref{tab:citecommands}. 
+%\tabref{tab:citecommands}.
 Их поведение
 лишь в редких случаях отличается от стандартного, описанного в документации
 \biblatex.
@@ -1235,12 +1235,12 @@ gost-numeric & cite & Только номер, без скобок \\
 gost-authoryear & cite & Автор (заголовок) и год в тексте без скобок \\
   & cite* & Часть цитаты без автора (заголовка) в тексте без скобок \\
   & parencite & Автор (заголовок) и год в тексте в квадратных скобках \\
-  & parencite* & Часть цитаты без автора (заголовка) в тексте 
+  & parencite* & Часть цитаты без автора (заголовка) в тексте
                  в квадратных скобках \\
   & footcite & Автор (заголовок) и год в сноске без скобок \\
   & footcitetext & То же, но используется \cmd{footnotetext} вместо \cmd{footnote} \\
-  & smartcite & \cmd{footcite} в тексте, \cmd{parencite} в сноске. Другими словами, цитата всегда 
-                оказывается в сноске, но в первом случае в квадратных скобках, 
+  & smartcite & \cmd{footcite} в тексте, \cmd{parencite} в сноске. Другими словами, цитата всегда
+                оказывается в сноске, но в первом случае в квадратных скобках,
                 во втором~"--- без них. \\
   & textcite & Автор (заголовок) без скобок и затем оставшаяся часть цитаты в квадратных скобках \\
   & autocite & Совпадает с \cmd{parencite} (установлена опция \kvopt{autocite}{inline})\\
@@ -1250,14 +1250,14 @@ gost-authoryear & cite & Автор (заголовок) и год в текст
 \end{longtable}
 \endgroup
 
-Кроме перечисленных поддерживаются производные команды, описанные в 
- руководстве \biblatex, такие как \cmd{Cite}, \cmd{Parencite}, \dots\ \cmd{Cites}, 
+Кроме перечисленных поддерживаются производные команды, описанные в
+ руководстве \biblatex, такие как \cmd{Cite}, \cmd{Parencite}, \dots\ \cmd{Cites},
 \cmd{Footcites}, \dots\ и т.\,д.
-%Исключение составляют команды типа \cmd{volcite}, которые корректно работают 
-%только в \bibsty{gost-numeric}. 
+%Исключение составляют команды типа \cmd{volcite}, которые корректно работают
+%только в \bibsty{gost-numeric}.
 
 Хотя команды \cmd{textcite} и \cmd{textcites}
-% в стилях \bibsty{gost-inline}, \bibsty{gost-footnote} и \bibsty{gost-authoryear} 
+% в стилях \bibsty{gost-inline}, \bibsty{gost-footnote} и \bibsty{gost-authoryear}
 вряд ли найдут применение
 в русском тексте, они оставлены для полноты.
 
@@ -1269,13 +1269,13 @@ gost-authoryear & cite & Автор (заголовок) и год в текст
 ГОСТ определяет два способа библиографического описания отдельного тома многотомного издания:
 
 \begin{bibexample}
-\item Детская энциклопедия. В 12 т. Т. 7. Человек. \dots\ 
-\item Человек. \dots\ (Детская энциклопедия: в 12 т., т. 7)\dots\ 
+\item Детская энциклопедия. В 12 т. Т. 7. Человек. \dots\
+\item Человек. \dots\ (Детская энциклопедия: в 12 т., т. 7)\dots\
 \end{bibexample}
 
-В \biblatexgost реализован только первый вариант. Соответственно, 
-в стиле \bibsty{gost-autoryear} при отсутствии автора ссылка производится на общий 
-заголовок многотомного издания, а не на заголовок отдельного тома (тем более, что 
+В \biblatexgost реализован только первый вариант. Соответственно,
+в стиле \bibsty{gost-autoryear} при отсутствии автора ссылка производится на общий
+заголовок многотомного издания, а не на заголовок отдельного тома (тем более, что
 последний может и отсутствовать):
 
 \begin{bibexample}
@@ -1285,27 +1285,31 @@ gost-authoryear & cite & Автор (заголовок) и год в текст
 \subsection{Формат заголовка библиографической записи}
 \label{headformat}
 
-Имена авторов~--- 
-а также редакторов или переводчиков при использовании опций \opt{useeditor} и/или 
-\opt{usetranslator}~--- в заголовке библиографической записи 
-по умолчанию выводятся курсивом. Этот формат можно изменить, 
+Имена авторов~---
+а также редакторов или переводчиков при использовании опций \opt{useeditor} и/или
+\opt{usetranslator}~--- в заголовке библиографической записи
+по умолчанию выводятся курсивом. Этот формат можно изменить,
 переопределив команды
-\cmd{mkbibhdnamelast}, \cmd{mkbibhdnamefirst}, \cmd{mkbibhdnameprefix} и 
-\cmd{mkbibhdnameaffix}. По умолчанию они определены так: 
+\cmd{mkbibhdnamelast}, \cmd{mkbibhdnamefirst}, \cmd{mkbibhdnameprefix} и
+\cmd{mkbibhdnameaffix}. По умолчанию они определены так:
 
 \begin{lstlisting}[style=latex]
 \newcommand*{\mkbibhdnamelast}[1]{\mkbibemph{#1}}
 \newcommand*{\mkbibhdnamefirst}[1]{\mkbibhdnamelast{#1}}
 \newcommand*{\mkbibhdnameprefix}[1]{\mkbibhdnamelast{#1}}
-\newcommand*{\mkbibhdnameaffix}[1]{\mkbibhdnamelast{#1}} 
+\newcommand*{\mkbibhdnameaffix}[1]{\mkbibhdnamelast{#1}}
 \end{lstlisting}
 
-%\section{Известные проблемы}
-%\label{sec:issues}
-%
-%\begin{itemize}
-%\item \ldots
-%\end{itemize}
+\section{Известные проблемы}
+\label{sec:issues}
+
+\begin{itemize}
+\item Пакет при сортировке помещает латинские буквы перед кириллическими.
+Это связано с ограничениями
+модуля Unicode::Collate языка Perl, на котором написан \biber (не реализовано правило
+reorder). Поэтому, если вы хотите, чтобы в библиографии кириллические записи шли в начале, то в качестве обходного пути можете отредактировать файл .bbl, создаваемый \biber'ом
+(переместить записи в начало списка \texttt{sortlist}), и затем запустить \latex.
+\end{itemize}
 
 \appendix
 \section*{Приложения}
@@ -1320,9 +1324,9 @@ gost-authoryear & cite & Автор (заголовок) и год в текст
 редакторов и переводчиков, изменяя формат вывода, когда это количество превышает 3
 (см.~\secref{4names}).
 При этом, однако, механизм сортировки \biblatex не позволяет обнаружить, что в заголовке
-теперь используются не имена, а заглавие. 
+теперь используются не имена, а заглавие.
 Поэтому в \biblatexgost для правильной работы сортировки в записи публикаций,
-имеющих более 3-х имён, в поле \bibfield{options} добавляется значение 
+имеющих более 3-х имён, в поле \bibfield{options} добавляется значение
 \kvopt{useauthor}{false} (при 4-х и более авторах), \kvopt{useeditor}{false} (при 4-х и более
 редакторах) и \kvopt{usetranslator}{false} (при 4-х и более переводчиках). Например:
 
@@ -1336,16 +1340,16 @@ gost-authoryear & cite & Автор (заголовок) и год в текст
 
 Это делается автоматически при помощи функции \cmd{DeclareSourcemap}%
 \footnote{В предыдущих версиях \biblatexgost это нужно было делать вручную.}.
-При этом, однако, используется фиксированное значение предельного количества авторов 
+При этом, однако, используется фиксированное значение предельного количества авторов
 (3), которое не зависит от опции пакета \opt{maxnames}. Соответственно, простое изменение
 этой опции может привести к ошибкам сортировки.
 
-%\item Определен макрос \cmd{ifmulticitation}, принимающий значение \texttt{True} 
+%\item Определен макрос \cmd{ifmulticitation}, принимающий значение \texttt{True}
 %внутри команд \cmd{...cites} (комплексных ссылок, в терминологии ГОСТа).
 
 \item Пакет загружает дополнительный файл локализации
 \linebreak\file{russian-gost.lbx}.
-%В него добавлены строки \bibfield{books}, \bibfield{parts}, \bibfield{issues} для книг, частей, 
+%В него добавлены строки \bibfield{books}, \bibfield{parts}, \bibfield{issues} для книг, частей,
 %выпусков.
 
 \end{itemize}
@@ -1374,21 +1378,21 @@ gost-authoryear & cite & Автор (заголовок) и год в текст
 \end{release}
 
 \begin{release}{0.5}{1-07-2012}% up to rev. 197
-\item Добавлено поле \bibfield{material} (общее обозначение материала)\see{sec:newfields} 
+\item Добавлено поле \bibfield{material} (общее обозначение материала)\see{sec:newfields}
 \item Восстановлены стандартные значения опции \opt{mergedate}\see{sec:newoptions}
 \item Добавлена опция \kvopt{mergedate}{gostlabel}\see{sec:newoptions}
 \item Добавлена обработка опции \opt{singletitle}\see{sec:newoptions}
 \item Добавлено сокращение <<Там же>>/<<Ibid.>> для  последовательных ссылок\\ на публикации,
   включённые в один и тот же документ. Регулируется опцией \opt{inbookibid}\see{sec:newoptions}
-\item Исправлены отклонения от ГОСТа в драйверах \bibtype{booklet}, \bibtype{manual}, 
-  \bibtype{misc},\\ \bibtype{online}, \bibtype{patent}, \bibtype{report},  
+\item Исправлены отклонения от ГОСТа в драйверах \bibtype{booklet}, \bibtype{manual},
+  \bibtype{misc},\\ \bibtype{online}, \bibtype{patent}, \bibtype{report},
   \bibtype{thesis}, \bibtype{unpublished}
 %\item Исправлена ошибка, приводившая к неопределённости для публикаций без авторов в
 %  \bibsty{gost-autoryear}%\see{sec:}
 %\item Исправлена ошибка: нечисловые значения
 %  \bibfield{edition}, \bibfield{volume}, \bibfield{book} и т.\,д. выводились со
-%  строчной буквы  
-%\item Удалён вывод тома и пр. из цитат в \bibsty{gost-autoryear}%\see{sec:} 
+%  строчной буквы
+%\item Удалён вывод тома и пр. из цитат в \bibsty{gost-autoryear}%\see{sec:}
 \item Исправлены ошибки
 \end{release}
 
@@ -1397,7 +1401,7 @@ gost-authoryear & cite & Автор (заголовок) и год в текст
 \item Изменено соответствие терминов ГОСТа и полей \biblatex\see{sec:gost-biblatex}
 \item Добавлено автоматическое переопределение полей (теперь не нужна настройка \file{biber.conf})%\see{bibermap}
 \item Добавлена автоматическая обработка длинных списков имён\see{4names}
-\item Добавлено новая опция \bibfield{movenames}\see{4names} 
+\item Добавлено новая опция \bibfield{movenames}\see{4names}
 \item Добавлено новое поле \bibfield{specdata}\see{sec:newfields}
 \item В \bibsty{gost-authoryear} значение по умолчанию опции \opt{loccittracker} изменено на
     \opt{constrict}\see{sec:styles}
@@ -1415,7 +1419,7 @@ gost-authoryear & cite & Автор (заголовок) и год в текст
 \item Исправлена ошибка опции \kvopt{citetracker}{constrict} в \bibsty{gost-inline},
 \bibsty{gost-footnote}. Опция установлена по умолчанию.
 \item Исправлено: не выводилось полное число томов, частей и т.\,д.
-\item Исправлено: в цитатах \bibsty{gost-numeric} не переключался язык. 
+\item Исправлено: в цитатах \bibsty{gost-numeric} не переключался язык.
 \end{release}
 
 \begin{release}{0.3.1}{21-04-2012}
@@ -1426,7 +1430,7 @@ gost-authoryear & cite & Автор (заголовок) и год в текст
 \item Добавлена обработка длинных списков имён\see{4names}
 \item Добавлена схема сортировки \opt{ntvy}\see{sorting}
 \item Изменены некоторые стандартные схемы сортировки\see{sorting}
-\item Поля \bibfield{volume}, \bibfield{book}, \bibfield{part}, \bibfield{issue} 
+\item Поля \bibfield{volume}, \bibfield{book}, \bibfield{part}, \bibfield{issue}
 теперь могут быть нечисловыми\see{sec:volsparts}
 \item Добавлены макросы настройки формата имён заголовков\see{sec:impldet}
 \item Восстановлена опция \opt{dashed} для \bibsty{gost-inline}, \bibsty{gost-footnote}
