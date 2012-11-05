@@ -176,6 +176,7 @@
   \ifinteger{#1}
     {\mkbibordedition{#1}~\bibstring{edition}}
     {\ifcapital{\MakeCapital{#1}}{#1}\isdot}}
+\DeclareFieldFormat[thesis]{type}{\ifbibstring{#1}{\bibsentence\biblstring{#1}}{#1}}
 
 \DeclareNameAlias{sortname}{last-first}
 
@@ -768,10 +769,10 @@
   \usebibmacro{author}%
   \setunit*{\labelnamepunct}%
   \usebibmacro{title}%
+  \setunit{\subtitlepunct}%
+  \printfield{type}%
   \newunit\newblock
   \printlist[semicolondelim]{specdata}%
-  \newunit\newblock
-  \printfield{type}%
   \newunit
   \usebibmacro{institution+location+date}%
   \newunit\newblock
@@ -1303,7 +1304,7 @@
           {\setunit*{\subtitlepunct}}
           {\setunit*{\addspace}%
            \usebibmacro{media}%
-           \setunit*{\addcolondelim}}
+           \setunit*{\addcolondelim}}%
        \printfield[titlecase]{subtitle}}%
      \newunit}%
   \setunit*{\addcolondelim}%
