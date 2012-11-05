@@ -188,7 +188,7 @@
 \newcommand*{\mkbibhdnamelast}[1]{\mkbibemph{#1}}
 \newcommand*{\mkbibhdnamefirst}[1]{\mkbibhdnamelast{#1}}
 \newcommand*{\mkbibhdnameprefix}[1]{\mkbibhdnamelast{#1}}
-\newcommand*{\mkbibhdnameaffix}[1]{\mkbibhdnamelast{#1}} 
+\newcommand*{\mkbibhdnameaffix}[1]{\mkbibhdnamelast{#1}}
 \newbibmacro*{authorname:last-first}[4]{%
   \ifuseprefix
     {\usebibmacro{name:delim}{#3#1}%
@@ -216,7 +216,7 @@
 
 \newbibmacro*{//}{%
   \nopunct\printtext{\addnbspace\mbox{//}\addspace}}
-\renewcommand*{\labelnamepunct}{\addspace} 
+\renewcommand*{\labelnamepunct}{\addspace}
 \renewcommand*{\intitlepunct}{\addspace}
 \renewcommand*{\finalnamedelim}{\addcomma\space}
 \renewcommand*{\finallistdelim}{\addcomma\space}
@@ -853,10 +853,10 @@
 
 \newbibmacro*{maintitle+volumes+parts+title}{%
   \usebibmacro{maintitle+volumes+parts+}{title}}
-  
+
 \newbibmacro*{maintitle+volumes+parts+booktitle}{%
   \usebibmacro{maintitle+volumes+parts+}{booktitle}}
-  
+
 \newbibmacro*{event+venue+date}{%
     \ifboolexpr{
       test {\iffieldundef{eventtitle}}
@@ -972,10 +972,10 @@
   \newunit\newblock
   \ifcitation
     {\iftoggle{cbx:eprint}
-      {\printfield{eprint}}
+      {\usebibmacro{eprint}}
       {}}
     {\iftoggle{bbx:eprint}
-      {\printfield{eprint}}
+      {\usebibmacro{eprint}}
       {}}%
   \newunit\newblock
   \usebibmacro{url+urldate+note}}
@@ -1008,7 +1008,7 @@
 % <field><true><false>
 % checks if book<field> doesn't exist nor is equal to <field>,
 % so that <field> should be printed
-\newbibmacro*{checkbookfield}[3]{% 
+\newbibmacro*{checkbookfield}[3]{%
   \ifboolexpr{
     test {\iffieldundef{book#1}}
     or
@@ -1019,7 +1019,7 @@
 }
 
 % <name><true><false>
-\newbibmacro*{checkbookname}[3]{% 
+\newbibmacro*{checkbookname}[3]{%
   \ifboolexpr{
     test {\ifnameundef{book#1}}
     or
@@ -1030,7 +1030,7 @@
 }
 
 % <list><true><false>
-\newbibmacro*{checkbooklist}[3]{% 
+\newbibmacro*{checkbooklist}[3]{%
   \ifboolexpr{
     test {\iflistundef{book#1}}
     or
@@ -1047,7 +1047,7 @@
      }
     {}}
 
-\renewbibmacro*{byeditor}{%    
+\renewbibmacro*{byeditor}{%
   \ifnameundef{editor}
     {}
     %{\usebibmacro{checkbookname}{editor}
@@ -1067,7 +1067,7 @@
       test {\ifnameundef{booktranslator}}
       or
       not test {\ifnamesequal{translator}{booktranslator}}
-      or 
+      or
       ( not test {\iffieldundef{origlanguage}}
         and
         test {\iffieldundef{bookoriglanguage}}
@@ -1081,7 +1081,7 @@
       ( not test {\iffieldundef{origlanguage}}
         and
         not test {\iffieldundef{bookoriglanguage}}
-        and 
+        and
         not test {\iffieldsequal{origlanguage}{bookoriglanguage}}
       )
       }
@@ -1184,7 +1184,7 @@
           {\appto\abx@tempa{af}%
            \clearname{bookafterword}}
           {}}}%
-  % temporarily redefining commands used in the bibstring 
+  % temporarily redefining commands used in the bibstring
   \savecommand\lbx@lfromlang%
   \savecommand\lbx@sfromlang%
   \renewcommand*{\lbx@lfromlang}{%
@@ -1229,7 +1229,7 @@
 
 \newbibmacro*{book:withannotator}{%
   \usebibmacro{book:with+}{annotator}}
-  
+
 \newbibmacro*{book:withintroduction}{%
   \usebibmacro{book:with+}{introduction}}
 
@@ -1270,7 +1270,7 @@
           {\printfield{issue}%
            \blx@gost@setunit}
           {}}}}%
-  \ifthenelse{\equal{#2}{\blx@gost@endofstring}}% end of string ? 
+  \ifthenelse{\equal{#2}{\blx@gost@endofstring}}% end of string ?
     {}%
     {\stepcounter{blx@gost@pointer}%
      \blx@gost@volsinorder#2}}
@@ -1373,7 +1373,7 @@
           {\printfield{issues}%
            \blx@gost@setunit}
           {}}}}%
-  \ifthenelse{\equal{#2}{\blx@gost@endofstring}}% end of string ? 
+  \ifthenelse{\equal{#2}{\blx@gost@endofstring}}% end of string ?
     {}%
     {\stepcounter{blx@gost@pointer}%
      \blx@gost@involsinorder#2}}
@@ -1410,7 +1410,7 @@
     {%\usebibmacro{bytypestrg}{author}{author}%
      %\setunit{\addspace}%
      \printnames[byauthor]{author}}}
-     
+
 \newbibmacro*{book:byauthor}{%
   \ifboolexpr{
     test {\ifnameundef{bookauthor}}
