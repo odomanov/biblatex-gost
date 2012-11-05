@@ -251,29 +251,31 @@
   \setunit*{\resppunct}%
   \usebibmacro{bytranslator+others}%
   \setunit{\space}
-  \usebibmacro{//}%
-  \usebibmacro{journal}
-  \setunit{\respdelim}%
-  \usebibmacro{credits}%
-  \setunit*{\resppunct}%
-  \usebibmacro{byeditor}%
-  \newunit\newblock
-  \printfield{edition}%
-  \newunit\newblock
-  \printfield{location}%
-  \setunit*{\addcomma\space}%
-  \usebibmacro{jour:date}%
-  \newunit\newblock
-  \usebibmacro{jour:volume+parts+issuetitle}%
-  \newunit\newblock
-  \printfield{pages}%
-  \newunit\newblock
-  \iffieldundef{series}
-    {}
-    {\printtext{(\printfield{series})}}
-  \newunit\newblock
-  \usebibmacro{issn}
-  \newunit\newblock
+  \iffieldundef{journaltitle}  % no journaltitle means electronic publication
+   {\newunit}
+   {\usebibmacro{//}%
+    \usebibmacro{journal}
+    \setunit{\respdelim}%
+    \usebibmacro{credits}%
+    \setunit*{\resppunct}%
+    \usebibmacro{byeditor}%
+    \newunit\newblock
+    \printfield{edition}%
+    \newunit\newblock
+    \printfield{location}%
+    \setunit*{\addcomma\space}%
+    \usebibmacro{jour:date}%
+    \newunit\newblock
+    \usebibmacro{jour:volume+parts+issuetitle}%
+    \newunit\newblock
+    \printfield{pages}%
+    \newunit\newblock
+    \iffieldundef{series}
+      {}
+      {\printtext{(\printfield{series})}}
+    \newunit\newblock
+    \usebibmacro{issn}
+    \newunit\newblock}%
   \usebibmacro{doi+eprint+url+note}%
   \newunit\newblock
   \usebibmacro{addendum+pubstate}%
