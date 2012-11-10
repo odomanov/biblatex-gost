@@ -377,7 +377,7 @@ Permission is granted to copy, distribute and\slash or modify this software unde
                                     {\spotcolor bookintroduction}, {\spotcolor booktranslator} \\
 \cmidrule(r){1-1}\cmidrule{2-2}
 \multicolumn{1}{@{}H}{Область издания} & \\*
-Сведения об издании & edition, version \\
+Сведения об издании & edition, version, {\spotcolor editioncredits} \\
 \textit{Параллельные сведения об издании} & edition \\
 \cmidrule(r){1-1}\cmidrule{2-2}
 \multicolumn{1}{@{}H}{Область специфических сведений} & {\spotcolor specdata} \\
@@ -525,6 +525,11 @@ ISSN серии или подсерии & issn (isbn) \\
 оно может содержать вообще все сведения об ответственности.
 Поле \bibfield{credits} выводится в сведениях об ответственности в самом начале или
 сразу после авторов, если они там присутствуют.
+
+\listitem{editioncredits}{literal}
+
+Сведения об ответственности издания, если они относятся к конкретному изданию.
+Выводятся сразу после издания (см.~\gostbibref{5.3.3}).
 
 \fielditem{editortype}{key}
 
