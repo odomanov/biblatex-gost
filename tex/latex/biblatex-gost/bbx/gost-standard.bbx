@@ -262,6 +262,8 @@
     \usebibmacro{byeditor}%
     \newunit\newblock
     \printfield{edition}%
+    \setunit*{\respdelim}
+    \printlist[semicolondelim]{editioncredits}%
     \newunit\newblock
     \printfield{location}%
     \setunit*{\addcomma\space}%
@@ -302,6 +304,8 @@
   \usebibmacro{bytranslator+others}%
   \newunit\newblock
   \printfield{edition}%
+  \setunit*{\respdelim}
+  \printlist[semicolondelim]{editioncredits}%
   \newunit\newblock
   \printlist[semicolondelim]{specdata}%
   \newunit\newblock
@@ -372,6 +376,8 @@
   \usebibmacro{bytranslator+others}%
   \newunit\newblock
   \printfield{edition}%
+  \setunit*{\respdelim}
+  \printlist[semicolondelim]{editioncredits}%
   \newunit\newblock
   \printlist[semicolondelim]{specdata}%
   \newunit\newblock
@@ -424,6 +430,8 @@
       \usebibmacro{book:bytranslator+others}%
       \newunit\newblock
       \printfield{edition}%
+      \setunit*{\respdelim}
+      \printlist[semicolondelim]{editioncredits}%
       \newunit\newblock
       \printlist[semicolondelim]{specdata}%
       \newunit\newblock
@@ -470,6 +478,8 @@
       \usebibmacro{book:bytranslator+others}%
       \newunit\newblock
       \printfield{edition}%
+      \setunit*{\respdelim}
+      \printlist[semicolondelim]{editioncredits}%
       \newunit\newblock
       \printlist[semicolondelim]{specdata}%
       \newunit\newblock
@@ -551,6 +561,8 @@
   \setunit*{\resppunct}
   \newunit\newblock
   \printfield{edition}%
+  \setunit*{\respdelim}
+  \printlist[semicolondelim]{editioncredits}%
   \newunit
   \printfield{version}%
   \newunit\newblock
@@ -1545,6 +1557,7 @@
   \renewbibmacro*{series+number}{}%
   \renewbibmacro*{credits}{}%
   \renewbibmacro*{book:credits}{}%
+  \renewbibmacro*{editioncredits}{}%
   \renewbibmacro*{byeditor}{}%
   \renewbibmacro*{bytranslator+others}{}%
   \renewbibmacro*{book:bytranslator+others}{}%
@@ -1552,6 +1565,7 @@
   \clearfield{series}%
   \clearfield{edition}%
   \clearlist{credits}%
+  \clearlist{editioncredits}%
   \clearlist{specdata}%
   \clearfield{media}%
   \clearfield{pagetotal}%

@@ -25,17 +25,19 @@
 
 \DeclareDatamodelFields[type=list, datatype=literal]{
   specdata,
-  credits, 
+  credits,
   bookcredits,
+  editioncredits,
 }
 
 \DeclareDatamodelEntryfields{
   media,
   credits,
+  editioncredits,
   specdata,
   volsorder,
 }
-  
+
 \DeclareDatamodelEntryfields[book,collection,proceedings,reference]{
   book,
   books,parts,issues,
