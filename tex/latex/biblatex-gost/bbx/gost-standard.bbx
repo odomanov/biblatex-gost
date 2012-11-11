@@ -1057,7 +1057,7 @@
 
 \newbibmacro*{credits}{%
   \usebibmacro{checkbooklist}{credits}
-    {\printlist{credits}%
+    {\printlist[semicolondelim]{credits}%
      \clearlist{credits}%
      }
     {}}
@@ -1166,7 +1166,7 @@
     {}}
 
 \newbibmacro*{book:credits}{%
-  \printlist{bookcredits}%
+  \printlist[semicolondelim]{bookcredits}%
   \clearlist{bookcredits}%
 }
 
