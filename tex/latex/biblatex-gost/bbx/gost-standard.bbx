@@ -1003,19 +1003,19 @@
 \renewbibmacro*{byeditorx}{%
   \ifnameundef{editora}
     {}
-    {\usebibmacro{bytypestrg}{editora}{editor}%
+    {\usebibmacro{byeditor+othersstrg}{editora}%
      \setunit{\addspace}%
      \printnames[byeditora]{editora}%
      \setunit*{\resppunct}}%
   \ifnameundef{editorb}
     {}
-    {\usebibmacro{bytypestrg}{editorb}{editor}%
+    {\usebibmacro{byeditor+othersstrg}{editorb}%
      \setunit{\addspace}%
      \printnames[byeditorb]{editorb}%
      \setunit*{\resppunct}}%
   \ifnameundef{editorc}
     {}
-    {\usebibmacro{bytypestrg}{editorc}{editor}%
+    {\usebibmacro{byeditor+othersstrg}{editorc}%
      \setunit{\addspace}%
      \printnames[byeditorc]{editorc}%
      \setunit*{\resppunct}}}
@@ -1062,11 +1062,41 @@
      }
     {}}
 
+\renewbibmacro*{byeditor+othersstrg}[1]{%
+  \iffieldundef{#1type}
+    {\def\abx@tempa{byeditor}}
+    {\edef\abx@tempa{by\thefield{#1type}}}%
+  \let\abx@tempb=\empty
+  \ifnamesequal{#1}{translator}
+    {\appto\abx@tempa{tr}%
+     \appto\abx@tempb{\clearname{translator}}}
+    {}%
+  \ifnamesequal{#1}{commentator}
+    {\appto\abx@tempa{co}%
+     \appto\abx@tempb{\clearname{commentator}}}
+    {\ifnamesequal{#1}{annotator}
+       {\appto\abx@tempa{an}%
+        \appto\abx@tempb{\clearname{annotator}}}
+       {}}%
+  \ifnamesequal{#1}{introduction}
+    {\appto\abx@tempa{in}%
+     \appto\abx@tempb{\clearname{introduction}}}
+    {\ifnamesequal{#1}{foreword}
+       {\appto\abx@tempa{fo}%
+        \appto\abx@tempb{\clearname{foreword}}}
+       {\ifnamesequal{#1}{afterword}
+          {\appto\abx@tempa{af}%
+           \appto\abx@tempb{\clearname{afterword}}}
+          {}}}%
+  \ifbibxstring{\abx@tempa}
+    {\printtext{\bibstring{\abx@tempa}}\abx@tempb}
+    {\usebibmacro{bytypestrg}{#1}{editor}}}
+
 \renewbibmacro*{byeditor}{%
   \ifnameundef{editor}
     {}
     %{\usebibmacro{checkbookname}{editor}
-      {\usebibmacro{byeditor+othersstrg}%
+      {\usebibmacro{byeditor+othersstrg}{editor}%
        \setunit{\addspace}%
        \printnames[byeditor]{editor}%
        \clearname{editor}%
