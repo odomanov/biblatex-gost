@@ -182,8 +182,12 @@
   \renewbibmacro*{date}{\printdate}%
   \renewbibmacro*{year}{\printfield{year}}%
   \renewbibmacro*{labeltitle}{}%
-  \DeclareFieldFormat{extrayear}{}%
-  \DeclareFieldFormat{extratitleyear}{}%
+  \DeclareFieldFormat{extrayear}{%
+    \PackageWarning{biblatex-gost}{%
+      Citation \thefield{entrykey} is not unique}}%
+  \DeclareFieldFormat{extratitleyear}{%
+    \PackageWarning{biblatex-gost}{%
+      Citation \thefield{entrykey} is not unique}}%
   \ExecuteBibliographyOptions{singletitle}%
   \renewbibmacro*{authoryearlabel}{}%
   \setlength{\labelauthoryearsep}{0pt}%
