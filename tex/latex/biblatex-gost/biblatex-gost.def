@@ -338,6 +338,7 @@
 }
 
 \DeclareBibliographyOption{movenames}[true]{%
+  \gdef\blx@opt@movenames{#1}%
   \ifstrequal{#1}{true}
     {\DeclareSourcemap{
       \maps[datatype=bibtex]{

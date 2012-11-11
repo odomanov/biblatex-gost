@@ -15,6 +15,20 @@
      This is a fatal error. I'm aborting now.}%
     \endinput}
 
+\AtEndOfPackage{%
+\ifboolexpr{
+      test {\ifdefstring{\blx@opt@movenames}{true}}
+      and
+      ( not test {\ifnumequal{\blx@maxbibnames}{3}}
+        or
+        not test {\ifnumequal{\blx@maxcitenames}{3}}
+      )
+      }
+  {\PackageWarning{biblatex-gost}{You set maxbibnames or maxcitenames\MessageBreak
+    different from their default value 3.\MessageBreak
+    Make sure that sorting works as expected.}}
+  {}}
+
 \RequireBiber[3]  % strictly required
 
 \blx@inputonce{biblatex-gost.def}{generic definitions}{}{}{}{}
