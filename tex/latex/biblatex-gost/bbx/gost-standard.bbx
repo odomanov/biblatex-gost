@@ -226,7 +226,7 @@
 \renewcommand*{\newblockpunct}{%
   \addnbspace\textemdash\space\bibsentence}% block punctuation
 \newcommand*{\respdelim}{\addnbspace/\space}% delimiter before "credits"
-\newcommand*{\resppunct}{\addsemicolondelim\space}% punctuation between "credits" items
+\newcommand*{\resppunct}{\addsemicolondelim}% punctuation between "credits" items
 
 \newcounter{blx@gost@pointer}%
 \newcommand*{\blx@gost@endofstring}{\@\@\@\@\@}  % end of string = \\\
@@ -1533,7 +1533,7 @@
     {\iftoggle{bbx:url}
       {\usebibmacro{url+urldate}}
       {}}%
-  \setunit*{\addsemicolondelim\space}
+  \setunit*{\addsemicolondelim}
   \printfield{note}}
 
 \gdef\ifmulticitation{%
