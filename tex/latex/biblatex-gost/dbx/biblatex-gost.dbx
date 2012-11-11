@@ -7,6 +7,17 @@
   books,parts,issues,
   volsorder,
   sortvolume,
+  systemreq,
+}
+
+\DeclareDatamodelFields[type=field, datatype=date, skipout]{
+  update,
+}
+
+\DeclareDatamodelFields[type=field, datatype=integer]{
+  upday,
+  upmonth,
+  upyear,
 }
 
 \DeclareDatamodelFields[type=list, datatype=name]{
@@ -59,7 +70,14 @@
   bookcredits,
 }
 
-%\DeclareDatamodelConstraints{
-%}
+\DeclareDatamodelEntryfields[online]{
+  update,systemreq,
+}
+
+\DeclareDatamodelConstraints{
+  \constraint[type=data, datatype=date]{
+    \constraintfield{update}
+  }
+}
 
 \endinput

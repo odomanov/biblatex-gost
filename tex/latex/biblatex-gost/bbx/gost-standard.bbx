@@ -42,6 +42,10 @@
 \newtoggle{cbx:doi}
 \newtoggle{cbx:eprint}
 
+\protected\def\blx@imc@printupdate{\csuse{mkbibrangeshort}{up}}
+\blx@regimcs{%
+  \printupdate}
+
 %  OPTIONS
 
 \newbibmacro*{bbx:savehash}{%
@@ -176,6 +180,14 @@
    {\iffieldequalstr{endyear}{}
       {#1\mbox{~~~~}}
       {#1}}}
+\DeclareFieldFormat{update}{%
+  \ifbibstring{updated}
+    {\bibstring{updated}\addcolon\space#1}
+    {Updated\addcolon\space#1}}
+\DeclareFieldFormat{systemreq}{%
+  \ifbibstring{systemreq}
+    {\bibstring{systemreq}\addcolon\space#1}
+    {Sys. requirements\addcolon\space#1}}
 \DeclareListFormat{semicolondelim}{%
   \ifnumgreater{\value{listcount}}{\value{liststart}}
     {\ifnumless{\value{listcount}}{\value{liststop}}
@@ -655,6 +667,10 @@
   \printlist[semicolondelim]{specdata}%
   \newunit\newblock
   \usebibmacro{date}%
+  \newunit\newblock
+  \printupdate%
+  \newunit\newblock
+  \printfield{systemreq}%
   \newunit\newblock
   \usebibmacro{url+urldate+note}%
   \newunit\newblock
