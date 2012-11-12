@@ -287,9 +287,9 @@
     \setunit*{\resppunct}%
     \usebibmacro{byeditor}%
     \newunit\newblock
-    \printfield{edition}%
-    \setunit*{\respdelim}
-    \printlist[semicolondelim]{editioncredits}%
+    \printfield{version}%
+    \newunit\newblock
+    \printlist[semicolondelim]{specdata}%
     \newunit\newblock
     \printfield{location}%
     \setunit*{\addcomma\space}%
@@ -781,6 +781,8 @@
   \usebibmacro{title}%
   \setunit{\respdelim}%
   \usebibmacro{byauthor}%
+  \setunit*{\resppunct}%
+  \usebibmacro{credits}%
   \newunit\newblock
   \printfield{version}%
   \newunit\newblock
@@ -839,9 +841,9 @@
   \usebibmacro{title}%
   \setunit{\respdelim}%
   \usebibmacro{byauthor}%
-  \setunit*{\resppunct}%
+  \setunit*{resppunct}%
   \usebibmacro{credits}%
-  \setunit*{\resppunct}%
+  \setunit*{resppunct}%
   \usebibmacro{byeditor}%
   \newunit\newblock
   \printlist[semicolondelim]{specdata}%
