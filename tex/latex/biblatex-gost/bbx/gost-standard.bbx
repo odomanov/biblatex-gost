@@ -1656,11 +1656,20 @@
 \renewbibmacro*{related:default}[1]{%
   \entrydata{#1}{%
     \usebibmacro{title}%
-    \newunit
+    \setunit{\space}
     \ifentrytype{article}
-      {\usebibmacro{in:}%
-       \usebibmacro{journal+issuetitle}%
-       \newunit\newblock}
+      {\usebibmacro{//}%
+       \usebibmacro{journal}%
+       \setunit{\respdelim}%
+        \usebibmacro{byeditor}%
+        \newunit\newblock
+        \printfield{location}%
+        \setunit*{\addcomma\space}%
+        \usebibmacro{jour:date}%
+        \newunit\newblock
+        \usebibmacro{jour:volume+parts+issuetitle}%
+        \newunit\newblock
+        \printfield{pages}}
       {}%
     \ifboolexpr{
       test {\ifentrytype{inbook}}
@@ -1669,23 +1678,19 @@
       or
       test {\ifentrytype{inproceedings}}
     }
-      {\usebibmacro{in:}%
-       \usebibmacro{maintitle+booktitle}%
-       \newunit\newblock
+      {\usebibmacro{//}%
+       \usebibmacro{maintitle+volumes+parts+booktitle}%
+       \newunit
        \usebibmacro{event+venue+date}%
+       \setunit{\respdelim}%
+       \usebibmacro{byeditor}%
+       \newunit\newblock
+       \usebibmacro{publisher+location+date}%
+       \newunit\newblock
+       \usebibmacro{chapter+pages}%
        \newunit\newblock}
       {}%
-  \usebibmacro{byeditor+others}%
-  \newunit\newblock
-  \printlist{location}%
-  \iflistundef{publisher}
-    {\setunit*{\addcomma\space}}
-    {\setunit*{\addcolon\space}}%
-  \printlist{publisher}%
-  \setunit*{\addcomma\space}%
-  \printdate%
-  \setunit{\bibpagespunct}%
-  \printfield{pages}}}
+  }}
 
 \renewbibmacro*{related:bytranslator}[1]{%
   \entrydata{#1}{%
