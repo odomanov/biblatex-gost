@@ -1374,16 +1374,16 @@
 \def\blx@gost@volsinorder#1#2{%
   \ifstrequal{#1}{v}
     {\printfield{volume}%
-     \blx@gost@setunit}
+     \iffieldundef{volume}{}{\blx@gost@setunit}}
     {\ifstrequal{#1}{b}
       {\printfield{book}%
-       \blx@gost@setunit}
+       \iffieldundef{book}{}{\blx@gost@setunit}}
       {\ifstrequal{#1}{p}
         {\printfield{part}%
-         \blx@gost@setunit}
+         \iffieldundef{part}{}{\blx@gost@setunit}}
         {\ifstrequal{#1}{i}
           {\printfield{issue}%
-           \blx@gost@setunit}
+           \iffieldundef{issue}{}{\blx@gost@setunit}}
           {}}}}%
   \ifthenelse{\equal{#2}{\blx@gost@endofstring}}% end of string ?
     {}%
