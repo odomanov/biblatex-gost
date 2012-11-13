@@ -1737,29 +1737,31 @@
 
 \renewbibmacro*{related:multivolume}[1]{%
   \entrydata*{#1}{%
-    \printfield{volume}%
-    \printfield{part}%
-    \setunit{\addcolon\space}%
-    \usebibmacro{title}%
+    \usebibmacro{volume+parts}{\newunit}%
+    \setunit{\addcolondelim}%
     \ifboolexpr{
       test {\ifnamesequal{author}{savedauthor}}
       or
       test {\ifnameundef{author}}
     }
       {}
-      {\usebibmacro{bytypestrg}{author}{author}%
-       \setunit{\addspace}%
-       \printnames[byauthor]{author}
-       \newunit\newblock}%
+      {\usebibmacro{author}%
+       \setunit*{\labelnamepunct}}%
+    \usebibmacro{title}%
     \ifboolexpr{
       test {\ifnamesequal{editor}{savededitor}}
       or
       test {\ifnameundef{editor}}
     }
       {}
-      {\usebibmacro{byeditor+others}%
-       \newunit\newblock}%
-  \printdate}}
+      {\setunit{\respdelim}%
+       \usebibmacro{byeditor}}%
+  \newunit\newblock
+  \printdate%
+  \iffieldundef{pagetotal}
+    {}
+    {\newunit\newblock
+     \printfield{pagetotal}}}}
 
 \renewbibmacro*{related:origpubin}[1]{%
   \entrydata*{#1}{%
