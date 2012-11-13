@@ -463,7 +463,7 @@
          \setunit*{\resppunct}}%
       \usebibmacro{book:credits}%
       \setunit*{\resppunct}%
-      \usebibmacro{byeditor}%
+      \usebibmacro{book:byeditor}%
       \setunit*{\resppunct}%
       \usebibmacro{book:bytranslator+others}%
       \newunit\newblock
@@ -513,7 +513,7 @@
       \setunit{\respdelim}%
       \usebibmacro{book:credits}%
       \setunit*{\resppunct}%
-      \usebibmacro{byeditor}%
+      \usebibmacro{book:byeditor}%
       \setunit*{\resppunct}%
       \usebibmacro{book:bytranslator+others}%
       \newunit\newblock
@@ -565,7 +565,7 @@
       \setunit{\respdelim}%
       \usebibmacro{book:credits}%
       \setunit*{\resppunct}%
-      \usebibmacro{byeditor}%
+      \usebibmacro{book:byeditor}%
       \setunit*{\resppunct}%
       \usebibmacro{book:bytranslator+others}%
       \newunit\newblock
@@ -1090,6 +1090,26 @@
      \printnames[byeditorc]{editorc}%
      \setunit*{\resppunct}}}
 
+\renewbibmacro*{book:byeditorx}{%
+  \ifnameundef{editora}
+    {}
+    {\usebibmacro{book:byeditor+othersstrg}{editora}%
+     \setunit{\addspace}%
+     \printnames[byeditora]{editora}%
+     \setunit*{\resppunct}}%
+  \ifnameundef{editorb}
+    {}
+    {\usebibmacro{book:byeditor+othersstrg}{editorb}%
+     \setunit{\addspace}%
+     \printnames[byeditorb]{editorb}%
+     \setunit*{\resppunct}}%
+  \ifnameundef{editorc}
+    {}
+    {\usebibmacro{book:byeditor+othersstrg}{editorc}%
+     \setunit{\addspace}%
+     \printnames[byeditorc]{editorc}%
+     \setunit*{\resppunct}}}
+
 % <field><true><false>
 % checks if book<field> doesn't exist nor is equal to <field>,
 % so that <field> should be printed
@@ -1265,9 +1285,53 @@
      \clearname{afterword}}
     {}}
 
+%----------------------------------------------------------------
 \newbibmacro*{book:credits}{%
   \printlist[semicolondelim]{bookcredits}%
   \clearlist{bookcredits}%
+}
+
+\renewbibmacro*{book:byeditor+othersstrg}[1]{%
+  \iffieldundef{#1type}
+    {\def\abx@tempa{byeditor}}
+    {\edef\abx@tempa{by\thefield{#1type}}}%
+  \let\abx@tempb=\empty
+  \ifnamesequal{#1}{booktranslator}
+    {\appto\abx@tempa{tr}%
+     \appto\abx@tempb{\clearname{booktranslator}}}
+    {}%
+  \ifnamesequal{#1}{bookcommentator}
+    {\appto\abx@tempa{co}%
+     \appto\abx@tempb{\clearname{bookcommentator}}}
+    {\ifnamesequal{#1}{bookannotator}
+       {\appto\abx@tempa{an}%
+        \appto\abx@tempb{\clearname{bookannotator}}}
+       {}}%
+  \ifnamesequal{#1}{bookintroduction}
+    {\appto\abx@tempa{in}%
+     \appto\abx@tempb{\clearname{bookintroduction}}}
+    {\ifnamesequal{#1}{bookforeword}
+       {\appto\abx@tempa{fo}%
+        \appto\abx@tempb{\clearname{bookforeword}}}
+       {\ifnamesequal{#1}{bookafterword}
+          {\appto\abx@tempa{af}%
+           \appto\abx@tempb{\clearname{bookafterword}}}
+          {}}}%
+  \ifbibxstring{\abx@tempa}
+    {\printtext{\bibstring{\abx@tempa}}\abx@tempb}
+    {\usebibmacro{bytypestrg}{#1}{editor}}}
+
+\renewbibmacro*{book:byeditor}{%
+  \ifnameundef{editor}
+    {}
+    %{\usebibmacro{checkbookname}{editor}
+      {\usebibmacro{book:byeditor+othersstrg}{editor}%
+       \setunit{\addspace}%
+       \printnames[byeditor]{editor}%
+       \clearname{editor}%
+       \setunit*{\resppunct}%
+       \usebibmacro{book:byeditorx}}
+      %{}}%
 }
 
 \newbibmacro*{book:bytranslator+others}{%
