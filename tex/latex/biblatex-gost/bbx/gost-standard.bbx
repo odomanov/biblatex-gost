@@ -1653,8 +1653,7 @@
         {\printtext[brackets]{\bibcpstring{media\thefield{media}}}}
         {}}}}
 
-\renewbibmacro*{related:default}[1]{%
-  \entrydata{#1}{%
+\newbibmacro{rel:common}{%
     \usebibmacro{author}%
     \setunit*{\labelnamepunct}%
     \ifboolexpr{
@@ -1717,8 +1716,12 @@
           \newunit
           \usebibmacro{publisher+location+date}}%
        \newunit\newblock
-       \usebibmacro{chapter+pages}%
-       \newunit\newblock}}}
+       \usebibmacro{chapter+pages}}}
+
+\renewbibmacro*{related:default}[1]{%
+  \entrydata{#1}{%
+    \usebibmacro{rel:common}%
+    \newunit\newblock}}
 
 \renewbibmacro*{related:bytranslator}[1]{%
   \entrydata{#1}{%
