@@ -1090,7 +1090,7 @@
      \printnames[byeditorc]{editorc}%
      \setunit*{\resppunct}}}
 
-\renewbibmacro*{book:byeditorx}{%
+\newbibmacro*{book:byeditorx}{%
   \ifnameundef{editora}
     {}
     {\usebibmacro{book:byeditor+othersstrg}{editora}%
@@ -1291,7 +1291,7 @@
   \clearlist{bookcredits}%
 }
 
-\renewbibmacro*{book:byeditor+othersstrg}[1]{%
+\newbibmacro*{book:byeditor+othersstrg}[1]{%
   \iffieldundef{#1type}
     {\def\abx@tempa{byeditor}}
     {\edef\abx@tempa{by\thefield{#1type}}}%
@@ -1321,7 +1321,7 @@
     {\printtext{\bibstring{\abx@tempa}}\abx@tempb}
     {\usebibmacro{bytypestrg}{#1}{editor}}}
 
-\renewbibmacro*{book:byeditor}{%
+\newbibmacro*{book:byeditor}{%
   \ifnameundef{editor}
     {}
     %{\usebibmacro{checkbookname}{editor}
