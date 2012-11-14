@@ -43,9 +43,12 @@
 \title{Biblatex-GOST examples}
 \author{Oleg Domanov\thanks{odomanov@yandex.ru}}
 
+\defbibcheck{related}{%
+  \iffieldundef{related}{\skipentry}{}}
+
 \begin{document}
 \maketitle
-Examples are grouped according to their entrytypes. The types themselves are the following 
+Examples are grouped according to their entrytypes. The types themselves are the following
 (click to go to the respective bibliography section):
 \renewcommand*{\do}[1]{\hyperref[#1]{@#1}\\}
 \begin{multicols}{5}
@@ -53,13 +56,15 @@ Examples are grouped according to their entrytypes. The types themselves are the
 \docsvlist{mvbook,book,inbook,suppbook,bookinbook,mvcollection,collection,incollection,suppcollection,mvreference,reference,inreference,proceedings,inproceedings,periodical,article,patent,online}
 \end{multicols}
 
-In the end of the text you may find the listing of the 
-\hyperref[bibfile]{bibliography database file} used. 
-You may take advantage of 
+See also examples of \hyperref[related]{\texttt{related}} fields.
+
+In the end of the text you may find the listing of the
+\hyperref[bibfile]{bibliography database file} used.
+You may take advantage of
 the arrows on the left to switch between a database entry and its presentation.
-The database itself is preliminary. This is actually a file that I use in my everyday work, 
-so it contains some redundant, provisional and even erroneous (sometimes) material. 
-I hope this is not going to confuse the reader too much.  
+The database itself is preliminary. This is actually a file that I use in my everyday work,
+so it contains some redundant, provisional and even erroneous (sometimes) material.
+I hope this is not going to confuse the reader too much.
 
 \nocite{*}
 
@@ -67,6 +72,9 @@ I hope this is not going to confuse the reader too much.
 \renewcommand*{\do}[1]{\section{@#1\label{#1}}\printbibliography[type=#1]}
 \docsvlist{mvbook,book,inbook,suppbook,bookinbook,mvcollection,collection,incollection,suppcollection,mvreference,reference,inreference,proceedings,inproceedings,periodical,article,patent,online}
 
+\section{Related fields\label{related}}
+\printbibliography[check=related]
+
 \section{Bibliography database\label{bibfile}}
 \VerbatimInput[fontsize=\small,codes={\catcode`\-=11},commandchars=\@\[\]]{biblatex-gost-examples.bib}
-\end{document} 
+\end{document}
