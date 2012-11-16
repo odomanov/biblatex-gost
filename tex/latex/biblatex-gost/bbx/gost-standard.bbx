@@ -1148,6 +1148,7 @@
 \newbibmacro*{credits}{%
   \usebibmacro{checkbooklist}{credits}
     {\printlist[semicolondelim]{credits}%
+     \savelist{credits}{\savedclearedcredits}%
      \clearlist{credits}%
      }
     {}}
@@ -1159,7 +1160,7 @@
   \let\abx@tempb=\empty
   \ifnamesequal{#1}{translator}
     {\appto\abx@tempa{tr}%
-     \appto\abx@tempb{\clearname{translator}}}
+     \appto\abx@tempb{\savename{translator}{\savedclearedtranslator}\clearname{translator}}}
     {}%
   \ifnamesequal{#1}{commentator}
     {\appto\abx@tempa{co}%
@@ -1189,6 +1190,7 @@
       {\usebibmacro{byeditor+othersstrg}{editor}%
        \setunit{\addspace}%
        \printnames[byeditor]{editor}%
+       \savename{editor}{\savedclearededitor}%
        \clearname{editor}%
        \setunit*{\resppunct}%
        \usebibmacro{byeditorx}}
@@ -1223,6 +1225,7 @@
         {\usebibmacro{bytranslator+othersstrg}%
          \setunit{\addspace}%
          \printnames[bytranslator]{translator}%
+         \savename{translator}{\savedclearedtranslator}%
          \clearname{translator}%
          \setunit*{\resppunct}}
         {}}%
@@ -1328,6 +1331,7 @@
       {\usebibmacro{book:byeditor+othersstrg}{editor}%
        \setunit{\addspace}%
        \printnames[byeditor]{editor}%
+       \savename{editor}{\savedclearededitor}%
        \clearname{editor}%
        \setunit*{\resppunct}%
        \usebibmacro{book:byeditorx}}
@@ -1652,6 +1656,7 @@
      \setunit{\addcomma\space}%
      \usebibmacro{bbx:savehash}}%
      \usebibmacro{#1}%
+     \savename{editor}{\savedclearededitor}%
      \clearname{editor}}
     {\global\undef\bbx@lasthash}}
 
@@ -1671,6 +1676,7 @@
      \setunit{\addcomma\space}%
      \usebibmacro{bbx:savehash}}%
      \usebibmacro{#1}%
+     \savename{translator}{\savedclearedtranslator}%
      \clearname{translator}}
     {\global\undef\bbx@lasthash}}
 
@@ -1816,12 +1822,12 @@
       {}
       {\setunit{\respdelim}%
        \usebibmacro{byeditor}}%
-  \newunit\newblock
-  \printdate%
-  \iffieldundef{pagetotal}
-    {}
-    {\newunit\newblock
-     \printfield{pagetotal}}}}
+    \newunit\newblock
+    \printdate%
+    \iffieldundef{pagetotal}
+      {}
+      {\newunit\newblock
+       \printfield{pagetotal}}}}
 
 \renewbibmacro*{related:origpubin}[1]{%
   \entrydata*{#1}{%
@@ -1859,6 +1865,9 @@
 \newcounter{bbx:relatedtotal}
 
 \newbibmacro*{related}{%
+  \restorelist{credits}{\savedclearedcredits}%
+  \restorename{editor}{\savedclearededitor}%
+  \restorename{translator}{\savedclearedtranslator}%
   \iffieldequalstr{relatedtype}{multivolume}
     {\finentry}
     {}%
