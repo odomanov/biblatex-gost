@@ -1814,14 +1814,18 @@
       {\usebibmacro{author}%
        \setunit*{\labelnamepunct}}%
     \usebibmacro{title}%
-    \ifboolexpr{
-      test {\ifnamesequal{editor}{savededitor}}
-      or
-      test {\ifnameundef{editor}}
-    }
+    \setunit{\respdelim}%
+    \iflistsequal{credits}{savedcredits}
       {}
-      {\setunit{\respdelim}%
-       \usebibmacro{byeditor}}%
+      {\usebibmacro{credits}}%
+    \setunit*{\resppunct}%
+    \ifnamesequal{editor}{savededitor}
+      {}
+      {\usebibmacro{byeditor}}%
+    \setunit*{\resppunct}%
+    \ifnamesequal{translator}{savedtranslator}
+      {}
+      {\usebibmacro{bytranslator+others}}%
     \newunit\newblock
     \printdate%
     \iffieldundef{pagetotal}
