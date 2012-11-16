@@ -1827,11 +1827,10 @@
       {}
       {\usebibmacro{bytranslator+others}}%
     \newunit\newblock
-    \printdate%
-    \iffieldundef{pagetotal}
-      {}
-      {\newunit\newblock
-       \printfield{pagetotal}}}}
+    \usebibmacro{date}%
+    \newunit\newblock
+    \printfield{pagetotal}%
+    \usebibmacro{finentry}}}
 
 \renewbibmacro*{related:origpubin}[1]{%
   \entrydata*{#1}{%
