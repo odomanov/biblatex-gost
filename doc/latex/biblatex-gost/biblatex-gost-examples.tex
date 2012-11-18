@@ -71,8 +71,11 @@ I hope this is not going to confuse the reader too much.
 \nocite{*}
 
 \defbibheading{bibliography}{}
-\renewcommand*{\do}[1]{\section{@#1\label{#1}}\printbibliography[check=norelated,type=#1]}
+\renewcommand*{\do}[1]{\section{@#1\label{#1}}\printbibliography[type=#1]}
 \docsvlist{mvbook,book,inbook,suppbook,bookinbook,mvcollection,collection,incollection,suppcollection,mvreference,reference,inreference,proceedings,inproceedings,periodical,article,patent,online}
+
+\renewbibmacro*{begentry}
+  {\hspace{-4em}\makebox[4em]{\hyperlink{\thefield{entrykey}}{$\Downarrow$}}}%
 
 \section{\texttt{Related} field\label{related}}
 \printbibliography[check=related]
