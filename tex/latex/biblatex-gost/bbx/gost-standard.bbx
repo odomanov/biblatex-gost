@@ -208,6 +208,8 @@
     {\ifcapital{\MakeCapital{#1}}{#1}\isdot}}
 \DeclareFieldFormat[thesis]{type}{\ifbibstring{#1}{\bibsentence\biblstring{#1}}{#1}}
 
+\DeclareFieldFormat{relatedstring}{\select@language{\bbl@main@language}#1\relatedpunct}
+
 \DeclareNameAlias{sortname}{last-first}
 
 \DefineBibliographyExtras{french}{\protected\def\mkbibnamelast#1{#1}}
@@ -1895,6 +1897,9 @@
      \iffieldformatundef{related:\strfield{relatedtype}}
        {\def\bbx@tempa{related}}
        {\def\bbx@tempa{related:\strfield{relatedtype}}}%
+     \iffieldformatundef{relatedstring:\strfield{relatedtype}}
+       {\def\bbx@tempb{relatedstring}}
+       {\def\bbx@tempb{relatedstring:\strfield{relatedtype}}}%
      \printtext[\bbx@tempa]{%
        \iffieldundef{relatedstring}
          {\ifboolexpr{
@@ -1902,13 +1907,13 @@
             and
             test {\ifbibxstring{\thefield{relatedtype}s}}
           }
-            {\printtext{\bibstring{\thefield{relatedtype}s}\relatedpunct}}
+            {\printtext[\bbx@tempb]{\bibstring{\thefield{relatedtype}s}}}
             {\iffieldbibstring{relatedtype}
-               {\printtext{\bibstring{\thefield{relatedtype}}\relatedpunct}}
+               {\printtext[\bbx@tempb]{\bibstring{\thefield{relatedtype}}}}
                {}}}
          {\iffieldbibstring{relatedstring}
-            {\printtext{\bibstring{\thefield{relatedstring}}\relatedpunct}}
-            {\printtext{\printfield{relatedstring}\relatedpunct}}}%
+            {\printtext[\bbx@tempb]{\bibstring{\thefield{relatedstring}}}}
+            {\printfield[\bbx@tempb]{relatedstring}}}%
        \docsvfield{related}}}}
 
 \newbibmacro*{setup:min}{%
