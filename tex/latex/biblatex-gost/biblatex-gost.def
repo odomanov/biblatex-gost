@@ -389,7 +389,7 @@
             replace=\regexp{useeditor=false,$1}]
         }
         \map{
-          \step[typesource=docthesis, typetarget=thesis, final]
+          \step[typesource=doctorsthesis, typetarget=thesis, final]
           \step[fieldset=type,        fieldvalue=docthesis]
         }
       }
@@ -398,7 +398,7 @@
    {\DeclareSourcemap{
       \maps[datatype=bibtex]{
         \map{
-          \step[typesource=docthesis, typetarget=thesis, final]
+          \step[typesource=doctorsthesis, typetarget=thesis, final]
           \step[fieldset=type,        fieldvalue=docthesis]
         }
        }
