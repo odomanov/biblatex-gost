@@ -1,5 +1,3 @@
-% $Id$
-
 \ProvidesFile{biblatex-gost.def}
 
 % these declarations should be here, not in lbx, to be initialized for all languages

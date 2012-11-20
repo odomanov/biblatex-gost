@@ -1,5 +1,3 @@
-% $Id$
-
 \ProvidesFile{gost-numeric-min.dbx}
 
 \blx@inputonce{biblatex-gost.dbx}{biblatex-gost data model}{}{}{}{}

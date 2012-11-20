@@ -1,5 +1,3 @@
-% $Id$
-
 \ProvidesFile{biblatex-gost.dbx}
 
 \DeclareDatamodelFields[type=field, datatype=literal]{

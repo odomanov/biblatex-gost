@@ -1,5 +1,3 @@
-% $Id$
-
 \ProvidesFile{gost-footnote.dbx}
 
 \blx@inputonce{biblatex-gost.dbx}{biblatex-gost data model}{}{}{}{}
