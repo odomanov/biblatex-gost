@@ -8,6 +8,7 @@
 \usepackage{btxdockit}
 \usepackage{babel}
 \usepackage[strict]{csquotes}
+\usepackage{microtype}
 \usepackage{tabularx}
 \usepackage{longtable}
 \usepackage{booktabs}
@@ -135,8 +136,26 @@ bibstyle=gost-standard,
 
 Ниже перечислены изменения, на которые стоит обратить внимание с
 точки зрения совместимости с предыдущими версиями. Пока проект находится на бета-стадии,
-модификации могут оказаться существенными. Более полный список изменений см.
+модификации могут оказаться значительными. Более полный список изменений см.
 в \Apxref{apx:changelog}.
+
+\subsubsection*{Версия 0.7}
+
+\begin{trivlist}
+\item Переход на \biblatex~2.3 и \biber~1.3
+\item \bibtype{phdthesis} теперь соответствует кандидатской диссертации,
+  см.~\secref{sec:dissers}
+\item В \bibtype{article} отсутствие поля \bibfield{journaltitle} означает электронную
+  публикацию (не выводится информация об идентифицирующем документе:
+  сведения об ответственности, дата, том, номер и т.\,д.)
+\item Изменён перевод некоторых строк в файле локализации: <<вступительная статья>> вместо
+  <<введение>>, почти все строки, связанные с полем \bibfield{related}, а также строки,
+  связанные с конкатенацией сведений об ответственности при совпадении имён.
+\item Обратите внимание на проблему, связанную с сортировкой кириллических
+  публикаций (см.~\secref{sec:issues})
+\item Внесены небольшие изменения в вывод записей типа \bibtype{booklet}, \bibtype{misc},
+  \bibtype{online}, \bibtype{periodical}, \bibtype{thesis}, \bibtype{unpublished}
+\end{trivlist}
 
 \subsubsection*{Версия 0.6}
 
@@ -162,10 +181,10 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 обновить индексы (в \tex~Live, например, это делается командой \texttt{mktexlsr},
 в MiKTeX~--- \texttt{initexmf -{}-update-fndb}).
 
-Для работы \biblatexgost версии 0.6 и выше требуется
-\biblatex~2.1\fnurl{http://sourceforge.net/projects/biblatex/files/biblatex-2.1/}
-и \biber~1.1\fnurl{http://sourceforge.net/projects/biblatex-biber/files/biblatex-biber/1.1/}
-или выше.
+Для работы \biblatexgost версии 0.7 требуется
+\biblatex~2.3\fnurl{http://sourceforge.net/projects/biblatex/files/biblatex-2.3/}
+и \biber~1.3\fnurl{http://sourceforge.net/projects/biblatex-biber/files/biblatex-biber/1.3/}
+(текущие версии на CTAN).
 
 \section{Стили \biblatexgost}
 \label{sec:styles}
@@ -387,8 +406,9 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 Дата издания, распространения и т.\,п. & date \\
 \cmidrule(r){1-1}\cmidrule{2-2}
 \multicolumn{1}{@{}H}{Область физической характеристики} & \\*
-Специфическое обозначение материала и объём & volumes, pagetotal, pages, howpublished,
-    {\spotcolor books}, {\spotcolor parts}, {\spotcolor issues}\\
+Специфическое обозначение материала и объём & volumes, {\spotcolor books}, {\spotcolor parts},
+                                              {\spotcolor issues}, pagetotal, pages,
+                                              howpublished \\
 \textit{Другие сведения о физической характеристике} & \textendash \\
 \textit{Размеры} & \textendash \\
 \textit{Сведения о сопроводительном материале} & \textendash \\
@@ -401,7 +421,8 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 ISSN серии или подсерии & issn (isbn) \\
 Номер выпуска серии или подсерии & number \\
 \cmidrule(r){1-1}\cmidrule{2-2}
-\multicolumn{1}{@{}H}{Область примечания} & url, urldate, note, type \\
+\multicolumn{1}{@{}H}{Область примечания} & url, urldate, note, type,
+                                            {\spotcolor update}, {\spotcolor systemreq}\\
 \cmidrule(r){1-1}\cmidrule{2-2}
 \multicolumn{1}{@{}H}{Область стандартного номера и} & \\
 \multicolumn{1}{@{}H}{условий доступности} & \\*
@@ -594,6 +615,14 @@ eresource & электронный ресурс\\
 
 Область специфических сведений (см.~\tabref{tab:gost-biblatex}). Представляет собой список,
 элементы которого при выводе разделяются точкой с запятой.
+
+\fielditem{systemreq}{literal}
+
+Системные требования для записей типа \bibtype{online}.
+
+\fielditem{update}{date}
+
+Дата обновления для записей типа \bibtype{online}.
 
 \fielditem{volsorder}{literal}
 
@@ -965,7 +994,7 @@ volsorder = {pbi},
 Подробности можно найти в документации по \biblatex{}\fnurl{http://www.ctan.org/tex-archive/macros/latex/contrib/biblatex/doc/biblatex.pdf}. \xelatex
 официально не поддерживается, поскольку \biblatex{'ом} пока не поддерживается
 \sty{polyglossia}. Однако использование \sty{babel} совместно с \sty{xecyr},
-похоже, не приводит ни к каким проблемам.
+похоже, не приводит к каким-либо проблемам.
 
 \subsection{Новые опции и значения опций}
 \label{sec:newoptions}
@@ -987,7 +1016,7 @@ volsorder = {pbi},
 для раздельного регулирования этих параметров для цитат и библиографии. При этом опции
 \opt{url}, \opt{isbn}, \opt{doi} и \opt{eprint} устанавливают одновременно соответствующие
 \opt{cite\ldots} и \opt{bib\ldots} опции. Не все из этих опций имеют смысл для всех
-стилей (см. ниже). По умолчанию все стили, для которых опции
+стилей (см. ниже). По умолчанию стили, для которых опции
 \opt{cite\ldots} имеют смысл, устанавливают их в \opt{false}.
 Исключением является стиль \bibsty{gost-footnote}, который
 устанавливает \kvopt{citeisbn}{true}. Опции \opt{bib\ldots} устанавливаются
@@ -1122,8 +1151,8 @@ gost-authoryear-min & --- & false \\
 Эта опция призвана обеспечить максимальное соответствие требованиям ГОСТа,
 хотя при этом могут возникать неопределённые ссылки.
 Никаких знаков к году не добавляется, и вам нужно самим следить за
-уникальностью ссылок.
-Например, если вы делаете ссылки на тома многотомного издания, то, возможно,
+уникальностью ссылок (\biblatexgost выводит предупреждение при их обнаружении).
+Например, если вы делаете ссылки на тома многотомного издания, то вам, возможно,
 понадобится указать том в \prm{postnote} или воспользоваться командами типа \cmd{volcite}.
 
 Эта опция также устанавливает \kvopt{singletitle}{true}, то есть при ней по умолчанию
@@ -1286,6 +1315,44 @@ gost-authoryear & cite & Автор (заголовок) и год в текст
 \item{} [Детская энциклопедия, 2001, с.\,33]
 \end{bibexample}
 
+\subsection{Оформление диссертаций}
+\label{sec:dissers}
+
+В \biblatexgost диссертации описываются записями трёх видов:
+\bibtype{mastersthesis} (магистерская), \bibtype{phdthesis} (кандидатская),
+\bibtype{doctorsthesis} (докторская).
+Вместо них можно использовать запись \bibtype{thesis} с полем
+\bibfield{type}, установленным в \opt{mathesis}, \opt{phdthesis} или \opt{docthesis}
+соответственно.
+
+\begin{comment}----------------------------------------------------------------
+\subsection{Поле \bibfield{related}}
+\label{sec:related}
+
+Поле \bibfield{related} в \biblatex~--- вместе с \bibfield{relatedtype} и
+\bibfield{relatedstring}~--- служит для описания различных связей между
+библиографическими записями. Связи, реализованные в \biblatexgost, перечисленны в
+\tabref{tab:related}.
+
+\begin{table}[htbp]
+\tablesetup
+\centering
+\begin{tabularx}{.8\textwidth}{@{}V{.3\textwidth}@{}V{.3\textwidth}@{}V{.2\textwidth}@{}}
+\toprule
+\multicolumn{1}{@{}H}{Значения полей} &
+\multicolumn{1}{@{}H}{Функция} &
+\multicolumn{1}{@{}H}{Пример вывода}  \\
+\cmidrule(r){1-1}\cmidrule{2-3}%\cmidrule{3-3}
+gost-inline & false & true \\
+\bottomrule
+\end{tabularx}
+\caption{Поле \bibfield{related}}
+\label{tab:related}
+\end{table}
+
+(см.~файл примеров)
+\end{comment}
+
 \subsection{Формат заголовка библиографической записи}
 \label{headformat}
 
@@ -1311,7 +1378,9 @@ gost-authoryear & cite & Автор (заголовок) и год в текст
 \item Пакет при сортировке помещает латинские буквы перед кириллическими.
 Это связано с ограничениями
 модуля Unicode::Collate языка Perl, на котором написан \biber (не реализовано правило
-reorder). Поэтому, если вы хотите, чтобы в библиографии кириллические записи шли в начале, то в качестве обходного пути можете отредактировать файл .bbl, создаваемый \biber'ом
+reorder). Поэтому, если вы хотите, чтобы в библиографии кириллические записи
+предшествовали остальным, то в качестве обходного пути можете отредактировать файл .bbl,
+создаваемый \biber'ом
 (переместить записи в начало списка \texttt{sortlist}), и затем запустить \latex.
 \end{itemize}
 
@@ -1343,10 +1412,13 @@ reorder). Поэтому, если вы хотите, чтобы в библио
 \end{lstlisting}
 
 Это делается автоматически при помощи функции \cmd{DeclareSourcemap}%
-\footnote{В предыдущих версиях \biblatexgost это нужно было делать вручную.}.
+%\footnote{В ранних версиях \biblatexgost это нужно было делать вручную.}
+.
 При этом, однако, используется фиксированное значение предельного количества авторов
 (3), которое не зависит от опции пакета \opt{maxnames}. Соответственно, простое изменение
-этой опции может привести к ошибкам сортировки.
+этой опции может привести к ошибкам сортировки. Чтобы об этом напомнить, \biblatexgost
+выводит предупреждение, если при включенной опции \opt{movenames} параметры
+\opt{maxbibnames} или \opt{maxcitenames} отличаются от заданных по умолчанию.
 
 %\item Определен макрос \cmd{ifmulticitation}, принимающий значение \texttt{True}
 %внутри команд \cmd{...cites} (комплексных ссылок, в терминологии ГОСТа).
@@ -1362,6 +1434,30 @@ reorder). Поэтому, если вы хотите, чтобы в библио
 \label{apx:changelog}
 
 \begin{changelog}
+
+\begin{release}{0.7}{20-11-2012}
+\item Переход на \biblatex~2.3 и \biber~1.3\see{sec:install}
+\item Добавлена обработка поля \bibfield{related}%\see{sec:related}
+\item Добавлен тип записи \bibtype{docthesis} для докторских диссертаций\see{sec:dissers}
+\item \bibtype{phdthesis} теперь соответствует кандидатской диссертации\see{sec:dissers}
+\item Добавлены поля \bibfield{update}, \bibfield{systemreq} в записях типа
+  \bibtype{online}\see{sec:newfields}
+\item Добавлено поле \bibfield{editioncredits}\see{sec:newfields}
+\item В \bibtype{article} отсутствие поля \bibfield{journaltitle} означает электронную
+  публикацию\\ (не выводится информация об идентифицирующем документе:
+  сведения об ответственности, дата, том, номер и т.\,д.)
+\item Многочисленные изменения в файле локализации
+\item Улучшена конкатенация строк в сведениях об ответствености при совпадении имён
+\item Добавлен файл примеров \texttt{biblatex-gost-examples.pdf}
+\item Добавлен раздел документации об проблеме сортировки кириллических\\ записей\see{sec:issues}
+\item Небольшие изменения в драйверах (наведение порядка)
+\item Добавлено предупреждение о неуникальных цитатах в режиме\\ \kvopt{mergedate}{goststrict}
+\item Добавлено предупреждение об изменении \opt{maxbibnames} или \opt{maxcitenames}
+\item Добавлены строки локализации \texttt{bycompiler}, \texttt{bygecompiler}
+\item Исправлена ошибка вывода редакторов в минимальных стилях
+\item Исправлена обработка поля \bibfield{eprint}
+\item Исправлены другие ошибки
+\end{release}
 
 \begin{release}{0.6}{20-08-2012}% up to rev.283
 \item Переход на \biblatex~2.1 и \biber~1.1\see{sec:install}
