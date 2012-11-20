@@ -208,6 +208,8 @@
     {\ifcapital{\MakeCapital{#1}}{#1}\isdot}}
 \DeclareFieldFormat[thesis]{type}{\ifbibstring{#1}{\bibsentence\biblstring{#1}}{#1}}
 
+\DeclareFieldFormat{relatedstring}{\select@language{\bbl@main@language}#1\relatedpunct}
+
 \DeclareNameAlias{sortname}{last-first}
 
 \DefineBibliographyExtras{french}{\protected\def\mkbibnamelast#1{#1}}
@@ -1148,6 +1150,7 @@
 \newbibmacro*{credits}{%
   \usebibmacro{checkbooklist}{credits}
     {\printlist[semicolondelim]{credits}%
+     \savelist{credits}{\savedclearedcredits}%
      \clearlist{credits}%
      }
     {}}
@@ -1159,7 +1162,7 @@
   \let\abx@tempb=\empty
   \ifnamesequal{#1}{translator}
     {\appto\abx@tempa{tr}%
-     \appto\abx@tempb{\clearname{translator}}}
+     \appto\abx@tempb{\savename{translator}{\savedclearedtranslator}\clearname{translator}}}
     {}%
   \ifnamesequal{#1}{commentator}
     {\appto\abx@tempa{co}%
@@ -1189,6 +1192,7 @@
       {\usebibmacro{byeditor+othersstrg}{editor}%
        \setunit{\addspace}%
        \printnames[byeditor]{editor}%
+       \savename{editor}{\savedclearededitor}%
        \clearname{editor}%
        \setunit*{\resppunct}%
        \usebibmacro{byeditorx}}
@@ -1223,6 +1227,7 @@
         {\usebibmacro{bytranslator+othersstrg}%
          \setunit{\addspace}%
          \printnames[bytranslator]{translator}%
+         \savename{translator}{\savedclearedtranslator}%
          \clearname{translator}%
          \setunit*{\resppunct}}
         {}}%
@@ -1328,6 +1333,7 @@
       {\usebibmacro{book:byeditor+othersstrg}{editor}%
        \setunit{\addspace}%
        \printnames[byeditor]{editor}%
+       \savename{editor}{\savedclearededitor}%
        \clearname{editor}%
        \setunit*{\resppunct}%
        \usebibmacro{book:byeditorx}}
@@ -1652,6 +1658,7 @@
      \setunit{\addcomma\space}%
      \usebibmacro{bbx:savehash}}%
      \usebibmacro{#1}%
+     \savename{editor}{\savedclearededitor}%
      \clearname{editor}}
     {\global\undef\bbx@lasthash}}
 
@@ -1671,6 +1678,7 @@
      \setunit{\addcomma\space}%
      \usebibmacro{bbx:savehash}}%
      \usebibmacro{#1}%
+     \savename{translator}{\savedclearedtranslator}%
      \clearname{translator}}
     {\global\undef\bbx@lasthash}}
 
@@ -1808,20 +1816,23 @@
       {\usebibmacro{author}%
        \setunit*{\labelnamepunct}}%
     \usebibmacro{title}%
-    \ifboolexpr{
-      test {\ifnamesequal{editor}{savededitor}}
-      or
-      test {\ifnameundef{editor}}
-    }
+    \setunit{\respdelim}%
+    \iflistsequal{credits}{savedcredits}
       {}
-      {\setunit{\respdelim}%
-       \usebibmacro{byeditor}}%
-  \newunit\newblock
-  \printdate%
-  \iffieldundef{pagetotal}
-    {}
-    {\newunit\newblock
-     \printfield{pagetotal}}}}
+      {\usebibmacro{credits}}%
+    \setunit*{\resppunct}%
+    \ifnamesequal{editor}{savededitor}
+      {}
+      {\usebibmacro{byeditor}}%
+    \setunit*{\resppunct}%
+    \ifnamesequal{translator}{savedtranslator}
+      {}
+      {\usebibmacro{bytranslator+others}}%
+    \newunit\newblock
+    \usebibmacro{date}%
+    \newunit\newblock
+    \printfield{pagetotal}%
+    \usebibmacro{finentry}}}
 
 \renewbibmacro*{related:origpubin}[1]{%
   \entrydata*{#1}{%
@@ -1859,6 +1870,9 @@
 \newcounter{bbx:relatedtotal}
 
 \newbibmacro*{related}{%
+  \restorelist{credits}{\savedclearedcredits}%
+  \restorename{editor}{\savedclearededitor}%
+  \restorename{translator}{\savedclearedtranslator}%
   \iffieldequalstr{relatedtype}{multivolume}
     {\finentry}
     {}%
@@ -1883,6 +1897,9 @@
      \iffieldformatundef{related:\strfield{relatedtype}}
        {\def\bbx@tempa{related}}
        {\def\bbx@tempa{related:\strfield{relatedtype}}}%
+     \iffieldformatundef{relatedstring:\strfield{relatedtype}}
+       {\def\bbx@tempb{relatedstring}}
+       {\def\bbx@tempb{relatedstring:\strfield{relatedtype}}}%
      \printtext[\bbx@tempa]{%
        \iffieldundef{relatedstring}
          {\ifboolexpr{
@@ -1890,13 +1907,13 @@
             and
             test {\ifbibxstring{\thefield{relatedtype}s}}
           }
-            {\printtext{\bibstring{\thefield{relatedtype}s}\relatedpunct}}
+            {\printtext[\bbx@tempb]{\bibstring{\thefield{relatedtype}s}}}
             {\iffieldbibstring{relatedtype}
-               {\printtext{\bibstring{\thefield{relatedtype}}\relatedpunct}}
+               {\printtext[\bbx@tempb]{\bibstring{\thefield{relatedtype}}}}
                {}}}
          {\iffieldbibstring{relatedstring}
-            {\printtext{\bibstring{\thefield{relatedstring}}\relatedpunct}}
-            {\printtext{\printfield{relatedstring}\relatedpunct}}}%
+            {\printtext[\bbx@tempb]{\bibstring{\thefield{relatedstring}}}}
+            {\printfield[\bbx@tempb]{relatedstring}}}%
        \docsvfield{related}}}}
 
 \newbibmacro*{setup:min}{%
