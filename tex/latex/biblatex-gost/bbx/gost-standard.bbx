@@ -39,7 +39,8 @@
 \newtoggle{cbx:url}
 \newtoggle{cbx:doi}
 \newtoggle{cbx:eprint}
-\newtoggle{bbx:related}
+\newtoggle{bbx:related:bib}
+\newtoggle{bbx:related:cite}
 
 \protected\def\blx@imc@printupdate{\csuse{mkbibrangeshort}{up}}
 \blx@regimcs{%
@@ -84,7 +85,27 @@
 \DeclareBibliographyOption{citeeprint}[true]{%
   \global\settoggle{cbx:eprint}{#1}}
 \DeclareBibliographyOption{related}[true]{%
-  \settoggle{bbx:related}{#1}}
+  \ifcsdef{bbx@opt@related@#1}
+    {\csuse{bbx@opt@related@#1}}
+    {\PackageError{biblatex}
+       {Invalid option 'related=#1'}
+       {Valid values are 'true', 'false', 'bib', and 'cite'.}}}
+
+\def\bbx@opt@related@true{%
+  \toggletrue{bbx:related:bib}%
+  \toggletrue{bbx:related:cite}}
+
+\def\bbx@opt@related@false{%
+  \togglefalse{bbx:related:bib}%
+  \togglefalse{bbx:related:cite}}
+
+\def\bbx@opt@related@bib{%
+  \toggletrue{bbx:related:bib}%
+  \togglefalse{bbx:related:cite}}
+
+\def\bbx@opt@related@cite{%
+  \togglefalse{bbx:related:bib}%
+  \toggletrue{bbx:related:cite}}
 
 \newcommand*{\blx@gost@defaultorder}{vbpi}
 \DeclareBibliographyOption{volsorder}[vbpi]{%
@@ -101,7 +122,7 @@
   movenames=true,
   firstinits,
   volsorder=vbpi,
-  related}
+  related=bib}
 
 \newbibmacro*{cbx:bookibid:check}[2]{#2}
 
@@ -1875,7 +1896,15 @@
     {\finentry}
     {}%
   \ifboolexpr{
-    not test {\iftoggle{bbx:related}}
+    ( test {\ifcitation}
+      and
+      not test {\iftoggle{bbx:related:cite}}
+    )
+    or
+    ( not test {\ifcitation}
+      and
+      not test {\iftoggle{bbx:related:bib}}
+    )
     or
     test {\iffieldundef{related}}
   }
