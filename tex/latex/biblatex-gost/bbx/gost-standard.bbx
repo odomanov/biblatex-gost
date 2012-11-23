@@ -112,7 +112,6 @@
   \renewcommand*{\blx@gost@defaultorder}{#1}}
 
 \ExecuteBibliographyOptions{
-  %datamodel=biblatex-gost,
   useeditor=false,
   usetranslator=false,
   maxnames=3,
@@ -125,6 +124,8 @@
   related=bib}
 
 \newbibmacro*{cbx:bookibid:check}[2]{#2}
+
+%  FORMATS
 
 \renewcommand*{\mkbibacro}[1]{#1}
 \DeclareFieldFormat{isbn}{\mkbibacro{ISBN} #1}
@@ -265,6 +266,8 @@
 \DeclareNameAlias{editorb}{editor}
 \DeclareNameAlias{editorc}{editor}
 \DeclareNameAlias{translator}{author}
+
+% FORMATTING COMMANDS
 
 \newbibmacro*{//}{%
   \nopunct\printtext{\addnbspace\mbox{//}\addspace}}
@@ -937,6 +940,8 @@
 \DeclareBibliographyAlias{review}{article}
 \DeclareBibliographyAlias{*}{misc}
 
+% (RE)DEFINING BIBMACROS
+
 \newbibmacro*{maintitle+volumes+parts+}[1]{%
   \iffieldsequal{maintitle}{#1}
     {\clearfield{maintitle}%
@@ -1207,7 +1212,6 @@
 \renewbibmacro*{byeditor}{%
   \ifnameundef{editor}
     {}
-    %{\usebibmacro{checkbookname}{editor}
       {\usebibmacro{byeditor+othersstrg}{editor}%
        \setunit{\addspace}%
        \printnames[byeditor]{editor}%
@@ -1215,7 +1219,6 @@
        \clearname{editor}%
        \setunit*{\resppunct}%
        \usebibmacro{byeditorx}}
-      %{}}%
 }
 
 \renewbibmacro*{bytranslator+others}{%
@@ -1309,7 +1312,8 @@
      \clearname{afterword}}
     {}}
 
-%----------------------------------------------------------------
+%  book:...  macros
+
 \newbibmacro*{book:credits}{%
   \printlist[semicolondelim]{bookcredits}%
   \clearlist{bookcredits}%
@@ -1348,7 +1352,6 @@
 \newbibmacro*{book:byeditor}{%
   \ifnameundef{editor}
     {}
-    %{\usebibmacro{checkbookname}{editor}
       {\usebibmacro{book:byeditor+othersstrg}{editor}%
        \setunit{\addspace}%
        \printnames[byeditor]{editor}%
@@ -1356,7 +1359,6 @@
        \clearname{editor}%
        \setunit*{\resppunct}%
        \usebibmacro{book:byeditorx}}
-      %{}}%
 }
 
 \newbibmacro*{book:bytranslator+others}{%
@@ -1443,7 +1445,8 @@
 \newbibmacro*{book:withafterword}{%
   \usebibmacro{book:with+}{afterword}}
 
-%----------------------------------------------------------------
+%  jour:..  macros
+
 \newbibmacro*{jour:volume+parts+issuetitle}{%
   \printfield{volume}%
   \setunit*{\addcomma\space}%
@@ -1611,9 +1614,7 @@
     test {\ifnameundef{author}}
   }
     {}
-    {%\usebibmacro{bytypestrg}{author}{author}%
-     %\setunit{\addspace}%
-     \printnames[byauthor]{author}}}
+    {\printnames[byauthor]{author}}}
 
 \newbibmacro*{book:byauthor}{%
   \ifboolexpr{
@@ -1743,6 +1744,8 @@
       \ifbibxstring{media\thefield{media}}
         {\printtext[brackets]{\bibcpstring{media\thefield{media}}}}
         {}}}}
+
+%  Related
 
 \newbibmacro{rel:common}{%
     \usebibmacro{author}%
