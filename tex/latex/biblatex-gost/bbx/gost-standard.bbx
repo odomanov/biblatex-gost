@@ -734,10 +734,10 @@
 \DeclareBibliographyDriver{patent}{%
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
-  %\usebibmacro{author}%
-  %\setunit*{\labelnamepunct}%
+  \usebibmacro{author}%
+  \setunit*{\labelnamepunct}%
   \usebibmacro{title}%
-  \setunit*{\addcolondelim}
+  \setunit*{\subtitlepunct}%
   \printfield{type}%
   \setunit*{\addspace}%
   \printfield{number}%
