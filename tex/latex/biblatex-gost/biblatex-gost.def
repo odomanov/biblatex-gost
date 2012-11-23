@@ -3,7 +3,6 @@
 % these declarations should be here, not in lbx, to be initialized for all languages
 \NewBibliographyString{
   involumes,
-  docthesis,
   geneditor,
   geneditors,
   bygeneditor,
@@ -388,22 +387,10 @@
             match=\regexp{(.+)},
             replace=\regexp{useeditor=false,$1}]
         }
-        \map{
-          \step[typesource=doctorsthesis, typetarget=thesis, final]
-          \step[fieldset=type,        fieldvalue=docthesis]
-        }
       }
      }
     }
-   {\DeclareSourcemap{
-      \maps[datatype=bibtex]{
-        \map{
-          \step[typesource=doctorsthesis, typetarget=thesis, final]
-          \step[fieldset=type,        fieldvalue=docthesis]
-        }
-       }
-    }
-   }
+   {}
 }
 
 \DeclareSortExclusion{inbook,incollection,inproceeding,bookinbook,suppbook,suppcollection,inreference}
