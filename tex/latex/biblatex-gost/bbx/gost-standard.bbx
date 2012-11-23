@@ -664,9 +664,11 @@
 \DeclareBibliographyDriver{misc}{%
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
-  \usebibmacro{author/editor+others/translator+others}%
+  \usebibmacro{author/editor}%
   \setunit*{\labelnamepunct}%
   \usebibmacro{title}%
+  \setunit{\subtitlepunct}%
+  \printfield{type}%
   \setunit{\respdelim}%
   \ifuseauthor
     {}
@@ -679,8 +681,6 @@
   \printlist[semicolondelim]{specdata}%
   \newunit\newblock
   \usebibmacro{organization+location+date}%
-  \newunit\newblock
-  \printfield{type}%
   \newunit\newblock
   \usebibmacro{doi+eprint+url+note}%
   \newunit
