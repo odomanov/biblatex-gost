@@ -624,16 +624,20 @@
   \usebibmacro{author/editor}%
   \setunit*{\labelnamepunct}%
   \usebibmacro{title}%
+  \setunit{\subtitlepunct}%
+  \printfield{type}%
   \setunit{\respdelim}%
   \usebibmacro{byauthor}%
   \setunit*{\resppunct}%
   \usebibmacro{credits}%
   \setunit*{\resppunct}%
   \printlist{organization}%
+  \setunit*{\resppunct}%
+  \usebibmacro{byeditor}%
   \setunit*{\resppunct}
   \newunit\newblock
   \printfield{edition}%
-  \setunit*{\respdelim}
+  \setunit*{\respdelim}%
   \printlist[semicolondelim]{editioncredits}%
   \newunit
   \printfield{version}%
@@ -646,11 +650,7 @@
   \newunit
   \printfield{pagetotal}%
   \newunit\newblock
-  \usebibmacro{series+number}%
-  \newunit\newblock
-  \usebibmacro{isbn}
-  \newunit\newblock
-  \printfield{type}%
+  \usebibmacro{isbn}%
   \newunit\newblock
   \usebibmacro{doi+eprint+url+note}%
   \newunit\newblock
