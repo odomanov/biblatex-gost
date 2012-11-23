@@ -36,7 +36,7 @@
   {\getkey#2}%
 }
 \renewcommand*{\do}[1]{\csdef{#1}##1{\def\mytempforbibtype{#1}\def\mytempforbibkey{}\getkey}}
-\docsvlist{MVBOOK,BOOK,INBOOK,SUPPBOOK,BOOKINBOOK,MVCOLLECTION,COLLECTION,INCOLLECTION,SUPPCOLLECTION,MVREFERENCE,REFERENCE,INREFERENCE,PROCEEDINGS,INPROCEEDINGS,PERIODICAL,ARTICLE,PATENT,ONLINE,mvbook,book,inbook,suppbook,bookinbook,mvcollection,collection,incollection,suppcollection,mvreference,reference,inreference,proceedings,inproceedings,periodical,article,patent,online}
+\docsvlist{MVBOOK,BOOK,INBOOK,SUPPBOOK,BOOKINBOOK,MVCOLLECTION,COLLECTION,INCOLLECTION,SUPPCOLLECTION,MVREFERENCE,REFERENCE,INREFERENCE,PROCEEDINGS,INPROCEEDINGS,PERIODICAL,ARTICLE,PATENT,ONLINE,THESIS,mvbook,book,inbook,suppbook,bookinbook,mvcollection,collection,incollection,suppcollection,mvreference,reference,inreference,proceedings,inproceedings,periodical,article,patent,online,thesis}
 \renewcommand*{\do}[1]{\csdef{#1}##1{\mytempforAtCharacter #1\{}}
 \docsvlist{XDATA,COMMENT,xdata,comment,}
 
@@ -55,7 +55,7 @@ Examples are grouped according to their entrytypes. The types themselves are the
 \renewcommand*{\do}[1]{\hyperref[#1]{@#1}\\}
 \begin{multicols}{5}
 \noindent%
-\docsvlist{mvbook,book,inbook,suppbook,bookinbook,mvcollection,collection,incollection,suppcollection,mvreference,reference,inreference,proceedings,inproceedings,periodical,article,patent,online}
+\docsvlist{mvbook,book,inbook,suppbook,bookinbook,mvcollection,collection,incollection,suppcollection,mvreference,reference,inreference,proceedings,inproceedings,periodical,article,patent,online,thesis}
 \end{multicols}
 
 See also examples of the \hyperref[related]{\texttt{related}} field.
@@ -72,7 +72,7 @@ I hope this is not going to confuse the reader too much.
 
 \defbibheading{bibliography}{}
 \renewcommand*{\do}[1]{\section{@#1\label{#1}}\printbibliography[type=#1]}
-\docsvlist{mvbook,book,inbook,suppbook,bookinbook,mvcollection,collection,incollection,suppcollection,mvreference,reference,inreference,proceedings,inproceedings,periodical,article,patent,online}
+\docsvlist{mvbook,book,inbook,suppbook,bookinbook,mvcollection,collection,incollection,suppcollection,mvreference,reference,inreference,proceedings,inproceedings,periodical,article,patent,online,thesis}
 
 \renewbibmacro*{begentry}
   {\hspace{-4em}\makebox[4em]{\hyperlink{\thefield{entrykey}}{$\Downarrow$}}}%
