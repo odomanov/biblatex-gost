@@ -844,21 +844,21 @@
   \setunit{\respdelim}%
   \usebibmacro{byauthor}%
   \setunit*{\resppunct}%
+  \printlist[semicolondelim]{institution}%
+  \setunit*{\resppunct}%
   \usebibmacro{credits}%
   \newunit\newblock
   \printfield{version}%
   \newunit\newblock
   \printlist[semicolondelim]{specdata}%
   \newunit\newblock
-  \usebibmacro{institution+location+date}%
+  \usebibmacro{location+date}%
   \newunit\newblock
   \usebibmacro{chapter+pages}%
   \newunit
   \printfield{pagetotal}%
   \newunit\newblock
   \usebibmacro{isrn}
-  \newunit\newblock
-  \printfield{type}%
   \setunit*{\addspace}%
   \printfield{number}%
   \newunit\newblock
