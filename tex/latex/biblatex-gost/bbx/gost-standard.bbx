@@ -267,6 +267,12 @@
 \DeclareNameAlias{editorc}{editor}
 \DeclareNameAlias{translator}{author}
 
+\DeclareNameFormat{last-first:full}{%
+  \begingroup%
+  \renewcommand*{\revsdnamepunct}{\addspace}%
+  \usebibmacro{name:last-first}{#1}{#3}{#5}{#7}%
+  \endgroup}
+
 % FORMATTING COMMANDS
 
 \newbibmacro*{//}{%
@@ -871,18 +877,16 @@
   \usebibmacro{author}%
   \setunit*{\labelnamepunct}%
   \usebibmacro{title}%
-  \setunit{\subtitlepunct}%
-  \printfield{type}%
+  \setunit{\respdelim}%
+  \printnames[last-first:full]{author}%
   \newunit\newblock
   \printlist[semicolondelim]{specdata}%
   \newunit
-  \usebibmacro{institution+location+date}%
+  \usebibmacro{location+date}%
   \newunit\newblock
   \usebibmacro{chapter+pages}%
   \newunit
   \printfield{pagetotal}%
-  \newunit\newblock
-  \usebibmacro{isbn}
   \newunit\newblock
   \usebibmacro{doi+eprint+url+note}%
   \newunit\newblock
