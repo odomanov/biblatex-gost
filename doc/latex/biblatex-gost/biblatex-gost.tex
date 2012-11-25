@@ -143,8 +143,6 @@ bibstyle=gost-standard,
 
 \begin{trivlist}
 \item Переход на \biblatex~2.3 и \biber~1.3
-\item \bibtype{phdthesis} теперь соответствует кандидатской диссертации,
-  см.~\secref{sec:dissers}
 \item В \bibtype{article} отсутствие поля \bibfield{journaltitle} означает электронную
   публикацию (не выводится информация об идентифицирующем документе:
   сведения об ответственности, дата, том, номер и т.\,д.)
@@ -315,10 +313,6 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 
 Дополнительно, все стили по умолчанию устанавливают опции
 \kvopt{dashed}{false},
-%\kvopt{isbn}{true},
-%\kvopt{url}{true},
-%\kvopt{doi}{true},
-%\kvopt{eprint}{true},
 \kvopt{useeditor}{false},
 \kvopt{usetranslator}{false},
 \kvopt{maxnames}{3},
@@ -327,9 +321,6 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 
 \vspace{.5\baselineskip}
 \starsdelim
-
-%\subsection{Ссылки в верхнем индексе}
-%\label{sec:superscript}
 
 ГОСТ определяет ещё один тип затекстовых ссылок, при котором они
 связываются с текстом номером в верхнем индексе. Этого можно достичь несколькими способами.
@@ -451,11 +442,7 @@ ISSN серии или подсерии & issn (isbn) \\
 \label{sec:newfields}
 
 В \biblatexgost определены следующие
-поля библиографической базы данных, отсутствующие в стандартном \biblatex%
-%\footnote{Используется дополнительный файл модели данных \file{biblatex-gost.dbx}.
-%При этом устанавливать опцию \opt{datamodel}  не требуется, модель подключается автоматически
-%}%
-.
+поля библиографической базы данных, отсутствующие в стандартном \biblatex.
 
 \begin{fieldlist}
 
@@ -749,7 +736,6 @@ introduction & вступительная статья \prm{кого} & всту
 
 \begin{bibexample}
 \item \prm{year}.~"---
-%\prm{day} \prm{month}
 \cmd{mkbibdatelong\{\}\{month\}\{day\}}%
 .~"--- \prm{volume}, \prm{issue}, \prm{number}
 \end{bibexample}
@@ -963,6 +949,28 @@ volsorder = {pbi},
 и поля \bibfield{volsorder}, поэтому при их изменении может потребоваться ручная настройка
 сортировки, например, при помощи поля \bibfield{sortvolume} (см.~\secref{sec:newfields}).
 
+\subsection{Оформление диссертаций}
+\label{sec:dissers}
+
+Пример оформление диссертации:
+
+\begin{lstlisting}[style=bibtex,escapechar=|]
+@THESIS{belozerov_thesis,
+  author = {|Белозеров, Иван Валентинович|},
+  title = {|Религиозная политика Золотой Орды на Руси в XIII—XIV вв.|},
+  media = {text},
+  subtitle = {|дис. \ldots\ канд. ист. наук~: 07.00.02~: защищена 22.01.02~:\\
+утв. 15.07.02|},
+  location = {|М.|},
+  date = {2002},
+  pagetotal = {215},
+  addendum = {|Библиогр.: с. 202---213.~--- 04200201565|},
+  language     = {russian},
+  hyphenation  = {russian},
+}
+\end{lstlisting}
+
+См. также файл примеров.
 
 \section{Работа с пакетом}
 \label{sec:usage}
@@ -1193,7 +1201,7 @@ gost-authoryear-min & --- & false \\
 Дополнительно к имеющимся в \biblatex значениям опции \opt{related}, полностью разрешающим
 или запрещающим вывод поля \bibfield{related}, в \biblatexgost определены значения, позволяющие
 делать это отдельно для цитат и библиографии. По умолчанию установлено \kvopt{related}{bib},
-т.\,е. поле выводится в библиографии, но не в цитатах.
+т.\,е. поле \bibfield{related} выводится в библиографии, но не в цитатах.
 
 \optitem{sorting}{\opt{ntvy}}
 \label{sorting}
@@ -1322,16 +1330,6 @@ gost-authoryear & cite & Автор (заголовок) и год в текст
 \item{} [Детская энциклопедия, 2001, с.\,33]
 \end{bibexample}
 
-\subsection{Оформление диссертаций}
-\label{sec:dissers}
-
-В \biblatexgost диссертации описываются записями трёх видов:
-\bibtype{mastersthesis} (магистерская), \bibtype{phdthesis} (кандидатская),
-\bibtype{doctorsthesis} (докторская).
-Вместо них можно использовать запись \bibtype{thesis} с полем
-\bibfield{type}, установленным в \opt{mathesis}, \opt{phdthesis} или \opt{docthesis}
-соответственно.
-
 \begin{comment}----------------------------------------------------------------
 \subsection{Поле \bibfield{related}}
 \label{sec:related}
@@ -1446,22 +1444,23 @@ reorder). Поэтому, если вы хотите, чтобы в библио
 \item Переход на \biblatex~2.3 и \biber~1.3\see{sec:install}
 \item Добавлена обработка поля \bibfield{related}%\see{sec:related}
 \item Добавлены опции \kvopt{related}{bib/cite}\see{sec:newoptions}
-\item Добавлен тип записи \bibtype{docthesis} для докторских диссертаций\see{sec:dissers}
-\item \bibtype{phdthesis} теперь соответствует кандидатской диссертации\see{sec:dissers}
+%\item Добавлен тип записи \bibtype{doctorsthesis} для докторских диссертаций\see{sec:dissers}
+%\item \bibtype{phdthesis} теперь соответствует кандидатской диссертации\see{sec:dissers}
+\item Вывод диссертаций приведён в соответствие с ГОСТом\see{sec:dissers}
 \item Добавлены поля \bibfield{update}, \bibfield{systemreq} в записях типа
   \bibtype{online}\see{sec:newfields}
 \item Добавлено поле \bibfield{editioncredits}\see{sec:newfields}
 \item В \bibtype{article} отсутствие поля \bibfield{journaltitle} означает электронную
   публикацию\\ (не выводится информация об идентифицирующем документе:
   сведения об ответственности, дата, том, номер и т.\,д.)
+\item Добавлен раздел документации о проблеме сортировки кириллических\\ записей\see{sec:issues}
 \item Многочисленные изменения в файле локализации
-\item Улучшена конкатенация строк в сведениях об ответствености при совпадении имён
+\item Улучшена конкатенация строк при совпадении имён в сведениях об ответствености
 \item Добавлен файл примеров \texttt{biblatex-gost-examples.pdf}
-\item Добавлен раздел документации об проблеме сортировки кириллических\\ записей\see{sec:issues}
 \item Небольшие изменения в драйверах (наведение порядка)
 \item Добавлено предупреждение о неуникальных цитатах в режиме\\ \kvopt{mergedate}{goststrict}
 \item Добавлено предупреждение об изменении \opt{maxbibnames} или \opt{maxcitenames}
-\item Добавлены строки локализации \texttt{bycompiler}, \texttt{bygecompiler}
+%\item Добавлены строки локализации \texttt{bycompiler}, \texttt{bygecompiler}
 \item Исправлена ошибка вывода редакторов в минимальных стилях
 \item Исправлена обработка поля \bibfield{eprint}
 \item Исправлены другие ошибки
