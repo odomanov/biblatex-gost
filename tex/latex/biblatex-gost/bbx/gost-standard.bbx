@@ -170,7 +170,7 @@
 \DeclareFieldFormat[patent]{number}{#1}%
 \DeclareFieldFormat{reqnumber}{%
   \ifbibstring{number}
-    {\bibsstring{number}\addabbrvspace#1}
+    {\bibsstring{number}\addnbspace#1}
     {#1}}%
 \newbibmacro*{volumes/parts/books/issues}[2]{%
   \iffieldnum{#1}
