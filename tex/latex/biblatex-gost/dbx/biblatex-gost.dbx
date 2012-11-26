@@ -6,16 +6,23 @@
   volsorder,
   sortvolume,
   systemreq,
+  publication,
+  ipc,
+  reqnumber,
+  prnumber,
+  prcountry,
 }
 
 \DeclareDatamodelFields[type=field, datatype=date, skipout]{
   update,
+  prdate,
+  publdate,
 }
 
 \DeclareDatamodelFields[type=field, datatype=integer]{
-  upday,
-  upmonth,
-  upyear,
+  upday,upmonth,upyear,
+  prday,prmonth,pryear,
+  publday,publmonth,publyear,
 }
 
 \DeclareDatamodelFields[type=list, datatype=name]{
@@ -72,9 +79,16 @@
   update,systemreq,
 }
 
+\DeclareDatamodelEntryfields[patent]{
+  prdate,publdate,
+  publication,reqnumber,ipc,prnumber,prcountry,
+}
+
 \DeclareDatamodelConstraints{
   \constraint[type=data, datatype=date]{
     \constraintfield{update}
+    \constraintfield{prdate}
+    \constraintfield{publdate}
   }
 }
 

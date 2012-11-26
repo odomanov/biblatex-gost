@@ -43,8 +43,10 @@
 \newtoggle{bbx:related:cite}
 
 \protected\def\blx@imc@printupdate{\csuse{mkbibrangeshort}{up}}
+\protected\def\blx@imc@printpubldate{\csuse{mkbibrangeshort}{publ}}
+\protected\def\blx@imc@printprdate{\csuse{mkbibrangeshort}{pr}}
 \blx@regimcs{%
-  \printupdate}
+  \printupdate \printpubldate \printprdate}
 
 %  OPTIONS
 
@@ -165,6 +167,11 @@
       {\bibsstring{number}\addabbrvspace#1}
       {\unspace\adddot#1}}%
     {\ifcapital{\MakeCapital{#1}}{#1}\isdot}}
+\DeclareFieldFormat[patent]{number}{#1}%
+\DeclareFieldFormat{reqnumber}{%
+  \ifbibstring{number}
+    {\bibsstring{number}\addabbrvspace#1}
+    {#1}}%
 \newbibmacro*{volumes/parts/books/issues}[2]{%
   \iffieldnum{#1}
     {\ifbibstring{#1}
@@ -208,6 +215,18 @@
   \ifbibstring{updated}
     {\bibstring{updated}\addcolon\space#1}
     {Updated\addcolon\space#1}}
+\DeclareFieldFormat{publdate}{%
+  \ifbibstring{published}
+    {\bibstring{published}\addspace#1}
+    {#1}}
+\DeclareFieldFormat{reqdate}{%
+  \ifbibstring{requested}
+    {\bibstring{requested}\addspace#1}
+    {#1}}
+\DeclareFieldFormat{prdate}{%
+  \ifbibstring{priority}
+    {\bibstring{priority}\addspace#1}
+    {#1}}
 \DeclareFieldFormat{systemreq}{%
   \ifbibstring{systemreq}
     {\bibstring{systemreq}\addcolon\space#1}
@@ -226,6 +245,10 @@
     {\mkbibordedition{#1}~\bibstring{edition}}
     {\ifcapital{\MakeCapital{#1}}{#1}\isdot}}
 \DeclareFieldFormat[thesis]{type}{\ifbibstring{#1}{\bibsentence\biblstring{#1}}{#1}}
+\DeclareFieldFormat{prcountry}{%
+  \ifbibxstring{\thefield{prcountry}}
+    {\bibcpstring{\thefield{prcountry}}}
+    {#1}}
 
 \DeclareFieldFormat{relatedstring}{\select@language{\bbl@main@language}#1\relatedpunct}
 
@@ -731,8 +754,6 @@
 \DeclareBibliographyDriver{patent}{%
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
-  \usebibmacro{author}%
-  \setunit*{\labelnamepunct}%
   \usebibmacro{title}%
   \setunit*{\subtitlepunct}%
   \printfield{type}%
@@ -742,14 +763,30 @@
     {}
     {\setunit*{\addspace}%
      \printlist[][-\value{listtotal}]{location}}%
+  \setunit{\addcolondelim}%
+  \printfield{ipc}%
   \setunit{\respdelim}%
   \printnames[byauthor]{author}%
-  \setunit*{\addsemicolondelim}
+  \setunit{\addspace}%
+  \printfield[parens]{authortype}%
+  \setunit{\addsemicolondelim}%
   \usebibmacro{byholder}%
+  \setunit{\addsemicolondelim}%
+  \usebibmacro{credits}%
   \newunit\newblock
-  \usebibmacro{date}%
-  \newunit\newblock
+  \printfield{reqnumber}%
+  \setunit{\addsemicolondelim}%
+  \printtext[reqdate]{\mkbibdateshort{year}{month}{day}}%
+  \setunit{\addsemicolondelim}%
+  \printpubldate%
+  \setunit{\addcomma\space}%
+  \printfield{publication}%
+  \setunit{\addsemicolondelim}%
   \printlist[semicolondelim]{specdata}%
+  \setunit{\addsemicolondelim}%
+  \usebibmacro{priority}%
+  \newunit\newblock
+  \printfield{pagetotal}%
   \newunit\newblock
   \usebibmacro{doi+eprint+url+note}%
   \newunit\newblock
@@ -1747,6 +1784,15 @@
       \ifbibxstring{media\thefield{media}}
         {\printtext[brackets]{\bibcpstring{media\thefield{media}}}}
         {}}}}
+
+\newbibmacro*{priority}{%
+  \printprdate%
+  \setunit{\addcomma\space}%
+  \printfield{prnumber}%
+  \setunit{\addspace}%
+  \iffieldundef{prcountry}
+    {}
+    {\printtext[parens]{\printfield{prcountry}}}}
 
 %  Related
 
