@@ -11,6 +11,8 @@
   reqnumber,
   prnumber,
   prcountry,
+  major,
+  majorcode,
 }
 
 \DeclareDatamodelFields[type=field, datatype=date, skipout]{
@@ -73,6 +75,10 @@
   bookafterword,
   bookoriglanguage,
   bookcredits,
+}
+
+\DeclareDatamodelEntryfields[thesis]{
+  major,majorcode,
 }
 
 \DeclareDatamodelEntryfields[online]{

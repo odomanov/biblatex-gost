@@ -101,6 +101,7 @@
   systemreq,
   countryru,countryussr,patentru,patentussr,patreqru,patrequssr,invcert,
   requested,published,priority,
+  docthesis,
 }
 \DeclareLanguageMapping{russian}{russian-gost}
 %

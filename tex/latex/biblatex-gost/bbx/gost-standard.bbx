@@ -912,7 +912,7 @@
   \usebibmacro{begentry}%
   \usebibmacro{author}%
   \setunit*{\labelnamepunct}%
-  \usebibmacro{title}%
+  \usebibmacro{thesistitle}%
   \setunit{\respdelim}%
   \printnames[last-first:full]{author}%
   \newunit\newblock
@@ -1588,6 +1588,32 @@
      \newunit}%
   \setunit{\addcolondelim}%
   \printfield{maintitleaddon}%
+  \clearfield{media}}
+
+\newbibmacro*{thesistitle}{%
+  \ifboolexpr{
+    test {\iffieldundef{title}}
+    and
+    test {\iffieldundef{subtitle}}
+  }
+    {}
+    {\printtext[title]{%
+       \printfield[titlecase]{title}%
+       \iffieldundef{media}
+          {\setunit*{\subtitlepunct}}
+          {\setunit*{\addspace}%
+           \usebibmacro{media}%
+           \setunit*{\addcolondelim}}%
+       \printfield[titlecase]{subtitle}}%
+       \ifbibxstring{\thefield{type}}
+          {\bibstring{\thefield{type}}}
+          {\printfield{type}}%
+       \setunit*{\addspace}%
+       \printfield{major}%
+       \setunit*{\addcolondelim}%
+       \printfield{majorcode}}%
+  \setunit*{\addcolondelim}%
+  \printfield{titleaddon}%
   \clearfield{media}}
 
 \newcommand*{\addcolondelim}{%
