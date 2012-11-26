@@ -99,6 +99,8 @@
   frompolish,
   updated,
   systemreq,
+  countryru,countryussr,patentru,patentussr,patreqru,patrequssr,invcert,
+  requested,published,priority,
 }
 \DeclareLanguageMapping{russian}{russian-gost}
 %
