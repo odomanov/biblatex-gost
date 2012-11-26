@@ -163,7 +163,7 @@
   \iffieldnum{number}
     {\ifbibstring{number}
       {\bibsstring{number}\addabbrvspace#1}
-      {\unspace\adddot#1}}
+      {\unspace\adddot#1}}%
     {\ifcapital{\MakeCapital{#1}}{#1}\isdot}}
 \newbibmacro*{volumes/parts/books/issues}[2]{%
   \iffieldnum{#1}
@@ -220,8 +220,7 @@
         {\addsemicolondelim}
         {}}}
     {}%
-    #1\isdot
-}
+    #1\isdot}
 \DeclareFieldFormat{edition}{%
   \ifinteger{#1}
     {\mkbibordedition{#1}~\bibstring{edition}}
