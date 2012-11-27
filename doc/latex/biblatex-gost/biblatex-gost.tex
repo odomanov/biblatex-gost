@@ -24,10 +24,10 @@ bibstyle=gost-standard,
 \hypersetup{unicode=true}
 
 \newcommand*{\biber}{Biber\xspace}
-\newcommand*{\biblatex}{Biblatex\xspace}
+\newcommand*{\biblatex}{Bib\-\latex\xspace}
 \newcommand*{\biblatexhome}{http://sourceforge.net/projects/biblatex/}
 \newcommand*{\biblatexctan}{http://www.ctan.org/tex-archive/macros/latex/contrib/biblatex/}
-\newcommand*{\biblatexgost}{\biblatex-GOST\xspace}
+\newcommand*{\biblatexgost}{Bib\-\latex\kern-0.3em -GOST\xspace}
 \newcommand*{\biblatexgosthome}{http://sourceforge.net/projects/biblatexgost/}
 
 \makeatletter
@@ -442,7 +442,8 @@ ISSN серии или подсерии & issn (isbn) \\
 \label{sec:newfields}
 
 В \biblatexgost определены следующие
-поля библиографической базы данных, отсутствующие в стандартном \biblatex.
+поля библиографической базы данных, отсутствующие в стандартном \biblatex
+(см. также поля для оформления патентов в \secref{sec:patent}).
 
 \begin{fieldlist}
 
@@ -544,6 +545,12 @@ ISSN серии или подсерии & issn (isbn) \\
 тип редактора \bibfield{geneditor}, соответствующий общему
 редактору. Он выводится в виде: \enquote{Под общ. ред.~\ldots}.
 
+\fielditem{major}{literal}\noitemspace%
+\fielditem{majorcode}{literal}
+
+Специальность и код специальности для диссертаций. Определены только для
+записей типа \bibtype{thesis}. Подробнее см. \secref{sec:dissers}.
+
 \fielditem{media}{literal}
 
 Общее обозначение материала (см.~\gostbibref{5.2.3}). В \tabref{tab:media} приведены
@@ -636,16 +643,14 @@ eresource & электронный ресурс\\
 \item[Область специфических сведений] применяется для
 особых типов публикации и специфических носителей (см.~\gostbibref{5.4}).
 \biblatexgost заполняет эту область самостоятельно только для
-%патентов\notimpl\ и
-сериальных изданий\notimpl.
+патентов.
+%и сериальных изданий\notimpl.
 Для всех остальных типов публикаций
 следует помещать информацию в поле \bibfield{specdata}.
 
-%В случае патентов здесь размещаются: \ldots
-
-В случае сериальных изданий эта область является областью нумерации, в которой приводятся
-первый и последний номер, перерывы в нумерации и пр. \biblatexgost оформляет это поле
-автоматически, если присутствует поле \bibfield{date} в записях типа \bibtype{periodical}\notimpl.
+%В случае сериальных изданий эта область является областью нумерации, в которой приводятся
+%первый и последний номер, перерывы в нумерации и пр. \biblatexgost оформляет это поле
+%автоматически, если присутствует поле \bibfield{date} в записях типа \bibtype{periodical}\notimpl.
 
 \item[Cведения об ответственности серии] в случае необходимости можно помещать
 в поле \bibfield{series}:
@@ -949,28 +954,119 @@ volsorder = {pbi},
 и поля \bibfield{volsorder}, поэтому при их изменении может потребоваться ручная настройка
 сортировки, например, при помощи поля \bibfield{sortvolume} (см.~\secref{sec:newfields}).
 
-\subsection{Оформление диссертаций}
-\label{sec:dissers}
+\subsection{Оформление патентов}
+\label{sec:patent}
 
-Пример оформление диссертации:
+Для оформления патентов введены следующие дополнительные поля (см. \gostbibref{}{5.4.1.5}):
+
+\begin{fieldlist}
+
+\fielditem{ipc}{literal}
+
+Код Международной патентной классификации (МПК) или Международной
+классификации изобретений (МКИ).
+
+\fielditem{reqnumber}{literal}
+
+Регистрационный номер заявки на патентный документ.
+
+\fielditem{publdate}{date}\noitemspace%
+\fielditem{publication}{literal}
+
+Дата публикации и сведения об официальном издании, в котором опубликованы сведения о
+патентном документе.
+
+\fielditem{prdate}{date}\noitemspace%
+\fielditem{prnumber}{literal}\noitemspace%
+\fielditem{prcountry}{literal}
+
+Сведения о конвенционном приоритете: дата подачи заявки, номер и название
+страны конвенционного приоритета.
+
+\end{fieldlist}
+
+Номер патента и дата подачи (поступления) заявки заносятся в поля \bibfield{number} и
+\bibfield{date}.
+
+Поле \bibfield{type} может иметь значения \opt{patent}, \opt{patreq} и \opt{invcert},
+соответствующие патенту, заявке и авторскому свидетельству.
+
+Пример оформление патента:
 
 \begin{lstlisting}[style=bibtex,escapechar=|]
-@THESIS{belozerov_thesis,
-  author = {|Белозеров, Иван Валентинович|},
-  title = {|Религиозная политика Золотой Орды на Руси в XIII—XIV вв.|},
-  media = {text},
-  subtitle = {|дис. \ldots\ канд. ист. наук~: 07.00.02~: защищена 22.01.02~:\\
-утв. 15.07.02|},
-  location = {|М.|},
-  date = {2002},
-  pagetotal = {215},
-  addendum = {|Библиогр.: с. 202---213.~--- 04200201565|},
+@PATENT{patent2,
+  author       = {|Тернер, Э. В.|},
+  authortype   = {|США|},
+  title        = {|Одноразовая ракета-носитель|},
+  media        = {text},
+  type         = {patreq},
+  number       = {1095735},
+  location     = {countryru},
+  ipc          = {|МПК|\ensuremath{^7} B 64 G 1/00},
+  holder       = {{|заявитель Спейс Системз/Лорал, инк.|}},
+  credits      = {|патент. поверенный Егорова Г. Б.|},
+  reqnumber    = {2000108705/28},
+  date         = {2000-04-07},
+  publdate     = {2001-03-10},
+  publication  = {|Бюл. № 7 (I ч.)|\midsentence},
+  prdate       = {1999-04-09},
+  prnumber     = {09/289, 037},
+  prcountry    = {countryus},
+  pagetotal    = {|5 с.~: ил.|},
   language     = {russian},
   hyphenation  = {russian},
 }
 \end{lstlisting}
 
-См. также файл примеров.
+Другие примеры можно найти в файле примеров.
+
+\subsection{Оформление диссертаций}
+\label{sec:dissers}
+
+Для оформления диссертаций используйте записи типа \bibtype{thesis}. Поле \bibfield{type}
+определяет тип диссертации: магистерская (\opt{mathesis}), кандидатская(\opt{phdthesis}),
+докторская (\opt{docthesis}).
+
+Пример оформление диссертации:
+
+\begin{lstlisting}[style=bibtex,escapechar=|]
+@THESIS{belozerov_thesis,
+  author       = {|Белозеров, Иван Валентинович|},
+  title        = {|Религиозная политика Золотой Орды на Руси в XIII—XIV вв.|},
+  media        = {text},
+  type         = {phdthesis},
+  major        = {|ист. наук|},
+  majorcode    = {07.00.02},
+  titleaddon   = {|защищена 22.01.02~: утв. 15.07.02|},
+  location     = {|М.|},
+  date         = {2002},
+  pagetotal    = {215},
+  addendum     = {|Библиогр.: с. 202---213.~--- 04200201565|},
+  language     = {russian},
+  hyphenation  = {russian},
+}
+\end{lstlisting}
+
+Другие примеры можно найти в файле примеров.
+
+\biblatex позволяет определять новые типы записей и динамически соотносить их
+с уже имеющимися.
+Например, если вы предпочитаете описывать докторские диссертации записями типа
+\bibtype{docdisser}, то следующий код в преамбуле
+
+\begin{lstlisting}[style=latex]
+\DeclareSourcemap{
+  \maps[datatype=bibtex]{
+    \map{
+      \step[typesource=docdisser, typetarget=thesis, final]
+      \step[fieldset=type,        fieldvalue=docthesis]
+    }
+   }
+}
+\end{lstlisting}
+
+\noindent сделает \bibtype{docdisser} эквивалентным \bibtype{thesis} с установленным полем
+\kvopt{type}{docthesis}.
 
 \section{Работа с пакетом}
 \label{sec:usage}
