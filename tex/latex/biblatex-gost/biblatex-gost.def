@@ -390,18 +390,30 @@
             match=\regexp{(.+)},
             replace=\regexp{useeditor=false,$1}]
         }
+        \map[overwrite]{
+          \pertype{patent}
+          \step[fieldsource=options, final]
+          \step[fieldset=options, fieldvalue={useauthor=false,}]
+          \step[fieldset=options, origfieldval, append]
+        }
         \map{
           \pertype{patent}
-          \step[fieldset=options, fieldvalue={, useauthor=false}, append]
+          \step[fieldset=options, fieldvalue={useauthor=false}]
         }
       }
      }
     }
    {\DeclareSourcemap{
       \maps[datatype=bibtex]{
+        \map[overwrite]{
+          \pertype{patent}
+          \step[fieldsource=options, final]
+          \step[fieldset=options, fieldvalue={useauthor=false,}]
+          \step[fieldset=options, origfieldval, append]
+        }
         \map{
           \pertype{patent}
-          \step[fieldset=options, fieldvalue={, useauthor=false}, append]
+          \step[fieldset=options, fieldvalue={useauthor=false}]
         }
       }
     }
