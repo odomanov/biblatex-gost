@@ -390,10 +390,22 @@
             match=\regexp{(.+)},
             replace=\regexp{useeditor=false,$1}]
         }
+        \map{
+          \pertype{patent}
+          \step[fieldset=options, fieldvalue={, useauthor=false}, append]
+        }
       }
      }
     }
-   {}
+   {\DeclareSourcemap{
+      \maps[datatype=bibtex]{
+        \map{
+          \pertype{patent}
+          \step[fieldset=options, fieldvalue={, useauthor=false}, append]
+        }
+      }
+    }
+   }
 }
 
 \DeclareSortExclusion{inbook,incollection,inproceeding,bookinbook,suppbook,suppcollection,inreference}
