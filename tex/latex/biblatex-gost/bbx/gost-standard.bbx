@@ -2028,6 +2028,7 @@
   \renewbibmacro*{bytranslator+others}{}%
   \renewbibmacro*{book:bytranslator+others}{}%
   \renewbibmacro*{media}{}%
+  \renewbibmacro*{priority}{}%
   \clearfield{series}%
   \clearfield{edition}%
   \clearlist{credits}%
@@ -2039,7 +2040,18 @@
   \clearfield{booktitleaddon}%
   \clearfield{maintitleaddon}%
   \clearfield{addendum}%
-  \clearfield{pubstate}}
+  \clearfield{pubstate}%
+  \clearname{holder}%
+  \clearfield{publyear}%
+  \clearfield{publmonth}%
+  \clearfield{publday}%
+  \clearfield{reqnumber}%
+  \clearfield{publication}%
+  \clearfield{upyear}%
+  \clearfield{upmonth}%
+  \clearfield{upday}%
+  \clearfield{systemreq}%
+}
 
 \DeclareAutoCiteCommand{footnote}{\smartcite}{\smartcites}
 \DeclareAutoCiteCommand{superscript}{\supercite}{\supercites}
