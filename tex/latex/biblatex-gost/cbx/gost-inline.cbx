@@ -2,7 +2,7 @@
 
 \DeclareLabelname
   [inbook,incollection,inproceedings,inreference,suppbook,suppcollection,suppperiodical,bookinbook]
-  {shortauthor,author,translator}
+  {\field{shortauthor}\field{author}\field{translator}}
 
 \DeclareFieldFormat{bibhyperlink}{%
   \bibhyperlink{\thefield{entrykey}:\csuse{cbx@\iffootnote{f}{t}@\thefield{entrykey}}}{#1}}
@@ -11,7 +11,7 @@
 \providecommand*{\mkibid}[1]{#1}
 \newtoggle{cbx:loccit}
 \newtoggle{cbx:t:bookibid} % for .. // Ibid. in inbook, incollection,..
-\newtoggle{cbx:f:bookibid} 
+\newtoggle{cbx:f:bookibid}
 \newtoggle{cbx:opt:inbookibid}
 \newbibmacro*{cite:citepages}{}
 \newbibmacro*{cite:full:citepages}{}
@@ -130,7 +130,7 @@
   \global\togglefalse{cbx:loccit}%
   \ifboolexpr{%
           not test {\ifdefvoid{\cbx@t@lastcrossref}}
-          and 
+          and
           test {\iffieldequals{crossref}{\cbx@t@lastcrossref}}
           }%
     {\global\toggletrue{cbx:t:bookibid}}
@@ -207,7 +207,7 @@
   \global\togglefalse{cbx:loccit}%
   \ifboolexpr{%
           not test {\ifdefvoid{\cbx@f@lastcrossref}} % undef, \relax, or empty
-          and 
+          and
           test {\iffieldequals{crossref}{\cbx@f@lastcrossref}}
           }%
     {\global\toggletrue{cbx:f:bookibid}}
@@ -291,9 +291,9 @@
       test {\iftoggle{cbx:f:bookibid}} )
       or
       ( not test {\iffootnote}
-        and 
+        and
         test {\iftoggle{cbx:t:bookibid}} )
-    ) 
+    )
   }
   {#1}
   {#2}}
