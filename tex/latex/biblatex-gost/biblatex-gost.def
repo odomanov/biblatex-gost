@@ -342,7 +342,7 @@
 \DeclareBibliographyOption{movenames}[true]{%
   \gdef\blx@opt@movenames{#1}%
   \ifstrequal{#1}{true}
-    {\DeclareSourcemap{
+    {\DeclareStyleSourcemap{
       \maps[datatype=bibtex]{
         \map{
           \step[fieldsource=author,
@@ -403,7 +403,7 @@
       }
      }
     }
-   {\DeclareSourcemap{
+   {\DeclareStyleSourcemap{
       \maps[datatype=bibtex]{
         \map[overwrite]{
           \pertype{patent}
@@ -423,7 +423,10 @@
 \DeclareSortExclusion{inbook,incollection,inproceeding,bookinbook,suppbook,suppcollection,inreference}
   {editor,volume,maintitle}
 
-\DeclareLabeltitle[book,collection,reference,proceedings]{shorttitle,maintitle,title}
+\DeclareLabeltitle[book,collection,reference,proceedings]{%
+  \field{shorttitle}
+  \field{maintitle}
+  \field{title}}
 
 \DeclareDataInheritance{periodical}{article}{%
   \noinherit{endyear}\noinherit{endmonth}\noinherit{endday}}
