@@ -333,7 +333,7 @@
   \usebibmacro{byauthor}%
   \setunit*{\resppunct}%
   \usebibmacro{bytranslator+others}%
-  \setunit{\space}
+  \setunit{\space}%
   \iffieldundef{journaltitle}  % no journaltitle means electronic publication
    {\newunit}
    {\usebibmacro{//}%
@@ -386,7 +386,7 @@
   \usebibmacro{bytranslator+others}%
   \newunit\newblock
   \printfield{edition}%
-  \setunit*{\respdelim}
+  \setunit*{\respdelim}%
   \printlist[semicolondelim]{editioncredits}%
   \newunit\newblock
   \printlist[semicolondelim]{specdata}%
@@ -399,7 +399,7 @@
   \newunit\newblock
   \usebibmacro{series+number}%
   \newunit\newblock
-  \usebibmacro{isbn}
+  \usebibmacro{isbn}%
   \newunit\newblock
   \usebibmacro{doi+eprint+url+note}%
   \newunit\newblock
@@ -460,7 +460,7 @@
   \usebibmacro{bytranslator+others}%
   \newunit\newblock
   \printfield{edition}%
-  \setunit*{\respdelim}
+  \setunit*{\respdelim}%
   \printlist[semicolondelim]{editioncredits}%
   \newunit\newblock
   \printlist[semicolondelim]{specdata}%
@@ -496,7 +496,7 @@
   \usebibmacro{credits}%
   \setunit*{\resppunct}%
   \usebibmacro{bytranslator+others}%
-  \setunit{\space}
+  \setunit{\space}%
   \usebibmacro{//}%
   \usebibmacro{cbx:bookibid:check}
      {\bibsentence\printtext{%
@@ -516,7 +516,7 @@
       \usebibmacro{book:bytranslator+others}%
       \newunit\newblock
       \printfield{edition}%
-      \setunit*{\respdelim}
+      \setunit*{\respdelim}%
       \printlist[semicolondelim]{editioncredits}%
       \newunit\newblock
       \printlist[semicolondelim]{specdata}%
@@ -550,7 +550,7 @@
   \usebibmacro{credits}%
   \setunit*{\resppunct}%
   \usebibmacro{bytranslator+others}%
-  \setunit{\space}
+  \setunit{\space}%
   \usebibmacro{//}%
   \usebibmacro{cbx:bookibid:check}
      {\bibsentence\printtext{%
@@ -566,7 +566,7 @@
       \usebibmacro{book:bytranslator+others}%
       \newunit\newblock
       \printfield{edition}%
-      \setunit*{\respdelim}
+      \setunit*{\respdelim}%
       \printlist[semicolondelim]{editioncredits}%
       \newunit\newblock
       \printlist[semicolondelim]{specdata}%
@@ -600,7 +600,7 @@
   \usebibmacro{credits}%
   \setunit*{\resppunct}%
   \usebibmacro{bytranslator+others}%
-  \setunit{\space}
+  \setunit{\space}%
   \usebibmacro{//}%
   \usebibmacro{cbx:bookibid:check}
      {\bibsentence\printtext{%
@@ -654,7 +654,7 @@
   \usebibmacro{credits}%
   \setunit*{\resppunct}%
   \usebibmacro{byeditor}%
-  \setunit*{\resppunct}
+  \setunit*{\resppunct}%
   \newunit\newblock
   \printfield{edition}%
   \setunit*{\respdelim}%
@@ -1032,8 +1032,7 @@
     {\printtext{(%
       \printfield{series}%
       \setunit*{\addsemicolondelim}%
-      \printfield[seriesnumber]{number})}}
-  }
+      \printfield[seriesnumber]{number})}}}
 
 \newbibmacro*{publisher+location+date}{%
   \usebibmacro{publisher+location}%
@@ -1791,7 +1790,7 @@
     {\iftoggle{bbx:url}
       {\usebibmacro{url+urldate}}
       {}}%
-  \setunit*{\addsemicolondelim}
+  \setunit*{\addsemicolondelim}%
   \printfield{note}}
 
 \gdef\ifmulticitation{%
