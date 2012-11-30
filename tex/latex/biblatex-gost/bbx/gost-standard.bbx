@@ -345,7 +345,7 @@
     \newunit\newblock
     \printlist[semicolondelim]{specdata}%
     \newunit\newblock
-    \printfield{location}%              ???
+    \printlist{location}%              ???
     \setunit*{\addcomma\space}%
     \usebibmacro{jour:date}%
     \newunit\newblock
@@ -810,7 +810,7 @@
   \newunit\newblock
   \printlist[semicolondelim]{specdata}%
   \newunit\newblock
-  \printfield{location}%              ???
+  \printlist{location}%              ???
   \setunit*{\addcomma\space}%
   \usebibmacro{jour:date}%
   \newunit\newblock
@@ -1861,7 +1861,7 @@
       or
       test {\ifentrytype{periodical}}
     }
-      {\printfield{location}%
+      {\printlist{location}%
        \setunit*{\addcomma\space}%
        \usebibmacro{jour:date}%
        \newunit\newblock
