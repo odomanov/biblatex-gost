@@ -344,36 +344,6 @@
   \ifstrequal{#1}{true}
     {\DeclareStyleSourcemap{
       \maps[datatype=bibtex]{
-        \map{
-          \step[fieldsource=author,
-            match=\regexp{(.+\s+and\s+){3,}},
-            final]
-          \step[fieldset=options, fieldvalue={useauthor=false}]
-        }
-        \map{
-          \step[fieldsource=editor,
-            match=\regexp{(.+\s+and\s+){3,}},
-            final]
-          \step[fieldset=options, fieldvalue={useeditor=false}]
-        }
-        \map[overwrite]{
-          \step[fieldsource=author,
-            match=\regexp{(.+\s+and\s+){3,}},
-            final]
-          \step[fieldsource=options,
-            match=\regexp{^$},
-            final]
-          \step[fieldset=options, fieldvalue={useauthor=false}]
-        }
-        \map[overwrite]{
-          \step[fieldsource=editor,
-            match=\regexp{(.+\s+and\s+){3,}},
-            final]
-          \step[fieldsource=options,
-            match=\regexp{^$},
-            final]
-          \step[fieldset=options, fieldvalue={useeditor=false}]
-        }
         \map[overwrite]{
           \step[fieldsource=author,
             match=\regexp{(.+\s+and\s+){3,}},
@@ -381,6 +351,15 @@
           \step[fieldsource=options,
             match=\regexp{(.+)},
             replace=\regexp{useauthor=false,$1}]
+          \step[fieldsource=options,
+            match=\regexp{^$},
+            replace=\regexp{useauthor=false}]
+        }
+        \map{
+          \step[fieldsource=author,
+            match=\regexp{(.+\s+and\s+){3,}},
+            final]
+          \step[fieldset=options, fieldvalue={useauthor=false}]
         }
         \map[overwrite]{
           \step[fieldsource=editor,
@@ -389,6 +368,15 @@
           \step[fieldsource=options,
             match=\regexp{(.+)},
             replace=\regexp{useeditor=false,$1}]
+          \step[fieldsource=options,
+            match=\regexp{^$},
+            replace=\regexp{useeditor=false}]
+        }
+        \map{
+          \step[fieldsource=editor,
+            match=\regexp{(.+\s+and\s+){3,}},
+            final]
+          \step[fieldset=options, fieldvalue={useeditor=false}]
         }
         \map[overwrite]{
           \pertype{patent}
