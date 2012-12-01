@@ -337,7 +337,7 @@
   \iffieldundef{journaltitle}  % no journaltitle means electronic publication
    {\newunit}
    {\usebibmacro{//}%
-    \usebibmacro{journal}
+    \usebibmacro{journal}%
     \setunit{\respdelim}%
     \usebibmacro{credits}%
     \setunit*{\resppunct}%
@@ -355,9 +355,9 @@
     \newunit\newblock
     \iffieldundef{series}
       {}
-      {\printtext{(\printfield{series})}}
+      {\printtext{(\printfield{series})}}%
     \newunit\newblock
-    \usebibmacro{issn}
+    \usebibmacro{issn}%
     \newunit\newblock}%
   \usebibmacro{doi+eprint+url+note}%
   \newunit\newblock
@@ -473,7 +473,7 @@
   \newunit\newblock
   \usebibmacro{series+number}%
   \newunit\newblock
-  \usebibmacro{isbn}
+  \usebibmacro{isbn}%
   \newunit\newblock
   \usebibmacro{doi+eprint+url+note}%
   \newunit\newblock
@@ -527,7 +527,7 @@
       \newunit\newblock
       \usebibmacro{series+number}%
       \newunit\newblock
-      \usebibmacro{isbn}
+      \usebibmacro{isbn}%
       \newunit\newblock
       \usebibmacro{doi+eprint+url+note}%
       \newunit\newblock
@@ -577,7 +577,7 @@
       \newunit\newblock
       \usebibmacro{series+number}%
       \newunit\newblock
-      \usebibmacro{isbn}
+      \usebibmacro{isbn}%
       \newunit\newblock
       \usebibmacro{doi+eprint+url+note}%
       \newunit\newblock
@@ -627,7 +627,7 @@
       \newunit\newblock
       \usebibmacro{series+number}%
       \newunit\newblock
-      \usebibmacro{isbn}
+      \usebibmacro{isbn}%
       \newunit\newblock
       \usebibmacro{doi+eprint+url+note}%
       \newunit\newblock
@@ -818,9 +818,9 @@
   \newunit\newblock
   \iffieldundef{series}
     {}
-    {\printtext{(\printfield{series})}}
+    {\printtext{(\printfield{series})}}%
   \newunit\newblock
-  \usebibmacro{issn}
+  \usebibmacro{issn}%
   \newunit\newblock
   \usebibmacro{doi+eprint+url+note}%
   \newunit\newblock
@@ -858,7 +858,7 @@
   \newunit\newblock
   \usebibmacro{series+number}%
   \newunit\newblock
-  \usebibmacro{isbn}
+  \usebibmacro{isbn}%
   \newunit\newblock
   \usebibmacro{doi+eprint+url+note}%
   \newunit\newblock
@@ -1074,7 +1074,7 @@
 
 \newbibmacro*{chapter+pages}{%
   \printfield{chapter}%
-  \setunit{\bibpagespunct}%
+  \setunit*{\bibpagespunct}%
   \printfield{pages}%
   \newunit}
 
