@@ -767,8 +767,10 @@
   \printfield{ipc}%
   \setunit{\respdelim}%
   \printnames[byauthor]{author}%
-  \setunit*{\addspace}%
-  \printfield[parens]{authortype}%
+  \iffieldundef{authortype}
+    {}
+    {\setunit*{\addspace}%
+     \printfield[parens]{authortype}}%
   \setunit*{\addsemicolondelim}%
   \usebibmacro{byholder}%
   \setunit*{\addsemicolondelim}%
