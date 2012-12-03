@@ -1187,8 +1187,7 @@
     not test {\iffieldsequal{#1}{book#1}}
   }
   {#2}
-  {#3}
-}
+  {#3}}
 
 % <name><true><false>
 \newbibmacro*{checkbookname}[3]{%
@@ -1198,8 +1197,7 @@
     not test {\ifnamesequal{#1}{book#1}}
   }
   {#2}
-  {#3}
-}
+  {#3}}
 
 % <list><true><false>
 \newbibmacro*{checkbooklist}[3]{%
@@ -1209,8 +1207,7 @@
     not test {\iflistsequal{#1}{book#1}}
   }
   {#2}
-  {#3}
-}
+  {#3}}
 
 \newbibmacro*{credits}{%
   \usebibmacro{checkbooklist}{credits}
@@ -1259,8 +1256,7 @@
        \savename{editor}{\savedclearededitor}%
        \clearname{editor}%
        \setunit*{\resppunct}%
-       \usebibmacro{byeditorx}}
-}
+       \usebibmacro{byeditorx}}}
 
 \renewbibmacro*{bytranslator+others}{%
   \ifnameundef{translator}
@@ -1288,7 +1284,7 @@
       )
       }
         {\usebibmacro{bytranslator+othersstrg}%
-         \setunit{\addspace}%
+         \setunit*{\addspace}%
          \printnames[bytranslator]{translator}%
          \savename{translator}{\savedclearedtranslator}%
          \clearname{translator}%
@@ -1399,8 +1395,7 @@
        \savename{editor}{\savedclearededitor}%
        \clearname{editor}%
        \setunit*{\resppunct}%
-       \usebibmacro{book:byeditorx}}
-}
+       \usebibmacro{book:byeditorx}}}
 
 \newbibmacro*{book:bytranslator+others}{%
   \ifnameundef{booktranslator}
