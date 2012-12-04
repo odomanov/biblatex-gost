@@ -13,9 +13,6 @@
 \newtoggle{cbx:t:bookibid} % for .. // Ibid. in inbook, incollection,..
 \newtoggle{cbx:f:bookibid}
 \newtoggle{cbx:opt:inbookibid}
-\newbibmacro*{cite:citepages}{}
-\newbibmacro*{cite:full:citepages}{}
-\newbibmacro*{cite:postnote}{}
 
 \DeclareBibliographyOption{strict}[true]{%
   \ifstrequal{#1}{true}
@@ -150,13 +147,6 @@
 
 \newbibmacro{cite:clearfields}{%
    \renewbibmacro*{series+number}{}%
-   %\clearfield{media}%
-   %\clearfield{doi}%
-   %\clearfield{eprint}%
-   %\clearfield{url}%
-   %\clearfield{urlday}%
-   %\clearfield{urlmonth}%
-   %\clearfield{urlyear}%
    \clearfield{addendum}%
    \clearfield{pubstate}%
    \clearfield{titleaddon}}
