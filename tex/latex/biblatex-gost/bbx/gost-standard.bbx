@@ -777,8 +777,14 @@
   \usebibmacro{credits}%
   \newunit\newblock
   \printfield{reqnumber}%
-  \setunit*{\addsemicolondelim}%
-  \printtext[reqdate]{\mkbibdateshort{year}{month}{day}}%
+  \ifboolexpr{
+      test {\iffieldundef{year}}
+      and test {\iffieldundef{month}}
+      and test {\iffieldundef{day}}
+      }
+      {}
+      {\setunit*{\addsemicolondelim}%
+       \printtext[reqdate]{\mkbibdateshort{year}{month}{day}}}%
   \setunit*{\addsemicolondelim}%
   \printpubldate%
   \setunit*{\addcomma\space}%

@@ -163,11 +163,23 @@
   \ifnameundef{labelname}
     {\printfield{label}}
     {\printnames{labelname}}%
-  \setunit*{\nametitledelim}%
-  \printtext[bibhyperlink]{%
-     \printfield[citetitle]{labeltitle}}%
-  \ifthenelse{ \ifentrytype{book} \or \ifentrytype{collection}
-    \or \ifentrytype{proceedings} \or \ifentrytype{reference}
+  \iffieldundef{labeltitle}
+    {}
+    {\setunit*{\nametitledelim}%
+     \printtext[bibhyperlink]{%
+        \printfield[citetitle]{labeltitle}}}%
+  \ifboolexpr{
+    ( test {\ifentrytype{book}}     % do we use macro{volume+parts} ?
+      or test {\ifentrytype{collection}}
+      or test {\ifentrytype{proceedings}}
+      or test {\ifentrytype{reference}}
+    )
+    and not
+    ( test {\iffieldundef{volume}}        % does macro{volume+parts} prints anything ?
+      and test {\iffieldundef{part}}
+      and test {\iffieldundef{issue}}
+      and test {\iffieldundef{book}}
+    )
     }
     {\setunit*{\addcomma\space}%
      \printtext[bibhyperlink]{\usebibmacro{volume+parts}{\setunit*{\addcomma\space}}}}%
@@ -185,7 +197,7 @@
   \bibsentence\printtext[bibhyperlink]{\bibstring[\mkibid]{ibidem}}}
 
 \newbibmacro*{cite:shorthand}{%
-  \printtext[bibhyperlink]{\printfield{shorthand}}}
+  \printfield[bibhyperlink]{shorthand}}
 
 \newbibmacro*{cite:postnote:ibidpage}{%
   \iftoggle{cbx:loccit}
