@@ -1,4 +1,4 @@
-\ProvidesFile{biblatex-gost.dbx}
+% Biblatex-GOST data model
 
 \DeclareDatamodelFields[type=field, datatype=literal]{
   book,

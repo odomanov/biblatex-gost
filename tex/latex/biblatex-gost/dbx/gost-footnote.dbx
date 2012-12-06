@@ -1,4 +1,4 @@
-\ProvidesFile{gost-footnote.dbx}
+% Biblatex-GOST data model
 
 \blx@inputonce{biblatex-gost.dbx}{biblatex-gost data model}{}{}{}{}
 
