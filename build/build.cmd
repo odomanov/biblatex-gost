@@ -43,9 +43,13 @@ pdflatex -interaction=batchmode biblatex-gost-examples.tex
 rm -f *.aux *.bbl *.bcf *.blg *.log *.lot *.out *.toc *.run.xml
 cd ../../..
 zip -r -ll ../biblatex-gost-%VERS%.tds.zip *
+cp doc/latex/biblatex-gost/biblatex-gost.pdf ../
+cp doc/latex/biblatex-gost/biblatex-gost-examples.pdf ../
 pause
 GOTO:EOF
 
 :s_error
-Echo Something is wrong
+Echo Something is wrong. Either version is not set or WMIC is not found.
+Echo Usage: build.cmd Version
+Echo     For example: build.cmd 0.7
 GOTO:EOF
