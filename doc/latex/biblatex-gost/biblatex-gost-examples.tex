@@ -3,7 +3,7 @@
 \usepackage[margin=2cm]{geometry}
 \usepackage[T1,T2A]{fontenc}
 \usepackage[utf8]{inputenx}
-\usepackage[british,american,spanish,greek,french,german,polish,russian,english]{babel}
+\usepackage[british,american,spanish,greek,french,german,polish,english,russian]{babel}
 \usepackage{csquotes}
 \usepackage{multicol}
 \usepackage{fancyvrb}
@@ -49,6 +49,7 @@
   \iffieldundef{related}{}{\skipentry}}
 
 \begin{document}
+\selectlanguage{english}
 \maketitle
 Examples are grouped according to their entrytypes. The types themselves are the following
 (click to go to the respective bibliography section):
@@ -70,6 +71,7 @@ I hope this is not going to confuse the reader too much.
 
 \nocite{*}
 
+\selectlanguage{russian}
 \defbibheading{bibliography}{}
 \renewcommand*{\do}[1]{\section{@#1\label{#1}}\printbibliography[type=#1]}
 \docsvlist{mvbook,book,inbook,suppbook,bookinbook,mvcollection,collection,incollection,suppcollection,mvreference,reference,inreference,proceedings,inproceedings,periodical,article,patent,online,thesis}
