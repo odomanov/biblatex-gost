@@ -1,5 +1,5 @@
-@ECHO OFF
 :: The script is intended for Windows 7 but requires GnuWin32
+@ECHO OFF
 
 :: Check WMIC is available
 WMIC.EXE Alias /? >NUL 2>&1 || GOTO s_error
@@ -23,7 +23,11 @@ set VERS=%1
 Echo Version is %VERS%, today is %_yyyy%/%_mm%/%_dd%
 sed -e s/\\def\\bbx@gost@date{.*}/\\def\\bbx@gost@date{%_yyyy%\/%_mm%\/%_dd%}/ -i ../tex/latex/biblatex-gost/bbx/gost-standard.bbx
 sed -e s/\\def\\bbx@gost@version{.*}/\\def\\bbx@gost@version{%VERS%}/ -i ../tex/latex/biblatex-gost/bbx/gost-standard.bbx
-rm -f ../tex/latex/biblatex-gost/bbx/sed*
+sed -e "s/\[.*\\space v.*\\space biblatex-gost styles\]/\[%_yyyy%\/%_mm%\/%_dd%\\space v%VERS%\\space biblatex-gost styles\]/" -i ../tex/latex/biblatex-gost/bbx/*.bbx
+sed -e "s/\[.*\\space v.*\\space biblatex-gost styles\]/\[%_yyyy%\/%_mm%\/%_dd%\\space v%VERS%\\space biblatex-gost styles\]/" -i ../tex/latex/biblatex-gost/cbx/*.cbx
+sed -e "s/\[.*\\space v.*\\space biblatex-gost styles\]/\[%_yyyy%\/%_mm%\/%_dd%\\space v%VERS%\\space biblatex-gost styles\]/" -i ../tex/latex/biblatex-gost/lbx/*.lbx
+sed -e "s/\[.*\\space v.*\\space biblatex-gost styles\]/\[%_yyyy%\/%_mm%\/%_dd%\\space v%VERS%\\space biblatex-gost styles\]/" -i ../tex/latex/biblatex-gost/*.def
+del /S ..\sed*
 rm -r tds\tex\latex\biblatex-gost
 rm -r tds\doc\latex\biblatex-gost
 mkdir tds\tex\latex\biblatex-gost
@@ -35,6 +39,7 @@ cp doc/latex/biblatex-gost/*.bib build/tds/doc/latex/biblatex-gost/
 cp doc/latex/biblatex-gost/*.cfg build/tds/doc/latex/biblatex-gost/
 cp doc/latex/biblatex-gost/*.tex build/tds/doc/latex/biblatex-gost/
 cd build/tds/doc/latex/biblatex-gost
+pdflatex -interaction=batchmode biblatex-gost.tex
 pdflatex -interaction=batchmode biblatex-gost.tex
 pdflatex -interaction=batchmode biblatex-gost.tex
 pdflatex -interaction=batchmode biblatex-gost-examples.tex
