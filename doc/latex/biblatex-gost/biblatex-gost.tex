@@ -27,7 +27,7 @@ bibstyle=gost-standard,
 \newcommand*{\biblatex}{Bib\-\latex\xspace}
 \newcommand*{\biblatexhome}{http://sourceforge.net/projects/biblatex/}
 \newcommand*{\biblatexctan}{http://www.ctan.org/tex-archive/macros/latex/contrib/biblatex/}
-\newcommand*{\biblatexgost}{Bib\-\latex\kern-0.3em \nohyphenation-GOST\xspace}
+\newcommand*{\biblatexgost}{Bib\-\latex\kern-0.3em\nohyphenation-GOST\xspace}
 \newcommand*{\biblatexgosthome}{http://sourceforge.net/projects/biblatexgost/}
 
 \makeatletter
@@ -125,7 +125,7 @@ bibstyle=gost-standard,
 \label{sec:int}
 
 Пакет \biblatexgost{}\fnurl{http://sourceforge.net/projects/biblatexgost/} представляет
-собой набор стилей для \biblatex{}\fnurl{http://www.ctan.org/tex-archive/macros/latex/contrib/biblatex/}
+собой набор стилей для \biblatex{}\unspace\fnurl{http://www.ctan.org/tex-archive/macros/latex/contrib/biblatex/}
 и предназначен для оформления библиографии в соответствии с требованиями ГОСТов 7.0.5--2008 и
 7.1--2003 (а также 7.80--2000, 7.82--2001 и др.). Пакет будет полезен прежде всего в
 гуманитарных дисциплинах с высокими требованиями к оформлению библиографии, многие из
@@ -350,7 +350,7 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 
 
 \subsection%
-[Термины ГОСТа и поля Bib\-\latex\kern-0.3em \nohyphenation-\\GOST]
+[Термины ГОСТа и поля Bib\-\latex\kern-0.3em\nohyphenation-\\GOST]
 {Термины ГОСТа и поля \biblatexgost}
 \label{sec:gost-biblatex}
 
@@ -965,7 +965,7 @@ volsorder = {pbi},
 \end{multicols}
 
 \bigskip
-Обратите внимание, что механизм сортировки \biblatex\slash\biber
+Обратите внимание, что механизм сортировки \biblatex\unspace\slash\biber
 нечувствителен к значениям опции %\opt{volsorder}
 и поля \bibfield{volsorder}, поэтому при их изменении может потребоваться ручная настройка
 сортировки, например, при помощи поля \bibfield{sortvolume} (см.~\secref{sec:newfields}).
@@ -974,7 +974,7 @@ volsorder = {pbi},
 \label{sec:dissers}
 
 Для оформления диссертаций используйте записи типа \bibtype{thesis}. Поле \bibfield{type}
-определяет тип диссертации: магистерская (\opt{mathesis}), кандидатская(\opt{phdthesis}),
+определяет тип диссертации: магистерская (\opt{mathesis}), кандидатская (\opt{phdthesis}),
 докторская (\opt{docthesis}).
 
 Пример оформление диссертации:
@@ -1552,7 +1552,7 @@ reorder). Поэтому, если вы хотите, чтобы в библио
 
 \begin{changelog}
 
-\begin{release}{0.7}{06-12-2012}
+\begin{release}{0.7}{07-12-2012}
 \item Переход на \biblatex~2.4 и \biber~1.4\see{sec:install}
 \item Добавлена обработка поля \bibfield{related}%\see{sec:related}
 \item Добавлены опции \kvopt{related}{bib/cite}\see{sec:newoptions}
