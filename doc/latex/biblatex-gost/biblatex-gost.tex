@@ -140,6 +140,12 @@ bibstyle=gost-standard,
 модификации могут оказаться значительными. Более полный список изменений см.
 в \Apxref{apx:changelog}.
 
+\subsubsection*{Версия 0.7.1}
+
+\begin{trivlist}
+\item Изменён вывод URL (в связи с изменениями в \biblatex~2.5)
+\end{trivlist}
+
 \subsubsection*{Версия 0.7}
 
 \begin{trivlist}
@@ -283,11 +289,12 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 \kvopt{singletitle}{false} (или \opt{true} при \kvopt{mergedate}{goststrict},
 см.~\secref{sec:newoptions}).
 
-\item[gost-inline-min]\vspace{-\itemsep}\vspace{-\parsep}%
+\item[gost-inline-min]%
 \item[gost-footnote-min]\vspace{-\itemsep}\vspace{-\parsep}%
 \item[gost-numeric-min]\vspace{-\itemsep}\vspace{-\parsep}%
 \item[gost-authoryear-min]\vspace{-\itemsep}\vspace{-\parsep}%
-%\vspace{-4\baselineskip}%
+\item\vspace{-\itemsep}\vspace{-\parsep}%
+\vspace{-4\baselineskip}%
 Все стили имеют <<минимальный>> вариант, в котором выводится минимальное количество
 сведений~--- автор, название, том\slash часть\slash книга\slash выпуск,
 выходные данные, страницы (для статей в журналах и книгах).
@@ -1551,6 +1558,16 @@ reorder). Поэтому, если вы хотите, чтобы в библио
 \label{apx:changelog}
 
 \begin{changelog}
+
+%\begin{release}{0.8}{??-12-2012}
+%\item The package status has been changed from \emph{author-maintained} to \emph{maintained}
+%\item Переход на \biblatex~2.4 и \biber~1.4\see{sec:install}
+%\item Исправлены другие ошибки
+%\end{release}
+
+\begin{release}{0.7.1}{15-01-2013}
+\item Небольшие правки в связи с изменениями в \biblatex~2.5
+\end{release}
 
 \begin{release}{0.7}{07-12-2012}
 \item Переход на \biblatex~2.4 и \biber~1.4\see{sec:install}
