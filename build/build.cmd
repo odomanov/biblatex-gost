@@ -47,9 +47,17 @@ biber biblatex-gost-examples
 pdflatex -interaction=batchmode biblatex-gost-examples.tex
 rm -f *.aux *.bbl *.bcf *.blg *.log *.lot *.out *.toc *.run.xml
 cd ../../..
+rm ../biblatex-gost-%VERS%.tds.zip
 zip -r -ll ../biblatex-gost-%VERS%.tds.zip *
 cp doc/latex/biblatex-gost/biblatex-gost.pdf ../
 cp doc/latex/biblatex-gost/biblatex-gost-examples.pdf ../
+cd ../ctan
+rm -r tex doc
+rem rm -r doc
+cp -r ../tds/doc/latex/biblatex-gost doc
+cp -r ../tds/tex/latex/biblatex-gost tex
+rm ../biblatex-gost-%VERS%.zip
+zip -r -ll ../biblatex-gost-%VERS%.zip *
 pause
 GOTO:EOF
 
