@@ -289,10 +289,28 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 \kvopt{singletitle}{false} (или \opt{true} при \kvopt{mergedate}{goststrict},
 см.~\secref{sec:newoptions}).
 
+\item[gost-alphabetic]
+Этот стиль не предусмотрен ГОСТом, но добавлен для полноты. Он соответствует стандартному
+стилю \bibsty{alphabetic}, а также \bibsty{alphabetic-verb}, если его использоваться в виде:
+
+\begin{ltxcode}
+\usepackage[%
+    citestyle=alphabetic-verb,
+    bibstyle=gost-alphabetic,
+    ...
+]{biblatex}
+\end{ltxcode}
+
+По умолчанию стиль устанавливает опции
+\kvopt{autocite}{inline},
+\kvopt{labelalpha}{true},
+\kvopt{sorting}{anyvt},
+
 \item[gost-inline-min]%
 \item[gost-footnote-min]\vspace{-\itemsep}\vspace{-\parsep}%
 \item[gost-numeric-min]\vspace{-\itemsep}\vspace{-\parsep}%
 \item[gost-authoryear-min]\vspace{-\itemsep}\vspace{-\parsep}%
+\item[gost-alphabetic-min]\vspace{-\itemsep}\vspace{-\parsep}%
 \item\vspace{-\itemsep}\vspace{-\parsep}%
 \vspace{-4\baselineskip}%
 Все стили имеют <<минимальный>> вариант, в котором выводится минимальное количество
@@ -1207,7 +1225,7 @@ gost-authoryear-min & --- & false \\
 По умолчанию этот параметр равен 2, но
 при установке \kvopt{inbookibid}{true} \biblatexgost выставляет его равным 1,
 так, чтобы запись, на которую указывает \bibfield{crossref}, всегда включалась в
-библиографию и поле \bibfield{crossref}  всегда было доступно.
+библиографию, и поле \bibfield{crossref}  всегда было доступно.
 Если вы изменяете опцию \opt{mincrossrefs} в настройках, убедитесь, что записи,
 нужные для работы опции \opt{inbookibid}, присутствуют в вашем тексте хотя бы в
 аргументе команды \cmd{nocite}.
@@ -1331,9 +1349,10 @@ gost-authoryear-min & --- & false \\
 и \bibsty{gost-numeric}.
 Схема сортирует сначала по тому, затем, внутри тома, по книге, затем~--- по части, и
 затем~--- по выпуску.
-Кроме того, поскольку стандартные схемы сортировки \biblatex недостаточно учитывают многотомные
+Кроме того, поскольку стандартные схемы сортировки \biblatex плохо учитывают многотомные
 издания (неверно обрабатывают
 поле \bibfield{maintitle}), то модифицированы схемы \opt{nty}, \opt{nyvt}, \opt{ynt},
+\opt{anyt}, \opt{anyvt},
 \opt{ydnt} и \opt{nyt}. В них также добавлена сортировка по
 тому\slash книге\slash части\slash выпуску.
 Схема \opt{nyt} (имя, год, заглавие) включена по умолчанию в стиле
@@ -1559,11 +1578,12 @@ reorder). Поэтому, если вы хотите, чтобы в библио
 
 \begin{changelog}
 
-%\begin{release}{0.8}{??-12-2012}
-%\item The package status has been changed from \emph{author-maintained} to \emph{maintained}
+\begin{release}{0.8}{??-??-2013}
+\item The package status has been changed from \emph{author-maintained} to \emph{maintained}
 %\item Переход на \biblatex~2.4 и \biber~1.4\see{sec:install}
-%\item Исправлены другие ошибки
-%\end{release}
+\item Добавлены стили \bibsty{gost-alphabetic} и \bibsty{gost-alphabetic-min}\see{sec:styles}
+\item Исправлены другие ошибки
+\end{release}
 
 \begin{release}{0.7.1}{15-01-2013}
 \item Переход на \biblatex~2.5 и \biber~1.5\see{sec:install}
