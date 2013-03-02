@@ -340,6 +340,86 @@
   }
 }
 
+\DeclareSortingScheme{anyt}{
+  \sort{
+    \field{presort}
+  }
+  \sort{
+    \field{labelalpha}
+  }
+  \sort[final]{
+    \field{sortkey}
+  }
+  \sort{
+    \field{sortname}
+    \field{author}
+    \field{editor}
+    \field{translator}
+    \field{sorttitle}
+    \field{maintitle}
+    \field{title}
+  }
+  \sort{
+    \field{sortyear}
+    \field{year}
+  }
+  \sort{
+    \field{sorttitle}
+    \field{maintitle}
+    \field{title}
+  }
+  \sort{
+    \field[padside=left,padwidth=4,padchar=0]{volume}
+    \literal{0000}
+  }
+}
+
+\DeclareSortingScheme{anyvt}{
+  \sort{
+    \field{presort}
+  }
+  \sort{
+    \field{labelalpha}
+  }
+  \sort[final]{
+    \field{sortkey}
+  }
+  \sort{
+    \field{sortname}
+    \field{author}
+    \field{editor}
+    \field{translator}
+    \field{sorttitle}
+    \field{maintitle}
+    \field{title}
+  }
+  \sort{
+    \field{sortyear}
+    \field{year}
+  }
+  \sort{
+    \field[padside=left,padwidth=4,padchar=0]{volume}
+    \literal{0000}
+  }
+  \sort{
+    \field[padside=left,padwidth=4,padchar=0]{book}
+    \literal{0000}
+  }
+  \sort{
+    \field[padside=left,padwidth=4,padchar=0]{part}
+    \literal{0000}
+  }
+  \sort{
+    \field[padside=left,padwidth=4,padchar=0]{issue}
+    \literal{0000}
+  }
+  \sort{
+    \field{sorttitle}
+    \field{maintitle}
+    \field{title}
+  }
+}
+
 \DeclareBibliographyOption{movenames}[true]{%
   \gdef\blx@opt@movenames{#1}%
   \ifstrequal{#1}{true}
