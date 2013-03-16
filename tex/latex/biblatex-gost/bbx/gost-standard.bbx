@@ -315,8 +315,10 @@
 \newcommand*{\blx@gost@setunit}{\newunit}
 
 \@ifpackageloaded{babel}
-  {\edef\gostmedialanguage{\bbl@main@language}}
-  {\edef\gostmedialanguage{russian}}
+  {\edef\gostmedialanguage{\bbl@main@language}%
+   \newcommand*{\select@medialanguage}{\select@language{\gostmedialanguage}}}
+  {\edef\gostmedialanguage{russian}%
+   \newcommand*{\select@medialanguage}{}}
 
 \newbibmacro*{begentry}{}
 \newbibmacro*{finentry}{\finentry}
@@ -1810,7 +1812,7 @@
     {}
     {{\ifdefvoid{\gostmedialanguage}
         {}
-        {\select@language{\gostmedialanguage}}% first switch language, then \ifbibxstring
+        {\select@medialanguage}% first switch language, then \ifbibxstring
       \ifbibxstring{media\thefield{media}}
         {\printtext[brackets]{\bibcpstring{media\thefield{media}}}}
         {}}}}
