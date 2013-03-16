@@ -1507,7 +1507,16 @@
 \newbibmacro*{jour:date}{%
   \usebibmacro{year}%
   \newunit\newblock
-  \mkbibdatelong{}{month}{day}}
+  \mkbibdatelong{}{month}{day}%
+  \iffieldundef{endyear}
+    {}
+    {\bibdatedash%
+     \iffieldequalstr{endyear}{}
+      {\mbox{~~~~}}
+      {\printfield{endyear}%
+       \newunit\newblock
+       \mkbibdatelong{}{endmonth}{endday}}}%
+}
 
 \def\blx@gost@volsinorder#1#2{%
   \ifstrequal{#1}{v}
