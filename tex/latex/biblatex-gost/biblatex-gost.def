@@ -102,7 +102,7 @@
   systemreq,
   countryru,countryussr,patentru,patentussr,patreqru,patrequssr,invcert,
   requested,published,priority,
-  docthesis,
+  docthesis,phdautoref,docautoref,
 }
 \DeclareLanguageMapping{russian}{russian-gost}
 %
