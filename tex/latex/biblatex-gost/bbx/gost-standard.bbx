@@ -1055,14 +1055,14 @@
   \printlist{location}%
   \iflistundef{publisher}
     {\setunit*{\addcomma\space}}
-    {\setunit*{\addcolon\space}}%
+    {\setunit*{\addcolondelim}}%
   \printlist{publisher}}
 
 \newbibmacro*{institution+location+date}{%
   \printlist{location}%
   \iflistundef{institution}
     {\setunit*{\addcomma\space}}
-    {\setunit*{\addcolon\space}}%
+    {\setunit*{\addcolondelim}}%
   \printlist{institution}%
   \setunit*{\addcomma\space}%
   \usebibmacro{date}%
@@ -1072,7 +1072,7 @@
   \printlist{location}%
   \iflistundef{organization}
     {\setunit*{\addcomma\space}}
-    {\setunit*{\addcolon\space}}%
+    {\setunit*{\addcolondelim}}%
   \printlist{organization}%
   \setunit*{\addcomma\space}%
   \usebibmacro{date}%
