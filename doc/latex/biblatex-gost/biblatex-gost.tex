@@ -12,6 +12,7 @@
 \usepackage{tabularx}
 \usepackage{longtable}
 \usepackage{booktabs}
+\usepackage{rotating}
 \usepackage{comment}
 \usepackage[inline]{enumitem}
 \usepackage{isodate}
@@ -1113,6 +1114,33 @@ volsorder = {pbi},
 
 Другие примеры можно найти в файле примеров.
 
+\subsection{Оформление стандартов}
+\label{sec:standards}
+
+Согласно \gostbibref{5.4.1.4},
+<<При описании нормативных документов по стандартизации (стандартов и технических
+условий) в области специфических сведений указывают обозначение ранее действовавшего документа,
+даты введения, сроки действия объекта библиографического описания>>.
+Таким образом, стандарты можно описывать как записи типа \bibtype{book} с
+заполненным полем \bibfield{specdata}. Например:
+
+\begin{lstlisting}[style=bibtex,escapechar=|]
+@BOOK{standard3,
+  title        = {|Селитра калиевая техническая. Технические условия|},
+  media        = {text},
+  subtitle     = {|ГОСТ 19790-74|},
+  specdata    = {|Взамен ГОСТ 1949-65 и ГОСТ 5.1138-71 ; введ. 01.07.05|},
+  location     = {|М.|},
+  publisher    = {|Стандартинформ|},
+  year         = {2006},
+  pagetotal    = {18},
+  series       = {|Межгосударственный стандарт|},
+  hyphenation  = {russian},
+}
+\end{lstlisting}
+
+Другие примеры можно найти в файле примеров.
+
 \section{Работа с пакетом}
 \label{sec:usage}
 
@@ -1576,6 +1604,105 @@ reorder). Поэтому, если вы хотите, чтобы в библио
 %выпусков.
 
 \end{itemize}
+
+\section{Последовательность макросов в драйверах}
+\label{sec:macros}
+
+Ниже приведен порядок вызова макросов~--- и, следовательно, вывода соответствующих
+полей~--- в драйверах записей различных типов (см.~файл \file{gost-standard.bbx}).
+Плюс в таблице означает, что макрос для записи данного типа вызывается (соответственно,
+поля выводятся).
+\newcommand*{\rl}{\cmidrule(r){1-1}\cmidrule(r){2-5}\cmidrule(r){6-9}\cmidrule(r){10-12}%
+                  \cmidrule{13-16}}
+\begingroup
+\footnotesize
+\noindent\begin{longtable}{rccccccccccccccc}
+\toprule
+ & \begin{sideways}
+inbook
+\end{sideways} & \begin{sideways}
+incollection
+\end{sideways} & \begin{sideways}
+inproceedings
+\end{sideways} & \begin{sideways}
+article
+\end{sideways} & \begin{sideways}
+book
+\end{sideways} & \begin{sideways}
+collection
+\end{sideways} & \begin{sideways}
+proceedings
+\end{sideways} & \begin{sideways}
+periodical
+\end{sideways} & \begin{sideways}
+booklet
+\end{sideways} & \begin{sideways}
+manual
+\end{sideways} & \begin{sideways}
+online
+\end{sideways} & \begin{sideways}
+report
+\end{sideways} & \begin{sideways}
+unpublished
+\end{sideways} & \begin{sideways}
+thesis
+\end{sideways} & \begin{sideways}
+misc
+\end{sideways}\tabularnewline
+\rl author/translator+others & + & + & + & + &  &  &  &  &  &  &  &  &  &  & \tabularnewline
+author/editor+others/translator+others &  &  &  &  & + &  &  &  &  &  &  &  &  &  & \tabularnewline
+editor+others &  &  &  &  &  & + & + &  &  &  &  &  &  &  & \tabularnewline
+author &  &  &  &  &  &  &  &  &  &  &  & + & + & + & \tabularnewline
+editor &  &  &  &  &  &  &  & + &  &  &  &  &  &  & \tabularnewline
+author/editor &  &  &  &  &  &  &  &  & + & + & + &  &  &  & +\tabularnewline
+\rl maintitle+volumes+parts+title &  &  &  &  & + & + & + &  &  &  &  &  &  &  & \tabularnewline
+title & + & + & + & + &  &  &  & + & + & + & + & + & + & + & +\tabularnewline
+type &  &  &  &  &  &  &  &  & + & + &  & + &  & + & +\tabularnewline
+event+venue+date &  &  &  &  &  &  & + &  &  &  &  &  &  &  & \tabularnewline
+\rl byauthor & + & + & + & + & + &  &  &  & + & + & + & + & + & +{*} & +\tabularnewline
+organization &  &  &  &  &  &  &  &  &  & + & + &  &  &  & \tabularnewline
+institution &  &  &  &  &  &  &  &  &  &  &  & + &  &  & \tabularnewline
+credits & + & + & + &  & + & + & + & + & + & + & + & + & + &  & +\tabularnewline
+byeditor &  &  &  &  & + & + & + & + & + & + & + &  &  &  & \tabularnewline
+bytranslator+others & + & + & + & + & + & + & + &  &  &  & + &  &  &  & \tabularnewline
+\rl maintitle+volumes+parts+booktitle  & + & + & + &  &  &  &  &  &  &  &  &  &  &  & \tabularnewline
+event+venue+date &  &  & + &  &  &  &  &  &  &  &  &  &  &  & \tabularnewline
+book:byauthor  & + &  &  &  &  &  &  &  &  &  &  &  &  &  & \tabularnewline
+book:credits  & + & + & + &  &  &  &  &  &  &  &  &  &  &  & \tabularnewline
+book:byeditor  & + & + & + &  &  &  &  &  &  &  &  &  &  &  & \tabularnewline
+book:bytranslator+others  & + & + & + &  &  &  &  &  &  &  &  &  &  &  & \tabularnewline
+journal &  &  &  & + &  &  &  &  &  &  &  &  &  &  & \tabularnewline
+credits &  &  &  & + &  &  &  &  &  &  &  &  &  &  & \tabularnewline
+byeditor &  &  &  & + &  &  &  &  &  &  &  &  &  &  & \tabularnewline
+\rl edition & + & + &  &  & + & + &  &  &  & + &  &  &  &  & \tabularnewline
+editioncredits & + & + &  &  & + & + &  &  &  & + &  &  &  &  & \tabularnewline
+version &  &  &  &  &  &  &  &  &  & + & + & + &  &  & +\tabularnewline
+\rl specdata & + & + & + & + & + & + & + & + & + & + & + & + & + & + & +\tabularnewline
+\rl organization &  &  & + &  &  &  & + &  &  &  &  &  &  &  & \tabularnewline
+publisher+location+date & + & + & + &  & + & + & + &  &  & + &  &  &  &  & \tabularnewline
+institution+location+date &  &  &  &  &  &  &  &  &  &  &  &  &  & + & \tabularnewline
+organization+location+date &  &  &  &  &  &  &  &  &  &  &  &  &  &  & +\tabularnewline
+location+date &  &  &  &  &  &  &  &  & + &  &  & + & + &  & \tabularnewline
+date &  &  &  &  &  &  &  &  &  &  & + &  &  &  & \tabularnewline
+\rl location &  &  &  & + &  &  &  & + &  &  &  &  &  &  & \tabularnewline
+jour:date &  &  &  & + &  &  &  & + &  &  &  &  &  &  & \tabularnewline
+jour:volume+parts+issuetitle &  &  &  & + &  &  &  & + &  &  &  &  &  &  & \tabularnewline
+\rl chapter+pages & + & + & + &  & + & + & + &  & + & + &  & + &  & + & \tabularnewline
+pages &  &  &  & + &  &  &  &  &  &  &  &  &  &  & \tabularnewline
+pagetotal &  &  &  &  & + & + & + &  & + & + &  & + &  & + & \tabularnewline
+\rl update, systemreq &  &  &  &  &  &  &  &  &  &  & + &  &  &  & \tabularnewline
+\rl series &  &  &  & + &  &  &  & + &  &  &  &  &  &  & \tabularnewline
+series+number & + & + & + &  & + & + & + &  &  &  &  &  &  &  & \tabularnewline
+\rl isbn/issn/isrn & + & + & + & + & + & + & + & + &  & + &  & + & + & + & \tabularnewline
+number &  &  &  &  &  &  &  &  &  &  &  & + &  &  & \tabularnewline
+doi+eprint+url+note & + & + & + & + & + & + & + & + & + & + &  & + &  & + & +\tabularnewline
+url+urldate+note &  &  &  &  &  &  &  &  &  &  & + &  & + &  & \tabularnewline
+howpublished &  &  &  &  &  &  &  &  & + &  &  &  & + &  & +\tabularnewline
+addendum+pubstate & + & + & + & + & + & + & + & + & + & + & + & + & + & + & +\tabularnewline
+pageref & + & + & + & + & + & + & + & + & + & + & + & + & + & + & +\tabularnewline
+\bottomrule
+\end{longtable}
+\endgroup
 
 \section{История изменений}
 \label{apx:changelog}
