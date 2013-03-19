@@ -21,14 +21,22 @@
 \renewcommand*{\bibleftparen}{\blx@postpunct\ifcitation{[\bibsentence}{(}}
 \renewcommand*{\bibrightparen}{\blx@postpunct\ifcitation{]}{)}\midsentence}
 
+\apptocmd{\blx@citeprint}{%
+  \ifcsdef{abx@field@hyphenation}
+    {\ifdef\blx@thelangenv
+      {\csname end\blx@thelangenv\endcsname}}
+      {}%
+    {}%
+}{}{}%
+
 \AtEveryCitekey{%
-	\ifcsdef{abx@field@hyphenation}{%
-		\edef\blx@languagename{\abx@field@hyphenation}%
-		\select@language{\abx@field@hyphenation}%
-		%\def\mkbibnamelast#1{#1}%
-		\blx@hyphenreset}%
-		{}%
-}
+  \ifcsdef{abx@field@hyphenation}
+    {\ifdef\blx@thelangenv
+      {\edef\blx@gost@langenv{\noexpand\csname\blx@thelangenv\endcsname%
+          {\abx@field@hyphenation}}%
+       \blx@gost@langenv}
+      {}}
+   {}}
 
 \DeclareFieldFormat*{citetitle}{\mkbibemph{#1}}
 \DeclareFieldFormat{extratitleyear}{\mknumalph{#1}}
