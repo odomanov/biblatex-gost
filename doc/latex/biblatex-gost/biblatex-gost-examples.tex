@@ -40,7 +40,9 @@
 \renewcommand*{\do}[1]{\csdef{#1}##1{\mytempforAtCharacter #1\{}}
 \docsvlist{XDATA,COMMENT,xdata,comment,}
 
-\title{Biblatex-GOST examples}
+\makeatletter
+\title{Biblatex-GOST examples\thanks{Version~\bbx@gost@version.}}
+\makeatother
 \author{Oleg Domanov\thanks{odomanov@yandex.ru}}
 
 \defbibcheck{related}{%
