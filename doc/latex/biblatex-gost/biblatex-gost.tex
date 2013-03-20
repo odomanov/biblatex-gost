@@ -25,10 +25,10 @@ bibstyle=gost-standard,
 \hypersetup{unicode=true}
 
 \newcommand*{\biber}{Biber\xspace}
-\newcommand*{\biblatex}{Bib\-\latex}
+\newcommand*{\biblatex}{Biblatex\xspace}
 \newcommand*{\biblatexhome}{http://sourceforge.net/projects/biblatex/}
 \newcommand*{\biblatexctan}{http://www.ctan.org/tex-archive/macros/latex/contrib/biblatex/}
-\newcommand*{\biblatexgost}{Bib\-\latex\kern-0.3em\nohyphenation-GOST\xspace}
+\newcommand*{\biblatexgost}{Biblatex-GOST\xspace}
 \newcommand*{\biblatexgosthome}{http://sourceforge.net/projects/biblatexgost/}
 
 \makeatletter
@@ -133,6 +133,27 @@ bibstyle=gost-standard,
 которых \bibtex не в состоянии удовлетворить (это касается в первую очередь многоязычных
 библиографий, а также библиографических ссылок в сносках, использования Ibid., Op. cit. и т.\,д.).
 
+\subsection{Лицензия}
+\label{sec:lic}
+
+Permission is granted to copy, distribute and\slash or modify this software under the terms of the \lppl, version 1.3.\fnurl{http://www.ctan.org/tex-archive/macros/latex/base/lppl.txt}
+This package is
+%author"=
+maintained.
+
+\subsection{Установка}
+\label{sec:install}
+
+Пакет поставляется в виде архива, содержащего стандартую структуру дерева TDS.
+Для его установки достаточно распаковать архив в дерево \tex, желательно локальное, и
+обновить индексы (в \tex~Live, например, это делается командой \texttt{mktexlsr},
+в MiK\tex~--- \texttt{initexmf -{}-update-fndb}).
+
+Для работы \biblatexgost версии 0.7.1 требуются, как минимум,
+\biblatex~2.5\fnurl{http://sourceforge.net/projects/biblatex/files/biblatex-2.5/}
+и \biber~1.5\fnurl{http://sourceforge.net/projects/biblatex-biber/files/biblatex-biber/1.5/}.
+%(текущие версии на CTAN). Пакет не будет работать с предыдущими версиями.
+
 \subsection{Важные изменения в этой версии}
 \label{sec:critchanges}
 
@@ -140,6 +161,13 @@ bibstyle=gost-standard,
 точки зрения совместимости с предыдущими версиями. Пока проект находится на бета-стадии,
 модификации могут оказаться значительными. Более полный список изменений см.
 в \Apxref{apx:changelog}.
+
+\subsubsection*{Версия 0.8}
+
+\begin{trivlist}
+\item URL в \bibtype{online} теперь выводится всегда, независимо от опций \opt{url}, \opt{biburl},
+  \opt{citeurl}
+\end{trivlist}
 
 \subsubsection*{Версия 0.7.1}
 
@@ -177,24 +205,6 @@ bibstyle=gost-standard,
 \item По умолчанию установлено \kvopt{firstinits}{true}.
 \item Изменён перевод на русский язык некоторых строк файла локализации.
 \end{trivlist}
-
-\subsection{Лицензия}
-\label{sec:lic}
-
-Permission is granted to copy, distribute and\slash or modify this software under the terms of the \lppl, version 1.3.\fnurl{http://www.ctan.org/tex-archive/macros/latex/base/lppl.txt} This package is author"=maintained.
-
-\subsection{Установка}
-\label{sec:install}
-
-Пакет поставляется в виде архива, содержащего стандартую структуру дерева TDS.
-Для его установки достаточно распаковать архив в дерево \tex, желательно локальное, и
-обновить индексы (в \tex~Live, например, это делается командой \texttt{mktexlsr},
-в MiK\tex~--- \texttt{initexmf -{}-update-fndb}).
-
-Для работы \biblatexgost версии 0.7.1 требуется
-\biblatex~2.5\fnurl{http://sourceforge.net/projects/biblatex/files/biblatex-2.5/}
-и \biber~1.5\fnurl{http://sourceforge.net/projects/biblatex-biber/files/biblatex-biber/1.5/}.
-%(текущие версии на CTAN). Пакет не будет работать с предыдущими версиями.
 
 \section{Стили \biblatexgost}
 \label{sec:styles}
@@ -277,7 +287,7 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 работ одного года. Поэтому в \biblatexgost используется несколько способов оформления
 ссылок, которые выбираются опцией \opt{mergedate} (см.~\secref{sec:newoptions}).
 В частности, значение опции \kvopt{mergedate}{goststrict} соответствует строгому
-следованию ГОСТу, хотя при этом существует опасность появления неопределённых ссылок.
+следованию ГОСТу, хотя при этом могут появляться неопределённые ссылок.
 Стиль чувствителен к опции \opt{singletitle} и может не выводить год в ссылке, если он
 не требуется для устранения неопределённости (например, если имеется лишь одна публикация
 данного автора или лишь одна публикация без автора с данным названием).
@@ -376,7 +386,7 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 
 
 \subsection%
-[Термины ГОСТа и поля Bib\-\latex\kern-0.3em\nohyphenation-\\GOST]
+%[Термины ГОСТа и поля Bib\-\latex\kern-0.3em\nohyphenation-\\GOST]
 {Термины ГОСТа и поля \biblatexgost}
 \label{sec:gost-biblatex}
 
@@ -391,7 +401,7 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 Цветом выделены поля \biblatexgost, отсутствующие в \biblatex
 (см.~\secref{sec:newfields,sec:patent}).
 В угловые скобки помещены поля, используемые не вполне стандартными типами записей,
-такими как \bibtype{patent} и \bibtype{thesis}.
+такими как \bibtype{patent} или \bibtype{thesis}.
 
 \begingroup
 \tablesetup
@@ -453,8 +463,9 @@ Permission is granted to copy, distribute and\slash or modify this software unde
 ISSN серии или подсерии & issn (isbn) \\
 Номер выпуска серии или подсерии & number \\
 \cmidrule(r){1-1}\cmidrule{2-2}
-\multicolumn{1}{@{}H}{Область примечания} & url, urldate, note, type,
-                                            {\spotcolor update}, {\spotcolor systemreq}\\
+\multicolumn{1}{@{}H}{Область примечания} & url, urldate, note, type,\newline
+                                            \ensuremath\langle{\spotcolor update},
+                                            {\spotcolor systemreq}\ensuremath\rangle\\
 \cmidrule(r){1-1}\cmidrule{2-2}
 \multicolumn{1}{@{}H}{Область стандартного номера и} & \\
 \multicolumn{1}{@{}H}{условий доступности} & \\*
@@ -487,7 +498,8 @@ ISSN серии или подсерии & issn (isbn) \\
 
 В \biblatexgost определены следующие
 поля библиографической базы данных, отсутствующие в стандартном \biblatex
-(см. также поля для оформления патентов в \secref{sec:patent}).
+(см. также поля для оформления диссертаций и авторефератов в \secref{sec:dissers},
+а также патентов в \secref{sec:patent}).
 
 \begin{fieldlist}
 
@@ -581,7 +593,7 @@ ISSN серии или подсерии & issn (isbn) \\
 \listitem{editioncredits}{literal}
 
 Сведения об ответственности издания, если они относятся к конкретному изданию.
-Выводятся сразу после издания (см.~\gostbibref{5.3.3}).
+Выводятся сразу после сведений об издании (см.~\gostbibref{5.3.3}).
 
 \fielditem{editortype}{key}
 
@@ -589,15 +601,9 @@ ISSN серии или подсерии & issn (isbn) \\
 тип редактора \bibfield{geneditor}, соответствующий общему
 редактору. Он выводится в виде: \enquote{Под общ. ред.~\ldots}.
 
-\fielditem{major}{literal}\noitemspace%
-\fielditem{majorcode}{literal}
-
-Специальность и код специальности для диссертаций. Определены только для
-записей типа \bibtype{thesis}. Подробнее см. \secref{sec:dissers}.
-
 \fielditem{media}{literal}
 
-Общее обозначение материала (см.~\gostbibref{5.2.3}). В \tabref{tab:media} приведены
+Общее обозначение материала (\gostbibref{5.2.3}). В \tabref{tab:media} приведены
 допустимые значения этого поля вместе с соответствующими терминами ГОСТа.
 \begin{table}[htbp]
 \tablesetup
@@ -1007,6 +1013,20 @@ volsorder = {pbi},
 докторская (\opt{docthesis})~--- или тип автореферата: кандидатская (\opt{phdautoref}),
 докторская (\opt{docautoref}).
 
+Для записей типа \bibtype{thesis} определены два дополнительных поля:
+
+\begin{fieldlist}
+
+\fielditem{major}{literal}
+
+Специальность в виде <<ист. наук>>, <<физ.-мат. наук>> и т.\,д.
+
+\fielditem{majorcode}{literal}
+
+Код специальности в виде <<09.00.01>>, <<07.00.02>> и т.\,д.
+
+\end{fieldlist}
+
 Пример оформление диссертации:
 
 \begin{lstlisting}[style=bibtex,escapechar=|]
@@ -1129,7 +1149,7 @@ volsorder = {pbi},
   title        = {|Селитра калиевая техническая. Технические условия|},
   media        = {text},
   subtitle     = {|ГОСТ 19790-74|},
-  specdata    = {|Взамен ГОСТ 1949-65 и ГОСТ 5.1138-71 ; введ. 01.07.05|},
+  specdata     = {|Взамен ГОСТ 1949-65 и ГОСТ 5.1138-71 ; введ. 01.07.05|},
   location     = {|М.|},
   publisher    = {|Стандартинформ|},
   year         = {2006},
@@ -1202,6 +1222,9 @@ volsorder = {pbi},
 представлены
 в \tabref{tab:bibcite}. Прочерк в таблице означает, что опция для данного стиля
 не имеет смысла.
+
+В записях типа \bibtype{online} URL выводится всегда, независимо от значения опций
+\opt{url}, \opt{biburl} и \opt{citeurl}.
 
 \begin{table}[htbp]
 \tablesetup
@@ -1282,7 +1305,7 @@ gost-authoryear-min & --- & false \\
 \begin{enumerate*}[label=\arabic*)]
 \item как обычно (\kvopt{mergedate}{false}),
 \item выводит дату только для меток с добавленной буквой (\kvopt{mergedate}{minimum}),
-\item выводит дату только для меток с добавленной буквой, и если
+\item выводит дату только для меток с добавленной буквой, если
 она является просто годом (\kvopt{mergedate}{basic}),
 \item дата вообще не выводится на своём обычном месте (\kvopt{mergedate}{maximum}),
 \item то же, но поле \bibfield{issue} всё же выводится
@@ -1360,7 +1383,7 @@ gost-authoryear-min & --- & false \\
 соответственно (что означает, что при наличии более трёх имён в списке, он сокращается до
 одного).
 %\opt{useauthor}, \opt{useeditor} и \opt{usetranslator},
-В частности, количество имён, при котором происходит перемещение, (4 и более) не зависит
+В частности, количество имён, при котором происходит перемещение (4 и более), не зависит
 от значения \opt{maxnames} и вообще не
 регулируется в \biblatexgost (особенности реализации см. в~\apxref{impl:4names}).
 Впрочем, изменение этого количества означало бы отступление от ГОСТа.
@@ -1389,6 +1412,8 @@ gost-authoryear-min & --- & false \\
 тому\slash книге\slash части\slash выпуску.
 Схема \opt{nyt} (имя, год, заглавие) включена по умолчанию в стиле
 \bibsty{gost-authoryear}.
+
+См. также \secref{sec:volsparts} о порядке вывода томов для многотомных изданий.
 
 \optitem[vbpi]{volsorder}{последовательность символов \opt{v}, \opt{b}, \opt{p}, \opt{i}}
 \label{volsorder}
@@ -1716,10 +1741,14 @@ pageref & + & + & + & + & + & + & + & + & + & + & + & + & + & + & +\tabularnewli
 
 \begin{changelog}
 
-\begin{release}{0.8}{??-??-2013}
+\begin{release}{0.8}{20-03-2013}
 \item The package status has been changed from \emph{author-maintained} to \emph{maintained}
 %\item Переход на \biblatex~2.4 и \biber~1.4\see{sec:install}
 \item Добавлены стили \bibsty{gost-alphabetic} и \bibsty{gost-alphabetic-min}\see{sec:styles}
+\item Добавлено оформление авторефератов диссертаций\see{sec:dissers}
+\item Добавлена документация об оформлении стандартов\see{sec:standards}
+\item Исправление: URL в \bibtype{online} теперь выводится всегда
+\item Исправлены ошибки при переключении языков (проверка наличия \texttt{babel} и пр.)
 \item Исправлены другие ошибки
 \end{release}
 
