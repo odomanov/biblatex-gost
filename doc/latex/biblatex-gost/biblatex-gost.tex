@@ -416,6 +416,7 @@ maintained.
 \bottomrule
 \endfoot
 \endlastfoot
+Заголовок                        & author, editor, translator, {\spotcolor heading} \\
 \multicolumn{1}{@{}H}{Область заглавия и сведений об ответственности} & \\*
 Основное заглавие                & title, maintitle, booktitle \\
 \textit{Общее обозначение материала} &  {\spotcolor media} \\
@@ -603,8 +604,29 @@ ISSN серии или подсерии & issn (isbn) \\
 
 \listitem{heading}{name}
 
-Заголовок согласно ГОСТу 7.80-2000 <<Библиографическая запись. Заголовок>>.
-В \biblatex нет понятия заголовка
+Заголовок библиографической записи.
+
+Заголовок, согласно ГОСТу 7.80---2000 <<Библиографическая запись. Заголовок>>,
+состоит из основной части и идентифицирующих признаков.
+Первая может включать: <<имя лица, наименование организации, унифицированное
+заглавие, обозначение документа, географическое название и т.\,д.>>,
+в качестве вторых могут быть приведены: <<даты,
+специальность, титул, сан, номер, название местности н другие сведения>>.
+В \biblatex нет понятия заголовка, однако вывод полей \bibfield{author}, \bibfield{editor} и
+\bibfield{translator} аналогичен выводу заголовка в ГОСТ. Другими словами можно сказать,
+что в \biblatex реализован лишь один тип заголовка~--- имя лица. Поле \bibfield{heading}
+позволяет определять заголовки других типов.%
+\footnote{Программно поле \bibfield{heading} реализовано как ещё одно, фиктивное имя
+(т.\,е. имеет тип данных \texttt{name list}). При чтении базы данных оно заключается
+в фигурные скобки, поэтому с точки зрения \biblatex представляет собой имя,
+состоящее из одной фамилии. В остальном оно обрабатывается так же как поля
+\bibfield{author}, \bibfield{editor} и \bibfield{translator}, в частности,
+участвует в определении \texttt{labelname} (имея преимущество перед остальными именами:
+при наличии поля \bibfield{heading} значение \texttt{labelname} равно ему).}
+
+Примеры использования заголовков см. в \secref{sec:patent}, \secref{sec:standards}.
+
+О формате вывода заголовков см. \secref{sec:headingformat}.
 
 \fielditem{major}{literal}\noitemspace%
 \fielditem{majorcode}{literal}
@@ -1024,20 +1046,6 @@ volsorder = {pbi},
 докторская (\opt{docthesis})~--- или тип автореферата: кандидатская (\opt{phdautoref}),
 докторская (\opt{docautoref}).
 
-Для записей типа \bibtype{thesis} определены два дополнительных поля:
-
-\begin{fieldlist}
-
-\fielditem{major}{literal}
-
-Специальность в виде <<ист. наук>>, <<физ.-мат. наук>> и т.\,д.
-
-\fielditem{majorcode}{literal}
-
-Код специальности в виде <<09.00.01>>, <<07.00.02>> и т.\,д.
-
-\end{fieldlist}
-
 Пример оформление диссертации:
 
 \begin{lstlisting}[style=bibtex,escapechar=|]
@@ -1116,7 +1124,7 @@ volsorder = {pbi},
 Поле \bibfield{type} может иметь значения \opt{patent}, \opt{patreq} и \opt{invcert},
 соответствующие патенту, заявке и авторскому свидетельству.
 
-Пример оформление патента:
+Пример оформление патента под заглавием (без заголовка):
 
 \begin{lstlisting}[style=bibtex,escapechar=|]
 @PATENT{patent2,
@@ -1128,6 +1136,32 @@ volsorder = {pbi},
   number       = {1095735},
   location     = {countryru},
   ipc          = {|МПК|\ensuremath{^7} B 64 G 1/00},
+  holder       = {{|заявитель Спейс Системз/Лорал, инк.|}},
+  credits      = {|патент. поверенный Егорова Г. Б.|},
+  reqnumber    = {2000108705/28},
+  date         = {2000-04-07},
+  publdate     = {2001-03-10},
+  publication  = {|Бюл. № 7 (I ч.)|\midsentence},
+  prdate       = {1999-04-09},
+  prnumber     = {09/289, 037},
+  prcountry    = {countryus},
+  pagetotal    = {|5 с.~: ил.|},
+  language     = {russian},
+  hyphenation  = {russian},
+}
+\end{lstlisting}
+
+Тот же самый патент, оформленный под заголовком (вместо
+\bibfield{type}, \bibfield{number}, \bibfield{location}, \bibfield{ipc}
+используется поле \bibfield{heading}):
+
+\begin{lstlisting}[style=bibtex,escapechar=|]
+@PATENT{patent2,
+  heading      = {|Заявка 1095735 Рос. федерация, МПК|\ensuremath{^7} B 64 G 1/00},
+  author       = {|Тернер, Э. В.|},
+  authortype   = {|США|},
+  title        = {|Одноразовая ракета-носитель|},
+  media        = {text},
   holder       = {{|заявитель Спейс Системз/Лорал, инк.|}},
   credits      = {|патент. поверенный Егорова Г. Б.|},
   reqnumber    = {2000108705/28},
@@ -1160,6 +1194,24 @@ volsorder = {pbi},
   title        = {|Селитра калиевая техническая. Технические условия|},
   media        = {text},
   subtitle     = {|ГОСТ 19790-74|},
+  specdata     = {|Взамен ГОСТ 1949-65 и ГОСТ 5.1138-71 ; введ. 01.07.05|},
+  location     = {|М.|},
+  publisher    = {|Стандартинформ|},
+  year         = {2006},
+  pagetotal    = {18},
+  series       = {|Межгосударственный стандарт|},
+  hyphenation  = {russian},
+}
+\end{lstlisting}
+
+Тот же самый ГОСТ, оформленный под заголовком (вместо \bibfield{subtitle}
+используется \bibfield{heading}):
+
+\begin{lstlisting}[style=bibtex,escapechar=|]
+@REFERENCE{standard3,
+  heading      = {|ГОСТ 19790-74|},
+  title        = {|Селитра калиевая техническая. Технические условия|},
+  media        = {text},
   specdata     = {|Взамен ГОСТ 1949-65 и ГОСТ 5.1138-71 ; введ. 01.07.05|},
   location     = {|М.|},
   publisher    = {|Стандартинформ|},
@@ -1570,18 +1622,24 @@ gost-inline & false & true \\
 \end{comment}
 
 \subsection{Формат заголовка библиографической записи}
-\label{headformat}
+\label{sec:headingformat}
+
+Формат заголовка определяется командой \cmd{mkgostheading}, по умолчанию
+определённой как:
+
+\begin{lstlisting}[style=latex]
+\newcommand*{\mkgostheading}[1]{\mkbibemph{#1}}
+\end{lstlisting}
 
 Имена авторов~---
 а также редакторов или переводчиков при использовании опций \opt{useeditor} и/или
-\opt{usetranslator}~--- в заголовке библиографической записи
-по умолчанию выводятся курсивом. Этот формат можно изменить,
+\opt{usetranslator}~--- в заголовке выводятся тем же форматом. Его можно изменить,
 переопределив команды
 \cmd{mkbibhdnamelast}, \cmd{mkbibhdnamefirst}, \cmd{mkbibhdnameprefix} и
 \cmd{mkbibhdnameaffix}. По умолчанию они определены так:
 
 \begin{lstlisting}[style=latex]
-\newcommand*{\mkbibhdnamelast}[1]{\mkbibemph{#1}}
+\newcommand*{\mkbibhdnamelast}[1]{\mkgostheading{#1}}
 \newcommand*{\mkbibhdnamefirst}[1]{\mkbibhdnamelast{#1}}
 \newcommand*{\mkbibhdnameprefix}[1]{\mkbibhdnamelast{#1}}
 \newcommand*{\mkbibhdnameaffix}[1]{\mkbibhdnamelast{#1}}
