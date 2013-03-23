@@ -260,7 +260,7 @@
     {\usebibmacro{authorname:last-first}{#1}{#4}{#5}{#7}}
     {\usebibmacro{authorname:last-first}{#1}{#3}{#5}{#7}}%
   \usebibmacro{name:andothers}}
-\newcommand*{\mkgostheading}[1]{\mkbibemph{#1\nocorr}}
+\newcommand*{\mkgostheading}[1]{\mkbibemph{#1}}%\nocorr}}
 \DeclareFieldFormat{heading}{%
   \mkgostheading{#1}\addperiod\space}
 \newcommand*{\mkbibhdnamelast}[1]{\mkgostheading{#1}}
