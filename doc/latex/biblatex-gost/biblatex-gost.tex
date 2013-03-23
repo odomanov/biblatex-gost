@@ -281,7 +281,9 @@ maintained.
 с текстом используются имя автора и год в квадратных скобках. Если имеется лишь одно
 произведение данного автора, то год в ссылке не выводится. Это поведение можно
 отключить опцией \kvopt{singletitle}{false}. При отсутствии автора
-используется название или поле \bibfield{shorttitle}, если оно доступно. Нужно заметить, что ГОСТ
+используется название или поле \bibfield{shorttitle}, если оно доступно.
+При наличии поля \bibfield{heading} используется оно, даже если одновременно присутствуют
+автор, редактор или переводчик. Нужно заметить, что ГОСТ
 не слишком строго определяет соответствующий стиль и, в частности, допускает неопределённые
 ссылки в случаях, когда один автор имеет несколько
 работ одного года. Поэтому в \biblatexgost используется несколько способов оформления
@@ -606,33 +608,20 @@ ISSN серии или подсерии & issn (isbn) \\
 
 Заголовок библиографической записи.
 
-Заголовок, согласно ГОСТу 7.80---2000 <<Библиографическая запись. Заголовок>>,
-состоит из основной части и идентифицирующих признаков.
+Согласно ГОСТу 7.80---2000 <<Библиографическая запись. Заголовок>>,
+заголовок состоит из основной части и идентифицирующих признаков.
 Первая может включать: <<имя лица, наименование организации, унифицированное
 заглавие, обозначение документа, географическое название и т.\,д.>>,
 в качестве вторых могут быть приведены: <<даты,
 специальность, титул, сан, номер, название местности н другие сведения>>.
-В \biblatex нет понятия заголовка, однако вывод полей \bibfield{author}, \bibfield{editor} и
-\bibfield{translator} аналогичен выводу заголовка в ГОСТ. Другими словами можно сказать,
+В \biblatex нет понятия заголовка, однако фактически поля \bibfield{author}, \bibfield{editor} и
+\bibfield{translator} играют роль того, что ГОСТ называет заголовком. Можно сказать,
 что в \biblatex реализован лишь один тип заголовка~--- имя лица. Поле \bibfield{heading}
 позволяет определять заголовки других типов.%
-\footnote{Программно поле \bibfield{heading} реализовано как ещё одно, фиктивное имя
-(т.\,е. имеет тип данных \texttt{name list}). При чтении базы данных оно заключается
-в фигурные скобки, поэтому с точки зрения \biblatex представляет собой имя,
-состоящее из одной фамилии. В остальном оно обрабатывается так же как поля
-\bibfield{author}, \bibfield{editor} и \bibfield{translator}, в частности,
-участвует в определении \texttt{labelname} (имея преимущество перед остальными именами:
-при наличии поля \bibfield{heading} значение \texttt{labelname} равно ему).}
 
-Примеры использования заголовков см. в \secref{sec:patent}, \secref{sec:standards}.
+Примеры использования заголовков см. в \secref{sec:patent,sec:standards}.
 
 О формате вывода заголовков см. \secref{sec:headingformat}.
-
-\fielditem{major}{literal}\noitemspace%
-\fielditem{majorcode}{literal}
-
-Специальность и код специальности для диссертаций. Определены только для
-записей типа \bibtype{thesis}. Подробнее см. \secref{sec:dissers}.
 
 \fielditem{media}{literal}
 
@@ -1046,6 +1035,20 @@ volsorder = {pbi},
 докторская (\opt{docthesis})~--- или тип автореферата: кандидатская (\opt{phdautoref}),
 докторская (\opt{docautoref}).
 
+Для записей типа \bibtype{thesis} определены два дополнительных поля:
+
+\begin{fieldlist}
+
+\fielditem{major}{literal}
+
+Специальность в виде <<ист. наук>>, <<физ.-мат. наук>> и т.\,д.
+
+\fielditem{majorcode}{literal}
+
+Код специальности в виде <<09.00.01>>, <<07.00.02>> и т.\,д.
+
+\end{fieldlist}
+
 Пример оформление диссертации:
 
 \begin{lstlisting}[style=bibtex,escapechar=|]
@@ -1090,7 +1093,7 @@ volsorder = {pbi},
 \subsection{Оформление патентов}
 \label{sec:patent}
 
-Для оформления патентов введены следующие дополнительные поля (см. \gostbibref{}{5.4.1.5}):
+Для оформления патентов определены следующие дополнительные поля (см. \gostbibref{}{5.4.1.5}):
 
 \begin{fieldlist}
 
@@ -1631,10 +1634,17 @@ gost-inline & false & true \\
 \newcommand*{\mkgostheading}[1]{\mkbibemph{#1}}
 \end{lstlisting}
 
-Имена авторов~---
+В стиле \bibsty{gost-authoryear} заголовок, использованный в цитате,
+форматируется отдельно:
+
+\begin{lstlisting}[style=latex]
+\DeclareFieldFormat{citeheading}{#1}
+\end{lstlisting}
+
+Поскольку имена авторов~---
 а также редакторов или переводчиков при использовании опций \opt{useeditor} и/или
-\opt{usetranslator}~--- в заголовке выводятся тем же форматом. Его можно изменить,
-переопределив команды
+\opt{usetranslator}~--- фактически выполняют роль заголовка, они по умолчанию выводятся
+тем же форматом. Этот вывод можно изменить, переопределив команды
 \cmd{mkbibhdnamelast}, \cmd{mkbibhdnamefirst}, \cmd{mkbibhdnameprefix} и
 \cmd{mkbibhdnameaffix}. По умолчанию они определены так:
 
@@ -1757,7 +1767,8 @@ misc
 \bottomrule
 \endfoot
 \endlastfoot
-author/translator+others & + & + & + & + &  &  &  &  &  &  &  &  &  &  & \tabularnewline
+heading & + & + & + & + & + & + & + & + & + & + & + & + & + & + & +\tabularnewline
+\rl author/translator+others & + & + & + & + &  &  &  &  &  &  &  &  &  &  & \tabularnewline
 author/editor+others/translator+others &  &  &  &  & + &  &  &  &  &  &  &  &  &  & \tabularnewline
 editor+others &  &  &  &  &  & + & + &  &  &  &  &  &  &  & \tabularnewline
 author &  &  &  &  &  &  &  &  &  &  &  & + & + & + & \tabularnewline
@@ -1823,6 +1834,7 @@ pageref & + & + & + & + & + & + & + & + & + & + & + & + & + & + & +\tabularnewli
 \item The package status has been changed from \emph{author-maintained} to \emph{maintained}
 %\item Переход на \biblatex~2.4 и \biber~1.4\see{sec:install}
 \item Добавлены стили \bibsty{gost-alphabetic} и \bibsty{gost-alphabetic-min}\see{sec:styles}
+\item Добавлено поле заголовка \bibfield{heading}\see{sec:newfields}
 \item Добавлено оформление авторефератов диссертаций\see{sec:dissers}
 \item Добавлена документация об оформлении стандартов\see{sec:standards}
 \item Исправление: URL в \bibtype{online} теперь выводится всегда
