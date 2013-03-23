@@ -536,7 +536,8 @@
   \inherit{foreword}{bookforeword}
   \inherit{afterword}{bookafterword}
   \inherit{origlanguage}{bookoriglanguage}
-  \inherit{credits}{bookcredits}}
+  \inherit{credits}{bookcredits}
+  \noinherit{pagetotal}}
 \DeclareDataInheritance{collection,reference}{incollection,inreference,suppcollection}{%
   \inherit{translator}{booktranslator}
   \inherit{introduction}{bookintroduction}
@@ -545,7 +546,8 @@
   \inherit{foreword}{bookforeword}
   \inherit{afterword}{bookafterword}
   \inherit{origlanguage}{bookoriglanguage}
-  \inherit{credits}{bookcredits}}
+  \inherit{credits}{bookcredits}
+  \noinherit{pagetotal}}
 \DeclareDataInheritance{proceedings}{inproceedings}{%
   \inherit{translator}{booktranslator}
   \inherit{introduction}{bookintroduction}
@@ -554,5 +556,6 @@
   \inherit{foreword}{bookforeword}
   \inherit{afterword}{bookafterword}
   \inherit{origlanguage}{bookoriglanguage}
-  \inherit{credits}{bookcredits}}
+  \inherit{credits}{bookcredits}
+  \noinherit{pagetotal}}
 

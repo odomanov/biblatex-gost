@@ -88,7 +88,8 @@
 }
 
 \DeclareDatamodelEntryfields[patent]{
-  prdate,publdate,
+  prday,prmonth,pryear,
+  publday,publmonth,publyear,
   publication,reqnumber,ipc,prnumber,prcountry,
 }
 
