@@ -206,19 +206,22 @@
   \renewbibmacro*{date}{\printdate}%
   \renewbibmacro*{year}{\printfield{year}}%
   \renewbibmacro*{labeltitle}{}%
+  \renewbibmacro*{heading}{}%
   \renewbibmacro*{authoryearlabel}{%
-  \mkbibbrackets{%
-  \iffieldundef{shorthand}
-    {\ifthenelse{\ifnameundef{labelname}\OR\iffieldundef{labelyear}}
-        {\ifnameundef{labelname}
-          {\usebibmacro{cite:label+volume+parts}{}%
-           \setunit{\nameyeardelim}%
-           \usebibmacro{cite:labelyear+extras}{}}
-          {\usebibmacro{cite:labelname+volume+parts}{}}}
-        {\usebibmacro{cite:labelname+volume+parts}{}%
-          \setunit{\nameyeardelim}%
-          \usebibmacro{cite:labelyear+extras}{}}}
-    {\printfield{shorthand}}}}%
+    \mkbibbrackets{%
+      \iffieldundef{heading}
+       {\iffieldundef{shorthand}
+          {\ifthenelse{\ifnameundef{labelname}\OR\iffieldundef{labelyear}}
+              {\ifnameundef{labelname}
+                {\usebibmacro{cite:label+volume+parts}{}%
+                 \setunit{\nameyeardelim}%
+                 \usebibmacro{cite:labelyear+extras}{}}
+                {\usebibmacro{cite:labelname+volume+parts}{}}}
+              {\usebibmacro{cite:labelname+volume+parts}{}%
+                \setunit{\nameyeardelim}%
+                \usebibmacro{cite:labelyear+extras}{}}}
+          {\printfield{shorthand}}}
+        {\usebibmacro{cite:heading}{}}}}%
   \setlength{\biblabelsep}{.5em}%
   \setlength{\labelauthoryearsep}{\biblabelsep}%
 }

@@ -40,33 +40,41 @@
 
 \DeclareFieldFormat*{citetitle}{\mkbibemph{#1}}
 \DeclareFieldFormat{extratitleyear}{\mknumalph{#1}}
+\DeclareFieldFormat{citeheading}{#1}
 
 \newbibmacro*{cite}{%
   \iffieldundef{shorthand}
     {\ifthenelse{\ifciteibid\AND\NOT\iffirstonpage}
        {\usebibmacro{cite:ibid}}
-       {\ifthenelse{\ifnameundef{labelname}\OR\iffieldundef{labelyear}}
-          {\ifnameundef{labelname}
-              {\usebibmacro{cite:label+volume+parts}{bibhyperref}%
-               \setunit{\nameyeardelim}%
-               \usebibmacro{cite:labelyear+extras}{bibhyperref}}
-              {\usebibmacro{cite:labelname+volume+parts}{bibhyperref}}%
-           \usebibmacro{cite:reinit}}
-          {\iffieldequals{namehash}{\cbx@lasthash}
-             {\ifthenelse{\iffieldequals{labelyear}{\cbx@lastyear}\AND
-                      \(\value{multicitecount}=0\OR\iffieldundef{postnote}\)}
-                {\setunit{\addcomma}%
-                 \usebibmacro{cite:extrayear}}
-                {\setunit{\compcitedelim}%
-                 \usebibmacro{cite:labelyear+extras}{bibhyperref}%
-                 \savefield{labelyear}{\cbx@lastyear}}}
-             {\ifsingletitle
-                {\usebibmacro{cite:labelname+volume+parts}{bibhyperref}}
-                {\usebibmacro{cite:labelname+volume+parts}{}%
+       {\iffieldundef{heading}
+         {\ifthenelse{\ifnameundef{labelname}\OR\iffieldundef{labelyear}}
+            {\ifnameundef{labelname}
+                {\usebibmacro{cite:label+volume+parts}{bibhyperref}%
                  \setunit{\nameyeardelim}%
-                 \usebibmacro{cite:labelyear+extras}{bibhyperref}%
-                 \savefield{labelyear}{\cbx@lastyear}}%
-              \savefield{namehash}{\cbx@lasthash}}}}}
+                 \usebibmacro{cite:labelyear+extras}{bibhyperref}}
+                {\usebibmacro{cite:labelname+volume+parts}{bibhyperref}}%
+             \usebibmacro{cite:reinit}}
+            {\iffieldequals{namehash}{\cbx@lasthash}
+               {\ifthenelse{\iffieldequals{labelyear}{\cbx@lastyear}\AND
+                        \(\value{multicitecount}=0\OR\iffieldundef{postnote}\)}
+                  {\setunit{\addcomma}%
+                   \usebibmacro{cite:extrayear}}
+                  {\setunit{\compcitedelim}%
+                   \usebibmacro{cite:labelyear+extras}{bibhyperref}%
+                   \savefield{labelyear}{\cbx@lastyear}}}
+               {\ifsingletitle
+                  {\usebibmacro{cite:labelname+volume+parts}{bibhyperref}}
+                  {\usebibmacro{cite:labelname+volume+parts}{}%
+                   \setunit{\nameyeardelim}%
+                   \usebibmacro{cite:labelyear+extras}{bibhyperref}%
+                   \savefield{labelyear}{\cbx@lastyear}}%
+                \savefield{namehash}{\cbx@lasthash}}}}
+         {\usebibmacro{cite:heading}{bibhyperref}%
+%          \iffieldundef{labelyear}
+%            {}
+%            {\setunit{\nameyeardelim}%
+%             \usebibmacro{cite:labelyear+extras}{bibhyperref}}
+          \usebibmacro{cite:reinit}}}}%
     {\usebibmacro{cite:shorthand}%
      \usebibmacro{cite:reinit}}%
   \setunit{\multicitedelim}}
@@ -181,6 +189,9 @@
       {\bibcloseparen\global\boolfalse{cbx:parens}}
       {}%
     \multicitedelim}}
+
+\newbibmacro*{cite:heading}[1]{%
+  \printtext[#1]{\printfield[citeheading]{heading}}}
 
 \newbibmacro*{cite:shorthand}{%
   \printtext[bibhyperref]{\printfield{shorthand}}}
