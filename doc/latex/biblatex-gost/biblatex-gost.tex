@@ -34,7 +34,7 @@ bibstyle=gost-standard,
 \makeatletter
 \titlepage{%
   title={Пакет \biblatexgost},
-  subtitle={Оформление библиографии по ГОСТам 7.0.5--2008 и 7.1--2003},
+  subtitle={Оформление библиографии по ГОСТам 7.0.5---2008 и 7.1---2003},
   url={\biblatexgosthome},
   author={Олег Доманов},
   email={odomanov@yandex.ru},
@@ -90,8 +90,8 @@ bibstyle=gost-standard,
 %-----
 \usepackage{ellipsis}% must be loaded after hyperref !!
 \newcommand*{\bibsty}{\texttt}
-\newcommand*{\gostbibname}[1][]{ГОСТ#1 7.1--2003}
-\newcommand*{\gostcitename}[1][]{ГОСТ#1 7.0.5--2008}
+\newcommand*{\gostbibname}[1][]{ГОСТ#1 7.1---2003}
+\newcommand*{\gostcitename}[1][]{ГОСТ#1 7.0.5---2008}
 \newcommand*{\gostbibref}[2][]{\gostbibname[#1], п.\,#2}
 \newcommand*{\gostciteref}[2][]{\gostcitename[#1], п.\,#2}
 \newcommand*{\notimpl}{\footnote{Не реализовано в данной версии \biblatexgost.}}
@@ -127,8 +127,8 @@ bibstyle=gost-standard,
 
 Пакет \biblatexgost{}\fnurl{http://sourceforge.net/projects/biblatexgost/} представляет
 собой набор стилей для \biblatex{}\unspace\fnurl{http://www.ctan.org/tex-archive/macros/latex/contrib/biblatex/}
-и предназначен для оформления библиографии в соответствии с требованиями ГОСТов 7.0.5--2008 и
-7.1--2003 (а также 7.80--2000, 7.82--2001 и др.). Пакет будет полезен прежде всего в
+и предназначен для оформления библиографии в соответствии с требованиями ГОСТов 7.0.5---2008 и
+7.1---2003 (а также 7.80---2000, 7.82---2001 и др.). Пакет будет полезен прежде всего в
 гуманитарных дисциплинах с высокими требованиями к оформлению библиографии, многие из
 которых \bibtex не в состоянии удовлетворить (это касается в первую очередь многоязычных
 библиографий, а также библиографических ссылок в сносках, использования Ibid., Op. cit. и т.\,д.).
@@ -401,7 +401,7 @@ maintained.
 Цветом выделены поля \biblatexgost, отсутствующие в \biblatex
 (см.~\secref{sec:newfields,sec:patent}).
 В угловые скобки помещены поля, используемые не вполне стандартными типами записей,
-такими как \bibtype{patent} или \bibtype{thesis}.
+такими как \bibtype{patent} или \bibtype{thesis} (см.~\secref{sec:dissers,sec:patent}).
 
 \begingroup
 \tablesetup
@@ -832,7 +832,7 @@ introduction & вступительная статья \prm{кого} & всту
 \end{bibexample}
 
 и имя должно быть в именительном падеже. То же касается переводчика и опции \opt{usetranslator}
-(\ldots~/~пер. с фр. \prm{кого} И.\,Иванова).
+(\ldots~/~пер. с фр. \prm{кого} И.\,Ивановой).
 
 \fielditem{series}{integer/literal}
 
@@ -1454,7 +1454,9 @@ gost-inline & cite & Только цитата в тексте без скобо
   & parencite & Цитата в тексте в круглых скобках \\
   & footcite & Цитата в сноске без скобок\\
   & footcitetext & То же, но используется \cmd{footnotetext} вместо \cmd{footnote} \\
-  & smartcite & \cmd{footcite} в тексте, \cmd{parencite} в сноске. Другими словами, цитата всегда оказывается в сноске, но в первом случае в круглых скобках, во втором~"--- без них\\
+  & smartcite & \cmd{footcite} в тексте, \cmd{parencite} в сноске. Другими словами, цитата всегда
+                оказывается в сноске, но в первом случае без круглых скобок,
+                во втором~"--- с ними\\
   & autocite & Совпадает с \cmd{parencite} (установлена опция \kvopt{autocite}{inline})\\
 \cmidrule(r){1-1}\cmidrule(r){2-2}\cmidrule{3-3}
 gost-footnote & cite & Только цитата в тексте без скобок \\
@@ -1462,7 +1464,8 @@ gost-footnote & cite & Только цитата в тексте без скоб
   & footcite & Цитата в сноске без скобок\\
   & footcitetext & То же, но используется \cmd{footnotetext} вместо \cmd{footnote} \\
   & smartcite & \cmd{footcite} в тексте, \cmd{parencite} в сноске. Другими словами, цитата всегда
-                оказывается в сноске, но в первом случае в круглых скобках, во втором~"--- без них\\
+                оказывается в сноске, но в первом случае без круглых скобок,
+                во втором~"--- с ними\\
   & autocite & Совпадает с \cmd{footcite} (установлена опция \kvopt{autocite}{footnote})\\
 \cmidrule(r){1-1}\cmidrule(r){2-2}\cmidrule{3-3}
 gost-numeric & cite & Только номер, без скобок \\
@@ -1470,7 +1473,8 @@ gost-numeric & cite & Только номер, без скобок \\
   & footcite & Номер в сноске без скобок \\
   & footcitetext & То же, но используется \cmd{footnotetext} вместо \cmd{footnote} \\
   & smartcite & \cmd{footcite} в тексте, \cmd{parencite} в сноске. Другими словами, номер всегда
-               оказывается в сноске, но в первом случае в квадратных скобках, во втором~"--- без них.\\
+               оказывается в сноске, но в первом случае без квадратных скобок,
+               во втором~"--- с ними.\\
   & textcite & Номер в тексте без скобок \\
   & supercite & Номер как верхний индекс \\
   & autocite & Совпадает с \cmd{parencite} (установлена опция \kvopt{autocite}{inline})\\
@@ -1483,9 +1487,10 @@ gost-authoryear & cite & Автор (заголовок) и год в текст
   & footcite & Автор (заголовок) и год в сноске без скобок \\
   & footcitetext & То же, но используется \cmd{footnotetext} вместо \cmd{footnote} \\
   & smartcite & \cmd{footcite} в тексте, \cmd{parencite} в сноске. Другими словами, цитата всегда
-                оказывается в сноске, но в первом случае в квадратных скобках,
-                во втором~"--- без них. \\
-  & textcite & Автор (заголовок) без скобок и затем оставшаяся часть цитаты в квадратных скобках \\
+                оказывается в сноске, но в первом случае без квадратных скобок,
+                во втором~"--- с ними. \\
+  & textcite & Автор (заголовок, редактор, переводчик) без скобок и затем оставшаяся часть
+                цитаты в квадратных скобках \\
   & autocite & Совпадает с \cmd{parencite} (установлена опция \kvopt{autocite}{inline})\\
 \bottomrule
 \caption{Поддерживаемые команды цитирования}\\
@@ -1641,7 +1646,11 @@ reorder). Поэтому, если вы хотите, чтобы в библио
                   \cmidrule{13-16}}
 \begingroup
 \footnotesize
-\noindent\begin{longtable}{rccccccccccccccc}
+\tabcolsep=5.5pt
+\setlength\LTleft{0pt}
+\setlength\LTright{0pt}
+%\noindent
+\begin{longtable}{rccccccccccccccc}
 \toprule
  & \begin{sideways}
 inbook
