@@ -55,6 +55,7 @@
   editioncredits,
   specdata,
   volsorder,
+  heading,
 }
 
 \DeclareDatamodelEntryfields[book,collection,proceedings,reference]{
