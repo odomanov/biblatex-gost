@@ -116,6 +116,7 @@
     \field{sortkey}
   }
   \sort{
+    \field{heading}
     \name{sortname}
     \name{author}
     \name{editor}
@@ -160,6 +161,7 @@
     \field{sortkey}
   }
   \sort{
+    \field{heading}
     \name{sortname}
     \name{author}
     \name{editor}
@@ -204,6 +206,9 @@
     \field{sortkey}
   }
   \sort{
+    \field{heading}
+  }
+  \sort{
     \field{sortyear}
     \field{year}
     \literal{9999}
@@ -230,6 +235,9 @@
   }
   \sort[final]{
     \field{sortkey}
+  }
+  \sort{
+    \field{heading}
   }
   \sort[direction=descending]{
     \field[strside=left,strwidth=4]{sortyear}
@@ -260,6 +268,7 @@
     \field{sortkey}
   }
   \sort{
+    \field{heading}
     \name{sortname}
     \name{author}
     \name{editor}
@@ -304,6 +313,7 @@
     \field{sortkey}
   }
   \sort{
+    \field{heading}
     \name{sortname}
     \name{author}
     \name{editor}
@@ -351,6 +361,7 @@
     \field{sortkey}
   }
   \sort{
+    \field{heading}
     \field{sortname}
     \field{author}
     \field{editor}
@@ -385,6 +396,7 @@
     \field{sortkey}
   }
   \sort{
+    \field{heading}
     \field{sortname}
     \field{author}
     \field{editor}
@@ -492,11 +504,21 @@
 \DeclareSortExclusion{inbook,incollection,inproceeding,bookinbook,suppbook,suppcollection,inreference}
   {editor,volume,maintitle}
 
+\DeclareLabelname{%
+  \field{shortauthor}
+  \field{author}
+  \field{shorteditor}
+  \field{editor}
+  \field{translator}
+}
+
 \DeclareLabeltitle[book,collection,reference,proceedings]{%
   \field{shorttitle}
   \field{maintitle}
   \field{title}}
 
+\DeclareDataInheritance{*}{*}{%
+  \noinherit{heading}}
 \DeclareDataInheritance{periodical}{article}{%
   \noinherit{endyear}\noinherit{endmonth}\noinherit{endday}}
 \DeclareDataInheritance{mvbook,mvcollection,mvproceedings}

@@ -260,7 +260,10 @@
     {\usebibmacro{authorname:last-first}{#1}{#4}{#5}{#7}}
     {\usebibmacro{authorname:last-first}{#1}{#3}{#5}{#7}}%
   \usebibmacro{name:andothers}}
-\newcommand*{\mkbibhdnamelast}[1]{\mkbibemph{#1}}
+\newcommand*{\mkgostheading}[1]{\mkbibemph{#1}}
+\DeclareFieldFormat{heading}{%
+  \mkgostheading{#1}\addperiod}
+\newcommand*{\mkbibhdnamelast}[1]{\mkgostheading{#1}}
 \newcommand*{\mkbibhdnamefirst}[1]{\mkbibhdnamelast{#1}}
 \newcommand*{\mkbibhdnameprefix}[1]{\mkbibhdnamelast{#1}}
 \newcommand*{\mkbibhdnameaffix}[1]{\mkbibhdnamelast{#1}}
@@ -328,6 +331,8 @@
 \DeclareBibliographyDriver{article}{%
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
+  \usebibmacro{heading}%
+  \newunit
   \usebibmacro{author/translator+others}%
   \setunit*{\labelnamepunct}%
   \usebibmacro{title}%
@@ -373,6 +378,8 @@
 \DeclareBibliographyDriver{book}{%
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
+  \usebibmacro{heading}%
+  \newunit
   \usebibmacro{author/editor+others/translator+others}%
   \setunit*{\labelnamepunct}%
   \usebibmacro{maintitle+volumes+parts+title}%
@@ -415,6 +422,8 @@
 \DeclareBibliographyDriver{booklet}{%
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
+  \usebibmacro{heading}%
+  \newunit
   \usebibmacro{author/editor}%
   \setunit*{\labelnamepunct}%
   \usebibmacro{title}%
@@ -451,6 +460,8 @@
 \DeclareBibliographyDriver{collection}{%
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
+  \usebibmacro{heading}%
+  \newunit
   \usebibmacro{editor+others}%
   \setunit*{\labelnamepunct}%
   \usebibmacro{maintitle+volumes+parts+title}%
@@ -489,6 +500,8 @@
 \DeclareBibliographyDriver{inbook}{%
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
+  \usebibmacro{heading}%
+  \newunit
   \usebibmacro{author/translator+others}%
   \setunit*{\labelnamepunct}%
   \usebibmacro{title}%
@@ -543,6 +556,8 @@
 \DeclareBibliographyDriver{incollection}{%
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
+  \usebibmacro{heading}%
+  \newunit
   \usebibmacro{author/translator+others}%
   \setunit*{\labelnamepunct}%
   \usebibmacro{title}%
@@ -593,6 +608,8 @@
 \DeclareBibliographyDriver{inproceedings}{%
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
+  \usebibmacro{heading}%
+  \newunit
   \usebibmacro{author/translator+others}%
   \setunit*{\labelnamepunct}%
   \usebibmacro{title}%
@@ -643,6 +660,8 @@
 \DeclareBibliographyDriver{manual}{%
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
+  \usebibmacro{heading}%
+  \newunit
   \usebibmacro{author/editor}%
   \setunit*{\labelnamepunct}%
   \usebibmacro{title}%
@@ -686,6 +705,8 @@
 \DeclareBibliographyDriver{misc}{%
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
+  \usebibmacro{heading}%
+  \newunit
   \usebibmacro{author/editor}%
   \setunit*{\labelnamepunct}%
   \usebibmacro{title}%
@@ -718,6 +739,8 @@
 \DeclareBibliographyDriver{online}{%
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
+  \usebibmacro{heading}%
+  \newunit
   \usebibmacro{author/editor}%
   \setunit*{\labelnamepunct}%
   \usebibmacro{title}%
@@ -758,6 +781,8 @@
 \DeclareBibliographyDriver{patent}{%
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
+  \usebibmacro{heading}%
+  \newunit
   \usebibmacro{title}%
   \setunit*{\subtitlepunct}%
   \printfield{type}%
@@ -812,6 +837,8 @@
 \DeclareBibliographyDriver{periodical}{%
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
+  \usebibmacro{heading}%
+  \newunit
   \usebibmacro{editor}%
   \setunit*{\labelnamepunct}%
   \usebibmacro{title}
@@ -846,6 +873,8 @@
 \DeclareBibliographyDriver{proceedings}{%
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
+  \usebibmacro{heading}%
+  \newunit
   \usebibmacro{editor+others}%
   \setunit*{\labelnamepunct}%
   \usebibmacro{maintitle+volumes+parts+title}%
@@ -884,6 +913,8 @@
 \DeclareBibliographyDriver{report}{%
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
+  \usebibmacro{heading}%
+  \newunit
   \usebibmacro{author}%
   \setunit*{\labelnamepunct}%
   \usebibmacro{title}%
@@ -922,6 +953,8 @@
 \DeclareBibliographyDriver{thesis}{%
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
+  \usebibmacro{heading}%
+  \newunit
   \usebibmacro{author}%
   \setunit*{\labelnamepunct}%
   \usebibmacro{thesistitle}%
@@ -948,6 +981,8 @@
 \DeclareBibliographyDriver{unpublished}{%
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
+  \usebibmacro{heading}%
+  \newunit
   \usebibmacro{author}%
   \setunit*{\labelnamepunct}%
   \usebibmacro{title}%
@@ -1834,6 +1869,9 @@
   \iffieldundef{prcountry}
     {}
     {\printtext[parens]{\printfield{prcountry}}}}
+
+\newbibmacro*{heading}{%
+  \printfield{heading}}
 
 %  Related
 

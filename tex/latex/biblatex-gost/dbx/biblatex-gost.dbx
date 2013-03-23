@@ -13,6 +13,7 @@
   prcountry,
   major,
   majorcode,
+  heading,
 }
 
 \DeclareDatamodelFields[type=field, datatype=date, skipout]{
