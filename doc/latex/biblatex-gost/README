@@ -1,3 +1,20 @@
-These are Biblatex bibliography and citation styles to format bibliography according to Russian standard GOST 7.0.5-2008. The documentation provided is mainly in Russian, since anyone wishing to use GOST styles can supposedly write, and of course read Russian. The translation may follow, though.
+This package is a set of biblatex bibliography and citation styles
+to format bibliography according to Russian standard GOST 7.0.5-2008.
+For documentation and release notes please refer to biblatex-gost.pdf.
+The documentation is mainly in Russian, the translation may be provided
+later. The file biblatex-gost-examples.pdf contains formatting examples
+for various bibliography entries.
 
-To install just unzip the package into your texmf tree (preferably local) and update the TeX hash (for example, in TeX Live run texhash).
+To install the package copy the content of the 'tex' directory to
+
+      <TEXMFLOCAL>/tex/latex/biblatex-contrib/biblatex-gost
+
+and refresh the file hash tables of your TeX distribution.
+
+To use the package you will need biblatex 2.5/biber 1.5 or later.
+Using the styles is not different from using any other biblatex styles.
+
+Permission is granted to copy, distribute and/or modify this software under
+the terms of the LaTeX Project Public License, version 1.3c or any later
+version (http://www.ctan.org/tex-archive/macros/latex/base/lppl.txt).
+This package is maintained. The current maintainer is Oleg Domanov.
