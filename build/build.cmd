@@ -28,17 +28,16 @@ sed -e "s/\[.*\\space v.*\\space biblatex-gost styles\]/\[%_yyyy%\/%_mm%\/%_dd%\
 sed -e "s/\[.*\\space v.*\\space biblatex-gost styles\]/\[%_yyyy%\/%_mm%\/%_dd%\\space v%VERS%\\space biblatex-gost styles\]/" -i ../tex/latex/biblatex-gost/lbx/*.lbx
 sed -e "s/\[.*\\space v.*\\space biblatex-gost styles\]/\[%_yyyy%\/%_mm%\/%_dd%\\space v%VERS%\\space biblatex-gost styles\]/" -i ../tex/latex/biblatex-gost/*.def
 del /S ..\sed*
-rm -r tds\tex\latex\biblatex-gost
-rm -r tds\doc\latex\biblatex-gost
-mkdir tds\tex\latex\biblatex-gost
-mkdir tds\doc\latex\biblatex-gost
+rm -r tds ctan
+mkdir tds\tex\latex\biblatex-contrib\biblatex-gost
+mkdir tds\doc\latex\biblatex-contrib\biblatex-gost
 cd ..
-cp -r tex/latex/biblatex-gost build/tds/tex/latex/
-cp doc/latex/biblatex-gost/README build/tds/doc/latex/biblatex-gost/
-cp doc/latex/biblatex-gost/*.bib build/tds/doc/latex/biblatex-gost/
-cp doc/latex/biblatex-gost/*.cfg build/tds/doc/latex/biblatex-gost/
-cp doc/latex/biblatex-gost/*.tex build/tds/doc/latex/biblatex-gost/
-cd build/tds/doc/latex/biblatex-gost
+cp -r tex/latex/biblatex-gost build/tds/tex/latex/biblatex-contrib/
+cp doc/latex/biblatex-gost/README build/tds/doc/latex/biblatex-contrib/biblatex-gost/
+cp doc/latex/biblatex-gost/*.bib build/tds/doc/latex/biblatex-contrib/biblatex-gost/
+cp doc/latex/biblatex-gost/*.cfg build/tds/doc/latex/biblatex-contrib/biblatex-gost/
+cp doc/latex/biblatex-gost/*.tex build/tds/doc/latex/biblatex-contrib/biblatex-gost/
+cd build/tds/doc/latex/biblatex-contrib/biblatex-gost
 pdflatex -interaction=batchmode biblatex-gost.tex
 pdflatex -interaction=batchmode biblatex-gost.tex
 pdflatex -interaction=batchmode biblatex-gost.tex
@@ -46,17 +45,19 @@ pdflatex -interaction=batchmode biblatex-gost-examples.tex
 biber biblatex-gost-examples
 pdflatex -interaction=batchmode biblatex-gost-examples.tex
 rm -f *.aux *.bbl *.bcf *.blg *.log *.lot *.out *.toc *.run.xml
-cd ../../..
+cd ../../../..
 rm ../biblatex-gost-%VERS%.tds.zip
 zip -r -ll ../biblatex-gost-%VERS%.tds.zip *
-cp doc/latex/biblatex-gost/biblatex-gost.pdf ../
-cp doc/latex/biblatex-gost/biblatex-gost-examples.pdf ../
-cd ../ctan
-rm -r tex doc
-rem rm -r doc
-cp -r ../tds/doc/latex/biblatex-gost doc
-cp -r ../tds/tex/latex/biblatex-gost tex
+cp doc/latex/biblatex-contrib/biblatex-gost/biblatex-gost.pdf ../
+cp doc/latex/biblatex-contrib/biblatex-gost/biblatex-gost-examples.pdf ../
+mkdir ..\ctan\biblatex-gost
+cd ../ctan/biblatex-gost
+cp -r ../../tds/doc/latex/biblatex-contrib/biblatex-gost doc
+cp -r ../../tds/tex/latex/biblatex-contrib/biblatex-gost tex
+mv doc/README .
+cd ..
 rm ../biblatex-gost-%VERS%.zip
+cp ../biblatex-gost-%VERS%.tds.zip .
 zip -r -ll ../biblatex-gost-%VERS%.zip *
 pause
 GOTO:EOF
