@@ -136,7 +136,9 @@ bibstyle=gost-standard,
 \subsection{Лицензия}
 \label{sec:lic}
 
-Permission is granted to copy, distribute and\slash or modify this software under the terms of the \lppl, version 1.3.\fnurl{http://www.ctan.org/tex-archive/macros/latex/base/lppl.txt}
+Permission is granted to copy, distribute and\slash or modify this software under the
+terms of the \lppl, version 1.3 or any later
+version\fnurl{http://www.ctan.org/tex-archive/macros/latex/base/lppl.txt}.
 This package is
 %author"=
 maintained.
@@ -149,7 +151,8 @@ maintained.
 обновить индексы (в \tex~Live, например, это делается командой \texttt{mktexlsr},
 в MiK\tex~--- \texttt{initexmf -{}-update-fndb}).
 
-Для работы \biblatexgost версии 0.7.1 требуются, как минимум,
+Для работы \biblatexgost версии \makeatletter\blx@gost@version\makeatother\
+требуются, как минимум,
 \biblatex~2.5\fnurl{http://sourceforge.net/projects/biblatex/files/biblatex-2.5/}
 и \biber~1.5\fnurl{http://sourceforge.net/projects/biblatex-biber/files/biblatex-biber/1.5/}.
 %(текущие версии на CTAN). Пакет не будет работать с предыдущими версиями.
@@ -1830,7 +1833,7 @@ pageref & + & + & + & + & + & + & + & + & + & + & + & + & + & + & +\tabularnewli
 
 \begin{changelog}
 
-\begin{release}{0.8}{20-03-2013}
+\begin{release}{0.8}{24-03-2013}
 \item The package status has been changed from \emph{author-maintained} to \emph{maintained}
 %\item Переход на \biblatex~2.4 и \biber~1.4\see{sec:install}
 \item Добавлены стили \bibsty{gost-alphabetic} и \bibsty{gost-alphabetic-min}\see{sec:styles}
