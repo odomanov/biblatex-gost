@@ -1,20 +1,57 @@
-This package is a set of biblatex bibliography and citation styles
+This package is a collection of biblatex bibliography and citation styles
 to format bibliography according to Russian standard GOST 7.0.5-2008.
 For documentation and release notes please refer to biblatex-gost.pdf.
-The documentation is mainly in Russian, the translation may be provided
-later. The file biblatex-gost-examples.pdf contains formatting examples
-for various bibliography entries.
-
-To install the package copy the content of the 'tex' directory to
-
-      <TEXMFLOCAL>/tex/latex/biblatex-contrib/biblatex-gost
-
-and refresh the file hash tables of your TeX distribution.
+The documentation is mainly in Russian. Formatting examples for various
+bibliography entries may be found in biblatex-gost-examples.pdf.
 
 To use the package you will need biblatex 2.5/biber 1.5 or later.
-Using the styles is not different from using any other biblatex styles.
+Using the styles is not different from using any other biblatex styles,
+please refer to the biblatex documentation.
+
+For feedbacks and bug reports please use the project page
+http://sourceforge.net/projects/biblatexgost
+or e-mail me at the address in documentation.
+
+Installation
+------------
+
+METHOD 1
+
+  Download the file biblatex-gost-<version>.tds.zip from
+
+    http://sourceforge.net/projects/biblatexgost/files/
+
+  or get the file
+
+    http://www.ctan.org/tex-archive/install/macros/latex/contrib/biblatex-gost.tds.zip
+
+  Unpack the archive into your <TEXMFLOCAL> tree.
+  Refresh the file hash tables.
+
+METHOD 2
+
+  Download the file
+
+    http://www.ctan.org/tex-archive/macros/latex/contrib/biblatex-contrib/biblatex-gost.zip
+
+  Unpack the content of the 'tex' directory to
+
+    <TEXMFLOCAL>/tex/latex/biblatex-contrib/biblatex-gost
+
+  and the content of the 'doc' directory to
+
+    <TEXMFLOCAL>/doc/latex/biblatex-gost
+
+  Refresh the file hash tables.
+
+License information
+-------------------
 
 Permission is granted to copy, distribute and/or modify this software under
 the terms of the LaTeX Project Public License, version 1.3c or any later
 version (http://www.ctan.org/tex-archive/macros/latex/base/lppl.txt).
+This software is provided 'as is', without warranty of any kind, either
+expressed or implied, including, but not limited to, the implied warranties
+of merchantability and fitness for a particular purpose.
+
 This package is maintained. The current maintainer is Oleg Domanov.
