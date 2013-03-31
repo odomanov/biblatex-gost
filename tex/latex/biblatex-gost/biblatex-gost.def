@@ -559,3 +559,143 @@
   \inherit{credits}{bookcredits}
   \noinherit{pagetotal}}
 
+\newbibmacro{rel:common}{%
+    \usebibmacro{author}%
+    \setunit*{\labelnamepunct}%
+    \ifboolexpr{
+      test {\ifentrytype{book}}
+      or
+      test {\ifentrytype{collection}}
+      or
+      test {\ifentrytype{proceedings}}
+    }
+      {\usebibmacro{maintitle+volumes+parts+title}%
+       \ifentrytype{proceedings}
+        {\newunit
+         \usebibmacro{event+venue+date}}
+        {}}
+      {\usebibmacro{title}}%
+    \ifentrytype{article}
+      {\usebibmacro{//}%
+       \usebibmacro{journal}}
+      {}%
+    \ifboolexpr{
+      test {\ifentrytype{inbook}}
+      or
+      test {\ifentrytype{incollection}}
+      or
+      test {\ifentrytype{inproceedings}}
+    }
+      {\usebibmacro{//}%
+       \usebibmacro{maintitle+volumes+parts+booktitle}%
+       \ifentrytype{proceedings}
+        {\newunit
+         \usebibmacro{event+venue+date}}
+        {}}
+      {}%
+    \ifboolexpr{
+      test {\ifentrytype{article}}
+      or
+      test {\ifentrytype{periodical}}
+    }
+      {\printlist{location}%
+       \setunit*{\addcomma\space}%
+       \usebibmacro{jour:date}%
+       \newunit\newblock
+       \usebibmacro{jour:volume+parts+issuetitle}%
+       \ifentrytype{article}
+          {\newunit\newblock
+           \printfield{pages}}
+          {}}
+      {\ifboolexpr{
+          test {\ifentrytype{booklet}}
+          or
+          test {\ifentrytype{unpublished}}
+       }
+         {\newunit\newblock
+          \usebibmacro{location+date}%
+          \newunit\newblock}
+         {\newunit\newblock
+          \printlist{organization}%
+          \newunit
+          \usebibmacro{publisher+location+date}}%
+       \newunit\newblock
+       \usebibmacro{chapter+pages}}}
+
+\renewbibmacro*{related:default}[1]{%
+  \entrydata*{#1}{%
+    \usebibmacro{rel:common}%
+    \newunit\newblock}}
+
+\renewbibmacro*{related:bytranslator}[1]{%
+  \entrydata{#1}{%
+    \printnames[bytranslator]{translator}%
+    \clearname{translatror}%
+    \setunit*{\addcolon\space}%
+    \usebibmacro{rel:common}%
+    \newunit\newblock}}
+
+\renewbibmacro*{related:multivolume}[1]{%
+  \entrydata*{#1}{%
+    \usebibmacro{volume+parts}{\newunit}%
+    \setunit{\addcolondelim}%
+    \ifboolexpr{
+      test {\ifnamesequal{author}{savedauthor}}
+      or
+      test {\ifnameundef{author}}
+    }
+      {}
+      {\usebibmacro{author}%
+       \setunit*{\labelnamepunct}}%
+    \usebibmacro{title}%
+    \setunit{\respdelim}%
+    \iflistsequal{credits}{savedcredits}
+      {}
+      {\usebibmacro{credits}}%
+    \setunit*{\resppunct}%
+    \ifnamesequal{editor}{savededitor}
+      {}
+      {\usebibmacro{byeditor}}%
+    \setunit*{\resppunct}%
+    \ifnamesequal{translator}{savedtranslator}
+      {}
+      {\usebibmacro{bytranslator+others}}%
+    \newunit\newblock
+    \usebibmacro{date}%
+    \newunit\newblock
+    \printfield{pagetotal}%
+    \usebibmacro{finentry}}}
+
+\renewbibmacro*{related:origpubin}[1]{%
+  \entrydata*{#1}{%
+    \printfield{year}%
+    \ifboolexpr{
+      test {\iflistsequal{publisher}{savedpublisher}}
+      or
+      test {\iflistundef{publisher}}
+    }
+      {}
+      {\setunit{\addspace\bibstring[\mkrelatedstring]{bypublisher}\space}%
+       \printlist{publisher}%
+       \setunit{\addcomma\space}%
+       \iflistsequal{location}{savedlocation}
+         {}
+         {\printlist{location}}}}}
+
+\renewbibmacro*{related:origpubas}[1]{%
+  \entrydata*{#1}{%
+    \usebibmacro{title}%
+    \ifboolexpr{
+      test {\iflistsequal{publisher}{savedpublisher}}
+      or
+      test {\iflistundef{publisher}}
+    }
+      {}
+      {\setunit{\addspace\bibstring[\mkrelatedstring]{bypublisher}\space}%
+       \printlist{publisher}%
+       \setunit{\addcomma\space}%
+       \iflistsequal{location}{savedlocation}
+         {}
+         {\printlist{location}}}}}
+
+\endinput
