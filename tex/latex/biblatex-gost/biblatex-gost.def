@@ -630,7 +630,7 @@
 \renewbibmacro*{related:bytranslator}[1]{%
   \entrydata{#1}{%
     \printnames[bytranslator]{translator}%
-    \clearname{translatror}%
+    \clearname{translator}%
     \setunit*{\addcolon\space}%
     \usebibmacro{rel:common}%
     \newunit\newblock}}
