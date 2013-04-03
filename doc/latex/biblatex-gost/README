@@ -15,20 +15,10 @@ or e-mail me at the address in documentation.
 Installation
 ------------
 
+The package is a part of major TeX distributions and can be installed
+automatically. For manual installation use one of the methods below.
+
 METHOD 1
-
-  Download the file biblatex-gost-<version>.tds.zip from
-
-    http://sourceforge.net/projects/biblatexgost/files/
-
-  or get the file
-
-    http://www.ctan.org/tex-archive/install/macros/latex/contrib/biblatex-gost.tds.zip
-
-  Unpack the archive into your <TEXMFLOCAL> tree.
-  Refresh the file hash tables.
-
-METHOD 2
 
   Download the file
 
@@ -36,12 +26,21 @@ METHOD 2
 
   Unpack the content of the 'tex' directory to
 
-    <TEXMFLOCAL>/tex/latex/biblatex-contrib/biblatex-gost
+    <TEXMFLOCAL>/tex/latex/biblatex-gost/
 
   and the content of the 'doc' directory to
 
-    <TEXMFLOCAL>/doc/latex/biblatex-gost
+    <TEXMFLOCAL>/doc/latex/biblatex-gost/
 
+  Refresh the file hash tables.
+
+METHOD 2
+
+  Download the file biblatex-gost-<version>.tds.zip from
+
+    http://sourceforge.net/projects/biblatexgost/files/
+
+  Unpack the archive into your <TEXMFLOCAL> tree.
   Refresh the file hash tables.
 
 License information
