@@ -1,5 +1,7 @@
-:: The script is intended for Windows 7 but requires GnuWin32
+:: The script is intended for Windows 7 but requires GnuWin32 (for sed)
 @ECHO OFF
+
+set BUILDDIR=%CD%
 
 :: Check WMIC is available
 WMIC.EXE Alias /? >NUL 2>&1 || GOTO s_error
@@ -28,37 +30,36 @@ sed -e "s/\[.*\\space v.*\\space biblatex-gost styles\]/\[%_yyyy%\/%_mm%\/%_dd%\
 sed -e "s/\[.*\\space v.*\\space biblatex-gost styles\]/\[%_yyyy%\/%_mm%\/%_dd%\\space v%VERS%\\space biblatex-gost styles\]/" -i ../tex/latex/biblatex-gost/lbx/*.lbx
 sed -e "s/\[.*\\space v.*\\space biblatex-gost styles\]/\[%_yyyy%\/%_mm%\/%_dd%\\space v%VERS%\\space biblatex-gost styles\]/" -i ../tex/latex/biblatex-gost/*.def
 del /S ..\sed*
-rm -r tds ctan
-mkdir tds\tex\latex\biblatex-contrib\biblatex-gost
-mkdir tds\doc\latex\biblatex-contrib\biblatex-gost
-cd ..
-cp -r tex/latex/biblatex-gost build/tds/tex/latex/biblatex-contrib/
-cp doc/latex/biblatex-gost/README build/tds/doc/latex/biblatex-contrib/biblatex-gost/
-cp doc/latex/biblatex-gost/*.bib build/tds/doc/latex/biblatex-contrib/biblatex-gost/
-cp doc/latex/biblatex-gost/*.cfg build/tds/doc/latex/biblatex-contrib/biblatex-gost/
-cp doc/latex/biblatex-gost/*.tex build/tds/doc/latex/biblatex-contrib/biblatex-gost/
-cd build/tds/doc/latex/biblatex-contrib/biblatex-gost
+rmdir /S /Q tds
+rmdir /S /Q ctan
+mkdir tds\tex\latex\biblatex-gost
+mkdir tds\doc\latex\biblatex-gost
+xcopy /E/Y ..\tex\latex\biblatex-gost\*.* tds\tex\latex\biblatex-gost\
+xcopy /Y ..\doc\latex\biblatex-gost\README tds\doc\latex\biblatex-gost\
+xcopy /Y ..\doc\latex\biblatex-gost\*.bib tds\doc\latex\biblatex-gost\
+xcopy /Y ..\doc\latex\biblatex-gost\*.cfg tds\doc\latex\biblatex-gost\
+xcopy /Y ..\doc\latex\biblatex-gost\*.tex tds\doc\latex\biblatex-gost\
+chdir /D %BUILDDIR%\tds\doc\latex\biblatex-gost
 pdflatex -interaction=batchmode biblatex-gost.tex
 pdflatex -interaction=batchmode biblatex-gost.tex
 pdflatex -interaction=batchmode biblatex-gost.tex
 pdflatex -interaction=batchmode biblatex-gost-examples.tex
 biber biblatex-gost-examples
 pdflatex -interaction=batchmode biblatex-gost-examples.tex
-rm -f *.aux *.bbl *.bcf *.blg *.log *.lot *.out *.toc *.run.xml
-cd ../../../..
-rm ../biblatex-gost-%VERS%.tds.zip
-zip -r -ll ../biblatex-gost-%VERS%.tds.zip *
-cp doc/latex/biblatex-contrib/biblatex-gost/biblatex-gost.pdf ../
-cp doc/latex/biblatex-contrib/biblatex-gost/biblatex-gost-examples.pdf ../
-mkdir ..\ctan\biblatex-gost
-cd ../ctan/biblatex-gost
-cp -r ../../tds/doc/latex/biblatex-contrib/biblatex-gost doc
-cp -r ../../tds/tex/latex/biblatex-contrib/biblatex-gost tex
-mv doc/README .
-cd ..
-rm ../biblatex-gost-%VERS%.zip
-cp ../biblatex-gost-%VERS%.tds.zip .
-zip -r -ll ../biblatex-gost-%VERS%.zip *
+del -f *.aux *.bbl *.bcf *.blg *.log *.lot *.out *.toc *.run.xml
+chdir /D %BUILDDIR%\tds
+del %BUILDDIR%\biblatex-gost-%VERS%.tds.zip
+zip -r -ll %BUILDDIR%\biblatex-gost-%VERS%.tds.zip *
+xcopy /Y %BUILDDIR%\tds\doc\latex\biblatex-gost\biblatex-gost.pdf %BUILDDIR%\
+xcopy /Y %BUILDDIR%\tds\doc\latex\biblatex-gost\biblatex-gost-examples.pdf %BUILDDIR%\
+mkdir %BUILDDIR%\ctan\biblatex-gost
+chdir /D %BUILDDIR%\ctan\biblatex-gost
+xcopy /E/Y %BUILDDIR%\tds\doc\latex\biblatex-gost %BUILDDIR%\ctan\biblatex-gost\doc\
+xcopy /E/Y %BUILDDIR%\tds\tex\latex\biblatex-gost %BUILDDIR%\ctan\biblatex-gost\tex\
+move %BUILDDIR%\ctan\biblatex-gost\doc\README %BUILDDIR%\ctan\biblatex-gost\
+chdir /D %BUILDDIR%\ctan
+del %BUILDDIR%\biblatex-gost-%VERS%.zip
+zip -r -ll %BUILDDIR%\biblatex-gost-%VERS%.zip *
 pause
 GOTO:EOF
 
