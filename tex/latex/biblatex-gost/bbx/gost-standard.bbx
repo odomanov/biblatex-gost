@@ -372,6 +372,7 @@
   \setunit{\bibpagerefpunct}\newblock
   \usebibmacro{pageref}%
   \newunit\newblock
+  \usebibmacro{related:init}%
   \usebibmacro{related}%
   \usebibmacro{finentry}}
 
@@ -416,6 +417,7 @@
   \setunit{\bibpagerefpunct}\newblock
   \usebibmacro{pageref}%
   \newunit\newblock
+  \usebibmacro{related:init}%
   \usebibmacro{related}%
   \usebibmacro{finentry}}
 
@@ -454,6 +456,7 @@
   \setunit{\bibpagerefpunct}\newblock
   \usebibmacro{pageref}%
   \newunit\newblock
+  \usebibmacro{related:init}%
   \usebibmacro{related}%
   \usebibmacro{finentry}}
 
@@ -494,6 +497,7 @@
   \setunit{\bibpagerefpunct}\newblock
   \usebibmacro{pageref}%
   \newunit\newblock
+  \usebibmacro{related:init}%
   \usebibmacro{related}%
   \usebibmacro{finentry}}
 
@@ -550,6 +554,7 @@
       \setunit{\bibpagerefpunct}\newblock
       \usebibmacro{pageref}}%
   \newunit\newblock
+  \usebibmacro{related:init}%
   \usebibmacro{related}%
   \usebibmacro{finentry}}
 
@@ -602,6 +607,7 @@
       \setunit{\bibpagerefpunct}\newblock
       \usebibmacro{pageref}}%
   \newunit\newblock
+  \usebibmacro{related:init}%
   \usebibmacro{related}%
   \usebibmacro{finentry}}
 
@@ -654,6 +660,7 @@
       \setunit{\bibpagerefpunct}\newblock
       \usebibmacro{pageref}}%
   \newunit\newblock
+  \usebibmacro{related:init}%
   \usebibmacro{related}%
   \usebibmacro{finentry}}
 
@@ -699,6 +706,7 @@
   \setunit{\bibpagerefpunct}\newblock
   \usebibmacro{pageref}%
   \newunit\newblock
+  \usebibmacro{related:init}%
   \usebibmacro{related}%
   \usebibmacro{finentry}}
 
@@ -733,6 +741,7 @@
   \setunit{\bibpagerefpunct}\newblock
   \usebibmacro{pageref}%
   \newunit\newblock
+  \usebibmacro{related:init}%
   \usebibmacro{related}%
   \usebibmacro{finentry}}
 
@@ -775,6 +784,7 @@
   \setunit{\bibpagerefpunct}\newblock
   \usebibmacro{pageref}%
   \newunit\newblock
+  \usebibmacro{related:init}%
   \usebibmacro{related}%
   \usebibmacro{finentry}}
 
@@ -831,6 +841,7 @@
   \setunit{\bibpagerefpunct}\newblock
   \usebibmacro{pageref}%
   \newunit\newblock
+  \usebibmacro{related:init}%
   \usebibmacro{related}%
   \usebibmacro{finentry}}
 
@@ -867,6 +878,7 @@
   \setunit{\bibpagerefpunct}\newblock
   \usebibmacro{pageref}%
   \newunit\newblock
+  \usebibmacro{related:init}%
   \usebibmacro{related}%
   \usebibmacro{finentry}}
 
@@ -907,6 +919,7 @@
   \setunit{\bibpagerefpunct}\newblock
   \usebibmacro{pageref}%
   \newunit\newblock
+  \usebibmacro{related:init}%
   \usebibmacro{related}%
   \usebibmacro{finentry}}
 
@@ -947,6 +960,7 @@
   \setunit{\bibpagerefpunct}\newblock
   \usebibmacro{pageref}%
   \newunit\newblock
+  \usebibmacro{related:init}%
   \usebibmacro{related}%
   \usebibmacro{finentry}}
 
@@ -975,6 +989,7 @@
   \setunit{\bibpagerefpunct}\newblock
   \usebibmacro{pageref}%
   \newunit\newblock
+  \usebibmacro{related:init}%
   \usebibmacro{related}%
   \usebibmacro{finentry}}
 
@@ -1005,6 +1020,7 @@
   \setunit{\bibpagerefpunct}\newblock
   \usebibmacro{pageref}%
   \newunit\newblock
+  \usebibmacro{related:init}%
   \usebibmacro{related}%
   \usebibmacro{finentry}}
 
@@ -1875,148 +1891,13 @@
 
 %  Related
 
-\newbibmacro{rel:common}{%
-    \usebibmacro{author}%
-    \setunit*{\labelnamepunct}%
-    \ifboolexpr{
-      test {\ifentrytype{book}}
-      or
-      test {\ifentrytype{collection}}
-      or
-      test {\ifentrytype{proceedings}}
-    }
-      {\usebibmacro{maintitle+volumes+parts+title}%
-       \ifentrytype{proceedings}
-        {\newunit
-         \usebibmacro{event+venue+date}}
-        {}}
-      {\usebibmacro{title}}%
-    \ifentrytype{article}
-      {\usebibmacro{//}%
-       \usebibmacro{journal}}
-      {}%
-    \ifboolexpr{
-      test {\ifentrytype{inbook}}
-      or
-      test {\ifentrytype{incollection}}
-      or
-      test {\ifentrytype{inproceedings}}
-    }
-      {\usebibmacro{//}%
-       \usebibmacro{maintitle+volumes+parts+booktitle}%
-       \ifentrytype{proceedings}
-        {\newunit
-         \usebibmacro{event+venue+date}}
-        {}}
-      {}%
-    \ifboolexpr{
-      test {\ifentrytype{article}}
-      or
-      test {\ifentrytype{periodical}}
-    }
-      {\printlist{location}%
-       \setunit*{\addcomma\space}%
-       \usebibmacro{jour:date}%
-       \newunit\newblock
-       \usebibmacro{jour:volume+parts+issuetitle}%
-       \ifentrytype{article}
-          {\newunit\newblock
-           \printfield{pages}}
-          {}}
-      {\ifboolexpr{
-          test {\ifentrytype{booklet}}
-          or
-          test {\ifentrytype{unpublished}}
-       }
-         {\newunit\newblock
-          \usebibmacro{location+date}%
-          \newunit\newblock}
-         {\newunit\newblock
-          \printlist{organization}%
-          \newunit
-          \usebibmacro{publisher+location+date}}%
-       \newunit\newblock
-       \usebibmacro{chapter+pages}}}
-
-\renewbibmacro*{related:default}[1]{%
-  \entrydata*{#1}{%
-    \usebibmacro{rel:common}%
-    \newunit\newblock}}
-
-\renewbibmacro*{related:bytranslator}[1]{%
-  \entrydata{#1}{%
-    \printnames[bytranslator]{translator}%
-    \clearname{translatror}%
-    \setunit*{\addcolon\space}%
-    \usebibmacro{rel:common}%
-    \newunit\newblock}}
-
-\renewbibmacro*{related:multivolume}[1]{%
-  \entrydata*{#1}{%
-    \usebibmacro{volume+parts}{\newunit}%
-    \setunit{\addcolondelim}%
-    \ifboolexpr{
-      test {\ifnamesequal{author}{savedauthor}}
-      or
-      test {\ifnameundef{author}}
-    }
-      {}
-      {\usebibmacro{author}%
-       \setunit*{\labelnamepunct}}%
-    \usebibmacro{title}%
-    \setunit{\respdelim}%
-    \iflistsequal{credits}{savedcredits}
-      {}
-      {\usebibmacro{credits}}%
-    \setunit*{\resppunct}%
-    \ifnamesequal{editor}{savededitor}
-      {}
-      {\usebibmacro{byeditor}}%
-    \setunit*{\resppunct}%
-    \ifnamesequal{translator}{savedtranslator}
-      {}
-      {\usebibmacro{bytranslator+others}}%
-    \newunit\newblock
-    \usebibmacro{date}%
-    \newunit\newblock
-    \printfield{pagetotal}%
-    \usebibmacro{finentry}}}
-
-\renewbibmacro*{related:origpubin}[1]{%
-  \entrydata*{#1}{%
-    \printfield{year}%
-    \ifboolexpr{
-      test {\iflistsequal{publisher}{savedpublisher}}
-      or
-      test {\iflistundef{publisher}}
-    }
-      {}
-      {\setunit{\addspace\bibstring{bypublisher}\space}%
-       \printlist{publisher}%
-       \setunit{\addcomma\space}%
-       \iflistsequal{location}{savedlocation}
-         {}
-         {\printlist{location}}}}}
-
-\renewbibmacro*{related:origpubas}[1]{%
-  \entrydata*{#1}{%
-    \usebibmacro{title}%
-    \ifboolexpr{
-      test {\iflistsequal{publisher}{savedpublisher}}
-      or
-      test {\iflistundef{publisher}}
-    }
-      {}
-      {\setunit{\addspace\bibstring{bypublisher}\space}%
-       \printlist{publisher}%
-       \setunit{\addcomma\space}%
-       \iflistsequal{location}{savedlocation}
-         {}
-         {\printlist{location}}}}}
-
 \newcounter{bbx:relatedcount}
 \newcounter{bbx:relatedtotal}
 
+\newbibmacro*{related:init}{%
+  \csundef{bbx:relatedloop}}
+\newbibmacro*{begrelated}{}
+\newbibmacro*{endrelated}{}
 \newbibmacro*{related}{%
   \restorelist{credits}{\savedclearedcredits}%
   \restorename{editor}{\savedclearededitor}%
@@ -2036,9 +1917,12 @@
     )
     or
     test {\iffieldundef{related}}
+    or
+    test {\xifinlistcs{\thefield{entrykey}}{bbx:relatedloop}}
   }
     {}
-    {\setcounter{bbx:relatedcount}{0}%
+    {\listcsxadd{bbx:relatedloop}{\thefield{entrykey}}%
+     \setcounter{bbx:relatedcount}{0}%
      \setcounter{bbx:relatedtotal}{0}%
      \def\do##1{\stepcounter{bbx:relatedtotal}}%
      \docsvfield{related}%
@@ -2057,20 +1941,25 @@
        {\def\bbx@tempb{relatedstring}}
        {\def\bbx@tempb{relatedstring:\strfield{relatedtype}}}%
      \printtext[\bbx@tempa]{%
+       \usebibmacro{begrelated}%
        \iffieldundef{relatedstring}
          {\ifboolexpr{
             test {\ifnumgreater{\value{bbx:relatedtotal}}{1}}
             and
             test {\ifbibxstring{\thefield{relatedtype}s}}
           }
-            {\printtext[\bbx@tempb]{\bibstring{\thefield{relatedtype}s}}}
+            {\printtext[\bbx@tempb]{%
+               \bibstring[\mkrelatedstring]{\thefield{relatedtype}s}}}
             {\iffieldbibstring{relatedtype}
-               {\printtext[\bbx@tempb]{\bibstring{\thefield{relatedtype}}}}
+               {\printtext[\bbx@tempb]{%
+                  \bibstring[\mainlang]{\thefield{relatedtype}}}}
                {}}}
          {\iffieldbibstring{relatedstring}
-            {\printtext[\bbx@tempb]{\bibstring{\thefield{relatedstring}}}}
+            {\printtext[\bbx@tempb]{%
+               \bibstring[\mainlang]{\thefield{relatedstring}}}}
             {\printfield[\bbx@tempb]{relatedstring}}}%
-       \docsvfield{related}}}}
+       \docsvfield{related}%
+       \usebibmacro{endrelated}}}}
 
 \newbibmacro*{setup:min}{%
   \renewbibmacro*{series+number}{}%
