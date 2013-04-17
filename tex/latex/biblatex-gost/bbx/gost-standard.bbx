@@ -254,7 +254,8 @@
 
 \DeclareNameAlias{sortname}{last-first}
 
-\DefineBibliographyExtras{french}{\protected\def\mkbibnamelast#1{#1}}
+\DefineBibliographyExtras{french}{\restorecommand\mkbibnamelast}
+
 \DeclareNameFormat{author}{%
   \iffirstinits
     {\usebibmacro{authorname:last-first}{#1}{#4}{#5}{#7}}
