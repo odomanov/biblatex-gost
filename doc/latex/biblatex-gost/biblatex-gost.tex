@@ -21,6 +21,7 @@ bibstyle=gost-standard,
 ]{biblatex} % to receive \bbx@gost@version, etc.
 \usepackage{indentfirst}
 \usepackage{paratype}
+\usepackage{wrapfig}
 
 \hypersetup{unicode=true}
 
@@ -146,15 +147,22 @@ maintained.
 \subsection{Установка}
 \label{sec:install}
 
-Пакет поставляется в виде архива, содержащего стандартую структуру дерева TDS.
-Для его установки достаточно распаковать архив в дерево \tex, желательно локальное, и
-обновить индексы (в \tex~Live, например, это делается командой \texttt{mktexlsr},
-в MiK\tex~--- \texttt{initexmf -{}-update-fndb}).
+Пакет входит в \tex~Live, MiK\tex и другие дистрибутивы и может быть установлен
+с помощью их менеджеров пакетов. Для установки вручную скачайте архив
+\texttt{biblatex-gost-\prm{версия}.tds.zip}, содержащий стандартую структуру дерева TDS.
+Распакуйте его в локальное дерево \tex'а и
+обновите индексы (в \tex~Live, например, это делается командой \texttt{mktexlsr},
+в MiK\tex~--- \texttt{initexmf -{}-update-fndb}). Обратите внимание, что директория,
+в которую менеджер пакетов устанавливает пакет в конкретном дистрибутиве,
+определяется разработчиками
+этого дистрибутива. Эта директория может отличаться (и отличается!) от директории
+в вышеупомянутом архиве, поэтому при ручной установке настоятельно рекомендуется распаковывать
+архив в локальное, а не общее дерево \tex'а.
 
 Для работы \biblatexgost версии \makeatletter\bbx@gost@version\makeatother\
 требуются, как минимум,
-\biblatex~2.5\fnurl{http://sourceforge.net/projects/biblatex/files/biblatex-2.5/}
-и \biber~1.5\fnurl{http://sourceforge.net/projects/biblatex-biber/files/biblatex-biber/1.5/}.
+\biblatex~2.6\fnurl{http://sourceforge.net/projects/biblatex/files/biblatex-2.6/}
+и \biber~1.6\fnurl{http://sourceforge.net/projects/biblatex-biber/files/biblatex-biber/1.6/}.
 %(текущие версии на CTAN). Пакет не будет работать с предыдущими версиями.
 
 \subsection{Важные изменения в этой версии}
@@ -292,7 +300,7 @@ maintained.
 работ одного года. Поэтому в \biblatexgost используется несколько способов оформления
 ссылок, которые выбираются опцией \opt{mergedate} (см.~\secref{sec:newoptions}).
 В частности, значение опции \kvopt{mergedate}{goststrict} соответствует строгому
-следованию ГОСТу, хотя при этом могут появляться неопределённые ссылок.
+следованию ГОСТу, хотя при этом могут появляться неопределённые ссылки.
 Стиль чувствителен к опции \opt{singletitle} и может не выводить год в ссылке, если он
 не требуется для устранения неопределённости (например, если имеется лишь одна публикация
 данного автора или лишь одна публикация без автора с данным названием).
@@ -630,6 +638,7 @@ ISSN серии или подсерии & issn (isbn) \\
 
 Общее обозначение материала (\gostbibref{5.2.3}). В \tabref{tab:media} приведены
 допустимые значения этого поля вместе с соответствующими терминами ГОСТа.
+
 \begin{table}[htbp]
 \tablesetup
 \centering
@@ -920,10 +929,11 @@ introduction & вступительная статья \prm{кого} & всту
 Издание может разделяться на физически отдельные части, которые могут называться по-разному. \biblatexgost поддерживает деление на тома, книги, части и выпуски.
 Соответствующие им поля базы данных показаны в \tabref{tab:volsparts}.
 
-\begin{table}[htbp]
+\begin{wraptable}{r}{0pt}
+%\begin{table}[htbp]
 \tablesetup
 \centering
-\begin{tabularx}{.6\textwidth}{@{}L{.3\textwidth}@{}V{.3\textwidth}@{}}
+\begin{tabularx}{.4\textwidth}{@{}L{.2\textwidth}@{}V{.2\textwidth}@{}}
 \toprule
 \multicolumn{1}{@{}H}{Части издания} &
 \multicolumn{1}{@{}H}{Поле \biblatex}  \\
@@ -939,7 +949,8 @@ introduction & вступительная статья \prm{кого} & всту
 \end{tabularx}
 \caption{Обозначение частей издания}
 \label{tab:volsparts}
-\end{table}
+%\end{table}
+\end{wraptable}
 
 Если эти поля являются целыми числами, то они выводятся в виде: \enquote{В 5 т.},
 \enquote{В 4 вып.} и т.\,д. В противном случае, они выводятся как есть: \enquote{В
@@ -1832,6 +1843,11 @@ pageref & + & + & + & + & + & + & + & + & + & + & + & + & + & + & +\tabularnewli
 \label{apx:changelog}
 
 \begin{changelog}
+
+\begin{release}{0.?}{??-??-2013}
+\item Переход на \biblatex~2.6 и \biber~1.6\see{sec:install}
+\item Исправлены другие ошибки
+\end{release}
 
 \begin{release}{0.8}{03-04-2013}
 \item The package status has been changed from \emph{author-maintained} to \emph{maintained}
