@@ -319,7 +319,7 @@
 \newcommand*{\blx@gost@setunit}{\newunit}
 
 \@ifpackageloaded{babel}
-  {\edef\gostmedialanguage{\bbl@main@language}%
+  {\edef\gostmedialanguage{\csname bbl@main@language\endcsname}%
    \newcommand*{\select@medialanguage}{\select@language{\gostmedialanguage}}}
   {\edef\gostmedialanguage{russian}%
    \newcommand*{\select@medialanguage}{}}
