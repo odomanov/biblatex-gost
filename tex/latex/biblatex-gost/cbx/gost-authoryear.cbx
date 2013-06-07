@@ -21,23 +21,6 @@
 \renewcommand*{\bibleftparen}{\blx@postpunct\ifcitation{[\bibsentence}{(}}
 \renewcommand*{\bibrightparen}{\blx@postpunct\ifcitation{]}{)}\midsentence}
 
-% changing the language of citation
-\gpreto\blx@hook@citekey{%
-  \ifdef\abx@field@hyphenation
-    {\ifdef\blx@thelangenv
-      {\edef\blx@temp@langenv{\noexpand\csname\blx@thelangenv\endcsname%
-          {\abx@field@hyphenation}}%
-       \blx@temp@langenv}
-      {}}%
-    {}}
-\apptocmd{\blx@citeprint}{%
-  \ifdef\abx@field@hyphenation
-    {\ifdef\blx@thelangenv
-      {\csname end\blx@thelangenv\endcsname}
-      {}}%
-    {}%
-}{}{\blx@err@patch{citeprint command}}
-
 \DeclareFieldFormat*{citetitle}{\mkbibemph{#1}}
 \DeclareFieldFormat{extratitleyear}{\mknumalph{#1}}
 \DeclareFieldFormat{citeheading}{#1}
