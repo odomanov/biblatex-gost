@@ -11,8 +11,6 @@
   \bibhypertarget{\thefield{entrykey}:\the\value{instcount}}{#1}}
 \providecommand*{\mkibid}[1]{#1}
 \newtoggle{cbx:loccit}
-\newtoggle{cbx:t:bookibid} % for .. // Ibid. in inbook, incollection,..
-\newtoggle{cbx:f:bookibid}
 \newtoggle{cbx:t:bookloccit}
 \newtoggle{cbx:f:bookloccit}
 \newtoggle{cbx:opt:inbookibid}
@@ -188,25 +186,15 @@
 
 \newbibmacro*{cite}{%
   \usebibmacro{cite:citepages}%
-  \global\togglefalse{cbx:loccit}%
-  \ifboolexpr{%
-          not test {\ifdefvoid{\cbx@t@lastcrossref}}
-          and
-          test {\iffieldequals{crossref}{\cbx@t@lastcrossref}}
-          }%
-    {\global\toggletrue{cbx:t:bookibid}%
-     \iffieldequals{postnote}{\cbx@t@lastpostnote}
+  \ifxrefibid
+    {\iffieldequals{postnote}{\cbx@t@lastpostnote}
       {\global\toggletrue{cbx:t:bookloccit}}
       {\global\togglefalse{cbx:t:bookloccit}}}
-    {\global\togglefalse{cbx:t:bookibid}%
-     \global\togglefalse{cbx:t:bookloccit}%
-     \savefield{crossref}{\cbx@t@lastcrossref}%
+    {\global\togglefalse{cbx:t:bookloccit}%
      \savefield{postnote}{\cbx@t@lastpostnote}%
      \global\xdef\cbx@t@bookref{\thefield{entrykey}:\the\value{instcount}}}%
   \ifciteseen
-    {\global\togglefalse{cbx:t:bookibid}%
-     \global\undef\cbx@t@lastcrossref%
-     \global\undef\cbx@t@bookref%
+    {\global\undef\cbx@t@bookref%
      \global\undef\cbx@t@lastpostnote%
      \usebibmacro{cite:seen}}
     {\usebibmacro{cite:full}%
@@ -288,25 +276,15 @@
 
 \newbibmacro*{footcite}{%
   \usebibmacro{cite:citepages}%
-  \global\togglefalse{cbx:loccit}%
-  \ifboolexpr{%
-          not test {\ifdefvoid{\cbx@f@lastcrossref}} % undef, \relax, or empty
-          and
-          test {\iffieldequals{crossref}{\cbx@f@lastcrossref}}
-          }%
-    {\global\toggletrue{cbx:f:bookibid}%
-     \iffieldequals{postnote}{\cbx@f@lastpostnote}
+  \ifxrefibid
+    {\iffieldequals{postnote}{\cbx@f@lastpostnote}
       {\global\toggletrue{cbx:f:bookloccit}}
       {\global\togglefalse{cbx:f:bookloccit}}}
-    {\global\togglefalse{cbx:f:bookibid}%
-     \global\togglefalse{cbx:f:bookloccit}%
-     \savefield{crossref}{\cbx@f@lastcrossref}%
+    {\global\togglefalse{cbx:f:bookloccit}%
      \savefield{postnote}{\cbx@f@lastpostnote}%
      \global\xdef\cbx@f@bookref{\thefield{entrykey}:\the\value{instcount}}}%
   \ifciteseen
-    {\global\togglefalse{cbx:f:bookibid}%
-     \global\undef\cbx@f@lastcrossref%
-     \global\undef\cbx@f@bookref%
+    {\global\undef\cbx@f@bookref%
      \global\undef\cbx@f@lastpostnote%
      \usebibmacro{cite:seen}}
     {\usebibmacro{cite:full}%
