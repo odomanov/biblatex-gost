@@ -372,6 +372,8 @@
 
 \newbibmacro*{cbx:bookibid:check}[2]{%
   \ifboolexpr{%
+      test {\iftoggle{cbx:opt:inbookibid}}
+      and
       test {\ifcitation}
       and
       test {\ifxrefibid}
