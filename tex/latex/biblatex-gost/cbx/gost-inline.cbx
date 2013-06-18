@@ -10,9 +10,8 @@
 \DeclareFieldFormat{bibhypertarget}{%
   \bibhypertarget{\thefield{entrykey}:\the\value{instcount}}{#1}}
 \providecommand*{\mkibid}[1]{#1}
-\newtoggle{cbx:loccit}
-\newtoggle{cbx:t:bookloccit}
-\newtoggle{cbx:f:bookloccit}
+\newtoggle{cbx:loccit}      % needed because \blx@loccittracker is executed before 'postnote'
+\newtoggle{cbx:xrefloccit}
 \newtoggle{cbx:opt:inbookibid}
 
 \DeclareBibliographyOption{strict}[true]{%
@@ -74,9 +73,9 @@
       test {\ifnumequal{\value{citecount}}{\value{citetotal}}}
       and
       (
-	not test {\iffieldundef{pages}}
-	or
-	not test {\iffieldundef{pagetotal}}
+      	not test {\iffieldundef{pages}}
+      	or
+      	not test {\iffieldundef{pagetotal}}
       )
     }
       {\usebibmacro{cite:postnote:pages}}
@@ -99,13 +98,16 @@
 \renewcommand{\postnotedelim}{\addperiod\space}
 \renewcommand{\multicitedelim}{\addsemicolondelim\space}
 
-% ibidem tracker
-% should go before the option execution
+% two xref trackers below should go before the option execution
+%
+% xref ibidem tracker
 
 \appto\blx@ibidtracker@gobal{%
   \ifbool{citetracker}
     {\blx@imc@iffieldundef{crossref}
-       {\blx@imc@savefield{xref}{\blx@lastxref@text}}
+       {\blx@imc@iffieldundef{xref}
+          {\global\undef\blx@lastxref@text}
+          {\blx@imc@savefield{xref}{\blx@lastxref@text}}}
        {\blx@imc@savefield{crossref}{\blx@lastxref@text}}}
     {}}
 
@@ -113,10 +115,14 @@
   \ifbool{citetracker}
     {\iftoggle{blx@footnote}
       {\blx@imc@iffieldundef{crossref}
-        {\blx@imc@savefield{xref}{\blx@lastxref@foot}}
+        {\blx@imc@iffieldundef{xref}
+          {\global\undef\blx@lastxref@foot}
+          {\blx@imc@savefield{xref}{\blx@lastxref@foot}}}
         {\blx@imc@savefield{crossref}{\blx@lastxref@foot}}}
       {\blx@imc@iffieldundef{crossref}
-       {\blx@imc@savefield{xref}{\blx@lastxref@text}}
+       {\blx@imc@iffieldundef{xref}
+          {\global\undef\blx@lastxref@text}
+          {\blx@imc@savefield{xref}{\blx@lastxref@text}}}
        {\blx@imc@savefield{crossref}{\blx@lastxref@text}}}}
     {}}
 
@@ -146,13 +152,36 @@
 
 % {<true>}{<false>}
 
+\def\blx@xrefibid@check#1{%
+  \ifboolexpr{
+      ( test {\blx@imc@ifentrytype{inbook}}
+        or
+        test {\blx@imc@ifentrytype{incollection}}
+        or
+        test {\blx@imc@ifentrytype{inreference}}
+        or
+        test {\blx@imc@ifentrytype{inproceedings}}
+        or
+        test {\blx@imc@ifentrytype{bookinbook}}
+        or
+        test {\blx@imc@ifentrytype{suppbook}}
+        or
+        test {\blx@imc@ifentrytype{suppcollection}}
+      )
+      and
+      ( test {\blx@imc@iffieldequalcs{crossref}{blx@lastxref@#1}}
+        or
+        test {\blx@imc@iffieldequals{xref}{blx@lastxref@#1}}
+      )
+      }}
+
 \def\blx@ifxrefibid@global{%
-  \blx@imc@iffieldequals{crossref}\blx@lastxref@text}
+  \blx@xrefibid@check{text}}
 
 \def\blx@ifxrefibid@context{%
   \iftoggle{blx@footnote}
-    {\blx@imc@iffieldequals{crossref}\blx@lastxref@foot}
-    {\blx@imc@iffieldequals{crossref}\blx@lastxref@text}}
+    {\blx@xrefibid@check{foot}}
+    {\blx@xrefibid@check{text}}}
 
 \def\blx@ifxrefibid@strict{%
   \blx@ifcitesingle
@@ -163,9 +192,9 @@
   \blx@ifcitesingle
     {\iftoggle{blx@footnote}
        {\blx@ifmpfncheck
-          {\blx@imc@iffieldequals{crossref}\blx@lastxref@foot}
+          {\blx@xrefibid@check{foot}}
           {\@secondoftwo}}
-       {\blx@imc@iffieldequals{crossref}\blx@lastxref@text}}
+       {\blx@xrefibid@check{text}}}
     {\@secondoftwo}}%
 
 \blx@regimcs{\ifxrefibid}
@@ -185,36 +214,173 @@
 \appto\blx@opt@ibidtracker@constrict{%
   \let\blx@imc@ifxrefibid\blx@ifxrefibid@constrict}
 
-% end of ibidem tracker code
+% end of xref ibidem tracker code
+
+% xrefloccit tracker
+% {<true>}{<false>}
+
+\def\blx@ifxrefloccit@global{%
+  \blx@xrefloccit@check{text}}
+
+\def\blx@ifxrefloccit@context{%
+  \iftoggle{blx@footnote}
+    {\blx@xrefloccit@check{foot}}
+    {\blx@xrefloccit@check{text}}}
+
+\def\blx@ifxrefloccit@strict{%
+  \blx@ifcitesingle
+    {\blx@xrefloccit@numcheck{text}}
+    {\@secondoftwo}}%
+
+\def\blx@ifxrefloccit@constrict{%
+  \blx@ifcitesingle
+    {\iftoggle{blx@footnote}
+       {\blx@ifmpfncheck
+          {\blx@xrefloccit@numcheck{foot}}
+          {\@secondoftwo}}
+       {\blx@xrefloccit@numcheck{text}}}
+    {\@secondoftwo}}
+
+\def\blx@xrefloccit@check#1{%
+  \blx@imc@ifxrefibid
+    {\blx@imc@iffieldundef{postnote}
+      {\@secondoftwo}
+      {\blx@imc@iffieldequalcs{postnote}{blx@xreflastnote@#1}}}
+    {\@secondoftwo}}
+
+\def\blx@xrefloccit@numcheck#1{%
+  \blx@imc@ifxrefibid
+    {\blx@imc@iffieldundef{postnote}
+      {\@secondoftwo}
+      {\expandafter\blx@imc@ifpages
+       \expandafter{\abx@field@postnote}
+         {\blx@imc@iffieldequalcs{postnote}{blx@xreflastnote@#1}}
+         {\@secondoftwo}}}
+    {\@secondoftwo}}
+
+\blx@regimcs{\ifxrefloccit}
+
+% loccit tracker patching
+
+\appto\blx@loccittracker@gobal{%
+  \ifbool{citetracker}
+    {\blx@xrefloccit@tracker{text}}
+    {}}
+
+\appto\blx@loccittracker@context{%
+  \ifbool{citetracker}
+    {\iftoggle{blx@footnote}
+       {\blx@xrefloccit@tracker{foot}}
+       {\blx@xrefloccit@tracker{text}}}
+    {}}
+
+\appto\blx@loccittracker@strict{%
+  \ifbool{citetracker}
+    {\blx@xrefloccit@stricttracker{text}}
+    {}}
+
+\appto\blx@loccittracker@constrict{%
+  \ifbool{citetracker}
+    {\iftoggle{blx@footnote}
+       {\blx@mpfnsave
+        \blx@xrefloccit@stricttracker{foot}}
+       {\blx@xrefloccit@stricttracker{text}}}
+    {}}
+
+\def\blx@xrefloccit@tracker#1{%
+  \global\csundef{blx@xreflastnote@#1}%
+  \blx@imc@iffieldundef{postnote}
+    {}
+    {\global\cslet{blx@xreflastnote@#1}\abx@field@postnote}}
+
+\def\blx@xrefloccit@stricttracker#1{%
+  \global\csundef{blx@xreflastnote@#1}%
+  \blx@imc@iffieldundef{postnote}
+    {}
+    {\blx@ifcitesingle
+       {\expandafter\blx@imc@ifpages
+        \expandafter{\abx@field@postnote}
+          {\global\cslet{blx@xreflastnote@#1}\abx@field@postnote}
+          {}}
+       {}}}
+
+\apptocmd\blx@loccit@reset{%    #1
+  \begingroup
+  \global\csundef{blx@xreflastnote@#1}%
+  \endgroup}
+  {}
+  {}
+
+\protected\appto\abx@savetrackers{%
+  \begingroup
+  \global\csletcs{blx@saved@xreflastnote@text}{blx@xreflastnote@text}%
+  \global\csletcs{blx@saved@xreflastnote@foot}{blx@xreflastnote@foot}%
+  \endgroup}
+
+\protected\appto\abx@resttrackers{%
+  \begingroup
+  %\blx@loccit@reset{text}%
+  \global\csletcs{blx@xreflastnote@text}{blx@saved@xreflastnote@text}%
+  %\blx@loccit@reset{foot}%
+  \global\csletcs{blx@xreflastnote@foot}{blx@saved@xreflastnote@foot}%
+  \endgroup}
+
+\protected\appto\abx@cleartrackers{%
+  \begingroup
+  \global\csundef{blx@saved@xreflastnote@text}%
+  \global\csundef{blx@saved@xreflastnote@foot}%
+  \endgroup}
+
+\appto\blx@blxinit{%
+  \appto\blx@TE@hook{%
+    \def\ifxrefloccit{\blx@TE\blx@imc@ifxrefloccit}}}
+
+\appto\blx@opt@loccittracker@true{%
+  \let\blx@imc@ifxrefloccit\blx@ifxrefloccit@global}
+\appto\blx@opt@loccittracker@false{%
+  \let\blx@imc@ifxrefloccit\@secondoftwo}
+\appto\blx@opt@loccittracker@context{%
+  \let\blx@imc@ifxrefloccit\blx@ifxrefloccit@context}
+\appto\blx@opt@loccittracker@strict{%
+  \let\blx@imc@ifxrefloccit\blx@ifxrefloccit@strict}
+\appto\blx@opt@loccittracker@constrict{%
+  \let\blx@imc@ifxrefloccit\blx@ifxrefloccit@constrict}
+
+% end of xrefloccit tracker code
 
 \ExecuteBibliographyOptions{citetracker=constrict,autocite=inline,inbookibid=false,
                             citepages=omit,strict,opcittracker=constrict,labeltitle,
                             citeisbn=false,citeurl=false,citedoi=false,citeeprint=false}
 
+\newbibmacro*{set:cbx:loccit:toggles}{%
+  \ifloccit
+    {\global\toggletrue{cbx:loccit}}
+    {\global\togglefalse{cbx:loccit}}%
+  \ifxrefloccit
+    {\global\toggletrue{cbx:xrefloccit}}
+    {\global\togglefalse{cbx:xrefloccit}}}
+
 \newbibmacro*{cite:seen}{%  the same for cite and footcite
-  \ifciteibid
-     {\ifloccit{\global\toggletrue{cbx:loccit}}{}%
-      \usebibmacro{cite:ibid}}
-     {\ifopcit
-        {\ifloccit{\global\toggletrue{cbx:loccit}}{}%
-         \usebibmacro{cite:opcit}}
+  \iffirstonpage
+    {\iffieldundef{shorthand}
+      {\usebibmacro{cite:short}}
+      {\usebibmacro{cite:shorthand}}}
+    {\ifciteibid
+      {\usebibmacro{cite:ibid}}
+      {\ifopcit
+        {\usebibmacro{cite:opcit}}
         {\iffieldundef{shorthand}
           {\usebibmacro{cite:short}}
-          {\usebibmacro{cite:shorthand}}}}%
-}
+          {\usebibmacro{cite:shorthand}}}}}}
 
 \newbibmacro*{cite}{%
   \usebibmacro{cite:citepages}%
+  \usebibmacro{set:cbx:loccit:toggles}%
   \ifxrefibid
-    {\iffieldequals{postnote}{\cbx@t@lastpostnote}
-      {\global\toggletrue{cbx:t:bookloccit}}
-      {\global\togglefalse{cbx:t:bookloccit}}}
-    {\global\togglefalse{cbx:t:bookloccit}%
-     \savefield{postnote}{\cbx@t@lastpostnote}%
-     \global\xdef\cbx@t@bookref{\thefield{entrykey}:\the\value{instcount}}}%
+    {}
+    {\global\xdef\cbx@t@bookref{\thefield{entrykey}:\the\value{instcount}}}%
   \ifciteseen
     {\global\undef\cbx@t@bookref%
-     \global\undef\cbx@t@lastpostnote%
      \usebibmacro{cite:seen}}
     {\usebibmacro{cite:full}%
      \usebibmacro{cite:save}}}
@@ -237,6 +403,8 @@
   \usebibmacro{shorthandintro}}
 
 \newbibmacro*{cite:short}{%
+  \global\togglefalse{cbx:loccit}%  always print postnote after short citation
+  \global\togglefalse{cbx:xrefloccit}%
   \ifnameundef{labelname}
     {\printfield{label}}
     {\printnames{labelname}}%
@@ -278,33 +446,21 @@
 
 \newbibmacro*{cite:postnote:ibidpage}{%
   \ifboolexpr{
-        test {\iftoggle{cbx:loccit}}
+        togl {cbx:loccit}
         or
-        ( test {\iffootnote}
-          and
-          test {\iftoggle{cbx:f:bookloccit}}
-        )
-        or
-        ( not test {\iffootnote}
-          and
-          test {\iftoggle{cbx:t:bookloccit}}
-        )
+        togl {cbx:xrefloccit}
         }
     {}
     {\usebibmacro{postnote}}}
 
 \newbibmacro*{footcite}{%
   \usebibmacro{cite:citepages}%
+  \usebibmacro{set:cbx:loccit:toggles}%
   \ifxrefibid
-    {\iffieldequals{postnote}{\cbx@f@lastpostnote}
-      {\global\toggletrue{cbx:f:bookloccit}}
-      {\global\togglefalse{cbx:f:bookloccit}}}
-    {\global\togglefalse{cbx:f:bookloccit}%
-     \savefield{postnote}{\cbx@f@lastpostnote}%
-     \global\xdef\cbx@f@bookref{\thefield{entrykey}:\the\value{instcount}}}%
+    {}
+    {\global\xdef\cbx@f@bookref{\thefield{entrykey}:\the\value{instcount}}}%
   \ifciteseen
     {\global\undef\cbx@f@bookref%
-     \global\undef\cbx@f@lastpostnote%
      \usebibmacro{cite:seen}}
     {\usebibmacro{cite:full}%
      \usebibmacro{footcite:save}}}
@@ -369,7 +525,7 @@
 
 \newbibmacro*{cbx:bookibid:check}[2]{%
   \ifboolexpr{%
-      test {\iftoggle{cbx:opt:inbookibid}}
+      togl {cbx:opt:inbookibid}
       and
       test {\ifcitation}
       and
