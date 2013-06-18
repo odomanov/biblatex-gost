@@ -95,14 +95,6 @@
     {\def\blx@mincrossrefs{1}}
     {}}
 
-\AtEveryCitekey{%
-  \ifcsdef{abx@field@hyphenation}{%
-    \edef\blx@languagename{\abx@field@hyphenation}%
-    \select@language{\abx@field@hyphenation}%
-    \blx@hyphenreset}%
-  {}%
-}
-
 \DeclareNameAlias{labelname}{author}
 \DeclareFieldFormat*{citetitle}{#1}
 
