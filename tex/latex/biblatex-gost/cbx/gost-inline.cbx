@@ -100,10 +100,7 @@
 \renewcommand{\multicitedelim}{\addsemicolondelim\space}
 
 % ibidem tracker
-% should go before option execution
-
-\def\blx@lastxref@text{}
-\def\blx@lastxref@foot{}
+% should go before the option execution
 
 \appto\blx@ibidtracker@gobal{%
   \ifbool{citetracker}
@@ -147,24 +144,46 @@
   \global\undef\blx@saved@lastxref@text%
   \global\undef\blx@saved@lastxref@foot}
 
-\def\ifxrefibid{%
-  \ifboolexpr{
-      ( test {\iftoggle{blx@footnote}}
-        and
-        ( test {\blx@imc@iffieldequals{crossref}{\blx@lastxref@foot}}%
-          or
-          test {\blx@imc@iffieldequals{xref}{\blx@lastxref@foot}}
-        )
-      )
-      or
-      ( not test {\iftoggle{blx@footnote}}
-        and
-        ( test {\blx@imc@iffieldequals{crossref}{\blx@lastxref@text}}%
-          or
-          test {\blx@imc@iffieldequals{xref}{\blx@lastxref@text}}
-        )
-      )
-  }}
+% {<true>}{<false>}
+
+\def\blx@ifxrefibid@global{%
+  \blx@imc@iffieldequals{crossref}\blx@lastxref@text}
+
+\def\blx@ifxrefibid@context{%
+  \iftoggle{blx@footnote}
+    {\blx@imc@iffieldequals{crossref}\blx@lastxref@foot}
+    {\blx@imc@iffieldequals{crossref}\blx@lastxref@text}}
+
+\def\blx@ifxrefibid@strict{%
+  \blx@ifcitesingle
+    {\blx@ifciteibid@global}
+    {\@secondoftwo}}%
+
+\def\blx@ifxrefibid@constrict{%
+  \blx@ifcitesingle
+    {\iftoggle{blx@footnote}
+       {\blx@ifmpfncheck
+          {\blx@imc@iffieldequals{crossref}\blx@lastxref@foot}
+          {\@secondoftwo}}
+       {\blx@imc@iffieldequals{crossref}\blx@lastxref@text}}
+    {\@secondoftwo}}%
+
+\blx@regimcs{\ifxrefibid}
+
+\appto\blx@blxinit{%
+  \appto\blx@TE@hook{%
+    \def\ifxrefibid{\blx@TE\blx@imc@ifxrefibid}}}
+
+\appto\blx@opt@ibidtracker@true{%
+  \let\blx@imc@ifxrefibid\blx@ifxrefibid@global}
+\appto\blx@opt@ibidtracker@false{%
+  \let\blx@imc@ifxrefibid\@secondoftwo}
+\appto\blx@opt@ibidtracker@context{%
+  \let\blx@imc@ifxrefibid\blx@ifxrefibid@context}
+\appto\blx@opt@ibidtracker@strict{%
+  \let\blx@imc@ifxrefibid\blx@ifxrefibid@strict}
+\appto\blx@opt@ibidtracker@constrict{%
+  \let\blx@imc@ifxrefibid\blx@ifxrefibid@constrict}
 
 % end of ibidem tracker code
 
