@@ -101,6 +101,75 @@
 \renewcommand{\postnotedelim}{\addperiod\space}
 \renewcommand{\multicitedelim}{\addsemicolondelim\space}
 
+% ibidem tracker
+% should go before option execution
+
+\def\blx@lastxref@text{}
+\def\blx@lastxref@foot{}
+
+\appto\blx@ibidtracker@gobal{%
+  \ifbool{citetracker}
+    {\blx@imc@iffieldundef{crossref}
+       {\blx@imc@savefield{xref}{\blx@lastxref@text}}
+       {\blx@imc@savefield{crossref}{\blx@lastxref@text}}}
+    {}}
+
+\appto\blx@ibidtracker@context{%
+  \ifbool{citetracker}
+    {\iftoggle{blx@footnote}
+      {\blx@imc@iffieldundef{crossref}
+        {\blx@imc@savefield{xref}{\blx@lastxref@foot}}
+        {\blx@imc@savefield{crossref}{\blx@lastxref@foot}}}
+      {\blx@imc@iffieldundef{crossref}
+       {\blx@imc@savefield{xref}{\blx@lastxref@text}}
+       {\blx@imc@savefield{crossref}{\blx@lastxref@text}}}}
+    {}}
+
+\appto\blx@ibidreset@force{%
+  \global\undef\blx@lastxref@text%
+  \global\undef\blx@lastxref@foot}
+
+\appto\blx@ibidreset@gobal{%
+  \global\undef\blx@lastxref@text}
+
+\appto\blx@ibidreset@context{%
+  \iftoggle{blx@footnote}
+    {\global\undef\blx@lastxref@foot}
+    {\global\undef\blx@lastxref@text}}
+
+\protected\appto\abx@savetrackers{%
+  \global\let\blx@saved@lastxref@text\blx@lastxref@text%
+  \global\let\blx@saved@lastxref@foot\blx@lastxref@foot}
+
+\protected\appto\abx@resttrackers{%
+  \global\let\blx@lastxref@text\blx@saved@lastxref@text%
+  \global\let\blx@lastxref@foot\blx@saved@lastxref@foot}
+
+\protected\appto\abx@cleartrackers{%
+  \global\undef\blx@saved@lastxref@text%
+  \global\undef\blx@saved@lastxref@foot}
+
+\def\ifxrefibid{%
+  \ifboolexpr{
+      ( test {\iftoggle{blx@footnote}}
+        and
+        ( test {\blx@imc@iffieldequals{crossref}{\blx@lastxref@foot}}%
+          or
+          test {\blx@imc@iffieldequals{xref}{\blx@lastxref@foot}}
+        )
+      )
+      or
+      ( not test {\iftoggle{blx@footnote}}
+        and
+        ( test {\blx@imc@iffieldequals{crossref}{\blx@lastxref@text}}%
+          or
+          test {\blx@imc@iffieldequals{xref}{\blx@lastxref@text}}
+        )
+      )
+  }}
+
+% end of ibidem tracker code
+
 \ExecuteBibliographyOptions{citetracker=constrict,autocite=inline,inbookibid=false,
                             citepages=omit,strict,opcittracker=constrict,labeltitle,
                             citeisbn=false,citeurl=false,citedoi=false,citeeprint=false}
@@ -301,22 +370,13 @@
 
 \DeclareMultiCiteCommand{\textcites}[\cbx@textcite\footcites]{\textcite}{\multicitedelim}
 
-\renewbibmacro*{cbx:bookibid:check}[2]{%
+\newbibmacro*{cbx:bookibid:check}[2]{%
   \ifboolexpr{%
-    test {\ifcitation}
-    and
-    test {\iftoggle{cbx:opt:inbookibid}}
-    and
-    ( ( test {\iffootnote}
+      test {\ifcitation}
       and
-      test {\iftoggle{cbx:f:bookibid}} )
-      or
-      ( not test {\iffootnote}
-        and
-        test {\iftoggle{cbx:t:bookibid}} )
-    )
-  }
-  {#1}
-  {#2}}
+      test {\ifxrefibid}
+      }
+    {#1}
+    {#2}}
 
 \endinput
