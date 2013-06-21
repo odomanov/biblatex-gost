@@ -523,7 +523,7 @@
 
 \DeclareMultiCiteCommand{\textcites}[\cbx@textcite\footcites]{\textcite}{\multicitedelim}
 
-\newbibmacro*{cbx:bookibid:check}[2]{%
+\renewbibmacro*{cbx:bookibid:check}[2]{%
   \ifboolexpr{%
       togl {cbx:opt:inbookibid}
       and
