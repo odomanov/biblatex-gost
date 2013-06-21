@@ -254,6 +254,8 @@
 
 \DefineBibliographyExtras{french}{\restorecommand\mkbibnamelast}
 
+% format for author is defined separately, because \mkbibnamelast, etc. cannot be
+% used, since they affect all names, not only headings
 \DeclareNameFormat{author}{%
   \iffirstinits
     {\usebibmacro{authorname:last-first}{#1}{#4}{#5}{#7}}
@@ -312,6 +314,7 @@
 \newcommand*{\respdelim}{\addnbspace/\space}% delimiter before "credits"
 \newcommand*{\resppunct}{\addsemicolondelim}% punctuation between "credits" items
 
+% auxillary macros for volsorder handling
 \newcounter{blx@gost@pointer}%
 \newcommand*{\blx@gost@endofstring}{\@\@\@\@\@}  % end of string = \\\
 \newcommand*{\blx@gost@setunit}{\newunit}
@@ -1250,6 +1253,7 @@
   {#3}}
 
 % <name><true><false>
+% similar check for names
 \newbibmacro*{checkbookname}[3]{%
   \ifboolexpr{
     test {\ifnameundef{book#1}}
@@ -1260,6 +1264,7 @@
   {#3}}
 
 % <list><true><false>
+% similar check for lists
 \newbibmacro*{checkbooklist}[3]{%
   \ifboolexpr{
     test {\iflistundef{book#1}}
@@ -1568,6 +1573,8 @@
        \mkbibdatelong{}{endmonth}{endday}}}%
 }
 
+% processing volumes, books, parts, issues in the specified order
+
 \def\blx@gost@volsinorder#1#2{%
   \ifstrequal{#1}{v}
     {\printfield{volume}%
@@ -1859,6 +1866,8 @@
   \setunit*{\addsemicolondelim}%
   \printfield{note}}
 
+% do I need this?
+
 \gdef\ifmulticitation{%
   \ifnum\c@multicitetotal>0
     \expandafter\@firstoftwo
@@ -1888,7 +1897,7 @@
 \newbibmacro*{heading}{%
   \printfield{heading}}
 
-%  Related
+%  Related field
 
 \renewcommand*{\relatedpunct}{\setunit{\addspace}}
 
@@ -2017,7 +2026,8 @@
 \DeclareAutoCiteCommand{footnote}{\smartcite}{\smartcites}
 \DeclareAutoCiteCommand{superscript}{\supercite}{\supercites}
 
-% changing the language of citation
+% changing the language of citations
+
 \gpreto\blx@hook@citekey{%
   \ifdef\abx@field@hyphenation
     {\ifdef\blx@thelangenv
