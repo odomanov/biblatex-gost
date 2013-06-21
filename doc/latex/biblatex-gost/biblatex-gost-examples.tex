@@ -8,6 +8,7 @@
 \usepackage{multicol}
 \usepackage{fancyvrb}
 \usepackage{color}
+\usepackage{xpatch}
 \definecolor{spot}{rgb}{0,0.2,0.6}
 \usepackage[colorlinks,allcolors=spot,bookmarksopen=true,pdfstartview=FitH]{hyperref}
 \usepackage[parentracker=true,
@@ -23,9 +24,12 @@
 
 \tolerance=1500
 
+\xpatchbibmacro{related:default}
+  {\renewbibmacro*{pageref}{}}
+  {\renewbibmacro*{pageref}{}\renewbibmacro*{begentry}{}}{}{}
 \renewbibmacro*{begentry}
   {\hspace{-4em}\makebox[4em]{\hyperlink{\thefield{entrykey}}{$\Downarrow$}}%
-   \raisebox{\baselineskip}{\hypertarget{back:\thefield{entrykey}}{}}}%
+       \raisebox{\baselineskip}{\hypertarget{back:\thefield{entrykey}}{}}}%
 \edef\mytempforAtCharacter{\char64}
 \def\getkey#1#2{%
   \csappto{mytempforbibkey}{#1}%
