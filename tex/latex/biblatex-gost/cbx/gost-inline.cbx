@@ -154,7 +154,9 @@
 
 \def\blx@xrefibid@check#1{%
   \ifboolexpr{
-      ( test {\blx@imc@ifentrytype{inbook}}
+      ( test {\blx@imc@ifentrytype{article}}
+        or
+        test {\blx@imc@ifentrytype{inbook}}
         or
         test {\blx@imc@ifentrytype{incollection}}
         or

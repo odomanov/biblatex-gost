@@ -346,33 +346,38 @@
   \iffieldundef{journaltitle}  % no journaltitle means electronic publication
    {\newunit}
    {\usebibmacro{//}%
-    \usebibmacro{journal}%
-    \setunit{\respdelim}%
-    \usebibmacro{credits}%
-    \setunit*{\resppunct}%
-    \usebibmacro{byeditor}%
+    \usebibmacro{cbx:bookibid:check}
+     {\bibsentence\printtext{%
+        \bibhyperlink{\csuse{cbx@\iffootnote{f}{t}@bookref}}{\bibstring[\mkibid]{ibidem}}}%
+        \newunit\newblock
+        \usebibmacro{chapter+pages}}
+     {\usebibmacro{journal}%
+      \setunit{\respdelim}%
+      \usebibmacro{credits}%
+      \setunit*{\resppunct}%
+      \usebibmacro{byeditor}%
+      \newunit\newblock
+      \printlist[semicolondelim]{specdata}%
+      \newunit\newblock
+      \printlist{location}%              ???
+      \setunit*{\addcomma\space}%
+      \usebibmacro{jour:date}%
+      \newunit\newblock
+      \usebibmacro{jour:volume+parts+issuetitle}%
+      \newunit\newblock
+      \printfield{pages}%
+      \newunit\newblock
+      \iffieldundef{series}
+        {}
+        {\printtext{(\printfield{series})}}%
+      \newunit\newblock
+      \usebibmacro{issn}%
+      \newunit\newblock}%
+    \usebibmacro{doi+eprint+url+note}%
     \newunit\newblock
-    \printlist[semicolondelim]{specdata}%
-    \newunit\newblock
-    \printlist{location}%              ???
-    \setunit*{\addcomma\space}%
-    \usebibmacro{jour:date}%
-    \newunit\newblock
-    \usebibmacro{jour:volume+parts+issuetitle}%
-    \newunit\newblock
-    \printfield{pages}%
-    \newunit\newblock
-    \iffieldundef{series}
-      {}
-      {\printtext{(\printfield{series})}}%
-    \newunit\newblock
-    \usebibmacro{issn}%
-    \newunit\newblock}%
-  \usebibmacro{doi+eprint+url+note}%
-  \newunit\newblock
-  \usebibmacro{addendum+pubstate}%
-  \setunit{\bibpagerefpunct}\newblock
-  \usebibmacro{pageref}%
+    \usebibmacro{addendum+pubstate}%
+    \setunit{\bibpagerefpunct}\newblock
+    \usebibmacro{pageref}}%
   \newunit\newblock
   \usebibmacro{related:init}%
   \usebibmacro{related}%
