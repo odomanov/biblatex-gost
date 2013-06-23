@@ -1116,12 +1116,14 @@
     }
       {}
       {\setunit{\addspace}%
-       \printtext{(%
+       \printtext[parens]{%
          \printfield{eventtitle}%
-         \setunit*{\addcomma\space}%
+         \setunit{\addcolondelim}%
+         \printfield{eventtitleaddon}%
+         \setunit{\addcomma\space}%
          \printfield{venue}%
          \setunit*{\addcomma\space}%
-         \printeventdate)}}%
+         \printeventdate}}%
   \newunit}
 
 \newbibmacro*{series+number}{%
