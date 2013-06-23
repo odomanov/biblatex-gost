@@ -176,7 +176,14 @@ maintained.
 \subsubsection*{Версия 0.?}
 
 \begin{trivlist}
+\item Переход на \biblatex~2.7 и \biber~1.7
 \item Опция \opt{related} по умолчанию установлена в \opt{true}, так же как в \biblatex
+\item Обработка поля \bibfield{related} приведена в соответствие с \biblatex,
+  в связи с чем вывод изменился.
+  Кроме того, по умолчанию опция \opt{related} установлена в \opt{true}
+\item Опция \opt{labelyear} заменена на \opt{labeldate}, в связи с изменениями
+  в \biblatex.
+%\item Исправлена ошибка несовместимости с \texttt{polyglossia}.
 \end{trivlist}
 
 \subsubsection*{Версия 0.8}
@@ -1386,9 +1393,8 @@ gost-authoryear-min & --- & false \\
 нужные для работы опции \opt{inbookibid}, присутствуют в вашем тексте хотя бы в
 аргументе команды \cmd{nocite}.
 
-Опция относится ко всем записям типа \bibtype{inbook}, \bibtype{bookinbook},
-\bibtype{suppbook}, \bibtype{incollection}, \bibtype{inproceedings} и т.\,д.,
-но не работает для \bibtype{article}.
+Опция относится к записям типа \bibtype{article}, \bibtype{inbook}, \bibtype{bookinbook},
+\bibtype{suppbook}, \bibtype{incollection}, \bibtype{inproceedings} и т.\,д.
 
 \choitem[gostletter]{mergedate}{goststrict, gostletter, gostlabel}
 
@@ -1870,9 +1876,20 @@ pageref & + & + & + & + & + & + & + & + & + & + & + & + & + & + & +\tabularnewli
 
 \begin{changelog}
 
-\begin{release}{0.?}{??-??-2013}
-\item Переход на \biblatex~2.6 и \biber~1.6\see{sec:install}
-\item Исправлены другие ошибки
+\begin{release}{0.?}{??-??-2013}  % 23.06
+\item Переход на \biblatex~2.6 и \biber~1.6.\see{sec:install}
+\item Переработан механизм \opt{bookibid}, он теперь чувствителен к трекерам
+  \biblatex, работает для \bibtype{article}, были исправлены ошибки, например,
+  отсутствие гиперссылок в некоторых случаях.\see{sec:newoptions}
+\item Обработка поля \bibfield{related} приведена в соответствие с \biblatex,
+  в связи с чем его вывод изменился.
+  Кроме того, по умолчанию опция \opt{related} установлена в \opt{true}.\see{sec:newoptions}
+\item Опция \opt{labelyear} заменена на \opt{labeldate}, в связи с изменениями
+  в \biblatex.
+\item Обновлён файл локализации.
+\item Обновлён и пополнен файл примеров.
+\item Исправлена ошибка несовместимости с \texttt{polyglossia}.
+\item Исправлены разные ошибки.
 \end{release}
 
 \begin{release}{0.8}{03-04-2013}
