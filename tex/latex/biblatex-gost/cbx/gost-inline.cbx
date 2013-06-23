@@ -154,27 +154,9 @@
 
 \def\blx@xrefibid@check#1{%
   \ifboolexpr{
-      ( test {\blx@imc@ifentrytype{article}}
-        or
-        test {\blx@imc@ifentrytype{inbook}}
-        or
-        test {\blx@imc@ifentrytype{incollection}}
-        or
-        test {\blx@imc@ifentrytype{inreference}}
-        or
-        test {\blx@imc@ifentrytype{inproceedings}}
-        or
-        test {\blx@imc@ifentrytype{bookinbook}}
-        or
-        test {\blx@imc@ifentrytype{suppbook}}
-        or
-        test {\blx@imc@ifentrytype{suppcollection}}
-      )
-      and
-      ( test {\blx@imc@iffieldequalcs{crossref}{blx@lastxref@#1}}
-        or
-        test {\blx@imc@iffieldequals{xref}{blx@lastxref@#1}}
-      )
+          test {\blx@imc@iffieldequalcs{crossref}{blx@lastxref@#1}}
+          or
+          test {\blx@imc@iffieldequals{xref}{blx@lastxref@#1}}
       }}
 
 \def\blx@ifxrefibid@global{%
@@ -378,17 +360,24 @@
 \newbibmacro*{cite}{%
   \usebibmacro{cite:citepages}%
   \usebibmacro{set:cbx:loccit:toggles}%
-  \ifxrefibid
-    {}
-    {\global\xdef\cbx@t@bookref{\thefield{entrykey}:\the\value{instcount}}}%
   \ifciteseen
-    {\global\undef\cbx@t@bookref%
-     \usebibmacro{cite:seen}}
+    {\usebibmacro{cite:seen}}
     {\usebibmacro{cite:full}%
-     \usebibmacro{cite:save}}}
+     \usebibmacro{cite:save}{t}}}
 
-\newbibmacro*{cite:save}{%
-  \csxdef{cbx@t@\thefield{entrykey}}{\the\value{instcount}}}%
+\newbibmacro*{cite:save:bookref}[1]{%
+  \usebibmacro{cbx:bookibid:check}
+    {}
+    {\iffieldundef{crossref}
+      {\iffieldundef{xref}
+        {}
+        {\csxdef{cbx@#1@bookref@\thefield{xref}}{\thefield{entrykey}:\the\value{instcount}}}}
+      {\csxdef{cbx@#1@bookref@\thefield{crossref}}{\thefield{entrykey}:\the\value{instcount}}}}}
+
+\newbibmacro*{cite:save}[1]{%
+  \csxdef{cbx@#1@\thefield{entrykey}}{\the\value{instcount}}%
+  \label{cbx@\the\value{instcount}}%    what for?
+  \usebibmacro{cite:save:bookref}{#1}}
 
 \newbibmacro{cite:clearfields}{%
    \renewbibmacro*{series+number}{}%
@@ -458,18 +447,10 @@
 \newbibmacro*{footcite}{%
   \usebibmacro{cite:citepages}%
   \usebibmacro{set:cbx:loccit:toggles}%
-  \ifxrefibid
-    {}
-    {\global\xdef\cbx@f@bookref{\thefield{entrykey}:\the\value{instcount}}}%
   \ifciteseen
-    {\global\undef\cbx@f@bookref%
-     \usebibmacro{cite:seen}}
+    {\usebibmacro{cite:seen}}
     {\usebibmacro{cite:full}%
-     \usebibmacro{footcite:save}}}
-
-\newbibmacro*{footcite:save}{%
-  \csxdef{cbx@f@\thefield{entrykey}}{\the\value{instcount}}%
-  \label{cbx@\the\value{instcount}}}
+     \usebibmacro{cite:save}{f}}}
 
 \DeclareCiteCommand{\cite}
   {\usebibmacro{prenote}}

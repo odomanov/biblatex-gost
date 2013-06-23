@@ -348,7 +348,14 @@
    {\usebibmacro{//}%
     \usebibmacro{cbx:bookibid:check}
      {\bibsentence\printtext{%
-        \bibhyperlink{\csuse{cbx@\iffootnote{f}{t}@bookref}}{\bibstring[\mkibid]{ibidem}}}%
+        \bibhyperlink{\csuse{%
+            cbx@\iffootnote{f}{t}@bookref@%
+              \iffieldundef{crossref}
+                {\iffieldundef{xref}
+                  {}
+                  {\thefield{xref}}}
+                {\thefield{crossref}}}}
+            {\bibstring[\mkibid]{ibidem}}}%
         \newunit\newblock
         \usebibmacro{chapter+pages}}
      {\usebibmacro{journal}%
@@ -526,7 +533,14 @@
   \usebibmacro{//}%
   \usebibmacro{cbx:bookibid:check}
      {\bibsentence\printtext{%
-        \bibhyperlink{\csuse{cbx@\iffootnote{f}{t}@bookref}}{\bibstring[\mkibid]{ibidem}}}%
+        \bibhyperlink{\csuse{%
+            cbx@\iffootnote{f}{t}@bookref@%
+              \iffieldundef{crossref}
+                {\iffieldundef{xref}
+                  {}
+                  {\thefield{xref}}}
+                {\thefield{crossref}}}}
+            {\bibstring[\mkibid]{ibidem}}}%
         \newunit\newblock
         \usebibmacro{chapter+pages}}
      {\usebibmacro{maintitle+volumes+parts+booktitle}%
@@ -583,7 +597,14 @@
   \usebibmacro{//}%
   \usebibmacro{cbx:bookibid:check}
      {\bibsentence\printtext{%
-        \bibhyperlink{\csuse{cbx@\iffootnote{f}{t}@bookref}}{\bibstring[\mkibid]{ibidem}}}%
+        \bibhyperlink{\csuse{%
+            cbx@\iffootnote{f}{t}@bookref@%
+              \iffieldundef{crossref}
+                {\iffieldundef{xref}
+                  {}
+                  {\thefield{xref}}}
+                {\thefield{crossref}}}}
+            {\bibstring[\mkibid]{ibidem}}}%
         \newunit\newblock
         \usebibmacro{chapter+pages}}
      {\usebibmacro{maintitle+volumes+parts+booktitle}%
@@ -636,7 +657,14 @@
   \usebibmacro{//}%
   \usebibmacro{cbx:bookibid:check}
      {\bibsentence\printtext{%
-        \bibhyperlink{\csuse{cbx@\iffootnote{f}{t}@bookref}}{\bibstring[\mkibid]{ibidem}}}%
+        \bibhyperlink{\csuse{%
+            cbx@\iffootnote{f}{t}@bookref@%
+              \iffieldundef{crossref}
+                {\iffieldundef{xref}
+                  {}
+                  {\thefield{xref}}}
+                {\thefield{crossref}}}}
+            {\bibstring[\mkibid]{ibidem}}}%
         \newunit\newblock
         \usebibmacro{chapter+pages}}
      {\usebibmacro{maintitle+volumes+parts+booktitle}%
