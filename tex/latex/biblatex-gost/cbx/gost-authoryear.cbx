@@ -7,6 +7,8 @@
                             citeisbn,citeurl,citedoi,citeeprint}
 
 \providecommand*{\mkibid}[1]{#1}
+\renewcommand*{\iffinalcitedelim}{%
+  \ifnumequal{\value{textcitecount}}{\value{textcitetotal}-1}}
 \newbool{cbx:parens}
 \newbool{cbx:loccit}
 
@@ -24,6 +26,21 @@
 \DeclareFieldFormat*{citetitle}{\mkbibemph{#1}}
 \DeclareFieldFormat{extratitleyear}{\mknumalph{#1}}
 \DeclareFieldFormat{citeheading}{#1}
+
+\newbibmacro*{cite:init}{%
+  \global\boolfalse{cbx:loccit}%
+  \ifnumless{\value{multicitecount}}{2}
+    {\global\boolfalse{cbx:parens}%
+     \global\undef\cbx@lasthash
+     \global\undef\cbx@lastyear}
+    {\iffieldundef{prenote}
+       {}
+       {\global\undef\cbx@lasthash
+  \global\undef\cbx@lastyear}}}
+
+\newbibmacro*{cite:reinit}{%
+  \global\undef\cbx@lasthash
+  \global\undef\cbx@lastyear}
 
 \newbibmacro*{cite}{%
   \iffieldundef{shorthand}
@@ -86,21 +103,6 @@
       {\printtext[#1]{%
           \printfield{labelyear}%
           \usebibmacro{cite:extras}}}}}
-
-\newbibmacro*{cite:init}{%
-  \global\boolfalse{cbx:loccit}%
-  \ifnumless{\value{multicitecount}}{2}
-    {\global\boolfalse{cbx:parens}%
-     \global\undef\cbx@lasthash
-     \global\undef\cbx@lastyear}
-    {\iffieldundef{prenote}
-       {}
-       {\global\undef\cbx@lasthash
-  \global\undef\cbx@lastyear}}}
-
-\newbibmacro*{cite:reinit}{%
-  \global\undef\cbx@lasthash
-  \global\undef\cbx@lastyear}
 
 \newbibmacro*{citeyear}{%
   \iffieldundef{shorthand}
@@ -165,13 +167,14 @@
     {\usebibmacro{cite:labelyear+extrayear}}}%
            \savefield{labelyear}{\cbx@lastyear}}
           {\usebibmacro{cite:shorthand}%
-           \global\undef\cbx@lastyear}%
-        \savefield{namehash}{\cbx@lasthash}}}%
+           \global\undef\cbx@lastyear}}%
+     \stepcounter{textcitecount}%
+     \savefield{namehash}{\cbx@lasthash}}%
   \setunit{%
     \ifbool{cbx:parens}
       {\bibcloseparen\global\boolfalse{cbx:parens}}
       {}%
-    \multicitedelim}}
+    \textcitedelim}}
 
 \newbibmacro*{cite:heading}[1]{%
   \printtext[#1]{\printfield[citeheading]{heading}}}
@@ -221,7 +224,7 @@
        \ifbool{cbx:parens}
    {\bibcloseparen\global\boolfalse{cbx:parens}}
    {}%
-       \multicitedelim}}}
+       \textcitedelim}}}
 
 \DeclareCiteCommand{\cite}
   {\usebibmacro{cite:init}%
@@ -279,19 +282,51 @@
   {}
   {\usebibmacro{cite:postnote}}
 
-\DeclareCiteCommand{\textcite}
+\DeclareCiteCommand{\cbx@textcite}
   {\usebibmacro{cite:init}}
   {\usebibmacro{citeindex}%
    \usebibmacro{textcite}}
   {}
   {\usebibmacro{textcite:postnote}}
 
+\DeclareCiteCommand{\textcite}[\cbx@textcite@init\cbx@textcite]
+  {\gdef\cbx@savedkeys{}%
+   \citetrackerfalse%
+   \pagetrackerfalse%
+   \DeferNextCitekeyHook%
+   \usebibmacro{cite:init}}
+  {\ifthenelse{\iffirstcitekey\AND\value{multicitetotal}>0}
+     {\protected@xappto\cbx@savedcites{()(\thefield{multipostnote})}%
+      \global\clearfield{multipostnote}}
+     {}%
+   \xappto\cbx@savedkeys{\thefield{entrykey},}%
+   \iffieldequals{namehash}{\cbx@lasthash}
+     {}
+     {\stepcounter{textcitetotal}%
+      \savefield{namehash}{\cbx@lasthash}}}
+  {}
+  {\protected@xappto\cbx@savedcites{%
+     [\thefield{prenote}][\thefield{postnote}]{\cbx@savedkeys}}}
+
+\newrobustcmd{\cbx@textcite@init}[2]{%
+  \setcounter{textcitetotal}{0}%
+  \setcounter{textcitecount}{0}%
+  \def\cbx@savedcites{#1}#2\cbx@savedcites\empty}
+
+\DeclareMultiCiteCommand{\cbx@textcites}{\cbx@textcite}{}
+\DeclareMultiCiteCommand{\textcites}[\cbx@textcites@init\cbx@textcites]{\textcite}{}
+
+\let\cbx@textcites@init\cbx@textcite@init
+\pretocmd{\cbx@textcites@init}{\UseNextMultiCiteHook}{}{}
+
 \DeclareMultiCiteCommand{\cites}{\cite}{\setunit{\multicitedelim}}
-\DeclareMultiCiteCommand{\parencites}[\mkbibparens]{\parencite}{\setunit{\multicitedelim}}
-\DeclareMultiCiteCommand{\footcites}[\mkbibfootnote]{\footcite}{\setunit{\multicitedelim}}
-\DeclareMultiCiteCommand{\footcitetexts}[\mkbibfootnotetext]{\footcitetext}{\setunit{\multicitedelim}}
-\DeclareMultiCiteCommand{\smartcites}[\iffootnote\mkbibparens\mkbibfootnote]{\smartcite}
-                                     {\setunit{\multicitedelim}}
-\DeclareMultiCiteCommand{\textcites}{\textcite}{}
+\DeclareMultiCiteCommand{\parencites}[\mkbibparens]
+  {\parencite}{\setunit{\multicitedelim}}
+\DeclareMultiCiteCommand{\footcites}[\mkbibfootnote]
+  {\footcite}{\setunit{\multicitedelim}}
+\DeclareMultiCiteCommand{\footcitetexts}[\mkbibfootnotetext]
+  {\footcitetext}{\setunit{\multicitedelim}}
+\DeclareMultiCiteCommand{\smartcites}[\iffootnote\mkbibparens\mkbibfootnote]
+  {\smartcite}{\setunit{\multicitedelim}}
 
 \endinput
