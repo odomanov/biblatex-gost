@@ -24,7 +24,10 @@
 \renewcommand*{\bibrightparen}{\blx@postpunct\ifcitation{]}{)}\midsentence}
 
 \DeclareFieldFormat*{citetitle}{\mkbibemph{#1}}
-\DeclareFieldFormat{extratitleyear}{\mknumalph{#1}}
+\DeclareFieldFormat{extratitleyear}{%
+  \iffieldnums{labelyear}
+    {\mknumalph{#1}}
+    {\printtext{(}\mknumalph{#1}\printtext{)}}}
 \DeclareFieldFormat{citeheading}{#1}
 
 \newbibmacro*{cite:init}{%
