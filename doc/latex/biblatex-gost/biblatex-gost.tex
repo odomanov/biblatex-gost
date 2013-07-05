@@ -31,6 +31,8 @@ bibstyle=gost-standard,
 \newcommand*{\biblatexctan}{http://www.ctan.org/tex-archive/macros/latex/contrib/biblatex/}
 \newcommand*{\biblatexgost}{Biblatex-GOST\xspace}
 \newcommand*{\biblatexgosthome}{http://sourceforge.net/projects/biblatexgost/}
+\newcommand*{\biblatexgostctan}
+    {http://www.ctan.org/tex-archive/macros/latex/contrib/biblatex-contrib/biblatex-gost/}
 
 \makeatletter
 \titlepage{%
@@ -154,16 +156,17 @@ maintained.
 обновите индексы (в \tex~Live, например, это делается командой \texttt{mktexlsr},
 в MiK\tex~--- \texttt{initexmf -{}-update-fndb}). Обратите внимание, что директория,
 в которую менеджер пакетов устанавливает пакет в конкретном дистрибутиве,
-определяется разработчиками
-этого дистрибутива. Эта директория может отличаться (и отличается!) от директории
-в вышеупомянутом архиве, поэтому при ручной установке настоятельно рекомендуется распаковывать
+определяется разработчиками этого дистрибутива.
+Эта директория может отличаться (и отличается!) от директории
+в вышеупомянутом архиве, поэтому при ручной установке лучше распаковывать
 архив в локальное, а не общее дерево \tex'а.
 
 Для работы \biblatexgost версии \makeatletter\bbx@gost@version\makeatother\
 требуются, как минимум,
-\biblatex~2.6\fnurl{http://sourceforge.net/projects/biblatex/files/biblatex-2.6/}
-и \biber~1.6\fnurl{http://sourceforge.net/projects/biblatex-biber/files/biblatex-biber/1.6/}.
-%(текущие версии на CTAN). Пакет не будет работать с предыдущими версиями.
+\biblatex~2.7\fnurl{http://sourceforge.net/projects/biblatex/files/biblatex-2.7/}
+и \biber~1.7\fnurl{http://sourceforge.net/projects/biblatex-biber/files/biblatex-biber/1.7/}.
+%(текущие версии на CTAN).
+Пакет не будет работать с предыдущими версиями.
 
 \subsection{Важные изменения в этой версии}
 \label{sec:critchanges}
@@ -180,7 +183,6 @@ maintained.
 \item Опция \opt{related} по умолчанию установлена в \opt{true}, так же как в \biblatex
 \item Обработка поля \bibfield{related} приведена в соответствие с \biblatex,
   в связи с чем вывод изменился.
-  Кроме того, по умолчанию опция \opt{related} установлена в \opt{true}
 \item Опция \opt{labelyear} заменена на \opt{labeldate}, в связи с изменениями
   в \biblatex.
 %\item Исправлена ошибка несовместимости с \texttt{polyglossia}.
@@ -1409,18 +1411,19 @@ gost-authoryear-min & --- & false \\
 
 Во-вторых, на своём обычном месте в самой записи.
 Данная опция определяет, каким образом выводится вторая дата:
-\begin{enumerate*}[label=\arabic*)]
+\begin{enumerate}[label=\arabic*)~]
 \item как обычно (\kvopt{mergedate}{false}),
 \item выводит дату только для меток с добавленной буквой (\kvopt{mergedate}{minimum}),
 \item выводит дату только для меток с добавленной буквой, если
 она является просто годом (\kvopt{mergedate}{basic}),
 \item дата вообще не выводится на своём обычном месте (\kvopt{mergedate}{maximum}),
 \item то же, но поле \bibfield{issue} всё же выводится
-(\kvopt{mergedate}{compact {\rmfamily или} true})
-\end{enumerate*}
-(подробнее см. примеры в документации \biblatex).
-\biblatexgost сохраняет все эти опции, но, поскольку ГОСТ не предусматривает вывод даты после
-автора, то добавляет ещё три. Все они чувствительны к опции \opt{singletitle} и могут опускать
+(\kvopt{mergedate}{compact {\rmfamily или} true}).
+\end{enumerate}
+Подробности см. в документации \biblatex, в примерах.
+\biblatexgost сохраняет все эти опции, но поскольку ГОСТ не предусматривает вывод даты после
+автора, то добавляет ещё три.
+Все они чувствительны к опции \opt{singletitle} и могут опускать
 дату, если она не требуется для устранения неопределённости.
 
 \begin{valuelist}
@@ -1876,8 +1879,8 @@ pageref & + & + & + & + & + & + & + & + & + & + & + & + & + & + & +\tabularnewli
 
 \begin{changelog}
 
-\begin{release}{0.?}{??-??-2013}  % 23.06
-\item Переход на \biblatex~2.6 и \biber~1.6.\see{sec:install}
+\begin{release}{0.9}{06-07-2013}  % 23.06
+\item Переход на \biblatex~2.7 и \biber~1.7.\see{sec:install}
 \item Переработан механизм \opt{bookibid}, он теперь чувствителен к трекерам
   \biblatex, работает для \bibtype{article}, были исправлены ошибки, например,
   отсутствие гиперссылок в некоторых случаях.\see{sec:newoptions}
