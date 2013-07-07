@@ -15,7 +15,7 @@
 \usepackage{rotating}
 \usepackage{comment}
 \usepackage[inline]{enumitem}
-\usepackage{isodate}
+%\usepackage{isodate}    % bug?
 \usepackage[backend=biber,
 bibstyle=gost-standard,
 ]{biblatex} % to receive \bbx@gost@version, etc.
@@ -176,13 +176,13 @@ maintained.
 модификации могут оказаться значительными. Более полный список изменений см.
 в \Apxref{apx:changelog}.
 
-\subsubsection*{Версия 0.9}
+\subsubsection*{Версия 1.0}
 
 \begin{trivlist}
 \item Переход на \biblatex~2.7 и \biber~1.7
 \item Опция \opt{related} по умолчанию установлена в \opt{true}, так же как в \biblatex
 \item Обработка поля \bibfield{related} приведена в соответствие с \biblatex,
-  в связи с чем вывод изменился.
+  в связи с чем изменилось оформление.
 \item Опция \opt{labelyear} заменена на \opt{labeldate}, в связи с изменениями
   в \biblatex.
 %\item Исправлена ошибка несовместимости с \texttt{polyglossia}.
@@ -1879,13 +1879,13 @@ pageref & + & + & + & + & + & + & + & + & + & + & + & + & + & + & +\tabularnewli
 
 \begin{changelog}
 
-\begin{release}{0.9}{06-07-2013}  % 23.06
+\begin{release}{1.0}{07-07-2013}
 \item Переход на \biblatex~2.7 и \biber~1.7.\see{sec:install}
 \item Переработан механизм \opt{bookibid}, он теперь чувствителен к трекерам
   \biblatex, работает для \bibtype{article}, были исправлены ошибки, например,
   отсутствие гиперссылок в некоторых случаях.\see{sec:newoptions}
 \item Обработка поля \bibfield{related} приведена в соответствие с \biblatex,
-  в связи с чем его вывод изменился.
+  в связи с чем изменилось оформление.
   Кроме того, по умолчанию опция \opt{related} установлена в \opt{true}.\see{sec:newoptions}
 \item Опция \opt{labelyear} заменена на \opt{labeldate}, в связи с изменениями
   в \biblatex.
