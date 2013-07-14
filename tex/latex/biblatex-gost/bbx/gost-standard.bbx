@@ -325,6 +325,25 @@
   {\edef\gostmedialanguage{russian}%
    \newcommand*{\select@medialanguage}{}}
 
+% macros and formats for printing origlanguage and bookoriglanguage.
+% made special to simplify making them lists
+
+\DeclareFieldFormat{origlanguage}{%
+  \bibstring{from#1}}
+
+\newcommand*{\lbx@gost@lfromlang}[1]{%
+  \iffieldundef{#1}
+    {\unspace}
+    {\printfield[origlanguage]{#1}}}
+\newcommand*{\lbx@gost@sfromlang}[1]{%
+  \iffieldundef{#1}
+    {\unspace}
+    {\printfield[origlanguage]{#1}}}
+% \renewcommand*{\lbx@lfromlang}{\lbx@gost@lfromlang{origlanguage}}
+% \renewcommand*{\lbx@sfromlang}{\lbx@gost@sfromlang{origlanguage}}
+\newcommand*{\blx@gost@iflangundef}[3]{\iffieldundef{#1}{#2}{#3}}
+\newcommand*{\blx@gost@iflangsequal}[4]{\iffieldsequal{#1}{#2}{#3}{#4}}
+
 \newbibmacro*{begentry}{}
 \newbibmacro*{finentry}{\finentry}
 %
@@ -1366,21 +1385,21 @@
       or
       not test {\ifnamesequal{translator}{booktranslator}}
       or
-      ( not test {\iffieldundef{origlanguage}}
+      ( not test {\blx@gost@iflangundef{origlanguage}}
         and
-        test {\iffieldundef{bookoriglanguage}}
+        test {\blx@gost@iflangundef{bookoriglanguage}}
       )
       or
-      ( test {\iffieldundef{origlanguage}}
+      ( test {\blx@gost@iflangundef{origlanguage}}
         and
-        not test {\iffieldundef{bookoriglanguage}}
+        not test {\blx@gost@iflangundef{bookoriglanguage}}
       )
       or
-      ( not test {\iffieldundef{origlanguage}}
+      ( not test {\blx@gost@iflangundef{origlanguage}}
         and
-        not test {\iffieldundef{bookoriglanguage}}
+        not test {\blx@gost@iflangundef{bookoriglanguage}}
         and
-        not test {\iffieldsequal{origlanguage}{bookoriglanguage}}
+        not test {\blx@gost@iflangsequal{origlanguage}{bookoriglanguage}}
       )
       }
         {\usebibmacro{bytranslator+othersstrg}%
@@ -1529,14 +1548,8 @@
   % temporarily redefining commands used in the bibstring
   \savecommand\lbx@lfromlang%
   \savecommand\lbx@sfromlang%
-  \renewcommand*{\lbx@lfromlang}{%
-    \iffielddundef{bookoriglanguage}
-      {\unspace}
-      {\biblstring{from\thefield{bookoriglanguage}}}}
-  \renewcommand*{\lbx@sfromlang}{%
-    \iffieldundef{bookoriglanguage}
-      {\unspace}
-      {\bibsstring{from\thefield{bookoriglanguage}}}}
+  \renewcommand*{\lbx@lfromlang}{\lbx@gost@lfromlang{bookoriglanguage}}%
+  \renewcommand*{\lbx@sfromlang}{\lbx@gost@sfromlang{bookoriglanguage}}%
   \bibstring{\abx@tempa}%
   \restorecommand\lbx@lfromlang%
   \restorecommand\lbx@sfromlang%
