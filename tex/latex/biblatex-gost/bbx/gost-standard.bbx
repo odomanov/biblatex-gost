@@ -2077,15 +2077,15 @@
 % changing the language of citations
 
 \gpreto\blx@hook@citekey{%
-  \ifdef\abx@field@hyphenation
+  \ifdef\abx@field@langid
     {\ifdef\blx@thelangenv
       {\edef\blx@temp@langenv{\noexpand\csname\blx@thelangenv\endcsname%
-          {\abx@field@hyphenation}}%
+          {\abx@field@langid}}%
        \blx@temp@langenv}
       {}}%
     {}}
 \apptocmd{\blx@citeprint}{%
-  \ifdef\abx@field@hyphenation
+  \ifdef\abx@field@langid
     {\ifdef\blx@thelangenv
       {\csname end\blx@thelangenv\endcsname}
       {}}%
