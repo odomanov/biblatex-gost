@@ -319,7 +319,11 @@
 \newcommand*{\blx@gost@endofstring}{\@\@\@\@\@}  % end of string = \\\
 \newcommand*{\blx@gost@setunit}{\newunit}
 
-\@ifpackageloaded{babel}
+\ifboolexpr{%
+    test {\@ifpackageloaded{babel}}
+    or
+    test {\@ifpackageloaded{polyglossia}}
+  }
   {\edef\gostmedialanguage{\csname bbl@main@language\endcsname}%
    \newcommand*{\select@medialanguage}{\select@language{\gostmedialanguage}}}
   {\edef\gostmedialanguage{russian}%
