@@ -105,7 +105,7 @@
 %
 % xref ibidem tracker
 
-\appto\blx@ibidtracker@gobal{%
+\appto\blx@ibidtracker@global{%
   \ifbool{citetracker}
     {\blx@imc@iffieldundef{crossref}
        {\blx@imc@iffieldundef{xref}
@@ -133,7 +133,7 @@
   \global\undef\blx@lastxref@text%
   \global\undef\blx@lastxref@foot}
 
-\appto\blx@ibidreset@gobal{%
+\appto\blx@ibidreset@global{%
   \global\undef\blx@lastxref@text}
 
 \appto\blx@ibidreset@context{%
@@ -249,7 +249,7 @@
 
 % loccit tracker patching
 
-\appto\blx@loccittracker@gobal{%
+\appto\blx@loccittracker@global{%
   \ifbool{citetracker}
     {\blx@xrefloccit@tracker{text}}
     {}}
