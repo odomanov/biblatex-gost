@@ -279,12 +279,12 @@
        \ifpunctmark{'}{}{\bibnamedelimc}}%
      \mkbibhdnamelast{#1}\isdot
      \ifblank{#4}{}{\bibnamedelimd\mkbibhdnameaffix{#4}\isdot}%
-     \ifblank{#2}{}{\addcomma\bibnamedelimd\mkbibhdnamefirst{#2}\isdot}}
+     \ifblank{#2}{}{\revsdnamepunct\bibnamedelimd\mkbibhdnamefirst{#2}\isdot}}
     {\usebibmacro{name:delim}{#1}%
      \usebibmacro{name:hook}{#1}%
      \mkbibhdnamelast{#1}\isdot
      \ifblank{#4}{}{\bibnamedelimd\mkbibhdnameaffix{#4}\isdot}%
-     \ifblank{#2#3}{}{\addspace}%
+     \ifblank{#2#3}{}{\revsdnamepunct}%
      \ifblank{#2}{}{\bibnamedelimd\mkbibhdnamefirst{#2}\isdot}%
      \ifblank{#3}{}{\bibnamedelimd\mkbibhdnameprefix{#3}\isdot}}}
 \DeclareNameAlias{editor}{author}
@@ -292,6 +292,8 @@
 \DeclareNameAlias{editorb}{editor}
 \DeclareNameAlias{editorc}{editor}
 \DeclareNameAlias{translator}{author}
+
+\renewcommand*{\revsdnamepunct}{\addspace}%
 
 \DeclareNameFormat{last-first:full}{%
   \begingroup%
