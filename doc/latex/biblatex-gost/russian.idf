@@ -1,0 +1,136 @@
+\ProvidesFile{russian.idf}
+  [2010/01/03  v2.30  Language definitions for isodate package (HH)]
+\let\iso@languageloaded\active
+\def\month@russian{\ifcase\month\or
+    \cyrya\cyrn\cyrv\cyra\cyrr\cyrya
+    \or \cyrf\cyre\cyrv\cyrr\cyra\cyrl\cyrya
+    \or \cyrm\cyra\cyrr\cyrt\cyra
+    \or \cyra\cyrp\cyrr\cyre\cyrl\cyrya
+    \or \cyrm\cyra\cyrya
+    \or \cyri\cyryu\cyrn\cyrya
+    \or \cyri\cyryu\cyrl\cyrya
+    \or \cyra\cyrv\cyrg\cyru\cyrs\cyrt\cyra
+    \or \cyrs\cyre\cyrn\cyrt\cyrya\cyrb\cyrr\cyrya
+    \or \cyro\cyrk\cyrt\cyrya\cyrb\cyrr\cyrya
+    \or \cyrn\cyro\cyrya\cyrb\cyrr\cyrya
+    \or \cyrd\cyre\cyrk\cyra\cyrb\cyrr\cyrya\fi}
+\ifthenelse{\equal{\CurrentOption}{russian}}{%
+  \typeout{Define commands for Russian date format}
+  \def\day@russian{%
+    \ifiso@cleanlook
+      \day
+    \else
+      \ifcase\day\or
+        1-\cyre\or 2-\cyre\or 3-\cyre\or 4-\cyre\or 5-\cyre\or
+        6-\cyre\or 7-\cyre\or 8-\cyre\or 9-\cyre\or 10-\cyre\or
+        11-\cyre\or 12-\cyre\or 13-\cyre\or 14-\cyre\or 15-\cyre\or
+        16-\cyre\or 17-\cyre\or 18-\cyre\or 19-\cyre\or 20-\cyre\or
+        21-\cyre\or 22-\cyre\or 23-\cyre\or 24-\cyre\or 25-\cyre\or
+        26-\cyre\or 27-\cyre\or 28-\cyre\or 29-\cyre\or 30-\cyre\or
+        31-\cyre%
+      \fi
+    \fi
+  }
+  \def\iso@printmonthday@russian#1#2{%
+    \ifthenelse{\equal{\iso@dateformat}{iso}\OR
+                \equal{\iso@dateformat}{TeX}}{%
+      \iso@printmonthday@int{#1}{#2}%
+    }{%
+      \ifthenelse{\equal{\iso@dateformat}{numeric}\OR
+                  \equal{\iso@dateformat}{short}}{%
+        \ifiso@doprintday
+          \iso@printday{#2}/%
+        \fi
+        \iso@printmonth{#1}%
+      }{%
+        \ifthenelse{\equal{\iso@dateformat}{orig}\OR
+                    \equal{\iso@dateformat}{shortorig}}{%
+          \begingroup
+          \edef\lday{#2}\def\day{\lday}%
+          \edef\lmonth{#1}\def\month{\lmonth}%
+          \ifiso@doprintday
+            \day@russian\iso@monthsep\@empty
+          \fi
+          \month@russian
+          \endgroup
+        }{}%
+      }%
+    }%
+  }
+  \def\iso@printdate@russian#1#2#3{%
+    \ifthenelse{\equal{\iso@dateformat}{iso}\OR
+                \equal{\iso@dateformat}{TeX}}{%
+      \iso@printdate@int{#1}{#2}{#3}%
+    }{%
+      \iso@printmonthday@russian{\number#2}{\number#3}%
+      \ifiso@printyear
+        \ifthenelse{\equal{\iso@dateformat}{orig}\OR
+                    \equal{\iso@dateformat}{shortorig}}{%
+        }{%
+          /%
+        }%
+        \ifthenelse{\equal{\iso@dateformat}{numeric}}{%
+          \iso@yearfour{\number#1}%
+        }{%
+          \ifthenelse{\equal{\iso@dateformat}{orig}}{%
+            \iso@yearsep\iso@yearfour{\number#1}%
+          }{%
+            \ifthenelse{\equal{\iso@dateformat}{shortorig}}{%
+              \iso@yearsep\iso@twodigitsign\iso@yeartwo{\number#1}%
+            }{%
+              \ifthenelse{\equal{\iso@dateformat}{short}}{%
+                \iso@yeartwo{\number#1}%
+              }{}%
+            }%
+          }%
+        }%
+      \fi
+    }%
+  }
+  \def\iso@daterussian{%
+    \def\today{\iso@printdate@russian{\year}{\month}{\day}}}%
+  \expandafter\def\csname iso@daterange@\CurrentOption\endcsname{%
+    \iso@daterange@russian}%
+  \def\iso@daterange@russian#1#2#3#4#5#6{%
+    \ifthenelse{\equal{\iso@dateformat}{iso}\OR
+                \equal{\iso@dateformat}{TeX}}{%
+      \iso@daterange@int{#1}{#2}{#3}{#4}{#5}{#6}%
+    }{%
+      \ifthenelse{\equal{\number#1}{\number#4}}{%
+        \ifthenelse{\equal{\number#2}{\number#5}}{%
+          \ifiso@doprintday
+            \ifthenelse{\equal{\iso@dateformat}{orig}\OR
+                        \equal{\iso@dateformat}{shortorig}}{%
+              \begingroup
+              \edef\lday{#3}\def\day{\lday}%
+              \day@russian
+              \endgroup
+            }{%
+              \iso@printday{#3}%
+            }%
+          \else
+            \csname iso@printmonthday@\iso@languagename\endcsname{#2}{#3}%
+          \fi
+        }{%
+          \csname iso@printmonthday@\iso@languagename\endcsname{#2}{#3}%
+        }%
+      }{%
+        \csname iso@printdate@\iso@languagename\endcsname{#1}{#2}{#3}%
+      }%
+      \iso@rangesign
+      \csname iso@printdate@\iso@languagename\endcsname{#4}{#5}{#6}%
+    }%
+  }
+  \def\iso@languagename{russian}%
+}{}
+\expandafter\def\csname iso@rangesign@\CurrentOption\endcsname{~to~}
+\AtBeginDocument{%
+  \ifx\undefined\iso@daterussian\else
+    \def\daterussian{\iso@daterussian}%
+    \def\datebritish{\iso@daterussian}%
+    \def\dateUKrussian{\iso@daterussian}%
+  \fi
+}
+\endinput
+%%
+%% End of file `russian.idf'.
