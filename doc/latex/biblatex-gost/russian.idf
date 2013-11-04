@@ -21,13 +21,13 @@
       \day
     \else
       \ifcase\day\or
-        1-\cyre\or 2-\cyre\or 3-\cyre\or 4-\cyre\or 5-\cyre\or
-        6-\cyre\or 7-\cyre\or 8-\cyre\or 9-\cyre\or 10-\cyre\or
-        11-\cyre\or 12-\cyre\or 13-\cyre\or 14-\cyre\or 15-\cyre\or
-        16-\cyre\or 17-\cyre\or 18-\cyre\or 19-\cyre\or 20-\cyre\or
-        21-\cyre\or 22-\cyre\or 23-\cyre\or 24-\cyre\or 25-\cyre\or
-        26-\cyre\or 27-\cyre\or 28-\cyre\or 29-\cyre\or 30-\cyre\or
-        31-\cyre%
+        1\or 2\or 3\or 4\or 5\or
+        6\or 7\or 8\or 9\or 10\or
+        11\or 12\or 13\or 14\or 15\or
+        16\or 17\or 18\or 19\or 20\or
+        21\or 22\or 23\or 24\or 25\or
+        26\or 27\or 28\or 29\or 30\or
+        31%
       \fi
     \fi
   }
