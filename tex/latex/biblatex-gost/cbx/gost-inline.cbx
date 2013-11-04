@@ -404,7 +404,7 @@
     {\printnames{labelname}}%
   \iffieldundef{labeltitle}
     {}
-    {\setunit*{\addspace}%
+    {\setunit*{\labelnamepunct}%
      \printtext[bibhyperlink]{%
         \printfield[citetitle]{labeltitle}}}%
   \ifboolexpr{
@@ -428,7 +428,7 @@
   \ifnameundef{labelname}
     {\printfield{label}}
     {\printnames{labelname}}%
-  \newunit
+  \setunit*{\labelnamepunct}%
   \printtext[bibhyperlink]{%
     \bibstring[\mkibid]{opcit}}}
 
