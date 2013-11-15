@@ -2080,20 +2080,9 @@
 
 % changing the language of citations
 
-\gpreto\blx@hook@citekey{%
-  \ifdef\abx@field@langid
-    {\ifdef\blx@thelangenv
-      {\edef\blx@temp@langenv{\noexpand\csname\blx@thelangenv\endcsname%
-          {\abx@field@langid}}%
-       \blx@temp@langenv}
-      {}}%
-    {}}
-\apptocmd{\blx@citeprint}{%
-  \ifdef\abx@field@langid
-    {\ifdef\blx@thelangenv
-      {\csname end\blx@thelangenv\endcsname}
-      {}}%
-    {}%
-}{}{\blx@err@patch{citeprint command}}
+\patchcmd{\blx@citeprint}{\begingroup}{\begingroup\blx@beglang}
+  {}{\blx@err@patch{citeprint command}}
+\patchcmd{\blx@citeprint}{\endgroup}{\blx@endlang\endgroup}
+  {}{\blx@err@patch{citeprint command}}
 
 \endinput
