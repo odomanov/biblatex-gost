@@ -41,6 +41,8 @@
 \newtoggle{cbx:eprint}
 \newtoggle{bbx:related:bib}
 \newtoggle{bbx:related:cite}
+\newtoggle{bbx:gostbibliography}
+\togglefalse{bbx:gostbibliography}
 
 \protected\def\blx@imc@printupdate{\csuse{mkbibrangeshort}{up}}
 \protected\def\blx@imc@printpubldate{\csuse{mkbibrangeshort}{publ}}
@@ -257,10 +259,16 @@
 % format for author is defined separately, because \mkbibnamelast, etc. cannot be
 % used, since they affect all names, not only headings
 \DeclareNameFormat{author}{%
-  \iffirstinits
-    {\usebibmacro{authorname:last-first}{#1}{#4}{#5}{#7}}
-    {\usebibmacro{authorname:last-first}{#1}{#3}{#5}{#7}}%
-  \usebibmacro{name:andothers}}
+  \iftoggle{bbx:gostbibliography}
+    {\ifnumequal{\value{listcount}}{1}
+      {\iffirstinits
+        {\usebibmacro{authorname:last-first}{#1}{#4}{#5}{#7}}
+        {\usebibmacro{authorname:last-first}{#1}{#3}{#5}{#7}}}
+      {}}
+    {\iffirstinits
+      {\usebibmacro{authorname:last-first}{#1}{#4}{#5}{#7}}
+      {\usebibmacro{authorname:last-first}{#1}{#3}{#5}{#7}}%
+     \usebibmacro{name:andothers}}}
 \newcommand*{\mkgostheading}[1]{\mkbibemph{#1}}%\nocorr}}
 \DeclareFieldFormat{heading}{%
   \mkgostheading{#1}\addperiod\space}
@@ -426,10 +434,8 @@
   \setunit*{\labelnamepunct}%
   \usebibmacro{maintitle+volumes+parts+title}%
   \setunit{\respdelim}%
-  \ifuseauthor
-    {}
-    {\usebibmacro{byauthor}%
-     \setunit*{\resppunct}}%
+  \usebibmacro{byauthor}%
+  \setunit*{\resppunct}%
   \usebibmacro{credits}%
   \setunit*{\resppunct}%
   \usebibmacro{byeditor}%
@@ -473,10 +479,8 @@
   \setunit{\subtitlepunct}%
   \printfield{type}%
   \setunit{\respdelim}%
-  \ifuseauthor
-    {}
-    {\usebibmacro{byauthor}%
-     \setunit*{\resppunct}}%
+  \usebibmacro{byauthor}%
+  \setunit*{\resppunct}%
   \usebibmacro{credits}%
   \setunit*{\resppunct}%
   \usebibmacro{byeditor}%
@@ -572,10 +576,8 @@
         \usebibmacro{chapter+pages}}
      {\usebibmacro{maintitle+volumes+parts+booktitle}%
       \setunit{\respdelim}%
-      \ifnamesequal{author}{bookauthor}
-        {}
-        {\usebibmacro{book:byauthor}%
-         \setunit*{\resppunct}}%
+      \usebibmacro{book:byauthor}%
+      \setunit*{\resppunct}%
       \usebibmacro{book:credits}%
       \setunit*{\resppunct}%
       \usebibmacro{book:byeditor}%
@@ -783,10 +785,8 @@
   \setunit{\subtitlepunct}%
   \printfield{type}%
   \setunit{\respdelim}%
-  \ifuseauthor
-    {}
-    {\usebibmacro{byauthor}%
-     \setunit*{\resppunct}}%
+  \usebibmacro{byauthor}%
+  \setunit*{\resppunct}%
   \usebibmacro{credits}%
   \newunit\newblock
   \printfield{version}%
@@ -816,10 +816,8 @@
   \setunit*{\labelnamepunct}%
   \usebibmacro{title}%
   \setunit{\respdelim}%
-  \ifuseauthor
-    {}
-    {\usebibmacro{byauthor}%
-     \setunit*{\resppunct}}%
+  \usebibmacro{byauthor}%
+  \setunit*{\resppunct}%
   \printlist{organization}%
   \setunit*{\resppunct}%
   \usebibmacro{credits}%
@@ -1320,7 +1318,10 @@
   \ifboolexpr{
     test {\ifnameundef{book#1}}
     or
-    not test {\ifnamesequal{#1}{book#1}}
+    ( not test {\ifnamesequal{#1}{book#1}}
+      or
+      togl {bbx:gostbibliography}
+    )
   }
   {#2}
   {#3}}
@@ -1808,7 +1809,10 @@
 
 \renewbibmacro*{byauthor}{%
   \ifboolexpr{
-    test \ifuseauthor
+    ( test \ifuseauthor
+      and
+      not togl {bbx:gostbibliography}
+    )
     or
     test {\ifnameundef{author}}
   }
@@ -1819,7 +1823,10 @@
   \ifboolexpr{
     test {\ifnameundef{bookauthor}}
     or
-    test {\ifnamesequal{author}{bookauthor}}
+    ( test {\ifnamesequal{author}{bookauthor}}
+      and
+      not togl {bbx:gostbibliography}
+    )
   }
     {}
     {\printnames[byauthor]{bookauthor}}}
@@ -1878,7 +1885,9 @@
      \usebibmacro{bbx:savehash}}%
      \usebibmacro{#1}%
      \savename{editor}{\savedclearededitor}%
-     \clearname{editor}}
+     \iftoggle{bbx:gostbibliography}
+      {}
+      {\clearname{editor}}}
     {\global\undef\bbx@lasthash}}
 
 \renewbibmacro*{translator}{%
@@ -1898,7 +1907,9 @@
      \usebibmacro{bbx:savehash}}%
      \usebibmacro{#1}%
      \savename{translator}{\savedclearedtranslator}%
-     \clearname{translator}}
+     \iftoggle{bbx:gostbibliography}
+      {}
+      {\clearname{translator}}}
     {\global\undef\bbx@lasthash}}
 
 \newbibmacro*{bbx:dashcheck}[2]{%
@@ -2091,5 +2102,19 @@
   {}{\blx@err@patch{citeprint command}}
 \patchcmd{\blx@citeprint}{\endgroup}{\blx@endlang\endgroup}
   {}{\blx@err@patch{citeprint command}}
+
+\defbibenvironment{gostbibliography}
+  {\list
+     {}
+     {\toggletrue{bbx:gostbibliography}%
+      \renewcommand*{\revsdnamepunct}{\addcomma}%
+      \renewcommand*{\labelnamepunct}{\addperiod\space}%
+      \setlength{\bibitemsep}{0pt}%
+      \setlength{\leftmargin}{\bibhang}%
+      \setlength{\itemindent}{-\leftmargin}%
+      \setlength{\itemsep}{\bibitemsep}%
+      \setlength{\parsep}{\bibparsep}}}
+  {\endlist}
+  {\item}
 
 \endinput
