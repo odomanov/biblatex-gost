@@ -58,6 +58,10 @@
   heading,
 }
 
+\DeclareDatamodelEntryfields[article]{
+  journalcredits,
+}
+
 \DeclareDatamodelEntryfields[book,collection,proceedings,reference]{
   book,
   books,parts,issues,

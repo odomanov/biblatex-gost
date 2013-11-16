@@ -366,6 +366,8 @@
   \setunit{\respdelim}%
   \usebibmacro{byauthor}%
   \setunit*{\resppunct}%
+  \usebibmacro{credits}%
+  \setunit*{\resppunct}%
   \usebibmacro{bytranslator+others}%
   \setunit{\space}%
   \iffieldundef{journaltitle}  % no journaltitle means electronic publication
@@ -385,7 +387,7 @@
         \usebibmacro{chapter+pages}}
      {\usebibmacro{journal}%
       \setunit{\respdelim}%
-      \usebibmacro{credits}%
+      \usebibmacro{jour:credits}%
       \setunit*{\resppunct}%
       \usebibmacro{byeditor}%
       \newunit\newblock
@@ -1625,6 +1627,11 @@
       {\printfield{endyear}%
        \newunit\newblock
        \mkbibdatelong{}{endmonth}{endday}}}%
+}
+
+\newbibmacro*{jour:credits}{%
+  \printlist[semicolondelim]{journalcredits}%
+  \clearlist{journalcredits}%
 }
 
 % processing volumes, books, parts, issues in the specified order

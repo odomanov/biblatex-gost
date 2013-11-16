@@ -518,7 +518,8 @@
 \DeclareDataInheritance{*}{*}{%
   \noinherit{heading}}
 \DeclareDataInheritance{periodical}{article}{%
-  \noinherit{endyear}\noinherit{endmonth}\noinherit{endday}}
+  \noinherit{endyear}\noinherit{endmonth}\noinherit{endday}
+  \inherit{credits}{journalcredits}}
 \DeclareDataInheritance{mvbook,mvcollection,mvproceedings}
   {book,collection,inbook,incollection,inproceedings}{%
   \noinherit{endyear}\noinherit{endmonth}\noinherit{endday}}
