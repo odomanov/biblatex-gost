@@ -15,7 +15,6 @@
 \usepackage{rotating}
 \usepackage{comment}
 \usepackage[inline]{enumitem}
-\usepackage[russian]{isodate}    % bug?
 \usepackage[backend=biber,
 bibstyle=gost-standard,
 ]{biblatex} % to receive \bbx@gost@version, etc.
@@ -35,6 +34,10 @@ bibstyle=gost-standard,
     {http://www.ctan.org/tex-archive/macros/latex/contrib/biblatex-contrib/biblatex-gost/}
 
 \makeatletter
+\usepackage{datetime}
+\def\blx@gost@printdateTeX#1/#2/#3//{\formatdate{#3}{#2}{#1}}
+\newcommand*{\printdateTeX}[1]{\expandafter\blx@gost@printdateTeX#1//}
+
 \titlepage{%
   title={Пакет \biblatexgost},
   subtitle={Оформление библиографии по ГОСТ 7.0.5---2008},
@@ -42,7 +45,7 @@ bibstyle=gost-standard,
   author={Олег Доманов},
   email={odomanov@yandex.ru},
   revision={\bbx@gost@version},
-  date={\bbx@gost@date}}
+  date={\printdateTeX{\bbx@gost@date}}}
 
 % TOC,LOT layout
 
