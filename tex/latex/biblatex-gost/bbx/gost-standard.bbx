@@ -2096,13 +2096,6 @@
 \DeclareAutoCiteCommand{footnote}{\smartcite}{\smartcites}
 \DeclareAutoCiteCommand{superscript}{\supercite}{\supercites}
 
-% changing the language of citations
-
-\patchcmd{\blx@citeprint}{\begingroup}{\begingroup\blx@beglang}
-  {}{\blx@err@patch{citeprint command}}
-\patchcmd{\blx@citeprint}{\endgroup}{\blx@endlang\endgroup}
-  {}{\blx@err@patch{citeprint command}}
-
 \defbibenvironment{gostbibliography}
   {\list
      {}
