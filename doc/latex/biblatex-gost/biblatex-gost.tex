@@ -172,7 +172,7 @@ maintained.
 
 Для работы \biblatexgost версии \makeatletter\bbx@gost@version\makeatother\
 требуются, как минимум,
-\biblatex~2.8\fnurl{http://sourceforge.net/projects/biblatex/files/biblatex-2.8/}
+\biblatex~2.8a\fnurl{http://sourceforge.net/projects/biblatex/files/biblatex-2.8/}
 и \biber~1.8\fnurl{http://sourceforge.net/projects/biblatex-biber/files/biblatex-biber/1.8/}.
 %(текущие версии на CTAN).
 Пакет не будет работать с предыдущими версиями.
@@ -189,6 +189,8 @@ maintained.
 
 \begin{trivlist}
 \item Добавлено поле \bibfield{journalcredits}
+\item Удалена настройка языка цитат, поскольку эта функция поддерживается
+  в \biblatex, начиная с версии 2.8a (опция \opt{language}).
 \end{trivlist}
 
 \subsubsection*{Версия 0.9.1}
@@ -2002,12 +2004,12 @@ pageref & + & + & + & + & + & + & + & + & + & + & + & + & + & + & +\tabularnewli
 
 \begin{changelog}
 
-\begin{release}{0.9.2}{????}%{4-11-2013}
-\item Добавлено поле \field{journalcredits}\see{sec:newfields}
+\begin{release}{0.9.2}{30-11-2013}
+\item Добавлено поле \bibfield{journalcredits}\see{sec:newfields}
 \item Добавлено окружение \texttt{gostbibliography} для печати библиографических
   списков и указателей\see{sec:gostbibliography}
-\item Исправлена настройка языка цитаты для \texttt{polyglossia}.
-\item Исправлено несколько ошибок пунктуации.
+\item Удалён патч для настройки языка цитат, поскольку эта функция поддерживается
+  в \biblatex, начиная с версии 2.8a.
 \end{release}
 
 \begin{release}{0.9.1}{4-11-2013}
