@@ -39,7 +39,6 @@ xcopy /Y ..\doc\latex\biblatex-gost\README tds\doc\latex\biblatex-gost\
 xcopy /Y ..\doc\latex\biblatex-gost\*.bib tds\doc\latex\biblatex-gost\
 xcopy /Y ..\doc\latex\biblatex-gost\*.cfg tds\doc\latex\biblatex-gost\
 xcopy /Y ..\doc\latex\biblatex-gost\*.tex tds\doc\latex\biblatex-gost\
-xcopy /Y ..\doc\latex\biblatex-gost\russian.idf tds\doc\latex\biblatex-gost\
 chdir /D %BUILDDIR%\tds\doc\latex\biblatex-gost
 pdflatex -interaction=batchmode biblatex-gost.tex
 pdflatex -interaction=batchmode biblatex-gost.tex
