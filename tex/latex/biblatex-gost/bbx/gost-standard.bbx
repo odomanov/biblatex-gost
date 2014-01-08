@@ -382,7 +382,7 @@
   \usebibmacro{bytranslator+others}%
   \setunit{\space}%
   \iffieldundef{journaltitle}  % no journaltitle means electronic publication
-   {\newunit}
+   {\usebibmacro{doi+eprint+url+note}}
    {\usebibmacro{//}%
     \usebibmacro{cbx:bookibid:check}
      {\bibsentence\printtext{%
@@ -418,11 +418,11 @@
       \newunit\newblock
       \usebibmacro{issn}%
       \newunit\newblock}%
-    \usebibmacro{doi+eprint+url+note}%
-    \newunit\newblock
-    \usebibmacro{addendum+pubstate}%
-    \setunit{\bibpagerefpunct}\newblock
-    \usebibmacro{pageref}}%
+      \usebibmacro{doi+eprint+url+note}}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
   \newunit\newblock
   \usebibmacro{related:init}%
   \usebibmacro{related}%
