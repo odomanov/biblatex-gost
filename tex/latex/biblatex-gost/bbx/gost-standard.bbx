@@ -43,6 +43,7 @@
 \newtoggle{bbx:related:cite}
 \newtoggle{bbx:gostbibliography}
 \togglefalse{bbx:gostbibliography}
+\newtoggle{bbx:respdelim}
 
 \protected\def\blx@imc@printupdate{\csuse{mkbibrangeshort}{up}}
 \protected\def\blx@imc@printpubldate{\csuse{mkbibrangeshort}{publ}}
@@ -371,7 +372,7 @@
   \usebibmacro{author/translator+others}%
   \setunit*{\labelnamepunct}%
   \usebibmacro{title}%
-  \setunit{\respdelim}%
+  \togglefalse{bbx:respdelim}% ----- Resp starts -----
   \usebibmacro{byauthor}%
   \setunit*{\resppunct}%
   \usebibmacro{credits}%
@@ -394,7 +395,7 @@
         \newunit\newblock
         \usebibmacro{chapter+pages}}
      {\usebibmacro{journal}%
-      \setunit{\respdelim}%
+      \togglefalse{bbx:respdelim}% ----- Resp starts -----
       \usebibmacro{jour:credits}%
       \setunit*{\resppunct}%
       \usebibmacro{byeditor}%
@@ -433,7 +434,7 @@
   \usebibmacro{author/editor+others/translator+others}%
   \setunit*{\labelnamepunct}%
   \usebibmacro{maintitle+volumes+parts+title}%
-  \setunit{\respdelim}%
+  \togglefalse{bbx:respdelim}% ----- Resp starts -----
   \usebibmacro{byauthor}%
   \setunit*{\resppunct}%
   \usebibmacro{credits}%
@@ -478,7 +479,7 @@
   \usebibmacro{title}%
   \setunit{\subtitlepunct}%
   \printfield{type}%
-  \setunit{\respdelim}%
+  \togglefalse{bbx:respdelim}% ----- Resp starts -----
   \usebibmacro{byauthor}%
   \setunit*{\resppunct}%
   \usebibmacro{credits}%
@@ -513,7 +514,7 @@
   \usebibmacro{editor+others}%
   \setunit*{\labelnamepunct}%
   \usebibmacro{maintitle+volumes+parts+title}%
-  \setunit{\respdelim}%
+  \togglefalse{bbx:respdelim}% ----- Resp starts -----
   \usebibmacro{credits}%
   \setunit*{\resppunct}%
   \usebibmacro{byeditor}%
@@ -554,7 +555,7 @@
   \usebibmacro{author/translator+others}%
   \setunit*{\labelnamepunct}%
   \usebibmacro{title}%
-  \setunit{\respdelim}%
+  \togglefalse{bbx:respdelim}% ----- Resp starts -----
   \usebibmacro{byauthor}%
   \setunit*{\resppunct}%
   \usebibmacro{credits}%
@@ -575,7 +576,7 @@
         \newunit\newblock
         \usebibmacro{chapter+pages}}
      {\usebibmacro{maintitle+volumes+parts+booktitle}%
-      \setunit{\respdelim}%
+      \togglefalse{bbx:respdelim}% ----- Resp starts -----
       \usebibmacro{book:byauthor}%
       \setunit*{\resppunct}%
       \usebibmacro{book:credits}%
@@ -616,7 +617,7 @@
   \usebibmacro{author/translator+others}%
   \setunit*{\labelnamepunct}%
   \usebibmacro{title}%
-  \setunit{\respdelim}%
+  \togglefalse{bbx:respdelim}% ----- Resp starts -----
   \usebibmacro{byauthor}%
   \setunit*{\resppunct}%
   \usebibmacro{credits}%
@@ -637,7 +638,7 @@
         \newunit\newblock
         \usebibmacro{chapter+pages}}
      {\usebibmacro{maintitle+volumes+parts+booktitle}%
-      \setunit{\respdelim}%
+      \togglefalse{bbx:respdelim}% ----- Resp starts -----
       \usebibmacro{book:credits}%
       \setunit*{\resppunct}%
       \usebibmacro{book:byeditor}%
@@ -676,7 +677,7 @@
   \usebibmacro{author/translator+others}%
   \setunit*{\labelnamepunct}%
   \usebibmacro{title}%
-  \setunit{\respdelim}%
+  \togglefalse{bbx:respdelim}% ----- Resp starts -----
   \usebibmacro{byauthor}%
   \setunit*{\resppunct}%
   \usebibmacro{credits}%
@@ -699,7 +700,7 @@
      {\usebibmacro{maintitle+volumes+parts+booktitle}%
       \newunit
       \usebibmacro{event+venue+date}%
-      \setunit{\respdelim}%
+      \togglefalse{bbx:respdelim}% ----- Resp starts -----
       \usebibmacro{book:credits}%
       \setunit*{\resppunct}%
       \usebibmacro{book:byeditor}%
@@ -738,11 +739,14 @@
   \usebibmacro{title}%
   \setunit{\subtitlepunct}%
   \printfield{type}%
-  \setunit{\respdelim}%
+  \togglefalse{bbx:respdelim}% ----- Resp starts -----
   \usebibmacro{byauthor}%
   \setunit*{\resppunct}%
-  \printlist{organization}%
-  \setunit*{\resppunct}%
+  \iflistundef{organization}
+    {}
+    {\setrespdelim%
+     \printlist{organization}%
+     \setunit*{\resppunct}}%
   \usebibmacro{credits}%
   \setunit*{\resppunct}%
   \usebibmacro{byeditor}%
@@ -784,7 +788,7 @@
   \usebibmacro{title}%
   \setunit{\subtitlepunct}%
   \printfield{type}%
-  \setunit{\respdelim}%
+  \togglefalse{bbx:respdelim}% ----- Resp starts -----
   \usebibmacro{byauthor}%
   \setunit*{\resppunct}%
   \usebibmacro{credits}%
@@ -815,11 +819,14 @@
   \usebibmacro{author/editor}%
   \setunit*{\labelnamepunct}%
   \usebibmacro{title}%
-  \setunit{\respdelim}%
+  \togglefalse{bbx:respdelim}% ----- Resp starts -----
   \usebibmacro{byauthor}%
   \setunit*{\resppunct}%
-  \printlist{organization}%
-  \setunit*{\resppunct}%
+  \iflistundef{organization}
+    {}
+    {\setrespdelim%
+     \printlist{organization}%
+     \setunit*{\resppunct}}%
   \usebibmacro{credits}%
   \setunit*{\resppunct}%
   \usebibmacro{byeditor}%
@@ -864,15 +871,21 @@
      \printlist[][-\value{listtotal}]{location}}%
   \setunit{\addcolondelim}%
   \printfield{ipc}%
-  \setunit{\respdelim}%
-  \printnames[byauthor]{author}%
-  \iffieldundef{authortype}
+  \togglefalse{bbx:respdelim}% ----- Resp starts -----
+  \ifnameundef{author}
     {}
-    {\setunit*{\addspace}%
-     \printfield[parens]{authortype}}%
-  \setunit*{\addsemicolondelim}%
-  \usebibmacro{byholder}%
-  \setunit*{\addsemicolondelim}%
+    {\setrespdelim%
+      \printnames[byauthor]{author}%
+      \iffieldundef{authortype}
+        {}
+        {\setunit*{\addspace}%
+         \printfield[parens]{authortype}}%
+      \setunit*{\addsemicolondelim}}%
+  \ifnameundef{holder}
+    {}
+    {\setrespdelim%
+      \usebibmacro{byholder}%
+      \setunit*{\addsemicolondelim}}%
   \usebibmacro{credits}%
   \newunit\newblock
   \printfield{reqnumber}%
@@ -913,7 +926,7 @@
   \usebibmacro{editor}%
   \setunit*{\labelnamepunct}%
   \usebibmacro{title}
-  \setunit{\respdelim}%
+  \togglefalse{bbx:respdelim}% ----- Resp starts -----
   \usebibmacro{credits}%
   \setunit*{\resppunct}%
   \usebibmacro{byeditor}%
@@ -952,7 +965,7 @@
   \usebibmacro{maintitle+volumes+parts+title}%
   \newunit
   \usebibmacro{event+venue+date}%
-  \setunit{\respdelim}%
+  \togglefalse{bbx:respdelim}% ----- Resp starts -----
   \usebibmacro{credits}%
   \setunit*{\resppunct}%
   \usebibmacro{byeditor}%
@@ -993,11 +1006,14 @@
   \usebibmacro{title}%
   \setunit{\subtitlepunct}%
   \printfield{type}%
-  \setunit{\respdelim}%
+  \togglefalse{bbx:respdelim}% ----- Resp starts -----
   \usebibmacro{byauthor}%
   \setunit*{\resppunct}%
-  \printlist[semicolondelim]{institution}%
-  \setunit*{\resppunct}%
+  \iflistundef{institution}
+    {}
+    {\setrespdelim%
+     \printlist[semicolondelim]{institution}%
+     \setunit*{\resppunct}}%
   \usebibmacro{credits}%
   \newunit\newblock
   \printfield{version}%
@@ -1061,7 +1077,7 @@
   \usebibmacro{author}%
   \setunit*{\labelnamepunct}%
   \usebibmacro{title}%
-  \setunit{\respdelim}%
+  \togglefalse{bbx:respdelim}% ----- Resp starts -----
   \usebibmacro{byauthor}%
   \setunit*{\resppunct}%
   \usebibmacro{credits}%
@@ -1338,12 +1354,15 @@
   {#3}}
 
 \newbibmacro*{credits}{%
-  \usebibmacro{checkbooklist}{credits}
-    {\printlist[semicolondelim]{credits}%
-     \savelist{credits}{\savedclearedcredits}%
-     \clearlist{credits}%
-     }
-    {}}
+  \iflistundef{credits}
+    {}
+    {\usebibmacro{checkbooklist}{credits}
+      {\setrespdelim%
+       \printlist[semicolondelim]{credits}%
+       \savelist{credits}{\savedclearedcredits}%
+       \clearlist{credits}%
+      }
+      {}}}
 
 \renewbibmacro*{byeditor+othersstrg}[1]{%
   \iffieldundef{#1type}
@@ -1378,13 +1397,14 @@
 \renewbibmacro*{byeditor}{%
   \ifnameundef{editor}
     {}
-      {\usebibmacro{byeditor+othersstrg}{editor}%
-       \setunit{\addspace}%
-       \printnames[byeditor]{editor}%
-       \savename{editor}{\savedclearededitor}%
-       \clearname{editor}%
-       \setunit*{\resppunct}%
-       \usebibmacro{byeditorx}}}
+    {\setrespdelim%
+     \usebibmacro{byeditor+othersstrg}{editor}%
+     \setunit{\addspace}%
+     \printnames[byeditor]{editor}%
+     \savename{editor}{\savedclearededitor}%
+     \clearname{editor}%
+     \setunit*{\resppunct}%
+     \usebibmacro{byeditorx}}}
 
 \renewbibmacro*{bytranslator+others}{%
   \ifnameundef{translator}
@@ -1411,7 +1431,8 @@
         not test {\blx@gost@iflangsequal{origlanguage}{bookoriglanguage}}
       )
       }
-        {\usebibmacro{bytranslator+othersstrg}%
+        {\setrespdelim%
+         \usebibmacro{bytranslator+othersstrg}%
          \setunit*{\addspace}%
          \printnames[bytranslator]{translator}%
          \savename{translator}{\savedclearedtranslator}%
@@ -1477,11 +1498,37 @@
      \clearname{afterword}}
     {}}
 
+\newbibmacro*{with+}[1]{%
+  \ifnameundef{#1}
+    {}
+    {\setrespdelim%
+     \bibstring{with#1}%
+     \setunit{\addspace}%
+     \printnames[with#1]{#1}}}
+
+\renewbibmacro*{withcommentator}{%
+  \usebibmacro{with+}{commentator}}
+
+\renewbibmacro*{withannotator}{%
+  \usebibmacro{with+}{annotator}}
+
+\renewbibmacro*{withintroduction}{%
+  \usebibmacro{with+}{introduction}}
+
+\renewbibmacro*{withforeword}{%
+  \usebibmacro{with+}{foreword}}
+
+\renewbibmacro*{withafterword}{%
+  \usebibmacro{with+}{afterword}}
+
 %  book:...  macros
 
 \newbibmacro*{book:credits}{%
-  \printlist[semicolondelim]{bookcredits}%
-  \clearlist{bookcredits}%
+  \iflistundef{credits}
+    {}
+    {\setrespdelim%
+     \printlist[semicolondelim]{bookcredits}%
+     \clearlist{bookcredits}}%
 }
 
 \newbibmacro*{book:byeditor+othersstrg}[1]{%
@@ -1517,18 +1564,20 @@
 \newbibmacro*{book:byeditor}{%
   \ifnameundef{editor}
     {}
-      {\usebibmacro{book:byeditor+othersstrg}{editor}%
-       \setunit{\addspace}%
-       \printnames[byeditor]{editor}%
-       \savename{editor}{\savedclearededitor}%
-       \clearname{editor}%
-       \setunit*{\resppunct}%
-       \usebibmacro{book:byeditorx}}}
+    {\setrespdelim%
+     \usebibmacro{book:byeditor+othersstrg}{editor}%
+     \setunit{\addspace}%
+     \printnames[byeditor]{editor}%
+     \savename{editor}{\savedclearededitor}%
+     \clearname{editor}%
+     \setunit*{\resppunct}%
+     \usebibmacro{book:byeditorx}}}
 
 \newbibmacro*{book:bytranslator+others}{%
   \ifnameundef{booktranslator}
     {}
-    {\usebibmacro{book:bytranslator+othersstrg}%
+    {\setrespdelim%
+     \usebibmacro{book:bytranslator+othersstrg}%
      \setunit{\addspace}%
      \printnames[bytranslator]{booktranslator}%
      \clearname{booktranslator}%
@@ -1584,7 +1633,8 @@
 \newbibmacro*{book:with+}[1]{%
   \ifnameundef{book#1}
     {}
-    {\bibstring{with#1}%
+    {\setrespdelim%
+     \bibstring{with#1}%
      \setunit{\addspace}%
      \printnames[with#1]{book#1}}}
 
@@ -1631,8 +1681,11 @@
 }
 
 \newbibmacro*{jour:credits}{%
-  \printlist[semicolondelim]{journalcredits}%
-  \clearlist{journalcredits}%
+  \iflistundef{credits}
+    {}
+    {\setrespdelim%
+     \printlist[semicolondelim]{journalcredits}%
+     \clearlist{journalcredits}}%
 }
 
 % processing volumes, books, parts, issues in the specified order
@@ -1817,7 +1870,8 @@
     test {\ifnameundef{author}}
   }
     {}
-    {\printnames[byauthor]{author}}}
+    {\setrespdelim%
+     \printnames[byauthor]{author}}}
 
 \newbibmacro*{book:byauthor}{%
   \ifboolexpr{
@@ -1829,7 +1883,8 @@
     )
   }
     {}
-    {\printnames[byauthor]{bookauthor}}}
+    {\setrespdelim%
+     \printnames[byauthor]{bookauthor}}}
 
 \renewbibmacro*{name:andothers}{%
   \ifboolexpr{
@@ -1968,6 +2023,12 @@
 
 \newbibmacro*{heading}{%
   \printfield{heading}}
+
+\newcommand*{\setrespdelim}{%
+  \iftoggle{bbx:respdelim}
+    {}
+    {\setunit{\respdelim}%
+     \toggletrue{bbx:respdelim}}}
 
 %  Related field
 
