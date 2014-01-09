@@ -43,7 +43,6 @@
 \newtoggle{bbx:related:cite}
 \newtoggle{bbx:gostbibliography}
 \togglefalse{bbx:gostbibliography}
-\newtoggle{bbx:respdelim}
 
 \protected\def\blx@imc@printupdate{\csuse{mkbibrangeshort}{up}}
 \protected\def\blx@imc@printpubldate{\csuse{mkbibrangeshort}{publ}}
@@ -374,7 +373,7 @@
   \usebibmacro{title}%
   \setunit{\addcolondelim}%
   \usebibmacro{translation}%
-  \togglefalse{bbx:respdelim}% ----- Resp starts -----
+  \def\bbx@gost@respdelim{\setunit{\respdelim}}% ----- Resp starts -----
   \usebibmacro{byauthor}%
   \setunit*{\resppunct}%
   \usebibmacro{credits}%
@@ -397,7 +396,7 @@
         \newunit\newblock
         \usebibmacro{chapter+pages}}
      {\usebibmacro{journal}%
-      \togglefalse{bbx:respdelim}% ----- Resp starts -----
+      \def\bbx@gost@respdelim{\setunit{\respdelim}}% ----- Resp starts -----
       \usebibmacro{jour:credits}%
       \setunit*{\resppunct}%
       \usebibmacro{byeditor}%
@@ -438,7 +437,7 @@
   \usebibmacro{maintitle+volumes+parts+title}%
   \setunit{\addcolondelim}%
   \usebibmacro{translation}%
-  \togglefalse{bbx:respdelim}% ----- Resp starts -----
+  \def\bbx@gost@respdelim{\setunit{\respdelim}}% ----- Resp starts -----
   \usebibmacro{byauthor}%
   \setunit*{\resppunct}%
   \usebibmacro{credits}%
@@ -485,7 +484,7 @@
   \printfield{type}%
   \setunit{\addcolondelim}%
   \usebibmacro{translation}%
-  \togglefalse{bbx:respdelim}% ----- Resp starts -----
+  \def\bbx@gost@respdelim{\setunit{\respdelim}}% ----- Resp starts -----
   \usebibmacro{byauthor}%
   \setunit*{\resppunct}%
   \usebibmacro{credits}%
@@ -522,7 +521,7 @@
   \usebibmacro{maintitle+volumes+parts+title}%
   \setunit{\addcolondelim}%
   \usebibmacro{translation}%
-  \togglefalse{bbx:respdelim}% ----- Resp starts -----
+  \def\bbx@gost@respdelim{\setunit{\respdelim}}% ----- Resp starts -----
   \usebibmacro{credits}%
   \setunit*{\resppunct}%
   \usebibmacro{byeditor}%
@@ -565,7 +564,7 @@
   \usebibmacro{title}%
   \setunit{\addcolondelim}%
   \usebibmacro{translation}%
-  \togglefalse{bbx:respdelim}% ----- Resp starts -----
+  \def\bbx@gost@respdelim{\setunit{\respdelim}}% ----- Resp starts -----
   \usebibmacro{byauthor}%
   \setunit*{\resppunct}%
   \usebibmacro{credits}%
@@ -588,7 +587,7 @@
      {\usebibmacro{maintitle+volumes+parts+booktitle}%
       \setunit{\addcolondelim}%
       \usebibmacro{book:translation}%
-      \togglefalse{bbx:respdelim}% ----- Resp starts -----
+      \def\bbx@gost@respdelim{\setunit{\respdelim}}% ----- Resp starts -----
       \usebibmacro{book:byauthor}%
       \setunit*{\resppunct}%
       \usebibmacro{book:credits}%
@@ -631,7 +630,7 @@
   \usebibmacro{title}%
   \setunit{\addcolondelim}%
   \usebibmacro{translation}%
-  \togglefalse{bbx:respdelim}% ----- Resp starts -----
+  \def\bbx@gost@respdelim{\setunit{\respdelim}}% ----- Resp starts -----
   \usebibmacro{byauthor}%
   \setunit*{\resppunct}%
   \usebibmacro{credits}%
@@ -654,7 +653,7 @@
      {\usebibmacro{maintitle+volumes+parts+booktitle}%
       \setunit{\addcolondelim}%
       \usebibmacro{book:translation}%
-      \togglefalse{bbx:respdelim}% ----- Resp starts -----
+      \def\bbx@gost@respdelim{\setunit{\respdelim}}% ----- Resp starts -----
       \usebibmacro{book:credits}%
       \setunit*{\resppunct}%
       \usebibmacro{book:byeditor}%
@@ -695,7 +694,7 @@
   \usebibmacro{title}%
   \setunit{\addcolondelim}%
   \usebibmacro{translation}%
-  \togglefalse{bbx:respdelim}% ----- Resp starts -----
+  \def\bbx@gost@respdelim{\setunit{\respdelim}}% ----- Resp starts -----
   \usebibmacro{byauthor}%
   \setunit*{\resppunct}%
   \usebibmacro{credits}%
@@ -720,7 +719,7 @@
       \usebibmacro{event+venue+date}%
       \setunit{\addcolondelim}%
       \usebibmacro{book:translation}%
-      \togglefalse{bbx:respdelim}% ----- Resp starts -----
+      \def\bbx@gost@respdelim{\setunit{\respdelim}}% ----- Resp starts -----
       \usebibmacro{book:credits}%
       \setunit*{\resppunct}%
       \usebibmacro{book:byeditor}%
@@ -761,7 +760,7 @@
   \printfield{type}%
   \setunit{\addcolondelim}%
   \usebibmacro{translation}%
-  \togglefalse{bbx:respdelim}% ----- Resp starts -----
+  \def\bbx@gost@respdelim{\setunit{\respdelim}}% ----- Resp starts -----
   \usebibmacro{byauthor}%
   \setunit*{\resppunct}%
   \iflistundef{organization}
@@ -812,7 +811,7 @@
   \printfield{type}%
   \setunit{\addcolondelim}%
   \usebibmacro{translation}%
-  \togglefalse{bbx:respdelim}% ----- Resp starts -----
+  \def\bbx@gost@respdelim{\setunit{\respdelim}}% ----- Resp starts -----
   \usebibmacro{byauthor}%
   \setunit*{\resppunct}%
   \usebibmacro{credits}%
@@ -845,7 +844,7 @@
   \usebibmacro{title}%
   \setunit{\addcolondelim}%
   \usebibmacro{translation}%
-  \togglefalse{bbx:respdelim}% ----- Resp starts -----
+  \def\bbx@gost@respdelim{\setunit{\respdelim}}% ----- Resp starts -----
   \usebibmacro{byauthor}%
   \setunit*{\resppunct}%
   \iflistundef{organization}
@@ -897,7 +896,7 @@
      \printlist[][-\value{listtotal}]{location}}%
   \setunit{\addcolondelim}%
   \printfield{ipc}%
-  \togglefalse{bbx:respdelim}% ----- Resp starts -----
+  \def\bbx@gost@respdelim{\setunit{\respdelim}}% ----- Resp starts -----
   \ifnameundef{author}
     {}
     {\setrespdelim%
@@ -954,7 +953,7 @@
   \usebibmacro{title}
   \setunit{\addcolondelim}%
   \usebibmacro{translation}%
-  \togglefalse{bbx:respdelim}% ----- Resp starts -----
+  \def\bbx@gost@respdelim{\setunit{\respdelim}}% ----- Resp starts -----
   \usebibmacro{credits}%
   \setunit*{\resppunct}%
   \usebibmacro{byeditor}%
@@ -995,7 +994,7 @@
   \usebibmacro{event+venue+date}%
   \setunit{\addcolondelim}%
   \usebibmacro{translation}%
-  \togglefalse{bbx:respdelim}% ----- Resp starts -----
+  \def\bbx@gost@respdelim{\setunit{\respdelim}}% ----- Resp starts -----
   \usebibmacro{credits}%
   \setunit*{\resppunct}%
   \usebibmacro{byeditor}%
@@ -1038,7 +1037,7 @@
   \printfield{type}%
   \setunit{\addcolondelim}%
   \usebibmacro{translation}%
-  \togglefalse{bbx:respdelim}% ----- Resp starts -----
+  \def\bbx@gost@respdelim{\setunit{\respdelim}}% ----- Resp starts -----
   \usebibmacro{byauthor}%
   \setunit*{\resppunct}%
   \iflistundef{institution}
@@ -1111,7 +1110,7 @@
   \usebibmacro{title}%
   \setunit*{\addcolondelim}%
   \usebibmacro{translation}%
-  \togglefalse{bbx:respdelim}% ----- Resp starts -----
+  \def\bbx@gost@respdelim{\setunit{\respdelim}}% ----- Resp starts -----
   \usebibmacro{byauthor}%
   \setunit*{\resppunct}%
   \usebibmacro{credits}%
@@ -2083,11 +2082,7 @@
 \newbibmacro*{heading}{%
   \printfield{heading}}
 
-\newcommand*{\setrespdelim}{%
-  \iftoggle{bbx:respdelim}
-    {}
-    {\setunit{\respdelim}%
-     \toggletrue{bbx:respdelim}}}
+\newcommand*{\setrespdelim}{\bbx@gost@respdelim\def\bbx@gost@respdelim{}}
 
 %  Related field
 
