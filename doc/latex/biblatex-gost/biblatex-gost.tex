@@ -299,7 +299,8 @@ maintained.
 \end{quotation}
 В частности, библиографический указатель может содержать не только цитированную, но и, например,
   рекомендуемую литературу.
-Хотя оформление ссылок во многом сходно с оформлением записей, имеются следующие отличия:
+Хотя оформление ссылок во многом сходно с оформлением записей, имеются следующие отличия
+  (см.~\gostciteref{}{4.9, 4.10}):
 \begin{itemize}
   \item Заголовок записи в ссылке может содержать имена одного, двух или трех авторов документа.
     \emph{Имена авторов, указанные в заголовке, не повторяют в сведениях об ответственности}
@@ -406,9 +407,8 @@ maintained.
 \item[gost-authoryear]
 Затекстовые ссылки. Основан на стандартном
 стиле \bibsty{authoryear-icomp}. Ссылки помещаются после текста, и для их связи
-с текстом используются имя автора и год в квадратных скобках. Если имеется лишь одно
-произведение данного автора, то год в ссылке не выводится. Это поведение можно
-отключить опцией \kvopt{singletitle}{false}. При отсутствии автора
+с текстом используются имя автора и год в квадратных скобках. 
+При отсутствии автора
 используется название или поле \bibfield{shorttitle}, если оно доступно.
 При наличии поля \bibfield{heading} используется оно, даже если одновременно присутствуют
 автор, редактор или переводчик. Нужно заметить, что ГОСТ
@@ -545,6 +545,15 @@ maintained.
 %\setlength\LTleft{0pt}
 %\setlength\LTright{0pt}
 \begin{longtable}[l]{@{}L{0.6\textwidth}@{}V{0.4\textwidth}@{}}
+\caption{Соответствие между терминами ГОСТа и полями \biblatexgost\label{tab:gost-biblatex}}%
+  \medskip\\
+\toprule
+\multicolumn{1}{@{}H}{ГОСТ} &
+\multicolumn{1}{@{}H}{\biblatexgost\hfill}  \\
+\cmidrule(r){1-1}\cmidrule{2-2}
+\endfirsthead
+\caption{Соответствие между терминами ГОСТа и полями \biblatexgost (продолжение)}%
+  \medskip\\
 \toprule
 \multicolumn{1}{@{}H}{ГОСТ} &
 \multicolumn{1}{@{}H}{\biblatexgost\hfill}  \\
@@ -615,8 +624,6 @@ ISSN серии или подсерии & issn (isbn) \\
 Условия доступности и (или) цена & addendum \\
 Дополнительные сведения к элементам области & addendum \\
 \bottomrule
-\caption{Соответствие между терминами ГОСТа и полями \biblatexgost}\\
-\label{tab:gost-biblatex}
 \end{longtable}
 \endgroup
 
@@ -765,10 +772,11 @@ ISSN серии или подсерии & issn (isbn) \\
 
 Общее обозначение материала (\gostbibref{5.2.3}). В \tabref{tab:media} приведены
 допустимые значения этого поля вместе с соответствующими терминами ГОСТа.
-
+%
 \begin{table}[htbp]
 \tablesetup
 \centering
+\caption{Общее обозначение материала\label{tab:media}}\medskip
 \begin{tabularx}{.7\textwidth}{@{}V{.4\textwidth}@{}L{.3\textwidth}@{}}
 \toprule
 \multicolumn{1}{@{}H}{Значение поля \bibfield{media}} &
@@ -790,8 +798,6 @@ braille & шрифт Брайля\\
 eresource & электронный ресурс\\
 \bottomrule
 \end{tabularx}
-\caption{Общее обозначение материала}
-\label{tab:media}
 \end{table}
 %
 Для этих значений определены строки в файле локализации, то есть они могут быть локализованы.
@@ -937,6 +943,7 @@ series = {|Полное собрание сочинений : для форте�
 \begin{table}[htbp]
 \tablesetup
 \centering
+\caption{Вывод полей \bibfield{afterword} и пр.\label{tab:afterword}}\medskip
 \begin{tabularx}{.7\textwidth}{@{}V{.2\textwidth}@{}L{.3\textwidth}@{}L{.2\textwidth}@{}}
 \toprule
 \multicolumn{1}{@{}H}{Поле} &
@@ -949,8 +956,6 @@ foreword & предисловие \prm{кого} & предисл. \prm{кого
 introduction & вступительная статья \prm{кого} & вступит. статья \prm{кого} \\
 \bottomrule
 \end{tabularx}
-\caption{Вывод полей \bibfield{afterword} и пр.}
-\label{tab:afterword}
 \end{table}
 
 \fielditem{date}{date}
@@ -1082,8 +1087,7 @@ introduction & вступительная статья \prm{кого} & всту
 , issues \\
 \bottomrule
 \end{tabularx}
-\caption{Обозначение частей издания}
-\label{tab:volsparts}
+\caption{Обозначение частей издания\label{tab:volsparts}}
 %\end{table}
 \end{wraptable}
 
@@ -1105,6 +1109,8 @@ volumes = {|в 5-и томах (6-и кн.)|}
 и \bibfield{xref}.
 
 Несколько примеров:
+
+\bigskip
 
 \columnseprule=.5pt
 \raggedcolumns
@@ -1132,7 +1138,7 @@ part = {2},
 volsorder = {pbi},
 \end{lstlisting}
 \columnbreak
-Выводится как:
+Выводится как:%
 \begin{bibexample}
 \item \ldots\ Ч. 2. Кн. 1. Вып. 4. \ldots
 \end{bibexample}
@@ -1444,6 +1450,9 @@ volsorder = {pbi},
 \begin{table}[htbp]
 \tablesetup
 \centering
+\caption{Значения по умолчанию для опций \opt{citeurl}, \ldots, \opt{biburl}, \ldots}
+\medskip
+\label{tab:bibcite}
 \begin{tabularx}{.8\textwidth}{@{}V{.3\textwidth}@{}V{.3\textwidth}@{}V{.2\textwidth}@{}}
 \toprule
 \multicolumn{1}{@{}H}{Стиль} &
@@ -1460,8 +1469,6 @@ gost-numeric-min & --- & false \\
 gost-authoryear-min & --- & false \\
 \bottomrule
 \end{tabularx}
-\caption{Значения по умолчанию для опций \opt{citeurl}, \ldots, \opt{biburl}, \ldots}
-\label{tab:bibcite}
 \end{table}
 
 
@@ -1660,6 +1667,14 @@ gost-authoryear-min & --- & false \\
     @{}V{0.25\textwidth}%
     @{}V{0.25\textwidth}%
     @{}L{0.5\textwidth}@{}}
+\caption{Поддерживаемые команды цитирования\label{tab:citecommands}}\medskip\\
+\toprule
+\multicolumn{1}{@{}H}{Стиль} &
+\multicolumn{1}{@{}H}{Команда} &
+\multicolumn{1}{@{}H}{Вывод\hfill} \\
+\cmidrule(r){1-1}\cmidrule(r){2-2}\cmidrule{3-3}
+\endfirsthead
+\caption{Поддерживаемые команды цитирования (продолжение)}\medskip\\
 \toprule
 \multicolumn{1}{@{}H}{Стиль} &
 \multicolumn{1}{@{}H}{Команда} &
@@ -1713,8 +1728,6 @@ gost-authoryear & cite & Автор (заголовок) и год в текст
                 цитаты в квадратных скобках \\
   & autocite & Совпадает с \cmd{parencite} (установлена опция \kvopt{autocite}{inline})\\
 \bottomrule
-\caption{Поддерживаемые команды цитирования}\\
-\label{tab:citecommands}
 \end{longtable}
 \endgroup
 
@@ -1904,6 +1917,42 @@ reorder). Поэтому, если вы хотите, чтобы в библио
 \setlength\LTright{0pt}
 %\noindent
 \begin{longtable}{rccccccccccccccc}
+\caption{Последовательность макросов в драйверах\label{tab:macros}}\medskip\\
+\toprule
+ & \begin{sideways}
+inbook
+\end{sideways} & \begin{sideways}
+incollection
+\end{sideways} & \begin{sideways}
+inproceedings
+\end{sideways} & \begin{sideways}
+article
+\end{sideways} & \begin{sideways}
+book
+\end{sideways} & \begin{sideways}
+collection
+\end{sideways} & \begin{sideways}
+proceedings
+\end{sideways} & \begin{sideways}
+periodical
+\end{sideways} & \begin{sideways}
+booklet
+\end{sideways} & \begin{sideways}
+manual
+\end{sideways} & \begin{sideways}
+online
+\end{sideways} & \begin{sideways}
+report
+\end{sideways} & \begin{sideways}
+unpublished
+\end{sideways} & \begin{sideways}
+thesis
+\end{sideways} & \begin{sideways}
+misc
+\end{sideways}\tabularnewline
+\rl
+\endfirsthead
+\caption{Последовательность макросов в драйверах (продолжение)}\medskip\\
 \toprule
  & \begin{sideways}
 inbook
@@ -1952,15 +2001,17 @@ author/editor &  &  &  &  &  &  &  &  & + & + & + &  &  &  & +\tabularnewline
 title & + & + & + & + &  &  &  & + & + & + & + & + & + & + & +\tabularnewline
 type &  &  &  &  &  &  &  &  & + & + &  & + &  & + & +\tabularnewline
 event+venue+date &  &  &  &  &  &  & + &  &  &  &  &  &  &  & \tabularnewline
-\rl byauthor & + & + & + & + & + &  &  &  & + & + & + & + & + & +{*} & +\tabularnewline
+translation & + & + & + & + & + & + & + & + & + & + &  & + & + &  & +\tabularnewline%not in patent
+\rl /\hfill byauthor & + & + & + & + & + &  &  &  & + & + & + & + & + & +{*} & +\tabularnewline
 organization &  &  &  &  &  &  &  &  &  & + & + &  &  &  & \tabularnewline
 institution &  &  &  &  &  &  &  &  &  &  &  & + &  &  & \tabularnewline
 credits & + & + & + & + & + & + & + & + & + & + & + & + & + &  & +\tabularnewline
 byeditor &  &  &  &  & + & + & + & + & + & + & + &  &  &  & \tabularnewline
 bytranslator+others & + & + & + & + & + & + & + &  &  &  & + &  &  &  & \tabularnewline
-\rl maintitle+volumes+parts+booktitle  & + & + & + &  &  &  &  &  &  &  &  &  &  &  & \tabularnewline
+\rl //\hfill maintitle+volumes+parts+booktitle  & + & + & + &  &  &  &  &  &  &  &  &  &  &  & \tabularnewline
 event+venue+date &  &  & + &  &  &  &  &  &  &  &  &  &  &  & \tabularnewline
-book:byauthor  & + &  &  &  &  &  &  &  &  &  &  &  &  &  & \tabularnewline
+book:translation & + & + & + &  &  &  &  &  &  &  &  &  &  &  & \tabularnewline%not in patent
+/\hfill book:byauthor  & + &  &  &  &  &  &  &  &  &  &  &  &  &  & \tabularnewline
 book:credits  & + & + & + &  &  &  &  &  &  &  &  &  &  &  & \tabularnewline
 book:byeditor  & + & + & + &  &  &  &  &  &  &  &  &  &  &  & \tabularnewline
 book:bytranslator+others  & + & + & + &  &  &  &  &  &  &  &  &  &  &  & \tabularnewline
@@ -1968,7 +2019,7 @@ journal &  &  &  & + &  &  &  &  &  &  &  &  &  &  & \tabularnewline
 jour:credits &  &  &  & + &  &  &  &  &  &  &  &  &  &  & \tabularnewline
 byeditor &  &  &  & + &  &  &  &  &  &  &  &  &  &  & \tabularnewline
 \rl edition & + & + &  &  & + & + &  &  &  & + &  &  &  &  & \tabularnewline
-editioncredits & + & + &  &  & + & + &  &  &  & + &  &  &  &  & \tabularnewline
+/\hfill editioncredits & + & + &  &  & + & + &  &  &  & + &  &  &  &  & \tabularnewline
 version &  &  &  &  &  &  &  &  &  & + & + & + &  &  & +\tabularnewline
 \rl specdata & + & + & + & + & + & + & + & + & + & + & + & + & + & + & +\tabularnewline
 \rl organization &  &  & + &  &  &  & + &  &  &  &  &  &  &  & \tabularnewline
@@ -1994,8 +2045,6 @@ howpublished &  &  &  &  &  &  &  &  & + &  &  &  & + &  & +\tabularnewline
 addendum+pubstate & + & + & + & + & + & + & + & + & + & + & + & + & + & + & +\tabularnewline
 pageref & + & + & + & + & + & + & + & + & + & + & + & + & + & + & +\tabularnewline
 \bottomrule
-\caption{Последовательность макросов в драйверах}\\
-\label{tab:macros}
 \end{longtable}
 \endgroup
 
@@ -2003,6 +2052,13 @@ pageref & + & + & + & + & + & + & + & + & + & + & + & + & + & + & +\tabularnewli
 \label{apx:changelog}
 
 \begin{changelog}
+
+\begin{release}{1.0}{15-02-2014}
+\item Первая официальная версия.
+\item Исправлен вывод статей без \bibfield{journaltitle} (электронные публиации). 
+\item Добавлен вывод информации о переводе в сведениях, относящихся к заглавию. 
+\item Исправлено несколько мелких ошибок.
+\end{release}
 
 \begin{release}{0.9.2}{30-11-2013}
 \item Добавлено поле \bibfield{journalcredits}\see{sec:newfields}
