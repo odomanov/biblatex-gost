@@ -20,8 +20,6 @@
 \renewcommand*{\postnotedelim}{\addcomma\addspace}
 \renewcommand*{\nameyeardelim}{\addcomma\addspace}
 \renewcommand*{\compcitedelim}{\addsemicolon\space}
-\renewcommand*{\bibleftparen}{\blx@postpunct\ifcitation{[\bibsentence}{(}}
-\renewcommand*{\bibrightparen}{\blx@postpunct\ifcitation{]}{)}\midsentence}
 
 \DeclareFieldFormat*{citetitle}{\mkbibemph{#1}}
 \DeclareFieldFormat{extratitleyear}{%
@@ -245,7 +243,7 @@
   {}
   {\usebibmacro{cite:postnote}}
 
-\DeclareCiteCommand{\parencite}[\mkbibparens]
+\DeclareCiteCommand{\parencite}[\mkbibbrackets]
   {\usebibmacro{cite:init}%
    \usebibmacro{prenote}}
   {\usebibmacro{citeindex}%
@@ -253,7 +251,7 @@
   {}
   {\usebibmacro{cite:postnote}}
 
-\DeclareCiteCommand*{\parencite}[\mkbibparens]
+\DeclareCiteCommand*{\parencite}[\mkbibbrackets]
   {\usebibmacro{cite:init}%
    \usebibmacro{prenote}}
   {\usebibmacro{citeindex}%
