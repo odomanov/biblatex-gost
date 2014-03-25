@@ -1,5 +1,5 @@
 \ProvidesFile{biblatex-gost.def}
-[2014/02/15\space v1.0\space biblatex-gost styles]
+[2014/03/25\space vdev\space biblatex-gost styles]
 
 % these declarations should be here, not in lbx, to be initialized for all languages
 \NewBibliographyString{
@@ -437,7 +437,7 @@
       \maps[datatype=bibtex]{
         \map[overwrite]{
           \step[fieldsource=author,
-            match=\regexp{(.+\s+and\s+){3,}},
+            match=\regexp{(.+\s+and\s+){3,}|and\s+others\s*$},
             final]
           \step[fieldsource=options,
             match=\regexp{(.+)},
@@ -448,13 +448,13 @@
         }
         \map{
           \step[fieldsource=author,
-            match=\regexp{(.+\s+and\s+){3,}},
+            match=\regexp{(.+\s+and\s+){3,}|and\s+others\s*$},
             final]
           \step[fieldset=options, fieldvalue={useauthor=false}]
         }
         \map[overwrite]{
           \step[fieldsource=editor,
-            match=\regexp{(.+\s+and\s+){3,}},
+            match=\regexp{(.+\s+and\s+){3,}|and\s+others\s*$},
             final]
           \step[fieldsource=options,
             match=\regexp{(.+)},
@@ -465,7 +465,7 @@
         }
         \map{
           \step[fieldsource=editor,
-            match=\regexp{(.+\s+and\s+){3,}},
+            match=\regexp{(.+\s+and\s+){3,}|and\s+others\s*$},
             final]
           \step[fieldset=options, fieldvalue={useeditor=false}]
         }

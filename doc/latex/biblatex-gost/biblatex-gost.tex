@@ -1615,6 +1615,12 @@ gost-authoryear-min & --- & false \\
 регулируется в \biblatexgost (особенности реализации см. в~\apxref{impl:4names}).
 Впрочем, изменение этого количества означало бы отступление от ГОСТа.
 
+Обратите внимание, что при перемещении имён записи вида
+\begin{lstlisting}[style=bibtex,escapechar=|]
+author = {|Петров, А.| and others}
+\end{lstlisting}
+интерпретируются как записи с четырьмя и более авторами (редакторами).
+
 \choitem[true]{related}{true, false, bib, cite}
 
 Дополнительно к имеющимся в \biblatex значениям опции \opt{related}, полностью разрешающим
