@@ -46,6 +46,8 @@ pdflatex -interaction=batchmode biblatex-gost.tex
 pdflatex -interaction=batchmode biblatex-gost-examples.tex
 biber biblatex-gost-examples
 pdflatex -interaction=batchmode biblatex-gost-examples.tex
+xcopy /Y %BUILDDIR%\tds\doc\latex\biblatex-gost\biblatex-gost.log %BUILDDIR%\
+xcopy /Y %BUILDDIR%\tds\doc\latex\biblatex-gost\biblatex-gost-examples.log %BUILDDIR%\
 del -f *.aux *.bbl *.bcf *.blg *.log *.lot *.out *.toc *.run.xml
 chdir /D %BUILDDIR%\tds
 del %BUILDDIR%\biblatex-gost-%VERS%.tds.zip
