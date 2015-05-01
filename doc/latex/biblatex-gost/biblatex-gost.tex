@@ -1,7 +1,7 @@
 \input glyphtounicode.tex           %these three lines are
 \input glyphtounicode-cmr.tex       %needed for russian search/copy
 \pdfgentounicode=1                  %(cmap)
-\documentclass[10pt,a4paper,headings=small,numbers=enddot,english,russian]{ltxdockit}[2011/03/25]
+\documentclass[10pt,a4paper,headings=small,numbers=enddot,english,russian]{ltxdockit}
 \usepackage[vscale=0.8,hdivide={0.2\paperwidth,*,0.1\paperwidth}]{geometry}
 \usepackage[T2A]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -184,6 +184,8 @@ maintained.
   точки зрения совместимости с предыдущими версиями. 
 Более полный список изменений см. в \Apxref{apx:changelog}.
 
+\subsubsection*{Версия 1.2}
+
 \subsubsection*{Версия 1.1}
 
 \begin{trivlist}
@@ -200,11 +202,11 @@ maintained.
   в \biblatex, начиная с версии 2.8a (опция \opt{language}).
 \end{trivlist}
 
-\subsubsection*{Версия 0.9.1}
-
-\begin{trivlist}
-\item Переход на \biblatex~2.8 и \biber~1.8
-\end{trivlist}
+% \subsubsection*{Версия 0.9.1}
+% 
+% \begin{trivlist}
+% \item Переход на \biblatex~2.8 и \biber~1.8
+% \end{trivlist}
 
 % \subsubsection*{Версия 0.9}
 %
@@ -887,8 +889,8 @@ series = {|Языковеды мира / редкол.: Г.В. Степанов 
 (как, например, в журналах) и со сквозной нумерацией. В первом случае, кроме прочего,
 не печатается год на месте выходных данных. В \biblatexgost только документы
 с нумерацией по годам соответствуют \bibtype{periodical}.  Сериальные документы со
-сквозной нумерацией следует оформлять как \bibtype{mvbook}, \bibtype{mvcollection},
-\bibtype{mvproceedings} или \bibtype{mvreference}.
+сквозной нумерацией следует оформлять как \bibtype{book}, \bibtype{collection},
+\bibtype{proceedings} или \bibtype{reference}.
 
 Серия в журналах может пониматься в двух смыслах. Во-первых, она употребляется в
 том же смысле, что и для книг, и также выводится в области серии в виде:
@@ -1158,7 +1160,7 @@ volsorder = {pbi},
 
 \begin{multicols}{2}
 \begin{lstlisting}[style=bibtex,escapechar=|]
-@MVCOLLECTION{mvcoll,
+@COLLECTION{coll,
   title = {|Сказки|},
   volumes = {5},
   books = {6},
@@ -1167,7 +1169,7 @@ volsorder = {pbi},
 }
 
 @COLLECTION{coll,
-  crossref = {mvcoll},
+  crossref = {coll},
   title = {|Сказки Центральной Африки|},
   volume = {3},
   book = {|книга первая|},
@@ -1616,6 +1618,13 @@ gost-authoryear-min & --- & false \\
 регулируется в \biblatexgost (особенности реализации см. в~\apxref{impl:4names}).
 Впрочем, изменение этого количества означало бы отступление от ГОСТа.
 
+Поскольку при перемещении имён в качестве заголовка выступает название текста, а не имена, 
+такие команды как \cmd{citeauthor} работают неверно. 
+Фактически, эти команды выводят список \bibfield{labelname} --- аналог заголовка в \biblatex,
+который может состоять из авторов, редакторов или переводчиков, но который в данном случае 
+оказывается пустым.
+Если вам нужно вывести отдельно одно из этих имён, воспользуйтесь командой \cmd{citename}.
+
 Обратите внимание, что при перемещении имён записи вида
 \begin{lstlisting}[style=bibtex,escapechar=|]
 author = {|Петров, А.| and others}
@@ -2059,6 +2068,11 @@ pageref & + & + & + & + & + & + & + & + & + & + & + & + & + & + & +\tabularnewli
 \label{apx:changelog}
 
 \begin{changelog}
+
+\begin{release}{1.2}{01-05-2015}
+\item Исправлена ошибка при выводе даты для записей типа \bibtype{article}.
+\item Небольшое добавление в документации (в описании опции \texttt{movenames}).
+\end{release}
 
 \begin{release}{1.1}{28-11-2014}
 \item При \kvopt{movenames}{true} (установлено по умолчанию) `\texttt{and others}' 
