@@ -868,9 +868,7 @@
   \newunit\newblock
   \printfield{systemreq}%
   \newunit\newblock
-  \usebibmacro{url+urldate}%
-  \setunit*{\addsemicolondelim}%
-  \printfield{note}%
+  \usebibmacro{doi+eprint+url+note}%
   \newunit\newblock
   \usebibmacro{addendum+pubstate}%
   \setunit{\bibpagerefpunct}\newblock
@@ -2045,13 +2043,21 @@
     {#2}}
 
 \newbibmacro*{url+urldate+note}{%
-  \ifcitation
-    {\iftoggle{cbx:url}
-      {\usebibmacro{url+urldate}}
-      {}}
-    {\iftoggle{bbx:url}
-      {\usebibmacro{url+urldate}}
-      {}}%
+  \ifboolexpr{
+    test {\ifentrytype{online}}
+    or
+    ( test \ifcitation
+      and
+      togl {cbx:url}
+    )
+    or
+    ( not test \ifcitation
+      and
+      togl {bbx:url}
+    )
+  }
+    {\usebibmacro{url+urldate}}
+    {}%
   \setunit*{\addsemicolondelim}%
   \printfield{note}}
 

@@ -177,14 +177,18 @@ maintained.
 %(текущие версии на CTAN).
 Пакет не будет работать с предыдущими версиями.
 
-\subsection{Важные изменения в этой версии}
+\subsection{Важные изменения в этой и некоторых недавних версиях}
 \label{sec:critchanges}
 
 Ниже перечислены изменения, на которые стоит обратить внимание с
   точки зрения совместимости с предыдущими версиями. 
 Более полный список изменений см. в \Apxref{apx:changelog}.
 
-\subsubsection*{Версия 1.2}
+\subsubsection*{Версия 1.3}
+
+\begin{trivlist}
+\item Критических изменений нет.
+\end{trivlist}
 
 \subsubsection*{Версия 1.1}
 
@@ -2055,8 +2059,8 @@ pagetotal &  &  &  &  & + & + & + &  & + & + &  & + &  & + & \tabularnewline
 series+number & + & + & + &  & + & + & + &  &  &  &  &  &  &  & \tabularnewline
 \rl isbn/issn/isrn & + & + & + & + & + & + & + & + &  & + &  & + & + & + & \tabularnewline
 number &  &  &  &  &  &  &  &  &  &  &  & + &  &  & \tabularnewline
-doi+eprint+url+note & + & + & + & + & + & + & + & + & + & + &  & + &  & + & +\tabularnewline
-url+urldate+note &  &  &  &  &  &  &  &  &  &  & + &  & + &  & \tabularnewline
+doi+eprint+url+note & + & + & + & + & + & + & + & + & + & + & + & + &  & + & +\tabularnewline
+url+urldate+note &  &  &  &  &  &  &  &  &  &  &  &  & + &  & \tabularnewline
 howpublished &  &  &  &  &  &  &  &  & + &  &  &  & + &  & +\tabularnewline
 addendum+pubstate & + & + & + & + & + & + & + & + & + & + & + & + & + & + & +\tabularnewline
 pageref & + & + & + & + & + & + & + & + & + & + & + & + & + & + & +\tabularnewline
@@ -2068,6 +2072,12 @@ pageref & + & + & + & + & + & + & + & + & + & + & + & + & + & + & +\tabularnewli
 \label{apx:changelog}
 
 \begin{changelog}
+
+\begin{release}{1.3}{02-05-2015}
+\item Опять исправлена ошибка при выводе даты для записей типа \bibtype{article}.
+\item Добавлен вывод полей \bibfield{doi} и \bibfield{eprint} в записи типа 
+  \bibtype{online}.
+\end{release}
 
 \begin{release}{1.2}{01-05-2015}
 \item Исправлена ошибка при выводе даты для записей типа \bibtype{article}.
