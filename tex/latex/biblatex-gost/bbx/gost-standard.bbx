@@ -1702,7 +1702,9 @@
 \newbibmacro*{jour:date}{%
   \usebibmacro{year}%
   \newunit\newblock
-  \printtext{\mkbibdatelong{}{month}{day}}%
+  \iffieldundef{month}
+    {}
+    {\printtext{\mkbibdatelong{}{month}{day}}}%
   \iffieldundef{endyear}
     {}
     {\bibdatedash%
@@ -1710,7 +1712,9 @@
       {\mbox{~~~~}}
       {\printfield{endyear}%
        \newunit\newblock
-       \printtext{\mkbibdatelong{}{endmonth}{endday}}}}%
+       \iffieldundef{endmonth}
+         {}
+         {\printtext{\mkbibdatelong{}{endmonth}{endday}}}}}%
 }
 
 \newbibmacro*{jour:credits}{%
