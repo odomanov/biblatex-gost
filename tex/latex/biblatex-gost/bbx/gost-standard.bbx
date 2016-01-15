@@ -283,7 +283,7 @@
      \ifblank{#3}{}{%
        \ifcapital
          {\mkbibhdnameprefix{\MakeCapital{#3}}\isdot}
-	 {\mkbibhdnameprefix{#3}\isdot}%
+         {\mkbibhdnameprefix{#3}\isdot}%
        \ifpunctmark{'}{}{\bibnamedelimc}}%
      \mkbibhdnamelast{#1}\isdot
      \ifblank{#4}{}{\bibnamedelimd\mkbibhdnameaffix{#4}\isdot}%
@@ -381,7 +381,12 @@
   \usebibmacro{bytranslator+others}%
   \setunit{\space}%
   \iffieldundef{journaltitle}  % no journaltitle means electronic publication
-   {\usebibmacro{doi+eprint+url+note}}
+  {\newunit\newblock
+   \printlist[semicolondelim]{specdata}%
+   \newunit\newblock
+   \usebibmacro{jour:date}%
+   \newunit\newblock
+   \usebibmacro{doi+eprint+url+note}}
    {\usebibmacro{//}%
     \usebibmacro{cbx:bookibid:check}
      {\bibsentence\printtext{%

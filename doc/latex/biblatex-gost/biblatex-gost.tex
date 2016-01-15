@@ -1021,6 +1021,13 @@ introduction & вступительная статья \prm{кого} & всту
 и имя должно быть в именительном падеже. То же касается переводчика и опции \opt{usetranslator}
 (\ldots~/~пер. с фр. \prm{кого} И.\,Ивановой).
 
+\fielditem{journaltitle}{literal}
+
+В \bibtype{article} отсутствие поля \bibfield{journaltitle} означает
+электронную публикацию, такую как \texttt{arXiv} и пр.  
+В этом случае не выводится информация об идентифицирующем документе:
+сведения об ответственности, дата, том, номер и т.\,д.
+
 \fielditem{series}{integer/literal}
 
 Для периодических изданий, таких как журналы, выводится в виде «3-я сер.», если
@@ -1987,15 +1994,15 @@ reorder). Поэтому, если вы хотите, чтобы в библио
 полей~--- в драйверах записей различных типов (см.~файл \file{gost-standard.bbx}).
 Плюс в таблице означает, что макрос для записи данного типа вызывается (соответственно,
 поля выводятся).
-\newcommand*{\rl}{\cmidrule(r){1-1}\cmidrule(r){2-5}\cmidrule(r){6-9}\cmidrule(r){10-12}%
-                  \cmidrule{13-16}}
+\newcommand*{\rl}{\cmidrule(r){1-1}\cmidrule(r){2-6}\cmidrule(r){7-10}\cmidrule(r){11-13}%
+                  \cmidrule{14-17}}
 \begingroup
 \footnotesize
 \tabcolsep=5.5pt
 \setlength\LTleft{0pt}
 \setlength\LTright{0pt}
 %\noindent
-\begin{longtable}{rccccccccccccccc}
+\begin{longtable}{rcccccccccccccccc}
 \caption{Последовательность макросов в драйверах\label{tab:macros}}\medskip\\
 \toprule
  & \begin{sideways}
@@ -2006,6 +2013,8 @@ incollection
 inproceedings
 \end{sideways} & \begin{sideways}
 article
+\end{sideways} & \begin{sideways}
+article (электр.)
 \end{sideways} & \begin{sideways}
 book
 \end{sideways} & \begin{sideways}
@@ -2042,6 +2051,8 @@ inproceedings
 \end{sideways} & \begin{sideways}
 article
 \end{sideways} & \begin{sideways}
+article (электр.)
+\end{sideways} & \begin{sideways}
 book
 \end{sideways} & \begin{sideways}
 collection
@@ -2069,60 +2080,61 @@ misc
 \bottomrule
 \endfoot
 \endlastfoot
-heading & + & + & + & + & + & + & + & + & + & + & + & + & + & + & +\tabularnewline
-\rl author/translator+others & + & + & + & + &  &  &  &  &  &  &  &  &  &  & \tabularnewline
-author/editor+others/translator+others &  &  &  &  & + &  &  &  &  &  &  &  &  &  & \tabularnewline
-editor+others &  &  &  &  &  & + & + &  &  &  &  &  &  &  & \tabularnewline
-author &  &  &  &  &  &  &  &  &  &  &  & + & + & + & \tabularnewline
-editor &  &  &  &  &  &  &  & + &  &  &  &  &  &  & \tabularnewline
-author/editor &  &  &  &  &  &  &  &  & + & + & + &  &  &  & +\tabularnewline
-\rl maintitle+volumes+parts+title &  &  &  &  & + & + & + &  &  &  &  &  &  &  & \tabularnewline
-title & + & + & + & + &  &  &  & + & + & + & + & + & + & + & +\tabularnewline
-type &  &  &  &  &  &  &  &  & + & + &  & + &  & + & +\tabularnewline
-event+venue+date &  &  &  &  &  &  & + &  &  &  &  &  &  &  & \tabularnewline
-translation & + & + & + & + & + & + & + & + & + & + &  & + & + &  & +\tabularnewline%not in patent
-\rl /\hfill byauthor & + & + & + & + & + &  &  &  & + & + & + & + & + & +{*} & +\tabularnewline
-organization &  &  &  &  &  &  &  &  &  & + & + &  &  &  & \tabularnewline
-institution &  &  &  &  &  &  &  &  &  &  &  & + &  &  & \tabularnewline
-credits & + & + & + & + & + & + & + & + & + & + & + & + & + &  & +\tabularnewline
-byeditor &  &  &  &  & + & + & + & + & + & + & + &  &  &  & \tabularnewline
-bytranslator+others & + & + & + & + & + & + & + &  &  &  & + &  &  &  & \tabularnewline
-\rl //\hfill maintitle+volumes+parts+booktitle  & + & + & + &  &  &  &  &  &  &  &  &  &  &  & \tabularnewline
-event+venue+date &  &  & + &  &  &  &  &  &  &  &  &  &  &  & \tabularnewline
-book:translation & + & + & + &  &  &  &  &  &  &  &  &  &  &  & \tabularnewline%not in patent
-/\hfill book:byauthor  & + &  &  &  &  &  &  &  &  &  &  &  &  &  & \tabularnewline
-book:credits  & + & + & + &  &  &  &  &  &  &  &  &  &  &  & \tabularnewline
-book:byeditor  & + & + & + &  &  &  &  &  &  &  &  &  &  &  & \tabularnewline
-book:bytranslator+others  & + & + & + &  &  &  &  &  &  &  &  &  &  &  & \tabularnewline
-journal &  &  &  & + &  &  &  &  &  &  &  &  &  &  & \tabularnewline
-jour:credits &  &  &  & + &  &  &  &  &  &  &  &  &  &  & \tabularnewline
-byeditor &  &  &  & + &  &  &  &  &  &  &  &  &  &  & \tabularnewline
-\rl edition & + & + &  &  & + & + &  &  &  & + &  &  &  &  & \tabularnewline
-/\hfill editioncredits & + & + &  &  & + & + &  &  &  & + &  &  &  &  & \tabularnewline
-version &  &  &  &  &  &  &  &  &  & + & + & + &  &  & +\tabularnewline
-\rl specdata & + & + & + & + & + & + & + & + & + & + & + & + & + & + & +\tabularnewline
-\rl organization &  &  & + &  &  &  & + &  &  &  &  &  &  &  & \tabularnewline
-publisher+location+date & + & + & + &  & + & + & + &  &  & + &  &  &  &  & \tabularnewline
-institution+location+date &  &  &  &  &  &  &  &  &  &  &  &  &  & + & \tabularnewline
-organization+location+date &  &  &  &  &  &  &  &  &  &  &  &  &  &  & +\tabularnewline
-location+date &  &  &  &  &  &  &  &  & + &  &  & + & + &  & \tabularnewline
-date &  &  &  &  &  &  &  &  &  &  & + &  &  &  & \tabularnewline
-\rl location &  &  &  & + &  &  &  & + &  &  &  &  &  &  & \tabularnewline
-jour:date &  &  &  & + &  &  &  & + &  &  &  &  &  &  & \tabularnewline
-jour:volume+parts+issuetitle &  &  &  & + &  &  &  & + &  &  &  &  &  &  & \tabularnewline
-\rl chapter+pages & + & + & + &  & + & + & + &  & + & + &  & + &  & + & \tabularnewline
-pages &  &  &  & + &  &  &  &  &  &  &  &  &  &  & \tabularnewline
-pagetotal &  &  &  &  & + & + & + &  & + & + &  & + &  & + & \tabularnewline
-\rl update, systemreq &  &  &  &  &  &  &  &  &  &  & + &  &  &  & \tabularnewline
-\rl series &  &  &  & + &  &  &  & + &  &  &  &  &  &  & \tabularnewline
-series+number & + & + & + &  & + & + & + &  &  &  &  &  &  &  & \tabularnewline
-\rl isbn/issn/isrn & + & + & + & + & + & + & + & + &  & + &  & + & + & + & \tabularnewline
-number &  &  &  &  &  &  &  &  &  &  &  & + &  &  & \tabularnewline
-doi+eprint+url+note & + & + & + & + & + & + & + & + & + & + & + & + &  & + & +\tabularnewline
-url+urldate+note &  &  &  &  &  &  &  &  &  &  &  &  & + &  & \tabularnewline
-howpublished &  &  &  &  &  &  &  &  & + &  &  &  & + &  & +\tabularnewline
-addendum+pubstate & + & + & + & + & + & + & + & + & + & + & + & + & + & + & +\tabularnewline
-pageref & + & + & + & + & + & + & + & + & + & + & + & + & + & + & +\tabularnewline
+%%                                              & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 0 & 1 & 2 & 3 & 4 & 5
+heading                                         & + & + & + & + & + & + & + & + & + & + & + & + & + & + & + & +\tabularnewline
+\rl author/translator+others                    & + & + & + & + & + &   &   &   &   &   &   &   &   &   &   & \tabularnewline
+author/editor+others/translator+others          &   &   &   &   &   & + &   &   &   &   &   &   &   &   &   & \tabularnewline
+editor+others                                   &   &   &   &   &   &   & + & + &   &   &   &   &   &   &   & \tabularnewline
+author                                          &   &   &   &   &   &   &   &   &   &   &   &   & + & + & + & \tabularnewline
+editor                                          &   &   &   &   &   &   &   &   & + &   &   &   &   &   &   & \tabularnewline
+author/editor                                   &   &   &   &   &   &   &   &   &   & + & + & + &   &   &   & +\tabularnewline
+\rl maintitle+volumes+parts+title               &   &   &   &   &   & + & + & + &   &   &   &   &   &   &   & \tabularnewline
+title                                           & + & + & + & + & + &   &   &   & + & + & + & + & + & + & + & +\tabularnewline
+type                                            &   &   &   &   &   &   &   &   &   & + & + &   & + &   & + & +\tabularnewline
+event+venue+date                                &   &   &   &   &   &   &   & + &   &   &   &   &   &   &   & \tabularnewline
+translation                                     & + & + & + & + & + & + & + & + & + & + & + &   & + & + &   & +\tabularnewline%not in patent
+\rl /\hfill byauthor                            & + & + & + & + & + & + &   &   &   & + & + & + & + & + & +{*} & +\tabularnewline
+organization                                    &   &   &   &   &   &   &   &   &   &   & + & + &   &   &   & \tabularnewline
+institution                                     &   &   &   &   &   &   &   &   &   &   &   &   & + &   &   & \tabularnewline
+credits                                         & + & + & + & + & + & + & + & + & + & + & + & + & + & + &   & +\tabularnewline
+byeditor                                        &   &   &   &   &   & + & + & + & + & + & + & + &   &   &   & \tabularnewline
+bytranslator+others                             & + & + & + & + & + & + & + & + &   &   &   & + &   &   &   & \tabularnewline
+\rl //\hfill maintitle+volumes+parts+booktitle  & + & + & + &   &   &   &   &   &   &   &   &   &   &   &   & \tabularnewline
+event+venue+date                                &   &   & + &   &   &   &   &   &   &   &   &   &   &   &   & \tabularnewline
+book:translation                                & + & + & + &   &   &   &   &   &   &   &   &   &   &   &   & \tabularnewline%not in patent
+/\hfill book:byauthor                           & + &   &   &   &   &   &   &   &   &   &   &   &   &   &   & \tabularnewline
+book:credits                                    & + & + & + &   &   &   &   &   &   &   &   &   &   &   &   & \tabularnewline
+book:byeditor                                   & + & + & + &   &   &   &   &   &   &   &   &   &   &   &   & \tabularnewline
+book:bytranslator+others                        & + & + & + &   &   &   &   &   &   &   &   &   &   &   &   & \tabularnewline
+journal                                         &   &   &   & + &   &   &   &   &   &   &   &   &   &   &   & \tabularnewline
+jour:credits                                    &   &   &   & + &   &   &   &   &   &   &   &   &   &   &   & \tabularnewline
+byeditor                                        &   &   &   & + &   &   &   &   &   &   &   &   &   &   &   & \tabularnewline
+\rl edition                                     & + & + &   &   &   & + & + &   &   &   & + &   &   &   &   & \tabularnewline
+/\hfill editioncredits                          & + & + &   &   &   & + & + &   &   &   & + &   &   &   &   & \tabularnewline
+version                                         &   &   &   &   &   &   &   &   &   &   & + & + & + &   &   & +\tabularnewline
+\rl specdata                                    & + & + & + & + & + & + & + & + & + & + & + & + & + & + & + & +\tabularnewline
+\rl organization                                &   &   & + &   &   &   &   & + &   &   &   &   &   &   &   & \tabularnewline
+publisher+location+date                         & + & + & + &   &   & + & + & + &   &   & + &   &   &   &   & \tabularnewline
+institution+location+date                       &   &   &   &   &   &   &   &   &   &   &   &   &   &   & + & \tabularnewline
+organization+location+date                      &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   & +\tabularnewline
+location+date                                   &   &   &   &   &   &   &   &   &   & + &   &   & + & + &   & \tabularnewline
+date                                            &   &   &   &   &   &   &   &   &   &   &   & + &   &   &   & \tabularnewline
+\rl location                                    &   &   &   & + &   &   &   &   & + &   &   &   &   &   &   & \tabularnewline
+jour:date                                       &   &   &   & + & + &   &   &   & + &   &   &   &   &   &   & \tabularnewline
+jour:volume+parts+issuetitle                    &   &   &   & + &   &   &   &   & + &   &   &   &   &   &   & \tabularnewline
+\rl chapter+pages                               & + & + & + &   &   & + & + & + &   & + & + &   & + &   & + & \tabularnewline
+pages                                           &   &   &   & + &   &   &   &   &   &   &   &   &   &   &   & \tabularnewline
+pagetotal                                       &   &   &   &   &   & + & + & + &   & + & + &   & + &   & + & \tabularnewline
+\rl update, systemreq                           &   &   &   &   &   &   &   &   &   &   &   & + &   &   &   & \tabularnewline
+\rl series                                      &   &   &   & + &   &   &   &   & + &   &   &   &   &   &   & \tabularnewline
+series+number                                   & + & + & + &   &   & + & + & + &   &   &   &   &   &   &   & \tabularnewline
+\rl isbn/issn/isrn                              & + & + & + & + &   & + & + & + & + &   & + &   & + & + & + & \tabularnewline
+number                                          &   &   &   &   &   &   &   &   &   &   &   &   & + &   &   & \tabularnewline
+doi+eprint+url+note                             & + & + & + & + & + & + & + & + & + & + & + & + & + &   & + & +\tabularnewline
+url+urldate+note                                &   &   &   &   &   &   &   &   &   &   &   &   &   & + &   & \tabularnewline
+howpublished                                    &   &   &   &   &   &   &   &   &   & + &   &   &   & + &   & +\tabularnewline
+addendum+pubstate                               & + & + & + & + & + & + & + & + & + & + & + & + & + & + & + & +\tabularnewline
+pageref                                         & + & + & + & + & + & + & + & + & + & + & + & + & + & + & + & +\tabularnewline
 \bottomrule
 \end{longtable}
 \endgroup
@@ -2135,6 +2147,7 @@ pageref & + & + & + & + & + & + & + & + & + & + & + & + & + & + & +\tabularnewli
 \begin{release}{1.4}{??-??-2015}
 \item В документации добавлено описание возможного способа обходу ошибки
 сортировки источников на русском языке\see{sec:issues} 
+\item Исправлен вывод \bibtype{article} для электронных публикаций.
 \end{release}
 
 \begin{release}{1.3}{02-05-2015}
