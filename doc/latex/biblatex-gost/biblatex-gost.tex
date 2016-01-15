@@ -172,8 +172,8 @@ maintained.
 
 Для работы \biblatexgost версии \makeatletter\bbx@gost@version\makeatother\
 требуются, как минимум,
-\biblatex~2.8a\fnurl{http://sourceforge.net/projects/biblatex/files/biblatex-2.8/}
-и \biber~1.8\fnurl{http://sourceforge.net/projects/biblatex-biber/files/biblatex-biber/1.8/}.
+\biblatex~3.2\fnurl{http://sourceforge.net/projects/biblatex/files/biblatex-3.2/}
+и \biber~2.3\fnurl{http://sourceforge.net/projects/biblatex-biber/files/biblatex-biber/2.3/}.
 %(текущие версии на CTAN).
 Пакет не будет работать с предыдущими версиями.
 
@@ -949,9 +949,8 @@ series = {|Полное собрание сочинений : для форте�
 \listitem{foreword}{name}\noitemspace%
 \listitem{introduction}{name}
 
-Поля \bibfield{afterword} и пр.
-должны быть в родительном падеже. Форма их вывода (в полной и краткой форме)
-представлена в~\tabref{tab:afterword}.
+Это поля должны быть в родительном падеже. Форма их вывода (в полной и
+краткой форме) представлена в~\tabref{tab:afterword}.
 
 \begin{table}[htbp]
 \tablesetup
@@ -1408,7 +1407,7 @@ volsorder = {pbi},
 
 \begin{ltxexample}[escapechar=|]
 \documentclass{...}
-\usepackage[french,latin,english,russian]{babel}
+\usepackage[french,latin,english,main=russian]{babel}
 ...
 \usepackage[style=gost-footnote,        % |стиль цитирования и библиографии|
   language=auto,                        % |получение языка из| babel
@@ -2144,8 +2143,8 @@ pageref                                         & + & + & + & + & + & + & + & + 
 
 \begin{changelog}
 
-\begin{release}{1.4}{??-??-2015}
-\item В документации добавлено описание возможного способа обходу ошибки
+\begin{release}{1.4}{??-??-2016}
+\item В документации добавлено описание возможного способа обхода ошибки
 сортировки источников на русском языке\see{sec:issues} 
 \item Исправлен вывод \bibtype{article} для электронных публикаций.
 \end{release}
