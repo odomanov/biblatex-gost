@@ -178,7 +178,7 @@ maintained.
 \biblatex~3.2\fnurl{http://sourceforge.net/projects/biblatex/files/biblatex-3.2/}
 и \biber~2.3\fnurl{http://sourceforge.net/projects/biblatex-biber/files/biblatex-biber/2.3/}.
 %(текущие версии на CTAN).
-Пакет не будет работать с предыдущими версиями.
+Пакет может не работать с предыдущими версиями.
 
 \subsection{Важные изменения в этой и некоторых недавних версиях}
 \label{sec:critchanges}
@@ -187,10 +187,13 @@ maintained.
   точки зрения совместимости с предыдущими версиями. 
 Более полный список изменений см. в \Apxref{apx:changelog}.
 
-\subsubsection*{Версия 1.3}
+\subsubsection*{Версия 1.4}
 
 \begin{trivlist}
-\item Критических изменений нет.
+\item Внутреннее имя списка сокращений изменено на \texttt{shorthand} (было
+  \texttt{shorthands}), в соответсвие с изменением в \texttt{biblatex}.
+  Если вы не используете этот список явно, например, в \cmd{printbiblist}, вас это
+  изменение не затронет.
 \end{trivlist}
 
 \subsubsection*{Версия 1.1}
@@ -2149,10 +2152,13 @@ pageref                                         & + & + & + & + & + & + & + & + 
 
 \begin{changelog}
 
-\begin{release}{1.4}{??-??-2016}
-\item Исправлен вывод \bibtype{article} для электронных публикаций.
-\item Добавлена небольшая вики с советами на SourceForge:
-\url{https://sourceforge.net/p/biblatexgost/wiki/}
+\begin{release}{1.4}{04-02-2016}
+\item Исправлен вывод \bibtype{article} для электронных публикаций (добавлен
+  вывод \bibfield{date} и \bibfield{specdata}).
+\item Внутреннее имя списка сокращений изменено на \texttt{shorthand} (было
+  \texttt{shorthands}). Это изменения в \texttt{biblatex}.
+\item Добавлена вики с советами на SourceForge:
+  \url{https://sourceforge.net/p/biblatexgost/wiki/}
 \end{release}
 
 \begin{release}{1.3}{02-05-2015}
