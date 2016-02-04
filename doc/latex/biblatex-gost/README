@@ -4,7 +4,7 @@ For documentation and release notes please refer to biblatex-gost.pdf.
 The documentation is mainly in Russian. Formatting examples for various
 bibliography entries may be found in biblatex-gost-examples.pdf.
 
-To use the current version of the package you will need biblatex 2.8/biber 1.8
+To use the current version of the package you will need biblatex 3.2/biber 2.3
 or later. Using the styles is not different from using any other biblatex styles,
 please refer to the biblatex documentation.
 
