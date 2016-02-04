@@ -1,5 +1,5 @@
 \ProvidesFile{biblatex-gost.def}
-[2015/05/02\space v1.3\space biblatex-gost styles]
+[2016/02/04\space v1.4\space biblatex-gost styles]
 
 % these declarations should be here, not in lbx, to be initialized for all languages
 \NewBibliographyString{
