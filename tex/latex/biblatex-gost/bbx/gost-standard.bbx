@@ -123,7 +123,7 @@
   dashed=false,
   singletitle=false,
   movenames=true,
-  firstinits,
+  giveninits,
   volsorder=vbpi,
   related=true}
 
@@ -261,11 +261,11 @@
 \DeclareNameFormat{author}{%
   \iftoggle{bbx:gostbibliography}
     {\ifnumequal{\value{listcount}}{1}
-      {\iffirstinits
+      {\ifgiveinits
         {\usebibmacro{authorname:last-first}{#1}{#4}{#5}{#7}}
         {\usebibmacro{authorname:last-first}{#1}{#3}{#5}{#7}}}
       {}}
-    {\iffirstinits
+    {\ifgiveinits
       {\usebibmacro{authorname:last-first}{#1}{#4}{#5}{#7}}
       {\usebibmacro{authorname:last-first}{#1}{#3}{#5}{#7}}%
      \usebibmacro{name:andothers}}}
