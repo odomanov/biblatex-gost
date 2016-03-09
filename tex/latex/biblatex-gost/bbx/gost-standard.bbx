@@ -141,7 +141,7 @@
 \DeclareFieldFormat{issuetitle}{#1}
 \DeclareFieldFormat{maintitle}{#1}
 \DeclareFieldFormat*{volume}{%
-  \iffieldnum{volume}
+  \iffieldnums{volume}
     {\ifbibstring{volume}
       {\bibstring{volume}\addabbrvspace#1}
       {}}
@@ -151,20 +151,20 @@
     {\bibstring{jourvol}\addabbrvspace#1}
     {}}
 \DeclareFieldFormat*{book}{%
-  \iffieldnum{book}
+  \iffieldnums{book}
     {\ifbibstring{book}
       {\bibstring{book}\addabbrvspace#1}
       {}}
     {\ifcapital{\MakeCapital{#1}}{#1}\isdot}}
 \DeclareFieldFormat*{part}{%
-  \iffieldnum{part}
+  \iffieldnums{part}
     {\ifbibstring{part}
       {\bibstring{part}\addabbrvspace#1}
       {}}
     {\ifcapital{\MakeCapital{#1}}{#1}\isdot}}
 \DeclareFieldFormat{seriesnumber}{#1}%
 \DeclareFieldFormat*{number}{%
-  \iffieldnum{number}
+  \iffieldnums{number}
     {\ifbibstring{number}
       {\bibsstring{number}\addabbrvspace#1}
       {\unspace\adddot#1}}%
@@ -196,7 +196,7 @@
 \DeclareFieldFormat{inparts}{\usebibmacro{in+}{parts}{#1}}
 \DeclareFieldFormat{inissues}{\usebibmacro{in+}{issues}{#1}}
 \DeclareFieldFormat{issue}{%
-  \iffieldnum{issue}
+  \iffieldnums{issue}
     {\ifbibstring{issue}
       {\bibstring{issue}\addabbrvspace#1}
       {}}

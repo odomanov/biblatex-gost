@@ -1,7 +1,14 @@
 % Biblatex-GOST data model
 
-\DeclareDatamodelFields[type=field, datatype=literal]{
+\DeclareDatamodelFields[type=field, datatype=range]{
+  number,
   book,
+  part,
+  volume,
+  issue,
+}
+
+\DeclareDatamodelFields[type=field, datatype=literal]{
   books,parts,issues,
   volsorder,
   sortvolume,
