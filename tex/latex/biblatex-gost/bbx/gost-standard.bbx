@@ -4,11 +4,11 @@
 \def\bbx@gost@date{2016/02/04}
 \def\bbx@gost@version{1.4}
 
-\@ifpackagelater{biblatex}{2015/12/22}
+\@ifpackagelater{biblatex}{2016/03/03}
   {}
   {\PackageError{biblatex}
     {Outdated 'biblatex' package}
-    {This version of 'biblatex-gost' requires biblatex v3.2 or
+    {This version of 'biblatex-gost' requires biblatex v3.3 or
     later.\MessageBreak You are using: '\csuse{ver@biblatex.sty}'.\MessageBreak
      This is a fatal error. I'm aborting now.}%
     \endinput}
@@ -252,61 +252,65 @@
     {\bibcpstring{\thefield{prcountry}}}
     {#1}}
 
-\DeclareNameAlias{sortname}{last-first}
+\DeclareNameAlias{default}{given-family}
 
-\DefineBibliographyExtras{french}{\restorecommand\mkbibnamelast}
+\DefineBibliographyExtras{french}{\restorecommand\mkbibnamefamily}
 
-% format for author is defined separately, because \mkbibnamelast, etc. cannot be
+% Format for names (authors, editors, translators) used as headings.
+% It is defined separately, because \mkbibnamefamily, etc. cannot be
 % used, since they affect all names, not only headings
-\DeclareNameFormat{author}{%
-  \iftoggle{bbx:gostbibliography}
-    {\ifnumequal{\value{listcount}}{1}
-      {\ifgiveinits
-        {\usebibmacro{authorname:last-first}{#1}{#4}{#5}{#7}}
-        {\usebibmacro{authorname:last-first}{#1}{#3}{#5}{#7}}}
-      {}}
-    {\ifgiveinits
-      {\usebibmacro{authorname:last-first}{#1}{#4}{#5}{#7}}
-      {\usebibmacro{authorname:last-first}{#1}{#3}{#5}{#7}}%
-     \usebibmacro{name:andothers}}}
-\newcommand*{\mkgostheading}[1]{\mkbibemph{#1}}%\nocorr}}
-\DeclareFieldFormat{heading}{%
-  \mkgostheading{#1}\addperiod\space}
-\newcommand*{\mkbibhdnamelast}[1]{\mkgostheading{#1}}
-\newcommand*{\mkbibhdnamefirst}[1]{\mkbibhdnamelast{#1}}
-\newcommand*{\mkbibhdnameprefix}[1]{\mkbibhdnamelast{#1}}
-\newcommand*{\mkbibhdnameaffix}[1]{\mkbibhdnamelast{#1}}
-\newbibmacro*{authorname:last-first}[4]{%
+\DeclareNameFormat{heading}{%
+  \nameparts{#1}%
+  \ifgiveninits
+    {\usebibmacro{headingname:family-given}
+      {\namepartfamily}
+      {\namepartgiveni}
+      {\namepartprefix}
+      {\namepartsuffix}}
+    {\usebibmacro{headingname:family-given}
+      {\namepartfamily}
+      {\namepartgiven}
+      {\namepartprefix}
+      {\namepartsuffix}}%
+  \usebibmacro{name:andothers}} 
+\newbibmacro*{headingname:family-given}[4]{%
   \ifuseprefix
     {\usebibmacro{name:delim}{#3#1}%
      \usebibmacro{name:hook}{#3#1}%
-     \ifblank{#3}{}{%
+     \ifempty{#3}{}{%
        \ifcapital
          {\mkbibhdnameprefix{\MakeCapital{#3}}\isdot}
          {\mkbibhdnameprefix{#3}\isdot}%
-       \ifpunctmark{'}{}{\bibnamedelimc}}%
-     \mkbibhdnamelast{#1}\isdot
-     \ifblank{#4}{}{\bibnamedelimd\mkbibhdnameaffix{#4}\isdot}%
-     \ifblank{#2}{}{\revsdnamepunct\bibnamedelimd\mkbibhdnamefirst{#2}\isdot}}
+       \ifprefchar{}{\bibnamedelimc}}%
+     \mkbibhdnamefamily{#1}\isdot
+     \ifempty{#4}{}{\bibnamedelimd\mkbibhdnamesuffix{#4}\isdot}%
+     \ifempty{#2}{}{\revsdnamepunct\bibnamedelimd\mkbibhdnamegiven{#2}\isdot}}
     {\usebibmacro{name:delim}{#1}%
      \usebibmacro{name:hook}{#1}%
-     \mkbibhdnamelast{#1}\isdot
-     \ifblank{#4}{}{\bibnamedelimd\mkbibhdnameaffix{#4}\isdot}%
-     \ifblank{#2#3}{}{\revsdnamepunct}%
-     \ifblank{#2}{}{\bibnamedelimd\mkbibhdnamefirst{#2}\isdot}%
-     \ifblank{#3}{}{\bibnamedelimd\mkbibhdnameprefix{#3}\isdot}}}
-\DeclareNameAlias{editor}{author}
-\DeclareNameAlias{editora}{editor}
-\DeclareNameAlias{editorb}{editor}
-\DeclareNameAlias{editorc}{editor}
-\DeclareNameAlias{translator}{author}
+     \mkbibhdnamefamily{#1}\isdot
+     \ifempty{#4}{}{\bibnamedelimd\mkbibhdnamesuffix{#4}\isdot}%
+     \ifempty{#2#3}{}{\revsdnamepunct}%
+     \ifempty{#2}{}{\bibnamedelimd\mkbibhdnamegiven{#2}\isdot}%
+     \ifempty{#3}{}{\bibnamedelimd\mkbibhdnameprefix{#3}\isdot}}}
+\newcommand*{\mkgostheading}[1]{\mkbibemph{#1}}%\nocorr}}
+\DeclareFieldFormat{heading}{%
+  \mkgostheading{#1}\addperiod\space}
+\newcommand*{\mkbibhdnamefamily}[1]{\mkgostheading{#1}}
+\newcommand*{\mkbibhdnamegiven}[1]{\mkbibhdnamefamily{#1}}
+\newcommand*{\mkbibhdnameprefix}[1]{\mkbibhdnamefamily{#1}}
+\newcommand*{\mkbibhdnamesuffix}[1]{\mkbibhdnamefamily{#1}}
 
 \renewcommand*{\revsdnamepunct}{\addspace}%
 
-\DeclareNameFormat{last-first:full}{%
+\DeclareNameFormat{family-given:full}{%
   \begingroup%
   \renewcommand*{\revsdnamepunct}{\addspace}%
-  \usebibmacro{name:last-first}{#1}{#3}{#5}{#7}%
+  \nameparts{#1}%
+  \usebibmacro{name:family-given}
+      {\namepartprefix}
+      {\namepartfamily}
+      {\namepartgiven}
+      {\namepartsuffix}
   \endgroup}
 
 % FORMATTING COMMANDS
@@ -1083,7 +1087,7 @@
   \setunit*{\labelnamepunct}%
   \usebibmacro{thesistitle}%
   \setunit{\respdelim}%
-  \printnames[last-first:full]{author}%
+  \printnames[family-given:full]{author}%
   \newunit\newblock
   \printlist[semicolondelim]{specdata}%
   \newunit
@@ -1982,7 +1986,7 @@
   }
     {\usebibmacro{bbx:dashcheck}
        {\bibnamedash}
-       {\printnames{author}%
+       {\printnames[heading]{author}%
      \setunit{\addcomma\space}%
      \usebibmacro{bbx:savehash}}%
      \usebibmacro{authorstrg}}
@@ -2000,7 +2004,7 @@
   }
     {\usebibmacro{bbx:dashcheck}
        {\bibnamedash}
-       {\printnames{editor}%
+       {\printnames[heading]{editor}%
      \setunit{\addcomma\space}%
      \usebibmacro{bbx:savehash}}%
      \usebibmacro{#1}%
@@ -2022,7 +2026,7 @@
   }
     {\usebibmacro{bbx:dashcheck}
        {\bibnamedash}
-       {\printnames{translator}%
+       {\printnames[heading]{translator}%
      \setunit{\addcomma\space}%
      \usebibmacro{bbx:savehash}}%
      \usebibmacro{#1}%

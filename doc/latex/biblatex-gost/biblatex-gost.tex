@@ -1844,14 +1844,14 @@ gost-inline & false & true \\
 а также редакторов или переводчиков при использовании опций \opt{useeditor} и/или
 \opt{usetranslator}~--- фактически выполняют роль заголовка, они по умолчанию выводятся
 тем же форматом. Этот вывод можно изменить, переопределив команды
-\cmd{mkbibhdnamelast}, \cmd{mkbibhdnamefirst}, \cmd{mkbibhdnameprefix} и
-\cmd{mkbibhdnameaffix}. По умолчанию они определены так:
+\cmd{mkbibhdnamefamily}, \cmd{mkbibhdnamegiven}, \cmd{mkbibhdnameprefix} и
+\cmd{mkbibhdnamesuffix}. По умолчанию они определены так:
 
 \begin{lstlisting}[style=latex]
-\newcommand*{\mkbibhdnamelast}[1]{\mkgostheading{#1}}
-\newcommand*{\mkbibhdnamefirst}[1]{\mkbibhdnamelast{#1}}
-\newcommand*{\mkbibhdnameprefix}[1]{\mkbibhdnamelast{#1}}
-\newcommand*{\mkbibhdnameaffix}[1]{\mkbibhdnamelast{#1}}
+  \newcommand*{\mkbibhdnamefamily}[1]{\mkgostheading{#1}}
+  \newcommand*{\mkbibhdnamegiven}[1]{\mkbibhdnamefamily{#1}}
+  \newcommand*{\mkbibhdnameprefix}[1]{\mkbibhdnamefamily{#1}}
+  \newcommand*{\mkbibhdnamesuffix}[1]{\mkbibhdnamefamily{#1}}
 \end{lstlisting}
 
 \subsection{Библиографический список}
@@ -2152,6 +2152,11 @@ pageref                                         & + & + & + & + & + & + & + & + 
 
 \begin{changelog}
 
+  \begin{release}{1.5}{14-03-2016}
+  \item Исправлен вывод имён, используемых как заголовок (в связи с
+    изменением \cmd{DeclareNameFormat} в \biblatex 3.3.
+  \end{release}
+
 \begin{release}{1.4}{04-02-2016}
 \item Исправлен вывод \bibtype{article} для электронных публикаций (добавлен
   вывод \bibfield{date} и \bibfield{specdata}).
@@ -2356,3 +2361,8 @@ pageref                                         & + & + & + & + & + & + & + & + 
 \end{changelog}
 
 \end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
