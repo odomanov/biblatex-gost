@@ -1870,7 +1870,8 @@ gost-inline & false & true \\
 В пакете определяется окружение \texttt{gostbibliography}, которое можно использовать следующим
   образом:
 \begin{lstlisting}[style=latex]
-  \printbibliography[env=gostbibliography,sorting=ntvy]
+  \newrefcontext[sorting=ntvy]
+  \printbibliography[env=gostbibliography]
 \end{lstlisting}
 Эта команда печатает библиографический список в соответствии с \gostbibname.
 Он оформляется как простой алфавитный список без нумерации,
