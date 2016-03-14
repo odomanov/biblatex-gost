@@ -175,8 +175,8 @@ maintained.
 
 Для работы \biblatexgost версии \makeatletter\bbx@gost@version\makeatother\
 требуются, как минимум,
-\biblatex~3.2\fnurl{http://sourceforge.net/projects/biblatex/files/biblatex-3.2/}
-и \biber~2.3\fnurl{http://sourceforge.net/projects/biblatex-biber/files/biblatex-biber/2.3/}.
+\biblatex~3.3\fnurl{http://sourceforge.net/projects/biblatex/files/biblatex-3.3/}
+и \biber~2.4\fnurl{http://sourceforge.net/projects/biblatex-biber/files/biblatex-biber/2.4/}.
 %(текущие версии на CTAN).
 Пакет может не работать с предыдущими версиями.
 
@@ -186,6 +186,13 @@ maintained.
 Ниже перечислены изменения, на которые стоит обратить внимание с
   точки зрения совместимости с предыдущими версиями. 
 Более полный список изменений см. в \Apxref{apx:changelog}.
+
+\subsubsection*{Версия 1.5}
+
+\begin{trivlist}
+\item Изменились команды формата имён в
+  заголовках (\secref{sec:headingformat}).
+\end{trivlist}
 
 \subsubsection*{Версия 1.4}
 
@@ -204,13 +211,13 @@ maintained.
   означает, что число авторов/редакторов больше 3-х. Подробнее см.~\secref{sec:newoptions}.
 \end{trivlist}
 
-\subsubsection*{Версия 0.9.2}
+% \subsubsection*{Версия 0.9.2}
 
-\begin{trivlist}
-\item Добавлено поле \bibfield{journalcredits}
-\item Удалена настройка языка цитат, поскольку эта функция поддерживается
-  в \biblatex, начиная с версии 2.8a (опция \opt{language}).
-\end{trivlist}
+% \begin{trivlist}
+% \item Добавлено поле \bibfield{journalcredits}
+% \item Удалена настройка языка цитат, поскольку эта функция поддерживается
+%   в \biblatex, начиная с версии 2.8a (опция \opt{language}).
+% \end{trivlist}
 
 % \subsubsection*{Версия 0.9.1}
 % 
@@ -2154,7 +2161,13 @@ pageref                                         & + & + & + & + & + & + & + & + 
 
   \begin{release}{1.5}{14-03-2016}
   \item Исправлен вывод имён, используемых как заголовок (в связи с
-    изменением \cmd{DeclareNameFormat} в \biblatex 3.3.
+    изменением \cmd{DeclareNameFormat} в \biblatex 3.3.  
+    В связи с этим изменились команды формата имён
+    в заголовках.\see{sec:headingformat}
+  \item Тип полей \bibfield{number}, \bibfield{book}, \bibfield{part},
+    \bibfield{volume} и \bibfield{issue} изменён на \texttt{range}.
+  \item Опция \texttt{firtsinits} заменена на \texttt{giveinits}
+    (deprecated в \biblatex 3.3). 
   \end{release}
 
 \begin{release}{1.4}{04-02-2016}
