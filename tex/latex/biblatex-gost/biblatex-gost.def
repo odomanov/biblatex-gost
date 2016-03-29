@@ -527,6 +527,8 @@
   {book,collection,proceedings,reference}{%
   \inherit{shorttitle}{shorttitle}}
 
+\DeclareDataInheritance{article}{periodical}{%
+  \noinherit{pagetotal}}
 \DeclareDataInheritance{book}{inbook,bookinbook,suppbook}{%
   \inherit{translator}{booktranslator}
   \inherit{introduction}{bookintroduction}
