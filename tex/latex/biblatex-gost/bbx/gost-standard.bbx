@@ -277,21 +277,26 @@
   \ifuseprefix
     {\usebibmacro{name:delim}{#3#1}%
      \usebibmacro{name:hook}{#3#1}%
-     \ifempty{#3}{}{%
+     \ifdefvoid{#3}{}{%
        \ifcapital
          {\mkbibhdnameprefix{\MakeCapital{#3}}\isdot}
          {\mkbibhdnameprefix{#3}\isdot}%
        \ifprefchar{}{\bibnamedelimc}}%
      \mkbibhdnamefamily{#1}\isdot
-     \ifempty{#4}{}{\bibnamedelimd\mkbibhdnamesuffix{#4}\isdot}%
-     \ifempty{#2}{}{\revsdnamepunct\bibnamedelimd\mkbibhdnamegiven{#2}\isdot}}
+     \ifdefvoid{#4}{}{\bibnamedelimd\mkbibhdnamesuffix{#4}\isdot}%
+     \ifdefvoid{#2}{}{\revsdnamepunct\bibnamedelimd\mkbibhdnamegiven{#2}\isdot}}
     {\usebibmacro{name:delim}{#1}%
      \usebibmacro{name:hook}{#1}%
      \mkbibhdnamefamily{#1}\isdot
-     \ifempty{#4}{}{\bibnamedelimd\mkbibhdnamesuffix{#4}\isdot}%
-     \ifempty{#2#3}{}{\revsdnamepunct}%
-     \ifempty{#2}{}{\bibnamedelimd\mkbibhdnamegiven{#2}\isdot}%
-     \ifempty{#3}{}{\bibnamedelimd\mkbibhdnameprefix{#3}\isdot}}}
+     \ifdefvoid{#4}{}{\bibnamedelimd\mkbibhdnamesuffix{#4}\isdot}%
+     \ifboolexpe{%
+       test {\ifdefvoid{#2}}
+       and
+       test {\ifdefvoid{#3}}}
+       {}
+       {\revsdnamepunct}%
+     \ifdefvoid{#2}{}{\bibnamedelimd\mkbibhdnamegiven{#2}\isdot}%
+     \ifdefvoid{#3}{}{\bibnamedelimd\mkbibhdnameprefix{#3}\isdot}}}
 \newcommand*{\mkgostheading}[1]{\mkbibemph{#1}}%\nocorr}}
 \DeclareFieldFormat{heading}{%
   \mkgostheading{#1}\addperiod\space}
