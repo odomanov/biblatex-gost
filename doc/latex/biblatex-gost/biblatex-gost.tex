@@ -30,6 +30,7 @@ bibstyle=gost-standard,
 \newcommand*{\biblatexctan}{http://mirror.ctan.org/macros/latex/contrib/biblatex/}
 \newcommand*{\biblatexgost}{Biblatex-GOST\xspace}
 \newcommand*{\biblatexgosthome}{http://sourceforge.net/projects/biblatexgost/}
+\newcommand*{\biblatexgostcode}{https://github.com/odomanov/biblatex-gost/}
 \newcommand*{\biblatexgostctan}
     {http://mirror.ctan.org/macros/latex/contrib/biblatex-contrib/biblatex-gost/}
 
@@ -133,20 +134,22 @@ bibstyle=gost-standard,
 \section{Введение}
 \label{sec:int}
 
-Пакет \biblatexgost{}\fnurl{http://sourceforge.net/projects/biblatexgost/} представляет
-  собой набор стилей для
-  \biblatex{}\unspace\fnurl{http://mirror.ctan.org/macros/latex/contrib/biblatex/}
-  и предназначен для оформления библиографических ссылок в соответствии с требованиями
-  ГОСТа 7.0.5---2008
-  (а также 7.1---2003, 7.80---2000, 7.82---2001 и др., см. подробнее \secref{sec:whatfor}).
-Пакет будет полезен прежде всего в
-  гуманитарных дисциплинах с высокими требованиями к оформлению библиографии, многие из
-  которых \bibtex не в состоянии удовлетворить (это касается в первую очередь многоязычных
-  библиографий, а также библиографических ссылок в сносках, использования Ibid., Op. cit. и
-  т.\,д.).
+Пакет \biblatexgost{}\footnote{Сайт проекта:
+  \url{http://sourceforge.net/projects/biblatexgost/}. Исходный код:
+  \url{https://github.com/odomanov/biblatex-gost}.} представляет собой
+набор стилей для
+\biblatex{}\unspace\fnurl{http://mirror.ctan.org/macros/latex/contrib/biblatex/}
+и предназначен для оформления библиографических ссылок в соответствии
+с требованиями ГОСТа 7.0.5---2008 (а также 7.1---2003, 7.80---2000,
+7.82---2001 и др., см. подробнее \secref{sec:whatfor}).
+Пакет будет полезен прежде всего в гуманитарных дисциплинах с высокими
+требованиями к оформлению библиографии, многие из которых \bibtex не в
+состоянии удовлетворить (это касается в первую очередь многоязычных
+библиографий, а также библиографических ссылок в сносках,
+использования Ibid., Op. cit. и т.\,д.).
 
-На SourceForge можно найти небольшую вики с советами:
-\url{https://sourceforge.net/p/biblatexgost/wiki/}.
+На GitHub можно найти небольшую вики с советами:
+\url{https://github.com/odomanov/biblatex-gost/wiki/}.
 
 \subsection{Лицензия}
 \label{sec:lic}
@@ -1894,7 +1897,7 @@ gost-inline & false & true \\
 \begin{itemize}
 \item Пакет при сортировке помещает латинские буквы перед кириллическими.
 О возможных способах обхода см.:
-\url{https://sourceforge.net/p/biblatexgost/wiki/}.
+\url{https://github.com/odomanov/biblatex-gost/wiki/}.
 
 % Это связано с ограничениями
 % модуля Unicode::Collate языка Perl, на котором написан \biber (не реализовано правило
@@ -2165,6 +2168,10 @@ pageref                                         & + & + & + & + & + & + & + & + 
 \label{apx:changelog}
 
 \begin{changelog}
+
+  \begin{release}{1.7}{??-04-2016}
+  \item Добавлена документация о \texttt{github}.
+  \end{release}
 
   \begin{release}{1.6}{05-04-2016}
   \item Исправлены ошибки в модели данных (не влияли на вывод).
