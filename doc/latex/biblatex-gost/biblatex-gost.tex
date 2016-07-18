@@ -3,7 +3,7 @@
 \pdfgentounicode=1                  %(cmap)
 \documentclass[10pt,a4paper,headings=small,numbers=enddot,english,russian]{ltxdockit}
 \usepackage[vscale=0.8,hdivide={0.2\paperwidth,*,0.1\paperwidth}]{geometry}
-\usepackage[T2A]{fontenc}
+\usepackage[T1,T2A]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{btxdockit}
 \usepackage{babel}
@@ -192,7 +192,7 @@ maintained.
   точки зрения совместимости с предыдущими версиями. 
 Более полный список изменений см. в \Apxref{apx:changelog}.
 
-\subsubsection*{Версия 1.6}
+\subsubsection*{Версии 1.7, 1.6}
 
 \begin{trivlist}
 \item Нет критических изменений.
@@ -1109,9 +1109,6 @@ introduction & вступительная статья \prm{кого} & всту
 \subsection{Тома, книги, части, выпуски}
 \label{sec:volsparts}
 
-Издание может разделяться на физически отдельные части, которые могут называться по-разному. \biblatexgost поддерживает деление на тома, книги, части и выпуски.
-Соответствующие им поля базы данных показаны в \tabref{tab:volsparts}.
-
 \begin{wraptable}{r}{0pt}
 %\begin{table}[htbp]
 \tablesetup
@@ -1133,6 +1130,9 @@ introduction & вступительная статья \prm{кого} & всту
 \caption{Обозначение частей издания\label{tab:volsparts}}
 %\end{table}
 \end{wraptable}
+
+Издание может разделяться на физически отдельные части, которые могут называться по-разному. \biblatexgost поддерживает деление на тома, книги, части и выпуски.
+Соответствующие им поля базы данных показаны в \tabref{tab:volsparts}.
 
 Если эти поля являются целыми числами, то они выводятся в виде: \enquote{В 5 т.},
 \enquote{В 4 вып.} и т.\,д. В противном случае, они выводятся как есть: \enquote{В
@@ -1202,7 +1202,7 @@ volsorder = {pbi},
   ...
 }
 
-@COLLECTION{coll,
+@COLLECTION{coll3,
   crossref = {coll},
   title = {|Сказки Центральной Африки|},
   volume = {3},
@@ -2205,10 +2205,11 @@ pageref                                         & + & + & + & + & + & + & + & + 
 
 \begin{changelog}
 
-  \begin{release}{1.7}{??-04-2016}
+  \begin{release}{1.7}{18-07-2016}
   \item Добавлены альтернативные имена полей для патентов.\see{sec:patent}
   \item Исправлена ошибка в выводе \texttt{bookcredits}.
-  \item Добавлена документация о \texttt{github}.
+  \item Исходный код перенесён на \texttt{github}. Добавлены ссылки на
+    него.\see{sec:int}
   \end{release}
 
   \begin{release}{1.6}{05-04-2016}
