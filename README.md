@@ -9,9 +9,11 @@ biblatex-gost-examples.pdf.
 Using the styles is not different from using any other biblatex styles,
 please refer to the biblatex documentation.
 
-Current and previous releases as well as the development version can be
-found on the Sourceforge project page
-http://sourceforge.net/projects/biblatexgost.
+Current and previous releases as well as the development version can
+be found on the Sourceforge project page
+http://sourceforge.net/projects/biblatexgost. The source code location
+is https://github.com/odomanov/biblatex-gost. Please use this page for feedbacks 
+and bug reports/
 
 # License information #
 
@@ -21,6 +23,8 @@ version (http://mirror.ctan.org/macros/latex/base/lppl.txt).
 This software is provided 'as is', without warranty of any kind, either
 expressed or implied, including, but not limited to, the implied warranties
 of merchantability and fitness for a particular purpose.
+
+This package is maintained. The current maintainer is Oleg Domanov.
 
 # Installation #
 
