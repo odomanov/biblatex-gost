@@ -22,6 +22,8 @@ bibstyle=gost-standard,
 \usepackage{paratype}
 \usepackage{wrapfig}
 
+\lstset{keepspaces=true}
+
 \hypersetup{unicode=true}
 
 \newcommand*{\biber}{Biber\xspace}
@@ -1297,22 +1299,29 @@ volsorder = {pbi},
 Код Международной патентной классификации (МПК) или Международной
 классификации изобретений (МКИ).
 
-\fielditem{reqnumber}{literal}
+\fielditem{authorcountry}{literal}
+
+Страна автора патента.
+
+\fielditem{requestnumber}{literal}
 
 Регистрационный номер заявки на патентный документ.
 
-\fielditem{publdate}{date}\noitemspace%
+\fielditem{publicationdate}{date}\noitemspace%
 \fielditem{publication}{literal}
 
 Дата публикации и сведения об официальном издании, в котором опубликованы сведения о
 патентном документе.
 
-\fielditem{prdate}{date}\noitemspace%
-\fielditem{prnumber}{literal}\noitemspace%
-\fielditem{prcountry}{literal}
+\fielditem{prioritydate}{date}\noitemspace%
+\fielditem{prioritynumber}{literal}\noitemspace%
+\fielditem{prioritycountry}{literal}
 
 Сведения о конвенционном приоритете: дата подачи заявки, номер и название
 страны конвенционного приоритета.
+Вместо названия страны можно использовать локализованные
+идентификаторы, такие как \texttt{countryussr} или \texttt{countryfr}
+"--- см.~примеры.
 
 \end{fieldlist}
 
@@ -1322,29 +1331,56 @@ volsorder = {pbi},
 Поле \bibfield{type} может иметь значения \opt{patent}, \opt{patreq} и \opt{invcert},
 соответствующие патенту, заявке и авторскому свидетельству.
 
-Пример оформление патента под заглавием (без заголовка):
+\pagebreak[2]
 
+Для совместимости с предыдущими версиями часть полей имеет
+альтернативные имена, приведённые в~\tabref{tab:patent-fields}.
+
+% \begin{wraptable}{r}{0pt}
+\begin{table}[htb]
+% \begingroup
+  \tablesetup
+  \centering
+  \begin{tabularx}{.6\textwidth}{@{}V{.3\textwidth}@{}V{.3\textwidth}@{}}
+    \toprule
+    \multicolumn{1}{@{}H}{Имя} &
+                                 \multicolumn{1}{@{}H}{Альтернативное имя}  \\
+    \cmidrule(r){1-1}\cmidrule{2-2}
+    authorcountry & authortype \\
+    requestnumber & reqnumber \\
+    publicationdate & publdate \\
+    prioritydate & prdate \\
+    prioritynumber & prnumber \\
+    prioritycountry & prcountry \\
+    \bottomrule
+  \end{tabularx}
+  \caption{Альтернативные имена полей для патентов\label{tab:patent-fields}}
+% \endgroup
+\end{table}
+% \end{wraptable}
+
+Пример оформление патента под заглавием (без заголовка):
 \begin{lstlisting}[style=bibtex,escapechar=|]
 @PATENT{patent2,
-  author       = {|Тернер, Э. В.|},
-  authortype   = {|США|},
-  title        = {|Одноразовая ракета-носитель|},
-  media        = {text},
-  type         = {patreq},
-  number       = {1095735},
-  location     = {countryru},
-  ipc          = {|МПК|\ensuremath{^7} B 64 G 1/00},
-  holder       = {{|заявитель Спейс Системз/Лорал, инк.|}},
-  credits      = {|патент. поверенный Егорова Г. Б.|},
-  reqnumber    = {2000108705/28},
-  date         = {2000-04-07},
-  publdate     = {2001-03-10},
-  publication  = {|Бюл. № 7 (I ч.)|\midsentence},
-  prdate       = {1999-04-09},
-  prnumber     = {09/289, 037},
-  prcountry    = {countryus},
-  pagetotal    = {|5 с.~: ил.|},
-  langid       = {russian},
+  author          = {|Тернер, Э. В.|},
+  authorcountry   = {|США|},
+  title           = {|Одноразовая ракета-носитель|},
+  media           = {text},
+  type            = {patreq},
+  number          = {1095735},
+  location        = {countryru},
+  ipc             = {|МПК|\ensuremath{^7} B 64 G 1/00},
+  holder          = {{|заявитель Спейс Системз/Лорал, инк.|}},
+  credits         = {|патент. поверенный Егорова Г. Б.|},
+  requestnumber   = {2000108705/28},
+  date            = {2000-04-07},
+  publicationdate = {2001-03-10},
+  publication     = {|Бюл. № 7 (I ч.)|\midsentence},
+  prioritydate    = {1999-04-09},
+  prioritynumber  = {09/289, 037},
+  prioritycountry = {countryus},
+  pagetotal       = {|5 с.~: ил.|},
+  langid          = {russian},
 }
 \end{lstlisting}
 
@@ -1354,22 +1390,22 @@ volsorder = {pbi},
 
 \begin{lstlisting}[style=bibtex,escapechar=|]
 @PATENT{patent2,
-  heading      = {|Заявка 1095735 Рос. федерация, МПК|\ensuremath{^7} B 64 G 1/00},
-  author       = {|Тернер, Э. В.|},
-  authortype   = {|США|},
-  title        = {|Одноразовая ракета-носитель|},
-  media        = {text},
-  holder       = {{|заявитель Спейс Системз/Лорал, инк.|}},
-  credits      = {|патент. поверенный Егорова Г. Б.|},
-  reqnumber    = {2000108705/28},
-  date         = {2000-04-07},
-  publdate     = {2001-03-10},
-  publication  = {|Бюл. № 7 (I ч.)|\midsentence},
-  prdate       = {1999-04-09},
-  prnumber     = {09/289, 037},
-  prcountry    = {countryus},
-  pagetotal    = {|5 с.~: ил.|},
-  langid       = {russian},
+  heading = {|Заявка 1095735 Рос. федерация, МПК|\ensuremath{^7} B 64 G 1/00},
+  author          = {|Тернер, Э. В.|},
+  authorcountry   = {|США|},
+  title           = {|Одноразовая ракета-носитель|},
+  media           = {text},
+  holder          = {{|заявитель Спейс Системз/Лорал, инк.|}},
+  credits         = {|патент. поверенный Егорова Г. Б.|},
+  requestnumber   = {2000108705/28},
+  date            = {2000-04-07},
+  publicationdate = {2001-03-10},
+  publication     = {|Бюл. № 7 (I ч.)|\midsentence},
+  prioritydate    = {1999-04-09},
+  prioritynumber  = {09/289, 037},
+  prioritycountry = {countryus},
+  pagetotal       = {|5 с.~: ил.|},
+  langid          = {russian},
 }
 \end{lstlisting}
 
@@ -2170,6 +2206,7 @@ pageref                                         & + & + & + & + & + & + & + & + 
 \begin{changelog}
 
   \begin{release}{1.7}{??-04-2016}
+  \item Добавлены альтернативные имена полей для патентов.\see{sec:patent}
   \item Исправлена ошибка в выводе \texttt{bookcredits}.
   \item Добавлена документация о \texttt{github}.
   \end{release}

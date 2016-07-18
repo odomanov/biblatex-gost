@@ -478,6 +478,12 @@
         \map{
           \pertype{patent}
           \step[fieldset=options, fieldvalue={useauthor=false}]
+          \step[fieldsource=authorcountry,   fieldtarget=authortype]
+          \step[fieldsource=requestnumber,   fieldtarget=reqnumber]
+          \step[fieldsource=publicationdate, fieldtarget=publdate]
+          \step[fieldsource=prioritydate,    fieldtarget=prdate]
+          \step[fieldsource=prioritynumber,  fieldtarget=prnumber]
+          \step[fieldsource=prioritycountry, fieldtarget=prcountry]
         }
       }
      }
@@ -493,6 +499,12 @@
         \map{
           \pertype{patent}
           \step[fieldset=options, fieldvalue={useauthor=false}]
+          \step[fieldsource=authorcountry,   fieldtarget=authortype]
+          \step[fieldsource=requestnumber,   fieldtarget=reqnumber]
+          \step[fieldsource=publicationdate, fieldtarget=publdate]
+          \step[fieldsource=prioritydate,    fieldtarget=prdate]
+          \step[fieldsource=prioritynumber,  fieldtarget=prnumber]
+          \step[fieldsource=prioritycountry, fieldtarget=prcountry]
         }
       }
     }
