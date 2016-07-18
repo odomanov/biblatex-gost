@@ -39,7 +39,7 @@ xcopy /Y ..\tex\latex\biblatex-gost\bbx\*.* tds\tex\latex\biblatex-gost\bbx\
 xcopy /Y ..\tex\latex\biblatex-gost\cbx\*.* tds\tex\latex\biblatex-gost\cbx\
 xcopy /Y ..\tex\latex\biblatex-gost\lbx\*.* tds\tex\latex\biblatex-gost\lbx\
 xcopy /Y ..\tex\latex\biblatex-gost\dbx\*.* tds\tex\latex\biblatex-gost\dbx\
-xcopy /Y ..\doc\latex\biblatex-gost\README tds\doc\latex\biblatex-gost\
+xcopy /Y ..\README.md tds\doc\latex\biblatex-gost\
 xcopy /Y ..\doc\latex\biblatex-gost\*.bib tds\doc\latex\biblatex-gost\
 xcopy /Y ..\doc\latex\biblatex-gost\*.cfg tds\doc\latex\biblatex-gost\
 xcopy /Y ..\doc\latex\biblatex-gost\*.tex tds\doc\latex\biblatex-gost\
@@ -62,7 +62,7 @@ mkdir %BUILDDIR%\ctan\biblatex-gost
 chdir /D %BUILDDIR%\ctan\biblatex-gost
 xcopy /E/Y %BUILDDIR%\tds\doc\latex\biblatex-gost %BUILDDIR%\ctan\biblatex-gost\doc\
 xcopy /E/Y %BUILDDIR%\tds\tex\latex\biblatex-gost %BUILDDIR%\ctan\biblatex-gost\tex\
-move %BUILDDIR%\ctan\biblatex-gost\doc\README %BUILDDIR%\ctan\biblatex-gost\
+move %BUILDDIR%\ctan\biblatex-gost\doc\README.md %BUILDDIR%\ctan\biblatex-gost\
 chdir /D %BUILDDIR%\ctan
 del %BUILDDIR%\biblatex-gost-%VERS%.zip
 zip -r -ll %BUILDDIR%\biblatex-gost-%VERS%.zip *
