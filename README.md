@@ -13,7 +13,7 @@ Current and previous releases as well as the development version can
 be found on the Sourceforge project page
 http://sourceforge.net/projects/biblatexgost. The source code location
 is https://github.com/odomanov/biblatex-gost. Please use this page for feedbacks 
-and bug reports/
+and bug reports.
 
 # License information #
 
