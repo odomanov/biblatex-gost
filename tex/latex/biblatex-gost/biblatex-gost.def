@@ -115,10 +115,10 @@
   }
   \sort{
     \field{heading}
-    \name{sortname}
-    \name{author}
-    \name{editor}
-    \name{translator}
+    \field{sortname}
+    \field{author}
+    \field{editor}
+    \field{translator}
     \field{sorttitle}
     \field{maintitle}
     \field{title}
@@ -160,10 +160,10 @@
   }
   \sort{
     \field{heading}
-    \name{sortname}
-    \name{author}
-    \name{editor}
-    \name{translator}
+    \field{sortname}
+    \field{author}
+    \field{editor}
+    \field{translator}
     \field{sorttitle}
     \field{maintitle}
     \field{title}
@@ -212,10 +212,10 @@
     \literal{9999}
   }
   \sort{
-    \name{sortname}
-    \name{author}
-    \name{editor}
-    \name{translator}
+    \field{sortname}
+    \field{author}
+    \field{editor}
+    \field{translator}
     \field{sorttitle}
     \field{maintitle}
     \field{title}
@@ -243,10 +243,10 @@
     \literal{9999}
   }
   \sort{
-    \name{sortname}
-    \name{author}
-    \name{editor}
-    \name{translator}
+    \field{sortname}
+    \field{author}
+    \field{editor}
+    \field{translator}
     \field{sorttitle}
     \field{maintitle}
     \field{title}
@@ -267,10 +267,10 @@
   }
   \sort{
     \field{heading}
-    \name{sortname}
-    \name{author}
-    \name{editor}
-    \name{translator}
+    \field{sortname}
+    \field{author}
+    \field{editor}
+    \field{translator}
     \field{sorttitle}
     \field{maintitle}
     \field{title}
@@ -312,10 +312,10 @@
   }
   \sort{
     \field{heading}
-    \name{sortname}
-    \name{author}
-    \name{editor}
-    \name{translator}
+    \field{sortname}
+    \field{author}
+    \field{editor}
+    \field{translator}
     \field{sorttitle}
     \field{maintitle}
     \field{title}

@@ -44,9 +44,9 @@
 \newtoggle{bbx:gostbibliography}
 \togglefalse{bbx:gostbibliography}
 
-\protected\def\blx@imc@printupdate{\csuse{mkbibrangeshort}{up}}
-\protected\def\blx@imc@printpubldate{\csuse{mkbibrangeshort}{publ}}
-\protected\def\blx@imc@printprdate{\csuse{mkbibrangeshort}{pr}}
+\protected\def\blx@imc@printupdate{\csuse{mkdaterangeshort}{up}}
+\protected\def\blx@imc@printpubldate{\csuse{mkdaterangeshort}{publ}}
+\protected\def\blx@imc@printprdate{\csuse{mkdaterangeshort}{pr}}
 \blx@regimcs{%
   \printupdate \printpubldate \printprdate}
 
@@ -123,7 +123,7 @@
   dashed=false,
   singletitle=false,
   movenames=true,
-  giveninits,
+  giveninits=true,
   volsorder=vbpi,
   related=true}
 
@@ -1719,7 +1719,7 @@
     {\printtext{\mkbibdatelong{}{month}{day}}}%
   \iffieldundef{endyear}
     {}
-    {\bibdatedash%
+    {\bibdaterangesep%
      \iffieldequalstr{endyear}{}
       {\mbox{~~~~}}
       {\printfield{endyear}%
