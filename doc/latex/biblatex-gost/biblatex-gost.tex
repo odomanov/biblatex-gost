@@ -1020,6 +1020,8 @@ introduction & вступительная статья \prm{кого} & всту
 \item\textellipsis\ 2001.~"--- July.~"--- Vol.~34.~"--- \textellipsis
 \end{bibexample}
 
+См.~также \secref{sec:dates} о предполагаемых и открытых датах.
+
 \fielditem{edition}{integer/literal}
 
 Сведения об издании. Если целое число, то выводится в виде «5-е изд.». Если литерал, выводится как есть. Например: <<издание 13-е, существенно переработанное>>.
@@ -1223,6 +1225,49 @@ volsorder = {pbi},
 нечувствителен к значениям опции %\opt{volsorder}
 и поля \bibfield{volsorder}, поэтому при их изменении может потребоваться ручная настройка
 сортировки, например, при помощи поля \bibfield{sortvolume} (см.~\secref{sec:newfields}).
+
+\subsection{Предполагаемые и открытые даты}
+\label{sec:dates}
+
+В пакете частично реализована обработка дат в формате EDTF (см. раздел
+<<Date and Time Specifications>> в документации \biblatex).  
+Вывод соответствует \gostbibref{5.5.5.3}, см. примеры в
+\tabref{tab:dates}.  
+Прочерк в таблице означает, что спецификация не реализована "---
+поскольку требования ГОСТа на этот счёт неясны.
+\begin{table}[htbp]
+  \tablesetup
+  \centering
+  \caption{Предполагаемые даты}
+  \label{tab:dates}
+  \begin{tabularx}{.6\linewidth}{V{.3\linewidth}X}
+    \toprule
+    \multicolumn{1}{H}{Значение поля \bibfield{date}} &
+                                                        \multicolumn{1}{H}{Вывод в тексте} \\
+    \cmidrule(r){1-1}\cmidrule{2-2}
+    1997/unknown & 1997— \\
+    1997/open & 1997— \\
+    1942? & [1942?] \\
+    1900\textasciitilde & [ок. 1900] \\
+    1900?\textasciitilde & [ок. 1900?] \\
+    199u  & [199\bibrangedash] \\
+    18uu  & [18\bibrangedash\addnbspace\bibrangedash] \\
+    % 17uu? & [17\bibrangedash\addnbspace\bibrangedash?] \\
+    % 17uu? & "--- \\ 
+    1999-uu & "--- \\ 
+    1999-01-uu & "--- \\ 
+    1999-uu-uu & "--- \\
+    % 1993/2002? & [1993—2002?] \\
+    % 1993/2002\textasciitilde &  [1993\bibrangedash ок. 2002] \\
+    % 1993?\textasciitilde/2002? & [ок. 1993?\bibrangedash 2002?] \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+Нестандартные даты, такие как [1898 или 1899], [между 1908 и 1913],
+[конец XIX "--- нач. XX в.] и пр., можно помещать в поле
+\bibfield{year} в виде простой строки.
+
 
 \subsection{Оформление диссертаций и авторефератов}
 \label{sec:dissers}
@@ -2204,6 +2249,10 @@ pageref                                         & + & + & + & + & + & + & + & + 
 \label{apx:changelog}
 
 \begin{changelog}
+
+  \begin{release}{1.8}{??-07-2016}
+  \item Добавлена обработка предполагаемых и открытых дат.\see{sec:dates}
+  \end{release}
 
   \begin{release}{1.7}{18-07-2016}
   \item Добавлены альтернативные имена полей для патентов.\see{sec:patent}
