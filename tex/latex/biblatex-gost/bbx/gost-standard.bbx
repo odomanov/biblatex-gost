@@ -2130,7 +2130,7 @@
   }
   {\printtext[bracketsalways]{\midsentence*%
       \iffieldequalstr{dateunspecified}{yearincentury}
-        {\number\numexpr\thefield{year}/100\relax\bibrangedash}
+        {\number\numexpr\thefield{year}/100\relax\bibrangedash\addnbspace\bibrangedash}
         {\iffieldequalstr{dateunspecified}{yearindecade}
           {\number\numexpr\thefield{year}/10\relax\bibrangedash}%
           % {\iffieldequalstr{dateunspecified}{monthinyear}
@@ -2165,9 +2165,9 @@
   }
   {\printtext[bracketsalways]{\midsentence*%
       \iffieldequalstr{#1dateunspecified}{yearincentury}
-        {\number\numexpr\thefield{#1year}/100\relax\bibrangedash}
+        {\number\numexpr\thefield{#1year}/100\relax\bibrangedash\addnbspace\bibrangedash}
         {\iffieldequalstr{#1dateunspecified}{yearindecade}
-          {\number\numexpr\thefield{#1year}/10\relax\bibrangedash}%
+          {\number\numexpr\thefield{#1year}/10\relax\bibrangedash}
           {\usebibmacro{printyear+}{#1}}}}}
   {\usebibmacro{printyear+}{#1}}}
 
