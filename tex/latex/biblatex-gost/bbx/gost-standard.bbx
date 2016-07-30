@@ -44,12 +44,6 @@
 \newtoggle{bbx:gostbibliography}
 \togglefalse{bbx:gostbibliography}
 
-\protected\def\blx@imc@printupdate{\csuse{mkdaterangeshort}{up}}
-\protected\def\blx@imc@printpubldate{\csuse{mkdaterangeshort}{publ}}
-\protected\def\blx@imc@printprdate{\csuse{mkdaterangeshort}{pr}}
-\blx@regimcs{%
-  \printupdate \printpubldate \printprdate}
-
 %  OPTIONS
 
 \newbibmacro*{bbx:savehash}{%
@@ -170,7 +164,7 @@
       {\unspace\adddot#1}}%
     {\ifcapital{\MakeCapital{#1}}{#1}\isdot}}
 \DeclareFieldFormat[patent]{number}{#1}%
-\DeclareFieldFormat{reqnumber}{%
+\DeclareFieldFormat{requestnumber}{%
   \ifbibstring{number}
     {\bibsstring{number}\addnbspace#1}
     {#1}}%
@@ -217,15 +211,15 @@
   \ifbibstring{updated}
     {\bibstring{updated}\addcolon\space#1}
     {Updated\addcolon\space#1}}
-\DeclareFieldFormat{publdate}{%
+\DeclareFieldFormat{publicationdate}{%
   \ifbibstring{published}
     {\bibstring{published}\addspace#1}
     {#1}}
-\DeclareFieldFormat{reqdate}{%
+\DeclareFieldFormat{requestdate}{%  = date (in @patent)
   \ifbibstring{requested}
     {\bibstring{requested}\addspace#1}
     {#1}}
-\DeclareFieldFormat{prdate}{%
+\DeclareFieldFormat{prioritydate}{%
   \ifbibstring{priority}
     {\bibstring{priority}\addspace#1}
     {#1}}
@@ -247,9 +241,9 @@
     {\mkbibordedition{#1}~\bibstring{edition}}
     {\ifcapital{\MakeCapital{#1}}{#1}\isdot}}
 \DeclareFieldFormat[thesis]{type}{\ifbibstring{#1}{\bibsentence\biblstring{#1}}{#1}}
-\DeclareFieldFormat{prcountry}{%
-  \ifbibxstring{\thefield{prcountry}}
-    {\bibcpstring{\thefield{prcountry}}}
+\DeclareFieldFormat{prioritycountry}{%
+  \ifbibxstring{\thefield{prioritycountry}}
+    {\bibcpstring{\thefield{prioritycountry}}}
     {#1}}
 \DeclareFieldFormat{bracketsalways}{[#1]}
   
@@ -914,10 +908,10 @@
     {}
     {\setrespdelim%
       \printnames[byauthor]{author}%
-      \iffieldundef{authortype}
+      \iffieldundef{authorcountry}
         {}
         {\setunit*{\addspace}%
-         \printfield[parens]{authortype}}%
+         \printfield[parens]{authorcountry}}%
       \setunit*{\addsemicolondelim}}%
   \ifnameundef{holder}
     {}
@@ -926,7 +920,7 @@
       \setunit*{\addsemicolondelim}}%
   \usebibmacro{credits}%
   \newunit\newblock
-  \printfield{reqnumber}%
+  \printfield{requestnumber}%
   \ifboolexpr{
       test {\iffieldundef{year}}
       and test {\iffieldundef{month}}
@@ -934,9 +928,9 @@
       }
       {}
       {\setunit*{\addsemicolondelim}%
-       \printtext[reqdate]{\mkbibdateshort{year}{month}{day}}}%
+       \printtext[requestdate]{\mkbibdateshort{year}{month}{day}}}%
   \setunit*{\addsemicolondelim}%
-  \printpubldate%
+  \printpublicationdate%
   \setunit*{\addcomma\space}%
   \printfield{publication}%
   \setunit*{\addsemicolondelim}%
@@ -2096,13 +2090,13 @@
         {}}}}
 
 \newbibmacro*{priority}{%
-  \printprdate%
+  \printprioritydate%
   \setunit{\addcomma\space}%
-  \printfield{prnumber}%
+  \printfield{prioritynumber}%
   \setunit{\addspace}%
-  \iffieldundef{prcountry}
+  \iffieldundef{prioritycountry}
     {}
-    {\printtext[parens]{\printfield{prcountry}}}}
+    {\printtext[parens]{\printfield{prioritycountry}}}}
 
 \newbibmacro*{heading}{%
   \printfield{heading}}
@@ -2316,10 +2310,10 @@
   \clearfield{addendum}%
   \clearfield{pubstate}%
   \clearname{holder}%
-  \clearfield{publyear}%
-  \clearfield{publmonth}%
-  \clearfield{publday}%
-  \clearfield{reqnumber}%
+  \clearfield{publicationyear}%
+  \clearfield{publicationmonth}%
+  \clearfield{publicationday}%
+  \clearfield{requestnumber}%
   \clearfield{publication}%
   \clearfield{upyear}%
   \clearfield{upmonth}%

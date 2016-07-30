@@ -15,24 +15,19 @@
   systemreq,
   publication,
   ipc,
-  reqnumber,
-  prnumber,
-  prcountry,
+  requestnumber,
+  prioritynumber,
+  prioritycountry,
+  authorcountry,
   major,
   majorcode,
   heading,
 }
 
-\DeclareDatamodelFields[type=field, datatype=date]{
+\DeclareDatamodelFields[type=field,datatype=date,skipout]{
   update,
-  prdate,
-  publdate,
-}
-
-\DeclareDatamodelFields[type=field, datatype=integer]{
-  upday,upmonth,upyear,
-  prday,prmonth,pryear,
-  publday,publmonth,publyear,
+  prioritydate,
+  publicationdate,
 }
 
 \DeclareDatamodelFields[type=list, datatype=name]{
@@ -100,16 +95,19 @@
 
 \DeclareDatamodelEntryfields[patent]{
   pagetotal,
-  prday,prmonth,pryear,
-  publday,publmonth,publyear,
-  publication,reqnumber,ipc,prnumber,prcountry,
+  priorityday,prioritymonth,priorityyear,
+  priorityendday,priorityendmonth,priorityendyear,
+  publicationday,publicationmonth,publicationyear,
+  publicationendday,publicationendmonth,publicationendyear,
+  publication,requestnumber,ipc,prioritynumber,prioritycountry,
+  authorcountry
 }
 
 \DeclareDatamodelConstraints{
   \constraint[type=data, datatype=date]{
     \constraintfield{update}
-    \constraintfield{prdate}
-    \constraintfield{publdate}
+    \constraintfield{prioritydate}
+    \constraintfield{publicationdate}
   }
 }
 
