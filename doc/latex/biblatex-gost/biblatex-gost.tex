@@ -21,6 +21,10 @@ bibstyle=gost-standard,
 \usepackage{indentfirst}
 \usepackage{paratype}
 \usepackage{wrapfig}
+\usepackage[labelsep=period,hypcap=true]{caption}
+\DeclareCaptionLabelFormat{continued}{#1~#2 (продолжение)}
+\setlength{\abovecaptionskip}{0pt}
+\setlength{\belowcaptionskip}{1ex}
 
 \lstset{keepspaces=true}
 
@@ -342,7 +346,7 @@ maintained.
   \item Заголовок записи в ссылке может содержать имена одного, двух или трех авторов документа.
     \emph{Имена авторов, указанные в заголовке, не повторяют в сведениях об ответственности}
     (согласно \gostheadref{}{5.2}, в заголовке используется только одно имя,
-    а согласно \gostbibref{}{5.2.6.8},
+    а согласно \gostbibref{5.2.6.8},
     в сведениях об ответственности обязательно приводят все имена).
   \item Заголовок обязательно применяется в ссылках, содержащих записи на документы созданные
     одним, двумя и тремя авторами.
@@ -582,15 +586,14 @@ maintained.
 %\setlength\LTleft{0pt}
 %\setlength\LTright{0pt}
 \begin{longtable}[l]{@{}L{0.6\textwidth}@{}V{0.4\textwidth}@{}}
-\caption{Соответствие между терминами ГОСТа и полями \biblatexgost\label{tab:gost-biblatex}}%
-  \medskip\\
+\caption{Соответствие между терминами ГОСТа и полями \biblatexgost\label{tab:gost-biblatex}} \\
 \toprule
 \multicolumn{1}{@{}H}{ГОСТ} &
 \multicolumn{1}{@{}H}{\biblatexgost\hfill}  \\
 \cmidrule(r){1-1}\cmidrule{2-2}
 \endfirsthead
-\caption{Соответствие между терминами ГОСТа и полями \biblatexgost (продолжение)}%
-  \medskip\\
+\captionsetup{labelformat=continued}
+\caption[]{Соответствие между терминами ГОСТа и полями \biblatexgost} \\
 \toprule
 \multicolumn{1}{@{}H}{ГОСТ} &
 \multicolumn{1}{@{}H}{\biblatexgost\hfill}  \\
@@ -813,7 +816,9 @@ ISSN серии или подсерии & issn (isbn) \\
 \begin{table}[htbp]
 \tablesetup
 \centering
-\caption{Общее обозначение материала\label{tab:media}}\medskip
+% \vspace{-\baselineskip}
+\caption{Общее обозначение материала\label{tab:media}}
+% \medskip
 \begin{tabularx}{.7\textwidth}{@{}V{.4\textwidth}@{}L{.3\textwidth}@{}}
 \toprule
 \multicolumn{1}{@{}H}{Значение поля \bibfield{media}} &
@@ -930,7 +935,7 @@ series = {|Языковеды мира / редкол.: Г.В. Степанов 
 При заполнении базы данных, эта серия помещается в поле \bibfield{series}.
 
 В случае двух серий, они должны выводиться последовательно, каждая в круглых скобках, и
-разделяться пробелом (см.~\gostbibref{}{5.7.16}).
+разделяться пробелом (см.~\gostbibref{5.7.16}).
 Этого можно добиться следующим образом:
 
 \begin{lstlisting}[style=bibtex,escapechar=|]
@@ -979,7 +984,7 @@ series = {|Полное собрание сочинений : для форте�
 \begin{table}[htbp]
 \tablesetup
 \centering
-\caption{Вывод полей \bibfield{afterword} и пр.\label{tab:afterword}}\medskip
+\caption{Вывод полей \bibfield{afterword} и пр.\label{tab:afterword}}
 \begin{tabularx}{.7\textwidth}{@{}V{.2\textwidth}@{}L{.3\textwidth}@{}L{.2\textwidth}@{}}
 \toprule
 \multicolumn{1}{@{}H}{Поле} &
@@ -1111,10 +1116,12 @@ introduction & вступительная статья \prm{кого} & всту
 \subsection{Тома, книги, части, выпуски}
 \label{sec:volsparts}
 
-\begin{wraptable}{r}{0pt}
+\begin{wraptable}[6]{o}{.5\textwidth}
 %\begin{table}[htbp]
 \tablesetup
 \centering
+\vspace{-\baselineskip}
+\caption{Обозначение частей издания\label{tab:volsparts}}
 \begin{tabularx}{.4\textwidth}{@{}L{.2\textwidth}@{}V{.2\textwidth}@{}}
 \toprule
 \multicolumn{1}{@{}H}{Части издания} &
@@ -1129,7 +1136,6 @@ introduction & вступительная статья \prm{кого} & всту
 , issues \\
 \bottomrule
 \end{tabularx}
-\caption{Обозначение частей издания\label{tab:volsparts}}
 %\end{table}
 \end{wraptable}
 
@@ -1335,7 +1341,7 @@ volsorder = {pbi},
 \subsection{Оформление патентов}
 \label{sec:patent}
 
-Для оформления патентов определены следующие дополнительные поля (см. \gostbibref{}{5.4.1.5}):
+Для оформления патентов определены следующие дополнительные поля (см. \gostbibref{5.4.1.5}):
 
 \begin{fieldlist}
 
@@ -1386,6 +1392,7 @@ volsorder = {pbi},
 % \begingroup
   \tablesetup
   \centering
+  \caption{Альтернативные имена полей для патентов\label{tab:patent-fields}}
   \begin{tabularx}{.6\textwidth}{@{}V{.3\textwidth}@{}V{.3\textwidth}@{}}
     \toprule
     \multicolumn{1}{@{}H}{Имя} &
@@ -1399,7 +1406,6 @@ volsorder = {pbi},
     prioritycountry & prcountry \\
     \bottomrule
   \end{tabularx}
-  \caption{Альтернативные имена полей для патентов\label{tab:patent-fields}}
 % \endgroup
 \end{table}
 % \end{wraptable}
@@ -1560,14 +1566,13 @@ volsorder = {pbi},
 в \tabref{tab:bibcite}. Прочерк в таблице означает, что опция для данного стиля
 не имеет смысла.
 
-В записях типа \bibtype{online} URL выводится всегда, независимо от значения опций
+В записях типа \bibtype{online} URL выводится всегда, независимо от значений опций
 \opt{url}, \opt{biburl} и \opt{citeurl}.
 
 \begin{table}[htbp]
 \tablesetup
 \centering
 \caption{Значения по умолчанию для опций \opt{citeurl}, \ldots, \opt{biburl}, \ldots}
-\medskip
 \label{tab:bibcite}
 \begin{tabularx}{.8\textwidth}{@{}V{.3\textwidth}@{}V{.3\textwidth}@{}V{.2\textwidth}@{}}
 \toprule
@@ -1796,14 +1801,15 @@ author = {|Петров, А.| and others}
     @{}V{0.25\textwidth}%
     @{}V{0.25\textwidth}%
     @{}L{0.5\textwidth}@{}}
-\caption{Поддерживаемые команды цитирования\label{tab:citecommands}}\medskip\\
+\caption{Поддерживаемые команды цитирования\label{tab:citecommands}} \\
 \toprule
 \multicolumn{1}{@{}H}{Стиль} &
 \multicolumn{1}{@{}H}{Команда} &
 \multicolumn{1}{@{}H}{Вывод\hfill} \\
 \cmidrule(r){1-1}\cmidrule(r){2-2}\cmidrule{3-3}
 \endfirsthead
-\caption{Поддерживаемые команды цитирования (продолжение)}\medskip\\
+\captionsetup{labelformat=continued}
+\caption[]{Поддерживаемые команды цитирования} \\
 \toprule
 \multicolumn{1}{@{}H}{Стиль} &
 \multicolumn{1}{@{}H}{Команда} &
@@ -2108,8 +2114,8 @@ gost-inline & false & true \\
 \setlength\LTleft{0pt}
 \setlength\LTright{0pt}
 %\noindent
-\begin{longtable}{rcccccccccccccccc}
-\caption{Последовательность макросов в драйверах\label{tab:macros}}\medskip\\
+\begin{longtable}{rcccccccccccccccc}\caption{Последовательность
+  макросов в драйверах\label{tab:macros}} \\
 \toprule
  & \begin{sideways}
 inbook
@@ -2146,7 +2152,8 @@ misc
 \end{sideways}\tabularnewline
 \rl
 \endfirsthead
-\caption{Последовательность макросов в драйверах (продолжение)}\medskip\\
+\captionsetup{labelformat=continued}
+\caption[]{Последовательность макросов в драйверах} \\
 \toprule
  & \begin{sideways}
 inbook
