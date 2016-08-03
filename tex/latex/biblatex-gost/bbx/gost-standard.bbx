@@ -144,23 +144,23 @@
   \iffieldnums{volume}
     {\ifbibstring{volume}
       {\bibstring{volume}\addabbrvspace#1}
-      {}}
+      {#1}}
     {\ifcapital{\MakeCapital{#1}}{#1}\isdot}}
 \DeclareFieldFormat[article,periodical]{volume}{%
   \ifbibstring{volume}
     {\bibstring{jourvol}\addabbrvspace#1}
-    {}}
+    {#1}}
 \DeclareFieldFormat*{book}{%
   \iffieldnums{book}
     {\ifbibstring{book}
       {\bibstring{book}\addabbrvspace#1}
-      {}}
+      {#1}}
     {\ifcapital{\MakeCapital{#1}}{#1}\isdot}}
 \DeclareFieldFormat*{part}{%
   \iffieldnums{part}
     {\ifbibstring{part}
       {\bibstring{part}\addabbrvspace#1}
-      {}}
+      {#1}}
     {\ifcapital{\MakeCapital{#1}}{#1}\isdot}}
 \DeclareFieldFormat{seriesnumber}{#1}%
 \DeclareFieldFormat*{number}{%
@@ -177,8 +177,8 @@
 \newbibmacro*{volumes/parts/books/issues}[2]{%
   \iffieldnum{#1}
     {\ifbibstring{#1}
-      {#2~\bibsstring{#1}}
-      {}}
+      {#2\addnbspace\bibsstring{#1}}
+      {#2}}
     {\ifcapital{\MakeCapital{#2}}{#2}}}
 \DeclareFieldFormat{volumes}{\usebibmacro{volumes/parts/books/issues}{volumes}{#1}}
 \DeclareFieldFormat{parts}{\usebibmacro{volumes/parts/books/issues}{parts}{#1}}
@@ -189,7 +189,7 @@
     {\ifbibstring{involumes}
       {\bibstring{involumes}\addabbrvspace}
       {}%
-      #2~\bibsstring{#1}}
+      #2\addnbspace\bibsstring{#1}}
     {\ifcapital{\MakeCapital{#2}}{#2}}}
 \DeclareFieldFormat{involumes}{\usebibmacro{in+}{volumes}{#1}}
 \DeclareFieldFormat{inbooks}{\usebibmacro{in+}{books}{#1}}
@@ -199,10 +199,10 @@
   \iffieldnums{issue}
     {\ifbibstring{issue}
       {\bibstring{issue}\addabbrvspace#1}
-      {}}
+      {#1}}
     {\ifcapital{\MakeCapital{#1}}{#1}\isdot}}
 \DeclareFieldFormat[article,periodical]{issue}{%
-  \ifinteger{#1}
+  \iffieldnums{issue}
     {\ifbibstring{issue}%
      {\bibstring{issue}\addabbrvspace#1}%
      {\unspace\adddot#1}}%
@@ -243,8 +243,8 @@
     {}%
     #1\isdot}
 \DeclareFieldFormat{edition}{%
-  \ifinteger{#1}
-    {\mkbibordedition{#1}~\bibstring{edition}}
+  \iffieldnum{edition}
+    {\mkbibordedition{#1}\addnbspace\bibstring{edition}}
     {\ifcapital{\MakeCapital{#1}}{#1}\isdot}}
 \DeclareFieldFormat[thesis]{type}{\ifbibstring{#1}{\bibsentence\biblstring{#1}}{#1}}
 \DeclareFieldFormat{prcountry}{%
