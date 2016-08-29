@@ -45,7 +45,7 @@
 \togglefalse{bbx:gostbibliography}
 
 \protected\def\blx@imc@printupdate{\csuse{mkbibrangeshort}{up}}
-\protected\def\blx@imc@printpublicationdate{\csuse{mkbibrangeshort}{publication}}
+    \protected\def\blx@imc@printpublicationdate{\csuse{mkbibrangeshort}{publication}}
 \protected\def\blx@imc@printprioritydate{\csuse{mkbibrangeshort}{priority}}
 \blx@regimcs{%
   \printupdate \printpublicationdate \printprioritydate}
@@ -125,7 +125,9 @@
   movenames=true,
   giveninits,
   volsorder=vbpi,
-  related=true}
+  related=true,
+  alldates=short,
+  eventdate=comp}
 
 \newbibmacro*{cbx:bookibid:check}[2]{#2}
 
