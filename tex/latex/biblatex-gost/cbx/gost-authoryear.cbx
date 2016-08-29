@@ -24,9 +24,9 @@
 
 \DeclareFieldFormat*{citetitle}{\mkbibemph{#1}}
 \DeclareFieldFormat{extratitleyear}{%
-  \iffieldnums{labelyear}
+  \iffieldnum{labelyear}
     {\mknumalph{#1}}
-    {\printtext{(}\mknumalph{#1}\printtext{)}}}
+    {\printtext{(\mknumalph{#1})}}}
 \DeclareFieldFormat{citeheading}{#1}
 
 \newbibmacro*{cite:init}{%
