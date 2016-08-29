@@ -44,9 +44,12 @@
 \newtoggle{bbx:gostbibliography}
 \togglefalse{bbx:gostbibliography}
 
-\protected\def\blx@imc@printupdate{\csuse{mkbibrangeshort}{up}}
+\@ifpackagelater{biblatex}{2016/05/11}  % biblatex 3.5+
+  {}
+  {\protected\def\blx@imc@printupdate{\csuse{mkbibrangeshort}{up}}
     \protected\def\blx@imc@printpublicationdate{\csuse{mkbibrangeshort}{publication}}
-\protected\def\blx@imc@printprioritydate{\csuse{mkbibrangeshort}{priority}}
+    \protected\def\blx@imc@printprioritydate{\csuse{mkbibrangeshort}{priority}}
+    \newcommand{\bibdaterangesep}{\bibdatedash}}
 \blx@regimcs{%
   \printupdate \printpublicationdate \printprioritydate}
 
@@ -1721,7 +1724,7 @@
     {\printtext{\mkbibdatelong{}{month}{day}}}%
   \iffieldundef{endyear}
     {}
-    {\bibdatedash%
+    {\bibdaterangesep%
      \iffieldequalstr{endyear}{}
       {\mbox{~~~~}}
       {\printfield{endyear}%

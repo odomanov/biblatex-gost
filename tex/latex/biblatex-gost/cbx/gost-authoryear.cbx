@@ -1,10 +1,15 @@
 \ProvidesFile{gost-authoryear.cbx}
 [2016/07/18\space v1.7\space biblatex-gost styles]
 
-\ExecuteBibliographyOptions{dashed=false,citetracker=constrict,loccittracker=constrict,
+\@ifpackagelater{biblatex}{2016/05/11}  % biblatex 3.5+
+  {\ExecuteBibliographyOptions{dashed=false,citetracker=constrict,loccittracker=constrict,
+                            singletitle=false,labeldateparts,labeltitleyear,uniquename=init,
+                            uniquelist,ibidtracker=constrict,pagetracker,sortcites,autocite=inline,
+                            citeisbn,citeurl,citedoi,citeeprint}}
+  {\ExecuteBibliographyOptions{dashed=false,citetracker=constrict,loccittracker=constrict,
                             singletitle=false,labeldate,labeltitleyear,uniquename=init,
                             uniquelist,ibidtracker=constrict,pagetracker,sortcites,autocite=inline,
-                            citeisbn,citeurl,citedoi,citeeprint}
+                            citeisbn,citeurl,citedoi,citeeprint}}
 
 \providecommand*{\mkibid}[1]{#1}
 \renewcommand*{\iffinalcitedelim}{%
