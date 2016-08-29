@@ -226,8 +226,11 @@
   \setlength{\labelauthoryearsep}{\biblabelsep}%
 }
 
-\ExecuteBibliographyOptions{labeldateparts,labeltitleyear,sorting=nyt,pagetracker,mergedate=gostletter,
-                            bibisbn,biburl,bibdoi,bibeprint}
+\@ifpackagelater{biblatex}{2016/05/11}  % biblatex 3.5+
+  {\ExecuteBibliographyOptions{labeldateparts,labeltitleyear,sorting=nyt,pagetracker,mergedate=gostletter,
+                            bibisbn,biburl,bibdoi,bibeprint}}
+  {\ExecuteBibliographyOptions{labeldate,labeltitleyear,sorting=nyt,pagetracker,mergedate=gostletter,
+                            bibisbn,biburl,bibdoi,bibeprint}}
 
 \DeclareFieldFormat{shorthandwidth}{#1}
 \setlength{\bibitemsep}{0pt}

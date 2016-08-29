@@ -50,9 +50,19 @@ pdflatex -interaction=batchmode biblatex-gost.tex
 pdflatex -interaction=batchmode biblatex-gost-examples.tex
 biber biblatex-gost-examples
 pdflatex -interaction=batchmode biblatex-gost-examples.tex
+pdflatex -interaction=batchmode biblatex-gost-examples.tex
+if exist errors.txt del errors.txt
+echo ---- errors ----------------------- >> errors.txt
+grep -E -A 3 "^!" *.log >> errors.txt
+grep -E -i "error" *.log | grep -v "info/warning/error" >> errors.txt
+grep -E -i "error" *.blg >> errors.txt
+echo ---- warnings ----------------------- >> errors.txt
+grep -E -i "warning" *.log | grep -v "info/warning/error" >> errors.txt
+grep -E -i "warn" *.blg >> errors.txt
 xcopy /Y %BUILDDIR%\tds\doc\latex\biblatex-gost\biblatex-gost.log %BUILDDIR%\
 xcopy /Y %BUILDDIR%\tds\doc\latex\biblatex-gost\biblatex-gost-examples.log %BUILDDIR%\
-del -f *.aux *.bbl *.bcf *.blg *.log *.lot *.out *.toc *.run.xml
+xcopy /Y %BUILDDIR%\tds\doc\latex\biblatex-gost\errors.txt %BUILDDIR%\
+del -f *.aux *.bbl *.bcf *.blg *.log *.lot *.out *.toc *.run.xml errors.txt
 chdir /D %BUILDDIR%\tds
 del %BUILDDIR%\biblatex-gost-%VERS%.tds.zip
 zip -r -ll %BUILDDIR%\biblatex-gost-%VERS%.tds.zip *

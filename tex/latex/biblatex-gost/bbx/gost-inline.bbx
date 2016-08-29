@@ -3,8 +3,11 @@
 
 \RequireBibliographyStyle{gost-standard}
 
-\ExecuteBibliographyOptions{labeldateparts,sorting=ntvy,pagetracker,dashed=false,
-                            bibisbn,biburl,bibdoi,bibeprint}
+\@ifpackagelater{biblatex}{2016/05/11}  % biblatex 3.5+
+  {\ExecuteBibliographyOptions{labeldateparts,sorting=ntvy,pagetracker,dashed=false,
+                            bibisbn,biburl,bibdoi,bibeprint}}
+  {\ExecuteBibliographyOptions{labeldate,sorting=ntvy,pagetracker,dashed=false,
+                            bibisbn,biburl,bibdoi,bibeprint}}
 
 \DeclareFieldFormat{shorthandwidth}{#1}
 \setlength{\bibitemsep}{0pt}
