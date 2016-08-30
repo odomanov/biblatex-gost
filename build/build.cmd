@@ -34,11 +34,11 @@ rmdir /S /Q tds
 rmdir /S /Q ctan
 mkdir tds\tex\latex\biblatex-gost
 mkdir tds\doc\latex\biblatex-gost
-xcopy /Y ..\tex\latex\biblatex-gost\*.* tds\tex\latex\biblatex-gost\
-xcopy /Y ..\tex\latex\biblatex-gost\bbx\*.* tds\tex\latex\biblatex-gost\bbx\
-xcopy /Y ..\tex\latex\biblatex-gost\cbx\*.* tds\tex\latex\biblatex-gost\cbx\
-xcopy /Y ..\tex\latex\biblatex-gost\lbx\*.* tds\tex\latex\biblatex-gost\lbx\
-xcopy /Y ..\tex\latex\biblatex-gost\dbx\*.* tds\tex\latex\biblatex-gost\dbx\
+xcopy /Y ..\tex\latex\biblatex-gost\biblatex-gost.def tds\tex\latex\biblatex-gost\
+xcopy /Y ..\tex\latex\biblatex-gost\bbx\*.bbx tds\tex\latex\biblatex-gost\bbx\
+xcopy /Y ..\tex\latex\biblatex-gost\cbx\*.cbx tds\tex\latex\biblatex-gost\cbx\
+xcopy /Y ..\tex\latex\biblatex-gost\lbx\*.lbx tds\tex\latex\biblatex-gost\lbx\
+xcopy /Y ..\tex\latex\biblatex-gost\dbx\*.dbx tds\tex\latex\biblatex-gost\dbx\
 xcopy /Y ..\README.md tds\doc\latex\biblatex-gost\
 xcopy /Y ..\doc\latex\biblatex-gost\*.bib tds\doc\latex\biblatex-gost\
 xcopy /Y ..\doc\latex\biblatex-gost\*.cfg tds\doc\latex\biblatex-gost\
