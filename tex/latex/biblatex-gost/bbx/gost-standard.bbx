@@ -2112,43 +2112,8 @@
 \newbibmacro*{heading}{%
   \printfield{heading}}
 
-% Adds brackets is necessary
-\newbibmacro*{printdate}{%
-  \ifboolexpr{
-    test \ifdatecirca
-    or
-    test \ifdateuncertain
-    or
-    test \ifenddatecirca
-    or
-    test \ifenddateuncertain
-    or
-    test {\iffieldequalstr{dateunspecified}{yearindecade}}
-    or
-    test {\iffieldequalstr{dateunspecified}{yearincentury}}
-    or
-    test {\iffieldequalstr{dateunspecified}{monthinyear}}
-    or
-    test {\iffieldequalstr{dateunspecified}{dayinmonth}}
-    or
-    test {\iffieldequalstr{dateunspecified}{dayinyear}}
-  }
-  {\printtext[bracketsalways]{\midsentence*%
-      \iffieldequalstr{dateunspecified}{yearincentury}
-        {\number\numexpr\thefield{year}/100\relax\bibrangedash\addnbspace\bibrangedash}
-        {\iffieldequalstr{dateunspecified}{yearindecade}
-          {\number\numexpr\thefield{year}/10\relax\bibrangedash}%
-          % {\iffieldequalstr{dateunspecified}{monthinyear}
-            % {\thefield{year}\addspace\bibrangedash}%
-            % {\iffieldequalstr{dateunspecified}{dayinmonth}
-              % {\thefield{month}\adddot\thefield{year}\addspace\bibrangedash}%
-              % {\iffieldequalstr{dateunspecified}{dayinyear}
-                % {\thefield{year}\addspace\bibrangedash}%
-          {\printdate}}}}
-  % }}}
-  {\printdate}}
-
-\newbibmacro*{printyear}[1]{%
+% whether date needs brackets
+\newcommand*{\blx@gost@ifdateuncertain}[3]{%
   \ifboolexpr{
     test {\csuse{if#1datecirca}}
     or
@@ -2168,6 +2133,29 @@
     or
     test {\iffieldequalstr{#1dateunspecified}{dayinyear}}
   }
+  {#2}
+  {#3}}
+
+% Adds brackets is necessary
+\newbibmacro*{printdate}[1]{%
+  \blx@gost@ifdateuncertain{#1}
+  {\printtext[bracketsalways]{\midsentence*%
+      \iffieldequalstr{#1dateunspecified}{yearincentury}
+        {\number\numexpr\thefield{#1year}/100\relax\bibrangedash\addnbspace\bibrangedash}
+        {\iffieldequalstr{#1dateunspecified}{yearindecade}
+          {\number\numexpr\thefield{#1year}/10\relax\bibrangedash}%
+          % {\iffieldequalstr{dateunspecified}{monthinyear}
+            % {\thefield{year}\addspace\bibrangedash}%
+            % {\iffieldequalstr{dateunspecified}{dayinmonth}
+              % {\thefield{month}\adddot\thefield{year}\addspace\bibrangedash}%
+              % {\iffieldequalstr{dateunspecified}{dayinyear}
+                % {\thefield{year}\addspace\bibrangedash}%
+          {\csuse{print#1date}}}}}
+  % }}}
+  {\csuse{print#1date}}}
+
+\newbibmacro*{printyear}[1]{%
+  \blx@gost@ifdateuncertain{#1}
   {\printtext[bracketsalways]{\midsentence*%
       \iffieldequalstr{#1dateunspecified}{yearincentury}
         {\number\numexpr\thefield{#1year}/100\relax\bibrangedash\addnbspace\bibrangedash}
@@ -2177,34 +2165,37 @@
   {\usebibmacro{printyear+}{#1}}}
 
 \newbibmacro*{printyear+}[1]{%
-  \iffieldundef{#1year}
-    {}
-    {\ifdefstring\blx@dateformat@labeldate{edtf}
-       {}
-       {\datecircaprint}%
-     \dateeraprintpre{#1year}%
-     \mkyearzeros{\thefield{#1year}}%
-     % \printfield{extrayear}%
-     \iffieldsequal{#1dateera}{#1enddateera}{}
-       {\dateeraprint{#1year}}%
-     \dateuncertainprint%
-     \ifdefstring\blx@dateformat@labeldate{edtf}
-       {\datecircaprintedtf}
-       {}%
-     \iffieldundef{#1endyear}
-       {}
-       {\iffieldsequal{#1year}{#1endyear}{}
-        {\ifdefstring\blx@dateformat@labeldate{edtf}
-          {\slash}% strict EDTF
-          {\bibdaterangesep
-           \enddatecircaprint}%
-         \dateeraprintpre{#1endyear}%
-         \mkyearzeros{\thefield{#1endyear}}%
-         \enddateuncertainprint
-         \ifdefstring\blx@dateformat@labeldate{edtf}
-           {\enddatecircaprintedtf}
-           {}%
-         \dateeraprint{#1endyear}}}}}
+  \printtext{%
+    \iffieldundef{#1year}
+      {}
+      {\ifdefstring\blx@dateformat@labeldate{edtf}
+         {}
+         {\datecircaprint}%
+       \dateeraprintpre{#1year}%
+       \mkyearzeros{\thefield{#1year}}%
+       % \printfield{extrayear}%
+       \iffieldsequal{#1dateera}{#1enddateera}
+         {}
+         {\dateeraprint{#1year}}%
+       \dateuncertainprint%
+       \ifdefstring\blx@dateformat@labeldate{edtf}
+         {\datecircaprintedtf}
+         {}%
+       \iffieldundef{#1endyear}
+         {}
+         {\iffieldsequal{#1year}{#1endyear}
+           {}
+           {\ifdefstring\blx@dateformat@labeldate{edtf}
+             {\slash}% strict EDTF
+             {\bibdaterangesep%
+              \enddatecircaprint}%
+            \dateeraprintpre{#1endyear}%
+            \mkyearzeros{\thefield{#1endyear}}%
+            \enddateuncertainprint%
+            \ifdefstring\blx@dateformat@labeldate{edtf}
+              {\enddatecircaprintedtf}
+              {}%
+            \dateeraprint{#1endyear}}}}}}
 
 \newcommand*{\setrespdelim}{\bbx@gost@respdelim\def\bbx@gost@respdelim{}}
 
