@@ -9,8 +9,8 @@
 \providecommand*{\mkibid}[1]{#1}
 \renewcommand*{\iffinalcitedelim}{%
   \ifnumequal{\value{textcitecount}}{\value{textcitetotal}-1}}
-\newbool{cbx:parens}
-\newbool{cbx:loccit}
+\newbool{cbx:gost:parens}
+\newbool{cbx:gost:loccit}
 
 \DeclareBibliographyOption{ibidpage}[true]{%
   \ifstrequal{#1}{true}
@@ -30,9 +30,9 @@
 \DeclareFieldFormat{citeheading}{#1}
 
 \newbibmacro*{cite:init}{%
-  \global\boolfalse{cbx:loccit}%
+  \global\boolfalse{cbx:gost:loccit}%
   \ifnumless{\value{multicitecount}}{2}
-    {\global\boolfalse{cbx:parens}%
+    {\global\boolfalse{cbx:gost:parens}%
      \global\undef\cbx@lasthash
      \global\undef\cbx@lastyear}
     {\iffieldundef{prenote}
@@ -145,7 +145,7 @@
        {\iffieldundef{shorthand}
           {\usebibmacro{cite:label}%
      \setunit{%
-       \global\booltrue{cbx:parens}%
+       \global\booltrue{cbx:gost:parens}%
        \addspace\bibopenparen}%
      \ifnumequal{\value{citecount}}{1}
        {\usebibmacro{prenote}}
@@ -156,7 +156,7 @@
           {\usebibmacro{cite:shorthand}}}
        {\printnames{labelname}%
   \setunit{%
-    \global\booltrue{cbx:parens}%
+    \global\booltrue{cbx:gost:parens}%
     \addspace\bibopenparen}%
   \ifnumequal{\value{citecount}}{1}
     {\usebibmacro{prenote}}
@@ -173,8 +173,8 @@
      \stepcounter{textcitecount}%
      \savefield{namehash}{\cbx@lasthash}}%
   \setunit{%
-    \ifbool{cbx:parens}
-      {\bibcloseparen\global\boolfalse{cbx:parens}}
+    \ifbool{cbx:gost:parens}
+      {\bibcloseparen\global\boolfalse{cbx:gost:parens}}
       {}%
     \textcitedelim}}
 
@@ -204,27 +204,27 @@
 \newbibmacro*{cite:ibid}{%
   \printtext[bibhyperref]{\bibstring[\mkibid]{ibidem}}%
   \ifloccit
-    {\global\booltrue{cbx:loccit}}
+    {\global\booltrue{cbx:gost:loccit}}
     {}}
 
 \newbibmacro*{cite:postnote}{%
-  \ifbool{cbx:loccit}
+  \ifbool{cbx:gost:loccit}
     {}
     {\usebibmacro{postnote}}}
 
 \newbibmacro*{textcite:postnote}{%
-  \ifbool{cbx:loccit}
+  \ifbool{cbx:gost:loccit}
     {}
     {\usebibmacro{postnote}}%
   \ifthenelse{\value{multicitecount}=\value{multicitetotal}}
     {\setunit{}%
      \printtext{%
-       \ifbool{cbx:parens}
-   {\bibcloseparen\global\boolfalse{cbx:parens}}
+       \ifbool{cbx:gost:parens}
+   {\bibcloseparen\global\boolfalse{cbx:gost:parens}}
    {}}}
     {\setunit{%
-       \ifbool{cbx:parens}
-   {\bibcloseparen\global\boolfalse{cbx:parens}}
+       \ifbool{cbx:gost:parens}
+   {\bibcloseparen\global\boolfalse{cbx:gost:parens}}
    {}%
        \textcitedelim}}}
 
