@@ -21,6 +21,42 @@
 ]{biblatex}
 \addbibresource{biblatex-gost-examples.bib}
 
+% Russian sources first
+\DeclareSourcemap{
+  \maps[datatype=bibtex]{
+    \map{
+      \step[fieldset=langid, fieldvalue={tempruorder}]
+    }
+    \map[overwrite]{
+      \step[fieldsource=langid, match=russian, final]
+      \step[fieldsource=presort, match=\regexp{(.+)}, replace=\regexp{aa$1}]  %$
+    }
+    \map{
+      \step[fieldsource=langid, match=russian, final]
+      \step[fieldset=presort, fieldvalue={az}]
+    }
+    \map[overwrite]{
+      \step[fieldsource=langid, notmatch=russian, final]
+      \step[fieldsource=presort, match=\regexp{(.+)}, replace=\regexp{za$1}]  %$
+    }
+    \map{
+      \step[fieldsource=langid, notmatch=russian, final]
+    }
+    \map{
+      \step[fieldsource=langid, match={tempruorder}, final]
+      \step[fieldset=langid, null]
+    }
+    \map{
+      \step[fieldsource=entrykey, match=\regexp{badiou:ee$}, final]    %$
+      \step[fieldset=shorthand, fieldvalue={EE}]
+    }
+    \map{
+      \step[fieldsource=entrykey, match=\regexp{badiou:ee2$}, final]   %$
+      \step[fieldset=shorthand, fieldvalue={EE2}]
+    }
+  }
+}
+
 \tolerance=1500
 
 \xpatchbibmacro{related:default}
