@@ -2105,7 +2105,8 @@
 \newbibmacro*{heading}{%
   \printfield{heading}}
 
-% whether date needs brackets
+% whether date needs brackets.
+% labeldate needs special account
 \newcommand*{\blx@gost@ifdateuncertain}[3]{%
   \ifboolexpr{
     test {\csuse{if#1datecirca}}
@@ -2116,15 +2117,12 @@
     or
     test {\csuse{if#1enddateuncertain}}
     or
-    test {\iffieldequalstr{#1dateunspecified}{yearindecade}}
-    or
-    test {\iffieldequalstr{#1dateunspecified}{yearincentury}}
-    or
-    test {\iffieldequalstr{#1dateunspecified}{monthinyear}}
-    or
-    test {\iffieldequalstr{#1dateunspecified}{dayinmonth}}
-    or
-    test {\iffieldequalstr{#1dateunspecified}{dayinyear}}
+    not test {\iffieldundef{#1dateunspecified}}
+    or (
+       test {\ifstrequal{#1}{label}}
+       and
+       not test {\iffieldundef{\thefield{labeldatesource}dateunspecified}}
+       )
   }
   {#2}
   {#3}}
@@ -2133,28 +2131,37 @@
 \newbibmacro*{printdate}[1]{%
   \blx@gost@ifdateuncertain{#1}
   {\printtext[bracketsalways]{\midsentence*%
-      \iffieldequalstr{#1dateunspecified}{yearincentury}
-        {\number\numexpr\thefield{#1year}/100\relax\bibrangedash\addnbspace\bibrangedash}
-        {\iffieldequalstr{#1dateunspecified}{yearindecade}
-          {\number\numexpr\thefield{#1year}/10\relax\bibrangedash}%
-          % {\iffieldequalstr{dateunspecified}{monthinyear}
-            % {\thefield{year}\addspace\bibrangedash}%
-            % {\iffieldequalstr{dateunspecified}{dayinmonth}
-              % {\thefield{month}\adddot\thefield{year}\addspace\bibrangedash}%
-              % {\iffieldequalstr{dateunspecified}{dayinyear}
-                % {\thefield{year}\addspace\bibrangedash}%
-          {\csuse{print#1date}}}}}
-  % }}}
+      \ifstrequal{#1}{label}
+        {\iffieldequalstr{\thefield{labeldatesource}dateunspecified}{yearincentury}
+          {\number\numexpr\thefield{\thefield{labeldatesource}year}/100\relax%
+            \bibrangedash\addnbspace\bibrangedash}
+          {\iffieldequalstr{\thefield{labeldatesource}dateunspecified}{yearindecade}
+            {\number\numexpr\thefield{\thefield{labeldatesource}year}/10\relax\bibrangedash}%
+          {\csuse{print#1date}}}}
+        {\iffieldequalstr{#1dateunspecified}{yearincentury}
+          {\number\numexpr\thefield{#1year}/100\relax%
+            \bibrangedash\addnbspace\bibrangedash}
+          {\iffieldequalstr{#1dateunspecified}{yearindecade}
+            {\number\numexpr\thefield{#1year}/10\relax\bibrangedash}%
+          {\csuse{print#1date}}}}}}
   {\csuse{print#1date}}}
 
 \newbibmacro*{printyear}[1]{%
   \blx@gost@ifdateuncertain{#1}
   {\printtext[bracketsalways]{\midsentence*%
-      \iffieldequalstr{#1dateunspecified}{yearincentury}
-        {\number\numexpr\thefield{#1year}/100\relax\bibrangedash\addnbspace\bibrangedash}
+     \ifstrequal{#1}{label}
+      {\iffieldequalstr{\thefield{labeldatesource}dateunspecified}{yearincentury}
+        {\number\numexpr\thefield{\thefield{labeldatesource}year}/100\relax%
+          \bibrangedash\addnbspace\bibrangedash}
+        {\iffieldequalstr{\thefield{labeldatesource}dateunspecified}{yearindecade}
+          {\number\numexpr\thefield{\thefield{labeldatesource}year}/10\relax\bibrangedash}
+          {\usebibmacro{printyear+}{#1}}}}
+      {\iffieldequalstr{#1dateunspecified}{yearincentury}
+        {\number\numexpr\thefield{#1year}/100\relax%
+          \bibrangedash\addnbspace\bibrangedash}
         {\iffieldequalstr{#1dateunspecified}{yearindecade}
           {\number\numexpr\thefield{#1year}/10\relax\bibrangedash}
-          {\usebibmacro{printyear+}{#1}}}}}
+          {\usebibmacro{printyear+}{#1}}}}}}
   {\usebibmacro{printyear+}{#1}}}
 
 \newbibmacro*{printyear+}[1]{%
