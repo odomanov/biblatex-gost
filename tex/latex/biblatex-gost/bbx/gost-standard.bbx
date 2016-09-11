@@ -1764,8 +1764,11 @@
       \setcounter{blx@gost@pointer}{1}%
       \expandafter\blx@gost@volsinorder\gost@tempa\blx@gost@endofstring}}
 
+\renewbibmacro*{date}{%
+  \usebibmacro{printdate}{}}
+
 \newbibmacro*{year}{%
-  \printfield{year}}
+  \usebibmacro{printyear}{}}
 
 \renewbibmacro*{title}{%
   \ifboolexpr{

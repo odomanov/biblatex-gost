@@ -596,7 +596,7 @@
         {\setunit*{\addcolon\space}}%
       \printlist{publisher}%
       \setunit*{\addcomma\space}%
-      \usebibmacro{printdate}{}}}}
+      \usebibmacro{date}}}}
 
 \renewbibmacro*{related:multivolume}[1]{%
   \entrydata*{#1}{%
