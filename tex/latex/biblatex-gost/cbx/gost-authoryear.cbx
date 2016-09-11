@@ -2,9 +2,10 @@
 [2016/08/30\space v1.8\space biblatex-gost styles]
 
 \ExecuteBibliographyOptions{dashed=false,citetracker=constrict,loccittracker=constrict,
-                            singletitle=false,labeldateparts,labeltitleyear,uniquename=init,
-                            uniquelist,ibidtracker=constrict,pagetracker,sortcites,autocite=inline,
-                            citeisbn,citeurl,citedoi,citeeprint}
+  dropdates=false,
+  labeldateparts,labeltitleyear,uniquename=init,
+  uniquelist,ibidtracker=constrict,pagetracker,sortcites,autocite=inline,
+  citeisbn,citeurl,citedoi,citeeprint}
 
 \providecommand*{\mkibid}[1]{#1}
 \renewcommand*{\iffinalcitedelim}{%
@@ -23,10 +24,7 @@
 \newcommand{\mkbibbracketssentence}[1]{\bibsentence\mkbibbrackets{#1}\midsentence}
 
 \DeclareFieldFormat*{citetitle}{\mkbibemph{#1}}
-\DeclareFieldFormat{extratitleyear}{%
-  \iffieldnum{labelyear}
-    {\mknumalph{#1}}
-    {\printtext{(\mknumalph{#1})}}}
+\DeclareFieldFormat{extratitleyear}{\mknumalph{#1}}
 \DeclareFieldFormat{citeheading}{#1}
 
 \newbibmacro*{cite:init}{%
@@ -51,12 +49,22 @@
        {\iffieldundef{heading}
          {\ifthenelse{\ifnameundef{labelname}\OR\iffieldundef{labelyear}}
             {\ifnameundef{labelname}
-                {\usebibmacro{cite:label+volume+parts}{bibhyperref}%
-                 \setunit{\nameyeardelim}%
-                 \usebibmacro{cite:labelyear+extras}{bibhyperref}}
-                {\usebibmacro{cite:labelname+volume+parts}{bibhyperref}}%
-             \usebibmacro{cite:reinit}}
-            {\iffieldequals{namehash}{\cbx@lasthash}
+              {% no labelname
+               \iffieldundef{label}
+                 {% no label, so print labeltitle (always present)
+                  \blx@gost@ifneedsdate
+                    {\printfield[citetitle]{labeltitle}
+                     \setunit{\nameyeardelim}%
+                     \usebibmacro{cite:labelyear+extras}{bibhyperref}}
+                    {\printtext[bibhyperref]{%
+                              \printfield[citetitle]{labeltitle}}}}
+                 {% label exists, print it
+                  \usebibmacro{cite:label+volume+parts}}}%
+              {% labelname, no labelyear
+               \usebibmacro{cite:labelname+volume+parts}{bibhyperref}%
+               \usebibmacro{cite:reinit}}}%
+           {% both labelname, labelyear exist
+            \iffieldequals{namehash}{\cbx@lasthash}
                {\ifthenelse{\iffieldequals{labelyear}{\cbx@lastyear}\AND
                         \(\value{multicitecount}=0\OR\iffieldundef{postnote}\)}
                   {\setunit{\addcomma}%
@@ -64,12 +72,12 @@
                   {\setunit{\compcitedelim}%
                    \usebibmacro{cite:labelyear+extras}{bibhyperref}%
                    \savefield{labelyear}{\cbx@lastyear}}}
-               {\ifsingletitle
-                  {\usebibmacro{cite:labelname+volume+parts}{bibhyperref}}
+               {\blx@gost@ifneedsdate
                   {\usebibmacro{cite:labelname+volume+parts}{}%
                    \setunit{\nameyeardelim}%
                    \usebibmacro{cite:labelyear+extras}{bibhyperref}%
                    \savefield{labelyear}{\cbx@lastyear}}%
+                  {\usebibmacro{cite:labelname+volume+parts}{bibhyperref}}%
                 \savefield{namehash}{\cbx@lasthash}}}}
          {\usebibmacro{cite:heading}{bibhyperref}%
 %          \iffieldundef{labelyear}
@@ -87,24 +95,20 @@
      %\usebibmacro{volume+parts}{\setunit*{\addcomma\space}}%
 }
 
-\newbibmacro*{cite:label+volume+parts}[1]{%
+\newbibmacro*{cite:label+volume+parts}{%
   \iffieldundef{label}
-    {\ifsingletitle
-      {\printtext[#1]{\printfield[citetitle]{labeltitle}}}
-      {\printfield[citetitle]{labeltitle}}}
-    {\printtext[#1]{\printfield{label}}}%
+    {}
+    {\printtext[bibhyperref]{\printfield{label}}}%
      \setunit*{\addcomma\space}%
      %\usebibmacro{volume+parts}{\setunit*{\addcomma\space}}%
 }
 
 \newbibmacro*{cite:labelyear+extras}[1]{%
-  \ifsingletitle
+  \iffieldundef{labelyear}
     {}
-    {\iffieldundef{labelyear}
-      {}
-      {\printtext[#1]{%
-          \usebibmacro{printyear}{label}%
-          \usebibmacro{cite:extras}}}}}
+    {\printtext[#1]{%
+          \usebibmacro{printyear}{label}% print labelyear
+          \usebibmacro{cite:extras}}}}
 
 \newbibmacro*{citeyear}{%
   \iffieldundef{shorthand}
