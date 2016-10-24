@@ -1,3 +1,6 @@
+\ProvidesFile{biblatex-gost.dbx}
+[2016/09/18\space v1.10\space biblatex-gost data model]
+
 % Biblatex-GOST data model
 
 \DeclareDatamodelFields[type=field, datatype=range]{
