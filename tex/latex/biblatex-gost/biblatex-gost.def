@@ -485,6 +485,12 @@
           \step[fieldsource=prnumber,   fieldtarget=prioritynumber]
           \step[fieldsource=prcountry,  fieldtarget=prioritycountry]
         }
+        \map{
+          \pertype{thesis}
+          \step[fieldsource=speciality,     fieldtarget=major]
+          \step[fieldsource=specialitycode, fieldtarget=majorcode]
+          \step[fieldsource=number,         fieldtarget=majorcode]
+        }
       }
      }
     }
@@ -505,6 +511,12 @@
           \step[fieldsource=prdate,     fieldtarget=prioritydate]
           \step[fieldsource=prnumber,   fieldtarget=prioritynumber]
           \step[fieldsource=prcountry,  fieldtarget=prioritycountry]
+        }
+        \map{
+          \pertype{thesis}
+          \step[fieldsource=speciality,     fieldtarget=major]
+          \step[fieldsource=specialitycode, fieldtarget=majorcode]
+          \step[fieldsource=number,         fieldtarget=majorcode]
         }
       }
     }
