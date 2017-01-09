@@ -241,7 +241,11 @@
   \iffieldnum{edition}
     {\mkbibordedition{#1}\addnbspace\bibstring{edition}}
     {\ifcapital{\MakeCapital{#1}}{#1}\isdot}}
-\DeclareFieldFormat[thesis]{type}{\ifbibstring{#1}{\bibsentence\biblstring{#1}}{#1}}
+\DeclareFieldFormat[thesis]{type}{%
+  \ifbibstring{#1}{\bibsentence\biblstring{#1}%
+    \setunit*{\addspace}%
+    \printfield{major}}%
+  {#1}}
 \DeclareFieldFormat{prioritycountry}{%
   \ifbibxstring{\thefield{prioritycountry}}
     {\bibcpstring{\thefield{prioritycountry}}}
@@ -1864,12 +1868,8 @@
           {\setunit*{\addspace}%
            \usebibmacro{media}%
            \setunit*{\addcolondelim}}%
-       \printfield[titlecase]{subtitle}}%
-       \ifbibxstring{\thefield{type}}
-          {\bibstring{\thefield{type}}}
-          {\printfield{type}}%
-       \setunit*{\addspace}%
-       \printfield{major}%
+         \printfield[titlecase]{subtitle}}%
+       \printfield{type}%
        \setunit*{\addcolondelim}%
        \printfield{majorcode}}%
   \setunit*{\addcolondelim}%
