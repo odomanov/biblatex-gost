@@ -30,8 +30,8 @@ my $file=catfile(($TEXSRC, "bbx/"), "gost-standard.bbx");
 
     while (<>)
     {
-        s/\\def\\bbx\@gost\@date{.*}/\\def\\bbx\@gost\@date{$now_string}/;
-        s/\\def\\bbx\@gost\@version{.*}/\\def\\bbx\@gost\@version{$ver}/;
+        s/\\def\\bbx\@gost\@date\{.*\}/\\def\\bbx\@gost\@date\{$now_string\}/;
+        s/\\def\\bbx\@gost\@version\{.*\}/\\def\\bbx\@gost\@version\{$ver\}/;
     }
     continue
     {
