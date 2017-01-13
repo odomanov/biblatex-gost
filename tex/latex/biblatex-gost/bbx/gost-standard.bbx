@@ -1091,8 +1091,11 @@
   \usebibmacro{author}%
   \setunit*{\labelnamepunct}%
   \usebibmacro{thesistitle}%
-  \setunit{\respdelim}%
+  \def\bbx@gost@respdelim{\setunit{\respdelim}}% ----- Resp starts -----
+  \setrespdelim%
   \printnames[family-given:full]{author}%
+  \setunit*{\resppunct}%
+  \usebibmacro{credits}%
   \newunit\newblock
   \printlist[semicolondelim]{specdata}%
   \newunit
