@@ -242,7 +242,7 @@
     {\mkbibordedition{#1}\addnbspace\bibstring{edition}}
     {\ifcapital{\MakeCapital{#1}}{#1}\isdot}}
 \DeclareFieldFormat[thesis]{type}{%
-  \ifbibstring{#1}{\bibsentence\biblstring{#1}%
+  \ifbibstring{#1}{\biblstring{#1}%
     \setunit*{\addspace}%
     \printfield{major}}%
   {#1}}
@@ -1869,6 +1869,7 @@
            \usebibmacro{media}%
            \setunit*{\addcolondelim}}%
          \printfield[titlecase]{subtitle}}%
+       \setunit*{\addcolondelim}%
        \printfield{type}%
        \setunit*{\addcolondelim}%
        \printfield{majorcode}}%
