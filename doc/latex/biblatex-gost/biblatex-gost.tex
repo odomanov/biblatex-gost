@@ -626,7 +626,7 @@ This package is maintained.
 \textit{Параллельное заглавие} &  \textendash \\%{\spotcolor paratitle} \\
 \textit{Сведения, относящиеся к заглавию} & subtitle, mainsubtitle,
                                     booksubtitle, titleaddon, maintitleaddon,
-                                    booktitleaddon,\newline
+                                    booktitleaddon, type,\newline
                                     \ensuremath\langle{\spotcolor ipc}, {\spotcolor location},
                                     {\spotcolor number},
                                     {\spotcolor major}, {\spotcolor majorcode}\ensuremath\rangle \\
@@ -1295,23 +1295,31 @@ volsorder = {pbi},
 \subsection{Оформление диссертаций и авторефератов}
 \label{sec:dissers}
 
-Для оформления диссертаций и автореферетов
-используйте записи типа \bibtype{thesis}. Поле \bibfield{type}
-определяет тип диссертации~--- магистерская (\opt{mathesis}), кандидатская (\opt{phdthesis}),
-докторская (\opt{docthesis})~--- или тип автореферата: кандидатская (\opt{phdautoref}),
-докторская (\opt{docautoref}).
+Для оформления диссертаций и автореферетов используйте записи типа \bibtype{thesis}. Поле
+\bibfield{type} определяет тип диссертации~--- магистерская (\opt{mathesis}), кандидатская
+(\opt{phdthesis}), докторская (\opt{docthesis})~--- или тип автореферата: кандидатская
+(\opt{phdautoref}), докторская (\opt{docautoref}).
+При других значениях поля \bibfield{type}, оно выводится как есть, причём поля
+\bibfield{major} и \bibfield{speciality} (см.~ниже) игнорируются.
 
-Для записей типа \bibtype{thesis} определены два дополнительных поля:
+Для записей типа \bibtype{thesis} определены дополнительные поля:
 
 \begin{fieldlist}
 
-\fielditem{major}{literal}
+\fielditem{major}{literal}\noitemspace%
+\fielditem{speciality}{literal}
 
 Специальность в виде <<ист. наук>>, <<физ.-мат. наук>> и т.\,д.
 
-\fielditem{majorcode}{literal}
+Поля эквивалентны, можно использовать любое из них.
+
+\fielditem{majorcode}{literal}\noitemspace%
+\fielditem{specialitycode}{literal}\noitemspace%
+\fielditem{number}{literal}
 
 Код специальности в виде <<09.00.01>>, <<07.00.02>> и т.\,д.
+
+Поля эквивалентны, можно использовать любое из них.
 
 \end{fieldlist}
 
@@ -2235,7 +2243,8 @@ editor                                          &   &   &   &   &   &   &   &   
 author/editor                                   &   &   &   &   &   &   &   &   &   & + & + & + &   &   &   & +\tabularnewline
 \rl maintitle+volumes+parts+title               &   &   &   &   &   & + & + & + &   &   &   &   &   &   &   & \tabularnewline
 title                                           & + & + & + & + & + &   &   &   & + & + & + & + & + & + & + & +\tabularnewline
-type                                            &   &   &   &   &   &   &   &   &   & + & + &   & + &   & + & +\tabularnewline
+type                                            &   &   &   &   &   &   &   &   &   & + & + &   & + &   &   & +\tabularnewline
+type+major/speciality                           &   &   &   &   &   &   &   &   &   &   &   &   &   &   & + &  \tabularnewline
 event+venue+date                                &   &   &   &   &   &   &   & + &   &   &   &   &   &   &   & \tabularnewline
 translation                                     & + & + & + & + & + & + & + & + & + & + & + &   & + & + &   & +\tabularnewline%not in patent
 \rl /\hfill byauthor                            & + & + & + & + & + & + &   &   &   & + & + & + & + & + & +{*} & +\tabularnewline
@@ -2288,6 +2297,14 @@ pageref                                         & + & + & + & + & + & + & + & + 
 \label{apx:changelog}
 
 \begin{changelog}
+
+  \begin{release}{1.11}{??-01-2017}
+  \item В записях типа \bibtype{thesis}, если значение поля \bibfield{type} не совпадает с
+    заранее определёнными, то выводится как есть.\see{sec:dissers}
+  \item Определены новые поля \bibfield{speciality}, \bibfield{specialitycode},
+    \bibfield{number} для записей типа \bibtype{thesis}.\see{sec:dissers}
+  \item Заменил \texttt{build.cmd} на \texttt{build.pl}.
+  \end{release}
 
   \begin{release}{1.10}{18-09-2016}
   \item Исправлено сокращение <<док.>> на <<д-ра>>.
