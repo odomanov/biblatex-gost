@@ -241,11 +241,6 @@
   \iffieldnum{edition}
     {\mkbibordedition{#1}\addnbspace\bibstring{edition}}
     {\ifcapital{\MakeCapital{#1}}{#1}\isdot}}
-\DeclareFieldFormat[thesis]{type}{%
-  \ifbibstring{#1}{\biblstring{#1}%
-    \setunit*{\addspace}%
-    \printfield{major}}%
-  {#1}}
 \DeclareFieldFormat{prioritycountry}{%
   \ifbibxstring{\thefield{prioritycountry}}
     {\bibcpstring{\thefield{prioritycountry}}}
