@@ -24,6 +24,7 @@
   authorcountry,
   major,
   majorcode,
+  majorname,
   heading,
 }
 
@@ -89,7 +90,7 @@
 }
 
 \DeclareDatamodelEntryfields[thesis]{
-  major,majorcode,
+  major,majorcode,majorname,
 }
 
 \DeclareDatamodelEntryfields[online]{

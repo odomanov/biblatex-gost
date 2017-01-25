@@ -422,6 +422,7 @@
   \addperiod\addnbspace\textemdash\space\bibsentence}%block punct.,\bibsentence is for vol,etc.
 \newcommand*{\respdelim}{\addnbspace/\space}% delimiter before "credits"
 \newcommand*{\resppunct}{\addsemicolondelim}% punctuation between "credits" items
+\newcommand*{\specialitydelim}{\addnbspace\textemdash\space}% punctuation between specialitycode and speciality
 
 % auxillary macros for volsorder handling
 \newcounter{blx@gost@pointer}%
@@ -1965,8 +1966,10 @@
        \setunit*{\addcolondelim}%
        \printfield{type}%
        \setunit*{\addcolondelim}%
-       \printfield{majorcode}}%
-  \setunit*{\addcolondelim}%
+       \printfield{majorcode}%
+       \setunit*{\specialitydelim}%
+       \printfield{majorname}}%
+  \setunit{\addcolondelim}%
   \printfield{titleaddon}%
   \clearfield{media}}
 
