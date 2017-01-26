@@ -1574,8 +1574,19 @@ volsorder = {pbi},
 
 \begin{optionlist}
 
+  \choitem[emdash]{blockpunct}{emdash, space}
 
+  Разделитель блоков библиографического описания.  
+  По умолчанию равен точке и тире с окружающими его пробелами, при значении
+  \kvopt{blockpunct}{space} "--- точке с пробелом.
 
+  Опция просто устанавливает параметр \cmd{newblockpunct}.
+  Например, по умолчанию устанавливается:
+  \begin{lstlisting}[style=latex]
+  \renewcommand*{\newblockpunct}{%
+    \addperiod\addnbspace\textemdash\space\bibsentence}.
+  \end{lstlisting}
+  \vspace{-\baselineskip}Если вам нужен другой разделитель, измените его с помощью \cmd{renewcommand}.    
   
 \boolitem{citeurl,biburl}\noitemspace%
 \boolitem{citeisbn,bibisbn}\noitemspace%
@@ -2303,6 +2314,7 @@ pageref                                         & + & + & + & + & + & + & + & + 
 
 \begin{changelog}
   \begin{release}{1.11}{26-01-2017}
+  \item Добавлена опция \opt{blockpunct}.\see{sec:newoptions}
   \item В записях типа \bibtype{thesis}, если значение поля \bibfield{type} не совпадает с
     заранее определёнными, то выводится как есть.\see{sec:dissers}
   \item Исправлена ошибка: добавлена точка после заголовка.

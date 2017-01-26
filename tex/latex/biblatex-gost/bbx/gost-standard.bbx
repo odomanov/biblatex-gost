@@ -54,6 +54,14 @@
      \renewbibmacro*{bbx:savehash}{\savefield{fullhash}{\bbx@lasthash}}}
     {\renewbibmacro*{bbx:savehash}{}}}
 
+% block punctuation = emdash / space
+% \bibsentence is for vol,etc.
+\DeclareBibliographyOption{blockpunct}[emdash]{%
+  \ifstrequal{#1}{emdash}
+    {\renewcommand*{\newblockpunct}{\addperiod\addnbspace\textemdash\space\bibsentence}}
+    {\renewcommand*{\newblockpunct}{\addperiod\space\bibsentence}}
+}
+
 \DeclareBibliographyOption{isbn}[true]{%
   \global\settoggle{bbx:isbn}{#1}%
   \global\settoggle{cbx:isbn}{#1}}
@@ -215,7 +223,8 @@
   volsorder=vbpi,
   related=true,
   alldates=short,
-  eventdate=comp}
+  eventdate=comp,
+  blockpunct=emdash}
 
 \newbibmacro*{cbx:bookibid:check}[2]{#2}
 
@@ -423,8 +432,6 @@
 \renewcommand*{\finallistdelim}{\addcomma\space}
 \renewcommand*{\bibpagespunct}{\addperiod\space}
 \renewcommand*{\subtitlepunct}{\addcolon\space}
-\renewcommand*{\newblockpunct}{%
-  \addperiod\addnbspace\textemdash\space\bibsentence}%block punct.,\bibsentence is for vol,etc.
 \newcommand*{\respdelim}{\addnbspace/\space}% delimiter before "credits"
 \newcommand*{\resppunct}{\addsemicolondelim}% punctuation between "credits" items
 
