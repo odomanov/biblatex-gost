@@ -809,10 +809,15 @@ ISSN серии или подсерии & issn (isbn) \\
 
 \fielditem{editortype}{key}
 
-Это поле существует в \biblatex, но в \biblatexgost для него определёно новое значение:
+Это поле существует в \biblatex, но в \biblatexgost для него определёно два новых
+значения:
+\begin{itemize}
+\item \bibfield{geneditor} "--- выводится в виде: \enquote{под общ. ред.~\ldots}.
+\item \bibfield{editorcollaborator} "--- выводится в виде: \enquote{при ред. уч.~\ldots}.
+\end{itemize}
 
-тип редактора \bibfield{geneditor}, соответствующий общему
-редактору. Он выводится в виде: \enquote{Под общ. ред.~\ldots}.
+Обратите внимание, что в \biblatex есть также редакторская роль \bibfield{collaborator},
+которая выводится как \enquote{при уч.~\ldots}.
 
 \listitem{heading}{name}
 
@@ -2315,6 +2320,8 @@ pageref                                         & + & + & + & + & + & + & + & + 
 
 \begin{changelog}
   \begin{release}{1.11}{26-01-2017}
+  \item Добавлена редакторская роль \kvopt{editortype}{\{editorcollaborator\}}.\newline  
+    Печатается как «при ред. уч.».\see{sec:newfields}
   \item Добавлена опция \opt{blockpunct}.\see{sec:newoptions}
   \item В записях типа \bibtype{thesis}, если значение поля \bibfield{type} не совпадает с
     заранее определёнными, то выводится как есть.\see{sec:dissers}
