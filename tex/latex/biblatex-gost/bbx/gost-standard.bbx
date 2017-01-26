@@ -158,6 +158,14 @@
             final]
           \step[fieldset=options, fieldvalue={useeditor=false}]
         }
+        \map{
+          \step[typesource=candthesis,typetarget=thesis, final]
+          \step[fieldset=type,        fieldvalue=phdthesis]
+        }
+        \map{
+          \step[typesource=docthesis, typetarget=thesis, final]
+          \step[fieldset=type,        fieldvalue=docthesis]
+        }
         \map[overwrite]{
           \pertype{patent}
           \step[fieldsource=options, final]
@@ -185,6 +193,14 @@
     }
    {\DeclareStyleSourcemap{
       \maps[datatype=bibtex]{
+        \map{
+          \step[typesource=candthesis,typetarget=thesis, final]
+          \step[fieldset=type,        fieldvalue=phdthesis]
+        }
+        \map{
+          \step[typesource=docthesis, typetarget=thesis, final]
+          \step[fieldset=type,        fieldvalue=docthesis]
+        }
         \map[overwrite]{
           \pertype{patent}
           \step[fieldsource=options, final]
