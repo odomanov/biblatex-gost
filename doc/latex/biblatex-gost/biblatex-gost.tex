@@ -195,6 +195,13 @@ This package is maintained.
   точки зрения совместимости с предыдущими версиями. 
 Более полный список изменений см. в \Apxref{apx:changelog}.
 
+\subsubsection*{Версия 1.11}
+
+\begin{trivlist}
+\item При заполнении полей \bibfield{major}/\bibfield{speciality} в описании диссертаций
+  теперь нужно писать «экон.», «физ.-мат.» и пр. вместо «экон. наук», «физ.-мат. наук» и
+  пр. См.~\secref{sec:dissers}.
+\end{trivlist}
 \subsubsection*{Версия 1.10}
 
 \begin{trivlist}
@@ -626,7 +633,7 @@ This package is maintained.
 \textit{Параллельное заглавие} &  \textendash \\%{\spotcolor paratitle} \\
 \textit{Сведения, относящиеся к заглавию} & subtitle, mainsubtitle,
                                     booksubtitle, titleaddon, maintitleaddon,
-                                    booktitleaddon,\newline
+                                    booktitleaddon, type,\newline
                                     \ensuremath\langle{\spotcolor ipc}, {\spotcolor location},
                                     {\spotcolor number},
                                     {\spotcolor major}, {\spotcolor majorcode}\ensuremath\rangle \\
@@ -1300,14 +1307,17 @@ volsorder = {pbi},
 определяет тип диссертации~--- магистерская (\opt{mathesis}), кандидатская (\opt{phdthesis}),
 докторская (\opt{docthesis})~--- или тип автореферата: кандидатская (\opt{phdautoref}),
 докторская (\opt{docautoref}).
+При других значениях поля \bibfield{type}, оно выводится как есть, причём поле
+\bibfield{major} (см.~ниже) игнорируются.
 
-Для записей типа \bibtype{thesis} определены два дополнительных поля:
+Для записей типа \bibtype{thesis} определены дополнительные поля:
 
 \begin{fieldlist}
 
 \fielditem{major}{literal}
 
-Специальность в виде <<ист. наук>>, <<физ.-мат. наук>> и т.\,д.
+Специальность в виде <<ист.>>, <<физ.-мат.>>, <<технических>> и т.\,д.
+Выводится  как, например, «дис. \textellipsis\ канд. технических наук». 
 
 \fielditem{majorcode}{literal}
 
@@ -1323,7 +1333,7 @@ volsorder = {pbi},
   title        = {|Религиозная политика Золотой Орды на Руси в XIII—XIV вв.|},
   media        = {text},
   type         = {phdthesis},
-  major        = {|ист. наук|},
+  major        = {|ист.|},
   majorcode    = {07.00.02},
   titleaddon   = {|защищена 22.01.02~: утв. 15.07.02|},
   location     = {|М.|},
@@ -1564,6 +1574,9 @@ volsorder = {pbi},
 
 \begin{optionlist}
 
+
+
+  
 \boolitem{citeurl,biburl}\noitemspace%
 \boolitem{citeisbn,bibisbn}\noitemspace%
 \boolitem{citedoi,bibdoi}\noitemspace%
@@ -2235,7 +2248,8 @@ editor                                          &   &   &   &   &   &   &   &   
 author/editor                                   &   &   &   &   &   &   &   &   &   & + & + & + &   &   &   & +\tabularnewline
 \rl maintitle+volumes+parts+title               &   &   &   &   &   & + & + & + &   &   &   &   &   &   &   & \tabularnewline
 title                                           & + & + & + & + & + &   &   &   & + & + & + & + & + & + & + & +\tabularnewline
-type                                            &   &   &   &   &   &   &   &   &   & + & + &   & + &   & + & +\tabularnewline
+type                                            &   &   &   &   &   &   &   &   &   & + & + &   & + &   &   & +\tabularnewline
+type+major                                      &   &   &   &   &   &   &   &   &   &   &   &   &   &   & + &  \tabularnewline
 event+venue+date                                &   &   &   &   &   &   &   & + &   &   &   &   &   &   &   & \tabularnewline
 translation                                     & + & + & + & + & + & + & + & + & + & + & + &   & + & + &   & +\tabularnewline%not in patent
 \rl /\hfill byauthor                            & + & + & + & + & + & + &   &   &   & + & + & + & + & + & +{*} & +\tabularnewline
@@ -2288,6 +2302,13 @@ pageref                                         & + & + & + & + & + & + & + & + 
 \label{apx:changelog}
 
 \begin{changelog}
+  \begin{release}{1.11}{26-01-2017}
+  \item В записях типа \bibtype{thesis}, если значение поля \bibfield{type} не совпадает с
+    заранее определёнными, то выводится как есть.\see{sec:dissers}
+  \item Исправлена ошибка: добавлена точка после заголовка.
+  \item Исправлена ошибка: не работала опция \kvopt{movenames}{false}.
+  \item Заменил \texttt{build.cmd} на \texttt{build.pl}.
+  \end{release}
 
   \begin{release}{1.10}{18-09-2016}
   \item Исправлено сокращение <<док.>> на <<д-ра>>.
