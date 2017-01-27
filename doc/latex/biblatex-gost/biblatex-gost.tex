@@ -812,9 +812,15 @@ ISSN серии или подсерии & issn (isbn) \\
 
 \fielditem{editortype}{key}
 
-Это поле существует в \biblatex, но в \biblatexgost для него определёно новое значение:
-тип редактора \bibfield{geneditor}, соответствующий общему
-редактору. Он выводится в виде: \enquote{Под общ. ред.~\ldots}.
+Это поле существует в \biblatex, но в \biblatexgost для него определёно два новых
+значения:
+\begin{itemize}
+\item \bibfield{geneditor} "--- выводится в виде: \enquote{под общ. ред.~\ldots}.
+\item \bibfield{editorcollaborator} "--- выводится в виде: \enquote{при ред. уч.~\ldots}.
+\end{itemize}
+
+Обратите внимание, что в \biblatex есть также редакторская роль \bibfield{collaborator},
+которая выводится как \enquote{при уч.~\ldots}.
 
 \listitem{heading}{name}
 
@@ -1373,6 +1379,10 @@ volsorder = {pbi},
 
 \noindent сделает \bibtype{docdisser} эквивалентным \bibtype{thesis} с установленным полем
 \kvopt{type}{docthesis}.
+В частности, в \biblatex и \biblatexgost уже определены типы \bibtype{masterthesis} (с
+типом \opt{mathesis}), \bibtype{phdthesis} (с типом \opt{phdthesis}), \bibtype{candthesis}
+(с типом \opt{phdthesis}) и \bibtype{docthesis} (с типом \opt{docthesis}). 
+
 
 \subsection{Оформление патентов}
 \label{sec:patent}
@@ -1583,6 +1593,20 @@ volsorder = {pbi},
 
 \begin{optionlist}
 
+  \choitem[emdash]{blockpunct}{emdash, space}
+
+  Разделитель блоков библиографического описания.  
+  По умолчанию равен точке и тире с окружающими его пробелами, при значении
+  \kvopt{blockpunct}{space} "--- точке с пробелом.
+
+  Опция просто устанавливает параметр \cmd{newblockpunct}.
+  Например, по умолчанию устанавливается:
+  \begin{lstlisting}[style=latex]
+  \renewcommand*{\newblockpunct}{%
+    \addperiod\addnbspace\textemdash\space\bibsentence}.
+  \end{lstlisting}
+  \vspace{-\baselineskip}Если вам нужен другой разделитель, измените его с помощью \cmd{renewcommand}.    
+  
 \boolitem{citeurl,biburl}\noitemspace%
 \boolitem{citeisbn,bibisbn}\noitemspace%
 \boolitem{citedoi,bibdoi}\noitemspace%
@@ -2309,9 +2333,13 @@ pageref                                         & + & + & + & + & + & + & + & + 
 
 \begin{changelog}
 
-  \begin{release}{1.11}{??-01-2017}
+  \begin{release}{1.12}{??-01-2017}
   \item Слово «наук» теперь не нужно писать в
     \bibfield{major}/\bibfield{speciality}.\see{sec:dissers}
+  \item Добавлена редакторская роль \kvopt{editortype}{\{editorcollaborator\}}.\newline  
+    Печатается в виде: «при ред. уч.».\see{sec:newfields}
+  \item Добавлена опция \opt{blockpunct}.\see{sec:newoptions}
+  \item Добавлен вывод поля \bibfield{credits} в \bibtype{thesis}.
   \item В записях типа \bibtype{thesis}, если значение поля \bibfield{type} не совпадает с
     заранее определёнными, то выводится как есть.\see{sec:dissers}
   \item Определены новые поля \bibfield{speciality}, \bibfield{specialitycode},

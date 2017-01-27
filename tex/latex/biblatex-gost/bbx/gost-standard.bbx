@@ -1,8 +1,8 @@
 \ProvidesFile{gost-standard.bbx}
-[2016/09/18\space v1.10\space biblatex-gost styles]
+[2017/01/27\space v1.11\space biblatex-gost styles]
 
-\def\bbx@gost@date{2016/09/18}
-\def\bbx@gost@version{1.10}
+\def\bbx@gost@date{2017/01/27}
+\def\bbx@gost@version{1.11}
 
 \@ifpackagelater{biblatex}{2016/03/03}
   {}
@@ -53,6 +53,14 @@
     {\ExecuteBibliographyOptions{pagetracker}%
      \renewbibmacro*{bbx:savehash}{\savefield{fullhash}{\bbx@lasthash}}}
     {\renewbibmacro*{bbx:savehash}{}}}
+
+% block punctuation = emdash / space
+% \bibsentence is for vol,etc.
+\DeclareBibliographyOption{blockpunct}[emdash]{%
+  \ifstrequal{#1}{emdash}
+    {\renewcommand*{\newblockpunct}{\addperiod\addnbspace\textemdash\space\bibsentence}}
+    {\renewcommand*{\newblockpunct}{\addperiod\space\bibsentence}}
+}
 
 \DeclareBibliographyOption{isbn}[true]{%
   \global\settoggle{bbx:isbn}{#1}%
@@ -150,6 +158,14 @@
             final]
           \step[fieldset=options, fieldvalue={useeditor=false}]
         }
+        \map{
+          \step[typesource=candthesis,typetarget=thesis, final]
+          \step[fieldset=type,        fieldvalue=phdthesis]
+        }
+        \map{
+          \step[typesource=docthesis, typetarget=thesis, final]
+          \step[fieldset=type,        fieldvalue=docthesis]
+        }
         \map[overwrite]{
           \pertype{patent}
           \step[fieldsource=options, final]
@@ -177,6 +193,14 @@
     }
    {\DeclareStyleSourcemap{
       \maps[datatype=bibtex]{
+        \map{
+          \step[typesource=candthesis,typetarget=thesis, final]
+          \step[fieldset=type,        fieldvalue=phdthesis]
+        }
+        \map{
+          \step[typesource=docthesis, typetarget=thesis, final]
+          \step[fieldset=type,        fieldvalue=docthesis]
+        }
         \map[overwrite]{
           \pertype{patent}
           \step[fieldsource=options, final]
@@ -215,7 +239,8 @@
   volsorder=vbpi,
   related=true,
   alldates=short,
-  eventdate=comp}
+  eventdate=comp,
+  blockpunct=emdash}
 
 \newbibmacro*{cbx:bookibid:check}[2]{#2}
 
@@ -336,6 +361,11 @@
   \iffieldnum{edition}
     {\mkbibordedition{#1}\addnbspace\bibstring{edition}}
     {\ifcapital{\MakeCapital{#1}}{#1}\isdot}}
+\DeclareFieldFormat[thesis]{type}{%
+  \ifbibstring{#1}{\biblstring{#1}%
+    \setunit*{\addspace}%
+    \printfield{major}}%
+  {#1}}
 \DeclareFieldFormat{prioritycountry}{%
   \ifbibxstring{\thefield{prioritycountry}}
     {\bibcpstring{\thefield{prioritycountry}}}
@@ -418,8 +448,6 @@
 \renewcommand*{\finallistdelim}{\addcomma\space}
 \renewcommand*{\bibpagespunct}{\addperiod\space}
 \renewcommand*{\subtitlepunct}{\addcolon\space}
-\renewcommand*{\newblockpunct}{%
-  \addperiod\addnbspace\textemdash\space\bibsentence}%block punct.,\bibsentence is for vol,etc.
 \newcommand*{\respdelim}{\addnbspace/\space}% delimiter before "credits"
 \newcommand*{\resppunct}{\addsemicolondelim}% punctuation between "credits" items
 \newcommand*{\specialitydelim}{\addnbspace\textemdash\space}% punctuation between specialitycode and speciality
