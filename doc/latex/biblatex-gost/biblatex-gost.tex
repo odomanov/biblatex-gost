@@ -197,7 +197,7 @@ This package is maintained.
 
 
 
-\subsubsection*{Версия 1.11}
+\subsubsection*{Версия 1.11a}
 
 \begin{trivlist}
 \item При заполнении полей \bibfield{major}/\bibfield{speciality} в описании диссертаций
@@ -2334,16 +2334,25 @@ pageref                                         & + & + & + & + & + & + & + & + 
 \begin{changelog}
 
   \begin{release}{1.12}{??-01-2017}
-  \item Слово «наук» теперь не нужно писать в
-    \bibfield{major}/\bibfield{speciality}.\see{sec:dissers}
+  \item Определены новые поля \bibfield{speciality}, \bibfield{specialitycode},
+    \bibfield{number} для записей типа \bibtype{thesis}.\see{sec:dissers}
+  \end{release}
+
+  \begin{release}{1.11a}{28-01-2017}
+  \item При заполнении поля \bibfield{major} в описании диссертаций теперь нужно писать
+    «экон.», «физ.-мат.» и пр. вместо «экон. наук», «физ.-мат. наук» и пр. (в версии 1.11
+    добавил это в документацию, но забыл добавить в код)\see{sec:dissers}
+  \end{release}
+
+  \begin{release}{1.11}{27-01-2017}
+  \item Определены типы записей \bibtype{candthesis} и
+    \bibtype{docthesis}.\see{sec:dissers}
   \item Добавлена редакторская роль \kvopt{editortype}{\{editorcollaborator\}}.\newline  
     Печатается в виде: «при ред. уч.».\see{sec:newfields}
   \item Добавлена опция \opt{blockpunct}.\see{sec:newoptions}
   \item Добавлен вывод поля \bibfield{credits} в \bibtype{thesis}.
   \item В записях типа \bibtype{thesis}, если значение поля \bibfield{type} не совпадает с
     заранее определёнными, то выводится как есть.\see{sec:dissers}
-  \item Определены новые поля \bibfield{speciality}, \bibfield{specialitycode},
-    \bibfield{number} для записей типа \bibtype{thesis}.\see{sec:dissers}
   \item Исправлена ошибка: добавлена точка после заголовка.
   \item Исправлена ошибка: не работала опция \kvopt{movenames}{false}.
   \item Заменил \texttt{build.cmd} на \texttt{build.pl}.
