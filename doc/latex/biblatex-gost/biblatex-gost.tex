@@ -195,7 +195,14 @@ This package is maintained.
   точки зрения совместимости с предыдущими версиями. 
 Более полный список изменений см. в \Apxref{apx:changelog}.
 
+\subsubsection*{Версия 1.11b}
 
+\begin{trivlist}
+\item Вернул изменения предыдущей версии, касающиеся заполнении поля \bibfield{major}.  
+  Не все отрасли науки требуют слова «наук» (например, не требуют архитектура,
+  искусствоведение, культурология). 
+  См.~\secref{sec:dissers}.
+\end{trivlist}
 
 \subsubsection*{Версия 1.11a}
 
@@ -1325,8 +1332,9 @@ volsorder = {pbi},
 \fielditem{major}{literal}\noitemspace%
 \fielditem{speciality}{literal}
 
-Специальность в виде <<ист.>>, <<физ.-мат.>>, <<технических>> и т.\,д.
-Выводится  как, например, «дис. \textellipsis\ канд. технических наук». 
+Отрасль науки в виде «ист. наук», «физ.-мат. наук», «искусствоведения» и т.\,д.
+Выводится как «дис. \textellipsis\ канд. ист. наук», «дис. \textellipsis\
+канд. физ.-мат. наук», «дис. \textellipsis\ канд. искусствоведения» и т.\,д.
 
 Поля эквивалентны, можно использовать любое из них.
 
@@ -1348,7 +1356,7 @@ volsorder = {pbi},
   title        = {|Религиозная политика Золотой Орды на Руси в XIII—XIV вв.|},
   media        = {text},
   type         = {phdthesis},
-  major        = {|ист.|},
+  major        = {|ист. наук|},
   majorcode    = {07.00.02},
   titleaddon   = {|защищена 22.01.02~: утв. 15.07.02|},
   location     = {|М.|},
@@ -2336,6 +2344,12 @@ pageref                                         & + & + & + & + & + & + & + & + 
   \begin{release}{1.12}{??-01-2017}
   \item Определены новые поля \bibfield{speciality}, \bibfield{specialitycode},
     \bibfield{number} для записей типа \bibtype{thesis}.\see{sec:dissers}
+  \end{release}
+
+  \begin{release}{1.11b}{03-02-2017}
+  \item Вернул изменения предыдущей версии, касающиеся заполнении поля \bibfield{major}.  
+    Не все отрасли науки требуют слова «наук» (например, не требуют архитектура,
+    искусствоведения, культурология)\see{sec:dissers}
   \end{release}
 
   \begin{release}{1.11a}{28-01-2017}
