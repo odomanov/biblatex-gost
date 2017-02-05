@@ -510,13 +510,6 @@
 \newcommand*{\blx@gost@iflangundef}[3]{\iffieldundef{#1}{#2}{#3}}
 \newcommand*{\blx@gost@iflangsequal}[4]{\iffieldsequal{#1}{#2}{#3}{#4}}
 
-% clear \newblock in citations, not in biblists
-\AtUsedriver*{%
-  \ifcitation{\let\newblock\relax}{}
-  \let\finentry\blx@finentry@usedrv
-  \let\abx@macro@bibindex\@empty
-  \let\abx@macro@pageref\@empty}
-
 \newbibmacro*{begentry}{}
 \newbibmacro*{finentry}{\finentry}
 %
