@@ -22,9 +22,9 @@
   prioritynumber,
   prioritycountry,
   authorcountry,
-  major,
-  majorcode,
-  majorname,
+  science,
+  specialitycode,
+  speciality,
   heading,
 }
 
@@ -90,7 +90,7 @@
 }
 
 \DeclareDatamodelEntryfields[thesis]{
-  major,majorcode,majorname,
+  science,specialitycode,speciality,number,
 }
 
 \DeclareDatamodelEntryfields[online]{

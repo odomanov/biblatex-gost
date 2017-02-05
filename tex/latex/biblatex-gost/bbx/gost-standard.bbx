@@ -194,9 +194,9 @@
           \pertype{phdthesis}
           \pertype{candthesis}
           \pertype{docthesis}
-          \step[fieldsource=speciality,     fieldtarget=major]
-          \step[fieldsource=specialitycode, fieldtarget=majorcode]
-          \step[fieldsource=number,         fieldtarget=majorcode]
+          \step[fieldsource=major,     fieldtarget=speciality]
+          \step[fieldsource=majorcode, fieldtarget=specialitycode]
+          \step[fieldsource=number,    fieldtarget=specialitycode]
         }
       }
      }
@@ -233,9 +233,9 @@
           \pertype{phdthesis}
           \pertype{candthesis}
           \pertype{docthesis}
-          \step[fieldsource=speciality,     fieldtarget=major]
-          \step[fieldsource=specialitycode, fieldtarget=majorcode]
-          \step[fieldsource=number,         fieldtarget=majorcode]
+          \step[fieldsource=major,     fieldtarget=speciality]
+          \step[fieldsource=majorcode, fieldtarget=specialitycode]
+          \step[fieldsource=number,    fieldtarget=specialitycode]
         }
       }
     }
@@ -387,7 +387,7 @@
 \DeclareFieldFormat[thesis]{type}{%
   \ifbibstring{#1}{\biblstring{#1}%
     \setunit*{\addspace}%
-    \printfield{major}}%
+    \printfield{science}}%
   {#1}}
 \DeclareFieldFormat{prioritycountry}{%
   \ifbibxstring{\thefield{prioritycountry}}
@@ -2025,9 +2025,9 @@
        \setunit*{\addcolondelim}%
        \printfield{type}%
        \setunit*{\addcolondelim}%
-       \printfield{majorcode}%
+       \printfield{specialitycode}%
        \setunit*{\specialitydelim}%
-       \printfield{majorname}}%
+       \printfield{speciality}}%
   \setunit{\addcolondelim}%
   \printfield{titleaddon}%
   \clearfield{media}}

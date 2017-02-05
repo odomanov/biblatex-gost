@@ -198,7 +198,12 @@ This package is maintained.
 \subsubsection*{Версия 1.12}
 
 \begin{trivlist}
-\item Вернул изменения предыдущей версии, касающиеся заполнении поля \bibfield{major}.  
+\item Изменения в оформлении диссертаций.  
+  Определены новые поля, некоторые объявлены устаревшими
+  (\foreignlanguage{english}{deprecated}). 
+  См.~\secref{sec:dissers}.
+\item Вернул изменения предыдущей версии, касающиеся заполнении поля \bibfield{science}
+  (устаревшее "--- \bibfield{major}).  
   Не все отрасли науки требуют слова «наук» (например, не требуют архитектура,
   искусствоведение, культурология). 
   См.~\secref{sec:dissers}.
@@ -648,7 +653,8 @@ This package is maintained.
                                     booktitleaddon, type,\newline
                                     \ensuremath\langle{\spotcolor ipc}, {\spotcolor location},
                                     {\spotcolor number},
-                                    {\spotcolor major}, {\spotcolor majorcode}\ensuremath\rangle \\
+                                    {\spotcolor science}, {\spotcolor specialitycode},
+                                    {\spotcolor speciality}\ensuremath\rangle \\
 Сведения об ответственности      & {\spotcolor credits}, {\spotcolor bookcredits},
                                     editor, editora, editorb, editorc, afterword,
                                     annotator, commentator, foreword, introduction, organization,
@@ -1320,36 +1326,45 @@ volsorder = {pbi},
 \subsection{Оформление диссертаций и авторефератов}
 \label{sec:dissers}
 
-Для оформления диссертаций и автореферетов используйте записи типа \bibtype{thesis}. Поле
-\bibfield{type} определяет тип диссертации~--- магистерская (\opt{mathesis}), кандидатская
-(\opt{phdthesis}), докторская (\opt{docthesis})~--- или тип автореферата: кандидатская
-(\opt{phdautoref}), докторская (\opt{docautoref}).
-При других значениях поля \bibfield{type}, оно выводится как есть, причём поля
-\bibfield{major} и \bibfield{speciality} (см.~ниже) игнорируются.
+Для оформления диссертаций и автореферетов используйте записи типа \bibtype{thesis}.  
+Поле \bibfield{type} определяет тип диссертации "--- магистерская (\opt{mathesis}),
+кандидатская (\opt{phdthesis}), докторская (\opt{docthesis}) "--- или тип автореферата:
+кандидатская (\opt{phdautoref}), докторская (\opt{docautoref}).
+При других значениях поля \bibfield{type}, оно выводится как есть, причём поле
+\bibfield{science} (см.~ниже) игнорируется.
 
 Для записей типа \bibtype{thesis} определены дополнительные поля:
 
 \begin{fieldlist}
 
-\fielditem{major}{literal}\noitemspace%
-\fielditem{speciality}{literal}
+\fielditem{science}{literal}\noitemspace%
+\fielditem{major}{literal}
 
 Отрасль науки в виде «ист. наук», «физ.-мат. наук», «искусствоведения» и т.\,д.
 Выводится как «дис. \textellipsis\ канд. ист. наук», «дис. \textellipsis\
 канд. физ.-мат. наук», «дис. \textellipsis\ канд. искусствоведения» и т.\,д.
 
-Поля эквивалентны, можно использовать любое из них.
+Поля эквивалентны, можно использовать любое из них, но \bibfield{major} является
+устаревшим и не рекомендуется к использованию.
 
-\fielditem{majorcode}{literal}\noitemspace%
 \fielditem{specialitycode}{literal}\noitemspace%
-\fielditem{number}{literal}
+\fielditem{number}{literal}\noitemspace%
+\fielditem{majorcode}{literal}
 
 Код специальности в виде <<09.00.01>>, <<07.00.02>> и т.\,д.
 
-Поля эквивалентны, можно использовать любое из них.
+Поля эквивалентны, можно использовать любое из них, но \bibfield{majorcode} является
+устаревшим и не рекомендуется к использованию.
 
+\fielditem{speciality}{literal}
 
+Название специальности.  
+Отделяется от кода специальности разделителем \cmd{specialitydelim}, который по умолчанию
+определён как тире с пробелами:
 
+\begin{lstlisting}[style=latex]
+\newcommand*{\specialitydelim}{\addnbspace\textemdash\space}
+\end{lstlisting}
 
 \end{fieldlist}
 
@@ -1357,18 +1372,18 @@ volsorder = {pbi},
 
 \begin{lstlisting}[style=bibtex,escapechar=|]
 @THESIS{belozerov_thesis,
-  author       = {|Белозеров, Иван Валентинович|},
-  title        = {|Религиозная политика Золотой Орды на Руси в XIII—XIV вв.|},
-  media        = {text},
-  type         = {phdthesis},
-  major        = {|ист. наук|},
-  majorcode    = {07.00.02},
-  titleaddon   = {|защищена 22.01.02~: утв. 15.07.02|},
-  location     = {|М.|},
-  date         = {2002},
-  pagetotal    = {215},
-  addendum     = {|Библиогр.: с. 202---213.~--- 04200201565|},
-  langid       = {russian},
+  author         = {|Белозеров, Иван Валентинович|},
+  title          = {|Религиозная политика Золотой Орды на Руси в XIII—XIV вв.|},
+  media          = {text},
+  type           = {phdthesis},
+  science        = {|ист. наук|},
+  specialitycode = {07.00.02},
+  titleaddon     = {|защищена 22.01.02~: утв. 15.07.02|},
+  location       = {|М.|},
+  date           = {2002},
+  pagetotal      = {215},
+  addendum       = {|Библиогр.: с. 202---213.~--- 04200201565|},
+  langid         = {russian},
 }
 \end{lstlisting}
 
@@ -2054,8 +2069,15 @@ gost-inline & false & true \\
     \newcommand{\doublevolsdelim}{\slash}.
   \end{lstlisting}
 
+  \cmditem{specialitydelim}
 
+  Разделитель между кодом специальности и специальностью.  
+  См.~\secref{sec:dissers}.
 
+  По умолчанию:
+  \begin{lstlisting}[style=latex,belowskip=-\baselineskip]
+    \newcommand*{\specialitydelim}{\addnbspace\textemdash\space}.
+  \end{lstlisting}
 
 \end{ltxsyntax}
 
@@ -2325,7 +2347,7 @@ author/editor                                   &   &   &   &   &   &   &   &   
 \rl maintitle+volumes+parts+title               &   &   &   &   &   & + & + & + &   &   &   &   &   &   &   & \tabularnewline
 title                                           & + & + & + & + & + &   &   &   & + & + & + & + & + & + & + & +\tabularnewline
 type                                            &   &   &   &   &   &   &   &   &   & + & + &   & + &   &   & +\tabularnewline
-type+major/speciality                           &   &   &   &   &   &   &   &   &   &   &   &   &   &   & + &  \tabularnewline
+type+speciality/major                           &   &   &   &   &   &   &   &   &   &   &   &   &   &   & + &  \tabularnewline
 event+venue+date                                &   &   &   &   &   &   &   & + &   &   &   &   &   &   &   & \tabularnewline
 translation                                     & + & + & + & + & + & + & + & + & + & + & + &   & + & + &   & +\tabularnewline%not in patent
 \rl /\hfill byauthor                            & + & + & + & + & + & + &   &   &   & + & + & + & + & + & +{*} & +\tabularnewline
@@ -2382,6 +2404,9 @@ pageref                                         & + & + & + & + & + & + & + & + 
   \begin{release}{1.12}{05-02-2017}
   \item Определена опция \opt{doublevols} и команда
     \cmd{doublevolsdelim}\see{sec:newoptions}
+  \item Определены поля \bibfield{science}, \bibfield{specialitycode},
+    \bibfield{speciality}, \bibfield{number} для записей типа \bibtype{thesis}.  
+    Поля \bibfield{major}, \bibfield{majorcode} объявлены устаревшими\see{sec:dissers}
   \item Вернул изменения предыдущей версии, касающиеся заполнении поля \bibfield{major}.  
     Не все отрасли науки требуют слова «наук» (например, не требуют архитектура,
     искусствоведения, культурология)\see{sec:dissers}
