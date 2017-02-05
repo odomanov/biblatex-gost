@@ -46,14 +46,6 @@
       \step[fieldsource=langid, match={tempruorder}, final]
       \step[fieldset=langid, null]
     }
-    \map{
-      \step[fieldsource=entrykey, match=\regexp{badiou:ee$}, final]    %$
-      \step[fieldset=shorthand, fieldvalue={EE}]
-    }
-    \map{
-      \step[fieldsource=entrykey, match=\regexp{badiou:ee2$}, final]   %$
-      \step[fieldset=shorthand, fieldvalue={EE2}]
-    }
   }
 }
 
