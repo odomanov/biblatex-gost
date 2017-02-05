@@ -195,13 +195,15 @@ This package is maintained.
   точки зрения совместимости с предыдущими версиями. 
 Более полный список изменений см. в \Apxref{apx:changelog}.
 
-\subsubsection*{Версия 1.11b}
+\subsubsection*{Версия 1.12}
 
 \begin{trivlist}
 \item Вернул изменения предыдущей версии, касающиеся заполнении поля \bibfield{major}.  
   Не все отрасли науки требуют слова «наук» (например, не требуют архитектура,
   искусствоведение, культурология). 
   См.~\secref{sec:dissers}.
+\item Сдвоенные номера томов теперь разделяются косой чертой, как требует ГОСТ.
+  См. подробнее \secref{sec:newoptions}, опция \opt{doublevols}.
 \end{trivlist}
 
 \subsubsection*{Версия 1.11a}
@@ -1346,6 +1348,9 @@ volsorder = {pbi},
 
 Поля эквивалентны, можно использовать любое из них.
 
+
+
+
 \end{fieldlist}
 
 Пример оформление диссертации:
@@ -1662,6 +1667,19 @@ gost-authoryear-min & --- & false \\
 \end{table}
 
 
+\boolitem[true]{doublevols}
+
+Согласно \gostbibref{7.5.1.1}, сдвоенные номера тома или выпуска приводят через
+косую черту.  
+В \biblatexgost это происходит по умолчанию, причём для всех языков.  
+Данная опция позволяет отключить это поведение.
+При \kvopt{doublevols}{false} разделитель определяется настройками языка (командой
+\cmd{bibrangedash} в файлах \file{.lbx}).  
+Кроме того, при \kvopt{doublevols}{true} разделитель определяется командой
+\cmd{doublevolsdelim}, определённой по умолчанию как косая черта:
+\begin{lstlisting}[style=latex]
+  \newcommand{\doublevolsdelim}{\slash}.
+\end{lstlisting}
 
 \boolitem[false]{dropdates}
 
@@ -1962,25 +1980,6 @@ gost-authoryear & cite & Автор (заголовок) и год в текст
 
 %Команда \cmd{autocite} определена таким образом, чтобы\ldots
 
-\subsection{Описание многотомных изданий}
-\label{sec:multivol}
-
-ГОСТ определяет два способа библиографического описания отдельного тома многотомного издания:
-
-\begin{bibexample}
-\item Детская энциклопедия. В 12 т. Т. 7. Человек. \dots\
-\item Человек. \dots\ (Детская энциклопедия: в 12 т., т. 7)\dots\
-\end{bibexample}
-
-В \biblatexgost реализован только первый вариант. Соответственно,
-в стиле \bibsty{gost-autoryear} при отсутствии автора ссылка производится на общий
-заголовок многотомного издания, а не на заголовок отдельного тома (тем более, что
-последний может и отсутствовать):
-
-\begin{bibexample}
-\item{} [Детская энциклопедия, 1966b, с.\,33]
-\end{bibexample}
-
 \begin{comment}----------------------------------------------------------------
 \subsection{Поле \bibfield{related}}
 \label{sec:related}
@@ -2016,14 +2015,14 @@ gost-inline & false & true \\
 определённой как:
 
 \begin{lstlisting}[style=latex]
-\newcommand*{\mkgostheading}[1]{\mkbibemph{#1}}
+  \newcommand*{\mkgostheading}[1]{\mkbibemph{#1}}
 \end{lstlisting}
 
 В стиле \bibsty{gost-authoryear} заголовок, использованный в цитате,
 форматируется отдельно:
 
 \begin{lstlisting}[style=latex]
-\DeclareFieldFormat{citeheading}{#1}
+  \DeclareFieldFormat{citeheading}{#1}
 \end{lstlisting}
 
 Поскольку имена авторов~---
@@ -2039,6 +2038,45 @@ gost-inline & false & true \\
   \newcommand*{\mkbibhdnameprefix}[1]{\mkbibhdnamefamily{#1}}
   \newcommand*{\mkbibhdnamesuffix}[1]{\mkbibhdnamefamily{#1}}
 \end{lstlisting}
+
+\subsection{Другие команды}
+\label{sec:other-commands}
+
+\begin{ltxsyntax}
+
+  \cmditem{doublevolsdelim}
+
+  Разделитель сдвоенных номеров при \kvopt{doublevols}{true}.
+  См.~\secref{sec:newoptions}.
+
+  По умолчанию:
+  \begin{lstlisting}[style=latex,belowskip=-\baselineskip]
+    \newcommand{\doublevolsdelim}{\slash}.
+  \end{lstlisting}
+
+
+
+
+\end{ltxsyntax}
+
+\subsection{Описание многотомных изданий}
+\label{sec:multivol}
+
+ГОСТ определяет два способа библиографического описания отдельного тома многотомного издания:
+
+\begin{bibexample}
+\item Детская энциклопедия. В 12 т. Т. 7. Человек. \dots\
+\item Человек. \dots\ (Детская энциклопедия: в 12 т., т. 7)\dots\
+\end{bibexample}
+
+В \biblatexgost реализован только первый вариант. Соответственно,
+в стиле \bibsty{gost-autoryear} при отсутствии автора ссылка производится на общий
+заголовок многотомного издания, а не на заголовок отдельного тома (тем более, что
+последний может и отсутствовать):
+
+\begin{bibexample}
+\item{} [Детская энциклопедия, 1966b, с.\,33]
+\end{bibexample}
 
 \subsection{Библиографический список}
 \label{sec:gostbibliography}
@@ -2341,12 +2379,9 @@ pageref                                         & + & + & + & + & + & + & + & + 
 
 \begin{changelog}
 
-  \begin{release}{1.12}{??-01-2017}
-  \item Определены новые поля \bibfield{speciality}, \bibfield{specialitycode},
-    \bibfield{number} для записей типа \bibtype{thesis}.\see{sec:dissers}
-  \end{release}
-
-  \begin{release}{1.11b}{03-02-2017}
+  \begin{release}{1.12}{05-02-2017}
+  \item Определена опция \opt{doublevols} и команда
+    \cmd{doublevolsdelim}\see{sec:newoptions}
   \item Вернул изменения предыдущей версии, касающиеся заполнении поля \bibfield{major}.  
     Не все отрасли науки требуют слова «наук» (например, не требуют архитектура,
     искусствоведения, культурология)\see{sec:dissers}
