@@ -2065,8 +2065,20 @@ gost-inline & false & true \\
   См.~\secref{sec:newoptions}.
 
   По умолчанию:
-  \begin{lstlisting}[style=latex,belowskip=-\baselineskip]
+  \begin{lstlisting}[style=latex]
     \newcommand{\doublevolsdelim}{\slash}.
+  \end{lstlisting}
+
+  Команда временно переопределяет команду \biblatex \cmd{bibrangedash}, поэтому попытка
+  присваивания  
+  \begin{lstlisting}[style=latex,belowskip=-.5\baselineskip]
+    \renewcommand{\doublevolsdelim}{\bibrangedash}
+  \end{lstlisting}
+  приводит к бесконечному циклу.  
+  Если вам всё же требуется такое присваивание, сделайте, например,
+  \begin{lstlisting}[style=latex,belowskip=-\baselineskip]
+    \let\myvoldelim\bibrangedash
+    \renewcommand{\doublevolsdelim}{\myvoldelim}.
   \end{lstlisting}
 
   \cmditem{specialitydelim}
