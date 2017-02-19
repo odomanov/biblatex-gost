@@ -274,50 +274,36 @@
 % volume etc
 %
 % helper for printing volume/book/number/part/issue
-\newcommand{\printvol}[2]{%
-  \ifnumcomp{\rangelen{#2}}{=}{2}
+% [prefix] <value> <volume-string>
+\newcommand{\printvol}[3][]{%
+  \ifnumcomp{\rangelen{#3}}{=}{2}
     {\iftoggle{bbx:gost:doublevols}{\def\bibrangedash{\doublevolsdelim}}{}}
     {}%
-  \iffieldnums{#2}
-    {\ifbibstring{#2}
-      {\bibstring{#2}\addabbrvspace#1}
-      {#1}}
-    {\ifcapital{\MakeCapital{#1}}{#1}\isdot}}
+  \iffieldnums{#3}
+    {\ifbibstring{#3}
+      {\bibstring{#3}\addabbrvspace#2}
+      {#1#2}}
+    {\ifcapital{\MakeCapital{#2}}{#2}\isdot}}
 \DeclareFieldFormat*{volume}{\printvol{#1}{volume}}
 \DeclareFieldFormat[article,periodical]{volume}{%
-  \ifnumcomp{\rangelen{volume}}{=}{2}
-    {\iftoggle{bbx:gost:doublevols}{\def\bibrangedash{\doublevolsdelim}}{}}
-    {}%
+  \ifnumcomp{\rangelen{volume}}{=}{2}{%
+    \iftoggle{bbx:gost:doublevols}{\def\bibrangedash{\doublevolsdelim}}{}%
+  }{}%
   \ifbibstring{volume}
     {\bibstring{jourvol}\addabbrvspace#1}
     {#1}}
 \DeclareFieldFormat*{book}{\printvol{#1}{book}}
 \DeclareFieldFormat*{part}{\printvol{#1}{part}}
-\DeclareFieldFormat{seriesnumber}{#1}%
-\DeclareFieldFormat*{number}{%
-  \ifnumcomp{\rangelen{number}}{=}{2}
-    {\iftoggle{bbx:gost:doublevols}{\def\bibrangedash{\doublevolsdelim}}{}}
-    {}%
-  \iffieldnums{number}
-    {\ifbibstring{number}
-      {\bibsstring{number}\addabbrvspace#1}
-      {\unspace\adddot#1}}%
-    {\ifcapital{\MakeCapital{#1}}{#1}\isdot}}
+\DeclareFieldFormat*{issue}{\printvol{#1}{issue}}
+\DeclareFieldFormat[article,periodical]{issue}{\printvol[\unspace\adddot]{#1}{issue}}
+\DeclareFieldFormat*{number}{\printvol[\unspace\adddot]{#1}{number}}
+% \DeclareFieldFormat*{number}{\printvol{#1}{number}}
 \DeclareFieldFormat[patent]{number}{#1}%
 \DeclareFieldFormat{requestnumber}{%
   \ifbibstring{number}
     {\bibsstring{number}\addnbspace#1}
     {#1}}%
-\DeclareFieldFormat{issue}{\printvol{#1}{issue}}
-\DeclareFieldFormat[article,periodical]{issue}{%
-  \ifnumcomp{\rangelen{issue}}{=}{2}
-    {\iftoggle{bbx:gost:doublevols}{\def\bibrangedash{\doublevolsdelim}}{}}
-    {}%
-  \iffieldnums{issue}
-    {\ifbibstring{issue}%
-     {\bibstring{issue}\addabbrvspace#1}%
-     {\unspace\adddot#1}}%
-    {\ifcapital{\MakeCapital{#1}}{#1}\isdot}}
+\DeclareFieldFormat{seriesnumber}{#1}%
 
 % volumes etc, involumes etc
 %  
