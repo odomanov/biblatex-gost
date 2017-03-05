@@ -46,6 +46,21 @@
 
 %  OPTIONS
 
+\DeclareBibliographyOption{otherlangs}[true]{%
+  \ifstrequal{#1}{true}
+    {\DeclareLanguageMapping{brazilian}{brazilian-gost}
+      \DeclareLanguageMapping{catalan}{catalan-gost}
+      \DeclareLanguageMapping{croatian}{croatian-gost}
+      \DeclareLanguageMapping{english}{english-gost}
+      \DeclareLanguageMapping{greek}{greek-gost}
+      \DeclareLanguageMapping{icelandic}{icelandic-gost}
+      \DeclareLanguageMapping{italian}{italian-gost}
+      \DeclareLanguageMapping{portuguese}{portuguese-gost}
+      \DeclareLanguageMapping{slovene}{slovene-gost}
+      \DeclareLanguageMapping{spanish}{spanish-gost}}
+    {}
+  }
+
 \newbibmacro*{bbx:savehash}{%
   \savefield{fullhash}{\bbx@lasthash}}
 \DeclareBibliographyOption{dashed}[true]{%
@@ -255,7 +270,8 @@
   alldates=short,
   eventdate=comp,
   blockpunct=emdash,
-  doublevols=true}
+  doublevols=true,
+  otherlangs=true}
 
 \newbibmacro*{cbx:bookibid:check}[2]{#2}
 
