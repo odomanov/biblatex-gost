@@ -35,7 +35,7 @@
 % label isn't taken into account since labeltitle is always provided
 \newbibmacro*{labeltitle:common}{%
   \blx@gost@ifneedsdate
-    {\printfield[title]{labeltitle}%
+    {\printtext[title]{\printfield[titlecase]{labeltitle}}%
      \clearfield{\thefield{labeltitlesource}}}
     {}}
 
@@ -203,10 +203,10 @@
                    \iffieldundef{label}
                      {% no label, so print labeltitle (always present)
                       \blx@gost@ifneedsdate
-                        {\printfield[citetitle]{labeltitle}
+                        {\printtext[citetitle]{\printfield[titlecase]{labeltitle}}
                          \setunit{\nameyeardelim}%
                          \usebibmacro{cite:labelyear+extras}{}}
-                        {\printfield[citetitle]{labeltitle}}}
+                        {\printtext[citetitle]{\printfield[titlecase]{labeltitle}}}}
                      {% label exists, print it
                       \usebibmacro{cite:label+volume+parts}}}%
                   {% labelname, no labelyear

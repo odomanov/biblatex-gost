@@ -76,9 +76,9 @@
       test {\ifnumequal{\value{citecount}}{\value{citetotal}}}
       and
       (
-      	not test {\iffieldundef{pages}}
-      	or
-      	not test {\iffieldundef{pagetotal}}
+        not test {\iffieldundef{pages}}
+        or
+        not test {\iffieldundef{pagetotal}}
       )
     }
       {\usebibmacro{cite:postnote:pages}}
@@ -406,7 +406,7 @@
     {}
     {\setunit*{\labelnamepunct}%
      \printtext[bibhyperlink]{%
-        \printfield[citetitle]{labeltitle}}}%
+        \printtext[citetitle]{\printfield[titlecase]{labeltitle}}}}%
   \ifboolexpr{
     ( test {\ifentrytype{book}}     % do we use macro{volume+parts} ?
       or test {\ifentrytype{collection}}
@@ -499,7 +499,7 @@
 
 \newbibmacro*{textcite}{%
   \ifnameundef{labelname}
-    {\printfield[citetitle]{labeltitle}}
+    {\printtext[citetitle]{\printfield[titlecase]{labeltitle}}}
     {\printnames{labelname}}}
 
 \newbibmacro*{textcite:init}{%

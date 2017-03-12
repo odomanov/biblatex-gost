@@ -1841,7 +1841,7 @@
   \iffieldundef{issuetitle}
     {}
     {\setunit{\addcolon\space}%
-     \printfield{issuetitle}}}%
+     \printtext[issuetitle]{\printfield[titlecase]{issuetitle}}}}%
 
 \newbibmacro*{jour:date}{%
   \usebibmacro{year}%

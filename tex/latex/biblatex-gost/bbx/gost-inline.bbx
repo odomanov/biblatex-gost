@@ -38,9 +38,9 @@
 \newbibmacro*{labeltitle}{%
   \iffieldundef{label}
     {\iffieldundef{shorttitle}
-       {\printfield{title}%
+       {\printtext[title]{\printfield[titlecase]{title}}%
         \clearfield{title}}
-       {\printfield[title]{shorttitle}}}
+       {\printtext[title]{\printfield[titlecase]{shorttitle}}}}
     {\printfield{label}}}
 
 \endinput
