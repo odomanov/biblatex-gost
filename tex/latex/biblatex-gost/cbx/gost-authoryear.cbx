@@ -53,11 +53,11 @@
                \iffieldundef{label}
                  {% no label, so print labeltitle (always present)
                   \blx@gost@ifneedsdate
-                    {\printfield[citetitle]{labeltitle}
+                    {\printtext[citetitle]{\printfield[titlecase]{labeltitle}}
                      \setunit{\nameyeardelim}%
                      \usebibmacro{cite:labelyear+extras}{bibhyperref}}
                     {\printtext[bibhyperref]{%
-                              \printfield[citetitle]{labeltitle}}}}
+                        \printtext[citetitle]{\printfield[titlecase]{labeltitle}}}}}
                  {% label exists, print it
                   \usebibmacro{cite:label+volume+parts}}}%
               {% labelname, no labelyear
@@ -190,7 +190,7 @@
 
 \newbibmacro*{cite:label}{%
   \iffieldundef{label}
-    {\printtext[bibhyperref]{\printfield[citetitle]{labeltitle}}}
+    {\printtext[bibhyperref]{\printtext[citetitle]{\printfield[titlecase]{labeltitle}}}}
     {\printtext[bibhyperref]{\printfield{label}}}}
 
 \newbibmacro*{cite:labelyear+extrayear}{%
