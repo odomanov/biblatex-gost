@@ -2081,9 +2081,7 @@
   }
     {}
     {\setrespdelim%
-      \iftoggle{bbx:gostbibliography}
-        {\printnames[byauthor][-\value{listtotal}]{author}}
-        {\printnames[byauthor]{author}}}}
+     \printnames[byauthor]{author}}}
 
 \newbibmacro*{book:byauthor}{%
   \ifboolexpr{
@@ -2096,9 +2094,7 @@
   }
     {}
     {\setrespdelim%
-      \iftoggle{bbx:gostbibliography}
-        {\printnames[byauthor][-\value{listtotal}]{bookauthor}}
-        {\printnames[byauthor]{bookauthor}}}}
+     \printnames[byauthor]{bookauthor}}}
 
 \renewbibmacro*{name:andothers}{%
   \ifboolexpr{
