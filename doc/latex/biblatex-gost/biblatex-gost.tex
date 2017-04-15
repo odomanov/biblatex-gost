@@ -47,7 +47,7 @@ bibstyle=gost-standard,
 \newcommand*{\printdateTeX}[1]{\expandafter\blx@gost@printdateTeX#1//}
 
 \titlepage{%
-  title={Пакет \biblatexgost},
+  title={\biblatexgost},
   subtitle={Оформление библиографии по ГОСТ 7.0.5---2008},
   url={\biblatexgosthome},
   author={Олег Доманов},
@@ -194,6 +194,13 @@ This package is maintained.
 Ниже перечислены изменения, на которые стоит обратить внимание с
   точки зрения совместимости с предыдущими версиями. 
 Более полный список изменений см. в \Apxref{apx:changelog}.
+
+\subsubsection*{Версия 1.14}
+
+\begin{trivlist}
+\item Изменён вывод авторов в библиографическом списке (см.~\secref{sec:gostbibliography})
+  "--- приведён в соответствие с \gostbibname.
+\end{trivlist}
 
 \subsubsection*{Версия 1.12}
 
@@ -2429,7 +2436,7 @@ pageref                                         & + & + & + & + & + & + & + & + 
 
 \begin{changelog}
 
-  \begin{release}{1.14}{??-02-2017}
+  \begin{release}{1.14}{15-04-2017}
   \item Внутренние изменения вывода томов, номеров, выпусков.
   \item Добавлен везде, где можно, формат \texttt{titlecase} при выводе названий. 
   \item Исправлена библиография для ГОСТ 7.1-2003\see{sec:gostbibliography}
