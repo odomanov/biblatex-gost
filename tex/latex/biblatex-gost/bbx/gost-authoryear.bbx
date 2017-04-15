@@ -269,7 +269,9 @@
   }
     {\usebibmacro{bbx:dashcheck}
        {\bibnamedash}
-       {\printnames[heading]{author}%
+       {\iftoggle{bbx:gostbibliography}
+         {\printnames[heading][1-1]{author}}
+         {\printnames[heading]{author}}%
      \setunit{\addcomma\space}%
      \usebibmacro{bbx:savehash}}%
      \usebibmacro{authorstrg}%

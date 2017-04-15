@@ -401,7 +401,9 @@
       {\namepartgiven}
       {\namepartprefix}
       {\namepartsuffix}}%
-  \usebibmacro{name:andothers}} 
+    \iftoggle{bbx:gostbibliography}
+      {}
+      {\usebibmacro{name:andothers}}} 
 \newbibmacro*{headingname:family-given}[4]{%
   \ifuseprefix
     {\usebibmacro{name:delim}{#3#1}%
@@ -2125,7 +2127,9 @@
   }
     {\usebibmacro{bbx:dashcheck}
        {\bibnamedash}
-       {\printnames[heading]{author}%
+       {\iftoggle{bbx:gostbibliography}
+         {\printnames[heading][1-1]{author}}
+         {\printnames[heading]{author}}%
      \setunit{\addcomma\space}%
      \usebibmacro{bbx:savehash}}%
      \usebibmacro{authorstrg}}
