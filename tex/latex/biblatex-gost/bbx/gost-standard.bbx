@@ -46,6 +46,30 @@
 
 %  OPTIONS
 
+\DeclareBibliographyOption{otherlangs}[true]{%
+  \ifstrequal{#1}{true}
+    {\DeclareLanguageMapping{brazilian}{brazilian-gost}
+      \DeclareLanguageMapping{catalan}{catalan-gost}
+      \DeclareLanguageMapping{croatian}{croatian-gost}
+      \DeclareLanguageMapping{english}{english-gost}
+      \DeclareLanguageMapping{greek}{greek-gost}
+      \DeclareLanguageMapping{icelandic}{icelandic-gost}
+      \DeclareLanguageMapping{italian}{italian-gost}
+      \DeclareLanguageMapping{portuguese}{portuguese-gost}
+      \DeclareLanguageMapping{slovene}{slovene-gost}
+      \DeclareLanguageMapping{spanish}{spanish-gost}}
+    {\DeclareLanguageMapping{brazilian}{brazilian}
+      \DeclareLanguageMapping{catalan}{catalan}
+      \DeclareLanguageMapping{croatian}{croatian}
+      \DeclareLanguageMapping{english}{english}
+      \DeclareLanguageMapping{greek}{greek}
+      \DeclareLanguageMapping{icelandic}{icelandic}
+      \DeclareLanguageMapping{italian}{italian}
+      \DeclareLanguageMapping{portuguese}{portuguese}
+      \DeclareLanguageMapping{slovene}{slovene}
+      \DeclareLanguageMapping{spanish}{spanish}}
+  }
+
 \newbibmacro*{bbx:savehash}{%
   \savefield{fullhash}{\bbx@lasthash}}
 \DeclareBibliographyOption{dashed}[true]{%
@@ -255,7 +279,8 @@
   alldates=short,
   eventdate=comp,
   blockpunct=emdash,
-  doublevols=true}
+  doublevols=true,
+  otherlangs=true}
 
 \newbibmacro*{cbx:bookibid:check}[2]{#2}
 
