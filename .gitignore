@@ -1,6 +1,4 @@
 /tmp
-/.texlipse
-/.project
-/.settings
 auto/
 *.tex#
+*.synctex(busy)
