@@ -523,7 +523,10 @@
 \newcommand*{\blx@gost@iflangundef}[3]{\iffieldundef{#1}{#2}{#3}}
 \newcommand*{\blx@gost@iflangsequal}[4]{\iffieldsequal{#1}{#2}{#3}{#4}}
 
-\newbibmacro*{begentry}{}
+\newbibmacro*{begentry}{%
+  \csundef{savedclearedcredits}%
+  \csundef{savedclearededitor}%
+  \csundef{savedclearedtranslator}}
 \newbibmacro*{finentry}{\finentry}
 %
 %-----------  Drivers  ----------------
