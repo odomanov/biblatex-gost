@@ -195,7 +195,16 @@ This package is maintained.
   точки зрения совместимости с предыдущими версиями. 
 Более полный список изменений см. в \Apxref{apx:changelog}.
 
+\subsubsection*{Версия 1.15}
 
+\begin{trivlist}
+\item Добавлен пробел перед двоеточием "--- разделителем заголовка и
+  подзаголовка (его не было).  
+  Чтобы вернуться к старому поведению (убрать пробел) переопределите:
+  \begin{lstlisting}[style=latex]
+    \renewcommand*{\subtitlepunct}{\addcolon\space}.
+  \end{lstlisting}
+\end{trivlist}
 
 \subsubsection*{Версия 1.14}
 
@@ -2084,10 +2093,9 @@ gost-inline & false & true \\
   См.~\secref{sec:newoptions}.
 
   По умолчанию:
-  \begin{lstlisting}[style=latex]
+  \begin{lstlisting}[style=latex,belowskip=-.5\baselineskip]
     \newcommand{\doublevolsdelim}{\slash}.
   \end{lstlisting}
-
   Команда временно переопределяет команду \biblatex \cmd{bibrangedash}, поэтому попытка
   присваивания  
   \begin{lstlisting}[style=latex,belowskip=-.5\baselineskip]
@@ -2108,6 +2116,16 @@ gost-inline & false & true \\
   По умолчанию:
   \begin{lstlisting}[style=latex,belowskip=-\baselineskip]
     \newcommand*{\specialitydelim}{\addnbspace\textemdash\space}.
+  \end{lstlisting}
+
+  \cmditem{subtitlepunct}
+
+  Это стандартная команда \biblatex.  
+  Она определяет разделитель между заглавием и подзаголовком и, согласно ГОСТу, равна
+  двоеточию, окружённому пробелами.  
+  Если вы хотите убрать пробел перед двоеточием, переопределите:
+  \begin{lstlisting}[style=latex,belowskip=-.5\baselineskip]
+    \renewcommand*{\subtitlepunct}{\addcolon\space}.
   \end{lstlisting}
 
 \end{ltxsyntax}
@@ -2449,6 +2467,8 @@ pageref                                         & + & + & + & + & + & + & + & + 
 \begin{changelog}
 
   \begin{release}{1.15}{24-06-2017}
+  \item Добавлен пробел перед двоеточием "--- разделителем заголовка и
+    подзаголовка\see{sec:other-commands} 
   \item Исправлены ошибки вывода редакторов/переводчиков при выводе \texttt{related}. 
   \item Исправлена ошибка пунктуации при печати диссертаций.
   \end{release}
