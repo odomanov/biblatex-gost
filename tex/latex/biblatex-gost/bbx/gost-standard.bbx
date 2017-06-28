@@ -1,8 +1,8 @@
 \ProvidesFile{gost-standard.bbx}
-[2017/05/03\space v1.14\space biblatex-gost styles]
+[2017/06/27\space v1.15\space biblatex-gost styles]
 
-\def\bbx@gost@date{2017/05/03}
-\def\bbx@gost@version{1.14}
+\def\bbx@gost@date{2017/06/27}
+\def\bbx@gost@version{1.15}
 
 \@ifpackagelater{biblatex}{2016/09/07}
   {}
@@ -485,7 +485,7 @@
 \renewcommand*{\finalnamedelim}{\addcomma\space}
 \renewcommand*{\finallistdelim}{\addcomma\space}
 \renewcommand*{\bibpagespunct}{\addperiod\space}
-\renewcommand*{\subtitlepunct}{\addcolon\space}
+\renewcommand*{\subtitlepunct}{\addcolondelim}
 \newcommand*{\respdelim}{\addnbspace/\space}% delimiter before "credits"
 \newcommand*{\resppunct}{\addsemicolondelim}% between "credits" items
 \newcommand*{\specialitydelim}{\addnbspace\textemdash\space}% between specialitycode and speciality
@@ -532,7 +532,10 @@
   \let\abx@macro@bibindex\@empty
   \let\abx@macro@pageref\@empty}
 
-\newbibmacro*{begentry}{}
+\newbibmacro*{begentry}{%
+  \csundef{savedclearedcredits}%
+  \csundef{savedclearededitor}%
+  \csundef{savedclearedtranslator}}
 \newbibmacro*{finentry}{\finentry}
 %
 %-----------  Drivers  ----------------
@@ -602,8 +605,7 @@
   \setunit{\bibpagerefpunct}\newblock
   \usebibmacro{pageref}%
   \newunit\newblock
-  \usebibmacro{related:init}%
-  \usebibmacro{related}%
+  \usebibmacro{relatedblock}%
   \usebibmacro{finentry}}
 
 \DeclareBibliographyDriver{book}{%
@@ -647,8 +649,7 @@
   \setunit{\bibpagerefpunct}\newblock
   \usebibmacro{pageref}%
   \newunit\newblock
-  \usebibmacro{related:init}%
-  \usebibmacro{related}%
+  \usebibmacro{relatedblock}%
   \usebibmacro{finentry}}
 
 \DeclareBibliographyDriver{booklet}{%
@@ -686,8 +687,7 @@
   \setunit{\bibpagerefpunct}\newblock
   \usebibmacro{pageref}%
   \newunit\newblock
-  \usebibmacro{related:init}%
-  \usebibmacro{related}%
+  \usebibmacro{relatedblock}%
   \usebibmacro{finentry}}
 
 \DeclareBibliographyDriver{collection}{%
@@ -729,8 +729,7 @@
   \setunit{\bibpagerefpunct}\newblock
   \usebibmacro{pageref}%
   \newunit\newblock
-  \usebibmacro{related:init}%
-  \usebibmacro{related}%
+  \usebibmacro{relatedblock}%
   \usebibmacro{finentry}}
 
 \DeclareBibliographyDriver{inbook}{%
@@ -795,8 +794,7 @@
       \setunit{\bibpagerefpunct}\newblock
       \usebibmacro{pageref}}%
   \newunit\newblock
-  \usebibmacro{related:init}%
-  \usebibmacro{related}%
+  \usebibmacro{relatedblock}%
   \usebibmacro{finentry}}
 
 \DeclareBibliographyDriver{incollection}{%
@@ -859,8 +857,7 @@
       \setunit{\bibpagerefpunct}\newblock
       \usebibmacro{pageref}}%
   \newunit\newblock
-  \usebibmacro{related:init}%
-  \usebibmacro{related}%
+  \usebibmacro{relatedblock}%
   \usebibmacro{finentry}}
 
 \DeclareBibliographyDriver{inproceedings}{%
@@ -923,8 +920,7 @@
       \setunit{\bibpagerefpunct}\newblock
       \usebibmacro{pageref}}%
   \newunit\newblock
-  \usebibmacro{related:init}%
-  \usebibmacro{related}%
+  \usebibmacro{relatedblock}%
   \usebibmacro{finentry}}
 
 \DeclareBibliographyDriver{manual}{%
@@ -974,8 +970,7 @@
   \setunit{\bibpagerefpunct}\newblock
   \usebibmacro{pageref}%
   \newunit\newblock
-  \usebibmacro{related:init}%
-  \usebibmacro{related}%
+  \usebibmacro{relatedblock}%
   \usebibmacro{finentry}}
 
 \DeclareBibliographyDriver{misc}{%
@@ -1009,8 +1004,7 @@
   \setunit{\bibpagerefpunct}\newblock
   \usebibmacro{pageref}%
   \newunit\newblock
-  \usebibmacro{related:init}%
-  \usebibmacro{related}%
+  \usebibmacro{relatedblock}%
   \usebibmacro{finentry}}
 
 \DeclareBibliographyDriver{online}{%
@@ -1053,8 +1047,7 @@
   \setunit{\bibpagerefpunct}\newblock
   \usebibmacro{pageref}%
   \newunit\newblock
-  \usebibmacro{related:init}%
-  \usebibmacro{related}%
+  \usebibmacro{relatedblock}%
   \usebibmacro{finentry}}
 
 \DeclareBibliographyDriver{patent}{%
@@ -1116,8 +1109,7 @@
   \setunit{\bibpagerefpunct}\newblock
   \usebibmacro{pageref}%
   \newunit\newblock
-  \usebibmacro{related:init}%
-  \usebibmacro{related}%
+  \usebibmacro{relatedblock}%
   \usebibmacro{finentry}}
 
 \DeclareBibliographyDriver{periodical}{%
@@ -1155,8 +1147,7 @@
   \setunit{\bibpagerefpunct}\newblock
   \usebibmacro{pageref}%
   \newunit\newblock
-  \usebibmacro{related:init}%
-  \usebibmacro{related}%
+  \usebibmacro{relatedblock}%
   \usebibmacro{finentry}}
 
 \DeclareBibliographyDriver{proceedings}{%
@@ -1198,8 +1189,7 @@
   \setunit{\bibpagerefpunct}\newblock
   \usebibmacro{pageref}%
   \newunit\newblock
-  \usebibmacro{related:init}%
-  \usebibmacro{related}%
+  \usebibmacro{relatedblock}%
   \usebibmacro{finentry}}
 
 \DeclareBibliographyDriver{report}{%
@@ -1244,8 +1234,7 @@
   \setunit{\bibpagerefpunct}\newblock
   \usebibmacro{pageref}%
   \newunit\newblock
-  \usebibmacro{related:init}%
-  \usebibmacro{related}%
+  \usebibmacro{relatedblock}%
   \usebibmacro{finentry}}
 
 \DeclareBibliographyDriver{thesis}{%
@@ -1276,8 +1265,7 @@
   \setunit{\bibpagerefpunct}\newblock
   \usebibmacro{pageref}%
   \newunit\newblock
-  \usebibmacro{related:init}%
-  \usebibmacro{related}%
+  \usebibmacro{relatedblock}%
   \usebibmacro{finentry}}
 
 \DeclareBibliographyDriver{unpublished}{%
@@ -1309,8 +1297,7 @@
   \setunit{\bibpagerefpunct}\newblock
   \usebibmacro{pageref}%
   \newunit\newblock
-  \usebibmacro{related:init}%
-  \usebibmacro{related}%
+  \usebibmacro{relatedblock}%
   \usebibmacro{finentry}}
 
 \DeclareBibliographyDriver{shorthand}{%
@@ -2384,6 +2371,8 @@
 
 \newbibmacro*{begrelated}{}
 \newbibmacro*{endrelated}{}
+\newbibmacro*{begrelatedloop}{}
+\newbibmacro*{endrelatedloop}{}
 
 \def\ifrelatedloop{%
   \ifboolexpr{ test {\xifinlistcs{\strfield{entrykey}}{bbx:relatedloop}}
@@ -2396,23 +2385,10 @@
   \iffieldequalstr{relatedtype}{multivolume}
     {\finentry}
     {}%
-  \ifboolexpr{
-    ( test {\ifcitation}
-      and
-      not togl {bbx:related:cite}
-    )
-    or
-    ( not test {\ifcitation}
-      and
-      not togl {bbx:related:bib}
-    )
-    or
-    test {\iffieldundef{related}}
-    or
-    test {\ifrelatedloop}
-  }
+  \ifboolexpr{ test {\iffieldundef{related}} or test {\ifrelatedloop} }
     {}
-    {\def\bbx@tempa{}%
+    {\usebibmacro{begrelated}%
+     \def\bbx@tempa{}%
      \setcounter{bbx:relatedtotal}{0}%
      \def\do##1{%
        \entrydata{##1}{%
@@ -2431,7 +2407,9 @@
      \def\do{%
        \stepcounter{bbx:relatedcount}%
        \ifnumgreater{\value{bbx:relatedcount}}{1}
-         {\printtext{\relateddelim}}
+            {\ifcsundef{relateddelim\strfield{relatedtype}}
+              {\printtext{\relateddelim}}
+              {\printtext{\csuse{relateddelim\strfield{relatedtype}}}}}
          {}}%
      \ifbibmacroundef{related:\strfield{relatedtype}}
        {\appto{\do}{\usebibmacro{related:default}}}
@@ -2443,7 +2421,7 @@
        {\def\bbx@tempb{relatedstring:default}}
        {\def\bbx@tempb{relatedstring:\strfield{relatedtype}}}%
      \printtext[\bbx@tempa]{%
-       \usebibmacro{begrelated}%
+          \usebibmacro{begrelatedloop}%
        \iffieldundef{relatedstring}
          {\ifboolexpr{
             test {\ifnumgreater{\value{bbx:relatedtotal}}{1}}
@@ -2461,8 +2439,19 @@
                   \bibstring[\mkrelatedstring]{\thefield{relatedstring}}}}
             {\printfield[\bbx@tempb]{relatedstring}}}%
        \docsvfield{related}%
-          \usebibmacro{endrelated}}}%
-       {}}}
+          \usebibmacro{endrelatedloop}}}%
+       {}%
+     \usebibmacro{endrelated}}}
+
+\newbibmacro*{relatedblock}{%
+  \ifboolexpr{
+    ( test {\ifcitation} and togl {bbx:related:cite})
+    or
+    ( not test {\ifcitation} and togl {bbx:related:bib})
+   }
+   {\usebibmacro{related:init}%
+    \usebibmacro{related}}
+   {}}
 
 \newbibmacro*{setup:min}{%
   \renewbibmacro*{series+number}{}%
