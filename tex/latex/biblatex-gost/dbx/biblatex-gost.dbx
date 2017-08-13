@@ -45,8 +45,15 @@
 
 \DeclareDatamodelFields[type=field, datatype=key]{
   media,
-  bookoriglanguage,
 }
+
+\@ifpackagelater{biblatex}{2016/12/06} %biblatex 3.8+
+{\DeclareDatamodelFields[type=list, datatype=key]{
+  bookoriglanguage,
+}}
+{\DeclareDatamodelFields[type=field, datatype=key]{
+  bookoriglanguage,
+}}
 
 \DeclareDatamodelFields[type=list, datatype=literal]{
   specdata,

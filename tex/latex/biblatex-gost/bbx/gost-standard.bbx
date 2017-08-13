@@ -509,6 +509,25 @@
 % macros and formats for printing origlanguage and bookoriglanguage.
 % made special to simplify making them lists
 
+\@ifpackagelater{biblatex}{2016/12/06} %biblatex 3.8+
+{
+% \DeclareListFormat{origlanguage}{%
+%   \bibstring{from#1}}
+
+% used for printing origlanguage and bookoriglanguage
+\newcommand*{\lbx@gost@lfromlang}[1]{%
+  \iflistundef{#1}
+    {\unspace}
+    {\printlist[lfromoriglanguage]{#1}}}
+\newcommand*{\lbx@gost@sfromlang}[1]{%
+  \iflistundef{#1}
+    {\unspace}
+    {\printlist[sfromoriglanguage]{#1}}}
+% \renewcommand*{\lbx@lfromlang}{\lbx@gost@lfromlang{origlanguage}}
+% \renewcommand*{\lbx@sfromlang}{\lbx@gost@sfromlang{origlanguage}}
+\newcommand*{\blx@gost@iflangundef}[3]{\iflistundef{#1}{#2}{#3}}
+\newcommand*{\blx@gost@iflangsequal}[4]{\iflistsequal{#1}{#2}{#3}{#4}}}
+{
 \DeclareFieldFormat{origlanguage}{%
   \bibstring{from#1}}
 
@@ -524,6 +543,7 @@
 % \renewcommand*{\lbx@sfromlang}{\lbx@gost@sfromlang{origlanguage}}
 \newcommand*{\blx@gost@iflangundef}[3]{\iffieldundef{#1}{#2}{#3}}
 \newcommand*{\blx@gost@iflangsequal}[4]{\iffieldsequal{#1}{#2}{#3}{#4}}
+}
 
 \newbibmacro*{begentry}{%
   \csundef{savedclearedcredits}%
@@ -1957,6 +1977,33 @@
   \setunit{\addcolondelim}%
   \printfield{booktitleaddon}}
 
+\@ifpackagelater{biblatex}{2016/12/06} %biblatex 3.8+
+{\newbibmacro*{translation}{%
+  \ifnameundef{translator}
+    {\ifnameundef{booktranslator}
+      {\iflistundef{origlanguage}
+        {}
+        {\bibstring{bytranslator}%
+         \clearlist{origlanguage}}}
+      {}}%
+    {}}
+
+\newbibmacro*{book:translation}{%
+  \ifnameundef{booktranslator}
+    {\iflistundef{bookoriglanguage}
+      {}
+      {% temporarily redefining commands used in the bibstring
+        \savecommand\lbx@lfromlang%
+        \savecommand\lbx@sfromlang%
+        \renewcommand*{\lbx@lfromlang}{\lbx@gost@lfromlang{bookoriglanguage}}%
+        \renewcommand*{\lbx@sfromlang}{\lbx@gost@sfromlang{bookoriglanguage}}%
+        \bibstring{bytranslator}%
+        \restorecommand\lbx@lfromlang%
+        \restorecommand\lbx@sfromlang%
+        \clearlist{bookoriglanguage}}}
+    {}}
+}
+{
 \newbibmacro*{translation}{%
   \ifnameundef{translator}
     {\ifnameundef{booktranslator}
@@ -1981,6 +2028,10 @@
         \restorecommand\lbx@sfromlang%
         \clearfield{bookoriglanguage}}}
     {}}
+}
+
+
+
 
 \renewbibmacro*{maintitle}{%
   \ifboolexpr{
