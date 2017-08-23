@@ -195,6 +195,16 @@ This package is maintained.
   точки зрения совместимости с предыдущими версиями. 
 Более полный список изменений см. в \Apxref{apx:changelog}.
 
+\subsubsection*{Версия 1.16}
+
+\begin{trivlist}
+\item \bibfield{origlanguage} и \bibfield{bookoriglanguage} теперь могут быть списками
+    (требуется \biblatex~3.8).  
+    Если вы работаете с этими полями прямо, то нужно \cmd{printfield}, \cmd{iffieldundef}
+    и пр. заменить на \cmd{printlist}, \cmd{iflistundef} и пр.  
+    Если не работаете, то для вас это изменение не важно. 
+\end{trivlist}
+
 \subsubsection*{Версия 1.15}
 
 \begin{trivlist}
@@ -215,75 +225,75 @@ This package is maintained.
   См. описание опции \opt{otherlangs}, \secref{sec:newoptions}.
 \end{trivlist}
 
-\subsubsection*{Версия 1.12}
+% \subsubsection*{Версия 1.12}
 
-\begin{trivlist}
-\item Изменения в оформлении диссертаций.  
-  Определены новые поля, некоторые объявлены устаревшими
-  (\foreignlanguage{english}{deprecated}). 
-  См.~\secref{sec:dissers}.
-\item Вернул изменения предыдущей версии, касающиеся заполнении поля \bibfield{science}
-  (устаревшее "--- \bibfield{major}).  
-  Не все отрасли науки требуют слова «наук» (например, не требуют архитектура,
-  искусствоведение, культурология). 
-  См.~\secref{sec:dissers}.
-\item Сдвоенные номера томов теперь разделяются косой чертой, как требует ГОСТ.
-  См. подробнее \secref{sec:newoptions}, опция \opt{doublevols}.
-\end{trivlist}
+% \begin{trivlist}
+% \item Изменения в оформлении диссертаций.  
+%   Определены новые поля, некоторые объявлены устаревшими
+%   (\foreignlanguage{english}{deprecated}). 
+%   См.~\secref{sec:dissers}.
+% \item Вернул изменения предыдущей версии, касающиеся заполнении поля \bibfield{science}
+%   (устаревшее "--- \bibfield{major}).  
+%   Не все отрасли науки требуют слова «наук» (например, не требуют архитектура,
+%   искусствоведение, культурология). 
+%   См.~\secref{sec:dissers}.
+% \item Сдвоенные номера томов теперь разделяются косой чертой, как требует ГОСТ.
+%   См. подробнее \secref{sec:newoptions}, опция \opt{doublevols}.
+% \end{trivlist}
 
-\subsubsection*{Версия 1.11a}
+% \subsubsection*{Версия 1.11a}
 
-\begin{trivlist}
-\item При заполнении полей \bibfield{major}/\bibfield{speciality} в описании диссертаций
-  теперь нужно писать «экон.», «физ.-мат.» и пр. вместо «экон. наук», «физ.-мат. наук» и
-  пр. См.~\secref{sec:dissers}.
-\end{trivlist}
+% \begin{trivlist}
+% \item При заполнении полей \bibfield{major}/\bibfield{speciality} в описании диссертаций
+%   теперь нужно писать «экон.», «физ.-мат.» и пр. вместо «экон. наук», «физ.-мат. наук» и
+%   пр. См.~\secref{sec:dissers}.
+% \end{trivlist}
 
-\subsubsection*{Версия 1.10}
+% \subsubsection*{Версия 1.10}
 
-\begin{trivlist}
-\item Исправлено сокращение <<док.>> на <<д-ра>>.
-\end{trivlist}
+% \begin{trivlist}
+% \item Исправлено сокращение <<док.>> на <<д-ра>>.
+% \end{trivlist}
 
-\subsubsection*{Версия 1.9}
+% \subsubsection*{Версия 1.9}
 
-\begin{trivlist}
-\item Версия не совместима с \biblatex версий ниже 3.5.
-\item В \biblatex~3.5 для работы механизма пропуска даты для ссылок на уникальные работы
-  недостаточно опции \opt{singletitle}, нужно установить дополнительно опцию
-  \opt{uniquebaretitle} или воспользоваться опцией \biblatexgost \opt{dropdates}.
-  Подробнее см.~\secref{sec:newoptions}. 
-\end{trivlist}
+% \begin{trivlist}
+% \item Версия не совместима с \biblatex версий ниже 3.5.
+% \item В \biblatex~3.5 для работы механизма пропуска даты для ссылок на уникальные работы
+%   недостаточно опции \opt{singletitle}, нужно установить дополнительно опцию
+%   \opt{uniquebaretitle} или воспользоваться опцией \biblatexgost \opt{dropdates}.
+%   Подробнее см.~\secref{sec:newoptions}. 
+% \end{trivlist}
 
-\subsubsection*{Версии 1.8, 1.7, 1.6}
+% \subsubsection*{Версии 1.8, 1.7, 1.6}
 
-\begin{trivlist}
-\item Нет критических изменений.
-\end{trivlist}
+% \begin{trivlist}
+% \item Нет критических изменений.
+% \end{trivlist}
 
-\subsubsection*{Версия 1.5}
+% \subsubsection*{Версия 1.5}
 
-\begin{trivlist}
-\item Изменились команды формата имён в
-  заголовках (\secref{sec:headingformat}).
-\end{trivlist}
+% \begin{trivlist}
+% \item Изменились команды формата имён в
+%   заголовках (\secref{sec:headingformat}).
+% \end{trivlist}
 
-\subsubsection*{Версия 1.4}
+% \subsubsection*{Версия 1.4}
 
-\begin{trivlist}
-\item Внутреннее имя списка сокращений изменено на \texttt{shorthand} (было
-  \texttt{shorthands}), в соответсвие с изменением в \texttt{biblatex}.
-  Если вы не используете этот список явно, например, в \cmd{printbiblist}, вас это
-  изменение не затронет.
-\end{trivlist}
+% \begin{trivlist}
+% \item Внутреннее имя списка сокращений изменено на \texttt{shorthand} (было
+%   \texttt{shorthands}), в соответсвие с изменением в \texttt{biblatex}.
+%   Если вы не используете этот список явно, например, в \cmd{printbiblist}, вас это
+%   изменение не затронет.
+% \end{trivlist}
 
-\subsubsection*{Версия 1.1}
+% \subsubsection*{Версия 1.1}
 
-\begin{trivlist}
-\item При \kvopt{movenames}{true} (установлено по умолчанию) `\texttt{and others}' 
-  в поле \bibfield{author/editor}
-  означает, что число авторов/редакторов больше 3-х. Подробнее см.~\secref{sec:newoptions}.
-\end{trivlist}
+% \begin{trivlist}
+% \item При \kvopt{movenames}{true} (установлено по умолчанию) `\texttt{and others}' 
+%   в поле \bibfield{author/editor}
+%   означает, что число авторов/редакторов больше 3-х. Подробнее см.~\secref{sec:newoptions}.
+% \end{trivlist}
 
 % \subsubsection*{Версия 0.9.2}
 
@@ -2466,7 +2476,7 @@ pageref                                         & + & + & + & + & + & + & + & + 
 
 \begin{changelog}
 
-  \begin{release}{1.16}{??-06-2017}
+  \begin{release}{1.16}{23-08-2017}
   \item \bibfield{origlanguage} и \bibfield{bookoriglanguage} теперь могут быть списками
     (требуется \biblatex~3.8).
   \item Добавлена настройка вывода страниц для галицийского языка.  
