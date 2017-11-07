@@ -1,5 +1,5 @@
 \ProvidesFile{gost-numeric.dbx}
-[2017/06/27\space v1.15\space biblatex-gost data model]
+[2017/08/23\space v1.16\space biblatex-gost data model]
 
 \blx@inputonce{biblatex-gost.dbx}{biblatex-gost data model}{}{}{}{}
 
