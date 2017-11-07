@@ -110,7 +110,7 @@
 %
 %   Sorting Schemes
 %
-\DeclareSortingScheme{nty}{
+\DeclareSortingTemplate{nty}{
   \sort{
     \field{presort}
   }
@@ -155,7 +155,7 @@
   }
 }
 
-\DeclareSortingScheme{nyvt}{
+\DeclareSortingTemplate{nyvt}{
   \sort{
     \field{presort}
   }
@@ -200,7 +200,7 @@
   }
 }
 
-\DeclareSortingScheme{ynt}{
+\DeclareSortingTemplate{ynt}{
   \sort{
     \field{presort}
   }
@@ -231,7 +231,7 @@
   }
 }
 
-\DeclareSortingScheme{ydnt}{
+\DeclareSortingTemplate{ydnt}{
   \sort{
     \field{presort}
   }
@@ -262,7 +262,7 @@
   }
 }
 
-\DeclareSortingScheme{nyt}{
+\DeclareSortingTemplate{nyt}{
   \sort{
     \field{presort}
   }
@@ -307,7 +307,7 @@
   }
 }
 
-\DeclareSortingScheme{ntvy}{
+\DeclareSortingTemplate{ntvy}{
   \sort{
     \field{presort}
   }
@@ -352,7 +352,7 @@
   }
 }
 
-\DeclareSortingScheme{anyt}{
+\DeclareSortingTemplate{anyt}{
   \sort{
     \field{presort}
   }
@@ -387,7 +387,7 @@
   }
 }
 
-\DeclareSortingScheme{anyvt}{
+\DeclareSortingTemplate{anyvt}{
   \sort{
     \field{presort}
   }
