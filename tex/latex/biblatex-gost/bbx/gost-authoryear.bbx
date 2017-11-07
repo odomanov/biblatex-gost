@@ -22,12 +22,12 @@
     {\ifuniquebaretitle{#2}{#1}}
     {\ifsingletitle{#2}{#1}}}
 
-\providebibmacro*{labelyear+extrayear}{}
+\providebibmacro*{labelyear+extradate}{}
 \providebibmacro*{authoryearlabel}{}
 \newbibmacro*{cite:extras}{%
-  \ifnameundef{labelname}%    if there is labelname, extrayear disambiguation is enough
+  \ifnameundef{labelname}%    if there is labelname, extradate disambiguation is enough
     {\printfield{extratitleyear}} % if labeltitle+labelyear are the same
-    {\printfield{extrayear}}}
+    {\printfield{extradate}}}
 
 \providebibmacro*{labeltitle}{}
 \newlength{\labelauthoryearsep}
@@ -42,7 +42,7 @@
 \def\bbx@opt@mergedate@true{\bbx@opt@mergedate@compact}
 
 \def\bbx@opt@mergedate@maximum{%
-  \renewbibmacro*{labelyear+extrayear}{%
+  \renewbibmacro*{labelyear+extradate}{%
     \blx@gost@ifneedsdate
       {\iffieldundef{labelyear}
         {}
@@ -71,7 +71,7 @@
 }
 
 \def\bbx@opt@mergedate@compact{%
-  \renewbibmacro*{labelyear+extrayear}{%
+  \renewbibmacro*{labelyear+extradate}{%
     \blx@gost@ifneedsdate{\usebibmacro{cite:labelyear+extras}{parens}}{}}%
   %\renewcommand*{\labelnamepunct}{\newunitpunct}
   \renewbibmacro*{date}{\blx@gost@ifneedsdate{}{\usebibmacro{printdate}{}}}%
@@ -88,25 +88,25 @@
 }
 
 \def\bbx@opt@mergedate@basic{%
-  \renewbibmacro*{labelyear+extrayear}{%
+  \renewbibmacro*{labelyear+extradate}{%
     \blx@gost@ifneedsdate{\usebibmacro{cite:labelyear+extras}{parens}}{}}%
   %\renewcommand*{\labelnamepunct}{\newunitpunct}
   \renewbibmacro*{date}{%
     \blx@gost@ifneedsdate
-      {\ifthenelse{\(\iffieldundef{extrayear}\AND\iffieldundef{extratitleyear}\)
+      {\ifthenelse{\(\iffieldundef{extradate}\AND\iffieldundef{extratitleyear}\)
         \AND\iffieldundef{month}} %if date is simply year
         {}
         {\usebibmacro{printdate}{}}}
       {\usebibmacro{printdate}{}}}%
   \renewbibmacro*{year}{%
     \blx@gost@ifneedsdate
-      {\ifthenelse{\iffieldundef{extrayear}\AND\iffieldundef{extratitleyear}}
+      {\ifthenelse{\iffieldundef{extradate}\AND\iffieldundef{extratitleyear}}
         {}
         {\usebibmacro{printyear}{}}}
       {\usebibmacro{printyear}{}}}%
   \renewbibmacro*{jour:date}{%
     \blx@gost@ifneedsdate
-      {\ifthenelse{\(\iffieldundef{extrayear}\AND\iffieldundef{extratitleyear}\)
+      {\ifthenelse{\(\iffieldundef{extradate}\AND\iffieldundef{extratitleyear}\)
         \AND\iffieldundef{month}} %if date is simply year
         {}
         {\usebibmacro{year}%
@@ -121,24 +121,24 @@
 }
 
 \def\bbx@opt@mergedate@minimum{%
-  \renewbibmacro*{labelyear+extrayear}{%
+  \renewbibmacro*{labelyear+extradate}{%
     \blx@gost@ifneedsdate{\usebibmacro{cite:labelyear+extras}{parens}}{}}%
   %\renewcommand*{\labelnamepunct}{\newunitpunct}
   \renewbibmacro*{date}{%
     \blx@gost@ifneedsdate
-      {\ifthenelse{\iffieldundef{extrayear}\AND\iffieldundef{extratitleyear}}
+      {\ifthenelse{\iffieldundef{extradate}\AND\iffieldundef{extratitleyear}}
         {}
         {\usebibmacro{printdate}{}}}
       {\usebibmacro{printdate}{}}}%
   \renewbibmacro*{year}{%
     \blx@gost@ifneedsdate
-      {\ifthenelse{\iffieldundef{extrayear}\AND\iffieldundef{extratitleyear}}
+      {\ifthenelse{\iffieldundef{extradate}\AND\iffieldundef{extratitleyear}}
         {}
         {\usebibmacro{printyear}{}}}
       {\usebibmacro{printyear}{}}}%
   \renewbibmacro*{jour:date}{%
     \blx@gost@ifneedsdate
-      {\ifthenelse{\iffieldundef{extrayear}\AND\iffieldundef{extratitleyear}}
+      {\ifthenelse{\iffieldundef{extradate}\AND\iffieldundef{extratitleyear}}
         {}
         {\usebibmacro{year}%
          \newunit\newblock
@@ -152,7 +152,7 @@
 }
 
 \def\bbx@opt@mergedate@false{%
-  \renewbibmacro*{labelyear+extrayear}{%
+  \renewbibmacro*{labelyear+extradate}{%
     \blx@gost@ifneedsdate{\usebibmacro{cite:labelyear+extras}{parens}}{}}%
   %\renewcommand*{\labelnamepunct}{\newunitpunct}
   \renewbibmacro*{date}{\usebibmacro{printdate}{}}%
@@ -163,11 +163,11 @@
 }
 
 \def\bbx@opt@mergedate@goststrict{%
-  \renewbibmacro*{labelyear+extrayear}{}%
+  \renewbibmacro*{labelyear+extradate}{}%
   \renewbibmacro*{date}{\usebibmacro{printdate}{}}%
   \renewbibmacro*{year}{\usebibmacro{printyear}{}}%
   \renewbibmacro*{labeltitle}{}%
-  \DeclareFieldFormat{extrayear}{%
+  \DeclareFieldFormat{extradate}{%
     \PackageWarning{biblatex-gost}{%
       Citation \thefield{entrykey} is not unique}}%
   \DeclareFieldFormat{extratitleyear}{%
@@ -179,7 +179,7 @@
 }
 
 \def\bbx@opt@mergedate@gostletter{%
-  \renewbibmacro*{labelyear+extrayear}{}%
+  \renewbibmacro*{labelyear+extradate}{}%
   \renewbibmacro*{date}{\usebibmacro{printdate}{}\usebibmacro{cite:extras}}%
   \renewbibmacro*{year}{\usebibmacro{printyear}{}\usebibmacro{cite:extras}}%
   \renewbibmacro*{labeltitle}{}%
@@ -188,7 +188,7 @@
 }
 
 \def\bbx@opt@mergedate@gostlabel{%
-  \renewbibmacro*{labelyear+extrayear}{}%
+  \renewbibmacro*{labelyear+extradate}{}%
   \renewbibmacro*{date}{\usebibmacro{printdate}{}}%
   \renewbibmacro*{year}{\usebibmacro{printyear}{}}%
   \renewbibmacro*{labeltitle}{}%
@@ -279,7 +279,7 @@
     {\global\undef\bbx@lasthash%
      \usebibmacro{labeltitle}%
      \setunit*{\addspace}}%
-  \usebibmacro{labelyear+extrayear}}
+  \usebibmacro{labelyear+extradate}}
 
 
 \renewbibmacro*{editor}{%
@@ -303,7 +303,7 @@
     {\global\undef\bbx@lasthash%
      \usebibmacro{labeltitle}%
      \setunit*{\addspace}}%
-  \usebibmacro{labelyear+extrayear}}
+  \usebibmacro{labelyear+extradate}}
 
 \renewbibmacro*{translator}{%
   \usebibmacro{bbx:translator}{translatorstrg}}
@@ -326,7 +326,7 @@
     {\global\undef\bbx@lasthash%
      \usebibmacro{labeltitle}%
      \setunit*{\addspace}}%
-  \usebibmacro{labelyear+extrayear}}
+  \usebibmacro{labelyear+extradate}}
 
 
 \endinput
