@@ -41,6 +41,7 @@
 \newtoggle{cbx:eprint}
 \newtoggle{bbx:related:bib}
 \newtoggle{bbx:related:cite}
+\newtoggle{bbx:gost:otherlangs}
 \newtoggle{bbx:gostbibliography}
 \togglefalse{bbx:gostbibliography}
 
@@ -48,28 +49,8 @@
 
 \DeclareBibliographyOption{otherlangs}[true]{%
   \ifstrequal{#1}{true}
-    {\DeclareLanguageMapping{brazilian}{brazilian-gost}
-      \DeclareLanguageMapping{catalan}{catalan-gost}
-      \DeclareLanguageMapping{croatian}{croatian-gost}
-      \DeclareLanguageMapping{english}{english-gost}
-      \DeclareLanguageMapping{galician}{galician-gost}
-      \DeclareLanguageMapping{greek}{greek-gost}
-      \DeclareLanguageMapping{icelandic}{icelandic-gost}
-      \DeclareLanguageMapping{italian}{italian-gost}
-      \DeclareLanguageMapping{portuguese}{portuguese-gost}
-      \DeclareLanguageMapping{slovene}{slovene-gost}
-      \DeclareLanguageMapping{spanish}{spanish-gost}}
-    {\DeclareLanguageMapping{brazilian}{brazilian}
-      \DeclareLanguageMapping{catalan}{catalan}
-      \DeclareLanguageMapping{croatian}{croatian}
-      \DeclareLanguageMapping{english}{english}
-      \DeclareLanguageMapping{galician}{galician}
-      \DeclareLanguageMapping{greek}{greek}
-      \DeclareLanguageMapping{icelandic}{icelandic}
-      \DeclareLanguageMapping{italian}{italian}
-      \DeclareLanguageMapping{portuguese}{portuguese}
-      \DeclareLanguageMapping{slovene}{slovene}
-      \DeclareLanguageMapping{spanish}{spanish}}
+    {\toggletrue{bbx:gost:otherlangs}}
+    {\togglefalse{bbx:gost:otherlangs}}
   }
 
 \newbibmacro*{bbx:savehash}{%
@@ -282,7 +263,8 @@
   eventdate=comp,
   blockpunct=emdash,
   doublevols=true,
-  otherlangs=true}
+  otherlangs=true,
+}
 
 \newbibmacro*{cbx:bookibid:check}[2]{#2}
 

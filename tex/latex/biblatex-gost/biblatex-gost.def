@@ -105,7 +105,26 @@
   docthesis,phdautoref,docautoref,
 }
 
+% \DeclareLanguageMappingSuffix{-gost} doesn't play
+% well with american/british/english
+%
+% \DeclareLanguageMappingSuffix{-gost}
+\DeclareLanguageMapping{american}{american-gost}
+\DeclareLanguageMapping{brazilian}{brazilian-gost}
+\DeclareLanguageMapping{british}{british-gost}
+\DeclareLanguageMapping{catalan}{catalan-gost}
+\DeclareLanguageMapping{croatian}{croatian-gost}
+\DeclareLanguageMapping{english}{english-gost}
+\DeclareLanguageMapping{french}{french-gost}
+\DeclareLanguageMapping{galician}{galician-gost}
+\DeclareLanguageMapping{german}{german-gost}
+\DeclareLanguageMapping{greek}{greek-gost}
+\DeclareLanguageMapping{icelandic}{icelandic-gost}
+\DeclareLanguageMapping{italian}{italian-gost}
+\DeclareLanguageMapping{portuguese}{portuguese-gost}
 \DeclareLanguageMapping{russian}{russian-gost}
+\DeclareLanguageMapping{slovene}{slovene-gost}
+\DeclareLanguageMapping{spanish}{spanish-gost}
 
 %
 %   Sorting Schemes

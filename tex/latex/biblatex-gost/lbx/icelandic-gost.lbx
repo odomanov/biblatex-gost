@@ -2,11 +2,12 @@
 [2017/08/23\space v1.16\space biblatex-gost styles]
 
 \InheritBibliographyExtras{icelandic}
+\InheritBibliographyStrings{icelandic}
 
-\DeclareBibliographyStrings{%
-  inherit          = {icelandic},%------------------------------------------------------------
-  page             = {{bla\dh{}s\'{\i}\dh{}a}{b\adddot}},
-  pages            = {{bla\dh{}s\'{\i}\dh{}ur}{b\adddot}},
-}
+\iftoggle{bbx:gost:otherlangs}
+  {\DeclareBibliographyStrings{%
+    page             = {{bla\dh{}s\'{\i}\dh{}a}{b\adddot}},
+    pages            = {{bla\dh{}s\'{\i}\dh{}ur}{b\adddot}},
+  }}{}
 
 \endinput

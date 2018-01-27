@@ -2,10 +2,11 @@
 [2017/08/23\space v1.16\space biblatex-gost styles]
 
 \InheritBibliographyExtras{greek}
+\InheritBibliographyStrings{greek}
 
-\DeclareBibliographyStrings{%
-  inherit          = {greek},%------------------------------------------------------------
-  pages            = {{σελίδες}{σ\adddot}},
-}
+\iftoggle{bbx:gost:otherlangs}
+  {\DeclareBibliographyStrings{%
+    pages            = {{σελίδες}{σ\adddot}},
+  }}{}
 
 \endinput

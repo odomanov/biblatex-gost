@@ -2,11 +2,12 @@
 [2017/08/23\space v1.16\space biblatex-gost styles]
 
 \InheritBibliographyExtras{catalan}
+\InheritBibliographyStrings{catalan}
 
-\DeclareBibliographyStrings{%
-  inherit          = {catalan},%------------------------------------------------------------
-  page             = {{p\`agina}{p\adddot}},
-  pages            = {{p\`agines}{p\adddot}},
-}
+\iftoggle{bbx:gost:otherlangs}
+  {\DeclareBibliographyStrings{%
+    page             = {{p\`agina}{p\adddot}},
+    pages            = {{p\`agines}{p\adddot}},
+  }}{}
 
 \endinput

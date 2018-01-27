@@ -2,11 +2,12 @@
 [2017/08/23\space v1.16\space biblatex-gost styles]
 
 \InheritBibliographyExtras{croatian}
+\InheritBibliographyStrings{croatian}
 
-\DeclareBibliographyStrings{%
-  inherit          = {croatian},%------------------------------------------------------------
-  page             = {{stranica}{s\adddot}},
-  pages            = {{stranice}{s\adddot}},
-}
+\iftoggle{bbx:gost:otherlangs}
+  {\DeclareBibliographyStrings{%
+    page             = {{stranica}{s\adddot}},
+    pages            = {{stranice}{s\adddot}},
+  }}{}
 
 \endinput
