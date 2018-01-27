@@ -1,8 +1,8 @@
 \ProvidesFile{american-gost.lbx}
 [2017/08/23\space v1.16\space biblatex-gost styles]
 
-% \InheritBibliographyStrings{american}
 \InheritBibliographyExtras{american}
+\InheritBibliographyStrings{american}
 
 \DeclareBibliographyStrings{%
   % inherit = {american},
@@ -25,6 +25,7 @@
 \iftoggle{bbx:gost:otherlangs}
   {\DeclareBibliographyStrings{%
     pages               = {{pages}{p\adddot}},
+    pagetotals          = {{pages}{p\adddot}},
   }}{}
 
 \endinput
