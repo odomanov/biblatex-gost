@@ -1,5 +1,12 @@
 ---- errors -------------------------
 ---- warnings -----------------------
+biblatex-gost.log:Package typearea Warning: You've used obsolete option `DIV9'.
+biblatex-gost.log:(typearea)                in further warnings.
+biblatex-gost.log:Package hyperref Warning: Option `bookmarks' has already been used,
+biblatex-gost.log:Package hyperref Warning: Option `hyperfootnotes' has already been used,
+biblatex-gost.log:Package hyperref Warning: Option `pdfpagelabels' has already been used,
+biblatex-gost.log:Package csquotes Info: Enabling strict warnings.
+biblatex-gost.log:Package tocloft Warning: \@starttoc has already been redefined; tocloft bailing
 biblatex-gost-examples.log:Package Babel Warning: The package option `english' should not be used
 biblatex-gost-examples.log:Package biblatex Warning: Biber reported the following issues
 biblatex-gost-examples.log:Package biblatex Warning: Biber reported the following issues
@@ -7,36 +14,30 @@ biblatex-gost-examples.log:Package biblatex Warning: Type 'suppcollection' not f
 biblatex-gost-examples.log:LaTeX Warning: Empty bibliography on input line 110.
 biblatex-gost-examples.log:Package biblatex Warning: Type 'inreference' not found on input line 110.
 biblatex-gost-examples.log:LaTeX Warning: Empty bibliography on input line 110.
-biblatex-gost.log:Package typearea Warning: You've used obsolete option `DIV9'.
-biblatex-gost.log:(typearea)                in further warnings.
-biblatex-gost.log:Package hyperref Warning: Option `bookmarks' has already been used,
-biblatex-gost.log:Package hyperref Warning: Option `hyperfootnotes' has already been used,
-biblatex-gost.log:Package hyperref Warning: Option `pdfpagelabels' has already been used,
-biblatex-gost.log:Package csquotes Info: Enabling strict warnings.
-[1423] Utils.pm:164> WARN - ISBN '5-201-02033-Х' in entry 'if6' is invalid - run biber with '--validate_datamodel' for details.
-[1523] Utils.pm:164> WARN - ISBN '5-9292-0039-4 (ПЕР СЭ)~; 5-323-00003-1 (Университетская книга)' in entry 'pfa' is invalid - run biber with '--validate_datamodel' for details.
-[1552] Utils.pm:164> WARN - ISBN '3540440852,9783540440857' in entry 'jech:st2006' is invalid - run biber with '--validate_datamodel' for details.
-[1753] Utils.pm:164> WARN - ISBN '978-5-17-060345-9, 978-5-403-03334-3' in entry 'foucault:ibke' is invalid - run biber with '--validate_datamodel' for details.
-[1842] Utils.pm:164> WARN - ISBN '0521110815,9780521110815' in entry 'lc2006' is invalid - run biber with '--validate_datamodel' for details.
-[1920] Utils.pm:164> WARN - year field 'cop. 2002' in entry 'standard2h' is not an integer - this will probably not sort properly.
-[2115] Utils.pm:164> WARN - year field 'cop. 2002' in entry 'standard2' is not an integer - this will probably not sort properly.
-[2200] Utils.pm:164> WARN - ISBN '978-5-88373-263-1' in entry 'adorno:zhp' is invalid - run biber with '--validate_datamodel' for details.
-[2331] Utils.pm:164> WARN - ISBN '5-85133-062-7, 5-7914-0008-X' in entry 'badiou:ap-ru' is invalid - run biber with '--validate_datamodel' for details.
-[2356] Utils.pm:164> WARN - ISBN '0415324955,9780415324953,9780203086711' in entry 'rep' is invalid - run biber with '--validate_datamodel' for details.
-[2390] Utils.pm:164> WARN - ISBN '978-5-9757-0422-1, 978-5-403-00102-1' in entry 'sloterdijk:kcr' is invalid - run biber with '--validate_datamodel' for details.
-[2585] Utils.pm:164> WARN - ISBN '978-0-8218-2294-4 (print); 978-1-4704-0705-6 (online)' in entry 'scedrov:fct' is invalid - run biber with '--validate_datamodel' for details.
-[2689] Utils.pm:164> WARN - ISBN '5-7333-0485-6' in entry 'wittgenstein:fr1' is invalid - run biber with '--validate_datamodel' for details.
-[3077] Utils.pm:164> WARN - ISBN '5-85133-061-9, 5-7914-0056-4' in entry 'cassin:es' is invalid - run biber with '--validate_datamodel' for details.
-[3197] Utils.pm:164> WARN - year field '2005/1' in entry 'duportail:alu' is not an integer - this will probably not sort properly.
-[3412] Utils.pm:164> WARN - ISBN '0387984038, 9780387984032' in entry 'maclane:cwm' is invalid - run biber with '--validate_datamodel' for details.
-[3516] Utils.pm:164> WARN - ISBN '5-201-02047-Х' in entry 'if7' is invalid - run biber with '--validate_datamodel' for details.
-[3593] Utils.pm:164> WARN - ISBN '978-5-88373-180-5' in entry 'ayer:yail-book' is invalid - run biber with '--validate_datamodel' for details.
-[3655] Utils.pm:164> WARN - ISBN '985-485-082-Х' in entry 'jaspers:iu' is invalid - run biber with '--validate_datamodel' for details.
-[3659] Utils.pm:164> WARN - Range field 'volume' in entry 'freud:lek2' is malformed, falling back to literal
-[3725] Utils.pm:164> WARN - ISBN '978-5-88373-185-6' in entry 'fe' is invalid - run biber with '--validate_datamodel' for details.
-[3749] Utils.pm:164> WARN - Range field 'volume' in entry 'freud:lek1' is malformed, falling back to literal
-[3847] Utils.pm:164> WARN - ISBN '978-1-4822-3778-8,1482237784' in entry 'mendelson:iml2015' is invalid - run biber with '--validate_datamodel' for details.
-[3899] Utils.pm:164> WARN - ISBN '5-02-026807-0 (Наука), 5-87399-054-9 (Ювента)' in entry 'merleau-ponty:fv' is invalid - run biber with '--validate_datamodel' for details.
-[4044] Utils.pm:164> WARN - year field '2006/1' in entry 'duportail:pp' is not an integer - this will probably not sort properly.
-[4097] Utils.pm:164> WARN - ISBN '0720422701,9780720422702,9780080887050' in entry 'fraenkel-bar-hillel-levy:fst' is invalid - run biber with '--validate_datamodel' for details.
-[8481] Biber.pm:109> INFO - WARNINGS: 26
+[4167] Utils.pm:193> WARN - year field 'cop. 2002' in entry 'standard2' is not an integer - this will probably not sort properly.
+[4541] Utils.pm:193> WARN - year field '2006/1' in entry 'duportail:pp' is not an integer - this will probably not sort properly.
+[4662] Utils.pm:193> WARN - year field 'cop. 2002' in entry 'standard2h' is not an integer - this will probably not sort properly.
+[5046] Utils.pm:193> WARN - ISBN '978-0-8218-2294-4 (print); 978-1-4704-0705-6 (online)' in entry 'scedrov:fct' is invalid - run biber with '--validate_datamodel' for details.
+[5254] Utils.pm:193> WARN - ISBN '5-9292-0039-4 (ПЕР СЭ)~; 5-323-00003-1 (Университетская книга)' in entry 'pfa' is invalid - run biber with '--validate_datamodel' for details.
+[6064] Utils.pm:193> WARN - ISBN '978-5-88373-185-6' in entry 'fe' is invalid - run biber with '--validate_datamodel' for details.
+[6493] Utils.pm:193> WARN - ISBN '978-5-88373-263-1' in entry 'adorno:zhp' is invalid - run biber with '--validate_datamodel' for details.
+[7197] Utils.pm:193> WARN - ISBN '978-5-88373-180-5' in entry 'ayer:yail-book' is invalid - run biber with '--validate_datamodel' for details.
+[7294] Utils.pm:193> WARN - ISBN '985-485-082-Х' in entry 'jaspers:iu' is invalid - run biber with '--validate_datamodel' for details.
+[7432] Utils.pm:193> WARN - ISBN '5-201-02047-Х' in entry 'if7' is invalid - run biber with '--validate_datamodel' for details.
+[7481] Utils.pm:193> WARN - Range field 'volume' in entry 'freud:lek2' is malformed, falling back to literal
+[7588] Utils.pm:193> WARN - ISBN '5-201-02033-Х' in entry 'if6' is invalid - run biber with '--validate_datamodel' for details.
+[9006] Utils.pm:193> WARN - ISBN '978-1-4822-3778-8,1482237784' in entry 'mendelson:iml2015' is invalid - run biber with '--validate_datamodel' for details.
+[9283] Utils.pm:193> WARN - ISBN '978-5-17-060345-9, 978-5-403-03334-3' in entry 'foucault:ibke' is invalid - run biber with '--validate_datamodel' for details.
+[9474] Utils.pm:193> WARN - ISBN '5-7333-0485-6' in entry 'wittgenstein:fr1' is invalid - run biber with '--validate_datamodel' for details.
+[9528] Utils.pm:193> WARN - ISBN '5-85133-062-7, 5-7914-0008-X' in entry 'badiou:ap-ru' is invalid - run biber with '--validate_datamodel' for details.
+[9539] Utils.pm:193> WARN - ISBN '0720422701,9780720422702,9780080887050' in entry 'fraenkel-bar-hillel-levy:fst' is invalid - run biber with '--validate_datamodel' for details.
+[9557] Utils.pm:193> WARN - ISBN '978-5-9757-0422-1, 978-5-403-00102-1' in entry 'sloterdijk:kcr' is invalid - run biber with '--validate_datamodel' for details.
+[9901] Utils.pm:193> WARN - ISBN '5-85133-061-9, 5-7914-0056-4' in entry 'cassin:es' is invalid - run biber with '--validate_datamodel' for details.
+[9963] Utils.pm:193> WARN - ISBN '5-02-026807-0 (Наука), 5-87399-054-9 (Ювента)' in entry 'merleau-ponty:fv' is invalid - run biber with '--validate_datamodel' for details.
+[10048] Utils.pm:193> WARN - Range field 'volume' in entry 'freud:lek1' is malformed, falling back to literal
+[10234] Utils.pm:193> WARN - ISBN '3540440852,9783540440857' in entry 'jech:st2006' is invalid - run biber with '--validate_datamodel' for details.
+[10402] Utils.pm:193> WARN - year field '2005/1' in entry 'duportail:alu' is not an integer - this will probably not sort properly.
+[10805] Utils.pm:193> WARN - ISBN '0521110815,9780521110815' in entry 'lc2006' is invalid - run biber with '--validate_datamodel' for details.
+[10976] Utils.pm:193> WARN - ISBN '0387984038, 9780387984032' in entry 'maclane:cwm' is invalid - run biber with '--validate_datamodel' for details.
+[11106] Utils.pm:193> WARN - ISBN '0415324955,9780415324953,9780203086711' in entry 'rep' is invalid - run biber with '--validate_datamodel' for details.
+[15497] Biber.pm:110> INFO - WARNINGS: 26
