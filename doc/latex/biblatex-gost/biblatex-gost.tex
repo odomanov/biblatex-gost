@@ -2182,19 +2182,36 @@ gost-inline & false & true \\
   в двух разных падежах.
 В остальном учтены различия, перечисленные в \secref{sec:whatfor}.
 
-Фактически, помимо изменений форматирования, таких как отступы и поля, окружение
-\texttt{gostbibliography} содержит лишь команду
+Окружение \texttt{gostbibliography} определено следующим образом:
+\begin{lstlisting}[style=latex]
+\defbibenvironment{gostbibliography}
+  {\list
+    {}
+    {\toggletrue{bbx:gostbibliography}%
+     \renewcommand*{\revsdnamepunct}{\addcomma}%
+     \renewcommand*{\labelnamepunct}{\addperiod\space}%
+     \setlength{\bibitemsep}{0pt}%
+     \setlength{\leftmargin}{\bibhang}%
+     \setlength{\itemindent}{-\leftmargin}%
+     \setlength{\itemsep}{\bibitemsep}%
+     \setlength{\parsep}{\bibparsep}}}
+  {\endlist}
+  {\item}
+\end{lstlisting}
+Помимо изменений форматирования, таких как отступы и поля, оно
+содержит команду
 \begin{lstlisting}[style=latex]
   \toggletrue{bbx:gostbibliography}
 \end{lstlisting}
-Поэтому можно попытаться ограничиться только этой командой и пользоваться
+и изменения пунктуации. 
+Поэтому можно попытаться ограничиться только этими командами и пользоваться
 обычными окружениями.  
-При этом формат вывода библиографии будет соответствовать \gostbibname, а оформление
-окружения (включая, например, нумерацию при \kvopt{style}{gost-numeric})
-останется прежним.  
+При этом формат вывода библиографии будет соответствовать \gostbibname, а
+оформление окружения (включая, например, нумерацию при
+\kvopt{style}{gost-numeric}) останется прежним.  
 Это должно работать со всеми стилями, кроме \bibsty{gost-authoryear}, поскольку
-\gostbibname изменяет вывод заголовка библиографической записи, который в этом стиле
-используется для цитирования. 
+\gostbibname изменяет вывод заголовка библиографической записи, который в этом
+стиле используется для цитирования. 
 Если вам всё же нужно цитирование вида «Автор-год», воспользуйтесь стилем
 \bibsty{gost-alphabetic}. 
 
@@ -2477,6 +2494,11 @@ pageref                                         & + & + & + & + & + & + & + & + 
 \label{apx:changelog}
 
 \begin{changelog}
+
+  \begin{release}{1.18}{??-04-2018}
+  \item В документации добавлено описание окружения
+    \texttt{gostbibliography}\see{sec:gostbibliography}
+  \end{release}
 
   \begin{release}{1.17}{20-02-2018}
   \item Добавлен перевод поля \bibfield{media} (общее обозначение материала) на
