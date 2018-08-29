@@ -194,6 +194,13 @@ This package is maintained.
   точки зрения совместимости с предыдущими версиями. 
 Более полный список изменений см. в \Apxref{apx:changelog}.
 
+\subsubsection*{Версия 1.18}
+
+\begin{trivlist}
+\item Исправлено: в минимальных стилях (вида \bibsty{\textellipsis-min}) не
+  выводилось поле \bibfield{pagetotal} (полное количество страниц).
+\end{trivlist}
+
 \subsubsection*{Версия 1.16}
 
 \begin{trivlist}
@@ -215,14 +222,14 @@ This package is maintained.
   \end{lstlisting}
 \end{trivlist}
 
-\subsubsection*{Версия 1.14}
+% \subsubsection*{Версия 1.14}
 
-\begin{trivlist}
-\item Изменён вывод авторов в библиографическом списке (см.~\secref{sec:gostbibliography})
-  "--- приведён в соответствие с \gostbibname.
-\item Изменено сокращение страниц для некоторых языков.  
-  См. описание опции \opt{otherlangs}, \secref{sec:newoptions}.
-\end{trivlist}
+% \begin{trivlist}
+% \item Изменён вывод авторов в библиографическом списке (см.~\secref{sec:gostbibliography})
+%   "--- приведён в соответствие с \gostbibname.
+% \item Изменено сокращение страниц для некоторых языков.  
+%   См. описание опции \opt{otherlangs}, \secref{sec:newoptions}.
+% \end{trivlist}
 
 % \subsubsection*{Версия 1.12}
 
@@ -2494,6 +2501,8 @@ pageref                                         & + & + & + & + & + & + & + & + 
 \begin{changelog}
 
   \begin{release}{1.18}{??-04-2018}
+  \item Исправлено: в минимальных стилях (вида \bibsty{\textellipsis-min}) не
+    выводилось поле \bibfield{pagetotal} (полное количество страниц).
   \item В документации добавлено описание окружения
     \texttt{gostbibliography}\see{sec:gostbibliography}
   \end{release}
