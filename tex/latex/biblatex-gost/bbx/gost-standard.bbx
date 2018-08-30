@@ -460,8 +460,8 @@
 
 % FORMATTING COMMANDS
 
-\newbibmacro*{//}{%
-  \nopunct\printtext{\addnbspace\mbox{//}\addspace}}
+\newcommand*{\blxgostdblslash}{\nopunct\printtext{\addnbspace\mbox{//}\addspace}}
+\newbibmacro*{//}{\blxgostdblslash}
 \renewcommand*{\labelnamepunct}{\addperiod\space}
 \renewcommand*{\intitlepunct}{\addspace}
 \renewcommand*{\finalnamedelim}{\addcomma\space}
