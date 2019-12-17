@@ -39,8 +39,8 @@ bibstyle=gost-standard,
     {http://mirror.ctan.org/macros/latex/contrib/biblatex-contrib/biblatex-gost/}
 
 \makeatletter
-\usepackage{datetime}
-\def\blx@gost@printdateTeX#1/#2/#3//{\formatdate{#3}{#2}{#1}}
+\usepackage[useregional]{datetime2}
+\def\blx@gost@printdateTeX#1/#2/#3//{\DTMdisplaydate{#1}{#2}{#3}{-1}}
 \newcommand*{\printdateTeX}[1]{\expandafter\blx@gost@printdateTeX#1//}
 
 \titlepage{%
