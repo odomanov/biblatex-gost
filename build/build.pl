@@ -101,7 +101,7 @@ foreach my $ext ( 'bbx', 'cbx', 'dbx', 'lbx' )
 }
 
 copy (catfile(($BUILDDIR, ".."), "README.md"), "tds/doc/latex/biblatex-gost/") or die "Copy failed: $!";
-foreach my $ext ( 'bib', 'cfg', 'tex' )
+foreach my $ext ( 'bib', 'cfg', 'tex', 'cls' )
 {
     my @files = glob (catfile($DOCSRC, "*.$ext"));
     foreach my $file ( @files )
@@ -116,13 +116,13 @@ print "done\n";
 # Compiling .tex files
 #
 chdir (catdir ($BUILDDIR, "/tds/doc/latex/biblatex-gost"));
-system ("pdflatex -interaction=batchmode biblatex-gost.tex");
-system ("pdflatex -interaction=batchmode biblatex-gost.tex");
-system ("pdflatex -interaction=batchmode biblatex-gost.tex");
-system ("pdflatex -interaction=batchmode biblatex-gost-examples.tex");
+system ("lualatex -interaction=batchmode biblatex-gost.tex");
+system ("lualatex -interaction=batchmode biblatex-gost.tex");
+system ("lualatex -interaction=batchmode biblatex-gost.tex");
+system ("lualatex -interaction=batchmode biblatex-gost-examples.tex");
 system ("biber biblatex-gost-examples");
-system ("pdflatex -interaction=batchmode biblatex-gost-examples.tex");
-system ("pdflatex -interaction=batchmode biblatex-gost-examples.tex");
+system ("lualatex -interaction=batchmode biblatex-gost-examples.tex");
+system ("lualatex -interaction=batchmode biblatex-gost-examples.tex");
 
 my $err_file = "errors.txt";
 if ( -e $err_file) { unlink $err_file };

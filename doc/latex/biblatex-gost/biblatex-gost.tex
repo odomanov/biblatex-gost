@@ -1,8 +1,11 @@
 % -*- mode: LaTeX; coding: utf-8; fill-column: 80 -*-
 \documentclass[10pt,a4paper,headings=small,numbers=enddot,english,russian]{ltxdockit}
 \usepackage[vscale=0.8,hdivide={0.2\paperwidth,*,0.1\paperwidth}]{geometry}
-\usepackage[T1,T2A]{fontenc}
-\usepackage[utf8]{inputenc}
+\RequirePackage{fontspec}
+\RequirePackage{luatexbase}
+\setmainfont{PT Serif}
+\setsansfont{PT Sans}
+\setmonofont{PT Mono}
 \usepackage{btxdockit}
 \usepackage{babel}
 \usepackage[strict]{csquotes}
@@ -17,7 +20,6 @@
 bibstyle=gost-standard,
 ]{biblatex} % to receive \bbx@gost@version, etc.
 \usepackage{indentfirst}
-\usepackage{paratype}
 \usepackage{wrapfig}
 \usepackage[labelsep=period,hypcap=true]{caption}
 \DeclareCaptionLabelFormat{continued}{#1~#2 (продолжение)}

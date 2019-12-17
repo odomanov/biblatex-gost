@@ -1,7 +1,15 @@
 \documentclass[a4paper,10pt]{article}
 \usepackage[margin=2cm]{geometry}
-\usepackage[T1,T2A]{fontenc}
-\usepackage[utf8]{inputenx}
+\usepackage{fontspec}
+\defaultfontfeatures{%Mapping=tex-text,
+  Ligatures=TeX,
+  % Scale=MatchLowercase,
+}
+\usepackage{luatexbase}
+\setmainfont{CMU Serif}
+\setsansfont{CMU Sans Serif}
+\setmonofont{CMU Typewriter Text}
+
 \usepackage[british,american,spanish,greek,french,german,polish,english,russian]{babel}
 \usepackage{csquotes}
 \usepackage{multicol}
