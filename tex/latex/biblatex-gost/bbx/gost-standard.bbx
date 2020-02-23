@@ -4,14 +4,20 @@
 \def\bbx@gost@date{2018/02/20}
 \def\bbx@gost@version{1.17}
 
-\@ifpackagelater{biblatex}{2016/12/06}
+\@ifpackagelater{biblatex}{2019/09/01}
   {}
   {\PackageError{biblatex}
     {Outdated 'biblatex' package}
-    {This version of 'biblatex-gost' requires biblatex v3.8 or
+    {This version of 'biblatex-gost' requires biblatex v3.14 or
     later.\MessageBreak You are using: '\csuse{ver@biblatex.sty}'.\MessageBreak
      This is a fatal error. I'm aborting now.}%
     \endinput}
+
+\ifpdftex
+  \PackageWarningNoLine{biblatex-gost}{Applying temporary patch for 
+    Unicode symbols.\MessageBreak For details see biblatex issue \protect#960}
+  \AtEndPreamble{\DefineBibliographyStrings{russian}{number={\textnumero}}}
+\fi
 
 \AtEndOfPackage{%
 \ifboolexpr{

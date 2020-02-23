@@ -182,10 +182,10 @@ This package is maintained.
 
 Для работы \biblatexgost версии \makeatletter\bbx@gost@version\makeatother\
 требуются, как минимум,
-\biblatex~3.11%
-\fnurl{http://sourceforge.net/projects/biblatex/files/biblatex-3.11/}
-и \biber~2.11%
-\fnurl{http://sourceforge.net/projects/biblatex-biber/files/biblatex-biber/2.11/}.
+\biblatex~3.14%
+\fnurl{http://sourceforge.net/projects/biblatex/files/biblatex-3.14/}
+и \biber~2.14%
+\fnurl{http://sourceforge.net/projects/biblatex-biber/files/biblatex-biber/2.14/}.
 %(текущие версии на CTAN).
 Пакет может не работать с предыдущими версиями.
 
@@ -199,6 +199,13 @@ This package is maintained.
 \subsubsection*{Версия 1.18}
 
 \begin{trivlist}
+\item \biblatex в настоящее время (версии до 3.14 включительно) завершается с
+  ошибкой при выводе некоторых символов Юникода; см. подробнее:
+  \url{https://github.com/odomanov/biblatex-gost/issues/22},
+  \url{https://github.com/plk/biblatex/issues/960}.  
+  Версия \biblatexgost 1.18 содержит патч для обхода этой ошибки.  
+  Патч будет удалён, когда перестанет быть нужным.
+\item Минимальная требуемая версия \biblatex повышена до 3.14.
 \item Исправлено: в минимальных стилях (вида \bibsty{\textellipsis-min}) не
   выводилось поле \bibfield{pagetotal} (полное количество страниц).
 \end{trivlist}
@@ -2502,7 +2509,11 @@ pageref                                         & + & + & + & + & + & + & + & + 
 
 \begin{changelog}
 
-  \begin{release}{1.18}{??-04-2018}
+  \begin{release}{1.18}{23-02-2020}
+  \item Добавлен патч для обхода ошибки \biblatex 3.14. 
+    См. подробнее \url{https://github.com/odomanov/biblatex-gost/issues/22}, 
+    \url{https://github.com/plk/biblatex/issues/960}.  
+  \item Минимальная требуемая версия \biblatex повышена до 3.14.
   \item Исправлено: в минимальных стилях (вида \bibsty{\textellipsis-min}) не
     выводилось поле \bibfield{pagetotal} (полное количество страниц).
   \item В документации добавлено описание окружения
