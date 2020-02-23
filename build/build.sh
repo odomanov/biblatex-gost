@@ -114,4 +114,7 @@ echo -n "Zip CTAN file..."
 cd "$BUILDDIR/ctan" && zip -rq -ll --filesync "../biblatex-gost-$ver.zip" . 
 echo "done"
 
+# For uploading to CTAN
+cp "$BUILDDIR/biblatex-gost-$ver.zip" biblatex-gost.zip
+
 read -n1 -p "Press a key..."
