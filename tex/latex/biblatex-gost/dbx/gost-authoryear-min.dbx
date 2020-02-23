@@ -1,5 +1,5 @@
 \ProvidesFile{gost-authoryear-min.dbx}
-[2018/02/20\space v1.17\space biblatex-gost data model]
+[2020/02/23\space v1.18\space biblatex-gost data model]
 
 \blx@inputonce{biblatex-gost.dbx}{biblatex-gost data model}{}{}{}{}
 
