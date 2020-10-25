@@ -487,10 +487,15 @@ This package is maintained.
 \bibfield{shorttitle} (о многоточиях при сокращении заголовков
 см.~\secref{ellipsis}).
 
-По умолчанию стиль устанавливает опции \kvopt{autocite}{inline}, \kvopt{sorting}{ntvy},
- \kvopt{pagetracker}{true}, \kvopt{strict}{true}, \kvopt{citetracker}{constrict},
-\kvopt{opcittracker}{constrict}, \kvopt{citepages}{omit},
-\kvopt{labelyear}{true}.
+По умолчанию стиль устанавливает опции \kvopt{autocite}{inline}, %
+\kvopt{sorting}{ntvy}, %
+\kvopt{pagetracker}{true}, %
+\kvopt{strict}{true}, %
+\kvopt{citetracker}{constrict}, %
+\kvopt{opcittracker}{constrict}, %
+\kvopt{citepages}{omit}, %
+\kvopt{labeldateparts}{true}, %
+\kvopt{labeltitle}{true}.
 
 \item[gost-footnote]
 Подстрочные ссылки.
@@ -508,10 +513,15 @@ This package is maintained.
 там не выводятся поля \bibfield{doi},
 \bibfield{eprint}, \bibfield{url}, \bibfield{addendum}, \bibfield{pubstate}.
 
-По умолчанию стиль устанавливает опции \kvopt{autocite}{footnote}, \kvopt{sorting}{ntvy},
-\kvopt{pagetracker}{true}, \kvopt{strict}{true}, \kvopt{citetracker}{constrict},
-\kvopt{opcittracker}{constrict}, \kvopt{citepages}{omit},
-\kvopt{labelyear}{true}.
+По умолчанию стиль устанавливает опции \kvopt{autocite}{footnote}, %
+\kvopt{sorting}{ntvy}, %
+\kvopt{pagetracker}{true}, %
+\kvopt{strict}{true}, %
+\kvopt{citetracker}{constrict}, %
+\kvopt{opcittracker}{constrict}, %
+\kvopt{citepages}{omit}, %
+\kvopt{labeldateparts}{true}, %
+\kvopt{labeltitle}{true}.
 
 \item[gost-numeric]
 Затекстовые ссылки. Основан на стандартном стиле \bibsty{numeric-comp} и отличается
@@ -526,7 +536,8 @@ This package is maintained.
 \renewcommand*{\multicitedelim}{\addsemicolon\space}
 \end{lstlisting}
 
-По умолчанию стиль устанавливает опции \kvopt{autocite}{inline}, \kvopt{sortcites}{true}.
+По умолчанию стиль устанавливает опцию %
+% \kvopt{autocite}{inline}, \kvopt{sortcites}{true}.
 \kvopt{labelnumber}{true}.
 
 \item[gost-authoryear]
@@ -548,16 +559,25 @@ This package is maintained.
   имеется лишь одна публикация данного автора или лишь одна публикация без автора с данным
   названием).
 
-По умолчанию стиль устанавливает опции
-\kvopt{autocite}{inline},
-\kvopt{sorting}{nyt},
-\kvopt{pagetracker}{true},
-\kvopt{mergedate}{gostletter},
+По умолчанию стиль устанавливает опции %
+\kvopt{autocite}{inline}, %
+\kvopt{sorting}{nyt}, %
+\kvopt{pagetracker}{true}, %
+\kvopt{mergedate}{gostletter}, %
 \kvopt{dropdates}{false},
 (или \opt{true} при \kvopt{mergedate}{goststrict},
-см.~\secref{sec:newoptions}).
+см.~\secref{sec:newoptions}), %
+\kvopt{labeldateparts}{true}, %
+\kvopt{citetracker}{constrict}, %
+\kvopt{loccittracker}{constrict}, %
+\kvopt{dropdates}{false}, %
+\kvopt{labeltitleyear}{true}, %
+\kvopt{uniquename}{init}, % %
+\kvopt{uniquelist}{true}, %
+\kvopt{ibidtracker}{constrict}, %
+\kvopt{sortcites}{true}.
 
-\item[gost-alphabetic]
+\item[gost-alphabetic] %
 Этот стиль не предусмотрен ГОСТом, но добавлен для полноты. Он соответствует стандартному
 стилю \bibsty{alphabetic}, а также \bibsty{alphabetic-verb}, если его использовать в виде:
 
@@ -617,11 +637,21 @@ This package is maintained.
 \starsdelim
 
 Дополнительно, все стили по умолчанию устанавливают опции
-\kvopt{dashed}{false},
-\kvopt{useeditor}{false},
-\kvopt{usetranslator}{false},
-\kvopt{maxnames}{3},
-\kvopt{minnames}{1}.
+\kvopt{dashed}{false}, %
+\kvopt{useeditor}{false}, %
+\kvopt{usetranslator}{false}, %
+\kvopt{maxnames}{3}, %
+\kvopt{minnames}{1}, %
+\kvopt{dashed}{false}, %
+\kvopt{movenames}{true}, %
+\kvopt{giveninits}{true}, %
+\kvopt{volsorder}{vbpi}, %
+\kvopt{related}{true}, %
+\kvopt{alldates}{short}, %
+\kvopt{eventdate}{comp}, %
+\kvopt{blockpunct}{emdash}, %
+\kvopt{doublevols}{true}, %
+\kvopt{otherlangs}{true}. %
 Значения по умолчанию  для опций \opt{cite\ldots} и \opt{bib\ldots} см. в \tabref{tab:bibcite}.
 
 \vspace{.5\baselineskip}
