@@ -1342,7 +1342,7 @@
     {\iffieldundef{maintitle}
        {\usebibmacro{#1}%
         \setunit{\addcolondelim}%
-        \usebibmacro{involumes+otherparts}{\setunit*{\addcomma\space}}
+        \usebibmacro{involumes+otherparts}{\setunit*{\addcomma\space}}%
         \newunit
         \usebibmacro{volume+parts}{\newunit}}
        {\usebibmacro{maintitle}%
