@@ -1132,7 +1132,7 @@
   \newunit
   \usebibmacro{editor}%
   \setunit*{\labelnamepunct}%
-  \usebibmacro{title}
+  \usebibmacro{title}%
   \setunit{\addcolondelim}%
   \usebibmacro{translation}%
   \def\bbx@gost@respdelim{\setunit{\respdelim}}% ----- Resp starts -----
@@ -2046,7 +2046,7 @@
           {\setunit*{\subtitlepunct}}
           {\setunit*{\addspace}%
            \usebibmacro{media}%
-           \setunit*{\addcolondelim}}
+           \setunit*{\addcolondelim}}%
        \printfield[titlecase]{mainsubtitle}}%
      \newunit}%
   \setunit{\addcolondelim}%
