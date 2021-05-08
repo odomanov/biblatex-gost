@@ -14,9 +14,11 @@
     \endinput}
 
 \ifpdftex
-  \PackageWarningNoLine{biblatex-gost}{Applying temporary patch for 
+\@ifpackagelater{biblatex}{2020/08/23}  % v3.15a+
+  {}
+  {\PackageWarningNoLine{biblatex-gost}{Applying temporary patch for 
     Unicode symbols.\MessageBreak For details see biblatex issue \protect#960}
-  \AtEndPreamble{\DefineBibliographyStrings{russian}{number={\textnumero}}}
+  \AtEndPreamble{\DefineBibliographyStrings{russian}{number={\textnumero}}}}
 \fi
 
 \AtEndOfPackage{%
