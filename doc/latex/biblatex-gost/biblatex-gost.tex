@@ -103,7 +103,8 @@ bibstyle=gost-standard,
 %-----
 \usepackage{ellipsis}% must be loaded after hyperref !!
 \newcommand*{\bibsty}{\texttt}
-\newcommand*{\gostbibname}[1][]{ГОСТ#1 7.1---2003\xspace}
+% \newcommand*{\gostbibname}[1][]{ГОСТ#1 7.1---2003\xspace}    % старый ГОСТ
+\newcommand*{\gostbibname}[1][]{ГОСТ#1 Р 7.0.100---2018\xspace}
 \newcommand*{\gostcitename}[1][]{ГОСТ#1 7.0.5---2008\xspace}
 \newcommand*{\gostheadname}[1][]{ГОСТ#1 7.80---2000\xspace}
 \newcommand*{\gostbibref}[2][]{\gostbibname[#1], п.\,#2\xspace}
@@ -146,7 +147,7 @@ bibstyle=gost-standard,
 набор стилей для
 \biblatex{}\unspace\fnurl{http://mirror.ctan.org/macros/latex/contrib/biblatex/}
 и предназначен для оформления библиографических ссылок в соответствии
-с требованиями ГОСТа 7.0.5---2008 (а также 7.1---2003, 7.80---2000,
+с требованиями ГОСТа 7.0.5---2008 (а также Р 7.0.100---2018, 7.80---2000,
 7.82---2001 и др., см. подробнее \secref{sec:whatfor}).
 Пакет будет полезен прежде всего в гуманитарных дисциплинах с высокими
 требованиями к оформлению библиографии, многие из которых \bibtex не в
@@ -2539,6 +2540,10 @@ pageref                                         & + & + & + & + & + & + & + & + 
 
 \begin{changelog}
 
+  \begin{release}{1.23}{??-05-2021}
+  \item В документации ГОСТ 7.1---2003 заменён на ГОСТ Р 7.0.100-2018.
+  \end{release}
+  
   \begin{release}{1.22}{08-05-2021}
   \item При версиях \biblatex 3.15+ не применяется патч для обхода ошибки
     \url{https://github.com/odomanov/biblatex-gost/issues/22},
