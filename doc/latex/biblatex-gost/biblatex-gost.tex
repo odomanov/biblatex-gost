@@ -1,8 +1,8 @@
 % -*- mode: LaTeX; coding: utf-8; fill-column: 80 -*-
 \documentclass[10pt,a4paper,headings=small,numbers=enddot,english,russian]{ltxdockit}
 \usepackage[vscale=0.8,hdivide={0.2\paperwidth,*,0.1\paperwidth}]{geometry}
-\RequirePackage{fontspec}
-\RequirePackage{luatexbase}
+\usepackage{fontspec}
+\usepackage{luatexbase}
 \setmainfont{PT Serif}
 \setsansfont{PT Sans}
 \setmonofont{PT Mono}
@@ -47,7 +47,7 @@ bibstyle=gost-standard,
 
 \titlepage{%
   title={\biblatexgost},
-  subtitle={Оформление библиографии по ГОСТ 7.0.5---2008},
+  subtitle={Оформление библиографии по ГОСТ Р 7.0.5---2008},
   url={\biblatexgosthome},
   author={Олег Доманов},
   email={odomanov@yandex.ru},
@@ -73,7 +73,7 @@ bibstyle=gost-standard,
 
 \hypersetup{%
   pdftitle={\biblatexgost Package},
-  pdfsubject={Bibliography according to Russian standard GOST 7.0.5-2008},
+  pdfsubject={Bibliography according to Russian standard GOST R 7.0.5-2008},
   pdfauthor={Oleg Domanov},
   pdfkeywords={tex, latex, biblatex, bibliography, references, citation, gost, russian}}
 
@@ -147,7 +147,7 @@ bibstyle=gost-standard,
 набор стилей для
 \biblatex{}\unspace\fnurl{http://mirror.ctan.org/macros/latex/contrib/biblatex/}
 и предназначен для оформления библиографических ссылок в соответствии
-с требованиями ГОСТа 7.0.5---2008 (а также Р 7.0.100---2018, 7.80---2000,
+с требованиями ГОСТ Р 7.0.5---2008 (а также Р 7.0.100---2018, 7.80---2000,
 7.82---2001 и др., см. подробнее \secref{sec:whatfor}).
 Пакет будет полезен прежде всего в гуманитарных дисциплинах с высокими
 требованиями к оформлению библиографии, многие из которых \bibtex не в
@@ -421,7 +421,7 @@ This package is maintained.
 Действительно, согласно \gostcitename, ссылки могут быть внутри текста, в сноске на той же странице 
   или за текстом (в конце документа или его части).
 В последнем случае список ссылок в конце текста \emph{не является библиографическим списком}.
-ГОСТ говорит об этом вполне ясно:
+\gostcitename говорит об этом вполне ясно:
 
 \begin{quotation}
 Совокупность затекстовых библиографических ссылок не является библиографическим списком или
@@ -2577,8 +2577,9 @@ pageref                                         & + & + & + & + & + & + & + & + 
 
 \begin{changelog}
 
-  \begin{release}{1.23}{??-05-2021}
-  \item В документации ГОСТ 7.1---2003 заменён на ГОСТ Р 7.0.100-2018.
+  \begin{release}{1.23}{14-04-2023}
+  \item В документации ГОСТ 7.1---2003 заменён на ГОСТ Р 7.0.100-2018, а ГОСТ
+    2.0.5---2008 на ГОСТ Р 2.0.5---2008.
   \item Уточнения в документации.
   \end{release}
   

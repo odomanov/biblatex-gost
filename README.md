@@ -1,6 +1,6 @@
 This package is a collection of
 [Biblatex](https://github.com/plk/biblatex) bibliography and citation
-styles to format bibliography according to Russian standard GOST
+styles to format bibliography according to Russian standard GOST R
 7.0.5-2008.  For documentation and release notes please refer to
 biblatex-gost.pdf.  The documentation is mainly in Russian. Formatting
 examples for various bibliography entries may be found in
