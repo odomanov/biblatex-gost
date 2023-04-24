@@ -183,6 +183,13 @@
             final]
           \step[fieldset=options, fieldvalue={useeditor=false}]
         }
+        \map[overwrite, foreach={volume,book,part,issue}]{
+          \step[fieldsource=\regexp{$MAPLOOP}, final]
+          \step[fieldset=\regexp{internalsort$MAPLOOP}, origfieldval]
+          \step[fieldsource=\regexp{internalsort$MAPLOOP},
+            match=\regexp{(\d+).*},
+            replace=\regexp{$1}]
+        }
         \map{
           \step[typesource=candthesis,typetarget=thesis, final]
           \step[fieldset=type,        fieldvalue=phdthesis]
@@ -222,6 +229,13 @@
     }
    {\DeclareStyleSourcemap{
       \maps[datatype=bibtex]{
+        \map[overwrite, foreach={volume,book,part,issue}]{
+          \step[fieldsource=\regexp{$MAPLOOP}, final]
+          \step[fieldset=\regexp{internalsort$MAPLOOP}, origfieldval]
+          \step[fieldsource=\regexp{internalsort$MAPLOOP},
+            match=\regexp{(\d+).*},
+            replace=\regexp{$1}]
+        }
         \map{
           \step[typesource=candthesis,typetarget=thesis, final]
           \step[fieldset=type,        fieldvalue=phdthesis]

@@ -12,6 +12,10 @@
 }
 
 \DeclareDatamodelFields[type=field, datatype=literal]{
+  internalsortbook,
+  internalsortpart,
+  internalsortvolume,
+  internalsortissue,
   books,parts,issues,
   volsorder,
   sortvolume,
@@ -66,6 +70,10 @@
   number,
   book,part,issue,
   books,parts,issues,
+  internalsortbook,
+  internalsortpart,
+  internalsortvolume,
+  internalsortissue,
   language,
   media,
   credits,

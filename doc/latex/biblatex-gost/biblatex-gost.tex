@@ -2381,6 +2381,17 @@ gost-inline & false & true \\
 
 \begin{itemize}
 
+\item В отличие от \biblatex, в \biblatexgost поля \bibfield{volume},
+  \bibfield{book}, \bibfield{part} и \bibfield{issue} могут содержать не только
+  числа, но и диапазоны.
+  Поскольку \biber не сортирует диапазоны, из них выделяется первое число,
+  которое копируется в специальные поля \bibfield{internalsortvolume},
+  \bibfield{internalsortbook}, \bibfield{internalsortpart} и
+  \bibfield{internalsortissue}, по которым затем проводится сортировка.
+  Если поля \bibfield{volume},\textellipsis{} не начинаются с цифры, то они
+  копируются в \bibfield{internalsortvolume},\textellipsis{} как есть.
+  Если сортировка при этом некорректна, используйте поле \bibfield{sortvolume}.
+
 \item \label{impl:4names} \biblatexgost автоматически отслеживает количество авторов,
 редакторов и переводчиков, изменяя формат вывода, когда это количество превышает 3
 (см.~\secref{4names}).
@@ -2577,9 +2588,14 @@ pageref                                         & + & + & + & + & + & + & + & + 
 
 \begin{changelog}
 
+  \begin{release}{1.24}{25-04-2023}
+  \item Добавлена сортировка для диапазонов полей \bibfield{volume},
+    \bibfield{book}, \bibfield{part}, \bibfield{issue}.\see{sec:impldet}
+  \end{release}
+  
   \begin{release}{1.23}{14-04-2023}
   \item В документации ГОСТ 7.1---2003 заменён на ГОСТ Р 7.0.100-2018, а ГОСТ
-    2.0.5---2008 на ГОСТ Р 2.0.5---2008.
+    7.0.5---2008 на ГОСТ Р 7.0.5---2008.
   \item Уточнения в документации.
   \end{release}
   

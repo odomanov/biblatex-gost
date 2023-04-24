@@ -84,6 +84,10 @@
   books,
   parts,
   issues,
+  internalsortvolume,
+  internalsortbook,
+  internalsortpart,
+  internalsortissue,
   mediavideorecording,
   mediasoundrecording,
   mediagraphic,
@@ -157,19 +161,19 @@
   }
   \sort{
     \field{sortvolume}
-    \field[padside=left,padwidth=4,padchar=0]{volume}
+    \field[padside=left,padwidth=4,padchar=0]{internalsortvolume}
     \literal{0000}
   }
   \sort{
-    \field[padside=left,padwidth=4,padchar=0]{book}
+    \field[padside=left,padwidth=4,padchar=0]{internalsortbook}
     \literal{0000}
   }
   \sort{
-    \field[padside=left,padwidth=4,padchar=0]{part}
+    \field[padside=left,padwidth=4,padchar=0]{internalsortpart}
     \literal{0000}
   }
   \sort{
-    \field[padside=left,padwidth=4,padchar=0]{issue}
+    \field[padside=left,padwidth=4,padchar=0]{internalsortissue}
     \literal{0000}
   }
 }
@@ -197,19 +201,19 @@
   }
   \sort{
     \field{sortvolume}
-    \field[padside=left,padwidth=4,padchar=0]{volume}
+    \field[padside=left,padwidth=4,padchar=0]{internalsortvolume}
     \literal{0000}
   }
   \sort{
-    \field[padside=left,padwidth=4,padchar=0]{book}
+    \field[padside=left,padwidth=4,padchar=0]{internalsortbook}
     \literal{0000}
   }
   \sort{
-    \field[padside=left,padwidth=4,padchar=0]{part}
+    \field[padside=left,padwidth=4,padchar=0]{internalsortpart}
     \literal{0000}
   }
   \sort{
-    \field[padside=left,padwidth=4,padchar=0]{issue}
+    \field[padside=left,padwidth=4,padchar=0]{internalsortissue}
     \literal{0000}
   }
   \sort{
@@ -309,19 +313,19 @@
   }
   \sort{
     \field{sortvolume}
-    \field[padside=left,padwidth=4,padchar=0]{volume}
+    \field[padside=left,padwidth=4,padchar=0]{internalsortvolume}
     \literal{0000}
   }
   \sort{
-    \field[padside=left,padwidth=4,padchar=0]{book}
+    \field[padside=left,padwidth=4,padchar=0]{internalsortbook}
     \literal{0000}
   }
   \sort{
-    \field[padside=left,padwidth=4,padchar=0]{part}
+    \field[padside=left,padwidth=4,padchar=0]{internalsortpart}
     \literal{0000}
   }
   \sort{
-    \field[padside=left,padwidth=4,padchar=0]{issue}
+    \field[padside=left,padwidth=4,padchar=0]{internalsortissue}
     \literal{0000}
   }
 }
@@ -350,19 +354,19 @@
   }
   \sort{
     \field{sortvolume}
-    \field[padside=left,padwidth=4,padchar=0]{volume}
+    \field[padside=left,padwidth=4,padchar=0]{internalsortvolume}
     \literal{0000}
   }
   \sort{
-    \field[padside=left,padwidth=4,padchar=0]{book}
+    \field[padside=left,padwidth=4,padchar=0]{internalsortbook}
     \literal{0000}
   }
   \sort{
-    \field[padside=left,padwidth=4,padchar=0]{part}
+    \field[padside=left,padwidth=4,padchar=0]{internalsortpart}
     \literal{0000}
   }
   \sort{
-    \field[padside=left,padwidth=4,padchar=0]{issue}
+    \field[padside=left,padwidth=4,padchar=0]{internalsortissue}
     \literal{0000}
   }
   \sort{
@@ -401,7 +405,20 @@
     \field{title}
   }
   \sort{
-    \field[padside=left,padwidth=4,padchar=0]{volume}
+    \field{sortvolume}
+    \field[padside=left,padwidth=4,padchar=0]{internalsortvolume}
+    \literal{0000}
+  }
+  \sort{
+    \field[padside=left,padwidth=4,padchar=0]{internalsortbook}
+    \literal{0000}
+  }
+  \sort{
+    \field[padside=left,padwidth=4,padchar=0]{internalsortpart}
+    \literal{0000}
+  }
+  \sort{
+    \field[padside=left,padwidth=4,padchar=0]{internalsortissue}
     \literal{0000}
   }
 }
@@ -431,19 +448,20 @@
     \field{year}
   }
   \sort{
-    \field[padside=left,padwidth=4,padchar=0]{volume}
+    \field{sortvolume}
+    \field[padside=left,padwidth=4,padchar=0]{internalsortvolume}
     \literal{0000}
   }
   \sort{
-    \field[padside=left,padwidth=4,padchar=0]{book}
+    \field[padside=left,padwidth=4,padchar=0]{internalsortbook}
     \literal{0000}
   }
   \sort{
-    \field[padside=left,padwidth=4,padchar=0]{part}
+    \field[padside=left,padwidth=4,padchar=0]{internalsortpart}
     \literal{0000}
   }
   \sort{
-    \field[padside=left,padwidth=4,padchar=0]{issue}
+    \field[padside=left,padwidth=4,padchar=0]{internalsortissue}
     \literal{0000}
   }
   \sort{
