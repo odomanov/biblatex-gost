@@ -2388,9 +2388,13 @@ gost-inline & false & true \\
   которое копируется в специальные поля \bibfield{internalsortvolume},
   \bibfield{internalsortbook}, \bibfield{internalsortpart} и
   \bibfield{internalsortissue}, по которым затем проводится сортировка.
-  Если поля \bibfield{volume},\textellipsis{} не начинаются с цифры, то они
-  копируются в \bibfield{internalsortvolume},\textellipsis{} как есть.
-  Если сортировка при этом некорректна, используйте поле \bibfield{sortvolume}.
+  Если поля \bibfield{volume},\textellipsis{} не начинаются с арабского или
+  римского числа, то они копируются в
+  \bibfield{internalsortvolume},\textellipsis{} как есть.
+  Может быть полезной также опция \opt{noroman}, которую можно установить для
+  всего текста, типа или конкретной библиографической записи.
+  Если сортировка при этом всё ещё некорректна, используйте поле
+  \bibfield{sortvolume}.
 
 \item \label{impl:4names} \biblatexgost автоматически отслеживает количество авторов,
 редакторов и переводчиков, изменяя формат вывода, когда это количество превышает 3
@@ -2588,6 +2592,11 @@ pageref                                         & + & + & + & + & + & + & + & + 
 
 \begin{changelog}
 
+  \begin{release}{1.25}{??-04-2023}
+  \item Добавлена сортировка римских чисел для полей
+    \bibfield{internal...}.\see{sec:impldet}
+  \end{release}
+  
   \begin{release}{1.24}{25-04-2023}
   \item Добавлена сортировка для диапазонов полей \bibfield{volume},
     \bibfield{book}, \bibfield{part}, \bibfield{issue}.\see{sec:impldet}

@@ -11,11 +11,13 @@
   issue,
 }
 
-\DeclareDatamodelFields[type=field, datatype=literal]{
+\DeclareDatamodelFields[type=field, datatype=integer]{
   internalsortbook,
   internalsortpart,
   internalsortvolume,
   internalsortissue,
+}
+\DeclareDatamodelFields[type=field, datatype=literal]{
   books,parts,issues,
   volsorder,
   sortvolume,
