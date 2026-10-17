@@ -195,8 +195,15 @@ This package is maintained.
 
 % Ниже перечислены изменения, на которые стоит обратить внимание с
 %   точки зрения совместимости с предыдущими версиями. 
-Существенных изменений нет.
+% Существенных изменений нет.
 Полный список изменений см. в \Apxref{apx:changelog}.
+
+% \subsubsection*{Версия 1.25}
+
+\begin{trivlist}
+\item Добавлен EDN (\foreignlanguage{english}{eLIBRARY Document Number}).
+  См. \secref{sec:newfields}.
+\end{trivlist}
 
 % \subsubsection*{Версия 1.18}
 
@@ -516,7 +523,7 @@ This package is maintained.
 во внутритекстовой ссылке (но не
 в библиографии!) не выводятся серия и сведения, относящиеся
 к заглавию (поле \bibfield{titleaddon}, см.~\tabref{tab:gost-biblatex}). Кроме того,
-там не выводятся поля \bibfield{doi},
+там не выводятся поля \bibfield{doi}, \bibfield{edn},
 \bibfield{eprint}, \bibfield{url}, \bibfield{addendum}, \bibfield{pubstate}.
 
 По умолчанию стиль устанавливает опции \kvopt{autocite}{footnote}, %
@@ -612,7 +619,7 @@ This package is maintained.
 выходные данные, страницы (для статей в журналах и книгах).
 Сведения об ответственности, издании, серии и т.\,д. не выводятся, вне зависимости от их присутствия в базе данных.
 При этом вывод сведений, для которых в \biblatex имеются специальные опции
-(\opt{url}, \opt{doi}, \opt{isbn/issn/isrn}, \opt{eprint}), регулируется
+(\opt{url}, \opt{doi}, \opt{isbn/issn/isrn}, \opt{eprint}, а также \opt{edn}), регулируется
 этими опциями (а также опциями \opt{cite\ldots} и \opt{bib\ldots},
 описанными в \secref{sec:newoptions}). По умолчанию в минимальных стилях этот вывод отключён.
 
@@ -791,7 +798,7 @@ This package is maintained.
 % \multicolumn{1}{@{}H}{условий доступности} & \\*
 \emph{Идентификатор ресурса} & \textendash \\
 Международный стандартный номер & isbn, issn, %isan, ismn, isrn, iswc,
-                           doi, eprint, eprintclass, addendum,\newline
+                           doi, edn, eprint, eprintclass, addendum,\newline
                            \ensuremath\langle{\spotcolor prnumber}, {\spotcolor prdate},
                            {\spotcolor prcountry}\ensuremath\rangle \\
 \emph{Дополнительные сведения для идентификатора ресурса} & addendum \\
@@ -938,6 +945,11 @@ This package is maintained.
 
 Обратите внимание, что в \biblatex есть также редакторская роль \bibfield{collaborator},
 которая выводится как \enquote{при уч.~\ldots}.
+
+\fielditem{edn}{verbatim}
+
+EDN "--- идентификационный код платформы eLIBRARY.RU
+(\foreignlanguage{english}{eLIBRARY Document Number}). 
 
 \listitem{heading}{name}
 
@@ -1749,22 +1761,21 @@ volsorder = {pbi},
 \boolitem{citeurl,biburl}\noitemspace%
 \boolitem{citeisbn,bibisbn}\noitemspace%
 \boolitem{citedoi,bibdoi}\noitemspace%
+\boolitem{citeedn,bibedn}\noitemspace%
 \boolitem[\textrm{см.\,\tabref{tab:bibcite}}]{citeeprint,bibeprint}%\noitemspace%
 
-В дополнение к опциям \opt{url}, \opt{isbn}, \opt{doi} и \opt{eprint} в \biblatexgost
-определены опции
-для раздельного регулирования этих параметров для цитат и библиографии. При этом опции
-\opt{url}, \opt{isbn}, \opt{doi} и \opt{eprint} устанавливают одновременно соответствующие
-\opt{cite\ldots} и \opt{bib\ldots} опции. Не все из этих опций имеют смысл для всех
-стилей (см. ниже). По умолчанию стили, для которых опции
-\opt{cite\ldots} имеют смысл, устанавливают их в \opt{false}.
-Исключением является стиль \bibsty{gost-footnote}, который
-устанавливает \kvopt{citeisbn}{true}. Опции \opt{bib\ldots} устанавливаются
-по умолчанию в \opt{true}
-полными стилями и в \opt{false}~--- минимальными. Значения по умолчанию для всех опций
-представлены
-в \tabref{tab:bibcite}. Прочерк в таблице означает, что опция для данного стиля
-не имеет смысла.
+В дополнение к опциям \opt{url}, \opt{isbn}, \opt{doi}, \opt{edn} и \opt{eprint}
+в \biblatexgost определены опции для раздельного регулирования этих параметров
+для цитат и библиографии. При этом опции \opt{url}, \opt{isbn}, \opt{doi},
+\opt{edn} и \opt{eprint} устанавливают одновременно соответствующие
+\opt{cite\ldots} и \opt{bib\ldots} опции. Не все из этих опций имеют смысл для
+всех стилей (см. ниже). По умолчанию стили, для которых опции \opt{cite\ldots}
+имеют смысл, устанавливают их в \opt{false}.
+Исключением является стиль \bibsty{gost-footnote}, который устанавливает
+\kvopt{citeisbn}{true}. Опции \opt{bib\ldots} устанавливаются по умолчанию в
+\opt{true} полными стилями и в \opt{false}~--- минимальными. Значения по
+умолчанию для всех опций представлены в \tabref{tab:bibcite}. Прочерк в таблице
+означает, что опция для данного стиля не имеет смысла.
 
 В записях типа \bibtype{online} URL выводится всегда, независимо от значений опций
 \opt{url}, \opt{biburl} и \opt{citeurl}.
@@ -2578,7 +2589,7 @@ pagetotal                                       &   &   &   &   &   & + & + & + 
 series+number                                   & + & + & + &   &   & + & + & + &   &   &   &   &   &   &   & \tabularnewline
 \rl isbn/issn/isrn                              & + & + & + & + &   & + & + & + & + &   & + &   & + & + & + & \tabularnewline
 number                                          &   &   &   &   &   &   &   &   &   &   &   &   & + &   &   & \tabularnewline
-doi+eprint+url+note                             & + & + & + & + & + & + & + & + & + & + & + & + & + &   & + & +\tabularnewline
+doi+edn+eprint+url+note                         & + & + & + & + & + & + & + & + & + & + & + & + & + &   & + & +\tabularnewline
 url+urldate+note                                &   &   &   &   &   &   &   &   &   &   &   &   &   & + &   & \tabularnewline
 howpublished                                    &   &   &   &   &   &   &   &   &   & + &   &   &   & + &   & +\tabularnewline
 addendum+pubstate                               & + & + & + & + & + & + & + & + & + & + & + & + & + & + & + & +\tabularnewline
@@ -2592,7 +2603,9 @@ pageref                                         & + & + & + & + & + & + & + & + 
 
 \begin{changelog}
 
-  \begin{release}{1.25}{??-04-2023}
+  \begin{release}{1.25}{17-10-2026}
+  \item Добавлен вывод EDN (\foreignlanguage{english}{eLIBRARY Document
+      Number}).\see{sec:newfields}
   \item Добавлена сортировка римских чисел для полей
     \bibfield{internal...}.\see{sec:impldet}
   \end{release}

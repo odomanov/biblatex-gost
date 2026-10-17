@@ -68,6 +68,10 @@
   editioncredits,
 }
 
+\DeclareDatamodelFields[type=field, datatype=verbatim]{
+  edn,
+}
+
 \DeclareDatamodelEntryfields{
   number,
   book,part,issue,
@@ -83,6 +87,7 @@
   specdata,
   volsorder,
   heading,
+  edn,
 }
 
 \DeclareDatamodelEntryfields[article,periodical]{
@@ -129,6 +134,18 @@
     \constraintfield{update}
     \constraintfield{prioritydate}
     \constraintfield{publicationdate}
+  }
+}
+
+\DeclareDatamodelConstraints[online]{
+  \constraint[type=mandatory]{
+    \constraintfield{title}
+    \constraintfieldsor{
+      \constraintfield{url}
+      \constraintfield{doi}
+      \constraintfield{edn}
+      \constraintfield{eprint}
+    }
   }
 }
 

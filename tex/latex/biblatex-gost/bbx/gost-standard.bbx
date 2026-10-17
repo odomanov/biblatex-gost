@@ -46,10 +46,12 @@
 \newtoggle{bbx:isbn}
 \newtoggle{bbx:url}
 \newtoggle{bbx:doi}
+\newtoggle{bbx:edn}
 \newtoggle{bbx:eprint}
 \newtoggle{cbx:isbn}
 \newtoggle{cbx:url}
 \newtoggle{cbx:doi}
+\newtoggle{cbx:edn}
 \newtoggle{cbx:eprint}
 \newtoggle{bbx:related:bib}
 \newtoggle{bbx:related:cite}
@@ -90,6 +92,9 @@
 \DeclareBibliographyOption{doi}[true]{%
   \global\settoggle{bbx:doi}{#1}%
   \global\settoggle{cbx:doi}{#1}}
+\DeclareBibliographyOption{edn}[true]{%
+  \global\settoggle{bbx:edn}{#1}%
+  \global\settoggle{cbx:edn}{#1}}
 \DeclareBibliographyOption{eprint}[true]{%
   \global\settoggle{bbx:eprint}{#1}%
   \global\settoggle{cbx:eprint}{#1}}
@@ -99,6 +104,8 @@
   \global\settoggle{bbx:url}{#1}}
 \DeclareBibliographyOption{bibdoi}[true]{%
   \global\settoggle{bbx:doi}{#1}}
+\DeclareBibliographyOption{bibedn}[true]{%
+  \global\settoggle{bbx:edn}{#1}}
 \DeclareBibliographyOption{bibeprint}[true]{%
   \global\settoggle{bbx:eprint}{#1}}
 \DeclareBibliographyOption{citeisbn}[true]{%
@@ -107,6 +114,8 @@
   \global\settoggle{cbx:url}{#1}}
 \DeclareBibliographyOption{citedoi}[true]{%
   \global\settoggle{cbx:doi}{#1}}
+\DeclareBibliographyOption{citeedn}[true]{%
+  \global\settoggle{cbx:edn}{#1}}
 \DeclareBibliographyOption{citeeprint}[true]{%
   \global\settoggle{cbx:eprint}{#1}}
 \DeclareBibliographyOption{related}[true]{%
@@ -592,7 +601,7 @@
    \newunit\newblock
    \usebibmacro{jour:date}%
    \newunit\newblock
-   \usebibmacro{doi+eprint+url+note}}
+   \usebibmacro{doi+edn+eprint+url+note}}
    {\usebibmacro{//}%
     \usebibmacro{cbx:bookibid:check}
      {\bibsentence\printtext{%
@@ -628,7 +637,7 @@
       \newunit\newblock
       \usebibmacro{issn}%
       \newunit\newblock}%
-      \usebibmacro{doi+eprint+url+note}}%
+      \usebibmacro{doi+edn+eprint+url+note}}%
   \newunit\newblock
   \usebibmacro{addendum+pubstate}%
   \setunit{\bibpagerefpunct}\newblock
@@ -672,7 +681,7 @@
   \newunit\newblock
   \usebibmacro{isbn}%
   \newunit\newblock
-  \usebibmacro{doi+eprint+url+note}%
+  \usebibmacro{doi+edn+eprint+url+note}%
   \newunit\newblock
   \usebibmacro{addendum+pubstate}%
   \setunit{\bibpagerefpunct}\newblock
@@ -708,7 +717,7 @@
   \newunit
   \printfield{pagetotal}%
   \newunit\newblock
-  \usebibmacro{doi+eprint+url+note}%
+  \usebibmacro{doi+edn+eprint+url+note}%
   \newunit
   \printfield{howpublished}%
   \newunit\newblock
@@ -752,7 +761,7 @@
   \newunit\newblock
   \usebibmacro{isbn}%
   \newunit\newblock
-  \usebibmacro{doi+eprint+url+note}%
+  \usebibmacro{doi+edn+eprint+url+note}%
   \newunit\newblock
   \usebibmacro{addendum+pubstate}%
   \setunit{\bibpagerefpunct}\newblock
@@ -817,7 +826,7 @@
       \newunit\newblock
       \usebibmacro{isbn}%
       \newunit\newblock
-      \usebibmacro{doi+eprint+url+note}%
+      \usebibmacro{doi+edn+eprint+url+note}%
       \newunit\newblock
       \usebibmacro{addendum+pubstate}%
       \setunit{\bibpagerefpunct}\newblock
@@ -880,7 +889,7 @@
       \newunit\newblock
       \usebibmacro{isbn}%
       \newunit\newblock
-      \usebibmacro{doi+eprint+url+note}%
+      \usebibmacro{doi+edn+eprint+url+note}%
       \newunit\newblock
       \usebibmacro{addendum+pubstate}%
       \setunit{\bibpagerefpunct}\newblock
@@ -943,7 +952,7 @@
       \newunit\newblock
       \usebibmacro{isbn}%
       \newunit\newblock
-      \usebibmacro{doi+eprint+url+note}%
+      \usebibmacro{doi+edn+eprint+url+note}%
       \newunit\newblock
       \usebibmacro{addendum+pubstate}%
       \setunit{\bibpagerefpunct}\newblock
@@ -993,7 +1002,7 @@
   \newunit\newblock
   \usebibmacro{isbn}%
   \newunit\newblock
-  \usebibmacro{doi+eprint+url+note}%
+  \usebibmacro{doi+edn+eprint+url+note}%
   \newunit\newblock
   \usebibmacro{addendum+pubstate}%
   \setunit{\bibpagerefpunct}\newblock
@@ -1025,7 +1034,7 @@
   \newunit\newblock
   \usebibmacro{organization+location+date}%
   \newunit\newblock
-  \usebibmacro{doi+eprint+url+note}%
+  \usebibmacro{doi+edn+eprint+url+note}%
   \newunit
   \printfield{howpublished}%
   \newunit\newblock
@@ -1070,7 +1079,7 @@
   \newunit\newblock
   \printfield{systemreq}%
   \newunit\newblock
-  \usebibmacro{doi+eprint+url+note}%
+  \usebibmacro{doi+edn+eprint+url+note}%
   \newunit\newblock
   \usebibmacro{addendum+pubstate}%
   \setunit{\bibpagerefpunct}\newblock
@@ -1132,7 +1141,7 @@
   \newunit\newblock
   \printfield{pagetotal}%
   \newunit\newblock
-  \usebibmacro{doi+eprint+url+note}%
+  \usebibmacro{doi+edn+eprint+url+note}%
   \newunit\newblock
   \usebibmacro{addendum+pubstate}%
   \setunit{\bibpagerefpunct}\newblock
@@ -1170,7 +1179,7 @@
   \newunit\newblock
   \usebibmacro{issn}%
   \newunit\newblock
-  \usebibmacro{doi+eprint+url+note}%
+  \usebibmacro{doi+edn+eprint+url+note}%
   \newunit\newblock
   \usebibmacro{addendum+pubstate}%
   \setunit{\bibpagerefpunct}\newblock
@@ -1212,7 +1221,7 @@
   \newunit\newblock
   \usebibmacro{isbn}%
   \newunit\newblock
-  \usebibmacro{doi+eprint+url+note}%
+  \usebibmacro{doi+edn+eprint+url+note}%
   \newunit\newblock
   \usebibmacro{addendum+pubstate}%
   \setunit{\bibpagerefpunct}\newblock
@@ -1257,7 +1266,7 @@
   \setunit*{\addspace}%
   \printfield{number}%
   \newunit\newblock
-  \usebibmacro{doi+eprint+url+note}%
+  \usebibmacro{doi+edn+eprint+url+note}%
   \newunit\newblock
   \usebibmacro{addendum+pubstate}%
   \setunit{\bibpagerefpunct}\newblock
@@ -1288,7 +1297,7 @@
   \newunit
   \printfield{pagetotal}%
   \newunit\newblock
-  \usebibmacro{doi+eprint+url+note}%
+  \usebibmacro{doi+edn+eprint+url+note}%
   \newunit\newblock
   \usebibmacro{addendum+pubstate}%
   \setunit{\bibpagerefpunct}\newblock
@@ -1481,13 +1490,21 @@
       {\printfield{isrn}}
       {}}}
 
-\newbibmacro*{doi+eprint+url+note}{%
+\newbibmacro*{doi+edn+eprint+url+note}{%
   \ifcitation
     {\iftoggle{cbx:doi}
       {\printfield{doi}}
       {}}
     {\iftoggle{bbx:doi}
       {\printfield{doi}}
+      {}}%
+  \newunit\newblock
+  \ifcitation
+    {\iftoggle{cbx:edn}
+      {\printfield{edn}}
+      {}}
+    {\iftoggle{bbx:edn}
+      {\printfield{edn}}
       {}}%
   \newunit\newblock
   \ifcitation

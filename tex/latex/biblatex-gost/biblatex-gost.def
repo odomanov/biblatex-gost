@@ -532,6 +532,12 @@
   \inherit{credits}{bookcredits}
   \noinherit{pagetotal}}
 
+\DeclareFieldFormat{edn}{%
+  \mkbibacro{EDN}\addcolon\space
+  \ifhyperref
+    {\href{https://elibrary.ru/#1}{\nolinkurl{#1}}}
+    {\nolinkurl{#1}}}
+
 % Related
 
 \renewbibmacro*{related:bytranslator}[1]{%
